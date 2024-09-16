@@ -30,7 +30,9 @@ export const Login = () => {
                         <LoginCard/>
                     </Col>
                     <Col lg={12} className='mt-3'>
-                        <Button variant="primary" size='lg'>Log in</Button>
+                        <Button variant="primary" size='lg' onClick={() => {
+                            
+                        }}>Log in</Button>
                     </Col>
 
                 </Row>
