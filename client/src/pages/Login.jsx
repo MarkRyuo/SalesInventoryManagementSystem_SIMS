@@ -6,6 +6,7 @@ import { NavLogin } from '../components/NavBar/NavLogin';
 import { LoginCard } from '../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
 
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
 
