@@ -18,7 +18,7 @@ export const Login = () => {
                 {/* Space */}
             </Container>
 
-            <Container lg className='d-flex justify-content-center text-center'>
+            <Container fluid="lg" className='d-flex justify-content-center text-center'>
                 <Row style={{width: 450}}>
                     <Col lg={12}>
                         <RiBox3Fill size={80}/>
