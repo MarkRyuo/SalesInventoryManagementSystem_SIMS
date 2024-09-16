@@ -11,9 +11,10 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Login/>}/>
+      </Routes>
+      <Routes>
         <Route path='/Dashboard' element={<Dashboard/>}/>
       </Routes>
-      <Login/>
     </Router>
   )
 }
