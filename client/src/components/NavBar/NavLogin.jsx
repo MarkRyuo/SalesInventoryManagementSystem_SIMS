@@ -11,7 +11,7 @@ export const NavLogin = () => {
                     <Container>
                         <Navbar.Brand href="#home">
                             <BsBox size={50}/>
-                            Sales Inventory Management System
+                            SIMS
                         </Navbar.Brand>
                     </Container>
                 </Navbar>
