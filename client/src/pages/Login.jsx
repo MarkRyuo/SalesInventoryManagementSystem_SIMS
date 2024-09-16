@@ -10,7 +10,7 @@ export const Login = () => {
     return (
         <>
             <Container fluid>
-                
+                <NavLogin/>
             </Container>
                 <NavLogin/>
             <Container lg>
