@@ -6,7 +6,10 @@ import { NavLogin } from '../components/NavBar/NavLogin';
 import { LoginCard } from '../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
 
+
 export const Login = () => {
+
+
 
     return (
         <>
@@ -31,7 +34,7 @@ export const Login = () => {
                     </Col>
                     <Col lg={12} className='mt-3'>
                         <Button variant="primary" size='lg' onClick={() => {
-                            
+
                         }}>Log in</Button>
                     </Col>
 
