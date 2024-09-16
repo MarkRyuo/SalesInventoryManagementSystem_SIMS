@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { NavLogin } from '../components/NavBar/NavLogin';
 import { LoginCard } from '../components/LogIn/LoginCard';
-
+import { RiBox3Fill } from "react-icons/ri";
 
 export const Login = () => {
 
@@ -17,7 +17,10 @@ export const Login = () => {
             <Container lg className='d-flex justify-content-center text-center'>
                 <Row style={{width: 450}}>
                     <Col lg={12}>
-                        
+                        <RiBox3Fill size={80}/>
+                    </Col>
+                    <Col lg={12}>
+                        <p className='lead'>Sales Inventory Management System</p>
                     </Col>
                     <Col lg={12}>
                         <LoginCard/>

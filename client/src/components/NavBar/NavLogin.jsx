@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { BsBox } from "react-icons/bs";
+import Button from 'react-bootstrap/Button';
 
 export const NavLogin = () => {
 
@@ -13,6 +14,7 @@ export const NavLogin = () => {
                             <BsBox size={50}/>
                             SIMS
                         </Navbar.Brand>
+                        <Button variant="outline-primary">Download App</Button>
                     </Container>
                 </Navbar>
         </>
