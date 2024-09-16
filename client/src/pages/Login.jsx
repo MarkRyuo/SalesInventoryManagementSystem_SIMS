@@ -13,15 +13,16 @@ export const Login = () => {
             <Container fluid>
                 <NavLogin/>
             </Container>
-            
-            <Container lg>
-                <Row>
+
+            <Container lg className='d-flex justify-content-center'>
+                <Row style={{width: 450}}>
                     <Col lg={12}>
                         <LoginCard/>
                     </Col>
-                    <Col lg={12}>
-                        <Button variant="primary">Log in</Button>
+                    <Col lg={12} className='mt-3 text-center'>
+                        <Button variant="primary" size='lg'>Log in</Button>
                     </Col>
+
                 </Row>
 
             </Container>
