@@ -13,7 +13,7 @@ export const Login = () => {
     const navigate = useNavigate() ;
 
     const getNavigate = () => {
-        navigate("/Dashboard.jsx")
+        navigate("./Dashboard.jsx")
     }
 
 
