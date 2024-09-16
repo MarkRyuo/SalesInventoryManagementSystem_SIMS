@@ -14,12 +14,12 @@ export const Login = () => {
                 <NavLogin/>
             </Container>
 
-            <Container lg className='d-flex justify-content-center'>
+            <Container lg className='d-flex justify-content-center text-center'>
                 <Row style={{width: 450}}>
                     <Col lg={12}>
                         <LoginCard/>
                     </Col>
-                    <Col lg={12} className='mt-3 text-center'>
+                    <Col lg={12} className='mt-3'>
                         <Button variant="primary" size='lg'>Log in</Button>
                     </Col>
 
