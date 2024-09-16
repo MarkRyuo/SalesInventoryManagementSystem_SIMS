@@ -10,6 +10,11 @@ import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
 
+    const navigate = useNavigate() ;
+
+    const getNavigate = () => {
+        navigate("/")
+    }
 
 
     return (
@@ -35,7 +40,7 @@ export const Login = () => {
                     </Col>
                     <Col lg={12} className='mt-3'>
                         <Button variant="primary" size='lg' onClick={() => {
-
+                        getNavigate()
                         }}>Log in</Button>
                     </Col>
 
