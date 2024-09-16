@@ -10,8 +10,12 @@ export const Login = () => {
 
     return (
         <>
-            <Container fluid>
+            <Container fluid className='mb-5'>
                 <NavLogin/>
+            </Container>
+
+            <Container fluid className='my-5' style={{width: "100%", height:"50px"}}>
+                {/* Space */}
             </Container>
 
             <Container lg className='d-flex justify-content-center text-center'>
