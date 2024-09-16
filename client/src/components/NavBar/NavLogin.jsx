@@ -10,8 +10,8 @@ export const NavLogin = () => {
         <>
             <Navbar bg='light'>
                     <Container>
-                        <Navbar.Brand href="#home">
-                            <BsBox size={50}/>
+                        <Navbar.Brand href="#home" >
+                            <BsBox size={40}/>
                             SIMS
                         </Navbar.Brand>
                         <Button variant="outline-primary">Download App</Button>
