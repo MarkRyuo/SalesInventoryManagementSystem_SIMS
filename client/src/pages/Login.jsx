@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { NavLogin } from '../components/NavBar/NavLogin';
+import { LoginCard } from '../components/LogIn/LoginCard';
 
 
 export const Login = () => {
