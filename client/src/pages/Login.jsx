@@ -13,7 +13,7 @@ export const Login = () => {
             <Container fluid>
                 <NavLogin/>
             </Container>
-                <NavLogin/>
+            
             <Container lg>
                 <Row>
                     <Col lg={12}>
