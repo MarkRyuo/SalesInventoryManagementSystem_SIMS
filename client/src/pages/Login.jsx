@@ -17,6 +17,9 @@ export const Login = () => {
             <Container lg className='d-flex justify-content-center text-center'>
                 <Row style={{width: 450}}>
                     <Col lg={12}>
+                        
+                    </Col>
+                    <Col lg={12}>
                         <LoginCard/>
                     </Col>
                     <Col lg={12} className='mt-3'>
