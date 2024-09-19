@@ -6,7 +6,7 @@ export const NavLogin = () => {
     return (
 
         <>
-            <Container fluid bg='info'>
+            <Container fluid className="pt-2" style={{borderBottom: "1px solid gray"}>
                 <Navbar>
                     <Container>
                         <Row>
