@@ -19,7 +19,7 @@ export const NavLogin = () => {
                             </Col>
 
                             <Col>
-
+                                 <Button variant="outline-primary">Download App</Button>
                             </Col>
                         </Row>
                     </Container>
