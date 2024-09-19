@@ -11,11 +11,11 @@ export const NavLogin = () => {
             <Navbar bg='light'>
                     <Container>
                         <Navbar.Brand href="#home" >
-                            <div style={{marginLeft: '30px'}}>
-                                <BsBox size={40}/>
-                            </div>
                             SIMS
                         </Navbar.Brand>
+                        <div style={{marginLeft: '30px'}}>
+                                <BsBox size={40}/>
+                        </div>
                         <Button variant="outline-primary">Download App</Button>
                     </Container>
                 </Navbar>
