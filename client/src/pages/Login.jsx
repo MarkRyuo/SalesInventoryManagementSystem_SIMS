@@ -21,7 +21,7 @@ export const Login = () => {
                 <NavLogin/> {/** 100% width */}
             </Container>
 
-            <Container fluid className='my-5 container-Space' style={{width: "100%", height:"50px"}}>
+            <Container fluid className='my-5 container-Space'>
                 {/* Space */}
             </Container>
 
