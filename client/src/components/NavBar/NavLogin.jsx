@@ -10,7 +10,7 @@ export const NavLogin = () => {
     return (
 
         <>
-            <Container fluid className="pt-2" style={{borderBottom: "1px solid  #ccffcc", boxShadow: "1px"}}>
+            <Container fluid className="pt-2" style={{borderBottom: "1px solid  #f2f2f2"}}>
                 <Navbar>
                     <Container>
                         <Row>
