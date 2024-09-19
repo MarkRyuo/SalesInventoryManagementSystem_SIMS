@@ -11,7 +11,9 @@ export const NavLogin = () => {
             <Navbar bg='light'>
                     <Container>
                         <Navbar.Brand href="#home" >
-                            <BsBox size={40}/>
+                            <div>
+                                <BsBox size={40}/>
+                            </div>
                             SIMS
                         </Navbar.Brand>
                         <Button variant="outline-primary">Download App</Button>
