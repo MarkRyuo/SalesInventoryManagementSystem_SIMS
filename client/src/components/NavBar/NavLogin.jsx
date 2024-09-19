@@ -7,18 +7,19 @@ export const NavLogin = () => {
 
         <>
             <Container fluid bg='light'>
-                <Navbar bg='light'>
-                <Container>
-                    <Row>
-                        <Col>
-                            <BsBox size={40}/>
-                        </Col>
-                        <Col style={{paddingTop:5}}>
-                            <Navbar.Brand href="#home" >SIMS</Navbar.Brand>
-                        </Col>
-                    </Row>
-                    <Button variant="outline-primary">Download App</Button>
-                </Container>
+                <Navbar>
+                    <Container>
+                        <Row>
+                            <Col>
+                                <BsBox size={40}/>
+                            </Col>
+                            <Col style={{paddingTop:5}}>
+                                <Navbar.Brand href="#home" >SIMS</Navbar.Brand>
+                            </Col>
+                        </Row>
+                        <Button variant="outline-primary">Download App</Button>
+                    </Container>
+
             </Navbar>
             </Container>
         </>
