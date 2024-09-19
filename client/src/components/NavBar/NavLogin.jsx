@@ -11,7 +11,7 @@ export const NavLogin = () => {
             <Navbar bg='light'>
                     <Container>
                         <Navbar.Brand href="#home" >
-                            <div>
+                            <div style={{marginLeft: '30px'}}>
                                 <BsBox size={40}/>
                             </div>
                             SIMS
