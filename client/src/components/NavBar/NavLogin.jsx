@@ -16,7 +16,10 @@ export const NavLogin = () => {
                             <Col>
 
                             </Col>
-                            
+
+                            <Col>
+                                
+                            </Col>
                         </Row>
                         <Navbar.Brand href="#home" >
                             SIMS
