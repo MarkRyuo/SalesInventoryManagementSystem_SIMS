@@ -10,7 +10,9 @@ export const NavLogin = () => {
                     <Container>
                         <Row>
                             <Col>
-
+                                <Navbar.Brand href="#home" >
+                                SIMS
+                                </Navbar.Brand>
                             </Col>
 
                             <Col>
@@ -18,12 +20,9 @@ export const NavLogin = () => {
                             </Col>
 
                             <Col>
-                                
+
                             </Col>
                         </Row>
-                        <Navbar.Brand href="#home" >
-                            SIMS
-                        </Navbar.Brand>
                         <div style={{marginLeft: '30px'}}>
                             <BsBox size={40}/>
                         </div>
