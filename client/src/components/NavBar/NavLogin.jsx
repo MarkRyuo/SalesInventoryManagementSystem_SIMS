@@ -13,9 +13,7 @@ export const NavLogin = () => {
                                 <BsBox size={40}/>
                             </Col>
                             <Col>
-                                <Navbar.Brand href="#home" >
-                                    SIMS
-                                </Navbar.Brand>
+                                <Navbar.Brand href="#home" >SIMS</Navbar.Brand>
                             </Col>
                         </Row>
                         <Button variant="outline-primary">Download App</Button>
