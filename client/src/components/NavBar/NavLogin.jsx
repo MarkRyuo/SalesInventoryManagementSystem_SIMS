@@ -8,6 +8,11 @@ export const NavLogin = () => {
         <>
             <Navbar bg='light'>
                     <Container>
+                        <Row>
+                            <Col>
+                                
+                            </Col>
+                        </Row>
                         <Navbar.Brand href="#home" >
                             SIMS
                         </Navbar.Brand>
