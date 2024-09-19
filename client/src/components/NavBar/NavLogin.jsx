@@ -3,12 +3,14 @@ import {Row, Col, Container, Button, Navbar} from 'react-bootstrap' ;
 
 export const NavLogin = () => {
 
-    const handleDownload 
+    const handleDownload = () => {
+        
+    }
 
     return (
 
         <>
-            <Container fluid className="pt-2" style={{borderBottom: "1px solid  #ccffcc"}}>
+            <Container fluid className="pt-2" style={{borderBottom: "1px solid  #ccffcc", boxShadow: "1px"}}>
                 <Navbar>
                     <Container>
                         <Row>
