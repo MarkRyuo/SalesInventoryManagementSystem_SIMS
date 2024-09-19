@@ -7,8 +7,8 @@ export const NavLogin = () => {
 
         <>
             <Navbar bg='light'>
-                    <Container>
-                        <Row>
+                <Container>
+                    <Row>
                             <Col>
                                 <BsBox size={40}/>
                             </Col>
@@ -18,7 +18,7 @@ export const NavLogin = () => {
                         </Row>
                         <Button variant="outline-primary">Download App</Button>
                     </Container>
-                </Navbar>
+            </Navbar>
         </>
 
     )
