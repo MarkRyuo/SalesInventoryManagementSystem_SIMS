@@ -1,22 +1,28 @@
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
 import { BsBox } from "react-icons/bs";
-import Button from 'react-bootstrap/Button';
+import {Row, Col, Container, Button, Navbar} from 'react-bootstrap' ;
 
 export const NavLogin = () => {
 
+    // * handleDownload
     return (
 
         <>
-            <Navbar bg='light'>
+            <Container fluid className="py-2" style={{borderBottom: "1px solid  #f2f2f2"}}>
+                <Navbar>
                     <Container>
-                        <Navbar.Brand href="#home" >
-                            <BsBox size={40}/>
-                            SIMS
-                        </Navbar.Brand>
-                        <Button variant="outline-primary">Download App</Button>
+                        <Row>
+                            <Col>
+                                <BsBox size={40}/>
+                            </Col>
+                            <Col style={{paddingTop:4}}>
+                                <Navbar.Brand>SIMS</Navbar.Brand>
+                            </Col>
+                        </Row>
+                        {/* Hide Button if rage in small screen */}
+                        <Button variant="outline-primary" className="d-none d-sm-block" onClick={() => {}}>Download App</Button> 
                     </Container>
                 </Navbar>
+            </Container>
         </>
 
     )

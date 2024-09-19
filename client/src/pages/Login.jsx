@@ -1,33 +1,31 @@
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import { Row, Col, Button, Container } from 'react-bootstrap';
 import { NavLogin } from '../components/NavBar/NavLogin';
 import { LoginCard } from '../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
-
 import { useNavigate } from "react-router-dom";
+import './pagesStyles/Login.css' ;
 
 export const Login = () => {
 
     const navigate = useNavigate() ;
 
-    const getNavigate = () => {
-        navigate("/Dashboard")
+    const getNavigate = () => { 
+        // * Alternative function for login direct to dashboard
+        navigate("/Dashboard") 
     }
 
 
     return (
         <>
             <Container fluid className='mb-5'>
-                <NavLogin/>
+                <NavLogin/> {/** 100% width */}
             </Container>
 
-            <Container fluid className='my-5' style={{width: "100%", height:"50px"}}>
+            <Container fluid className='my-5 container-Space'>
                 {/* Space */}
             </Container>
 
-            <Container fluid="lg" className='d-flex justify-content-center text-center'>
+            <Container fluid='lg' className='d-flex justify-content-center text-center'>
                 <Row style={{width: 450}}>
                     <Col lg={12}>
                         <RiBox3Fill size={80} />
