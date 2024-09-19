@@ -15,7 +15,7 @@ export const NavLogin = () => {
                                 <BsBox size={40}/>
                             </Col>
                             <Col style={{paddingTop:4}}>
-                                <Navbar.Brand href="#home" >SIMS</Navbar.Brand>
+                                <Navbar.Brand>SIMS</Navbar.Brand>
                             </Col>
                         </Row>
                         {/* Hide Button if rage in small screen */}
