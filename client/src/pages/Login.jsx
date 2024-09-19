@@ -1,7 +1,4 @@
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import { Row, Col, Button, Container } from 'react-bootstrap';
 import { NavLogin } from '../components/NavBar/NavLogin';
 import { LoginCard } from '../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
