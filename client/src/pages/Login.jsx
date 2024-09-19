@@ -3,7 +3,7 @@ import { NavLogin } from '../components/NavBar/NavLogin';
 import { LoginCard } from '../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import './Login.css'
+import './Login.css' ;
 
 export const Login = () => {
 
