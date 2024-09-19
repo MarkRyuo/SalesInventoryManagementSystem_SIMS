@@ -11,7 +11,7 @@ export const NavLogin = () => {
                         <Row>
                             <Col>
                                 <Navbar.Brand href="#home" >
-                                SIMS
+                                    SIMS
                                 </Navbar.Brand>
                             </Col>
 
