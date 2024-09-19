@@ -10,6 +10,10 @@ export const NavLogin = () => {
                     <Container>
                         <Row>
                             <Col>
+
+                            </Col>
+
+                            <Col>
                                 
                             </Col>
                         </Row>
