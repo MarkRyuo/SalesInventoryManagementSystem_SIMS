@@ -3,9 +3,6 @@ import {Row, Col, Container, Button, Navbar} from 'react-bootstrap' ;
 
 export const NavLogin = () => {
 
-    const handleDownload = () => {
-        
-    }
 
     return (
 
