@@ -1,6 +1,6 @@
-import Navbar from 'react-bootstrap/Navbar';
+
 import { BsBox } from "react-icons/bs";
-import {Row, Container, Button} from 'react-bootstrap' ;
+import {Row, Container, Button, Navbar} from 'react-bootstrap' ;
 
 export const NavLogin = () => {
 
