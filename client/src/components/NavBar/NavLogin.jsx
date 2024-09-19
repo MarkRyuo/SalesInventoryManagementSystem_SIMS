@@ -16,7 +16,7 @@ export const NavLogin = () => {
                             </Col>
 
                             <Col>
-
+                                <BsBox size={40}/>
                             </Col>
 
                             <Col>
