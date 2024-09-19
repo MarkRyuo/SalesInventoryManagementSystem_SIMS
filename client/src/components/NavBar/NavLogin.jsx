@@ -6,14 +6,14 @@ export const NavLogin = () => {
     return (
 
         <>
-            <Container fluid className="pt-2" style={{borderBottom: "1px solid #F0F8FF"}}>
+            <Container fluid className="pt-2" style={{borderBottom: "1px solid  #ccffcc"}}>
                 <Navbar>
                     <Container>
                         <Row>
                             <Col>
                                 <BsBox size={40}/>
                             </Col>
-                            <Col style={{paddingTop:5}}>
+                            <Col style={{paddingTop:4}}>
                                 <Navbar.Brand href="#home" >SIMS</Navbar.Brand>
                             </Col>
                         </Row>
