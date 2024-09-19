@@ -9,8 +9,8 @@ export const NavLogin = () => {
             <Navbar bg='light'>
                 <Container>
                     <Row>
-                            <Col>
-                                <BsBox size={40}/>
+                        <Col>
+                            <BsBox size={40}/>
                             </Col>
                             <Col style={{paddingTop:5}}>
                                 <Navbar.Brand href="#home" >SIMS</Navbar.Brand>
