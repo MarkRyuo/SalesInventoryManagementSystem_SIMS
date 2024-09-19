@@ -17,11 +17,8 @@ export const NavLogin = () => {
                                     SIMS
                                 </Navbar.Brand>
                             </Col>
-
-                            <Col>
-                                 <Button variant="outline-primary">Download App</Button>
-                            </Col>
                         </Row>
+                        <Button variant="outline-primary">Download App</Button>
                     </Container>
                 </Navbar>
         </>
