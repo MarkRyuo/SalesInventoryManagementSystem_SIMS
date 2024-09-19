@@ -21,7 +21,7 @@ export const NavLogin = () => {
                                 <Navbar.Brand href="#home" >SIMS</Navbar.Brand>
                             </Col>
                         </Row>
-                        {/* Hide Button if rage in small screem */}
+                        {/* Hide Button if rage in small screen */}
                         <Button variant="outline-primary" className="d-none d-sm-block" onClick={() => {}}>Download App</Button> 
                     </Container>
                 </Navbar>
