@@ -3,8 +3,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // * Imported Pages
-import { Login } from './pages/Login';
-import { Dashboard } from './pages/Dashboard';
+import { Product, Reports, Accounts, Dashboard, Login} from './pages'
 
 
 
@@ -16,9 +15,9 @@ function App() {
         <Route path='/' element={<Login/>}/>
 
         <Route path=' Dashboard' element={<Dashboard/>}> 
-          <Route path=' Product' element={}/>
-          <Route path=' Reports' element={}/>
-          <Route path=' Accounts' element={}/>
+          <Route path=' Product' element={<Product />}/>
+          <Route path=' Reports' element={<Reports />}/>
+          <Route path=' Accounts' element={<Accounts />}/>
         </Route>
 
       </Routes>
