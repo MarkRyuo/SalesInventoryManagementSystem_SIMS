@@ -12,13 +12,13 @@ export const NavLogin = () => {
                 <Navbar>
                     <Container>
                         <Row>
-                            <Col>
-                                <BsBox size={40}/>
-                            </Col>
+                            <Col> <BsBox size={40}/> </Col>
                             <Col style={{paddingTop:4}}>
                                 <Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand>
                             </Col>
                         </Row>
+
+                        {/* Function of Dropdown */}
                         <Dropdown>
                             <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-3">
                                 Option
