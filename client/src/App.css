@@ -2,9 +2,14 @@
 
 /* * Fonts */
 
+* {
+    font-family: "Poppins", sans-serif; /** Default Font*/
+}
+
 
 .Nav-brand {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: noramal;
 }
+
