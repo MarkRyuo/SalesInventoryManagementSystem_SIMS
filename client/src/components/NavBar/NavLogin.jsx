@@ -15,7 +15,7 @@ export const NavLogin = () => {
                                 <BsBox size={40}/>
                             </Col>
                             <Col style={{paddingTop:4}}>
-                                <Navbar.Brand>SIMS</Navbar.Brand>
+                                <Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand>
                             </Col>
                         </Row>
                         <Dropdown>
