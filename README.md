@@ -3,7 +3,7 @@
 ## V1.3 Latest 
 
     v1.3
-        Add Pages: (Product, Reports, Accounts)
+        Add Pages: (Product, Reports, Accounts, About)
         Create index.js inside of pages to create a 1 line import for App.jsx
         Enable Routing to App.jsx
 
