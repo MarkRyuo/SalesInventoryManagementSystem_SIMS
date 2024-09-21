@@ -28,7 +28,8 @@ export const Login = () => {
                     <Col lg={12}> <p className='lead fs-5'>Sales Inventory Management System</p> </Col>
                     <Col lg={12}> <LoginCard /> </Col>
                     <Col lg={12} className='mt-4'>
-                        <Button variant="primary"  style={{width: "70%"}} size='lg' onClick={() => {
+                        <Button variant="primary" className={LoginStyle.btnLogin} 
+                        size='lg' onClick={() => {
                         getNavigate()
                         }}>Log in</Button>
                     </Col>
