@@ -3,7 +3,8 @@ import { NavLogin } from '../components/NavBar/NavLogin';
 import { LoginCard } from '../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import  { LoginStyle }  from './Pages_Cssmodules/Login.module.css' ;
+import { FcGoogle } from "react-icons/fc";
+import LoginStyle from './Login.module.css' ;
 
 export const Login = () => {
 
@@ -40,6 +41,15 @@ export const Login = () => {
                         <Button variant="primary" size='lg' onClick={() => {
                         getNavigate()
                         }}>Log in</Button>
+                    </Col>
+                    <Col lg={12} className='my-3'>
+                        <p>or</p>
+                        <Button variant="light" size='sm'>
+                        <FcGoogle size={35} className='m-2'/>
+                        Login with Google</Button>
+                    </Col>
+                    <Col>
+                        <a className="d-block d-sm-none" onClick={() => {}}>Download App</a> 
                     </Col>
 
                 </Row>
