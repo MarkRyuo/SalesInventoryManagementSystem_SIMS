@@ -37,15 +37,15 @@ export const Login = () => {
                     <Col lg={12}>
                         <LoginCard/>
                     </Col>
-                    <Col lg={12} className='mt-3'>
-                        <Button variant="primary" size='lg' onClick={() => {
+                    <Col lg={12} className='mt-4'>
+                        <Button variant="primary"  style={{width: "70%"}} size='lg' onClick={() => {
                         getNavigate()
                         }}>Log in</Button>
                     </Col>
                     <Col lg={12} className='my-3'>
                         <p>or</p>
-                        <Button variant="light" size='sm'>
-                        <FcGoogle size={35} className='m-2'/>
+                        <Button variant="light" size='sm' style={{width: "65%"}}>
+                        <FcGoogle size={35} className='me-2'/>
                         Login with Google</Button>
                     </Col>
 
