@@ -5,6 +5,7 @@
     v1.3
         Add Pages: (Product, Reports, Accounts)
         Create index.js inside of pages to create a 1 line import for App.jsx
+        Enable Routing to App.jsx
 
     v1.2 
         Complete Design of Login
