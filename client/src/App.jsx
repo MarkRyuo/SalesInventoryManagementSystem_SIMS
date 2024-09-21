@@ -11,9 +11,9 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Login/>}/>
-        
-        <Route path='/Dashboard' element={<Dashboard/>}> 
-        
+
+        <Route path=' Dashboard' element={<Dashboard/>}> 
+          <Route path='' element={}/>
         </Route>
 
       </Routes>
