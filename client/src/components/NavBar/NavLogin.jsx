@@ -25,10 +25,9 @@ export const NavLogin = () => {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                {/* <Button variant="outline-primary" className="d-none d-sm-block" onClick={() => {}}>Download App</Button> */}
-                                <Dropdown.Item href="#/action-1">Download App</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                <Dropdown.Item href="#/action-1" onClick={() => {}}>Download App</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">About</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Developer</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </Container>
