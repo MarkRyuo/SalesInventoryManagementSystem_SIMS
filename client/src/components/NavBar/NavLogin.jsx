@@ -1,5 +1,5 @@
 import { BsBox } from "react-icons/bs";
-import {Row, Col, Container, Button, Navbar, Dropdown} from 'react-bootstrap' ;
+import {Row, Col, Container, Navbar, Dropdown} from 'react-bootstrap' ;
 
 export const NavLogin = () => {
 
@@ -20,13 +20,13 @@ export const NavLogin = () => {
                         </Row>
                         {/* Hide Button if rage in small screen */}
                         <Dropdown>
-                            <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="">
+                            <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-5">
                                 Select
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
                                 {/* <Button variant="outline-primary" className="d-none d-sm-block" onClick={() => {}}>Download App</Button> */}
-                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-1">Download App</Dropdown.Item>
                                 <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                                 <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                             </Dropdown.Menu>
