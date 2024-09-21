@@ -21,7 +21,7 @@ export const NavLogin = () => {
                         {/* Hide Button if rage in small screen */}
                         <Button variant="outline-primary" className="d-none d-sm-block" onClick={() => {}}>Download App</Button>
                         <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            <Dropdown.Toggle variant="success" id="dropdown-basic" className="d-block d-sm-none">
                                 Dropdown Button
                             </Dropdown.Toggle>
 
