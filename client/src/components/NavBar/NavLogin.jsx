@@ -1,5 +1,6 @@
 import { BsBox } from "react-icons/bs";
 import {Row, Col, Container, Navbar, Dropdown} from 'react-bootstrap' ;
+import Navbars from './Navbar.module.css' ;
 
 export const NavLogin = () => {
 
@@ -7,17 +8,16 @@ export const NavLogin = () => {
     return (
 
         <>
-            <Container fluid className="py-2" style={{borderBottom: "1px solid  #f2f2f2"}}>
+            <Container fluid className={Navbars.navLogin}> {/* fix sm-Screen 412px */}
                 <Navbar>
                     <Container>
                         <Row>
-                            <Col>
-                                <BsBox size={40}/>
-                            </Col>
+                            <Col> <BsBox size={40}/> </Col>
                             <Col style={{paddingTop:4}}>
                                 <Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand>
                             </Col>
                         </Row>
+
                         <Dropdown>
                             <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-3">
                                 Option
@@ -30,6 +30,7 @@ export const NavLogin = () => {
                                 <Dropdown.Item href="#/action-3" onClick={() => {}}>About</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
+                        
                     </Container>
                 </Navbar>
             </Container>

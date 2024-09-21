@@ -1,6 +1,11 @@
 # Sales Inventory Management System (SIMS)
 
-## V1.2 Latest 
+## V1.3 Latest 
+
+    v1.3
+        Add Pages: (Product, Reports, Accounts, About)
+        Create index.js inside of pages to create a 1 line import for App.jsx
+        Enable Routing to App.jsx
 
     v1.2 
         Complete Design of Login
@@ -14,13 +19,13 @@
     1. 
         - npm
 
-    2. [ReactBootstrap](https://react-bootstrap.netlify.app/)
+    2. [ReactBootstrap](https://react-bootstrap.netlify.app/) : -v 2.10.4
         - npm install react-bootstrap bootstrap
 
-    3. [ReactIcons](https://react-icons.github.io/react-icons/)
+    3. [ReactIcons](https://react-icons.github.io/react-icons/) -v 5.3.0
         - npm install react-icons --save
 
-    4. React Router Dom - Version 6.26.2 
+    4. React Router Dom: -v 6.26.2 
         - npm i react-router-dom
 
     5. 

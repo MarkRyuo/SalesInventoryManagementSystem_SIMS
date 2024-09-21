@@ -1,0 +1,25 @@
+
+:root {
+    --btnGoogle: #2f9c4b ;
+}
+
+
+.containerSpace {
+    width: 100%;
+    height: 95px;
+}
+
+.containerRow {
+    width: 450px;
+    min-width: 412px;
+}
+
+.btnLogin {
+    width: 70%;
+}
+
+.btnGoogle {
+    width: 65%;
+    border-color: var(--btnGoogle);
+    border-radius: 10px;
+}

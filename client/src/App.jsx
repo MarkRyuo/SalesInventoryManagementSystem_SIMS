@@ -1,9 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-import { Login } from './pages/Login';
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Dashboard } from './pages/Dashboard';
+
+// * Imported Pages
+import { Login, Dashboard, Product, Reports, Accounts } from './pages' ;
+
+
 
 function App() {
 
@@ -11,9 +13,13 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Login/>}/>
-      </Routes>
-      <Routes>
-        <Route path='/Dashboard' element={<Dashboard/>}/>
+
+        <Route path='/Dashboard' element={<Dashboard/>}> 
+          <Route path='Product' element={<Product />}/>
+          <Route path='Reports' element={<Reports />}/>
+          <Route path='Accounts' element={<Accounts />}/>
+        </Route>
+
       </Routes>
     </Router>
   )
