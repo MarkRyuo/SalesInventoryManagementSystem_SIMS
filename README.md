@@ -11,4 +11,8 @@
 
 ## Installed : 
 
-    
+    1. 
+        - npm
+
+    2. [ReactBootstrap](https://react-bootstrap.netlify.app/)
+        - npm install react-bootstrap bootstrap
