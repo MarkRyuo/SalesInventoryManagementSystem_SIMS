@@ -18,9 +18,7 @@ export const Login = () => {
 
     return (
         <>
-            <Container fluid className='mb-5'>
-                <NavLogin/> {/** 100% width */}
-            </Container>
+            <Container fluid className='mb-5'> <NavLogin/> {/** 100% width */} </Container>
 
             <Container fluid className={LoginStyle.containerSpace}>
                 {/* Space */}
