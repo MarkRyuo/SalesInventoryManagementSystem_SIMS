@@ -27,7 +27,7 @@ export const NavLogin = () => {
                             <Dropdown.Menu>
                                 <Dropdown.Item href="#/action-1" onClick={() => {}}>Download App</Dropdown.Item> {/* App Files */}
                                 <Dropdown.Item href="#/action-2" onClick={() => {}}>About</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">Developer</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3" onClick={() => {}}>Developer</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </Container>
