@@ -1,5 +1,4 @@
 import { BsBox } from "react-icons/bs";
-import { IoIosArrowDropdownCircle } from "react-icons/io";
 import {Row, Col, Container, Button, Navbar, Dropdown} from 'react-bootstrap' ;
 
 export const NavLogin = () => {
@@ -21,8 +20,8 @@ export const NavLogin = () => {
                         </Row>
                         {/* Hide Button if rage in small screen */}
                         <Dropdown>
-                            <Dropdown.Toggle variant="light" id="dropdown-basic" className="d-block d-sm-none">
-                                <IoIosArrowDropdownCircle />
+                            <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="">
+                                Select
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
