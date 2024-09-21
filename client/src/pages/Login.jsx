@@ -15,6 +15,7 @@ export const Login = () => {
         navigate("/Dashboard") 
     }
 
+    
 
     return (
         <>
@@ -32,7 +33,7 @@ export const Login = () => {
                         <RiBox3Fill size={80} />
                     </Col>
                     <Col lg={12}>
-                        <p className='lead fs-4'>Sales Inventory Management System</p>
+                        <p className='lead fs-5'>Sales Inventory Management System</p>
                     </Col>
                     <Col lg={12}>
                         <LoginCard/>
