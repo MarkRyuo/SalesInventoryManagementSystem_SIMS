@@ -19,7 +19,7 @@
     1. 
         - npm
 
-    2. [ReactBootstrap](https://react-bootstrap.netlify.app/)
+    2. [ReactBootstrap](https://react-bootstrap.netlify.app/) : -v 2.10.4
         - npm install react-bootstrap bootstrap
 
     3. [ReactIcons](https://react-icons.github.io/react-icons/) -v 5.3.0
