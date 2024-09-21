@@ -18,7 +18,7 @@ export const NavLogin = () => {
                                 <Navbar.Brand>SIMS</Navbar.Brand>
                             </Col>
                         </Row>
-                        {/* Hide Button if rage in small screen */}
+                        
                         <Dropdown>
                             <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-5">
                                 Select
