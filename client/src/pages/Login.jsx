@@ -26,9 +26,7 @@ export const Login = () => {
                 <Row className={LoginStyle.containerRow}>
                     <Col lg={12}> <RiBox3Fill size={80} /> </Col>
                     <Col lg={12}> <p className='lead fs-5'>Sales Inventory Management System</p> </Col>
-                    <Col lg={12}>
-                        <LoginCard/>
-                    </Col>
+                    <Col lg={12}> <LoginCard /> </Col>
                     <Col lg={12} className='mt-4'>
                         <Button variant="primary"  style={{width: "70%"}} size='lg' onClick={() => {
                         getNavigate()
