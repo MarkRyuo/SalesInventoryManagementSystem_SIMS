@@ -1,5 +1,5 @@
 
-//* To one-line exporting
+//* To one-line exporting to App.jsx
 
 export { default as Product } from './Product';
 export { default as Reports } from './Reports';
