@@ -18,7 +18,6 @@ export const NavLogin = () => {
                             </Col>
                         </Row>
 
-                        {/* Function of Dropdown */}
                         <Dropdown>
                             <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-3">
                                 Option
