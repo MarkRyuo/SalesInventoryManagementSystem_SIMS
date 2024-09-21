@@ -8,4 +8,5 @@
 
 .containerRow {
     width: 450px;
+    min-width: 412px;
 }
