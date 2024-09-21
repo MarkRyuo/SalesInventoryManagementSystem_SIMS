@@ -8,7 +8,7 @@ export const NavLogin = () => {
     return (
 
         <>
-            <Container fluid className="py-2" style={{borderBottom: "1px solid  #f2f2f2"}}>
+            <Container fluid className={Navbars.NavLogin}>
                 <Navbar>
                     <Container>
                         <Row>
