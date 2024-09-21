@@ -10,3 +10,5 @@ export const Product = () => {
         </>
     )
 }
+
+export default Product ;
