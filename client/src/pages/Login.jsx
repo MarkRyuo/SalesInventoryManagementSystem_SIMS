@@ -48,9 +48,6 @@ export const Login = () => {
                         <FcGoogle size={35} className='m-2'/>
                         Login with Google</Button>
                     </Col>
-                    <Col>
-                        <a className="d-block d-sm-none" onClick={() => {}}>Download App</a> 
-                    </Col>
 
                 </Row>
 
