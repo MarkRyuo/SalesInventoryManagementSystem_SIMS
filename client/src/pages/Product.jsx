@@ -1,5 +1,10 @@
 
 
 export const Product = () => {
-    
+
+    return (
+        <>
+            
+        </>
+    )
 }
