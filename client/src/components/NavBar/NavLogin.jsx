@@ -1,5 +1,6 @@
 import { BsBox } from "react-icons/bs";
 import {Row, Col, Container, Navbar, Dropdown} from 'react-bootstrap' ;
+import Navbars from './Navbar.module.css' ;
 
 export const NavLogin = () => {
 
