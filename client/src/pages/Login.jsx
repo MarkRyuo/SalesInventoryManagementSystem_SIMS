@@ -35,7 +35,8 @@ export const Login = () => {
                         <p>or</p>
                         <Button variant="light" size='sm' className={LoginStyle.btnGoogle}>
                         <FcGoogle size={35} className='me-2'/>
-                        Login with Google</Button>
+                        Login with Google
+                        </Button>
                     </Col>
 
                 </Row>
