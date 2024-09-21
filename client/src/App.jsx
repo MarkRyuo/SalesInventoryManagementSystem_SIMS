@@ -1,9 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-import { Login } from './pages/Login';
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// * Imported Pages
+import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
+
+
 
 function App() {
 
