@@ -32,7 +32,7 @@ export const Login = () => {
                         <RiBox3Fill size={80} />
                     </Col>
                     <Col lg={12}>
-                        <p className='lead'>Sales Inventory Management System</p>
+                        <p className='lead fs-4'>Sales Inventory Management System</p>
                     </Col>
                     <Col lg={12}>
                         <LoginCard/>
