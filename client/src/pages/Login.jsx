@@ -9,7 +9,6 @@ import LoginStyle from './Login.module.css' ;
 export const Login = () => {
 
     const navigate = useNavigate() ;
-
     const getNavigate = () => { 
         // * Alternative function for login direct to dashboard
         navigate("/Dashboard") 
