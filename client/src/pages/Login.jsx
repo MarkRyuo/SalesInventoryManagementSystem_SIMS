@@ -34,8 +34,8 @@ export const Login = () => {
                     <Col lg={12} className='my-3'>
                         <p>or</p>
                         <Button variant="light" size='sm' className={LoginStyle.btnGoogle}>
-                        <FcGoogle size={35} className='me-2'/>
-                        Login with Google
+                            <FcGoogle size={35} className='me-2'/>
+                            Login with Google
                         </Button>
                     </Col>
 
