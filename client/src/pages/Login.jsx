@@ -32,7 +32,6 @@ export const Login = () => {
                     </Col>
                     <Col lg={12}>
                         <p className='lead'>Sales Inventory Management System</p>
-
                     </Col>
                     <Col lg={12}>
                         <LoginCard/>
