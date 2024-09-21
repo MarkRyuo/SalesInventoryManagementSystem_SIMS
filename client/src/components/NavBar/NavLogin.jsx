@@ -8,7 +8,7 @@ export const NavLogin = () => {
     return (
 
         <>
-            <Container fluid className={Navbars.navLogin}>
+            <Container fluid className={Navbars.navLogin}> {/* fix sm-Screen 412px */}
                 <Navbar>
                     <Container>
                         <Row>

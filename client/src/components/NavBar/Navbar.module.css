@@ -8,6 +8,7 @@
 
 .navLogin {
     border-bottom: 1px solid var(--navBorder);
-
+    padding-top: 10px;
+    padding-bottom: 10px;
     min-width: 412px;
 }
