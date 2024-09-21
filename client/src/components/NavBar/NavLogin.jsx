@@ -30,6 +30,7 @@ export const NavLogin = () => {
                                 <Dropdown.Item href="#/action-3" onClick={() => {}}>About</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
+                        
                     </Container>
                 </Navbar>
             </Container>
