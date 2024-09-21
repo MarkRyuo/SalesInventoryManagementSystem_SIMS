@@ -4,7 +4,7 @@ import { LoginCard } from '../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import LoginStyle from './Login.module.css' ;
+import LoginStyle from './Css/Login.module.css' ;
 
 export const Login = () => {
 
