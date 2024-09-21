@@ -3,7 +3,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // * Imported Pages
-import { Product, Reports, Accounts, Dashboard, Login} from './pages'
+import { Login, Dashboard, Product, Reports, Accounts } from './pages/' ;
 
 
 
@@ -14,10 +14,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Login/>}/>
 
-        <Route path=' Dashboard' element={<Dashboard/>}> 
-          <Route path=' Product' element={<Product />}/>
-          <Route path=' Reports' element={<Reports />}/>
-          <Route path=' Accounts' element={<Accounts />}/>
+        <Route path='/Dashboard' element={<Dashboard/>}> 
+          <Route path='Product' element={<Product />}/>
+          <Route path='Reports' element={<Reports />}/>
+          <Route path='Accounts' element={<Accounts />}/>
         </Route>
 
       </Routes>
