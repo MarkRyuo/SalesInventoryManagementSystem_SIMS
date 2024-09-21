@@ -18,14 +18,14 @@ export const NavLogin = () => {
                                 <Navbar.Brand>SIMS</Navbar.Brand>
                             </Col>
                         </Row>
-                        
                         <Dropdown>
                             <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-5">
                                 Select
                             </Dropdown.Toggle>
 
+                            {/* Dropdown function */}
                             <Dropdown.Menu>
-                                <Dropdown.Item href="#/action-1" onClick={() => {}}>Download App</Dropdown.Item>
+                                <Dropdown.Item href="#/action-1" onClick={() => {}}>Download App</Dropdown.Item> {/* App Files */}
                                 <Dropdown.Item href="#/action-2">About</Dropdown.Item>
                                 <Dropdown.Item href="#/action-3">Developer</Dropdown.Item>
                             </Dropdown.Menu>
