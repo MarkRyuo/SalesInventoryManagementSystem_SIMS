@@ -2,13 +2,13 @@
 
 //* Accounts Page
 
-export const Accounts = () => {
+export const AccountPage = () => {
 
     return (
         <>
-            <h1>Accounts Dashboard</h1>
+            <h1>AccountPage Dashboard</h1>
         </>
     )
 }
 
-export default Accounts ;
+export default AccountPage ;
