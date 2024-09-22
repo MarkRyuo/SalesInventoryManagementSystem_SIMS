@@ -16,11 +16,10 @@ export const NavDashboard = () => {
             
             <Navbar>
                 <Container className={Navbars.navDashboard}>
-                    <Button variant="primary" onClick={handleShow}>
-                        <GiHamburgerMenu size={20}/>  
-                    </Button>
-                    
                     <Navbar.Brand href="#home">
+                        <Button variant="primary" onClick={handleShow}>
+                            <GiHamburgerMenu size={20}/>  
+                        </Button>
                         React Bootstrap
                     </Navbar.Brand>
                 </Container>
