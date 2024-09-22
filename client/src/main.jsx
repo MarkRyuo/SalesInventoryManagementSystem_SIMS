@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import DashboardPage from '../src/pages/DashboardPage' ;
 import ProductPage from './pages/ProductPage.jsx'
+import ReportPage from './pages/ReportPage.jsx'
 
 import {
   createBrowserRouter,
@@ -22,6 +23,14 @@ const router = createBrowserRouter([
   {
     path: "ProductPage",
     element: <ProductPage /> ,
+  },
+  {
+    path: "ReportPage",
+    element: <ReportPage /> ,
+  },
+  {
+    path: "AccountPage",
+    element: <AccountPage /> ,
   },
 ]);
 
