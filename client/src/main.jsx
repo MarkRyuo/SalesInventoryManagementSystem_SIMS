@@ -7,8 +7,6 @@ import DashboardPage from '../src/pages/DashboardPage'
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Link,
 } from "react-router-dom";
 
 const router = createBrowserRouter([
