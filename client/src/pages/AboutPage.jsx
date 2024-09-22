@@ -1,6 +1,6 @@
 
 
-export const About = () => {
+export const AboutPage = () => {
 
     return (
         <>
