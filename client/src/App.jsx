@@ -9,18 +9,9 @@ import { Login, Dashboard, Product, Reports, Accounts } from './pages' ;
 function App() {
 
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Login />}/>
-
-        <Route path='/Dashboard/*' element={<Dashboard />}> 
-          <Route path=' Product' element={<Product />}/>
-          <Route path=' Reports' element={<Reports />}/>
-          <Route path=' Accounts' element={<Accounts />}/>
-        </Route>
-
-      </Routes>
-    </Router>
+    <>
+      <Login />
+    </>
   )
 }
 
