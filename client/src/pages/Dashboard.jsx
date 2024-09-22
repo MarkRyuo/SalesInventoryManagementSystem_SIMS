@@ -12,6 +12,7 @@ export const Dashboard = () => {
 
             <Container>
                 {/* Dashboard Components */}
+                <h1>Dashboard</h1>
             </Container>
 
             <Routes>
