@@ -14,8 +14,8 @@ export const NavDashboard = () => {
         
         <Container fluid>
             
-            <Navbar>
-                <Container className={Navbars.navDashboard}>
+            <Navbar className={Navbars.navDashboard}>
+                <Container>
                     <Navbar.Brand href="#home">
                         <Button variant="light" className={Navbars.btnOffcanvas} onClick={handleShow}>
                             <GiHamburgerMenu size={20}/>  
