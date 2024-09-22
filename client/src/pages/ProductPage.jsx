@@ -2,7 +2,7 @@
 
 //* Product Page
 
-export const Product = () => {
+export const ProductPage = () => {
 
     return (
         <>
@@ -11,4 +11,4 @@ export const Product = () => {
     )
 }
 
-export default Product ;
+export default ProductPage ;
