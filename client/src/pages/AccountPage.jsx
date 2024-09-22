@@ -1,4 +1,4 @@
-import { MainLayout }
+import { MainLayout } from '../layout/MainLayout'
 
 //* Accounts Page
 
