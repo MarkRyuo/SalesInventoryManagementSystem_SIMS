@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import DashboardPage from './pages/DashboardPage.jsx';
 
 import {
   createBrowserRouter,
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "Dashboard",
+    path: "DashboardPage",
     element: <DashboardPage />,
   },
 ]);
