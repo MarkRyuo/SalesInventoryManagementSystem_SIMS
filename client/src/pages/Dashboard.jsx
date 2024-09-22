@@ -1,6 +1,6 @@
 import {Container} from 'react-bootstrap' ;
 import {Routes, Route, Outlet} from 'react-router-dom'
-import { Product, Reports } from 'pages' ; 
+import { Product, Reports, Accounts } from 'pages' ; 
 
 export const Dashboard = () => {
 
@@ -11,6 +11,7 @@ export const Dashboard = () => {
             <Routes>
                 <Route path=' Product' element={<Product />}/>
                 <Route path=' Reports' element={<Reports />}/>
+                <Route path=' Accounts' element={<Accounts />}/>
             </Routes>
             <Outlet/>
 
