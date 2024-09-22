@@ -1,5 +1,4 @@
 import {Container} from 'react-bootstrap' ;
-import { Product, Reports, Accounts } from '.' ; 
 import { NavDashboard } from '../components/NavBar/NavDashboard';
 
 export const DashboardPage = () => {
@@ -18,4 +17,4 @@ export const DashboardPage = () => {
     )
 }
 
-export default Dashboard ;
+export default DashboardPage ;
