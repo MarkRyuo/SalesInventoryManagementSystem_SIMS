@@ -1,5 +1,6 @@
 import {Container} from 'react-bootstrap' ;
 import {Routes, Route, Outlet} from 'react-router-dom'
+import { Product } from './Product' ; 
 
 export const Dashboard = () => {
 
@@ -8,7 +9,7 @@ export const Dashboard = () => {
         <Container>
             
             <Routes>
-                <Route/>
+                <Route path=' Product' element={<Product />}/>
             </Routes>
             <Outlet/>
 
