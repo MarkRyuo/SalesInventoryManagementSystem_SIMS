@@ -17,7 +17,7 @@ export const NavDashboard = () => {
             <Navbar>
                 <Container className={Navbars.navDashboard}>
                     <Navbar.Brand href="#home">
-                        <Button variant="primary" className={Navbars.btnOffcanvas} onClick={handleShow}>
+                        <Button variant="light" className={Navbars.btnOffcanvas} onClick={handleShow}>
                             <GiHamburgerMenu size={20}/>  
                         </Button>
                         SIMS
