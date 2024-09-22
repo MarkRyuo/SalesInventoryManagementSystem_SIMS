@@ -20,7 +20,7 @@ export const Dashboard = () => {
                 <Route path=' Reports' element={<Reports />}/>
                 <Route path=' Accounts' element={<Accounts />}/>
             </Routes>
-            <Outlet />
+            
         </Container>
     )
 }
