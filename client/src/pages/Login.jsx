@@ -10,6 +10,10 @@ import { Link } from 'react-router-dom' ;
 
 export const Login = () => {
 
+    const navigate = useNavigate() ;
+
+    const handleLogin = () => navigate("/DashboardPage") ;
+
 
     return (
         <>
