@@ -15,12 +15,6 @@ export const Dashboard = () => {
                 <h1>Dashboard</h1>
             </Container>
 
-            <Routes>
-                <Route path=' Product' element={<Product />}/>
-                <Route path=' Reports' element={<Reports />}/>
-                <Route path=' Accounts' element={<Accounts />}/>
-            </Routes>
-
         </Container>
     )
 }
