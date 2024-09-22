@@ -35,8 +35,12 @@ export const NavDashboard = () => {
                 </Offcanvas.Header>
 
                 <Offcanvas.Body>
-                    Some text as placeholder. In real life you can have the elements you
-                    have chosen. Like, text, images, lists, etc.
+                    <div>
+                        <Button variant="Light">Dashboard</Button>
+                        <Button variant="Light">Product</Button>
+                        <Button variant="light">Reports</Button>
+                        <Button variant="light">Accounts</Button>
+                    </div>
                 </Offcanvas.Body>
             </Offcanvas>
 
