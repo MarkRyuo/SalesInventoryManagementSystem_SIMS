@@ -2,7 +2,7 @@
 
 //* Report Page
 
-export const Reports = () => {
+export const ReportPage = () => {
 
     return (
         <>
