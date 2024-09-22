@@ -1,4 +1,5 @@
-import { MainLayout } from '../layout/MainLayout'
+import { MainLayout } from '../layout/MainLayout' ;
+import { Container } from 'react-bootstrap';
 
 //* Accounts Page
 
