@@ -1,5 +1,10 @@
 
 
 export const MainLayout = () => {
-    
+
+    return (
+        <>
+            
+        </>
+    )
 }
