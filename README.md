@@ -4,6 +4,7 @@
 
     v1.3.1 
         Routing in Dashboard
+        Designing OffCanvas
 
     v1.3
         Add Pages: (Product, Reports, Accounts, About)
