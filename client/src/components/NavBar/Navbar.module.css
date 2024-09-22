@@ -31,4 +31,13 @@
 
 /* *Off Canvas Buttons*/
 
-.buttonOffcanvas
+.buttonOffcanvas {
+    display: flex;
+    flex-direction: column;
+
+    /* border: 1px solid red ; */
+    height: 200px;
+    justify-content: space-between;
+}
+
+
