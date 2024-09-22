@@ -27,7 +27,7 @@ export const Login = () => {
                     <Col lg={12}> <p className='lead fs-5'>Sales Inventory Management System</p> </Col>
                     <Col lg={12}> <LoginCard /> </Col>
                     <Col lg={12} className='mt-4'>
-                        <Button as={Link} to='/DashboardPage' variant="primary" className={LoginStyle.btnLogin} 
+                        <Button variant="primary" className={LoginStyle.btnLogin} onClick={() => handleLogin()} 
                         size='lg'>Log in</Button>
                     </Col>
                     <Col lg={12} className='my-3'>
