@@ -1,6 +1,6 @@
 import {Container} from 'react-bootstrap' ;
 import {Routes, Route, Outlet} from 'react-router-dom'
-import { Product } from './Product' ; 
+import { Product, Reports } from 'pages' ; 
 
 export const Dashboard = () => {
 
