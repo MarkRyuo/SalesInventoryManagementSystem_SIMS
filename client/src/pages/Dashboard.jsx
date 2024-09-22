@@ -8,7 +8,7 @@ export const Dashboard = () => {
     return (
 
         <Container fluid='lg'>
-            <NavDashboard/>
+            <NavDashboard />
 
             <Container>
                 {/* Dashboard Components */}
