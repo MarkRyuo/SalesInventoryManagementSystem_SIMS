@@ -11,4 +11,4 @@ export const ReportPage = () => {
     )
 }
 
-export default Reports ;
+export default ReportPage ;
