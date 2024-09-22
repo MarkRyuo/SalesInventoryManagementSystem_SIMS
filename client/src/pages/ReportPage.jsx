@@ -7,9 +7,11 @@ import { Container } from "react-bootstrap";
 export const ReportPage = () => {
 
     return (
-        <Container fluid='lg'>
-            <h1>Report Page Dashboard</h1>
-        </Container>
+        <MainLayout>
+            <Container fluid='lg'>
+                <h1>Report Page Dashboard</h1>
+            </Container>
+        </MainLayout>
     )
 }
 
