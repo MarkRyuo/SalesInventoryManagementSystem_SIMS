@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import LoginStyle from './Css/Login.module.css' ;
 
-import { Link } from 'react-router-dom' ;
-
 export const Login = () => {
 
     const navigate = useNavigate() ;
