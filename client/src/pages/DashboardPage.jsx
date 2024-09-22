@@ -1,5 +1,4 @@
 import {Container} from 'react-bootstrap' ;
-import { NavDashboard } from '../components/NavBar/NavDashboard';
 import { MainLayout } from '../layout/MainLayout';
 
 export const DashboardPage = () => {
