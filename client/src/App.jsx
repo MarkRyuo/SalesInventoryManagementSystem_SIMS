@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 
 // * Imported Pages
-import Login from '../src/pages/Login'
+import Login from '../src/pages/LoginPage'
 
 
 
