@@ -1,12 +1,18 @@
 import {Container} from 'react-bootstrap' ;
+import {Routes, Route, Outlet} from 'react-router-dom'
 
 export const Dashboard = () => {
 
     return (
 
-        <>
-            <h1>Welcome To Dashboard</h1>
-        </>
+        <Container>
+            
+            <Routes>
+                <Route/>
+            </Routes>
+            <Outlet/>
+
+        </Container>
     )
 }
 
