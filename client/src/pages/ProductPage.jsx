@@ -7,8 +7,8 @@ export const ProductPage = () => {
 
     return (
         <MainLayout>
-            <Container>
-                
+            <Container fluid='lg'>
+                <h1>Product Dashboard</h1>
             </Container>
         </MainLayout>
     )
