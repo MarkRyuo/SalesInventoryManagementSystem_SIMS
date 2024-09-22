@@ -1,10 +1,10 @@
 import { BsBox } from "react-icons/bs";
 import {Row, Col, Container, Navbar, Dropdown} from 'react-bootstrap' ;
 import Navbars from './Navbar.module.css' ;
+import { Link } from 'react-router-dom' ;
 
 export const NavLogin = () => {
 
-    // * handleDownload
     return (
 
         <>
@@ -26,8 +26,8 @@ export const NavLogin = () => {
                             {/* Dropdown function */}
                             <Dropdown.Menu style={{width: 100}}>
                                 <Dropdown.Item href="#/action-1" onClick={() => {}}>Download App</Dropdown.Item> {/* App Files */}
-                                <Dropdown.Item href="#/action-2" onClick={() => {}}>Developer</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3" onClick={() => {}}>About</Dropdown.Item>
+                                <Dropdown.Item as={Link} to='DeveloperPage' >Developer</Dropdown.Item>
+                                <Dropdown.Item as={Link} to='AboutPage' >About</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                         

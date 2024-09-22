@@ -6,13 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import LoginStyle from './Css/Login.module.css' ;
 
-export const Login = () => {
+export const LoginPage = () => {
 
     const navigate = useNavigate() ;
-    const getNavigate = () => { 
-        // * Alternative function for login direct to dashboard
-        navigate("/Dashboard") 
-    }
+
+    const handleLogin = () => navigate("/DashboardPage") ;
+
 
     return (
         <>
@@ -26,10 +25,8 @@ export const Login = () => {
                     <Col lg={12}> <p className='lead fs-5'>Sales Inventory Management System</p> </Col>
                     <Col lg={12}> <LoginCard /> </Col>
                     <Col lg={12} className='mt-4'>
-                        <Button variant="primary" className={LoginStyle.btnLogin} 
-                        size='lg' onClick={() => {
-                        getNavigate()
-                        }}>Log in</Button>
+                        <Button variant="primary" className={LoginStyle.btnLogin} onClick={() => handleLogin()} 
+                        size='lg'>Log in</Button>
                     </Col>
                     <Col lg={12} className='my-3'>
                         <p>or</p>
@@ -47,4 +44,4 @@ export const Login = () => {
     )
 }
 
-export default Login ;
+export default LoginPage ;

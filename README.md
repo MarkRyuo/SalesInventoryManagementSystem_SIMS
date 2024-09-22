@@ -1,6 +1,9 @@
 # Sales Inventory Management System (SIMS)
 
-## V1.3.1 Latest 
+## V2.0 Latest 
+
+    V2.0 
+        Recreate Dashboard
 
     v1.3.1 
         Routing in Dashboard
