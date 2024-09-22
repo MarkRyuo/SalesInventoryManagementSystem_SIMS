@@ -5,6 +5,7 @@ import './index.css'
 import DashboardPage from '../src/pages/DashboardPage' ;
 import ProductPage from './pages/ProductPage.jsx' ;
 import ReportPage from './pages/ReportPage.jsx' ;
+import AccountPage from './pages/AccountPage'
 
 import {
   createBrowserRouter,
