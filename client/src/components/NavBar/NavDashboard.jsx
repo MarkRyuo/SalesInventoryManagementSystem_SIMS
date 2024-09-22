@@ -17,10 +17,10 @@ export const NavDashboard = () => {
             <Navbar>
                 <Container className={Navbars.navDashboard}>
                     <Navbar.Brand href="#home">
-                        <Button variant="primary" className='' onClick={handleShow}>
+                        <Button variant="primary" className={Navbars.btnOffcanvas} onClick={handleShow}>
                             <GiHamburgerMenu size={20}/>  
                         </Button>
-                        React Bootstrap
+                        SIMS
                     </Navbar.Brand>
                 </Container>
             </Navbar>
