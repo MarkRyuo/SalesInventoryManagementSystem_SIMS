@@ -10,6 +10,7 @@ export const Dashboard = () => {
             
             <Routes>
                 <Route path=' Product' element={<Product />}/>
+                <Route path=' Reports' element={<Reports />}/>
             </Routes>
             <Outlet/>
 
