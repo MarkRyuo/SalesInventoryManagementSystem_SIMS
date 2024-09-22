@@ -6,7 +6,7 @@ export const Accounts = () => {
 
     return (
         <>
-            
+            <h1>Accounts Dashboard</h1>
         </>
     )
 }

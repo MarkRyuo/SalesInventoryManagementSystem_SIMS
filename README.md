@@ -1,6 +1,10 @@
 # Sales Inventory Management System (SIMS)
 
-## V1.3 Latest 
+## V1.3.1 Latest 
+
+    v1.3.1 
+        Routing in Dashboard
+        Designing OffCanvas
 
     v1.3
         Add Pages: (Product, Reports, Accounts, About)
