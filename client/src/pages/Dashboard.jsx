@@ -7,7 +7,7 @@ export const Dashboard = () => {
 
     return (
 
-        <Container>
+        <Container fluid='lg'>
             <NavDashboard/>
             <Routes>
                 <Route path=' Product' element={<Product />}/>
