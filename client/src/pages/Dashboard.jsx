@@ -10,6 +10,10 @@ export const Dashboard = () => {
         <Container fluid='lg'>
             <NavDashboard/>
 
+            <Container>
+                
+            </Container>
+
             <Routes>
                 <Route path=' Product' element={<Product />}/>
                 <Route path=' Reports' element={<Reports />}/>
