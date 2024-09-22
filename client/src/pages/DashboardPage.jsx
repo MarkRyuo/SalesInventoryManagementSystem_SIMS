@@ -1,11 +1,18 @@
 import {Container} from 'react-bootstrap' ;
+import { NavDashboard } from '../components/NavBar/NavDashboard';
 
 export const DashboardPage = () => {
 
     return (
 
         <Container fluid='lg'>
-            <h1>Hello World</h1>
+            <NavDashboard />
+
+            <Container>
+                {/* Dashboard Components */}
+                <h1>Dashboard</h1>
+            </Container>
+
         </Container>
     )
 }
