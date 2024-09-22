@@ -1,6 +1,7 @@
 import {Container, Navbar, Button, Offcanvas} from 'react-bootstrap' ;
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from 'react';
+import Navbars from './Navbar.module.css' ;
 
 
 export const NavDashboard = () => {
@@ -15,9 +16,8 @@ export const NavDashboard = () => {
             
             <Navbar className="bg-body-tertiary">
                 <Container>
-
                     <Button variant="primary" onClick={handleShow}>
-                        <GiHamburgerMenu size={30}/>  
+                        <GiHamburgerMenu size={20}/>  
                     </Button>
                     
                     <Navbar.Brand href="#home">
