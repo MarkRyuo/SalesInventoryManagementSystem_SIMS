@@ -30,7 +30,9 @@ export const NavDashboard = () => {
 
             <Offcanvas show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                    <Offcanvas.Title>
+                        Admin Name
+                    </Offcanvas.Title>
                 </Offcanvas.Header>
 
                 <Offcanvas.Body>
