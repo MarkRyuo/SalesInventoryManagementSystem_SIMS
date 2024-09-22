@@ -14,8 +14,8 @@ export const NavDashboard = () => {
         
         <Container fluid>
             
-            <Navbar className="bg-body-tertiary">
-                <Container>
+            <Navbar>
+                <Container className={Navbars.navDashboard}>
                     <Button variant="primary" onClick={handleShow}>
                         <GiHamburgerMenu size={20}/>  
                     </Button>
