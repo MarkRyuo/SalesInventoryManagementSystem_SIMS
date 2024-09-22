@@ -3,10 +3,16 @@ import { AiOutlineProduct } from "react-icons/ai";
 import { TbReportSearch } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 
-// or less ideally
+import { useState } from 'react' ;
+
+
 import { Button } from 'react-bootstrap';
 
 export const Buttons = () => {
+
+    const [dashboard, setDashboard] = useState() ;
+
+    const handleDashboard = () => 
 
     return (
         <>
