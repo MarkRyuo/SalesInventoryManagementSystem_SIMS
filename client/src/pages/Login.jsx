@@ -29,9 +29,7 @@ export const Login = () => {
                     <Col lg={12}> <LoginCard /> </Col>
                     <Col lg={12} className='mt-4'>
                         <Button as={Link} to='DashboardPage' variant="primary" className={LoginStyle.btnLogin} 
-                        size='lg' onClick={() => {
-                        getNavigate()
-                        }}>Log in</Button>
+                        size='lg'>Log in</Button>
                     </Col>
                     <Col lg={12} className='my-3'>
                         <p>or</p>
