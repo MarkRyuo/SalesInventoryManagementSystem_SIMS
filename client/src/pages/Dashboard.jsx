@@ -1,5 +1,4 @@
 import {Container} from 'react-bootstrap' ;
-import {Routes, Route} from 'react-router-dom'
 import { Product, Reports, Accounts } from './' ; 
 import { NavDashboard } from '../components/NavBar/NavDashboard';
 
