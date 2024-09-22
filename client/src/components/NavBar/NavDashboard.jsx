@@ -3,10 +3,6 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from 'react';
 import Navbars from './Navbar.module.css' ;
 
-import { MdDashboardCustomize } from "react-icons/md";
-import { AiOutlineProduct } from "react-icons/ai";
-import { TbReportSearch } from "react-icons/tb";
-import { VscAccount } from "react-icons/vsc";
 import { Buttons } from './Buttons';
 
 
