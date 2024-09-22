@@ -4,8 +4,6 @@ import { TbReportSearch } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 
 import { Link } from 'react-router-dom' ;
-
-
 import { Button } from 'react-bootstrap';
 
 export const Buttons = () => {
