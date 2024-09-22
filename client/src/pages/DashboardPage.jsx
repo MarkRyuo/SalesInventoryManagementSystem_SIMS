@@ -1,8 +1,8 @@
 import {Container} from 'react-bootstrap' ;
-import { Product, Reports, Accounts } from './' ; 
+import { Product, Reports, Accounts } from '.' ; 
 import { NavDashboard } from '../components/NavBar/NavDashboard';
 
-export const Dashboard = () => {
+export const DashboardPage = () => {
 
     return (
 
