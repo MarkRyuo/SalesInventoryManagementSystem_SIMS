@@ -9,6 +9,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import DashboardPage from './pages/DashboardPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/Dashboard",
-    element: ,
+    element: <DashboardPage />,
   },
 ]);
 
