@@ -17,7 +17,7 @@ export const NavDashboard = () => {
             <Navbar>
                 <Container className={Navbars.navDashboard}>
                     <Navbar.Brand href="#home">
-                        <Button variant="primary" onClick={handleShow}>
+                        <Button variant="primary" className='' onClick={handleShow}>
                             <GiHamburgerMenu size={20}/>  
                         </Button>
                         React Bootstrap
