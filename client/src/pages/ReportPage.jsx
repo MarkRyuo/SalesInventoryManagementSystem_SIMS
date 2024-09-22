@@ -7,8 +7,8 @@ import { Container } from "react-bootstrap";
 export const ReportPage = () => {
 
     return (
-        <Container fluid>
-            <h1>Reports Dashboard</h1>
+        <Container fluid='lg'>
+            <h1>Report Page Dashboard</h1>
         </Container>
     )
 }
