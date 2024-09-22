@@ -35,9 +35,9 @@ export const NavDashboard = () => {
                 </Offcanvas.Header>
 
                 <Offcanvas.Body>
-                    <div>
-                        <Button variant="Light">Dashboard</Button>
-                        <Button variant="Light">Product</Button>
+                    <div className=''>
+                        <Button variant="light">Dashboard</Button>
+                        <Button variant="light">Product</Button>
                         <Button variant="light">Reports</Button>
                         <Button variant="light">Accounts</Button>
                     </div>
