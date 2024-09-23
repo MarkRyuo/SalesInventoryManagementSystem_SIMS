@@ -8,7 +8,7 @@ export const Charts = () => {
             <div className="mainChart">
                 <Row>
                     <Col>
-                        
+                        Col-1
                     </Col>
                 </Row>
             </div>
