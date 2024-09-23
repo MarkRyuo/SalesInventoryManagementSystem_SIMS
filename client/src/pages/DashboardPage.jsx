@@ -9,6 +9,9 @@ export const DashboardPage = () => {
             <Container>
                 {/* Dashboard Components */}
                 <h1>Dashboard</h1>
+                <div>
+                    
+                </div>
             </Container>
         </MainLayout>
 
