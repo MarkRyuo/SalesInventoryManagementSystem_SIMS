@@ -7,16 +7,16 @@ export const Charts = () => {
         <>
             <div className="mainChart">
                 <Row>
-                    <Col lg={3} style={{border: "1px solid", height: "200px"}}>
+                    <Col lg={3} md={4} style={{border: "1px solid", height: "200px"}}>
                         Col-1
                     </Col>
-                    <Col lg={3} style={{border: "1px solid"}}>
+                    <Col lg={3} md={4} style={{border: "1px solid"}}>
                         Col-2
                     </Col>
-                    <Col lg={3} style={{border: "1px solid"}}>
+                    <Col lg={3} md={4} style={{border: "1px solid"}}>
                         Col-3
                     </Col>
-                    <Col lg={3} style={{border: "1px solid"}}>
+                    <Col lg={3} md={4} style={{border: "1px solid"}}>
                         Col-4
                     </Col>
                 </Row>
