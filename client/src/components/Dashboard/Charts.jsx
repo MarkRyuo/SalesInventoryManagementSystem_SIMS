@@ -16,7 +16,7 @@ export const Charts = () => {
                     <Col lg={3} md={12} style={{border: "1px solid", height: "200px"}}>
                         Col-3
                     </Col>
-                    <Col lg={3} md={12} style={{border: "1px solid"}}>
+                    <Col lg={3} md={12} style={{border: "1px solid", height: "200px"}}>
                         Col-4
                     </Col>
                 </Row>
