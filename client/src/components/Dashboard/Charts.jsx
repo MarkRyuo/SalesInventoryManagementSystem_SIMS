@@ -13,10 +13,10 @@ export const Charts = () => {
                     <Col lg={3} style={{border: "1px solid"}}>
                         Col-2
                     </Col>
-                    <Col lg={3}>
+                    <Col lg={3} style={{border: "1px solid"}}>
                         Col-3
                     </Col>
-                    <Col lg={3}>
+                    <Col lg={3} style={{border: "1px solid"}}>
                         Col-4
                     </Col>
                 </Row>
