@@ -7,7 +7,7 @@ export const Charts = () => {
         <>
             <div className="mainChart">
                 <Row>
-                    <Col lg={3} style={{border: "1px solid"}}>
+                    <Col lg={3} style={{border: "1px solid", height: "200px"}}>
                         Col-1
                     </Col>
                     <Col lg={3} style={{border: "1px solid"}}>
