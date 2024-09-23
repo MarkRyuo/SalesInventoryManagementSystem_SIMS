@@ -6,7 +6,7 @@ export const Charts = () => {
     return (
         <>
             <div className="mainChart">
-                <Row className="gap-0">
+                <Row>
                     <Col lg={3} md={6} style={{border: "1px solid", height: "200px"}}>
                         Col-1
                     </Col>
