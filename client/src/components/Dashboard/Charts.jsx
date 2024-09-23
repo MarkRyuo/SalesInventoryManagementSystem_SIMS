@@ -7,10 +7,10 @@ export const Charts = () => {
         <>
             <div className="mainChart">
                 <Row>
-                    <Col>
+                    <Col lg={3}>
                         Col-1
                     </Col>
-                    <Col>
+                    <Col lg={3}>
                         Col-2
                     </Col>
                     <Col>
