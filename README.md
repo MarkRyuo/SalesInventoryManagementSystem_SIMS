@@ -1,6 +1,9 @@
 # Sales Inventory Management System (SIMS)
 
-## V2.0 Latest 
+## V2.1 Latest 
+
+    v2.1
+        Dashboard Design 
 
     V2.0 
         Recreate Dashboard

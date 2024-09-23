@@ -1,5 +1,6 @@
 import {Container} from 'react-bootstrap' ;
 import { MainLayout } from '../layout/MainLayout';
+import { Charts } from '../components/Dashboard/Charts';
 
 export const DashboardPage = () => {
 
@@ -9,6 +10,9 @@ export const DashboardPage = () => {
             <Container>
                 {/* Dashboard Components */}
                 <h1>Dashboard</h1>
+                <div>
+                    <Charts />
+                </div>
             </Container>
         </MainLayout>
 
