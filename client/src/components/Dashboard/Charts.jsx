@@ -1,3 +1,10 @@
 
 
+export const Charts = () => {
 
+    return (
+        <>
+            
+        </>
+    )
+}
