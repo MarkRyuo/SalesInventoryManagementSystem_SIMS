@@ -16,7 +16,7 @@ export const Charts = () => {
                     <Col lg={3}>
                         Col-3
                     </Col>
-                    <Col>
+                    <Col lg={3}>
                         Col-4
                     </Col>
                 </Row>
