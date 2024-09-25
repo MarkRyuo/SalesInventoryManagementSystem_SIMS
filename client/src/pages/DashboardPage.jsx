@@ -5,8 +5,8 @@ import BigCharts from '../components/Dashboard/BigCharts';
 
 export const DashboardPage = () => {
 
-    const ChartData = {
-        Chart1 :
+    const Charts = {
+        
     }
 
     return (
