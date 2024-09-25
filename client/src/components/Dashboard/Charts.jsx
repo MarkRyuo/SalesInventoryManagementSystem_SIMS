@@ -2,7 +2,7 @@
 
 
 
-export const Charts = ({ChartName, Cha}) => {
+export const Charts = ({ChartName,}) => {
 
     return (
         <>
