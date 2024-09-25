@@ -4,7 +4,7 @@
 
 function BigCharts() {
     return (
-        <div>
+        <div style={{border: "1px solid red"}}>
             
         </div>
     )
