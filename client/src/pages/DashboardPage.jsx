@@ -5,10 +5,6 @@ import BigCharts from '../components/Dashboard/BigCharts';
 
 export const DashboardPage = () => {
 
-    const Charts = {
-        
-    }
-
     return (
         
         <MainLayout>
@@ -22,7 +18,7 @@ export const DashboardPage = () => {
                             <BigCharts />
                         </Col>
 
-                        <Col lg={4} sm={8}>
+                        <Col lg={4} sm={12}>
                             <BigCharts />
                         </Col>
                     </Row>
