@@ -7,7 +7,7 @@ export const DashboardPage = () => {
 
     const ChartData = {
         Chart1 : {
-            
+            chartName : "Chart 1"
         }
     }
 
