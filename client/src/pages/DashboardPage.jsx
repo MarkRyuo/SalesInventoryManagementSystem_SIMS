@@ -1,4 +1,4 @@
-import {Container} from 'react-bootstrap' ;
+import {Container, Row, Col} from 'react-bootstrap' ;
 import { MainLayout } from '../layout/MainLayout';
 import { Charts } from '../components/Dashboard/Charts';
 import BigCharts from '../components/Dashboard/BigCharts';
@@ -13,7 +13,11 @@ export const DashboardPage = () => {
                 <h1>Dashboard</h1>
                 <div>
                     <Charts />
-                    <BigCharts />
+                    <Row>
+                        <Col>
+                            
+                        </Col>
+                    </Row>
                 </div>
             </Container>
         </MainLayout>
