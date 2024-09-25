@@ -14,8 +14,12 @@ export const DashboardPage = () => {
                 <div>
                     <Charts />
                     <Row>
-                        <Col>
-                            
+                        <Col lg={8} sm={12}>
+                            <BigCharts />
+                        </Col>
+
+                        <Col lg={4} sm={8}>
+                            <BigCharts />
                         </Col>
                     </Row>
                 </div>
