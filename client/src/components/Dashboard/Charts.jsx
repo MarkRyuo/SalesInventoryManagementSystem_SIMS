@@ -2,7 +2,8 @@
 
 
 
-export const Charts = ({ChartName}) => {
+
+export const Charts = (props) => {
 
     return (
         <>
