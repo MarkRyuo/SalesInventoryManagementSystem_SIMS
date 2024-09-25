@@ -1,4 +1,3 @@
-import { Row, Col } from "react-bootstrap"
 
 
 
@@ -6,11 +5,7 @@ import { Row, Col } from "react-bootstrap"
 function BigCharts() {
     return (
         <div>
-            <Row>
-                <Col>
-                    
-                </Col>
-            </Row>
+            
         </div>
     )
 }
