@@ -7,7 +7,7 @@ export const DashboardPage = () => {
 
     const ChartData = {
         Chart1 : {
-            chartName : "Chart 1",
+            chartName : "Chart 1"
         }
     }
 
@@ -18,7 +18,7 @@ export const DashboardPage = () => {
                 {/* Dashboard Components */}
                 <h1>Dashboard</h1>
                 <div>
-                    <Charts {...ChartData.Chart1}/>
+                    <Charts ChartName={...ChartData.chartName}/>
                     <Row>
                         <Col lg={8} sm={12}>
                             <BigCharts />
