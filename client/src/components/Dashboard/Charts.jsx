@@ -1,4 +1,4 @@
-import { Row, Col } from "react-bootstrap"
+// import { Row, Col } from "react-bootstrap"
 
 
 export const Charts = () => {
@@ -6,7 +6,7 @@ export const Charts = () => {
     return (
         <>
             <div className="mainChart">
-                <Row>
+                {/* <Row>
                     <Col lg={3} md={6} style={{border: "1px solid", height: "150px"}}>
                         Col-1
                     </Col>
@@ -19,7 +19,7 @@ export const Charts = () => {
                     <Col lg={3} md={6} style={{border: "1px solid", height: "150px"}}>
                         Col-4
                     </Col>
-                </Row>
+                </Row> */}
             </div>
         </>
     )
