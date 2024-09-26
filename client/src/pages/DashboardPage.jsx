@@ -3,6 +3,8 @@ import { MainLayout } from '../layout/MainLayout';
 import { Charts } from '../components/Dashboard/Charts';
 import BigCharts from '../components/Dashboard/BigCharts';
 
+import Dashboardcss from '../pages/Css/Dashboard.module.css'
+
 export const DashboardPage = () => {
 
     const ChartData = {
@@ -23,16 +25,16 @@ export const DashboardPage = () => {
                 <h1>Dashboard</h1>
                 <div>
                     <Row>
-                        <Col sm={12} lg={6}>
+                        <Col sm={6} lg={6} className={Dashboardcss.}>
                             <Charts ChartNumber={ChartData.ChartName1} />
                         </Col>
-                        <Col sm={12} lg={6}>
+                        <Col sm={6} lg={6}>
                             <Charts ChartNumber={ChartData.ChartName2} />
                         </Col>
-                        <Col sm={12} lg={6}>
+                        <Col sm={6} lg={6}>
                             <Charts ChartNumber={ChartData.ChartName3} />
                         </Col>
-                        <Col sm={12} lg={6}>
+                        <Col sm={6} lg={6}>
                             <Charts ChartNumber={ChartData.ChartName4} />
                         </Col>
                     </Row>
