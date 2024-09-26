@@ -23,7 +23,7 @@ export const DashboardPage = () => {
                 <h1>Dashboard</h1>
                 <div>
                     <Row>
-                        <Col>
+                        <Col sm={12}>
                             <Charts ChartNumber={ChartData.ChartName1} />
                         </Col>
                         <Col>
