@@ -25,7 +25,7 @@ export const DashboardPage = () => {
                 <h1>Dashboard</h1>
                 <div>
                     <Row>
-                        <Col sm={6} lg={6} className={Dashboardcss.}>
+                        <Col sm={6} lg={6}>
                             <Charts ChartNumber={ChartData.ChartName1} />
                         </Col>
                         <Col sm={6} lg={6}>
