@@ -3,7 +3,6 @@
 
 export const Charts = ({ChartNumber}) => {
 
-    const ChartNumber = props.ChartNumber
 
     return (
         <>
