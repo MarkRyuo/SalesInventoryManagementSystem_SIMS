@@ -29,10 +29,10 @@ export const DashboardPage = () => {
                         <Col sm={12} lg={6}>
                             <Charts ChartNumber={ChartData.ChartName2} />
                         </Col>
-                        <Col sm={12}>
+                        <Col sm={12} lg={6}>
                             <Charts ChartNumber={ChartData.ChartName3} />
                         </Col>
-                        <Col>
+                        <Col sm={12} lg={6}>
                             <Charts ChartNumber={ChartData.ChartName4} />
                         </Col>
                     </Row>
