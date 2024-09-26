@@ -6,6 +6,10 @@ export const Charts = () => {
     return (
         <>
             <div className="mainChart">
+
+                <div>
+                    
+                </div>
                 {/* <Row>
                     <Col lg={3} md={6} style={{border: "1px solid", height: "150px"}}>
                         Col-1
