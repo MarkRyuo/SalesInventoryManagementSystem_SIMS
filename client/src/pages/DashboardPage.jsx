@@ -6,7 +6,9 @@ import BigCharts from '../components/Dashboard/BigCharts';
 export const DashboardPage = () => {
 
     const ChartData = {
-        ChartName1 : "Chart1"
+        ChartName1 : "Chart1", 
+
+        ChartName2 : "Chart2"
     }
 
     return (
@@ -19,6 +21,9 @@ export const DashboardPage = () => {
                     <Row>
                         <Col>
                             <Charts ChartNumber={ChartData.ChartName1} />
+                        </Col>
+                        <Col>
+                            <Charts ChartNumber={ChartData.ChartName2} />
                         </Col>
                     </Row>
                     <Row>
