@@ -9,7 +9,7 @@ export const Charts = ({ChartNumber}) => {
             <div className="mainChart">
 
                 <div>
-                    {props.ChartNumber}
+                    {ChartNumber}
                 </div>
                 {/* <Row>
                     <Col lg={3} md={6} style={{border: "1px solid", height: "150px"}}>
