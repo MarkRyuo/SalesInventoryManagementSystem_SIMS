@@ -10,7 +10,9 @@ export const DashboardPage = () => {
 
         ChartName2 : "Chart2",
 
-        ChartName3: "Chart3"
+        ChartName3: "Chart3",
+
+        ChartName4: "Chart4"
     }
 
     return (
