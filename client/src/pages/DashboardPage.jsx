@@ -8,7 +8,9 @@ export const DashboardPage = () => {
     const ChartData = {
         ChartName1 : "Chart1", 
 
-        ChartName2 : "Chart2"
+        ChartName2 : "Chart2",
+
+        ChartName3: "Chart3"
     }
 
     return (
@@ -24,6 +26,9 @@ export const DashboardPage = () => {
                         </Col>
                         <Col>
                             <Charts ChartNumber={ChartData.ChartName2} />
+                        </Col>
+                        <Col>
+
                         </Col>
                     </Row>
                     <Row>
