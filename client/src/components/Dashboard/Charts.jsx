@@ -1,14 +1,16 @@
 // import { Row, Col } from "react-bootstrap"
 
 
-export const Charts = () => {
+export const Charts = ({ChartNumber}) => {
+
+    const ChartNumber = props.ChartNumber
 
     return (
         <>
             <div className="mainChart">
 
                 <div>
-                    
+                    {props.ChartNumber}
                 </div>
                 {/* <Row>
                     <Col lg={3} md={6} style={{border: "1px solid", height: "150px"}}>
