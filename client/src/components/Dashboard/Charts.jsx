@@ -9,7 +9,7 @@ export const Charts = ({ChartNumber}) => {
         <>
             <div className="mainChart">
 
-                <div style={{border: "1px solid"}}>
+                <div style={{border: "1px solid", height: 150}}>
                     {ChartNumber}
                 </div>
                 {/* <Row>
