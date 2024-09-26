@@ -3,8 +3,6 @@ import { MainLayout } from '../layout/MainLayout';
 import { Charts } from '../components/Dashboard/Charts';
 import BigCharts from '../components/Dashboard/BigCharts';
 
-import Dashboardcss from '../pages/Css/Dashboard.module.css'
-
 export const DashboardPage = () => {
 
     const ChartData = {
