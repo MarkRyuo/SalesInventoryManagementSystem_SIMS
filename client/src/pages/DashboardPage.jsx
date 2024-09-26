@@ -5,6 +5,16 @@ import BigCharts from '../components/Dashboard/BigCharts';
 
 export const DashboardPage = () => {
 
+    const ChartData = {
+        ChartName1 : "Chart1", 
+
+        ChartName2 : "Chart2",
+
+        ChartName3: "Chart3",
+
+        ChartName4: "Chart4"
+    }
+
     return (
         
         <MainLayout>
@@ -12,7 +22,20 @@ export const DashboardPage = () => {
                 {/* Dashboard Components */}
                 <h1>Dashboard</h1>
                 <div>
-                    <Charts />
+                    <Row>
+                        <Col sm={6} lg={6}>
+                            <Charts ChartNumber={ChartData.ChartName1} />
+                        </Col>
+                        <Col sm={6} lg={6}>
+                            <Charts ChartNumber={ChartData.ChartName2} />
+                        </Col>
+                        <Col sm={6} lg={6}>
+                            <Charts ChartNumber={ChartData.ChartName3} />
+                        </Col>
+                        <Col sm={6} lg={6}>
+                            <Charts ChartNumber={ChartData.ChartName4} />
+                        </Col>
+                    </Row>
                     <Row>
                         <Col lg={8} sm={12}>
                             <BigCharts />
