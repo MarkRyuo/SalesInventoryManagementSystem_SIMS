@@ -26,7 +26,7 @@ export const LoginPage = () => {
                     <Col lg={12}> <LoginCard /> </Col>
                     <Col lg={12} className='mt-4'>
                         <Button variant="primary" className={LoginStyle.btnLogin} onClick={() => handleLogin()} 
-                        size='lg'>Log in</Button>
+                        size='lg'>Login</Button>
                     </Col>
                     <Col lg={12} className='my-3'>
                         <p>or</p>
