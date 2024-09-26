@@ -3,7 +3,6 @@
 
 export const Charts = ({ChartNumber}) => {
 
-
     return (
         <>
             <div className="mainChart">
