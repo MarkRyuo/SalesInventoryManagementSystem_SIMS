@@ -3,6 +3,8 @@
 
 export const Charts = ({ChartNumber}) => {
 
+    const ChartNumber = "C"
+
     return (
         <>
             <div className="mainChart">
