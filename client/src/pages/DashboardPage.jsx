@@ -23,13 +23,13 @@ export const DashboardPage = () => {
                 <h1>Dashboard</h1>
                 <div>
                     <Row>
-                        <Col sm={12}>
+                        <Col sm={12} lg={6}>
                             <Charts ChartNumber={ChartData.ChartName1} />
                         </Col>
-                        <Col>
+                        <Col sm={12} lg={6}>
                             <Charts ChartNumber={ChartData.ChartName2} />
                         </Col>
-                        <Col>
+                        <Col sm={12}>
                             <Charts ChartNumber={ChartData.ChartName3} />
                         </Col>
                         <Col>
