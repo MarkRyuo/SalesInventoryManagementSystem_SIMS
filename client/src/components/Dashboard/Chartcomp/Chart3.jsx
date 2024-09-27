@@ -10,4 +10,4 @@ function Chart3() {
     )
 }
 
-export default Chart3
+export default Chart3 ;
