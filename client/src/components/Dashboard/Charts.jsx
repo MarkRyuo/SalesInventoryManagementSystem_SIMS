@@ -2,7 +2,7 @@
 
 
 // eslint-disable-next-line react/prop-types
-export const Charts = ({ChartNumber}) => {
+export const Charts = () => {
 
 
     return (
