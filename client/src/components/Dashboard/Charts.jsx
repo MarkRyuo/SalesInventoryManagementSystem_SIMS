@@ -17,10 +17,10 @@ export const Charts = () => {
                     <Col lg={4} md={12} className={DashStyle.colChart1}>
                         <Chart1 />
                     </Col>
-                    <Col lg={4} className={DashStyle.colChart2}>
+                    <Col lg={4} md={12} className={DashStyle.colChart2}>
                         <Chart2 />
                     </Col>
-                    <Col lg={4} className={DashStyle.colChart3}>
+                    <Col lg={4} md={12} className={DashStyle.colChart3}>
                         <Chart3 />
                     </Col>
                 </Row>
