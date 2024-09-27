@@ -1,17 +1,29 @@
-// import { Row, Col } from "react-bootstrap"
+import { Row, Col } from "react-bootstrap"
+import Chart1 from "./Chartcomp/Chart1"
+import Chart2 from "./Chartcomp/Chart2"
+import Chart3 from "./Chartcomp/Chart3"
+
+import DashStyle from './Dashboard.module.css'
 
 
-// eslint-disable-next-line react/prop-types
-export const Charts = ({ChartNumber}) => {
+
+export const Charts = () => {
 
 
     return (
         <>
             <div className="mainChart">
-
-                <div style={{border: "1px solid", height: 150}}>
-                    {ChartNumber}
-                </div>
+                <Row className="gap-5">
+                    <Col lg={4} md={12} className={DashStyle.colChart}>
+                        <Chart1 />
+                    </Col>
+                    <Col lg={4} md={12} className={DashStyle.colChart}>
+                        <Chart2 />
+                    </Col>
+                    <Col lg={4} md={12} className={DashStyle.colChart}>
+                        <Chart3 />
+                    </Col>
+                </Row>
             </div>
         </>
     )

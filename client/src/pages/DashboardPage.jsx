@@ -1,51 +1,26 @@
-import {Container, Row, Col} from 'react-bootstrap' ;
+import {Container} from 'react-bootstrap' ;
 import { MainLayout } from '../layout/MainLayout';
 import { Charts } from '../components/Dashboard/Charts';
 import BigCharts from '../components/Dashboard/BigCharts';
+import { RxDashboard } from "react-icons/rx";
 
 export const DashboardPage = () => {
 
-    const ChartData = {
-        ChartName1 : "Chart1", 
-
-        ChartName2 : "Chart2",
-
-        ChartName3: "Chart3",
-
-        ChartName4: "Chart4"
-    }
 
     return (
         
         <MainLayout>
             <Container>
                 {/* Dashboard Components */}
-                <h1>Dashboard</h1>
-                <div>
-                    <Row>
-                        <Col sm={6} lg={6}>
-                            <Charts ChartNumber={ChartData.ChartName1} />
-                        </Col>
-                        <Col sm={6} lg={6}>
-                            <Charts ChartNumber={ChartData.ChartName2} />
-                        </Col>
-                        <Col sm={6} lg={6}>
-                            <Charts ChartNumber={ChartData.ChartName3} />
-                        </Col>
-                        <Col sm={6} lg={6}>
-                            <Charts ChartNumber={ChartData.ChartName4} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col lg={8} sm={12}>
-                            <BigCharts />
-                        </Col>
+                <p className='fs-3 text-center d-inline'>
+                <span style={{marginRight: "8px"}}><RxDashboard /></span>
+                Dashboard
+                </p>
 
-                        <Col lg={4} sm={12}>
-                            <BigCharts />
-                        </Col>
-                    </Row>
-                </div>
+                <Container>
+                    <Charts /> 
+                    <BigCharts />
+                </Container>
             </Container>
         </MainLayout>
 
