@@ -9,7 +9,9 @@ export const Charts = () => {
         <>
             <div className="mainChart">
                 <Row>
-                    
+                    <Col>
+                        
+                    </Col>
                 </Row>
             </div>
         </>
