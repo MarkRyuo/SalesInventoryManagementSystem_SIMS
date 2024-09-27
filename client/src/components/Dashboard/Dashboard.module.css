@@ -14,5 +14,8 @@
 }
 
 .bigCharts {
-    
+    border: 1px solid red;
+
+    height: 400px;
+    margin-top: 10;
 }
