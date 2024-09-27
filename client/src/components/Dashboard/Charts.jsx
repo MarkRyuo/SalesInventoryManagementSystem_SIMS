@@ -12,10 +12,10 @@ export const Charts = () => {
         <>
             <div className="mainChart">
                 <Row>
-                    <Col>
+                    <Col lg={4}>
                         <Chart1 />
                     </Col>
-                    <Col>
+                    <Col lg={4}>
                         <Chart2 />
                     </Col>
                     <Col>
