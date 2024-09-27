@@ -4,7 +4,7 @@
 function Chart1() {
     return (
         <div>
-
+            
         </div>
     )
 }
