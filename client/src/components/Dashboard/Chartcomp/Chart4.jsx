@@ -3,9 +3,9 @@
 
 function Chart4() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
