@@ -14,15 +14,7 @@ export const DashboardPage = () => {
                 <h1>Dashboard</h1>
                 <Container>
                     <Charts /> 
-                    <Row>
-                        <Col lg={8} sm={12}>
-                            <BigCharts />
-                        </Col>
-
-                        <Col lg={4} sm={12}>
-                            <BigCharts />
-                        </Col>
-                    </Row>
+                    <BigCharts />
                 </Container>
             </Container>
         </MainLayout>
