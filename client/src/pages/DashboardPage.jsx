@@ -12,7 +12,7 @@ export const DashboardPage = () => {
             <Container>
                 {/* Dashboard Components */}
                 <h1>Dashboard</h1>
-                <Container fluid='lg'>
+                <Container>
                     <Charts /> 
                     <Row>
                         <Col lg={8} sm={12}>
