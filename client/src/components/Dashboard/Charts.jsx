@@ -9,9 +9,6 @@ export const Charts = () => {
         <>
             <div className="mainChart">
 
-                <div style={{border: "1px solid", height: 150}}>
-                    {ChartNumber}
-                </div>
             </div>
         </>
     )
