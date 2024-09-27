@@ -10,7 +10,7 @@ function BigCharts() {
         <Container>
             <Row>
                 <Col>
-
+                    
                 </Col>
             </Row>
         </Container>
