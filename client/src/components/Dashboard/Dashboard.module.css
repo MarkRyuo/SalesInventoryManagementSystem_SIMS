@@ -11,6 +11,7 @@
 
     border: 1px solid;
 
+    margin-right: 10px;
 }
 
 .colChart2 {
@@ -21,6 +22,8 @@
     min-width: 380px;
 
     border: 1px solid;
+
+    margin-right: 10px;
 }
 
 .colChart3 {
@@ -31,4 +34,6 @@
     min-width: 380px;
 
     border: 1px solid;
+
+    margin: 20px;
 }
