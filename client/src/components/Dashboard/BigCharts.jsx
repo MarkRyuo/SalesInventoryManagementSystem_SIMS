@@ -9,16 +9,18 @@ import { Row, Col } from 'react-bootstrap';
 
 function BigCharts() {
     return (
-        <div style={{border: "1px solid "}}>
-            <Row>
-                <Col lg={8} className={DashStyle.colChartlg}>
-                    <Chart4 />
-                </Col>
-                <Col lg={4} className={DashStyle.colChartlg}>
-                    <Chart5 />
-                </Col>
-            </Row>
-        </div>
+        <>
+            <div style={{ border: "1px solid " }}>
+                <Row>
+                    <Col lg={8} className={DashStyle.colChartlg}>
+                        <Chart4 />
+                    </Col>
+                    <Col lg={4} className={DashStyle.colChartlg}>
+                        <Chart5 />
+                    </Col>
+                </Row>
+            </div>
+        </>
     )
 }
 

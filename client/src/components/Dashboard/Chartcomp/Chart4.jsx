@@ -11,4 +11,4 @@ function Chart4() {
     )
 }
 
-export default Chart4
+export default Chart4 ;
