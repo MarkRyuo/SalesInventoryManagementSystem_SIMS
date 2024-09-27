@@ -1,7 +1,7 @@
 // import { Row, Col } from "react-bootstrap"
 
 
-// eslint-disable-next-line react/prop-types
+
 export const Charts = () => {
 
 
