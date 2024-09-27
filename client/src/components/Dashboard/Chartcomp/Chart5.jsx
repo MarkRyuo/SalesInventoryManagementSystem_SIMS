@@ -3,7 +3,7 @@
 function Chart5() {
     return (
         <>
-            <div>
+            <div className="contentChart5">
                 Chart5
             </div>
         </>
