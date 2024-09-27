@@ -5,14 +5,7 @@ import BigCharts from '../components/Dashboard/BigCharts';
 
 export const DashboardPage = () => {
 
-    const ChartData = {
-        ChartName1 : "Chart1", 
-
-        ChartName2 : "Chart2",
-
-        ChartName3: "Chart3",
-
-        ChartName4: "Chart4"
+    
     }
 
     return (
