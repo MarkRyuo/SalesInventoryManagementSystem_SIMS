@@ -13,7 +13,7 @@ export const DashboardPage = () => {
                 {/* Dashboard Components */}
                 <h1>Dashboard</h1>
                 <div>
-                    <Charts />
+                    <Charts /> 
                     <Row>
                         <Col lg={8} sm={12}>
                             <BigCharts />
