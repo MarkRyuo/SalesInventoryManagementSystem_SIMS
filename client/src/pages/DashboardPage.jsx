@@ -16,6 +16,7 @@ export const DashboardPage = () => {
                 <span><RxDashboard /></span>
                 Dashboard
                 </p>
+                
                 <Container>
                     <Charts /> 
                     <BigCharts />
