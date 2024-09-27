@@ -14,13 +14,13 @@ export const Charts = () => {
         <>
             <div className="mainChart">
                 <Row className="gap-5">
-                    <Col lg={4} md={12} className={DashStyle.colChart1}>
+                    <Col lg={4} md={12} className={DashStyle.colChart}>
                         <Chart1 />
                     </Col>
-                    <Col lg={4} md={12} className={DashStyle.colChart2}>
+                    <Col lg={4} md={12} className={DashStyle.colChart}>
                         <Chart2 />
                     </Col>
-                    <Col lg={4} md={12} className={DashStyle.colChart3}>
+                    <Col lg={4} md={12} className={DashStyle.colChart}>
                         <Chart3 />
                     </Col>
                 </Row>
