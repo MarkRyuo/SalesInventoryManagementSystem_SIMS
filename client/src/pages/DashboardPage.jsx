@@ -12,7 +12,10 @@ export const DashboardPage = () => {
         <MainLayout>
             <Container>
                 {/* Dashboard Components */}
-                <h1><span><RxDashboard /></span>Dashboard</h1>
+                <p className='fs-3'>
+                <span><RxDashboard /></span>
+                Dashboard
+                </p>
                 <Container>
                     <Charts /> 
                     <BigCharts />
