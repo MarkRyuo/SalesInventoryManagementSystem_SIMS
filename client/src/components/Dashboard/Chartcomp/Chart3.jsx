@@ -2,7 +2,7 @@
 
 function Chart3() {
     return (
-        <div>
+        <div className="mainChart3">
 
         </div>
     )
