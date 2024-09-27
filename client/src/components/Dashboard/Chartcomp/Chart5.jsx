@@ -2,9 +2,9 @@
 
 function Chart5() {
     return (
-        <div>
-
-        </div>
+        <>
+            <div></div>
+        </>
     )
 }
 
