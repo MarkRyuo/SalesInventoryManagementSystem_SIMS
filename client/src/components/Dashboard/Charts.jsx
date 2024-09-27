@@ -13,7 +13,7 @@ export const Charts = () => {
     return (
         <>
             <div className="mainChart">
-                <Row className="gap-4">
+                <Row className="gap-5">
                     <Col lg={4} md={12} className={DashStyle.colChart1}>
                         <Chart1 />
                     </Col>
