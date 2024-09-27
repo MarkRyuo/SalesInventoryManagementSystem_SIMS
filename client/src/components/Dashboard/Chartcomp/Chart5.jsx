@@ -3,7 +3,9 @@
 function Chart5() {
     return (
         <>
-            <div></div>
+            <div>
+                Chart5
+            </div>
         </>
     )
 }
