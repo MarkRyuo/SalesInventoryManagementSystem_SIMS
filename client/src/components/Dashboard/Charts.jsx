@@ -13,6 +13,9 @@ export const Charts = () => {
                     <Col>
                         <Chart1 />
                     </Col>
+                    <Col>
+                        
+                    </Col>
                 </Row>
             </div>
         </>
