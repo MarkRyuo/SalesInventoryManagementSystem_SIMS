@@ -10,6 +10,9 @@ function BigCharts() {
         <Container>
             <Row>
                 <Col>
+
+                </Col>
+                <Col>
                     
                 </Col>
             </Row>
