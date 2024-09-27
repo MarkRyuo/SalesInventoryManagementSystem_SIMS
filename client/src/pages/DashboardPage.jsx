@@ -12,7 +12,7 @@ export const DashboardPage = () => {
             <Container>
                 {/* Dashboard Components */}
                 <h1>Dashboard</h1>
-                <div>
+                <Container fluid='lg'>
                     <Charts /> 
                     <Row>
                         <Col lg={8} sm={12}>
@@ -23,7 +23,7 @@ export const DashboardPage = () => {
                             <BigCharts />
                         </Col>
                     </Row>
-                </div>
+                </Container>
             </Container>
         </MainLayout>
 
