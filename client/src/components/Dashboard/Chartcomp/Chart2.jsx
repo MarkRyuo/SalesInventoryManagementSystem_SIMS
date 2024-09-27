@@ -4,8 +4,8 @@
 function Chart2() {
     return (
         <>
-            <div className="contentChart3">
-                Chart3
+            <div className="contentChart2">
+                Chart2
             </div>
         </>
     )
