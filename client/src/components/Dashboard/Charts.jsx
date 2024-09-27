@@ -13,7 +13,7 @@ export const Charts = () => {
     return (
         <>
             <div className="mainChart">
-                <Row className="gap-2 d-flex justify-content-between">
+                <Row className="gap-2">
                     <Col lg={4} md={12} className={DashStyle.colChart1}>
                         <Chart1 />
                     </Col>
