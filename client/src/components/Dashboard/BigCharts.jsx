@@ -1,5 +1,7 @@
 import DashStyle from './Dashboard.module.css' ;
 
+import { Container, Row, Col } from 'react-bootstrap';
+
 
 
 
@@ -8,7 +10,7 @@ function BigCharts() {
         <Container>
             <Row>
                 <Col>
-                    
+
                 </Col>
             </Row>
         </Container>
