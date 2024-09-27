@@ -3,6 +3,8 @@ import Chart1 from "./Chartcomp/Chart1"
 import Chart2 from "./Chartcomp/Chart2"
 import Chart3 from "./Chartcomp/Chart3"
 
+import DashStyle from './Dashboard.module.css'
+
 
 
 export const Charts = () => {
