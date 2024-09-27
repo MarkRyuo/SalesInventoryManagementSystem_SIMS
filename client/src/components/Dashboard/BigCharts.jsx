@@ -2,14 +2,14 @@ import Chart4 from './Chartcomp/Chart4';
 import Chart5 from './Chartcomp/Chart5';
 import DashStyle from './Dashboard.module.css' ;
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 
 
 
 function BigCharts() {
     return (
-        <Container>
+        <div>
             <Row>
                 <Col lg={8} className={DashStyle.colChartlg}>
                     <Chart4 />
@@ -18,7 +18,7 @@ function BigCharts() {
                     <Chart5 />
                 </Col>
             </Row>
-        </Container>
+        </div>
     )
 }
 
