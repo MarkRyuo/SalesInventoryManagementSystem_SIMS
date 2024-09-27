@@ -13,8 +13,8 @@ export const Charts = () => {
     return (
         <>
             <div className="mainChart">
-                <Row className="">
-                    <Col lg={4} className={DashStyle.colChart1}>
+                <Row className="d-flex justify-content-between">
+                    <Col lg={4} md={12} className={DashStyle.colChart1}>
                         <Chart1 />
                     </Col>
                     <Col lg={4} className={DashStyle.colChart2}>
