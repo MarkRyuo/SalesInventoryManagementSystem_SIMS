@@ -10,8 +10,8 @@ import { Row, Col } from 'react-bootstrap';
 function BigCharts() {
     return (
         <>
-                <Row>
-                    <Col lg={5} className={DashStyle.colChartlg}>
+                <Row className='gap-4'>
+                    <Col lg={7} className={DashStyle.colChartlg}>
                         <Chart4 />
                     </Col>
                     <Col lg={4} className={DashStyle.colChartlg}>
