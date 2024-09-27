@@ -18,7 +18,7 @@ export const Charts = () => {
                     <Col lg={4}>
                         <Chart2 />
                     </Col>
-                    <Col>
+                    <Col lg={4}>
                         <Chart3 />
                     </Col>
                 </Row>
