@@ -12,7 +12,7 @@ function BigCharts() {
         <>
             <div style={{ border: "1px solid " }}>
                 <Row>
-                    <Col lg={8} className={DashStyle.colChartlg}>
+                    <Col lg={5} className={DashStyle.colChartlg}>
                         <Chart4 />
                     </Col>
                     <Col lg={4} className={DashStyle.colChartlg}>
