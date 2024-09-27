@@ -10,7 +10,7 @@ import { Row, Col } from 'react-bootstrap';
 function BigCharts() {
     return (
         <>
-                <Row className=' d-flex justify-content-between'>
+                <Row>
                     <Col lg={7} className={DashStyle.colChartlg}>
                         <Chart4 />
                     </Col>
