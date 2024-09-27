@@ -17,7 +17,7 @@ export const Charts = () => {
                     <Col lg={4} className={DashStyle.colChart1}>
                         <Chart1 />
                     </Col>
-                    <Col lg={4}>
+                    <Col lg={4} className={DashStyle.}>
                         <Chart2 />
                     </Col>
                     <Col lg={4}>
