@@ -21,7 +21,7 @@ export const ProductPage = () => {
                 </div>
 
                 <div>
-                    
+                    <Product
                 </div>
             </div>
         </MainLayout>
