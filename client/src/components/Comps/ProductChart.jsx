@@ -1,4 +1,4 @@
-import { Row, col } from "react-bootstrap"
+import { Row, Col } from "react-bootstrap"
 
 function ProductChart() {
     return (
