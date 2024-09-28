@@ -7,8 +7,6 @@ function ProductChart() {
             <Row className="mt-3">
                 <Col lg={12}>
                     Scrollable........
-
-
                 </Col>
             </Row>
         </>
