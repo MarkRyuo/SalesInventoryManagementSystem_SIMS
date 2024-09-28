@@ -1,4 +1,4 @@
-import { Container} from "react-bootstrap";
+import { Container, Row, Col} from "react-bootstrap";
 import { MainLayout } from "../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
 import Search from "../components/Comps/Search";
@@ -13,6 +13,11 @@ export const ProductPage = () => {
             </Container>
             <div>
                 <div>
+                    <Row>
+                        <Col>
+
+                        </Col>
+                    </Row>
                     <Search />
                 </div>
 
