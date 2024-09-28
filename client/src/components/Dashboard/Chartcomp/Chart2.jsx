@@ -6,6 +6,7 @@ function Chart2() {
         <>
             <div className="contentChart2">
                 Chart2
+                {/* Insert Logic */}
             </div>
         </>
     )
