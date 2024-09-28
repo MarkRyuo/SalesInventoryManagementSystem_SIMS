@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import { MainLayout } from "../layout/MainLayout";
-
+import { AiFillProduct } from "react-icons/ai";
 //* Product Page
 
 export const ProductPage = () => {
@@ -8,7 +8,7 @@ export const ProductPage = () => {
     return (
         <MainLayout>
             <Container fluid='lg'>
-                <h1>Product Dashboard</h1>
+                <p className="fs-3"><span><AiFillProduct /></span>Product Dashboard</p>
             </Container>
         </MainLayout>
     )
