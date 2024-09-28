@@ -8,15 +8,15 @@ export const ProductPage = () => {
     return (
         <MainLayout>
             <Container fluid='lg'>
-                <p className="fs-3"><span><AiFillProduct /></span>Product Dashboard</p>
+                <p className="fs-3"><span><AiFillProduct /></span>Product</p>
             </Container>
             <div>
                 <div>
-
+                    
                 </div>
 
                 <div>
-                    
+
                 </div>
             </div>
         </MainLayout>
