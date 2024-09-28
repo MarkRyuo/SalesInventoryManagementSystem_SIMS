@@ -24,7 +24,7 @@ export const ProductPage = () => {
                 <div style={{width: '100%', margin: 50}}>
                     <Row>
                         <Col lg={12}>
-                            <ProductChart />
+                            
                         </Col>
                     </Row>
                 </div>
