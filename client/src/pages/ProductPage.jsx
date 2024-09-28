@@ -21,7 +21,7 @@ export const ProductPage = () => {
                     </Row>
                 </div>
 
-                <div style={{width: '100%', margin: 50}}>
+                <div>
                     <ProductChart />
                 </div>
             </div>
