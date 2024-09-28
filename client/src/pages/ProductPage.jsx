@@ -29,7 +29,7 @@ export const ProductPage = () => {
                     <Row>
                         <Col lg={12} style={{ border: "1px solid", height: "500px", overflow: "auto", width: '100%' }}>
                         <ProductChart />
-                    </Col>
+                        </Col>
                     </Row>
                 </div>
             </div>
