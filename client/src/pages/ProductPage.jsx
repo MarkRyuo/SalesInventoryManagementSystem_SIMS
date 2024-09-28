@@ -1,6 +1,7 @@
 import { Container} from "react-bootstrap";
 import { MainLayout } from "../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
+import Search from "../components/Comps/Search";
 //* Product Page
 
 export const ProductPage = () => {
@@ -12,7 +13,7 @@ export const ProductPage = () => {
             </Container>
             <div>
                 <div>
-                    
+                    <Search />
                 </div>
 
                 <div>
