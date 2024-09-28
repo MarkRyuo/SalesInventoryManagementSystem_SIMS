@@ -15,20 +15,17 @@ export const ProductPage = () => {
         <MainLayout>
             <Container fluid='lg'>
                 <p className="fs-3"><span><AiFillProduct /></span>Product</p>
-                    <div>
                         <Row>
                             <Col>
                                 <Search />
                             </Col>
                         </Row>
-                    </div>
 
                         <Row className={Productcss.containerProduct}>
                             <Col lg={12} className={Productcss.colProduct}>
                                 <ProductChart />
                             </Col>
                         </Row>
-                    </div>
             </Container>
         </MainLayout>
     )
