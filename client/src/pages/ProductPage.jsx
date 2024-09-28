@@ -22,7 +22,11 @@ export const ProductPage = () => {
                 </div>
 
                 <div style={{width: '1000px', margin: 50}}>
-                    <ProductChart />
+                    <Row>
+                        <Col>
+                            <ProductChart />
+                        </Col>
+                    </Row>
                 </div>
             </div>
         </MainLayout>
