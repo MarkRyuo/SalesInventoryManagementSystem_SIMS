@@ -5,9 +5,7 @@ function ProductChart() {
         <>
             <Row>
                 <Col>
-                    <div>
                         Scrollable
-                    </div>
                 </Col>
             </Row>
         </>
