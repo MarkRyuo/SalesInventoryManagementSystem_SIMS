@@ -16,23 +16,6 @@ export const ProductPage = () => {
             <Container fluid='lg'>
                 <p className="fs-3"><span><AiFillProduct /></span>Product</p>
             </Container>
-            <div>
-                <div>
-                    <Row>
-                        <Col>
-                            <Search />
-                        </Col>
-                    </Row>
-                </div>
-
-                <div>
-                    <Row className={Productcss.containerProduct}>
-                        <Col lg={12} className={Productcss.colProduct}>
-                            <ProductChart />
-                        </Col>
-                    </Row>
-                </div>
-            </div>
         </MainLayout>
     )
 }
