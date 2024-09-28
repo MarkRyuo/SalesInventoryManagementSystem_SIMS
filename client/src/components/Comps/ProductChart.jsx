@@ -1,13 +1,10 @@
 
 
-
-import React from 'react'
-
 function ProductChart() {
     return (
-        <div>
-
-        </div>
+        <>
+            <div
+        </>
     )
 }
 
