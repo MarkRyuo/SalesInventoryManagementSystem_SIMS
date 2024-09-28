@@ -27,7 +27,7 @@ export const ProductPage = () => {
 
                 <div>
                     <Row className={Productcss.containerProduct}>
-                        <Col lg={5} className={Productcss.}>
+                        <Col lg={12} className={Productcss.colProduct}>
                             <ProductChart />
                         </Col>
                     </Row>
