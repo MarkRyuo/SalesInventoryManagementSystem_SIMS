@@ -15,10 +15,9 @@ export const ProductPage = () => {
                 <div>
                     <Row>
                         <Col>
-
+                            <Search />
                         </Col>
                     </Row>
-                    <Search />
                 </div>
 
                 <div>

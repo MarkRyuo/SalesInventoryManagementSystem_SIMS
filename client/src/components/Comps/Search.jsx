@@ -5,15 +5,15 @@ function Search() {
     return (
         <>
             <Form inline>
-                <Row>
-                    <Col xs="auto">
+                <Row className="d-flex justify-content-end g-0">
+                    <Col md={4} lg={4}>
                         <Form.Control
                             type="text"
                             placeholder="Search Products"
                             className=" mr-sm-2"
                         />
                     </Col>
-                    <Col xs="auto">
+                    <Col md={3} lg={1}>
                         <Button type="submit" variant="primary"><IoSearch /></Button>
                     </Col>
                 </Row>
