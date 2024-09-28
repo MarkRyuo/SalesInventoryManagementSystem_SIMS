@@ -1,11 +1,10 @@
 
-import { Row, Col } from "react-bootstrap"
-
+import { Row, Col } from "react-bootstrap
 function ProductChart() {
     return (
         <>
             <div>
-                Sco
+                Scrollable.......
             </div>
         </>
     )
