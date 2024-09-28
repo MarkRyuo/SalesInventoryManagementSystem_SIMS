@@ -17,7 +17,7 @@ export const ProductPage = () => {
                 <p className="fs-3"><span><AiFillProduct /></span>Product</p>
                     <Row>
                         <Col>
-                                <Search />
+                            <Search />
                             </Col>
                         </Row>
 
