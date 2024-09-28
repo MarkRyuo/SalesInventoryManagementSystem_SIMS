@@ -17,7 +17,8 @@
 .colProduct {
     border: 1px solid;
     height: 500px;
-    overflow: auto;
+    overflow-y: scroll;
+        /* Enables vertical scrolling */
 
     margin: 30px 0;
 }
