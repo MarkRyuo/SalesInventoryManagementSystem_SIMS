@@ -4,7 +4,7 @@ import { AiFillProduct } from "react-icons/ai";
 import Search from "../components/Comps/Search";
 import ProductChart from "../components/Comps/ProductChart";
 
-import Productcss from './Css/'
+import Productcss from './Css/Product.module.css'
 
 
 //* Product Page
