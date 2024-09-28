@@ -16,7 +16,7 @@ export const ProductPage = () => {
             <Container fluid='lg'>
                 <p className="fs-3"><span><AiFillProduct /></span>Product</p>
                     <Row>
-                            <Col>
+                        <Col>
                                 <Search />
                             </Col>
                         </Row>
