@@ -22,7 +22,7 @@ export const ProductPage = () => {
                     </Row>
 
                     <Row className={Productcss.containerProduct}>
-                            <Col lg={12} className={Productcss.colProduct}>
+                        <Col lg={12} className={Productcss.colProduct}>
                                 <ProductChart />
                             </Col>
                         </Row>
