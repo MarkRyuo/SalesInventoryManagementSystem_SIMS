@@ -22,7 +22,7 @@ export const ProductPage = () => {
                 </div>
 
                 <div style={{width: '100%', margin: 50}}>
-                    <ProductChart />
+                    
                 </div>
             </div>
         </MainLayout>
