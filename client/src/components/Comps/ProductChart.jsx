@@ -5,7 +5,7 @@ function ProductChart() {
         <>
             <Row>
                 <Col>
-                    <div style={{ width: "100%", height: "400px", overflow: "auto", border: "1px solid", maxWidth: "500px" }}>
+                    <div>
                         Scrollable
                     </div>
                 </Col>
