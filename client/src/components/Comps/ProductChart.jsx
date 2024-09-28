@@ -4,6 +4,7 @@ function ProductChart() {
         <>
             <div>
                 Scrollable.......
+                {/* Insert Log */}
             </div>
         </>
     )
