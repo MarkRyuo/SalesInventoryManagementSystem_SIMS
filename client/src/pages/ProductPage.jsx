@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import { MainLayout } from "../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
 //* Product Page
@@ -12,7 +12,20 @@ export const ProductPage = () => {
             </Container>
             <div>
                 <div>
-                    
+                    <Form inline>
+                        <Row>
+                            <Col xs="auto">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Search"
+                                    className=" mr-sm-2"
+                                />
+                            </Col>
+                            <Col xs="auto">
+                                <Button type="submit">Submit</Button>
+                            </Col>
+                        </Row>
+                    </Form>
                 </div>
 
                 <div>
