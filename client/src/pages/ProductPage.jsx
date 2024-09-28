@@ -30,7 +30,6 @@ export const ProductPage = () => {
                             </Col>
                         </Row>
                     </div>
-                </div>
             </Container>
         </MainLayout>
     )
