@@ -26,7 +26,12 @@ export const ProductPage = () => {
                 </div>
 
                 <div className={Productcss.containerProduct}>
-                    <ProductChart />
+                    <Row>
+                        <Col lg={12} style={{ border: "1px solid", height: "500px", overflow: "auto", width: '100%' }}>
+                        Scrollable.......
+
+                    </Col>
+                    </Row>
                 </div>
             </div>
         </MainLayout>
