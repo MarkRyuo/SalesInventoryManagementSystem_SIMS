@@ -1,13 +1,11 @@
+import { Form, Row, Col, Button } from "react-bootstrap";
 
-
-
-import React from 'react'
 
 function Search() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
