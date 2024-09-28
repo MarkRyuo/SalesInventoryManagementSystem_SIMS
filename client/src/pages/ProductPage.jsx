@@ -28,8 +28,7 @@ export const ProductPage = () => {
                 <div className={Productcss.containerProduct}>
                     <Row>
                         <Col lg={12} style={{ border: "1px solid", height: "500px", overflow: "auto", width: '100%' }}>
-                        Scrollable.......
-
+                        <ProductChart />
                     </Col>
                     </Row>
                 </div>
