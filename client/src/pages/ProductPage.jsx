@@ -11,7 +11,13 @@ export const ProductPage = () => {
                 <p className="fs-3"><span><AiFillProduct /></span>Product Dashboard</p>
             </Container>
             <div>
-                
+                <div>
+
+                </div>
+
+                <div>
+                    
+                </div>
             </div>
         </MainLayout>
     )
