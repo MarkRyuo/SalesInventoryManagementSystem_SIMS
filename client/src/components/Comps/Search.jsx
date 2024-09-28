@@ -6,14 +6,14 @@ function Search() {
         <>
             <Form inline>
                 <Row className="d-flex justify-content-end g-0">
-                    <Col md={4} lg={4}>
+                    <Col lg={4}>
                         <Form.Control
                             type="text"
                             placeholder="Search Products"
                             className=" mr-sm-2"
                         />
                     </Col>
-                    <Col md={3} lg={1}>
+                    <Col lg={1}>
                         <Button type="submit" variant="primary"><IoSearch /></Button>
                     </Col>
                 </Row>
