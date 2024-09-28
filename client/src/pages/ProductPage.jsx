@@ -27,7 +27,7 @@ export const ProductPage = () => {
 
                 <div>
                     <Row className={Productcss.containerProduct}>
-                        <Col lg={5} style={{ border: "1px solid", height: "500px", overflow: "auto" }}>
+                        <Col lg={5} className={Productcss.}>
                             <ProductChart />
                         </Col>
                     </Row>
