@@ -4,7 +4,7 @@ import { AiFillProduct } from "react-icons/ai";
 import Search from "../components/Comps/Search";
 import ProductChart from "../components/Comps/ProductChart";
 
-import Productcss from './Css/Product.module.css'
+import Productcss from './Css/Product.module.css' ;
 
 
 //* Product Page
@@ -25,7 +25,7 @@ export const ProductPage = () => {
                     </Row>
                 </div>
 
-                <div>
+                <div className={Productcss.containerProduct}>
                     <ProductChart />
                 </div>
             </div>
