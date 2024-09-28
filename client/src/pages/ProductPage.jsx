@@ -25,8 +25,8 @@ export const ProductPage = () => {
                     </Row>
                 </div>
 
-                <div className={Productcss.containerProduct}>
-                    <Row className="d-flex justify-content-center">
+                <div>
+                    <Row className={Productcss.containerProduct}>
                         <Col lg={5} style={{ border: "1px solid", height: "500px", overflow: "auto" }}>
                             <ProductChart />
                         </Col>
