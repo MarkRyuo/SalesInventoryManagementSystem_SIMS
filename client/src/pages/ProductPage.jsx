@@ -3,6 +3,10 @@ import { MainLayout } from "../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
 import Search from "../components/Comps/Search";
 import ProductChart from "../components/Comps/ProductChart";
+
+import Productcss from './Css/'
+
+
 //* Product Page
 
 export const ProductPage = () => {
