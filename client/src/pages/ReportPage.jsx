@@ -3,7 +3,7 @@ import { MainLayout } from '../layout/MainLayout' ;
 import { TbReport } from "react-icons/tb";
 import { Row, Col } from 'react-bootstrap';
 
-import Reportcss from './Css/'
+import Reportcss from './Css/Report.module.css' ;
 
 
 //* Report Page
