@@ -1,5 +1,7 @@
+import ReportCharts from '../components/Comps/ReportCharts';
 import { MainLayout } from '../layout/MainLayout' ;
 import { TbReport } from "react-icons/tb";
+import { Row, Col } from 'react-bootstrap';
 
 
 //* Report Page
@@ -12,7 +14,7 @@ export const ReportPage = () => {
                 <p className='fs-4'><span><TbReport /></span> Sales Report</p>
                 
                 <div className='contentReport' style={{border: "1px solid", height: "800px"}}>
-                    <ReportCharts
+                    <ReportCharts />
                 </div>
         </MainLayout>
     )
