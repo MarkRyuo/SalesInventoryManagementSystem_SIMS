@@ -11,7 +11,9 @@ import Reportcss from './Css/Report.module.css' ;
 export const ReportPage = () => {
 
     const Reportobj = {
-        Revenue
+        Revenue : {
+            title: "Total Revenue"
+        }
     }
 
     return (
