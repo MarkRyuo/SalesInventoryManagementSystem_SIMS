@@ -15,9 +15,8 @@ export const ReportPage = () => {
                 
                 <div className='contentReport' style={{border: "1px solid", height: "800px"}}>
                     <Row>
-                        <Col>
+                        <Col className='colReport'>
                             <ReportCharts />
-
                         </Col>
                     </Row>
                 </div>
