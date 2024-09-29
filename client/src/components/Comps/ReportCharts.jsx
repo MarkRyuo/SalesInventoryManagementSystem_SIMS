@@ -3,14 +3,14 @@
 
 //* Reusable, Props 
 
-const ReportCharts = () => {
+const ReportCharts = ({className}) => {
 
     const title = "Total Revenue" ;
     const number = "$1000" ;
 
     return (
         <>
-            <div className="contentChart">
+            <div className={className}>
                 <p className="fs-4">{title}</p>
                 <p className="fs-3 text-danger">{number}</p>
             </div>
