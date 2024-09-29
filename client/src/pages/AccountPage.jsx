@@ -7,9 +7,9 @@ export const AccountPage = () => {
 
     return (
         <MainLayout>
-            <Container fluid='lg'>
+            
                 <h1>Account Page Dashboard</h1>
-            </Container>
+    
         </MainLayout>
     )
 }
