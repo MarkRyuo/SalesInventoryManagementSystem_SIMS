@@ -7,7 +7,7 @@ const ReportCharts = () => {
 
     return (
         <>
-
+            
         </>
     )
 }
