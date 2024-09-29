@@ -12,7 +12,8 @@ export const ReportPage = () => {
 
     const Reportobj = {
         Revenue : {
-            title: "Total Revenue"
+            title: "Total Revenue",
+            total: "21"
         }
     }
 
