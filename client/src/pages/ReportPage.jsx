@@ -14,7 +14,7 @@ export const ReportPage = () => {
                 <p className='fs-4'><span><TbReport /></span> Sales Report</p>
                 
                 <div className='contentReport' style={{border: "1px solid", height: "800px"}}>
-                    <Row>
+                    <Row className='rowReport'>
                         <Col className='colReport'>
                             <ReportCharts />
                         </Col>
