@@ -5,7 +5,8 @@
 
 const ReportCharts = () => {
 
-    const title = "Test"
+    const title = "Test" ;
+    const number = "1000" ;
 
     return (
         <>
