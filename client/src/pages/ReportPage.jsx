@@ -3,6 +3,8 @@ import { MainLayout } from '../layout/MainLayout' ;
 import { TbReport } from "react-icons/tb";
 import { Row, Col } from 'react-bootstrap';
 
+import Reportcss from './Css/'
+
 
 //* Report Page
 
