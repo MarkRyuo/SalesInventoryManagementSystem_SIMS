@@ -1,8 +1,10 @@
 
 
-//* Reusable 
+
+//* Reusable, Props 
 
 const ReportCharts = () => {
+
     return (
         <>
 
