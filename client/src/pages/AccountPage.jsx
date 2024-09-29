@@ -1,5 +1,5 @@
 import { MainLayout } from '../layout/MainLayout' ;
-import { Container } from 'react-bootstrap';
+import { MdAccountBox } from "react-icons/md";
 
 //* Accounts Page
 
@@ -7,9 +7,13 @@ export const AccountPage = () => {
 
     return (
         <MainLayout>
-            <Container fluid='lg'>
-                <h1>Account Page Dashboard</h1>
-            </Container>
+            
+            <p className='fs-3'><span><MdAccountBox /></span> Account</p>
+
+            <div className='contentAccount' style={{border: "1px solid", height: "700px"}}> 
+
+
+            </div>
         </MainLayout>
     )
 }

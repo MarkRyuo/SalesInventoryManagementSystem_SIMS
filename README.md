@@ -1,6 +1,10 @@
 # Sales Inventory Management System (SIMS)
 
-## V2.2 Latest 
+## V2.3 Latest 
+
+    v2.3 
+        Report Design
+        Account Design
 
     v2.2 
         Product Design 
