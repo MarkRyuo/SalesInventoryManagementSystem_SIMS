@@ -10,5 +10,9 @@
 .colContent {
     border: 1px solid;
     text-align: center;
-    margin-right: 2px;
+}
+
+
+@media screen and (min-width: 400px) {
+    
 }
