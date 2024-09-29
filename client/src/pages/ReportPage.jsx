@@ -27,7 +27,7 @@ export const ReportPage = () => {
 
                         <Col lg={4} className={Reportcss.colReport}>
                             <ReportCharts className={Reportcss.colContent} />  {/* Create module css here */}
-                    </Col>
+                        </Col>
                     </Row>
                 </div>
         </MainLayout>
