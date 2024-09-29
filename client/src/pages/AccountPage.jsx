@@ -10,7 +10,7 @@ export const AccountPage = () => {
             
             <p className='fs-3'><span><MdAccountBox /></span> Account Page Dashboard</p>
 
-            <div className='contentAccount' style={{border: "1px solid", height: ""}}> 
+            <div className='contentAccount' style={{border: "1px solid", height: "px"}}> 
 
 
             </div>
