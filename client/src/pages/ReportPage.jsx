@@ -16,7 +16,7 @@ export const ReportPage = () => {
                 <div className='contentReport' style={{border: "1px solid", height: "800px"}}>
                     <Row className='rowReport'>
                         <Col className='colReport'>
-                            <ReportCharts /> 
+                            <ReportCharts />  {/* Create moduke  */}
                         </Col>
                     </Row>
                 </div>
