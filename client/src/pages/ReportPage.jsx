@@ -10,7 +10,7 @@ export const ReportPage = () => {
     return (
         <MainLayout>
             <Container fluid='lg'>
-                <p><span></span> Report Page Dashboard</p>
+                <p><span><TbReport /></span> Report Page Dashboard</p>
             </Container>
         </MainLayout>
     )
