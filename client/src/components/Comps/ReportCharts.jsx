@@ -1,5 +1,7 @@
 
 
+//* Reusable
+
 const ReportCharts = () => {
     return (
         <>
