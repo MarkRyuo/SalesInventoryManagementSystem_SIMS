@@ -7,7 +7,9 @@ const ReportCharts = () => {
 
     return (
         <>
-            
+            <div className="contentChart">
+
+            </div>
         </>
     )
 }
