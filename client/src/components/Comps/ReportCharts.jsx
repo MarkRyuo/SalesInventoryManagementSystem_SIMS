@@ -3,10 +3,7 @@
 
 //* Reusable, Props 
 
-const ReportCharts = ({className, title, }) => {
-
-    const title = "Total Revenue" ;
-    const number = "$1000" ;
+const ReportCharts = ({className, title, total}) => {
 
     return (
         <>
