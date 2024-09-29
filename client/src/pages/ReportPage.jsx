@@ -8,9 +8,10 @@ export const ReportPage = () => {
 
     return (
         <MainLayout>
-        
+
                 <p className='fs-4'><span><TbReport /></span> Report Page Dashboard</p>
-            
+                
+                
         </MainLayout>
     )
 }
