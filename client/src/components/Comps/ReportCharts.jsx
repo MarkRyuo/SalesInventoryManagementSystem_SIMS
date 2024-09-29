@@ -5,6 +5,8 @@
 
 const ReportCharts = () => {
 
+    const title = "Test"
+
     return (
         <>
             <div className="contentChart">
