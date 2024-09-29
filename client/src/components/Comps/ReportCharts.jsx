@@ -1,11 +1,10 @@
 
 
-
 const ReportCharts = () => {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
