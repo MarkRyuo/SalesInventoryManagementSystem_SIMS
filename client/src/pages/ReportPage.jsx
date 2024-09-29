@@ -9,7 +9,7 @@ export const ReportPage = () => {
     return (
         <MainLayout>
             <Container fluid='lg'>
-                <h1>Report Page Dashboard</h1>
+                <p><span></span> Report Page Dashboard</p>
             </Container>
         </MainLayout>
     )
