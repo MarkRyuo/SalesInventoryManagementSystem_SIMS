@@ -17,7 +17,7 @@ export const ReportPage = () => {
                 
                 <div className='contentReport' style={{border: "1px solid", height: "800px"}}>
                     <Row className='rowReport'>
-                        <Col lg={4} className='colReport'>
+                        <Col lg={4} className={}>
                             <ReportCharts />  {/* Create module css here */}
                         </Col>
                     </Row>
