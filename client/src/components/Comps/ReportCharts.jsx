@@ -12,7 +12,7 @@ const ReportCharts = () => {
         <>
             <div className="contentChart">
                 <p className="fs-4">{title}</p>
-                <p className="fs-3">{number}</p>
+                <p className="fs-3 text-">{number}</p>
             </div>
         </>
     )
