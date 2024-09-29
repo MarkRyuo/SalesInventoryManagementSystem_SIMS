@@ -8,7 +8,7 @@ export const AccountPage = () => {
     return (
         <MainLayout>
             
-                <p className='fs-3'><span></span> Account Page Dashboard</p>
+            <p className='fs-3'><span><MdAccountBox /></span> Account Page Dashboard</p>
         </MainLayout>
     )
 }
