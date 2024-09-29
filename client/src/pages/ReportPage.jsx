@@ -10,7 +10,9 @@ import Reportcss from './Css/Report.module.css' ;
 
 export const ReportPage = () => {
 
-    const Reportobj 
+    const Reportobj = {
+        Revenue
+    }
 
     return (
         <MainLayout>
