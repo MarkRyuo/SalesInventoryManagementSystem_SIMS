@@ -12,7 +12,7 @@ export const ReportPage = () => {
                 <p className='fs-4'><span><TbReport /></span> Report Page Dashboard</p>
                 
                 <div className='contentReport'>
-
+                    
                 </div>
         </MainLayout>
     )
