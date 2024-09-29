@@ -9,7 +9,7 @@ export const ReportPage = () => {
     return (
         <MainLayout>
 
-                <p className='fs-4'><span><TbReport /></span> Report</p>
+                <p className='fs-4'><span><TbReport /></span> Sales Report</p>
                 
                 <div className='contentReport' style={{border: "1px solid", height: "800px"}}>
 
