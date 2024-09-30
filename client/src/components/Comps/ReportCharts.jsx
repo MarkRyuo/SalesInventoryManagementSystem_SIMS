@@ -1,4 +1,5 @@
 
+import Reportcss from './CSS/Report.module.css' ;
 
 
 //* Reusable, Props 
