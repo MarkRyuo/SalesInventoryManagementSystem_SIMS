@@ -2,19 +2,20 @@
 
 /* * Reportcss */
 
+.contentReport {
+    /* border: 1px solid; */
+    height: 800px;
+}
 
-/* .colReport {
-    border: 1px solid;
-} */
-
-.colContent {
-    border: 1px solid;
-    text-align: center;
+.rowReport {
+    
+    /* border: 1px solid; */
+    height: auto;  /* fix height */
 }
 
 
-@media screen and (min-width: 400px) {
+/* @media screen and (min-width: 400px) {
     .colContent {
         margin-top: 5px;
     }
-}
+} */

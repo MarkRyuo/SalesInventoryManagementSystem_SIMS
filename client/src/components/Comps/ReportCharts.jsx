@@ -1,18 +1,23 @@
 
+import Reportcss from './CSS/Reportcomp.module.css' ;
 
 
 //* Reusable, Props 
 
-const ReportCharts = ({className, title, total}) => {
-
+const ReportCharts = ({reports}) => {
+    
     return (
         <>
-            <div className={className}>
-                <p className="fs-4">{title}</p>
-                <p className="fs-3 text-danger">{total}</p>
+            <div>
+                {reports.map((report) => (
+                    <div key={report.id} className={Reportcss.contentReport}>  {/*Parent */}
+                        <p className="fs-4">{report.title}</p> {/* Child */}
+                        <p className="fs-6">{report.total}</p> 
+                    </div>
+                ))} 
             </div>
         </>
     )
 }
 
-export default ReportCharts
+export default ReportCharts ;
