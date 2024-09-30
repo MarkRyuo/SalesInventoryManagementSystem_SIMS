@@ -9,7 +9,9 @@ const ReportCharts = ({className}) => {
         <>
             <div className={className}>
                 {Reportobj.map((reports) => (
-                    
+                    <div key={reports.id}>
+
+                    </div>
                 ))}
             </div>
         </>
