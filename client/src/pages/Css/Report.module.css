@@ -5,12 +5,11 @@
 .contentReport {
     border: 1px solid;
     height: 800px;
-    width: auto;
 }
 
 .rowReport {
     
-    border: 1px solid;
+    /* border: 1px solid; */
     height: auto;  /* fix height */
 }
 
