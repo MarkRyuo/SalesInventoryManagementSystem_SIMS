@@ -33,7 +33,7 @@ export const ReportPage = () => {
                         <ReportCharts reports={reports.filter((report) => report.title === "Total Units Sold")} />
                     </Col>
                     <Col lg={4}>
-                        <ReportCharts reports={reports.filter((report) => report.title === "Total Units Sold")} />
+                        <ReportCharts reports={reports.filter((report) => report.title === "No. of Transactions")} />
                     </Col>
                 </Row>
             </div>
