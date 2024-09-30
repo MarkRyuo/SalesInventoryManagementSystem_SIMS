@@ -3,12 +3,12 @@
 
 //* Reusable, Props 
 
-const ReportCharts = ({className, title, total}) => {
+const ReportCharts = ({className}) => {
     
     return (
         <>
             <div className={className}>
-                {Reportobj.map(() => (
+                {Reportobj.map((reports) => (
                     
                 ))}
             </div>
