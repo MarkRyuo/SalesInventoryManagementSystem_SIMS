@@ -11,12 +11,11 @@ import { useState } from 'react';
 
 export const ReportPage = () => {
 
-    const [report, setReport] = useState() ;
+    const [report, setReport] = useState([
+        { title: "Total Revenue", total: "21", id: 1 }
+    ]) ;
 
     //* need Unique id 
-    const Reportobj = {
-        Revenue : {title: "Total Revenue",total: "21", id: 1}, 
-    }
 
     return (
         <MainLayout>
