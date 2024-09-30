@@ -28,8 +28,8 @@ export const ReportPage = () => {
                         <Col lg={4} className={Reportcss.colReport}>
                             <ReportCharts reports={reports.filter((report) => report.title === "Total Revenue") }/>  {/* Create module css here */}
                         </Col>
-                        <Col>
-                            
+                        <Col lg={4}>
+
                         </Col>
                     </Row>
                 </div>
