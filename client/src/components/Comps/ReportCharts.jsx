@@ -11,8 +11,8 @@ const ReportCharts = ({reports}) => {
             <div>
                 {reports.map((report) => (
                     <div key={report.id} className={Reportcss.contentReport}>  {/*Parent */}
-                        <p className="">{report.title}</p> {/* Child */}
-                        <p className="">{report.total}</p> 
+                        <p className="fs-4">{report.title}</p> {/* Child */}
+                        <p className="fs-6">{report.total}</p> 
                     </div>
                 ))} 
             </div>
