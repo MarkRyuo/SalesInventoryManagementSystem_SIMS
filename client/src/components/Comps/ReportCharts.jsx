@@ -7,9 +7,9 @@ const ReportCharts = ({className}) => {
     
     return (
         <>
-            <div className={className}>
+            <div>
                 {Reportobj.map((reports) => (
-                    <div key={reports.id}>
+                    <div key={reports.id} className="">
 
                     </div>
                 ))}
