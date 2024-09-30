@@ -10,8 +10,9 @@ import Reportcss from './Css/Report.module.css' ;
 
 export const ReportPage = () => {
 
+    //* need Unique id 
     const Reportobj = {
-        Revenue : {title: "Total Revenue",total: "21", id: 1},
+        Revenue : {title: "Total Revenue",total: "21", id: 1}, 
     }
 
     return (
