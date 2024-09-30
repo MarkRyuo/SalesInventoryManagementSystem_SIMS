@@ -14,7 +14,8 @@ export const ReportPage = () => {
     //* need Unique id 
     const [reports, setReport] = useState([
         { title: "Total Revenue", total: "$1000", id: 1 },
-        { title: "Total Units Sold", total: "500 units", id: 2}
+        { title: "Total Units Sold", total: "500 units", id: 2},
+        { title: "No. of Transactions", total: "2000 Transaction", id: 3 },
     ]) ;
 
 
@@ -29,7 +30,7 @@ export const ReportPage = () => {
                             <ReportCharts reports={reports.filter((report) => report.title === "Total Revenue") }/>  {/* Create module css here */}
                         </Col>
                         <Col lg={4}>
-
+                            <ReportCharts reports={reports.filter((report) => report.title === "Total Units Sold")} />
                         </Col>
                     </Row>
                 </div>
