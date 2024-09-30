@@ -5,6 +5,7 @@
 .contentReport {
     border: 1px solid;
     height: 800px;
+    width: auto;
 }
 
 .rowReport {
