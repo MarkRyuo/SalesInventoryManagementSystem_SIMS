@@ -25,8 +25,8 @@ export const ReportPage = () => {
             <p className='fs-4'><span><TbReport /></span> Sales Report</p>
 
             <div className='contentReport' style={{ border: "1px solid", height: "800px" }}>
-                <Row className='rowReport'>
-                    <Col lg={4} className={Reportcss.colReport}>
+                <Row className={Reportcss.rowReport}>
+                    <Col lg={4}>
                         <ReportCharts reports={reports.filter((report) => report.title === "Total Revenue")} />  {/* Create module css here */}
                     </Col>
                     <Col lg={4}>
