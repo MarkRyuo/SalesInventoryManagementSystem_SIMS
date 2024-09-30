@@ -3,7 +3,7 @@
 
 //* Reusable, Props 
 
-const ReportCharts = ({className, title, total}) => {
+const ReportCharts = ({className}) => {
 
     return (
         <>
