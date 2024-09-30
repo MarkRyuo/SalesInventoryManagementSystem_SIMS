@@ -12,7 +12,7 @@ import { useState } from 'react';
 export const ReportPage = () => {
 
     //* need Unique id 
-    const [report, setReport] = useState([
+    const [reports, setReport] = useState([
         { title: "Total Revenue", total: "21", id: 1 }
     ]) ;
 
@@ -25,7 +25,7 @@ export const ReportPage = () => {
                 <div className='contentReport' style={{border: "1px solid", height: "800px"}}>
                     <Row className='rowReport'>
                         <Col lg={4} className={Reportcss.colReport}>
-                            <ReportCharts />  {/* Create module css here */}
+                            <ReportCharts report={reports}/>  {/* Create module css here */}
                         </Col>
 
                         <Col lg={4} className={Reportcss.colReport}>

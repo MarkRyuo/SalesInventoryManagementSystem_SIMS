@@ -3,13 +3,13 @@
 
 //* Reusable, Props 
 
-const ReportCharts = ({Reportobj, title, total}) => {
+const ReportCharts = ({reports, title, total}) => {
     
     return (
         <>
             <div>
-                {Reportobj.map((reports) => (
-                    <div key={reports.id} className="contentReport">
+                {reports.map((report) => (
+                    <div key={report.id} className="contentReport">
                         <p>{title}</p>
                         <p>{total}</p>
                     </div>
