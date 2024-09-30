@@ -13,7 +13,8 @@ export const ReportPage = () => {
 
     //* need Unique id 
     const [reports, setReport] = useState([
-        { title: "Total Revenue", total: "21", id: 1 }
+        { title: "Total Revenue", total: "$1000", id: 1 },
+        { title: "Total Units Sold", total: "500 units", id: 2}
     ]) ;
 
 
