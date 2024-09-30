@@ -12,7 +12,7 @@ const ReportCharts = ({reports}) => {
                 {reports.map((report) => (
                     <div key={report.id} className={Reportcss.contentReport}>  {/*Parent */}
                         <p className="">{report.title}</p> {/* Child */}
-                        <p className="">{report.total}</p>
+                        <p className="">{report.total}</p> 
                     </div>
                 ))} 
             </div>
@@ -20,4 +20,4 @@ const ReportCharts = ({reports}) => {
     )
 }
 
-export default ReportCharts
+export default ReportCharts ;
