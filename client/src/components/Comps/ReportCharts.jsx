@@ -8,7 +8,9 @@ const ReportCharts = ({className, title, total}) => {
     return (
         <>
             <div className={className}>
-                {Reportobj.map(() => ())}
+                {Reportobj.map(() => (
+                    
+                ))}
             </div>
         </>
     )
