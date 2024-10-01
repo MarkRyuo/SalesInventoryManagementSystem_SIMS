@@ -3,9 +3,11 @@
 //* Child 
 
 const BigChart = () => {
+
+
     return (
         <>
-            
+            {}
         </>
     );
 }

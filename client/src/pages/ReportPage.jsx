@@ -41,6 +41,8 @@ export const ReportPage = () => {
                         <ReportCharts reports={reports.filter((report) => report.title === "No. of Transactions")} />
                     </Col>
                 </Row>
+
+                <Row></Row>
             </div>
         </MainLayout>
     )
