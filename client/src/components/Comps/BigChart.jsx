@@ -7,7 +7,9 @@ const BigChart = ({bigreports}) => {
 
     return (
         <>
-            {bigreports.map(())}
+            {bigreports.map((bigreport) => (
+                
+            ))}
         </>
     );
 }
