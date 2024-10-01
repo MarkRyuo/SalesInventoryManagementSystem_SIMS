@@ -22,4 +22,4 @@ function BigCharts() {
     )
 }
 
-export default BigCharts
+export default BigCharts ;
