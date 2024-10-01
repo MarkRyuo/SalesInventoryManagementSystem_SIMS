@@ -36,10 +36,10 @@ export const ReportPage = () => {
                         <ReportCharts reports={reports.filter((report) => report.id === 1)} />  {/* Create module css here */}
                     </Col>
                     <Col lg={4}>
-                        <ReportCharts reports={reports.filter((report) => report.title === "Total Units Sold")} />
+                        <ReportCharts reports={reports.filter((report) => report.id === 2)} />
                     </Col>
                     <Col lg={4}>
-                        <ReportCharts reports={reports.filter((report) => report.title === "No. of Transactions")} />
+                        <ReportCharts reports={reports.filter((report) => report.id === 3)} />
                     </Col>
                 </Row>
 
