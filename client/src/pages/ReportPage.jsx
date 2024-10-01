@@ -44,10 +44,10 @@ export const ReportPage = () => {
                 </Row>
 
                 <Row>
-                    <Col>
+                    <Col lg={7}>
                         <BigChart bigreports={bigreports.filter((bigreport) => bigreport.id === 4)}/>
                     </Col>
-                    <Col>
+                    <Col lg={5}>
                         <BigChart bigreports={bigreports.filter((bigreport) => bigreport.id === 5)} />
                     </Col>
                 </Row>
