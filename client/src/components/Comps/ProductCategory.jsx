@@ -1,7 +1,11 @@
 
 
 const ProductCategory = () => {
-    return (  );
+    return (
+        <>
+            
+        </>
+    );
 }
- 
+
 export default ProductCategory;
