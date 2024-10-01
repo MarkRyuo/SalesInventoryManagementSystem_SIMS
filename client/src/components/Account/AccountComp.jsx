@@ -13,10 +13,10 @@ const AccountComp = () => {
             <Form.Control  type="text" placeholder="FullName" />
             <Form.Control  type="text" placeholder="Username" />
             <Form.Control  type="password" placeholder="Password" />
-            <Form.Control size="lg" type="text" placeholder="FullName" />
+            <Form.Control  type="text" placeholder="Gender" />
 
             <Dropdown as={ButtonGroup}>
-                <Button variant="success">Split Button</Button>
+                <Button variant="success">Gender</Button>
 
                 <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
 
