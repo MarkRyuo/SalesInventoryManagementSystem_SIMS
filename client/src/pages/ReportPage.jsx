@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import Reportcss from './Css/Report.module.css';
 import { useState } from 'react';
+import BigChart from '../components/Comps/BigChart';
 
 
 //* Report Page
@@ -44,10 +45,10 @@ export const ReportPage = () => {
 
                 <Row>
                     <Col>
-
+                        <BigChart bigreports={bigreports.filter((bigreport) => bigreport.id === 4)}/>
                     </Col>
                     <Col>
-                        
+
                     </Col>
                 </Row>
             </div>
