@@ -6,7 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 const AccountComp = () => {
 
     return ( 
-        <div className="contentAccount">
+        <div className="contentAccount" style={{border: "1px solid"}}>
             <p>New Staff</p>
             <p>Details</p>
 
