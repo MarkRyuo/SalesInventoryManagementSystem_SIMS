@@ -1,7 +1,7 @@
 
 
-const  = () => {
+const AccountComp = () => {
     return (  );
 }
  
-export default ;
+export default AccountComp;
