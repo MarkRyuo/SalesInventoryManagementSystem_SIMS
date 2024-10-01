@@ -42,7 +42,9 @@ export const ReportPage = () => {
                     </Col>
                 </Row>
 
-                <Row></Row>
+                <Row>
+                    
+                </Row>
             </div>
         </MainLayout>
     )
