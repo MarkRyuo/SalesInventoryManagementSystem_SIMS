@@ -3,7 +3,11 @@
 //* Child 
 
 const BigChart = () => {
-    return (  );
+    return (
+        <>
+            
+        </>
+    );
 }
 
 export default BigChart;
