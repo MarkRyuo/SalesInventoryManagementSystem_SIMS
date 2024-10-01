@@ -18,6 +18,10 @@ export const ReportPage = () => {
         { title: "No. of Transactions", total: "2000 Transaction", id: 3 },
     ]);
 
+    const [bigreports, setBigrepots] = useState([
+        
+    ])
+
 
     return (
         <MainLayout>
