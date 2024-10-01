@@ -12,7 +12,7 @@ const AccountComp = () => {
 
             <Form.Control  type="text" placeholder="FullName" />
             <Form.Control  type="text" placeholder="Username" />
-            <Form.Control size="lg" type="password" placeholder="Password" />
+            <Form.Control  type="password" placeholder="Password" />
             <Form.Control size="lg" type="text" placeholder="FullName" />
 
             <Dropdown as={ButtonGroup}>
