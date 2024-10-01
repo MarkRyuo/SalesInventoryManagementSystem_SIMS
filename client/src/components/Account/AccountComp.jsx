@@ -2,10 +2,9 @@
 
 const AccountComp = () => {
 
-    
     return ( 
         <div className="contentAccount">
-
+            
         </div>
     );
 }
