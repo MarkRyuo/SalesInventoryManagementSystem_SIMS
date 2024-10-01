@@ -19,7 +19,8 @@ export const ReportPage = () => {
     ]);
 
     const [bigreports, setBigrepots] = useState([
-        
+        {title: "Bigchart1", id: 4},
+        { title: "Bigchart1", id: 5 }
     ])
 
 
