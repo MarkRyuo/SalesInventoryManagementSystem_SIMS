@@ -9,7 +9,7 @@ const BigChart = ({bigreports}) => {
         <>
             {bigreports.map((bigreport) => (
                 <div key={bigreport.id}>
-                    <TbDeviceIpadHorizontalPlus>{bigreport.title}</TbDeviceIpadHorizontalPlus>
+                    <p>{bigreport.title}</p>
                 </div>
             ))}
         </>
