@@ -2,12 +2,12 @@
 
 //* Child 
 
-const BigChart = () => {
+const BigChart = ({bigreports}) => {
 
 
     return (
         <>
-            {}
+            {bigreports.map(())}
         </>
     );
 }
