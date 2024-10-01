@@ -5,6 +5,7 @@ import Search from "../components/Comps/Search";
 import ProductChart from "../components/Comps/ProductChart";
 
 import Productcss from './Css/Product.module.css' ;
+import ProductCategory from "../components/Comps/ProductCategory";
 
 
 //* Product Page
@@ -17,7 +18,7 @@ export const ProductPage = () => {
                 <p className="fs-3"><span><AiFillProduct /></span>Product</p> {/*  */}
                     <Row>
                         <Col>
-                            
+                            <ProductCategory />
                         </Col>
                         <Col>
                             <Search />
