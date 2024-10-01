@@ -33,7 +33,7 @@ export const ReportPage = () => {
             <div className={Reportcss.contentReport}>
                 <Row className={Reportcss.rowReport}>
                     <Col lg={4}>
-                        <ReportCharts reports={reports.filter((report) => report.title === "Total Revenue")} />  {/* Create module css here */}
+                        <ReportCharts reports={reports.filter((report) => report.id === 1)} />  {/* Create module css here */}
                     </Col>
                     <Col lg={4}>
                         <ReportCharts reports={reports.filter((report) => report.title === "Total Units Sold")} />
