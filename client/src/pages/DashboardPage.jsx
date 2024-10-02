@@ -1,4 +1,4 @@
-import {Container, Row, Col} from 'react-bootstrap' ;
+import {Container, Row} from 'react-bootstrap' ;
 import { MainLayout } from '../layout/MainLayout';
 import { Charts } from '../components/Dashboard/Charts';
 import BigCharts from '../components/Dashboard/BigCharts';
