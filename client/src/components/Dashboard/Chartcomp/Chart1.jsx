@@ -15,6 +15,7 @@ function Chart1() {
             {charts.map((chart) => (
                 <div className="contentChart" key={chart.id}>
                     <p>{chart.ChartTitle}</p>
+                    <p>{chart.ChartNUmber}</p>
                 </div>
             ))}
         </div>
