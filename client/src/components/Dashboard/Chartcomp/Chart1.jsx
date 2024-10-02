@@ -8,7 +8,7 @@ function Chart1({charts}) {
             {charts.map((chart) => (
                 <div className="contentChart" key={chart.id}>
                     <p>{chart.ChartTitle}</p>
-                    <p>{chart.ChartNUmber}</p>
+                    <p>{chart.ChartNumber}</p>
                 </div>
             ))}
         </div>
