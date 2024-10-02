@@ -14,7 +14,6 @@ function Chart1() {
         <>
             <div className="contentChart1">
                 
-                
             </div>
         </>
     )
