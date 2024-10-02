@@ -2,6 +2,7 @@ import { Row, Col } from "react-bootstrap"
 import Chart1 from "./Chartcomp/Chart1"
 import Chart2 from "./Chartcomp/Chart2"
 import Chart3 from "./Chartcomp/Chart3"
+import { useState } from "react"
 
 import DashStyle from './Dashboard.module.css'
 
@@ -21,7 +22,7 @@ export const Charts = () => {
             <div className="mainChart">
                 <Row className="gap-5">
                     <Col lg={4} md={12} className={DashStyle.colChart}>
-                        <Chart1 />
+                        <Chart1 charts={charts.filter((chart) => chart.id === "C-1")}/>
                     </Col>
                     <Col lg={4} md={12} className={DashStyle.colChart}>
                         <Chart2 />
