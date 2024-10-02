@@ -1,8 +1,10 @@
-
+import { useState } from "react";
 
 
 function Chart1() {
-    
+
+    const []
+
     return (
         <>
             <div className="contentChart1">
