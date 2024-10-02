@@ -13,7 +13,9 @@ function Chart1() {
     return (
         <div className="contentChart1">
             {charts.map((chart) => (
-                
+                <div>
+                    
+                </div>
             ))}
         </div>
     )
