@@ -18,7 +18,7 @@ export const Charts = () => {
     return (
         <>
             <div className="mainChart">
-                <Row className="gap-5">
+                <Row>
                     <Col lg={4} md={12} className={DashStyle.colChart}>
                         <Chart1 charts={charts.filter((chart) => chart.id === "C-1")}/>
                     </Col>
