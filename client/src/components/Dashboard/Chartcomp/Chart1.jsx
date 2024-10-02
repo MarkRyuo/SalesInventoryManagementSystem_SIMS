@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-function Chart1() {
+function Chart1({charts}) {
 
     const [charts, SetCharts] = useState([
         { ChartTitle: "Chart1", ChartNumber: "00000", id: "C-1" },
