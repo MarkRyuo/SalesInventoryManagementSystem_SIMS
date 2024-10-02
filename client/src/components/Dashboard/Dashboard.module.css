@@ -2,14 +2,16 @@
 
 
 
+/** Design in Charts(Parent) */
 
 .colChart {
     width: 100%;
-    height: 250px;
-    max-width: 390px;
+    height: 170px;
+    max-width: 415px;
     min-width: 300px;
+    padding-top: 5px;
 
-    border: 1px solid;
+    /* border: 1px solid; */
 
 }
 
@@ -18,4 +20,13 @@
 
     height: 400px;
     margin-top: 10px;
+}
+
+.rowChart {
+    /* border: 1px solid; */
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
+    justify-content: center;
+
 }
