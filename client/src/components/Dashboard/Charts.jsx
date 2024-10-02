@@ -17,17 +17,17 @@ export const Charts = () => {
 
     return (
         <>
-                <Row className={DashStyle.rowChart}>
-                    <Col lg={4} md={12} className={DashStyle.colChart}>
-                        <Chart1 charts={charts.filter((chart) => chart.id === "C-1")}/>
-                    </Col>
-                    <Col lg={4} md={12} className={DashStyle.colChart}>
-                        <Chart1 charts={charts.filter((chart) => chart.id === "C-2")} />
-                    </Col>
-                    <Col lg={4} md={12} className={DashStyle.colChart}>
-                        <Chart1 charts={charts.filter((chart) => chart.id === "C-3")} />
-                    </Col>
-                </Row>
+            <Row className={DashStyle.rowChart}>
+                <Col lg={4} md={12} className={DashStyle.colChart}>
+                    <Chart1 charts={charts.filter((chart) => chart.id === "C-1")} /> {/** Chart 1 */}
+                </Col>
+                <Col lg={4} md={12} className={DashStyle.colChart}>
+                    <Chart1 charts={charts.filter((chart) => chart.id === "C-2")} />
+                </Col>
+                <Col lg={4} md={12} className={DashStyle.colChart}>
+                    <Chart1 charts={charts.filter((chart) => chart.id === "C-3")} />
+                </Col>
+            </Row>
         </>
     )
 }
