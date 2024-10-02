@@ -1,6 +1,9 @@
 # Sales Inventory Management System (SIMS)
 
-## V2.3.1 Latest 
+## V3.0 Latest 
+
+    v3.0 
+        Finishing Dashboard 
 
     v2.3.1
         Account Design
