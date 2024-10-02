@@ -4,7 +4,7 @@ import { useState } from "react";
 function Chart1() {
 
     const [Chart, SetChart] = useState([
-        
+        {ChartTitle: "Chart1", body: }
     ])
 
     return (
