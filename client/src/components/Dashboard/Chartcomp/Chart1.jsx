@@ -3,7 +3,7 @@ import { useState } from "react";
 
 function Chart1() {
 
-    const []
+    const [Chart, SetChart] = useState()
 
     return (
         <>
