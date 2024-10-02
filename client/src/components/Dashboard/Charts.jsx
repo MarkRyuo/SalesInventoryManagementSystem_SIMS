@@ -6,7 +6,7 @@ import Chart3 from "./Chartcomp/Chart3"
 import DashStyle from './Dashboard.module.css'
 
 
-
+//* Prop Comp
 export const Charts = () => {
 
 
