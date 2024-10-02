@@ -13,7 +13,7 @@ function Chart1() {
     return (
         <div className="mainContent">
             {charts.map((chart) => (
-                <div className="contentChart">
+                <div className="contentChart" key={chart.id}>
                     <p>{chart.ChartTitle}</p>
                 </div>
             ))}
