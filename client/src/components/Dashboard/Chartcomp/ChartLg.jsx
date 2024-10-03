@@ -11,8 +11,7 @@ function ChartLg() {
     return (
         
         <div className = "containerChartlg" >
-
-            {/* Insert Logic */ }
+            q
         </div >
     )
 }
