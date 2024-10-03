@@ -12,7 +12,9 @@ function ChartLg() {
         
         <div className = "containerChartlg" >
             {chartlg.map(() => (
-                
+                <div>
+                    
+                </div>
             ))}
         </div >
     )
