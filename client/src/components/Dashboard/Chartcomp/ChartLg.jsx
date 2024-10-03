@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-function ChartLg() {
+function ChartLg({chartlg}) {
 
     const [chartlg, setChartlg] = useState([
         { title: "Chartlg1", id: "lg-1" },
