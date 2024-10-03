@@ -15,15 +15,6 @@
 
 }
 
-/** Design in Chart Large*/
-
-.colChartlg {
-    border: 1px solid red;
-
-    height: 400px;
-    margin-top: 10px;
-}
-
 .rowChart {
     /* border: 1px solid; */
     width: 100%;
@@ -31,4 +22,13 @@
     margin: 20px 0;
     justify-content: center;
 
+}
+
+/** Design in Chart Large*/
+
+.colChartlg {
+    border: 1px solid red;
+
+    height: 400px;
+    margin-top: 10px;
 }
