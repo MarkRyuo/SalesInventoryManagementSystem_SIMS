@@ -39,11 +39,3 @@
     padding: 10px;
     justify-content: center;
 }
-
-
-/** xs  */
-@media screen and (min-width: 475px) {
-    .colChartlg {
-        width: 1000px;
-    }
-}
