@@ -11,7 +11,7 @@ function BigCharts() {
         <>
                 <Row className={DashStyle.rowChartlg}>
                     <Col lg={7} className={DashStyle.colChartlg}>
-                        <Chart4 />
+                        <ChartLg />
                     </Col>
                     <Col lg={5} className={DashStyle.colChartlg}>
                         <Chart5 />
