@@ -28,6 +28,10 @@ export const Charts = () => {
                     <Chart1 charts={charts.filter((chart) => chart.id === "C-3")} /> {/** Chart 3 */}
                 </Col>
             </Row>
+
+            <Row>
+                
+            </Row>
         </>
     )
 }
