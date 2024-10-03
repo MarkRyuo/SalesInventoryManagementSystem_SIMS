@@ -8,13 +8,11 @@ function ChartLg() {
         {title: "Chartlg2", id: "lg-2"}
     ])
 
-    return (
-        <>
+    return (a
             <div className="contentChart4"> 
                 Chart4
                 {/* Insert Logic */}
             </div>
-        </>
     )
 }
 
