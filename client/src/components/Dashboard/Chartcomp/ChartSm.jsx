@@ -1,7 +1,7 @@
 
 
 
-function Chartsm({charts}) {
+function ChartSm({charts}) {
 
     return (
         <div className="mainContent">
@@ -15,4 +15,4 @@ function Chartsm({charts}) {
     )
 }
 
-export default Chart1 ;
+export default ChartSm ;
