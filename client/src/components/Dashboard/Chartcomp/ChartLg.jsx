@@ -4,7 +4,7 @@ import { useState } from "react";
 function ChartLg() {
 
     const [chartlg, setChartlg] = useState([
-        {},
+        {title: "Chart1", id: "lg-1"},
     ])
 
     return (
