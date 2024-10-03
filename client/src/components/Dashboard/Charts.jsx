@@ -1,8 +1,8 @@
 import { Row, Col } from "react-bootstrap"
-import Chart1 from "./Chartcomp/Chart1"
 import { useState } from "react"
 
 import DashStyle from './Dashboard.module.css'
+import ChartSm from "./Chartcomp/ChartSm"
 
 
 //* Prop Parent
@@ -19,7 +19,7 @@ export const Charts = () => {
         <>
             <Row className={DashStyle.rowChart}> {/* Small Boxes */}
                 <Col lg={4} md={12} className={DashStyle.colChart}>
-                    <Chart1 charts={charts.filter((chart) => chart.id === "C-1")} /> {/** Chart 1 */}
+                    <ChartSm charts={charts.filter((chart) => chart.id === "C-1")} /> {/** Chart 1 */}
                 </Col>
                 <Col lg={4} md={12} className={DashStyle.colChart}>
                     <Chart1 charts={charts.filter((chart) => chart.id === "C-2")} /> {/** Chart 2 */}
