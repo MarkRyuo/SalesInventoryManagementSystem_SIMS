@@ -30,7 +30,9 @@ export const Charts = () => {
             </Row>
 
             <Row>
-                
+                <Col>
+                    
+                </Col>
             </Row>
         </>
     )
