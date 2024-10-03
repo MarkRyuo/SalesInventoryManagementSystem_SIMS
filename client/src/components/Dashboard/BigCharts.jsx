@@ -1,5 +1,4 @@
-import Chart4 from './Chartcomp/Chart4';
-import Chart5 from './Chartcomp/Chart5';
+import ChartLg from './Chartcomp/ChartLg';
 import DashStyle from './Dashboard.module.css' ;
 
 import { Row, Col } from 'react-bootstrap';
