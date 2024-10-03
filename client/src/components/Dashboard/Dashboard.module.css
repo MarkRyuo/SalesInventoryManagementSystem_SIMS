@@ -30,7 +30,6 @@
     /* border: 1px solid red; */
     height: auto;
     padding: 0;
-    width: 100%;
 }
 
 .rowChartlg {
@@ -42,6 +41,6 @@
 }
 
 
-@media screen and (min-width: 475) {
+@media screen and (min-width: 475px) {
     
 }
