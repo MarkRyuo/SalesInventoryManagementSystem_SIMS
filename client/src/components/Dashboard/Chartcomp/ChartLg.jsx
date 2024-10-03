@@ -11,8 +11,8 @@ function ChartLg() {
     return (
         
         <div className = "containerChartlg" >
-            {chartlg.map(() => (
-                <div className="contentChartLg">
+            {chartlg.map((chartlg) => (
+                <div className="contentChartLg" key={chartlg.id}>
 
                 </div>
             ))}
