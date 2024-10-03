@@ -35,5 +35,8 @@
 
 .rowChartlg {
     width: 100%;
+    height: auto;
     border: 1px solid;
+    padding: 10px;
+    justify-content: center;
 }
