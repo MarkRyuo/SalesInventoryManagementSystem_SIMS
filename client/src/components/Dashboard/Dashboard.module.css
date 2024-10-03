@@ -27,9 +27,9 @@
 /** Design in Chart Large*/
 
 .colChartlg {
-    border: 1px solid red;
-
-    height: 400px;
+    /* border: 1px solid red; */
+    height: auto;
+    padding: 0;
 }
 
 .rowChartlg {
