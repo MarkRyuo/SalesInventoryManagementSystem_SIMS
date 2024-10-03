@@ -30,6 +30,7 @@
     /* border: 1px solid red; */
     height: auto;
     padding: 0;
+    /* overflow-x: auto; */
 }
 
 .rowChartlg {
@@ -38,4 +39,6 @@
     border: 1px solid;
     padding: 10px;
     justify-content: center;
+
+    min-width: 550px;
 }
