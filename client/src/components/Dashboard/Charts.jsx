@@ -17,7 +17,7 @@ export const Charts = () => {
 
     return (
         <>
-            <Row className={DashStyle.rowChart}>
+            <Row className={DashStyle.rowChart}> {/* Small Boxes */}
                 <Col lg={4} md={12} className={DashStyle.colChart}>
                     <Chart1 charts={charts.filter((chart) => chart.id === "C-1")} /> {/** Chart 1 */}
                 </Col>
