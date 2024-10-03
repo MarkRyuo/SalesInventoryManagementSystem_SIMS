@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 
 
 function ChartLg({chartlg}) {
@@ -16,4 +16,4 @@ function ChartLg({chartlg}) {
     )
 }
 
-export default Chart4;
+export default ChartLg;

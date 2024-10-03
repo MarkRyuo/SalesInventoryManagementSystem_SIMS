@@ -20,7 +20,7 @@ function BigCharts() {
                         <ChartLg chartlg={chartlg.filter((chartlg) => chartlg.id === "lg-1")}/>
                     </Col>
                     <Col lg={5} className={DashStyle.colChartlg}>
-                        <ChartLg />
+                        <ChartLg chartlg={chartlg.filter((chartlg) => chartlg.id === "lg-2")}/>
                     </Col>
                 </Row>
         </>
