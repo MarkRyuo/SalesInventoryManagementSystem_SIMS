@@ -42,8 +42,8 @@
 
 
 /** xs  */
-@media screen and (min-width: 475) {
-    .rowChartlg {
+@media screen and (min-width: 475px) {
+    .colChartlg {
         width: 1000px;
     }
 }
