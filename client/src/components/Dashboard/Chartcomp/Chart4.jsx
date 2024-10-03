@@ -1,7 +1,7 @@
 
 
 
-function Chart4() {
+function ChartLg() {
     return (
         <>
             <div className="contentChart4"> 
