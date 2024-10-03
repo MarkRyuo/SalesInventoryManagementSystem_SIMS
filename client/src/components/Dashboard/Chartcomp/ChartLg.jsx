@@ -4,8 +4,8 @@ import { useState } from "react";
 function ChartLg() {
 
     const [chartlg, setChartlg] = useState([
-        {title: "Chart1", id: "lg-1"},
-        {title: "Chart2"}
+        {title: "Chartlg1", id: "lg-1"},
+        {title: "Chartlg2"}
     ])
 
     return (
