@@ -1,6 +1,5 @@
 import { Row, Col } from "react-bootstrap"
 import Chart1 from "./Chartcomp/Chart1"
-import { useState } from "react"
 
 import DashStyle from './Dashboard.module.css'
 
