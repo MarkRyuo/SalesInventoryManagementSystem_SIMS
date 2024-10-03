@@ -19,7 +19,7 @@ export const Charts = () => {
         <>
             <Row className={DashStyle.rowChart}> {/* Small Boxes */}
                 <Col lg={4} md={12} className={DashStyle.colChart}>
-                    <ChartSm charts={charts.filter((chart) => chart.id === "C-1")} /> {/** Chart 1 */}
+                    <ChartSm charts={charts.filter((chart) => chart.id === "C-1")} /> {/** Chartsm 1 */}
                 </Col>
                 <Col lg={4} md={12} className={DashStyle.colChart}>
                     <ChartSm charts={charts.filter((chart) => chart.id === "C-2")} /> {/** Chart 2 */}
