@@ -40,5 +40,5 @@
     padding: 10px;
     justify-content: center;
 
-    min-width: 550px;
+    min-width: 550px; /* Can't lower than 550px */
 }
