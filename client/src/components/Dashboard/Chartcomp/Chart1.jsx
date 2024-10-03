@@ -1,7 +1,7 @@
 
 
 
-function Chart1({charts}) {
+function Chartsm({charts}) {
 
     return (
         <div className="mainContent">
