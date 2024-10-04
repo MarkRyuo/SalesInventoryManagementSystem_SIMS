@@ -14,6 +14,7 @@ export const Buttons = () => {
             <Button as={Link} to="/ProductPage" variant="light"><AiOutlineProduct size={25}/>Product</Button>
             <Button as={Link} to="/ReportPage" variant="light"> <TbReportSearch size={25}/>Reports</Button>
             <Button as={Link} to="/AccountPage" variant="light"><VscAccount size={20}/>Accounts</Button>
+            <Button as={Link} to="/AccountPage" variant="light"><VscAccount size={20} />Logout</Button>
         </>
     )
 }
