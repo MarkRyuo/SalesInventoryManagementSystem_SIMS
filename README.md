@@ -1,6 +1,9 @@
 # Sales Inventory Management System (SIMS)
 
-## V3.0 Latest 
+## V3.0.1 Latest 
+
+    v3.0.1
+        Adding prop-types
 
     v3.0 
         Finishing Dashboard 
