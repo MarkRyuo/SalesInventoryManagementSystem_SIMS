@@ -1,4 +1,5 @@
 import { Form, Button, ButtonGroup, Dropdown  } from 'react-bootstrap';
+import Accountcss from './AccountComp.module.css'
 
 const AccountComp = () => {
 
@@ -20,7 +21,7 @@ const AccountComp = () => {
                     <Dropdown.Item href="#">Female</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-            <Form.Control  type="text" placeholder="Gender" className='my-2' readOnly/>
+            <Form.Control  type="text" placeholder="---" className='my-2' readOnly/>
 
             <Button type='button' variant='primary'>Create</Button>
 
