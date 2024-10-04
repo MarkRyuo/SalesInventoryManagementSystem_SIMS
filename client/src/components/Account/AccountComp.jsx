@@ -7,8 +7,8 @@ const AccountComp = () => {
 
     return ( 
         <div className="contentAccount" style={{border: "1px solid", width: "500px", height: "500px"}}>
-            <p>New Staff</p>
-            <p>Details</p>
+            <p className='fs-3'>New Staff</p>
+            <p className='fs-5'>Details</p>
 
             <Form.Control  type="text" placeholder="FullName" />
             <Form.Control  type="text" placeholder="Username" />
