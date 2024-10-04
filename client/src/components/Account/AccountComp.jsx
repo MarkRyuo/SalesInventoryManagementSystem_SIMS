@@ -1,5 +1,5 @@
 import { Form, Button, ButtonGroup, Dropdown  } from 'react-bootstrap';
-import Accountcss from './AccountComp.module.css'
+import Accountcss from './AccountComp.module.css' ;
 
 const AccountComp = () => {
 
