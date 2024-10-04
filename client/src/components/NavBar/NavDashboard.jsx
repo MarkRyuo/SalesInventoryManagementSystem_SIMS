@@ -3,7 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from 'react';
 import Navbars from './Navbar.module.css' ;
 
-import { Buttons } from './Buttons';
+import {Image, Buttons} from 'react-bootstrap';
 
 
 export const NavDashboard = () => {
@@ -30,9 +30,9 @@ export const NavDashboard = () => {
             {/* Off-canvas function */}
 
             <Offcanvas show={show} onHide={handleClose}>
-                <Offcanvas.Header closeButton>
+                <Offcanvas.Header closeButton style={{borderBottom: "1px solid", padding: "20px"}}>
                     <Offcanvas.Title>
-                        REYES ELECTRONICS
+                        <span><Image src="holder.js/171x180" rounded /></span>REYES ELECTRONICS
                     </Offcanvas.Title>
                 </Offcanvas.Header>
 
