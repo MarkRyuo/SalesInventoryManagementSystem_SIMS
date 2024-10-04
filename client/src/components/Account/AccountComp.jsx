@@ -1,7 +1,4 @@
 import { Form, Button, ButtonGroup, Dropdown  } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
 
 const AccountComp = () => {
 
