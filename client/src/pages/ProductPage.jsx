@@ -17,7 +17,6 @@ export const ProductPage = () => {
             <Container>
                 <Search />
                 <ProductCategory />
-
             </Container>
 
             <Row className={Productcss.containerProduct}>
