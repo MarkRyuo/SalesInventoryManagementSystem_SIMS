@@ -14,6 +14,7 @@ export const ProductPage = () => {
     return (
         <MainLayout>
             <p className="fs-3"><span><AiFillProduct /></span>Product</p> {/*  */}
+            
             <Search />
             <ProductCategory />
 
