@@ -5,6 +5,7 @@
     v3.0 
         Finishing Dashboard
         Finishing Product 
+        Finishing Account
 
     v2.3.1
         Account Design
