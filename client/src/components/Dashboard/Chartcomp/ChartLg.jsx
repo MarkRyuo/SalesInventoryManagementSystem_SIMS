@@ -1,4 +1,4 @@
-import chartcomp from './Chartcomp.module.css' ;
+import chartcomp from './Chartcomp.module.css' ; //* Styling
 
 
 function ChartLg({chartlg}) {
