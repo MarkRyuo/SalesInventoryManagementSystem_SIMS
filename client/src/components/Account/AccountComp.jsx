@@ -22,7 +22,7 @@ const AccountComp = () => {
             </Dropdown>
             <Form.Control  type="text" placeholder="Gender" className='my-2' />
 
-            <Button type='button' variant='primary' size='lg'>Create</Button>
+            <Button type='button' variant='primary'>Create</Button>
 
 
         </div>
