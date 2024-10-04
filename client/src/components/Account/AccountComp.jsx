@@ -7,9 +7,9 @@ const AccountComp = () => {
             <p className='fs-3'>New Staff</p>
             <p className='fs-5'>Details</p>
 
-            <Form.Control  type="text" placeholder="FullName" />
-            <Form.Control  type="text" placeholder="Username" />
-            <Form.Control  type="password" placeholder="Password" />
+            <Form.Control  type="text" placeholder="FullName" className='mb-2'/>
+            <Form.Control  type="text" placeholder="Username" className='mb-2'/>
+            <Form.Control  type="password" placeholder="Password" className='mb-2'/>
             <Dropdown as={ButtonGroup}>
                 <Button variant="success">Gender</Button>
 
