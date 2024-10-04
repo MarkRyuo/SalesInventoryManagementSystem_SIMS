@@ -6,3 +6,7 @@
     width: 100%;
     min-width: 500px;
 }
+
+.contentChartLg {
+    border: 1px solid;
+}
