@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import ReportCharts from '../components/Comps/ReportCharts';
 import { MainLayout } from '../layout/MainLayout';
 import { TbReport } from "react-icons/tb";
@@ -20,7 +21,7 @@ export const ReportPage = () => {
     ]);
 
     const [bigreports, setBigrepots] = useState([
-        {title: "Bigchart1", id: 4},
+        { title: "Bigchart1", id: 4 },
         { title: "Bigchart2", id: 5 }
     ])
 
@@ -33,7 +34,7 @@ export const ReportPage = () => {
             <div className={Reportcss.contentReport}>
                 <Row className={Reportcss.rowReport}>
                     <Col lg={4}>
-                        <ReportCharts reports={reports.filter((report) => report.id === 1)} /> 
+                        <ReportCharts reports={reports.filter((report) => report.id === 1)} />
                     </Col>
                     <Col lg={4}>
                         <ReportCharts reports={reports.filter((report) => report.id === 2)} />
@@ -45,7 +46,7 @@ export const ReportPage = () => {
 
                 <Row>
                     <Col lg={7}>
-                        <BigChart bigreports={bigreports.filter((bigreport) => bigreport.id === 4)}/>
+                        <BigChart bigreports={bigreports.filter((bigreport) => bigreport.id === 4)} />
                     </Col>
                     <Col lg={5}>
                         <BigChart bigreports={bigreports.filter((bigreport) => bigreport.id === 5)} />
