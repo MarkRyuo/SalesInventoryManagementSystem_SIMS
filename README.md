@@ -3,9 +3,10 @@
 ## V3.0 Latest 
 
     v3.0 
-        Finishing Dashboard
-        Finishing Product 
-        Finishing Account
+        Finishing Dashboard Page
+        Finishing Product Page
+        Finishing Report Page
+        Finishing Account Page
 
     v2.3.1
         Account Design
