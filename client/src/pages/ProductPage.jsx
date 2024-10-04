@@ -15,10 +15,10 @@ export const ProductPage = () => {
         <MainLayout>
                 <p className="fs-3"><span><AiFillProduct /></span>Product</p> {/*  */}
                     <Row>
-                        <Col>
+                        <Col lg={3}>
                             <ProductCategory />
                         </Col>
-                        <Col>
+                        <Col lg={8}>
                             <Search />
                         </Col>
                     </Row>
