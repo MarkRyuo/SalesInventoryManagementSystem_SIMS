@@ -1,4 +1,4 @@
-
+import chartcomp from './Chartcomp.module.css' ; //* Styling
 
 
 function ChartLg({chartlg}) {
@@ -6,9 +6,9 @@ function ChartLg({chartlg}) {
 
     return (
         
-        <div className = "containerChartlg" style={{border: "1px solid", width: "100%", minWidth: "500px"}} >
+        <div className ={chartcomp.containerChartlg} >
             {chartlg.map((chartlg) => (
-                <div className="contentChartLg" key={chartlg.id} style={{border: "1px solid", width: "100%", height: "380px"}}>
+                <div className={chartcomp.contentChartLg} key={chartlg.id}>
                     <p>{chartlg.title}</p>
                 </div>
             ))}

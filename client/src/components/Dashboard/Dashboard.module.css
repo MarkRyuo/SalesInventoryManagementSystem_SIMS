@@ -30,15 +30,15 @@
     /* border: 1px solid red; */
     height: auto;
     padding: 0;
+    width: auto;
     /* overflow-x: auto; */
 }
 
 .rowChartlg {
     width: 100%;
     height: auto;
-    border: 1px solid;
-    padding: 10px;
-    justify-content: center;
-
-    min-width: 550px; /* Can't lower than 550px */
+    /* border: 1px solid; */
+    padding: 10px 0px 10px 16px; /**Top, right, bottom, left */
+    /* justify-content: space-between; */
+    min-width: 550px; /** Can't lower than 550px */
 }

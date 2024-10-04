@@ -16,10 +16,10 @@ function BigCharts() {
     return (
         <>
             <Row className={DashStyle.rowChartlg}>
-                <Col lg={7} md={12} sm={12} className={DashStyle.colChartlg}>
+                <Col className={DashStyle.colChartlg}>
                     <ChartLg chartlg={chartlg.filter((chartlg) => chartlg.id === "lg-1")} />
                 </Col>
-                <Col lg={5} md={12} sm={12} className={DashStyle.colChartlg}>
+                <Col lg={5} sm={7} className={DashStyle.colChartlg}>
                     <ChartLg chartlg={chartlg.filter((chartlg) => chartlg.id === "lg-2")} />
                 </Col>
             </Row>
