@@ -17,9 +17,7 @@ export const ProductPage = () => {
             <Row>
                 <Col>
                     <Search />
-                </Col>
-            </Row>
-                <ProductCategory />
+            <ProductCategory />
 
             <Row className={Productcss.containerProduct}>
                 <Col lg={12} className={Productcss.colProduct}>
