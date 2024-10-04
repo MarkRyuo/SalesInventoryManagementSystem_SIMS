@@ -4,7 +4,7 @@
 .containerChartlg {
     border: 1px solid;
     width: 100%;
-    min-width: 500px;
+    min-width: 500px; /** Fix width(Can't lower than 500px) */
 }
 
 .contentChartLg {
