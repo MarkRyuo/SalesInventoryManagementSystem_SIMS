@@ -4,7 +4,7 @@ import Accountcss from './AccountComp.module.css' ;
 const AccountComp = () => {
 
     return ( 
-        <div className="contentAccount" style={{border: "1px solid", width: "500px", height: "100%", padding: "20px"}}>
+        <div className={Accountcss.contentAccount}>
             <p className='fs-3'>New Staff</p>
             <p className='fs-5'>Details</p>
 
