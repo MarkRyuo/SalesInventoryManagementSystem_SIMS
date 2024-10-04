@@ -20,7 +20,9 @@ const AccountComp = () => {
                     <Dropdown.Item href="#">Female</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-            <Form.Control  type="text" placeholder="Gender" />
+            <Form.Control  type="text" placeholder="Gender" className='my-2' />
+
+            <Button type='button' variant='primary' size='lg'>Create</Button>
 
 
         </div>
