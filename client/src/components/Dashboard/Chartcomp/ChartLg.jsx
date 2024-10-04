@@ -8,7 +8,7 @@ function ChartLg({chartlg}) {
         
         <div className ={chartcomp.containerChartlg} >
             {chartlg.map((chartlg) => (
-                <div className="contentChartLg" key={chartlg.id} style={{border: "1px solid", width: "100%", height: "380px"}}>
+                <div className={chartcomp.contentChartLg} key={chartlg.id}>
                     <p>{chartlg.title}</p>
                 </div>
             ))}
