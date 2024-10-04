@@ -1,3 +1,4 @@
+import Reportcss from './CSS/Reportcomp.module.css';
 
 
 //* Child 
@@ -8,7 +9,7 @@ const BigChart = ({bigreports}) => {
     return (
         <>
             {bigreports.map((bigreport) => (
-                <div key={bigreport.id} style={{border: "1px solid", height: "400px", marginTop: "10px"}}>
+                <div key={bigreport.id} className={Reportcss.contentBigchart}>
                     <p>{bigreport.title}</p>
                 </div>
             ))}
