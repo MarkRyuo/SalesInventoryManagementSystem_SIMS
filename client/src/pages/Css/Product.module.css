@@ -4,7 +4,7 @@
 
 .containerProduct {
     /* border: 1px solid; */
-    height: 600px;
+    height: 700px;
     width: 100%;
     max-height: 600px;
 
@@ -17,4 +17,6 @@
     overflow: auto;
 
     padding: 5px;
+
+
 }
