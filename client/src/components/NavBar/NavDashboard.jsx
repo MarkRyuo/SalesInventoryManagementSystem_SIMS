@@ -1,4 +1,4 @@
-import {Container, Navbar, Button, Offcanvas} from 'react-bootstrap' ;
+import {Container, Navbar, Button, Offcanvas, Image} from 'react-bootstrap' ;
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from 'react';
 import Navbars from './Navbar.module.css' ;
@@ -30,9 +30,9 @@ export const NavDashboard = () => {
             {/* Off-canvas function */}
 
             <Offcanvas show={show} onHide={handleClose}>
-                <Offcanvas.Header closeButton>
+                <Offcanvas.Header closeButton style={{borderBottom: "1px solid", padding: "20px"}}>
                     <Offcanvas.Title>
-                        Admin Name
+                        <span><Image src="/client/src/assets/react.svg" rounded /></span>REYES ELECTRONICS
                     </Offcanvas.Title>
                 </Offcanvas.Header>
 

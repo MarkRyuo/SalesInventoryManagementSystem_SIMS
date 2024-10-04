@@ -5,7 +5,7 @@ function Search() {
     return (
         <>
             <Form inline>
-                <Row className="d-flex justify-content-end g-1">
+                <Row className="d-flex justify-content-end g-1 my-4">
                     <Col lg={3} xs={8} md={5}>
                         <Form.Control
                             type="text"
