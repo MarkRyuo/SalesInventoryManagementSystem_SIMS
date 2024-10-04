@@ -2,9 +2,10 @@
 
 
 .containerChartlg {
-    border: 1px solid;
+    /* border: 1px solid; */
     width: 100%;
     min-width: 500px; /** Fix width(Can't lower than 500px) */
+    padding: 5px;
 }
 
 .contentChartLg {
