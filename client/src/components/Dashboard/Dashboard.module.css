@@ -39,7 +39,7 @@
     height: auto;
     /* border: 1px solid; */
     padding: 10px;
-    justify-content: center;
+    /* justify-content: center; */
 
     min-width: 550px; /** Can't lower than 550px */
 }
