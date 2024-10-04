@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Reportcss from './CSS/Reportcomp.module.css';
 
 
