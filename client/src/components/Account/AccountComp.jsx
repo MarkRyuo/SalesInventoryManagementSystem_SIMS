@@ -13,8 +13,6 @@ const AccountComp = () => {
             <Form.Control  type="text" placeholder="FullName" />
             <Form.Control  type="text" placeholder="Username" />
             <Form.Control  type="password" placeholder="Password" />
-            <Form.Control  type="text" placeholder="Gender" />
-
             <Dropdown as={ButtonGroup}>
                 <Button variant="success">Gender</Button>
 
@@ -25,6 +23,8 @@ const AccountComp = () => {
                     <Dropdown.Item href="#">Female</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
+            <Form.Control  type="text" placeholder="Gender" />
+
 
         </div>
     );
