@@ -1,5 +1,5 @@
 import chartcomp from './Chartcomp.module.css' ; //* Styling
-
+import PropTypes from 'prop-types';
 
 function ChartLg({chartlg}) {
 
@@ -15,5 +15,15 @@ function ChartLg({chartlg}) {
         </div >
     )
 }
+
+// Fixing PropTypes definition
+ChartLg.propTypes = {
+    chartlg: PropTypes.arrayOf(
+        PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired
+        })
+    ).isRequired
+};
 
 export default ChartLg;
