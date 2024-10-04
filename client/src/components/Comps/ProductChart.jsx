@@ -2,7 +2,7 @@
 function ProductChart() {
     return (
         <>
-            <div style={{}}>
+            <div>
                 Scrollable.......
                 {/* Insert Logic */}
             </div>
