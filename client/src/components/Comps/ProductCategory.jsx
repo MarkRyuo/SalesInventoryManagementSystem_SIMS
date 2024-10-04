@@ -6,7 +6,7 @@ const ProductCategory = () => {
         <DropdownButton id="dropdown-basic-button" title="Category">
             <Dropdown.Item href="#">Item 1</Dropdown.Item>
             <Dropdown.Item href="#">Item 2</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Item 3</Dropdown.Item>
+            <Dropdown.Item href="#">Item 3</Dropdown.Item>
         </DropdownButton>
     );
 }
