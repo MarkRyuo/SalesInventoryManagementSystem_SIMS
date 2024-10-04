@@ -44,6 +44,7 @@ export const ReportPage = () => {
                     </Col>
                 </Row>
 
+                {/* Big-Charts */}
                 <Row>
                     <Col lg={7}>
                         <BigChart bigreports={bigreports.filter((bigreport) => bigreport.id === 4)} />
