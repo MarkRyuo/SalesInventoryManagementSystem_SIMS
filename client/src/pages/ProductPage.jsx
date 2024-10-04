@@ -28,7 +28,6 @@ export const ProductPage = () => {
                             <ProductChart />
                         </Col>
                     </Row>
-            </Container>
         </MainLayout>
     )
 }
