@@ -1,9 +1,11 @@
-import {useState} from 'react' ;
+import { useState } from 'react';
 
 //* Props
 export const Buttons = () => {
 
-    const [bottons, setBottons] = useState=()
+    const [bottons, setBottons] = useState([
+        
+    ])
 
     return (
         <div>
