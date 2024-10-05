@@ -59,7 +59,7 @@ export const NavDashboard = () => {
 
                 <Offcanvas.Body>
                     <div className={Navbars.buttonOffcanvas}>
-                        <div className={Navbars.buttonList}>
+                        <div className={Navbars.buttonList} style={{border: "1px solid"}}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
