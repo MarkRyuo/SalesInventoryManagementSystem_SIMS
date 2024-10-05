@@ -4,11 +4,12 @@ import { MdSpaceDashboard } from "react-icons/md";
 export const Buttons = ({buttons}) => {
 
     return (
-        <div style={{border: "1px solid", display: "flex", alignItems: "center"}}>
+        <div>
             {buttons.map((button) => (
-                <a href="#" key={button.id}>
+                <a href="#" key={button.id} style={{ border: "1px solid", display: "flex", alignItems: "center", height: "50px" }}>
                     <span>{button.icon}</span>
-                    <p>{button.btnName}</p>
+                        {button.btnName}
+
                 </a>
             ))}
         </div>
