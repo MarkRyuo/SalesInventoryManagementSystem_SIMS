@@ -12,7 +12,7 @@ export const MyProfile = () => {
 
             <p className='fs-3'><span><MdAccountBox /></span> Accounts</p>
 
-            <div className='contentAccount' style={{ border: "1px solid #e6e6e6", height: "700px", padding: 20, boxShadow: "1px 1px 5px  #e6e6e6", background: " #ffffff" }}>
+            <div className='contentAccount' style={{ border: "1px solid #e6e6e6", height: "700px", padding: 20, boxShadow: "2px 2px 8px #e6e6e6", background: " #ffffff" }}>
                 <p className='fs-4'>My Details</p>
                 <p style={{borderBottom:"1px solid gray", padding: "20px 10px" }}>Personal Information</p>
                 <ProfileComp />
