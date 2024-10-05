@@ -1,6 +1,12 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
 
 :root {
-    --bodyColor: #FBFBFE;
+    --bodyColor: #f2f2f2;
     --textColor: #302F2F ;
 }
 
