@@ -2,6 +2,7 @@ import { Container, Navbar, Button, Offcanvas, Image } from 'react-bootstrap';
 import { useState } from 'react';
 import Navbars from './Navbar.module.css';
 import { Buttons } from './Buttons';
+import AccountDropdown from '../Comps/AccountDropdown';
 
 //* Icons
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -49,19 +50,21 @@ export const NavDashboard = () => {
             {/* Off-canvas function */}
 
             <Offcanvas show={show} onHide={handleClose}>
-                <Offcanvas.Header closeButton style={{ borderBottom: "1px solid", padding: "20px" }}>
+                <Offcanvas.Header closeButton className={Navbars.offCanvasHeader}>
                     <Offcanvas.Title>
-                        <Image width={40} className='me-2' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvTQPW7YrgwGyYJ3o3tDB2hRSGOPUyCo8rnQ&s" rounded/>REYES ELECTRONICS
+                        <Image width={40} className='me-2' 
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvTQPW7YrgwGyYJ3o3tDB2hRSGOPUyCo8rnQ&s" rounded/>
+                        REYES ELECTRONICS
                     </Offcanvas.Title>
                 </Offcanvas.Header>
 
                 <Offcanvas.Body>
-                    <div className={Navbars.buttonOffcanvas} style={{height: "700px", padding: "15px"}}>
-                        <div style={{height: "230px", display: 'flex', flexDirection: "column", justifyContent: 'space-between' }}>
+                    <div className={Navbars.buttonOffcanvas}>
+                        <div className={Navbars.buttonsList}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-4")} />
+                            <AccountDropdown />
                         </div>
                         <div style={{height: "150px"}}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-5")} />

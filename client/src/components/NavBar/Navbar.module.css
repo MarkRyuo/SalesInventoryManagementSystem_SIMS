@@ -5,7 +5,7 @@
     --hoverbuttons: #EBF1FF ;
 }
 
-/* *Nav Login */
+/* *NavLogin.jsx */
 
 .navLogin {
     border-bottom: 1px solid var(--navBorder);
@@ -16,7 +16,7 @@
 
 
 
-/* *Nav Dashboard */
+/* *NavDashboard.jsx */
 
 .navDashboard {
     padding: 10px;
@@ -30,21 +30,36 @@
     margin-right: 15px;
 }
 
-/* *Off Canvas Buttons*/
+.offCanvasHeader {
+    border-bottom: 1px solid var(--navBorder);
+    padding: 20px;
+
+}
+
+/* *OffCanvas Body Buttons*/
 
 .buttonOffcanvas {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
 
-    /* border: 1px solid red ; */
-    height: 200px;
+    border: 1px solid red ;
+    height: 700px;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.buttonsList {
+    border: 1px solid green;
+    height: auto;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
 
 
-/** Buttons Design*/
+/** Buttons.jsx Design*/
 
 .contentButtons {
     /* border: 1px solid; */
@@ -56,10 +71,12 @@
     min-width: 200px;
     border-radius: 10px;
     color: #333230;
+    padding-left: 10px;
 }
 
 .contentButtons:hover {
     background-color: var(--hoverbuttons);
 }
+
 
 

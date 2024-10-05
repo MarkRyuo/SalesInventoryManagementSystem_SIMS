@@ -5,12 +5,13 @@ import './index.css'
 import DashboardPage from '../src/pages/DashboardPage' ;
 import ProductPage from './pages/ProductPage.jsx' ;
 import ReportPage from './pages/ReportPage.jsx' ;
-import AccountPage from './pages/AccountPage'
+import StaffAccount from './pages/StaffAccount.jsx'
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import MyProfile from './pages/MyProfile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,9 +31,14 @@ const router = createBrowserRouter([
     element: <ReportPage /> ,
   },
   {
-    path: "AccountPage",
-    element: <AccountPage /> ,
+    path: "StaffAccount",
+    element: <StaffAccount /> ,
   },
+  {
+    path: "MyProfile",
+    element: <MyProfile />,
+  },
+
 ]);
 
 createRoot(document.getElementById('root')).render(
