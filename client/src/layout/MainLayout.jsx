@@ -9,7 +9,7 @@ export const MainLayout = ({children}) => {
             
             <div className="mainContainer">
                 <NavDashboard />
-                <Container fluid='lg' className="mainContent" style={{background: "#0000"}}>
+                <Container fluid='lg' className="mainContent">
                     {children}
                 </Container>
             </div>
