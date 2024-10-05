@@ -30,6 +30,12 @@
     margin-right: 15px;
 }
 
+.offCanvasHeader {
+    border-bottom: 1px solid var(--navBorder);
+    padding: 20px;
+
+}
+
 /* *Off Canvas Buttons*/
 
 .buttonOffcanvas {
