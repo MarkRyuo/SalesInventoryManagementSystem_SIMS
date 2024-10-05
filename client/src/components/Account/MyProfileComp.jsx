@@ -1,9 +1,11 @@
 
 
-const MyProfileComp = () => {
+const ProfileComp = () => {
     return (
-        <
+        <>
+
+        </>
     );
 }
 
-export default MyProfileComp;
+export default ProfileComp;
