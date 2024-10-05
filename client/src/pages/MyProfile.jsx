@@ -1,4 +1,4 @@
-import MyProfileComp from '../components/Account/MyProfileComp';
+import MyProfileComp from '../components/Account/ProfileComp';
 import { MainLayout } from '../layout/MainLayout';
 import { MdAccountBox } from "react-icons/md";
 
