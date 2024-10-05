@@ -2,7 +2,7 @@
 
 :root {
     --navBorder: #e1ebe4 ;
-    --hoverbuttons: ##D9D9D9 ;
+    --hoverbuttons: #EBF1FF ;
 }
 
 /* *Nav Login */
@@ -47,7 +47,7 @@
 /** Buttons Design*/
 
 .contentButtons {
-    border: 1px solid;
+    /* border: 1px solid; */
     display: flex;
     align-items: center;
     height: 50px;
