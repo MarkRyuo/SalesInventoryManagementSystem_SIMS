@@ -18,6 +18,7 @@ export const MyProfile = () => {
                 <ProfileComp />
 
                 <Button variant='primary' className='ms-2'>Save</Button>
+                <Button variant='primary' className='ms-2'>Edit</Button>
             </div>
 
         </MainLayout>
