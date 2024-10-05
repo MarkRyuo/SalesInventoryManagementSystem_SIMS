@@ -3,7 +3,7 @@ import {Button, Image, } from 'react-bootstrap'
 
 const MyProfileComp = () => {
     return (
-        <div>
+        <div style={{border: "1px solid"}}>
             <Image src="https://placekitten.com/171/180" />
             <p>Admin Name</p>
             <p>Example@email.comw</p>
