@@ -12,7 +12,6 @@ export const Buttons = () => {
         <div>
             {buttons.map((button) => (
                 <link key={button.id}>
-                    <span>{button.icon}</span>
                     <p>{button.btnName}</p>
                 </link>
             ))}
