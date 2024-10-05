@@ -12,6 +12,7 @@ export const Buttons = () => {
         <div>
             {buttons.map((button) => (
                 <div key={button.id}>
+                    <span>{button.icon}</span>
                     <p></p>
                 </div>
             ))}
