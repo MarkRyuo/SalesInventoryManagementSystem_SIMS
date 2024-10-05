@@ -20,6 +20,9 @@ export const NavDashboard = () => {
     //* Buttons 
     const [buttons, setBottons] = useState([
         { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-1" },
+        { icon: <MdSpaceDashboard />, btnName: "Product", id: "b-2" },
+        { icon: <MdSpaceDashboard />, btnName: "Report", id: "b-3" },
+        { icon: <MdSpaceDashboard />, btnName: "Account", id: "b-4" },
     ])
 
 
