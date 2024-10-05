@@ -9,6 +9,7 @@ const Dropdown = () => {
     const handleGenderSelect = (eventKey) => {
         setGender(eventKey); // Updates the gender state with the selected value
     };
+    
     return (
         <>
             <InputGroup className="mb-3 ps-2" style={{ width: "100%", maxWidth: "500px" }}>
