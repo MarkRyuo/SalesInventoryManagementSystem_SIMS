@@ -6,7 +6,10 @@ import { Buttons } from './Buttons';
 //* Icons
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdSpaceDashboard } from "react-icons/md";
-
+import { AiOutlineProduct } from "react-icons/ai";
+import { TbReportAnalytics } from "react-icons/tb";
+import { VscAccount } from "react-icons/vsc";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 
 
@@ -20,9 +23,10 @@ export const NavDashboard = () => {
     //* Buttons 
     const [buttons, setBottons] = useState([
         { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-1" },
-        { icon: <MdSpaceDashboard />, btnName: "Product", id: "b-2" },
-        { icon: <MdSpaceDashboard />, btnName: "Report", id: "b-3" },
-        { icon: <MdSpaceDashboard />, btnName: "Account", id: "b-4" },
+        { icon: <AiOutlineProduct />, btnName: "Product", id: "b-2" },
+        { icon: <TbReportAnalytics />, btnName: "Report", id: "b-3" },
+        { icon: <VscAccount />, btnName: "Account", id: "b-4" },
+        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-5" },
     ])
 
 
@@ -52,12 +56,15 @@ export const NavDashboard = () => {
                 </Offcanvas.Header>
 
                 <Offcanvas.Body>
-                    <div className={Navbars.buttonOffcanvas} style={{border: "1px solid", height: "700px", padding: "20px"}}>
-                        <div style={{border: "1px solid red"}}>
+                    <div className={Navbars.buttonOffcanvas} style={{height: "700px", padding: "15px"}}>
+                        <div style={{height: "250px", display: 'flex', flexDirection: "column", justifyContent: 'space-between' }}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-4")} />
                         </div>
-                        <div style={{border: "1px solid blue"}}>
-                            Logout
+                        <div style={{height: "150px"}}>
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-5")} />
                         </div>
                     </div>
                 </Offcanvas.Body>
