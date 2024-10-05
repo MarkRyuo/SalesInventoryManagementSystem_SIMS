@@ -2,7 +2,7 @@ import { Row, Form, Col } from 'react-bootstrap';
 
 const ProfileComp = () => {
     return (
-        <Form style={{border: "1px solid"}}>
+        <Form>
 
             <Row style={{border: "1px solid red", width: "100%"}}>
                 <Col>
