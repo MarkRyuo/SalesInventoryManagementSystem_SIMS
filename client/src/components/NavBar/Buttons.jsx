@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import {Link} from 'react-router-dom' ;
+import Navbars from './Navbar.module.css'
 
 //* Props
 export const Buttons = ({ buttons }) => {
