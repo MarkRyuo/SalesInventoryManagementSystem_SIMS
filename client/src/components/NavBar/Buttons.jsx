@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MdSpaceDashboard } from "react-icons/md";
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom' ;
 
 //* Props
 export const Buttons = () => {
