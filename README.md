@@ -1,5 +1,9 @@
 # Sales Inventory Management System (SIMS)
 
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
 ## V3.1 Latest 
 
     v3.1
