@@ -1,11 +1,13 @@
-import { Row, Form } from 'react-bootstrap';
+import { Row, Form, Col } from 'react-bootstrap';
 
 const ProfileComp = () => {
     return (
         <Form>
 
             <Row>
-                
+                <Col>
+
+                </Col>
             </Row>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Email address</Form.Label>
