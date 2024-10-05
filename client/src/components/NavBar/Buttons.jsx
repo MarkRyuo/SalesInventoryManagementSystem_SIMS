@@ -4,10 +4,6 @@ import { MdSpaceDashboard } from "react-icons/md";
 //* Props
 export const Buttons = () => {
 
-    const [buttons, setBottons] = useState([
-        { btnName: "Dashboard", id:"b-1" },
-    ])
-
     return (
         <div>
             <span>{<MdSpaceDashboard />}</span>

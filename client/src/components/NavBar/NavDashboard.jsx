@@ -12,6 +12,13 @@ export const NavDashboard = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    //* Buttons 
+    const [buttons, setBottons] = useState([
+        { btnName: "Dashboard", id: "b-1" },
+    ])
+
+
+
     return (
         
         <Container fluid>
