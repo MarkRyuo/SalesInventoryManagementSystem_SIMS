@@ -11,7 +11,9 @@ export const Buttons = () => {
     return (
         <div>
             {buttons.map((button) => (
-                <div></div>
+                <div key={button.id}>
+                    
+                </div>
             ))}
         </div>
     )
