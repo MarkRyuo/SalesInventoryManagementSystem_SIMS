@@ -4,13 +4,13 @@ import { MdSpaceDashboard } from "react-icons/md";
 //* Props
 export const Buttons = () => {
 
-    const [bottons, setBottons] = useState([
+    const [buttons, setBottons] = useState([
         { icon: "<MdSpaceDashboard />", btnName: "Dashboard", id:"b-1" },
     ])
 
     return (
         <div>
-            
+            {buttons.map((button))}
         </div>
     )
 }
