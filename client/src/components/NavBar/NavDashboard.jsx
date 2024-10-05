@@ -14,7 +14,7 @@ export const NavDashboard = () => {
 
     //* Buttons 
     const [buttons, setBottons] = useState([
-        { btnName: "Dashboard", id: "b-1" },
+        { icon: <MdSpaceDashboard /> ,btnName: "Dashboard", id: "b-1" },
     ])
 
 
