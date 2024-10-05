@@ -10,7 +10,7 @@ const AccountDropdown = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to={"#"}>Action</Dropdown.Item>
+                    <Dropdown.Item as={Link} to={"#"}>My Profile</Dropdown.Item>
                     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                 </Dropdown.Menu>
