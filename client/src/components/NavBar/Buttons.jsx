@@ -10,7 +10,9 @@ export const Buttons = () => {
 
     return (
         <div>
-            {buttons.map((button))}
+            {buttons.map((button) => (
+                <div></div>
+            ))}
         </div>
     )
 }
