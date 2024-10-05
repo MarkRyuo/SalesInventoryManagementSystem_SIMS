@@ -3,7 +3,7 @@
 //* Props
 export const Buttons = () => {
 
-    const [bottons, setBottons] =
+    const [bottons, setBottons] = useState=()
 
     return (
         <div>
