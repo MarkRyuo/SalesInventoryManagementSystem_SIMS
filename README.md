@@ -80,7 +80,7 @@
 
 1. After installing the dependencies, you can run the project using:
     ```bash
-    npm start
+    npm run dev
     ```
 
 2. Open the project in your browser at:
