@@ -5,11 +5,12 @@ import { MdSpaceDashboard } from "react-icons/md";
 export const Buttons = () => {
 
     const [buttons, setBottons] = useState([
-        { icon: "<MdSpaceDashboard />", btnName: "Dashboard", id:"b-1" },
+        { btnName: "Dashboard", id:"b-1" },
     ])
 
     return (
         <div>
+            <span>{}</span>
             {buttons.map((button) => (
                 <link key={button.id}>
                     <p>{button.btnName}</p>
