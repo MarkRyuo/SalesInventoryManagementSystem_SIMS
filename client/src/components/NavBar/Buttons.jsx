@@ -5,7 +5,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 export const Buttons = () => {
 
     const [bottons, setBottons] = useState([
-        { icon: "<MdSpaceDashboard />", btnName: "Dashboard", }
+        { icon: "<MdSpaceDashboard />", btnName: "Dashboard", id:"b-1" },
     ])
 
     return (
