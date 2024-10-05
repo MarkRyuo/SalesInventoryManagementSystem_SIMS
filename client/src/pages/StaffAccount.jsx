@@ -1,6 +1,7 @@
-
 import { MainLayout } from '../layout/MainLayout' ;
 import { MdAccountBox } from "react-icons/md";
+
+import ProfileComp from '../components/Account/ProfileComp';
 
 //* Accounts Page
 
