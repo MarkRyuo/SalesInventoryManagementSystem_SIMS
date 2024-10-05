@@ -6,7 +6,6 @@ import { Buttons } from './Buttons';
 
 import { MdSpaceDashboard } from "react-icons/md";
 
-
 export const NavDashboard = () => {
 
     const [show, setShow] = useState(false);
@@ -40,7 +39,7 @@ export const NavDashboard = () => {
             <Offcanvas show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton style={{borderBottom: "1px solid", padding: "20px"}}>
                     <Offcanvas.Title>
-                        <span><Image src={ReactLogo} rounded /></span>REYES ELECTRONICS
+                        <span><Image src="/client/src/assets/react.svg" rounded /></span>REYES ELECTRONICS
                     </Offcanvas.Title>
                 </Offcanvas.Header>
 
