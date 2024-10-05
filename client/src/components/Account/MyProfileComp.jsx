@@ -1,4 +1,3 @@
-import {Button, Image, } from 'react-bootstrap'
 
 
 const MyProfileComp = () => {
