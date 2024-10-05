@@ -63,6 +63,7 @@
     min-width: 200px;
     border-radius: 10px;
     color: #333230;
+    padding-left: 10px;
 }
 
 .contentButtons:hover {
