@@ -5,7 +5,7 @@
     --hoverbuttons: #EBF1FF ;
 }
 
-/* *NavLogin */
+/* *NavLogin.js */
 
 .navLogin {
     border-bottom: 1px solid var(--navBorder);
