@@ -1,10 +1,10 @@
 import { Container, Navbar, Button, Offcanvas, Image } from 'react-bootstrap';
-import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from 'react';
 import Navbars from './Navbar.module.css';
 import { Buttons } from './Buttons';
 
 //* Icons
+import { GiHamburgerMenu } from "react-icons/gi";
 import { MdSpaceDashboard } from "react-icons/md";
 
 
