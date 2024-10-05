@@ -1,5 +1,4 @@
 import { Row, Form, Col} from 'react-bootstrap';
-import { useState } from 'react';
 import DropDown from '../DropDown';
 
 const ProfileComp = () => {
