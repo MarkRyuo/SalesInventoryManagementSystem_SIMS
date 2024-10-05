@@ -68,7 +68,6 @@ export const NavDashboard = () => {
                         </div>
                     </div>
                 </Offcanvas.Body>
-                
             </Offcanvas>
 
         </Container>
