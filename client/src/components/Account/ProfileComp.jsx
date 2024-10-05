@@ -8,7 +8,13 @@ const ProfileComp = () => {
                 <Col>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>FIRST NAME</Form.Label>
-                        <Form.Control type="text" placeholder="n" />
+                        <Form.Control type="text" />
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>LAST NAME</Form.Label>
+                        <Form.Control type="text" />
                     </Form.Group>
                 </Col>
             </Row>
