@@ -11,7 +11,7 @@ export const AccountPage = () => {
             
             <p className='fs-3'><span><MdAccountBox /></span> Accounts</p>
 
-            <div className='contentAccount' style={{border: "1px solid red", height: "700px"}}> 
+            <div className='contentAccount' style={{border: "1px solid red", height: "700px", padding: "300px"}}> 
 
                 <AccountComp />
 
