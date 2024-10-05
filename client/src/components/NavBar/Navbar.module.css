@@ -50,6 +50,7 @@
 }
 
 .buttonsList {
+    border: 1px solid green;
     height: auto;
     display: flex;
     flex-direction: column;
