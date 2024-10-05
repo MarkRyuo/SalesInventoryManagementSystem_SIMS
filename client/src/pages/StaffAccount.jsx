@@ -9,7 +9,7 @@ export const AccountPage = () => {
     return (
         <MainLayout>
             
-            <p className='fs-3'><span><MdAccountBox /></span> Account</p>
+            <p className='fs-3'><span><MdAccountBox /></span> Accounts</p>
 
             <div className='contentAccount' style={{border: "1px solid red", height: "700px"}}> 
 
