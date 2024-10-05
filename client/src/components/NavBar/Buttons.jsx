@@ -11,10 +11,10 @@ export const Buttons = () => {
     return (
         <div>
             {buttons.map((button) => (
-                <div key={button.id}>
+                <link key={button.id}>
                     <span>{button.icon}</span>
                     <p>{button.btnName}</p>
-                </div>
+                </link>
             ))}
         </div>
     )
