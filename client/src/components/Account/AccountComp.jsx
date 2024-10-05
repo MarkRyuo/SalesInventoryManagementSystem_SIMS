@@ -1,7 +1,14 @@
 import { Form, Button, Dropdown, InputGroup, DropdownButton  } from 'react-bootstrap';
 import Accountcss from './AccountComp.module.css' ;
-
+import { useState } from 'react';
 const AccountComp = () => {
+
+    const [gender, setGender] = useState('');
+
+    // Function to handle gender selection
+    const handleGenderSelect = (eventKey) => {
+        setGender(eventKey); // Updates the gender state with the selected value
+    };
 
     return ( 
         <div className={Accountcss.contentAccount}>
@@ -12,16 +19,17 @@ const AccountComp = () => {
             <Form.Control  type="text" placeholder="Username" className='mb-2'/>
             <Form.Control  type="password" placeholder="Password" className='mb-2'/>
             <InputGroup className="mb-3">
-                <Form.Control aria-label="Text input with dropdown button" />
+                <Form.Control aria-label="Text input with dropdown button" placeholder={gender || 'Select Gender'} readOnly />
 
                 <DropdownButton
                     variant="outline-secondary"
                     title="Dropdown"
                     id="input-group-dropdown-2"
                     align="end"
+                    onSelect={handleGenderSelect} // Attach the function to handle selection
                 >
-                    <Dropdown.Item >Male</Dropdown.Item>
-                    <Dropdown.Item >Another action</Dropdown.Item>
+                    <Dropdown.Item eventKey="Male">Male</Dropdown.Item>
+                    <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
                 </DropdownButton>
             </InputGroup>
 
