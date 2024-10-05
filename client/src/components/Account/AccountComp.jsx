@@ -33,7 +33,7 @@ const AccountComp = () => {
                 </DropdownButton>
             </InputGroup>
 
-            <Button type='button' variant='primary' className='text-center'>Create</Button>
+            <Button type='button' variant='primary'>Create</Button>
 
 
         </div>
