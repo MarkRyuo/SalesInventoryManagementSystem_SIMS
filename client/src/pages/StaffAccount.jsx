@@ -13,7 +13,7 @@ export const AccountPage = () => {
 
             <div className='contentAccount' style={{border: "1px solid red", height: "700px"}}> 
 
-                <AccountComp />
+            
 
             </div>
         </MainLayout>
