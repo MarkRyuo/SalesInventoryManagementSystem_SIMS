@@ -1,4 +1,4 @@
-import {Image, } from 'react-bootstrap'
+import {Button, Image, } from 'react-bootstrap'
 
 
 const MyProfileComp = () => {
@@ -7,6 +7,7 @@ const MyProfileComp = () => {
             <Image src="https://placekitten.com/171/180" />
             <p>Admin Name</p>
             <p>Example@email.comw</p>
+            <Button>Upload Image</Button>
         </div>
     );
 }
