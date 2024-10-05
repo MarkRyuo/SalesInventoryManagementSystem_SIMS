@@ -7,9 +7,9 @@ export const Buttons = ({buttons, Icon}) => {
         <div>
             <span>{Icon}</span>
             {buttons.map((button) => (
-                <link key={button.id}>
+                <a href="#" key={button.id}>
                     <p>{button.btnName}</p>
-                </link>
+                </a>
             ))}
         </div>
     )

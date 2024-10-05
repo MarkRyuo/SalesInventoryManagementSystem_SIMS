@@ -40,13 +40,13 @@ export const NavDashboard = () => {
             <Offcanvas show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton style={{borderBottom: "1px solid", padding: "20px"}}>
                     <Offcanvas.Title>
-                        <span><Image src="/client/src/assets/react.svg" rounded /></span>REYES ELECTRONICS
+                        <span><Image src={ReactLogo} rounded /></span>REYES ELECTRONICS
                     </Offcanvas.Title>
                 </Offcanvas.Header>
 
                 <Offcanvas.Body>
                     <div className={Navbars.buttonOffcanvas}>
-                        <Buttons buttons={buttons.filter((button) => button.id === "b-1")} Icon=<MdSpaceDashboard /> />
+                        <Buttons buttons={buttons.filter((button) => button.id === "b-1")} Icon={<MdSpaceDashboard />} />
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>
