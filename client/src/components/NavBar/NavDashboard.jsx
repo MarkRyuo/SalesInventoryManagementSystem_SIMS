@@ -2,8 +2,9 @@ import {Container, Navbar, Button, Offcanvas, Image} from 'react-bootstrap' ;
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from 'react';
 import Navbars from './Navbar.module.css' ;
-
 import { Buttons } from './Buttons';
+
+import { MdSpaceDashboard } from "react-icons/md";
 
 
 export const NavDashboard = () => {
@@ -45,7 +46,7 @@ export const NavDashboard = () => {
 
                 <Offcanvas.Body>
                     <div className={Navbars.buttonOffcanvas}>
-                        <Buttons buttons={buttons.filter((button) => button.id === "b-1")}/>
+                        <Buttons buttons={buttons.filter((button) => button.id === "b-1")} Icon=<MdSpaceDashboard /> />
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>

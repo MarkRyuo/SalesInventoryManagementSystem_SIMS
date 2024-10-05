@@ -1,7 +1,7 @@
 import { MdSpaceDashboard } from "react-icons/md";
 
 //* Props
-export const Buttons = ({buttons, icon}) => {
+export const Buttons = ({buttons, Icon}) => {
 
     return (
         <div>
