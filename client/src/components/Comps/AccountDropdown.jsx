@@ -8,7 +8,8 @@ const AccountDropdown = () => {
         <>
             <Dropdown>
                 <Dropdown.Toggle as="div" style={{ cursor: 'pointer', padding: "10px" }}>
-                    <span><VscAccount /></span>Account
+                    <span><VscAccount /></span>
+                    Account
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
