@@ -8,12 +8,12 @@ const MyProfileComp = () => {
                 border: "1px solid",
                 display: 'flex',
                 }}>
-            <div> 
+            <div style={{width: "200px"}}> 
                 <Image src="https://www.pngkey.com/png/full/22-223848_businessman-vector-person-logo-png.png" thumbnail style={{width: "auto"}}/>
             </div>
             <div>
-                <p>Admin Name</p>
-                <p>Example@email.comw</p>
+                <p className='fs-3 m-0'>Ramil Reyes</p>
+                <p>Example@email.com</p>
                 <Button>Upload Image</Button>
             </div>
         </div>
