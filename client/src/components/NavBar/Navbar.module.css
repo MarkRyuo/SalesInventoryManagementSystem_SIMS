@@ -2,6 +2,7 @@
 
 :root {
     --navBorder: #e1ebe4 ;
+    --hoverbuttons: ##D9D9D9 ;
 }
 
 /* *Nav Login */
@@ -53,6 +54,12 @@
     text-decoration: none;
     width: 100%;
     min-width: 200px;
+    border-radius: 10px;
+    color: #333230;
+}
+
+.contentButtons:hover {
+    background-color: var(--hoverbuttons);
 }
 
 
