@@ -48,18 +48,50 @@
         Unstable 
 
 
-## Installed : 
+## Installation Guide
 
-    1. 
-        - npm
+### Prerequisites
 
-    2. [ReactBootstrap](https://react-bootstrap.netlify.app/) : -v 2.10.4
-        - npm install react-bootstrap bootstrap
+- Node.js (with npm)
 
-    3. [ReactIcons](https://react-icons.github.io/react-icons/) -v 5.3.0
-        - npm install react-icons --save
+### Steps to Install
 
-    4. React Router Dom: -v 6.26.2 
-        - npm i react-router-dom
+1. **Install npm packages**:
+    ```bash
+    npm install
+    ```
 
-    5. 
+2. **Install React Bootstrap** (v2.10.4):
+    ```bash
+    npm install react-bootstrap bootstrap
+    ```
+
+3. **Install React Icons** (v5.3.0):
+    ```bash
+    npm install react-icons --save
+    ```
+
+4. **Install React Router Dom** (v6.26.2):
+    ```bash
+    npm install react-router-dom
+    ```
+
+### How to Run the Project
+
+1. After installing the dependencies, you can run the project using:
+    ```bash
+    npm start
+    ```
+
+2. Open the project in your browser at:
+    ```
+    http://localhost:3000
+    ```
+
+### Additional Notes
+
+- Ensure you have the right Node.js version installed to avoid any compatibility issues.
+- You can find more documentation for the following packages:
+    - [React Bootstrap Documentation](https://react-bootstrap.netlify.app/)
+    - [React Icons Documentation](https://react-icons.github.io/react-icons/)
+    - [React Router Dom Documentation](https://reactrouter.com/)
