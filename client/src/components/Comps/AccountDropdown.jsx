@@ -1,11 +1,11 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link } from 'react-router-dom';
-import { a } from 'react-dom'
+
 const AccountDropdown = () => {
     return (
         <>
             <Dropdown>
-                <Dropdown.Toggle as={a} variant="success" id="dropdown-basic">
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
                     Account
                 </Dropdown.Toggle>
 
