@@ -2,6 +2,7 @@ import { MainLayout } from '../layout/MainLayout' ;
 import { MdAccountBox } from "react-icons/md";
 
 import ProfileComp from '../components/Account/ProfileComp';
+import { Button } from 'react-bootstrap';
 
 //* Accounts Page
 
