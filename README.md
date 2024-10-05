@@ -6,7 +6,9 @@
 
 ## Changelog
 
-### v3.1 (Latest)
+### v3.1.1 (Lates)
+
+### v3.1
 - Sidebar Designing
 
 ### v3.0
