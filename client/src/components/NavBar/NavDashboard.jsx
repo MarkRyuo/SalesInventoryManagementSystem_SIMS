@@ -10,6 +10,7 @@ import { AiOutlineProduct } from "react-icons/ai";
 import { TbReportAnalytics } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
+import AccountDropdown from '../Comps/AccountDropdown';
 
 
 
@@ -63,7 +64,7 @@ export const NavDashboard = () => {
                             <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-4")} />
+                            <AccountDropdown />
                         </div>
                         <div style={{height: "150px"}}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-5")} />
