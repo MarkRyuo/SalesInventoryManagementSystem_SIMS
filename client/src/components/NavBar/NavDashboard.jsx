@@ -45,7 +45,7 @@ export const NavDashboard = () => {
 
                 <Offcanvas.Body>
                     <div className={Navbars.buttonOffcanvas}>
-                        <Buttons buttons={buttons.filter((button) => button.id === "b-1")} Icon={<MdSpaceDashboard />} />
+                        <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>
