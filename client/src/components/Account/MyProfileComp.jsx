@@ -2,7 +2,11 @@
 
 
 const MyProfileComp = () => {
-    return (  );
+    return (
+        <>
+
+        </>
+    );
 }
- 
+
 export default MyProfileComp;
