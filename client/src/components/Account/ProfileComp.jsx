@@ -18,7 +18,7 @@ const ProfileComp = () => {
                     </Form.Group>
                 </Col>
             </Row>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{width: "100%", maxWidth: "400px"}}>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{width: "100%", maxWidth: "400px", paddingLeft: 10}}>
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="name@example.com" />
             </Form.Group>
