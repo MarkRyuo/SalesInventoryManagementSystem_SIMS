@@ -58,7 +58,7 @@ export const NavDashboard = () => {
                 </Offcanvas.Header>
 
                 <Offcanvas.Body>
-                    <div className={Navbars.buttonOffcanvas} style={{height: "700px", padding: "15px"}}>
+                    <div className={Navbars.buttonOffcanvas}>
                         <div style={{height: "230px", display: 'flex', flexDirection: "column", justifyContent: 'space-between' }}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
