@@ -3,6 +3,8 @@
 .contentAccount {
     border: 1px solid ;
     width: 100%;
+    max-width: 500px;
+    min-width: 400px;
     height: 100%;
     padding: 20px;
 }
