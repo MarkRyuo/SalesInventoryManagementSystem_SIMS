@@ -2,7 +2,7 @@ import { InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 
 
 
-const Dropdown = () => {
+const DropDown = () => {
 
     const [gender, setGender] = useState('');
 
@@ -35,4 +35,4 @@ const Dropdown = () => {
     );
 }
 
-export default Dropdown;
+export default DropDown;
