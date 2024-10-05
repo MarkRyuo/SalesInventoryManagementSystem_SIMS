@@ -25,8 +25,8 @@ export const NavDashboard = () => {
         { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-1", path:"/DashboardPage" },
         { icon: <AiOutlineProduct />, btnName: "Product", id: "b-2", path: "/ProductPage" },
         { icon: <TbReportAnalytics />, btnName: "Report", id: "b-3", path: "/ReportPage" },
-        { icon: <VscAccount />, btnName: "Account", id: "b-4", path: "/AccountPage" },
-        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-5", "/" },
+        { icon: <VscAccount />, btnName: "Account", id: "b-4", path: path: "/AccountPage" },
+        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-5", path: "/" }
     ])
 
 
