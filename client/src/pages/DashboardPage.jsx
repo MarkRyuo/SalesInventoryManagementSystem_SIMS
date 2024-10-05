@@ -10,7 +10,7 @@ export const DashboardPage = () => {
     return (
         
         <MainLayout>
-            <Container>
+            <Container style={{background: "#ffff"}}>
                 {/* Dashboard Components */}
                 <p className='fs-3 text-center d-inline'>
                 <span style={{marginRight: "8px"}}><RxDashboard /></span>
