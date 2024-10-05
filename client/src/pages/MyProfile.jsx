@@ -12,7 +12,7 @@ export const MyProfile = () => {
 
             <div className='contentAccount' style={{ border: "1px solid red", height: "700px" }}>
                 <p>My Details</p>
-                <p>Personal Information</p>
+                <p style={{borderBottom:"1px solid gray", paddingbuttom: "50px" }}>Personal Information</p>
             </div>
         </MainLayout>
     )
