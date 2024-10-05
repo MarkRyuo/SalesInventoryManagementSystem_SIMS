@@ -1,7 +1,7 @@
 
 
 :root {
-    --navBorder: #D4E1FF ;
+    --navBorder: #f5f5f5 ;
     --hoverbuttons: #EBF1FF ;
 }
 
@@ -13,6 +13,8 @@
     padding-bottom: 10px;
     min-width: 412px;
     background-color: #ffff;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -24,6 +26,7 @@
     margin-bottom: 30px;
     border-bottom: 1px solid var(--navBorder);
     /* border: 1px solid red; */
+    background-color: #ffff;
 
 }
 
