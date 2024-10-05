@@ -2,7 +2,7 @@
 
 ## Screenshots
 
-![App Screenshot](/client//public/Login.png)
+![Web App Screenshot](/client//public/Login.png)
 
 ## V3.1 Latest 
 
