@@ -10,7 +10,7 @@ export const Buttons = () => {
 
     return (
         <div>
-            <span>{}</span>
+            <span>{<MdSpaceDashboard />}</span>
             {buttons.map((button) => (
                 <link key={button.id}>
                     <p>{button.btnName}</p>
