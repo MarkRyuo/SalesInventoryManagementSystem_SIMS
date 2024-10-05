@@ -22,9 +22,9 @@ export const NavDashboard = () => {
 
     //* Buttons 
     const [buttons, setBottons] = useState([
-        { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-1" },
-        { icon: <AiOutlineProduct />, btnName: "Product", id: "b-2" },
-        { icon: <TbReportAnalytics />, btnName: "Report", id: "b-3" },
+        { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-1", path:"/DashboardPage" },
+        { icon: <AiOutlineProduct />, btnName: "Product", id: "b-2", path: "/ProductPage" },
+        { icon: <TbReportAnalytics />, btnName: "Report", id: "b-3", path: "/ReportPage" },
         { icon: <VscAccount />, btnName: "Account", id: "b-4" },
         { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-5" },
     ])
