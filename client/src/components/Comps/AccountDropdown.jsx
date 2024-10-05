@@ -5,7 +5,7 @@ const AccountDropdown = () => {
         <>
             <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Dropdown Button
+                    Account
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
