@@ -4,48 +4,49 @@
 
 ![Web App Screenshot](/client//public/Login.png)
 
-## V3.1 Latest 
+## Changelog
 
-    v3.1
-        Sidebar Designing
+### v3.1 (Latest)
+- Sidebar Designing
 
-    v3.0 
-        Finishing Dashboard Page
-        Finishing Product Page
-        Finishing Report Page
-        Finishing Account Page
+### v3.0
+- Finished Dashboard Page
+- Finished Product Page
+- Finished Report Page
+- Finished Account Page
 
-    v2.3.1
-        Account Design
+### v2.3.1
+- Account Page Design
 
-    v2.3 
-        Report Design
-        Account Design
+### v2.3
+- Report Page Design
+- Account Page Design
 
-    v2.2 
-        Product Design 
-        Report Design 
+### v2.2
+- Product Page Design
+- Report Page Design
 
-    v2.1
-        Dashboard Design 
+### v2.1
+- Dashboard Page Design
 
-    V2.0 
-        Recreate Dashboard
+### v2.0
+- Recreated Dashboard
 
-    v1.3.1 
-        Routing in Dashboard
-        Designing OffCanvas
+### v1.3.1
+- Added Routing in Dashboard
+- Designed OffCanvas
 
-    v1.3
-        Add Pages: (Product, Reports, Accounts, About)
-        Create index.js inside of pages to create a 1 line import for App.jsx
-        Enable Routing to App.jsx
+### v1.3
+- Added Pages: Product, Reports, Accounts, About
+- Created `index.js` inside the `pages` folder for one-line import in `App.jsx`
+- Enabled Routing in `App.jsx`
 
-    v1.2 
-        Complete Design of Login
+### v1.2
+- Completed Login Page Design
 
-    v1.1 
-        Unstable 
+### v1.1
+- Unstable Version
+
 
 
 ## Installation Guide
