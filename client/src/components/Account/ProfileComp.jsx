@@ -29,7 +29,7 @@ const ProfileComp = () => {
                     </Form.Group>
                 </Col>
             </Row>
-            <InputGroup className="mb-3 px-3" style={{}}>
+            <InputGroup className="mb-3 ps-2" style={{width: "100%", maxWidth: "500px"}}>
                 <Form.Control
                     aria-label="Text input with dropdown button"
                     placeholder={gender || 'Select Gender'}
