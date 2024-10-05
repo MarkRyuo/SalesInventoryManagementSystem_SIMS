@@ -49,7 +49,12 @@
     padding: 15px;
 }
 
-.buttons
+.buttonsList {
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 
 
