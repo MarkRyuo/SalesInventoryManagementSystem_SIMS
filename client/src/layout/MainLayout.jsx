@@ -6,7 +6,7 @@ import MainLayoutCss from './MainLayout.module.css' ;
 export const MainLayout = ({children}) => {
 
     return (
-        <Container fluid>
+        <Container fluid style={{ margin: "0px", padding: "0px" }}>
             
             <div className="mainContainer">
                 <NavDashboard />
