@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MdSpaceDashboard } from "react-icons/md";
+import {Link} from 'react-router-dom'
 
 //* Props
 export const Buttons = () => {
@@ -11,7 +12,7 @@ export const Buttons = () => {
     return (
         <div>
             {buttons.map((button) => (
-                <div key={button.id}>
+                <div key={button.id} as={Link}>
                     <span>{button.icon}</span>
                     <p>{button.btnName}</p>
                 </div>
