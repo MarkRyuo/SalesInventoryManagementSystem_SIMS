@@ -12,6 +12,8 @@ export const MyProfile = () => {
             <p className='fs-3'><span><MdAccountBox /></span> Accounts</p>
 
             <div className='contentAccount' style={{ border: "1px solid red", height: "700px" }}>
+                <p>My Details</p>
+                <p>Personal Information</p>
                 <MyProfileComp />
             </div>
         </MainLayout>
