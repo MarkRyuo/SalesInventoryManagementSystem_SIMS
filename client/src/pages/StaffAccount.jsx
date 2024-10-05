@@ -18,8 +18,7 @@ export const AccountPage = () => {
                 <p style={{ borderBottom: "1px solid gray", padding: "20px 10px" }}>Personal Information</p>
                 <ProfileComp />
 
-                <Button variant='primary' className='ms-2'>Save</Button>
-                <Button variant='primary' className='ms-2'>Edit</Button>
+                <Button variant='primary' className='ms-2'>Add</Button>
             </div>
 
         </MainLayout>
