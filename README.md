@@ -7,6 +7,7 @@
 ## Changelog
 
 ### v3.1.1 (Lates)
+- Re-designing Account Page
 
 ### v3.1
 - Sidebar Designing
