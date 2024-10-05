@@ -51,7 +51,9 @@ export const NavDashboard = () => {
             <Offcanvas show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton style={{ borderBottom: "1px solid", padding: "20px" }}>
                     <Offcanvas.Title>
-                        <Image width={40} className='me-2' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvTQPW7YrgwGyYJ3o3tDB2hRSGOPUyCo8rnQ&s" rounded/>REYES ELECTRONICS
+                        <Image width={40} className='me-2' 
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvTQPW7YrgwGyYJ3o3tDB2hRSGOPUyCo8rnQ&s" rounded/>
+                        REYES ELECTRONICS
                     </Offcanvas.Title>
                 </Offcanvas.Header>
 
