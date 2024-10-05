@@ -10,7 +10,7 @@ export const MainLayout = ({children}) => {
             
             <div className="mainContainer">
                 <NavDashboard />
-                <Container fluid='lg' className={MainLayoutCss.MainLayout   }>
+                <Container fluid='lg' className={MainLayoutCss.MainLayout}>
                     {children}
                 </Container>
             </div>
