@@ -1,7 +1,8 @@
 
 
 :root {
-    --navBorder: #e1ebe4 ;
+    --navBorder: #D4E1FF ;
+    --hoverbuttons: #EBF1FF ;
 }
 
 /* *Nav Login */
@@ -39,6 +40,26 @@
     /* border: 1px solid red ; */
     height: 200px;
     justify-content: space-between;
+}
+
+
+
+/** Buttons Design*/
+
+.contentButtons {
+    /* border: 1px solid; */
+    display: flex;
+    align-items: center;
+    height: 50px;
+    text-decoration: none;
+    width: 100%;
+    min-width: 200px;
+    border-radius: 10px;
+    color: #333230;
+}
+
+.contentButtons:hover {
+    background-color: var(--hoverbuttons);
 }
 
 

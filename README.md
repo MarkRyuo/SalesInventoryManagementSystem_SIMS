@@ -1,6 +1,13 @@
 # Sales Inventory Management System (SIMS)
 
-## V3.0 Latest 
+## Screenshots
+
+![Web App Screenshot](/client//public/Login.png)
+
+## V3.1 Latest 
+
+    v3.1
+        Sidebar Designing
 
     v3.0 
         Finishing Dashboard Page
