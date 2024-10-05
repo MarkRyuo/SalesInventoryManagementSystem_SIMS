@@ -19,7 +19,11 @@ const AccountComp = () => {
             <Form.Control  type="text" placeholder="Username" className='mb-2'/>
             <Form.Control  type="password" placeholder="Password" className='mb-2'/>
             <InputGroup className="mb-3">
-                <Form.Control aria-label="Text input with dropdown button" placeholder={gender || 'Select Gender'} readOnly />
+                <Form.Control 
+                    aria-label="Text input with dropdown button" 
+                    placeholder={gender || 'Select Gender'} 
+                    readOnly 
+                />
 
                 <DropdownButton
                     variant="outline-secondary"
