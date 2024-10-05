@@ -11,6 +11,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import MyProfile from './pages/MyProfile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
     path: "StaffAccount",
     element: <StaffAccount /> ,
   },
+  {
+    path: "MyProfile",
+    element: <MyProfile />,
+  },
+
 ]);
 
 createRoot(document.getElementById('root')).render(
