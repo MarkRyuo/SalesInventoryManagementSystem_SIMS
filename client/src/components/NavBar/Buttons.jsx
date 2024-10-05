@@ -1,11 +1,11 @@
 import { MdSpaceDashboard } from "react-icons/md";
 
 //* Props
-export const Buttons = ({buttons}) => {
+export const Buttons = ({buttons, icon}) => {
 
     return (
         <div>
-            <span>{<MdSpaceDashboard />}</span>
+            <span>{Icon}</span>
             {buttons.map((button) => (
                 <link key={button.id}>
                     <p>{button.btnName}</p>
