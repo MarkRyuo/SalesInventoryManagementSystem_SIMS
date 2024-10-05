@@ -1,4 +1,4 @@
-import { Row, Form, Col, InputGroup } from 'react-bootstrap';
+import { Row, Form, Col, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import { useState } from 'react';
 
 const ProfileComp = () => {
@@ -29,10 +29,6 @@ const ProfileComp = () => {
                     </Form.Group>
                 </Col>
             </Row>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="name@example.com" />
-            </Form.Group>
             <InputGroup className="mb-3">
                 <Form.Control
                     aria-label="Text input with dropdown button"
@@ -51,6 +47,10 @@ const ProfileComp = () => {
                     <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
                 </DropdownButton>
             </InputGroup>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="name@example.com" />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{width: "100%", maxWidth: "500px", paddingLeft: 10}}>
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="name@example.com" />
