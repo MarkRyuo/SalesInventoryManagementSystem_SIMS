@@ -49,7 +49,10 @@
     border: 1px solid;
     display: flex;
     align-items: center;
-    height: ;
+    height: 50px;
+    text-decoration: none;
+    width: 100%;
+    min-width: 200px;
 }
 
 
