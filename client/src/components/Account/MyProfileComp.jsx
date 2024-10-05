@@ -9,7 +9,7 @@ const MyProfileComp = () => {
                 display: 'flex',
                 }}>
             <div> 
-            <Image src="https://www.pngkey.com/png/full/22-223848_businessman-vector-person-logo-png.png" thumbnail style={{width: "auto"}}/>
+                <Image src="https://www.pngkey.com/png/full/22-223848_businessman-vector-person-logo-png.png" thumbnail style={{width: "auto"}}/>
             </div>
             <div>
                 <p>Admin Name</p>
