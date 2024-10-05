@@ -1,9 +1,10 @@
-import {Container, Navbar, Button, Offcanvas, Image} from 'react-bootstrap' ;
+import { Container, Navbar, Button, Offcanvas, Image } from 'react-bootstrap';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from 'react';
-import Navbars from './Navbar.module.css' ;
+import Navbars from './Navbar.module.css';
 import { Buttons } from './Buttons';
 
+//* Icons
 import { MdSpaceDashboard } from "react-icons/md";
 
 export const NavDashboard = () => {
@@ -14,20 +15,20 @@ export const NavDashboard = () => {
 
     //* Buttons 
     const [buttons, setBottons] = useState([
-        { icon: <MdSpaceDashboard /> ,btnName: "Dashboard", id: "b-1" },
+        { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-1" },
     ])
 
 
 
     return (
-        
+
         <Container fluid>
-            
+
             <Navbar className={Navbars.navDashboard}>
                 <Container>
                     <Navbar.Brand>
                         <Button variant="light" className={Navbars.btnOffcanvas} onClick={handleShow}>
-                            <GiHamburgerMenu size={20}/>  
+                            <GiHamburgerMenu size={20} />
                         </Button>
                         SIMS
                     </Navbar.Brand>
@@ -37,7 +38,7 @@ export const NavDashboard = () => {
             {/* Off-canvas function */}
 
             <Offcanvas show={show} onHide={handleClose}>
-                <Offcanvas.Header closeButton style={{borderBottom: "1px solid", padding: "20px"}}>
+                <Offcanvas.Header closeButton style={{ borderBottom: "1px solid", padding: "20px" }}>
                     <Offcanvas.Title>
                         <span><Image src="/client/src/assets/react.svg" rounded /></span>REYES ELECTRONICS
                     </Offcanvas.Title>
