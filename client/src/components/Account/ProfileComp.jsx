@@ -3,14 +3,6 @@ import { useState } from 'react';
 
 const ProfileComp = () => {
 
-    const [gender, setGender] = useState('');
-
-    // Function to handle gender selection
-    const handleGenderSelect = (eventKey) => {
-        setGender(eventKey); // Updates the gender state with the selected value
-    };
-
-
 
     return (
         <Form>
