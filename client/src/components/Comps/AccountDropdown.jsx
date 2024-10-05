@@ -5,7 +5,7 @@ const AccountDropdown = () => {
     return (
         <>
             <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                <Dropdown.Toggle as="div" style={{ cursor: 'pointer' }}>
                     Account
                 </Dropdown.Toggle>
 
