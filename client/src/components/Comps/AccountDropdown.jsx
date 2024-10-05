@@ -11,7 +11,7 @@ const AccountDropdown = () => {
 
                 <Dropdown.Menu>
                     <Dropdown.Item as={Link} to={"#"}>My Profile</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Staff Account</Dropdown.Item>
                     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
