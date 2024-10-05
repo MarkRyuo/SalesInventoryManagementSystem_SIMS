@@ -26,7 +26,7 @@ const AccountComp = () => {
                     title="Dropdown"
                     id="input-group-dropdown-2"
                     align="end"
-                    onSelect={handleGenderSelect} // Attach the function to handle selection
+                    onSelect={handleGenderSelect}
                 >
                     <Dropdown.Item eventKey="Male">Male</Dropdown.Item>
                     <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
