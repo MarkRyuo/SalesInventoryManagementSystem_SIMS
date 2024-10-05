@@ -3,7 +3,6 @@ import { MdSpaceDashboard } from "react-icons/md";
 //* Props
 export const Buttons = ({buttons}) => {
 
-
     return (
         <div>
             <span>{<MdSpaceDashboard />}</span>
