@@ -2,6 +2,7 @@ import { Container, Navbar, Button, Offcanvas, Image } from 'react-bootstrap';
 import { useState } from 'react';
 import Navbars from './Navbar.module.css';
 import { Buttons } from './Buttons';
+import AccountDropdown from '../Comps/AccountDropdown';
 
 //* Icons
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -10,7 +11,6 @@ import { AiOutlineProduct } from "react-icons/ai";
 import { TbReportAnalytics } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import AccountDropdown from '../Comps/AccountDropdown';
 
 
 
