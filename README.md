@@ -7,7 +7,7 @@
 ## Changelog
 
 ### v3.1.1 (Latest)
-- Re-designing Account Page(MyProfile, StaffProfile)
+- Re-designing Account Page(MyProfile, StaffProfile) Unstable
 
 ### v3.1
 - Sidebar Designing
