@@ -6,6 +6,9 @@
 
 ## Changelog
 
+### v3.1.2 (Latest)
+
+
 ### v3.1.1 (Latest)
 - Re-designing Account Page(MyProfile, StaffProfile) Unstable
 
