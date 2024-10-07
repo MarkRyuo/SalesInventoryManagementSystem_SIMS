@@ -14,7 +14,8 @@ export const LoginCard = () => {
             </FloatingLabel>
             
             <FloatingLabel controlId="floatingPassword" label="Password">
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control 
+                    type="password" placeholder="Password" />
             </FloatingLabel>
         </>
     )
