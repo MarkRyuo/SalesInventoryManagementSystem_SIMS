@@ -23,7 +23,7 @@ export const LoginCard = () => {
                 />
             </FloatingLabel>
 
-            <Button variant="primary" className={LoginStyle.btnLogin} onClick={() => handleLogin()}
+            <Button variant="primary" style={{width: "70%"}} onClick={() => handleLogin()}
                 size='lg'>Login</Button>
         </>
     )
