@@ -5,7 +5,9 @@ import { useState } from 'react';
 const ProfileComp = () => {
 
     const [] = useState([
-        
+        {},
+        {},
+        {}
     ])
 
     return (
