@@ -18,6 +18,7 @@ export const MyProfile = () => {
             <div className={MyProfilecss.contentAccount}>
                 <p className='fs-4'>My Details</p>
                 <p style={{borderBottom:"1px solid gray", padding: "20px 10px" }}>Personal Information</p>
+                
                 <ProfileComp />
 
                 <Form.Group
