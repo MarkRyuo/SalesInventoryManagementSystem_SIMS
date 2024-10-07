@@ -33,7 +33,7 @@ const ProfileComp = () => {
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>LAST NAME</Form.Label>
-                        <Form.Control type="text" value={}/>
+                        <Form.Control type="text" value={profileData.lastname}/>
                     </Form.Group>
                 </Col>
             </Row>
@@ -44,7 +44,7 @@ const ProfileComp = () => {
                 controlId="exampleForm.ControlInput1"
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" value={}/>
+                <Form.Control type="text" value={profileData.username}/>
             </Form.Group>
 
             <Form.Group 
@@ -52,7 +52,7 @@ const ProfileComp = () => {
                 controlId="exampleForm.ControlInput1" 
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" value={}/>
+                <Form.Control type="password" value={profileData.password}/>
 
             </Form.Group>
         </Form>
