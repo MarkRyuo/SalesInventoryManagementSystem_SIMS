@@ -23,6 +23,14 @@ const ProfileComp = () => {
             </Row>
             <DropDown />
 
+            <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="text" placeholder="" />
+            </Form.Group>
+
             <Form.Group 
                 className="mb-3" 
                 controlId="exampleForm.ControlInput1" 
