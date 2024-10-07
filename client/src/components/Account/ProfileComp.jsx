@@ -4,11 +4,21 @@ import { useState } from 'react';
 
 const ProfileComp = () => {
 
-    const [] = useState([
-        {},
-        {},
-        {}
-    ])
+    const [profileData, setProfileData] = useState({
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: ''
+    });
+
+    // Handler to update state on input change
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setProfileData({
+            ...profileData,
+            [name]: value
+        });
+    };
 
     return (
         <Form>
@@ -17,7 +27,7 @@ const ProfileComp = () => {
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>FIRST NAME</Form.Label>
-                        <Form.Control type="text" value={}/>
+                        <Form.Control type="text" value={profileData.firstName}/>
                     </Form.Group>
                 </Col>
                 <Col lg={6}>
