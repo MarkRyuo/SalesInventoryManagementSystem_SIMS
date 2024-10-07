@@ -2,6 +2,7 @@ import { Button } from 'react-bootstrap';
 import ProfileComp from '../components/Account/ProfileComp';
 import { MainLayout } from '../layout/MainLayout';
 import { MdAccountBox } from "react-icons/md";
+import { FcGoogle } from "react-icons/fc";
 
 //* Accounts Page
 
@@ -16,6 +17,11 @@ export const MyProfile = () => {
                 <p className='fs-4'>My Details</p>
                 <p style={{borderBottom:"1px solid gray", padding: "20px 10px" }}>Personal Information</p>
                 <ProfileComp />
+
+                <Button variant="light" size='sm' className={LoginStyle.btnGoogle}>
+                    <FcGoogle size={35} className='me-2' />
+                    Login with Google
+                </Button>
 
                 <Button variant='primary' className='ms-2'>Save</Button>
                 <Button variant='primary' className='ms-2'>Edit</Button>
