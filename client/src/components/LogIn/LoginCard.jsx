@@ -1,6 +1,5 @@
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-
+import { Button, Form } from 'react-bootstrap';
 
 export const LoginCard = () => {
 
@@ -20,6 +19,9 @@ export const LoginCard = () => {
                     placeholder="Password" 
                 />
             </FloatingLabel>
+
+            <Button variant="primary" className={LoginStyle.btnLogin} onClick={() => handleLogin()}
+                size='lg'>Login</Button>
         </>
     )
 }
