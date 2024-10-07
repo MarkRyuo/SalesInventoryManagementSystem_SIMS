@@ -8,10 +8,6 @@ import LoginStyle from './Css/Login.module.css' ;
 
 export const LoginPage = () => {
 
-    const navigate = useNavigate() ;
-
-    const handleLogin = () => navigate("/DashboardPage") ;
-
 
     return (
         <>
