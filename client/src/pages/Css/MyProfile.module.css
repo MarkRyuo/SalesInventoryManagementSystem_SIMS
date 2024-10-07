@@ -1,0 +1,10 @@
+
+:root {
+    --borderClr: #e6e6e6 ;
+}
+
+
+
+.contentAccount {
+    border: 1px solid var(--borderClr);
+}
