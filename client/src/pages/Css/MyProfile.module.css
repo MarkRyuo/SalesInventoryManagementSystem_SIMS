@@ -8,4 +8,6 @@
 .contentAccount {
     border: 1px solid var(--borderClr);
     height: 750px; /** Fix Height*/
+    padding: 50px;
+    box-shadow: 0px 8px 5px var(--borderClr);
 }
