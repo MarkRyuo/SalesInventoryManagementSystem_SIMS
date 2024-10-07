@@ -2,7 +2,6 @@ import { Row, Col, Button, Container } from 'react-bootstrap';
 import { NavLogin } from '../components/NavBar/NavLogin';
 import { LoginCard } from '../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import LoginStyle from './Css/Login.module.css' ;
 
