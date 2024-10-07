@@ -6,7 +6,7 @@ const ProfileComp = () => {
 
     const [profileData, setProfileData] = useState({
         firstname: '',
-        lastName: '',
+        lastname: '',
         username: '',
         password: ''
     });
