@@ -3,6 +3,7 @@
 
 .contentReport {
     border: 1px solid;
+    border-radius: 10px;
     text-align: center;
     height: 120px;
     align-content: center;
