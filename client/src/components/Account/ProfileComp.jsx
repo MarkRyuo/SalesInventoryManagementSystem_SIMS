@@ -1,8 +1,12 @@
 import { Row, Form, Col} from 'react-bootstrap';
 import DropDown from '../DropDown';
+import { useState } from 'react';
 
 const ProfileComp = () => {
 
+    const [] = useState([
+        
+    ])
 
     return (
         <Form>
@@ -11,7 +15,7 @@ const ProfileComp = () => {
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>FIRST NAME</Form.Label>
-                        <Form.Control type="text" />
+                        <Form.Control type="text" value={}/>
                     </Form.Group>
                 </Col>
                 <Col lg={6}>
