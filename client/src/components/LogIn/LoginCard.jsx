@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 export const LoginCard = () => {
 
-    const [navigate, setNavigate] = useNavigate()
+    const navigate = useNavigate() ;
+
+    const handleLogin = () => navigate("/DashboardPage")
 
     return (
 
