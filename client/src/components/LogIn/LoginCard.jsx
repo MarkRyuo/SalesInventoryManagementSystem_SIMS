@@ -7,7 +7,7 @@ export const LoginCard = () => {
     return (
 
         <>
-            <FloatingLabel controlId="floatingInput" label="Email" className="mb-4">
+            <FloatingLabel controlId="floatingInput" label="Email/Username" className="mb-4">
                 <Form.Control type="text" placeholder='Email'/>
             </FloatingLabel>
             
