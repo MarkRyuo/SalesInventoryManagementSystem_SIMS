@@ -5,6 +5,7 @@ import { MdAccountBox } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import { Form } from 'react-bootstrap';
 
+import MyProfilecss from './Css/MyProfile.module.css'
 //* Accounts Page
 
 export const MyProfile = () => {
