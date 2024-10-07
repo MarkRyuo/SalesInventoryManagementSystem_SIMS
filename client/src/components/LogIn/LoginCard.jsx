@@ -1,19 +1,38 @@
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
 
 
 export const LoginCard = () => {
 
+    const navigate = useNavigate() ;
+    const handleLogin = () => navigate("/DashboardPage")
+
     return (
 
         <>
-            <FloatingLabel controlId="floatingInput" label="Email" className="mb-4">
-                <Form.Control type="text" placeholder='Email'/>
+            <FloatingLabel controlId="floatingInput" label="Email/Username" className="mb-4">
+                <Form.Control 
+                    type="text" 
+                    placeholder='Email'
+                />
             </FloatingLabel>
             
             <FloatingLabel controlId="floatingPassword" label="Password">
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control 
+                    type="password" 
+                    placeholder="Password" 
+                />
             </FloatingLabel>
+
+            <Button 
+                variant="primary" 
+                style={{width: "70%", marginTop: "20px"}} 
+                onClick={handleLogin}
+                size='lg'>
+                Login
+            </Button>
         </>
     )
 }

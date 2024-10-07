@@ -3,8 +3,9 @@
 
 .contentReport {
     border: 1px solid;
+    border-radius: 10px;
     text-align: center;
-    height: 120px;
+    height: 125px;
     align-content: center;
 
     margin: 3px 0;
@@ -21,4 +22,6 @@
 
     width: 100%;
     min-width: 500px;
+    border-radius: 10px;
+    padding: 5px;
 }

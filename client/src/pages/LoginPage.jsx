@@ -1,16 +1,11 @@
-import { Row, Col, Button, Container } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { NavLogin } from '../components/NavBar/NavLogin';
 import { LoginCard } from '../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import LoginStyle from './Css/Login.module.css' ;
 
 export const LoginPage = () => {
-
-    const navigate = useNavigate() ;
-
-    const handleLogin = () => navigate("/DashboardPage") ;
 
 
     return (
@@ -24,17 +19,13 @@ export const LoginPage = () => {
                     <Col lg={12}> <RiBox3Fill size={80} /> </Col>
                     <Col lg={12}> <p className='lead fs-5'>Sales Inventory Management System</p> </Col>
                     <Col lg={12}> <LoginCard /> </Col>
-                    <Col lg={12} className='mt-4'>
-                        <Button variant="primary" className={LoginStyle.btnLogin} onClick={() => handleLogin()} 
-                        size='lg'>Login</Button>
-                    </Col>
-                    <Col lg={12} className='my-3'>
+                    {/* <Col lg={12} className='my-3'>
                         <p>or</p>
                         <Button variant="light" size='sm' className={LoginStyle.btnGoogle}>
                             <FcGoogle size={35} className='me-2'/>
                             Login with Google
                         </Button>
-                    </Col>
+                    </Col> */}
 
                 </Row>
 
