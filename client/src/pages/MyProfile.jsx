@@ -20,7 +20,7 @@ export const MyProfile = () => {
 
                 <Button variant="light" size='sm' className='ms-2'>
                     <FcGoogle size={35} className='me-2' />
-                    Login with Google
+                    Connect to Google
                 </Button>
             
                 <div className='mt-3'>
