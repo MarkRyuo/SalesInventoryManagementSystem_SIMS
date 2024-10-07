@@ -22,13 +22,14 @@ const ProfileComp = () => {
                 </Col>
             </Row>
             <DropDown />
-            
+
             <Form.Group 
                 className="mb-3" 
                 controlId="exampleForm.ControlInput1" 
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="name@example.com" />
+                
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{width: "100%", maxWidth: "500px", paddingLeft: 10}}>
                 <Form.Label>Email address</Form.Label>
