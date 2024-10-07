@@ -5,7 +5,7 @@ import { useState } from 'react';
 const ProfileComp = () => {
 
     const [profileData, setProfileData] = useState({
-        firstName: '',
+        firstname: '',
         lastName: '',
         username: '',
         password: ''
