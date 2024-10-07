@@ -18,7 +18,7 @@ export const MyProfile = () => {
                 <p style={{borderBottom:"1px solid gray", padding: "20px 10px" }}>Personal Information</p>
                 <ProfileComp />
 
-                <Button variant="light" size='sm' className={LoginStyle.btnGoogle}>
+                <Button variant="light" size='sm'>
                     <FcGoogle size={35} className='me-2' />
                     Login with Google
                 </Button>
