@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 export const LoginCard = () => {
 
+    const [navigate, setNavigate] = useNavigate
+
     return (
 
         <>
