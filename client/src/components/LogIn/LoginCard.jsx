@@ -27,8 +27,13 @@ export const LoginCard = () => {
                 />
             </FloatingLabel>
 
-            <Button variant="primary" style={{width: "70%", marginTop: "20px"}} onClick={handleLogin}
-                size='lg'>Login</Button>
+            <Button 
+                variant="primary" 
+                style={{width: "70%", marginTop: "20px"}} 
+                onClick={handleLogin}
+                size='lg'>
+                Login
+            </Button>
         </>
     )
 }
