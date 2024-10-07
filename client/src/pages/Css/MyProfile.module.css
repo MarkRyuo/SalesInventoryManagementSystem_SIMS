@@ -7,4 +7,5 @@
 
 .contentAccount {
     border: 1px solid var(--borderClr);
+    height: 750px; /** Fix Height*/
 }
