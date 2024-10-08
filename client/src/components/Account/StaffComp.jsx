@@ -72,7 +72,8 @@ const StaffComp = () => {
                 <Form.Label>Username</Form.Label>
                 <Form.Control type="text" value={staffData.username} />
             </Form.Group>
-            {/*  */}
+
+            {/* Password  */}
             <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
