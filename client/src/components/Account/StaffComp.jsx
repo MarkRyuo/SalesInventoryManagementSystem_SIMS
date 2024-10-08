@@ -43,6 +43,7 @@ const StaffComp = () => {
                     </Form.Group>
                 </Col>
             </Row>
+            
             {/* Dropdown(Male or Female) */}
             <InputGroup className="mb-3 ps-2" style={{ width: "100%", maxWidth: "500px" }}>
                 <Form.Control
