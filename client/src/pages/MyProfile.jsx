@@ -11,7 +11,6 @@ export const MyProfile = () => {
         <MainLayout>
 
             <p className='fs-3'><span><MdAccountBox /></span> Accounts</p>
-
             <div className={MyProfilecss.contentAccount}>
                 <p className='fs-4'>My Details</p>
                 <p style={{borderBottom:"1px solid gray", padding: "20px 10px" }}>Personal Information</p>
