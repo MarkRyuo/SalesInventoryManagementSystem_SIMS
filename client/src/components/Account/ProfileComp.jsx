@@ -1,4 +1,4 @@
-import { Row, Form, Col} from 'react-bootstrap';
+import { Row, Form, Col, Button} from 'react-bootstrap';
 import DropDown from '../DropDown';
 import { useState } from 'react';
 
@@ -55,6 +55,11 @@ const ProfileComp = () => {
                 <Form.Control type="password" value={profileData.password} onChange={handleChange} />
 
             </Form.Group>
+
+            <div className='mt-3'>
+                <Button variant='primary' className='ms-2'>Save</Button>
+                <Button variant='primary' className='ms-2'>Edit</Button>
+            </div>
         </Form>
     );
 }
