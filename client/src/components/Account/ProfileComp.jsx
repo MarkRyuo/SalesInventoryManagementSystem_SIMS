@@ -46,7 +46,7 @@ const ProfileComp = () => {
                 </Col>
             </Row>
             {/* DropDown (Male or Female) */}
-            <InputGroup className="mb-3 ps-2" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
+            <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
                 <Form.Control
                     aria-label="Text input with dropdown button"
                     placeholder={gender || 'Select Gender'}
