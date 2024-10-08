@@ -80,7 +80,6 @@ const StaffComp = () => {
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" value={staffData.password} onChange={handleChange} />
-
             </Form.Group>
             
             {/* Button Add */}
