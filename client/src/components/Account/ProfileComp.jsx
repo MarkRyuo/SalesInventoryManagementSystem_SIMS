@@ -1,6 +1,8 @@
 import { Row, Form, Col, Button} from 'react-bootstrap';
 import DropDown from '../DropDown';
 import { useState } from 'react';
+import { FcGoogle } from "react-icons/fc";
+
 
 const ProfileComp = () => {
 
@@ -55,6 +57,19 @@ const ProfileComp = () => {
                 <Form.Control type="password" value={profileData.password} onChange={handleChange} />
 
             </Form.Group>
+
+            <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="name@example.com" />
+            </Form.Group>
+
+            <Button variant="light" size='sm' className='ms-2'>
+                <FcGoogle size={35} className='me-2' />
+                Connect to Google
+            </Button>
 
             <div className='mt-3'>
                 <Button variant='primary' className='ms-2'>Save</Button>
