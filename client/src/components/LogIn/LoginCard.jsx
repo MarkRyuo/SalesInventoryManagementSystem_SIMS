@@ -11,8 +11,8 @@ export const LoginCard = () => {
 
     return (
 
-        <>
-            {/* Email */}
+        <Form>
+            {/* Username */}
             <FloatingLabel controlId="floatingInput" label="Email/Username" className="mb-4">
                 <Form.Control 
                     type="text" 
@@ -34,6 +34,6 @@ export const LoginCard = () => {
                 size='lg'>
                 Login
             </Button>
-        </>
+        </Form>
     )
 }
