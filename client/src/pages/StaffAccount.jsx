@@ -1,7 +1,5 @@
 import { MainLayout } from '../layout/MainLayout' ;
 import { MdAccountBox } from "react-icons/md";
-
-import { Button } from 'react-bootstrap';
 import StaffComp from '../components/Account/StaffComp';
 
 //* Accounts Page
@@ -18,7 +16,6 @@ export const StaffAccount = () => {
                 <p style={{ borderBottom: "1px solid gray", padding: "20px 10px" }}>Personal Information</p>
                 <StaffComp />
 
-                <Button variant='primary' className='ms-2'>Add</Button>
             </div>
 
         </MainLayout>
