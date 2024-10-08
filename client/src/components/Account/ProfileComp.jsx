@@ -1,5 +1,4 @@
-import { Row, Form, Col, Button} from 'react-bootstrap';
-import DropDown from '../DropDown';
+import { Row, Form, Col, Button, InputGroup, dro} from 'react-bootstrap';
 import { useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
 
@@ -40,7 +39,24 @@ const ProfileComp = () => {
                 </Col>
             </Row>
             {/* DropDown (Male or Female) */}
-            <DropDown /> 
+            <InputGroup className="mb-3 ps-2" style={{ width: "100%", maxWidth: "500px" }}>
+                <Form.Control
+                    aria-label="Text input with dropdown button"
+                    placeholder={gender || 'Select Gender'}
+                    readOnly
+                />
+
+                <DropdownButton
+                    variant="outline-secondary"
+                    title="Dropdown"
+                    id="input-group-dropdown-2"
+                    align="end"
+                    onSelect={handleGenderSelect}
+                >
+                    <Dropdown.Item eventKey="Male">Male</Dropdown.Item>
+                    <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
+                </DropdownButton>
+            </InputGroup>
 
             <Form.Group
                 className="mb-3"
