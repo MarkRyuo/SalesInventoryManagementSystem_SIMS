@@ -82,7 +82,8 @@ const StaffComp = () => {
                 <Form.Control type="password" value={staffData.password} onChange={handleChange} />
 
             </Form.Group>
-
+            
+            {/* Button Add */}
             <Button variant='primary' className='ms-2'>Add</Button>
         </Form>
     );
