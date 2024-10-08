@@ -20,6 +20,7 @@ export const LoginCard = () => {
                 />
             </FloatingLabel>
             
+            {/* Password */}
             <FloatingLabel controlId="floatingPassword" label="Password">
                 <Form.Control 
                     type="password" 
