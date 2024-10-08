@@ -52,7 +52,6 @@ const ProfileComp = () => {
                     placeholder={gender || 'Select Gender'}
                     readOnly
                 />
-
                 <DropdownButton
                     variant="outline-secondary"
                     title="Dropdown"
