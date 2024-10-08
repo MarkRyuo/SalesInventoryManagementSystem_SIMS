@@ -18,7 +18,7 @@
 ### v3.1.2
 - Re-designing Account Page(MyProfile, StaffProfile)
 
-### v3.1.1 (Latest)
+### v3.1.1
 - Re-designing Account Page(MyProfile, StaffProfile) Unstable -v
 
 ### v3.1
