@@ -6,7 +6,7 @@ import StaffComp from '../components/Account/StaffComp';
 
 //* Accounts Page
 
-export const AccountPage = () => {
+export const StaffAccount = () => {
 
     return (
         <MainLayout>
@@ -25,4 +25,4 @@ export const AccountPage = () => {
     )
 }
 
-export default AccountPage ;
+export default StaffAccount ;
