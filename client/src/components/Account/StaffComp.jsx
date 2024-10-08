@@ -28,7 +28,7 @@ const StaffComp = () => {
 
     return (
         <Form>
-
+            {/* Row of firstName and lastName */}
             <Row style={{ width: "100%", margin: 0, padding: 0 }}>
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -43,7 +43,7 @@ const StaffComp = () => {
                     </Form.Group>
                 </Col>
             </Row>
-            
+
             {/* Dropdown(Male or Female) */}
             <InputGroup className="mb-3 ps-2" style={{ width: "100%", maxWidth: "500px" }}>
                 <Form.Control
