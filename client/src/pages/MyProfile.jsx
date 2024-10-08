@@ -16,7 +16,6 @@ export const MyProfile = () => {
                 <p className='fs-4'>My Details</p>
                 <p style={{borderBottom:"1px solid gray", padding: "20px 10px" }}>Personal Information</p>
                 <ProfileComp />
-                
             </div>
 
         </MainLayout>
