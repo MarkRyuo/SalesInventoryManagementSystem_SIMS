@@ -64,6 +64,7 @@ const StaffComp = () => {
                 </DropdownButton>
             </InputGroup>
 
+            {/* Username */}
             <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
@@ -71,7 +72,7 @@ const StaffComp = () => {
                 <Form.Label>Username</Form.Label>
                 <Form.Control type="text" value={staffData.username} />
             </Form.Group>
-
+            {/*  */}
             <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
