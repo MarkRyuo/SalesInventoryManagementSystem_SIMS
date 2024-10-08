@@ -64,6 +64,7 @@ const ProfileComp = () => {
                 </DropdownButton>
             </InputGroup>
 
+            {/* Username */}
             <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
