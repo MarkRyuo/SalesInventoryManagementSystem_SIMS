@@ -13,6 +13,7 @@
     "@firebasegen/default": "file:generated/javascript/default",
     "bootstrap": "^5.3.3",
     "firebase": "^10.14.0",
+    "punycode": "^2.3.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
