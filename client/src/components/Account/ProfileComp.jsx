@@ -39,7 +39,8 @@ const ProfileComp = () => {
                     </Form.Group>
                 </Col>
             </Row>
-            <DropDown />
+            {/* DropDown (Male or Female) */}
+            <DropDown /> 
 
             <Form.Group
                 className="mb-3"
