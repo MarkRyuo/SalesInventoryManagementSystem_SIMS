@@ -73,7 +73,7 @@ const ProfileComp = () => {
                 <Form.Control type="text" value={profileData.username}/>
             </Form.Group>
 
-            {/*  */}
+            {/* Password */}
             <Form.Group 
                 className="mb-3" 
                 controlId="exampleForm.ControlInput1" 
