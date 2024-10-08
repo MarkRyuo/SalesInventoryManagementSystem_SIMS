@@ -1,12 +1,9 @@
-import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown} from 'react-bootstrap';
+import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import { useState } from 'react';
-import { FcGoogle } from "react-icons/fc";
 
+const StaffComp = () => {
 
-const ProfileComp = () => {
-    //? Logics
-    
-    const [profileData, setProfileData] = useState({
+    const [staffData, setStaffData] = useState({
         firstname: '',
         lastname: '',
         username: '',
@@ -16,8 +13,8 @@ const ProfileComp = () => {
     //* Handler to update state on input change
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setProfileData({
-            ...profileData,
+        setStaffData({
+            ...staffData,
             [name]: value
         });
     };
@@ -31,22 +28,23 @@ const ProfileComp = () => {
 
     return (
         <Form>
-
-            <Row style={{width: "100%", margin: 0, padding: 0}}>
+            {/* Row of firstName and lastName */}
+            <Row style={{ width: "100%", margin: 0, padding: 0 }}>
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>FIRST NAME</Form.Label>
-                        <Form.Control type="text" value={profileData.firstname}/>
+                        <Form.Control type="text" value={staffData.firstname} />
                     </Form.Group>
                 </Col>
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>LAST NAME</Form.Label>
-                        <Form.Control type="text" value={profileData.lastname}/>
+                        <Form.Control type="text" value={staffData.lastname} />
                     </Form.Group>
                 </Col>
             </Row>
-            {/* DropDown (Male or Female) */}
+
+            {/* Dropdown(Male or Female) */}
             <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
                 <Form.Control
                     aria-label="Text input with dropdown button"
@@ -71,40 +69,22 @@ const ProfileComp = () => {
                 controlId="exampleForm.ControlInput1"
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" value={profileData.username}/>
+                <Form.Control type="text" value={staffData.username} />
             </Form.Group>
 
-            {/* Password */}
-            <Form.Group 
-                className="mb-3" 
-                controlId="exampleForm.ControlInput1" 
-                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" value={profileData.password} onChange={handleChange} />
-            </Form.Group>
-
-            {/* Email */}
+            {/* Password  */}
             <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="name@example.com" />
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" value={staffData.password} onChange={handleChange} />
             </Form.Group>
-
-            {/* Button Connect to Google */}
-            <Button variant="light" size='sm' className='ms-2'>
-                <FcGoogle size={35} className='me-2' />
-                Connect to Google
-            </Button>
-
-            {/* Container of button(Save, Edit) */}
-            <div className='mt-3'>
-                <Button variant='primary' className='ms-2'>Save</Button>
-                <Button variant='primary' className='ms-2'>Edit</Button>
-            </div>
+            
+            {/* Button Add */}
+            <Button variant='primary' className='ms-2'>Add</Button>
         </Form>
     );
 }
 
-export default ProfileComp;
+export default StaffComp;

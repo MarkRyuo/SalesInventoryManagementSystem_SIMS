@@ -11,14 +11,16 @@ export const LoginCard = () => {
 
     return (
 
-        <>
-            <FloatingLabel controlId="floatingInput" label="Email/Username" className="mb-4">
+        <Form>
+            {/* Username */}
+            <FloatingLabel controlId="floatingInput" label="Email or Username" className="mb-4">
                 <Form.Control 
                     type="text" 
-                    placeholder='Email'
+                    placeholder='Email or Username'
                 />
             </FloatingLabel>
             
+            {/* Password */}
             <FloatingLabel controlId="floatingPassword" label="Password">
                 <Form.Control 
                     type="password" 
@@ -26,6 +28,7 @@ export const LoginCard = () => {
                 />
             </FloatingLabel>
 
+            {/* Button of Login */}
             <Button 
                 variant="primary" 
                 style={{width: "70%", marginTop: "20px"}} 
@@ -33,6 +36,6 @@ export const LoginCard = () => {
                 size='lg'>
                 Login
             </Button>
-        </>
+        </Form>
     )
 }
