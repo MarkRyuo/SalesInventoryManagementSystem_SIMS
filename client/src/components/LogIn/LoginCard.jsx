@@ -16,7 +16,7 @@ export const LoginCard = () => {
             <FloatingLabel controlId="floatingInput" label="Email/Username" className="mb-4">
                 <Form.Control 
                     type="text" 
-                    placeholder='Email'
+                    placeholder='Email/Username'
                 />
             </FloatingLabel>
             
