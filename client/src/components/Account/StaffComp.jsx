@@ -10,7 +10,7 @@ const StaffComp = () => {
         password: ''
     });
 
-    // Handler to update state on input change
+    //* Handler to update state on input change
     const handleChange = (e) => {
         const { name, value } = e.target;
         setStaffData({
