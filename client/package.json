@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@firebasegen/default": "file:generated/javascript/default",
     "bootstrap": "^5.3.3",
     "firebase": "^10.14.0",
     "react": "^18.3.1",
