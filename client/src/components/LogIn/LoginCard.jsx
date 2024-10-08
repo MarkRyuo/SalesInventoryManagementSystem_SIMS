@@ -2,14 +2,14 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseConfig'; // Ensure correct path
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export const LoginCard = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-    const auth = getAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
