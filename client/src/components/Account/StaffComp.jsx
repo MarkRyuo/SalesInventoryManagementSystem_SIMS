@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 const StaffComp = () => {
 
-    const [profileData, setProfileData] = useState({
+    const [staffData, setStaffData] = useState({
         firstname: '',
         lastname: '',
         username: '',
@@ -14,8 +14,8 @@ const StaffComp = () => {
     // Handler to update state on input change
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setProfileData({
-            ...profileData,
+        setStaffData({
+            ...staffData,
             [name]: value
         });
     };
@@ -27,13 +27,13 @@ const StaffComp = () => {
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>FIRST NAME</Form.Label>
-                        <Form.Control type="text" value={profileData.firstname} />
+                        <Form.Control type="text" value={staffData.firstname} />
                     </Form.Group>
                 </Col>
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>LAST NAME</Form.Label>
-                        <Form.Control type="text" value={profileData.lastname} />
+                        <Form.Control type="text" value={staffData.lastname} />
                     </Form.Group>
                 </Col>
             </Row>
@@ -44,7 +44,7 @@ const StaffComp = () => {
                 controlId="exampleForm.ControlInput1"
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" value={profileData.username} />
+                <Form.Control type="text" value={staffData.username} />
             </Form.Group>
 
             <Form.Group
@@ -52,7 +52,7 @@ const StaffComp = () => {
                 controlId="exampleForm.ControlInput1"
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" value={profileData.password} onChange={handleChange} />
+                <Form.Control type="password" value={staffData.password} onChange={handleChange} />
 
             </Form.Group>
         </Form>
