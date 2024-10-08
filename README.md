@@ -15,7 +15,7 @@
 ### v4.0
 - Configure Firebase(This -v not working)
 
-### v3.1.2 (Latest)
+### v3.1.2
 - Re-designing Account Page(MyProfile, StaffProfile)
 
 ### v3.1.1 (Latest)
