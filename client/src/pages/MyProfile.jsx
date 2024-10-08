@@ -18,7 +18,7 @@ export const MyProfile = () => {
             <div className={MyProfilecss.contentAccount}>
                 <p className='fs-4'>My Details</p>
                 <p style={{borderBottom:"1px solid gray", padding: "20px 10px" }}>Personal Information</p>
-                
+
                 <ProfileComp />
 
                 <Form.Group
@@ -34,10 +34,7 @@ export const MyProfile = () => {
                     Connect to Google
                 </Button>
             
-                <div className='mt-3'>
-                    <Button variant='primary' className='ms-2'>Save</Button>
-                    <Button variant='primary' className='ms-2'>Edit</Button>
-                </div>
+                
             </div>
 
         </MainLayout>
