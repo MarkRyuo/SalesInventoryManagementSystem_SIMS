@@ -80,7 +80,6 @@ const ProfileComp = () => {
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" value={profileData.password} onChange={handleChange} />
-
             </Form.Group>
 
             <Form.Group
