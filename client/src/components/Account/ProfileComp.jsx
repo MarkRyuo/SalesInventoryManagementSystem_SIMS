@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 
 
 const ProfileComp = () => {
-
+    //? Logics
     const [profileData, setProfileData] = useState({
         firstname: '',
         lastname: '',
