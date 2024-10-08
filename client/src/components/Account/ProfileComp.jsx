@@ -1,4 +1,4 @@
-import { Row, Form, Col, Button, InputGroup, dro} from 'react-bootstrap';
+import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown} from 'react-bootstrap';
 import { useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
 
@@ -19,6 +19,13 @@ const ProfileComp = () => {
             ...profileData,
             [name]: value
         });
+    };
+
+    const [gender, setGender] = useState('');
+
+    // Function to handle gender selection
+    const handleGenderSelect = (eventKey) => {
+        setGender(eventKey); // Updates the gender state with the selected value
     };
 
     return (
