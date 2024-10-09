@@ -24,7 +24,7 @@ function NavbarStaffDashboard() {
     const [buttons, setBottons] = useState([
         { icon: <MdSpaceDashboard />, btnName: "Text1", id: "b-1", path: "/DashboardPage" },
         { icon: <AiOutlineProduct />, btnName: "Text2", id: "b-2", path: "/ProductPage" },
-        { icon: <TbReportAnalytics />, btnName: "Report", id: "b-3", path: "/ReportPage" },
+        { icon: <TbReportAnalytics />, btnName: "Text3", id: "b-3", path: "/ReportPage" },
         { icon: <VscAccount />, btnName: "Account", id: "b-4", path: "/AccountPage" },
         { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-5", path: "/" }
     ])
