@@ -6,7 +6,7 @@ import { Container } from "react-bootstrap"
 function MainStaffLayout({children}) {
     return (
         <div className="container">
-            <Container   className="content"> {/**Content */}
+            <Container fluid className="content"> {/**Content */}
                 {children}
             </Container>
         </div>
