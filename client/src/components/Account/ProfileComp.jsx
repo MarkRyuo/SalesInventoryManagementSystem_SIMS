@@ -6,22 +6,6 @@ import { FcGoogle } from "react-icons/fc";
 const ProfileComp = () => {
     //? Logics
     
-    const [profileData, setProfileData] = useState({
-        firstname: '',
-        lastname: '',
-        username: '',
-        password: ''
-    });
-
-    //* Handler to update state on input change
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setProfileData({
-            ...profileData,
-            [name]: value
-        });
-    };
-
     const [gender, setGender] = useState('');
 
     //* Function to handle gender selection
