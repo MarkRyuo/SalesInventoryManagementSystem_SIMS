@@ -55,7 +55,7 @@ const ProfileComp = () => {
                 controlId="exampleForm.ControlInput1"
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" value={profileData.username}/>
+                <Form.Control type="text"/>
             </Form.Group>
 
             {/* Password */}
