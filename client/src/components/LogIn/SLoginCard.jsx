@@ -7,4 +7,4 @@ function SLoginCard() {
     )
 }
 
-export default SLoginCard
+export default SLoginCard ;
