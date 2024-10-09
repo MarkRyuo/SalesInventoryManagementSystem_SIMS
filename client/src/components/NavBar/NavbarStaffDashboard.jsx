@@ -22,11 +22,11 @@ function NavbarStaffDashboard() {
 
     //* Buttons 
     const [buttons, setBottons] = useState([
-        { icon: <MdSpaceDashboard />, btnName: "Text1", id: "b-1", path: "/Path" }, 
-        { icon: <AiOutlineProduct />, btnName: "Text2", id: "b-2", path: "/Path" },
-        { icon: <TbReportAnalytics />, btnName: "Text3", id: "b-3", path: "/Path" },
-        { icon: <VscAccount />, btnName: "Account", id: "b-4", path: "/AccountPage" },
-        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-5", path: "/SLogin" }
+        { icon: <MdSpaceDashboard />, btnName: "Text1", id: "b-6", path: "/Path" }, 
+        { icon: <AiOutlineProduct />, btnName: "Text2", id: "b-7", path: "/Path" },
+        { icon: <TbReportAnalytics />, btnName: "Text3", id: "b-8", path: "/Path" },
+        { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/AccountPage" },
+        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" }
     ])
 
     return (
@@ -57,13 +57,13 @@ function NavbarStaffDashboard() {
                 <Offcanvas.Body>
                     <div className={Navbars.buttonOffcanvas}>
                         <div className={Navbars.buttonsList}>
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-8")} />
                             <AccountDropdown />
                         </div>
                         <div style={{ height: "150px" }}>
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-5")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-10")} />
                         </div>
                     </div>
                 </Offcanvas.Body>
