@@ -4,7 +4,7 @@ function SLogin() {
     return (
         <div> {/**Container */}
             <div className="contentSLogin">
-
+                <SLogin />
             </div>
         </div>
     )
