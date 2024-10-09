@@ -1,11 +1,11 @@
 
 
 function NavStaffLogin() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+
+        </div>
+    )
 }
 
 export default NavStaffLogin
