@@ -8,4 +8,4 @@ function StaffApp() {
     )
 }
 
-export default StaffApp
+export default StaffApp ;
