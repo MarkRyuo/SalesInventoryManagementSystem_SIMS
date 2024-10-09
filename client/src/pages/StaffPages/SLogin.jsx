@@ -19,7 +19,7 @@ export const S_Login = () => {
                 <Row className={LoginStyle.containerRow}> {/* fix sm-screen 412 px */}
                     <Col lg={12}> <RiBox3Fill size={80} /> </Col>
                     <Col lg={12}> <p className='lead fs-5'>Sales Inventory Management System</p> </Col>
-                    <Col lg={12}> <SLoginCard </Col>
+                    <Col lg={12}> <SLoginCard /> </Col>
                     {/* <Col lg={12} className='my-3'>
                         <p>or</p>
                         <Button variant="light" size='sm' className={LoginStyle.btnGoogle}>
@@ -36,4 +36,4 @@ export const S_Login = () => {
     )
 }
 
-export default S_Login ;
+export default SLogin ;
