@@ -1,6 +1,6 @@
 
 
-//! Parent
+//* Parent
 function SLogin() {
     return (
         <div> {/**Container */}
