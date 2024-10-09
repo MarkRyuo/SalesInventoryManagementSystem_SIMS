@@ -1,5 +1,4 @@
 import { Row, Col, Container } from 'react-bootstrap';
-import { NavLogin } from '../../components/NavBar/NavLogin' ;
 import { RiBox3Fill } from "react-icons/ri";
 // import { FcGoogle } from "react-icons/fc";
 import LoginStyle from '../Css/Login.module.css'
@@ -11,7 +10,7 @@ export const SLogin = () => {
 
     return (
         <>
-            <Container fluid className='mb-5 p-0'> <NavStaffLogin/> </Container> {/** 100% width */}
+            <Container fluid className='mb-5 p-0'> <NavStaffLogin /> </Container> {/** 100% width */}
 
             <Container fluid className={LoginStyle.containerSpace}></Container> {/* Space */}
 
