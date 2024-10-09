@@ -3,7 +3,7 @@
 ## Screenshots
 
 ### Admin Login
-![Web App Screenshot](/client/public/Login.png)
+![Web App Screenshot](/client/public/AdminLogin.png)
 ### Staff Login
 ![Web App Staff Screenshot](/client/public/StaffLogin.png)
 
