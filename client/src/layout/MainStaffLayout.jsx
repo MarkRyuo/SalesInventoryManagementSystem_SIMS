@@ -4,7 +4,7 @@
 function MainStaffLayout({children}) {
     return (
         <div className="container">
-            <div className="content">
+            <div className="content"> {/**Content */}
                 {children}
             </div>
         </div>
