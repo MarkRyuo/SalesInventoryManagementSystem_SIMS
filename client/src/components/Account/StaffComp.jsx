@@ -3,22 +3,6 @@ import { useState } from 'react';
 
 const StaffComp = () => {
 
-    const [staffData, setStaffData] = useState({
-        firstname: '',
-        lastname: '',
-        username: '',
-        password: ''
-    });
-
-    //* Handler to update state on input change
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setStaffData({
-            ...staffData,
-            [name]: value
-        });
-    };
-
     const [gender, setGender] = useState('');
 
     //* Function to handle gender selection
