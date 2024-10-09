@@ -2,11 +2,17 @@
 
 ## Screenshots
 
-![Web App Screenshot](/client//public/Login.png)
+### Admin Login
+![Web App Screenshot](/client/public/Login.png)
+### Staff Login
+![Web App Staff Screenshot](/client/public/StaffLogin.png)
 
 ## Changelog
 
-### v4.1.1 (Latest)
+### v5.0.1 (Latest)
+- Adding Staff Account
+
+### v4.1.1
 - Re-Create the Design
 
 ### v4.1
