@@ -26,7 +26,7 @@ function NavbarStaffDashboard() {
         { icon: <AiOutlineProduct />, btnName: "Text2", id: "b-2", path: "/Path" },
         { icon: <TbReportAnalytics />, btnName: "Text3", id: "b-3", path: "/Path" },
         { icon: <VscAccount />, btnName: "Account", id: "b-4", path: "/AccountPage" },
-        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-5", path: "/" }
+        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-5", path: "/SLogin" }
     ])
 
     return (
