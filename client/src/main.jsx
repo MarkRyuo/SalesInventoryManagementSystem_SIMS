@@ -13,6 +13,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import MyProfile from './pages/MyProfile.jsx';
+import StaffApp from './StaffApp.jsx';
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
   },
   {
     path: "StaffApp",
-    element: <AboutPage />,
+    element: <StaffApp /> ,
   },
 
 ]);
