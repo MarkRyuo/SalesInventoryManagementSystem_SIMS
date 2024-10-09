@@ -9,6 +9,7 @@ import StaffAccount from './pages/StaffAccount.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import MyProfile from './pages/MyProfile.jsx';
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+import SLogin from './pages/StaffPages/SLogin.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
   },
   {
     path: "SLogin",
-    element: <AboutPage />,
+    element: <SLogin /> ,
   },
 
 ]);
