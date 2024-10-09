@@ -48,7 +48,7 @@ const router = createBrowserRouter([
   },
   {
     path: "SDashboard",
-    element: <SDashboard/> ,
+    element: <SDashboard /> ,
   },
 
 ]);
