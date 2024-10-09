@@ -24,7 +24,7 @@ function NavStaffLogin() {
 
                             {/* Dropdown function */}
                             <Dropdown.Menu style={{ width: 100 }}>
-                                <Dropdown.Item as={Link} to='/SLogin' >Sales Inventory</Dropdown.Item> {/* Staff Account*/}
+                                <Dropdown.Item as={Link} to='/SLogin' >Sales </Dropdown.Item> {/* Staff Account*/}
                                 <Dropdown.Item as={Link} to='DeveloperPage' >Developer</Dropdown.Item>
                                 <Dropdown.Item as={Link} to='/AboutPage' >About</Dropdown.Item>
                             </Dropdown.Menu>
