@@ -7,7 +7,7 @@ const StaffComp = () => {
 
     //* Function to handle gender selection
     const handleGenderSelect = (eventKey) => {
-        setGender(eventKey); // Updates the gender state with the selected value
+        setGender(eventKey); // * Update the gender state with the selected value
     };
 
     return (
