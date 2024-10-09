@@ -2,9 +2,9 @@
 
 function MainStaffLayout() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
