@@ -1,11 +1,11 @@
 
 
 function MainStaffLayout() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+
+        </div>
+    )
 }
 
 export default MainStaffLayout
