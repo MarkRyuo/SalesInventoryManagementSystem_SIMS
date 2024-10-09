@@ -3,7 +3,9 @@ import MainStaffLayout from "../../layout/MainStaffLayout";
 function SDashboard() {
     return (
         <MainStaffLayout>
-            <div
+            <div>
+                <h1>Staff DashboardPage</h1>
+            </div>
         </MainStaffLayout>
     )
 }
