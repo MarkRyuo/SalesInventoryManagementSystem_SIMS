@@ -40,7 +40,7 @@ const router = createBrowserRouter([
   },
   {
     path: "AboutPage",
-    element: <MyProfile />,
+    element: <AboutPage /> ,
   },
 
 ]);
