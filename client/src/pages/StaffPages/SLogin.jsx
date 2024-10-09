@@ -1,12 +1,11 @@
 import { Row, Col, Container } from 'react-bootstrap';
 import { NavLogin } from '../components/NavBar/NavLogin';
-import { LoginCard } from '../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
 // import { FcGoogle } from "react-icons/fc";
 import LoginStyle from './Css/Login.module.css';
 import SLoginCard from '../../components/LogIn/SLoginCard';
 
-export const S_Login = () => {
+export const SLogin = () => {
 
 
     return (
