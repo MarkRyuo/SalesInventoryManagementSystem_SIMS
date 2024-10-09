@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 
+import { Container } from "react-bootstrap"
+
 
 function MainStaffLayout({children}) {
     return (
         <div className="container">
-            <div className="content"> {/**Content */}
+            <Container   className="content"> {/**Content */}
                 {children}
-            </div>
+            </Container>
         </div>
     )
 }
