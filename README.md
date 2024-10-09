@@ -6,6 +6,9 @@
 
 ## Changelog
 
+### v5.0.1 (Latest)
+- Adding Staff Account
+
 ### v4.1.1 (Latest)
 - Re-Create the Design
 
