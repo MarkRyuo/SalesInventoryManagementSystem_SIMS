@@ -10,7 +10,7 @@ function MainStaffLayout({children}) {
 
             <div className="Staffcontainer">
                 <NavbarStaffDashboard />
-                <Container fluid='' className="content"> {/**Content */}
+                <Container fluid='lg' className="content"> {/**Content */}
                     {children}
                 </Container>
             </div>
