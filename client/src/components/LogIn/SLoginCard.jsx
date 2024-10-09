@@ -1,9 +1,9 @@
 
 function SLoginCard() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
