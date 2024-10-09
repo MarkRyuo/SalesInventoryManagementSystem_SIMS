@@ -1,6 +1,6 @@
 
 
-function MainStaffLayout() {
+function MainStaffLayout({children}) {
     return (
         <div className="container">
             <div className="content">
