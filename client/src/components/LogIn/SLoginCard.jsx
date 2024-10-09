@@ -14,7 +14,7 @@ function SLoginCard() {
                 <FloatingLabel controlId="floatingInput" label="Email or Username" className="mb-4">
                     <Form.Control
                         type="text"
-                        placeholder='Email or Username'
+                        placeholder='Username'
                     />
                 </FloatingLabel>
 
