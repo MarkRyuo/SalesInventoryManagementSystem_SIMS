@@ -4,7 +4,7 @@ import Navbars from './Navbar.module.css';
 import { Buttons } from './Buttons';
 import AccountDropdown from '../Comps/AccountDropdown';
 
-//! Change the Icons 
+//! Change the icons 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdSpaceDashboard } from "react-icons/md";
 import { AiOutlineProduct } from "react-icons/ai";
@@ -38,7 +38,7 @@ function NavbarStaffDashboard() {
                         <Button variant="light" className={Navbars.btnOffcanvas} onClick={handleShow}>
                             <GiHamburgerMenu size={20} />
                         </Button>
-                        SIMS
+                        Staff Portal
                     </Navbar.Brand>
                 </Container>
             </Navbar>
