@@ -1,6 +1,6 @@
 
 
-function S_Login() {
+function SLogin() {
     return (
         <div>
 
