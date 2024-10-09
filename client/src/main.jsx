@@ -6,6 +6,7 @@ import DashboardPage from '../src/pages/DashboardPage' ;
 import ProductPage from './pages/ProductPage.jsx' ;
 import ReportPage from './pages/ReportPage.jsx' ;
 import StaffAccount from './pages/StaffAccount.jsx'
+import AboutPage from './pages/AboutPage.jsx'
 
 import {
   createBrowserRouter,
