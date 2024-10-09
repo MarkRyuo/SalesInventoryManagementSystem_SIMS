@@ -2,8 +2,8 @@
 
 function MainStaffLayout() {
     return (
-        <div>
-            
+        <div className="containerStaffLayout">
+
         </div>
     )
 }
