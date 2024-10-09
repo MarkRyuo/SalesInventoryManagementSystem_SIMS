@@ -8,7 +8,7 @@ function MainStaffLayout({children}) {
     return (
         <Container fluid style={{ margin: "0px", padding: "0px" }}>
 
-            <div className="container">
+            <div className="Staffcontainer">
                 <NavbarStaffDashboard />
                 <Container fluid className="content"> {/**Content */}
                     {children}
