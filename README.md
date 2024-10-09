@@ -3,7 +3,7 @@
 ## Screenshots
 
 ![Web App Screenshot](/client/public/Login.png)
-
+### Staff Login
 ![Web App Staff Screenshot](/client/public/StaffLogin.png)
 
 ## Changelog
