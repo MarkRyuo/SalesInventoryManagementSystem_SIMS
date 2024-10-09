@@ -1,6 +1,6 @@
 import MainStaffLayout from "../../layout/MainStaffLayout";
 
-function S_Dashboard() {
+function SDashboard() {
     return (
         <MainStaffLayout>
             
@@ -8,4 +8,4 @@ function S_Dashboard() {
     )
 }
 
-export default S_Dashboard ;
+export default SDashboard ;
