@@ -10,6 +10,7 @@ import AboutPage from './pages/AboutPage.jsx'
 import MyProfile from './pages/MyProfile.jsx';
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import SLogin from './pages/StaffPages/SLogin.jsx';
+import SDashboard from './pages/StaffPages/SDashboard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
   },
   {
     path: "SDashboard",
-    element: <SLogin />,
+    element: <SDashboard/> ,
   },
 
 ]);
