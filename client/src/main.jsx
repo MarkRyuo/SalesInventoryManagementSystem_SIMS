@@ -40,8 +40,9 @@ const router = createBrowserRouter([
     path: "AboutPage",
     element: <AboutPage /> ,
   },
+  //? Staff Portal
   {
-    path: "SLogin",
+  path: "SLogin",
     element: <SLogin /> ,
   },
 

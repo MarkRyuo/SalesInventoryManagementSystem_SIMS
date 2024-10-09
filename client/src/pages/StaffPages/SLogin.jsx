@@ -19,7 +19,6 @@ export const SLogin = () => {
                     <Col lg={12}> <RiBox3Fill size={80} /> </Col>
                     <Col lg={12}> <p className='lead fs-4 m-0'>REYES ELECTRONICS</p> <p className='lead fs-5 m-0 pb-3'>Staff Portal</p> </Col>
                     <Col lg={12}> <SLoginCard /> </Col>
-
                 </Row>
 
             </Container>
