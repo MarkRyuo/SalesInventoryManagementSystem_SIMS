@@ -8,7 +8,4 @@ const ProductComp = () => {
     );
 }
 
-export default Product
-    <>
-    
-</> mp;
+export default ProductComp ;
