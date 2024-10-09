@@ -38,7 +38,7 @@ function NavbarStaffDashboard() {
                         <Button variant="light" className={Navbars.btnOffcanvas} onClick={handleShow}>
                             <GiHamburgerMenu size={20} />
                         </Button>
-                        <span className='fs-5 font-weight-bold'>SIMS</span>Staff Portal
+                        <span className='fs-5 fw-'>SIMS</span>Staff Portal
                     </Navbar.Brand>
                 </Container>
             </Navbar>
