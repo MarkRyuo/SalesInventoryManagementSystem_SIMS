@@ -6,7 +6,7 @@ import NavbarStaffDashboard from "../components/NavBar/NavbarStaffDashboard"
 
 function MainStaffLayout({children}) {
     return (
-        <Container fluid >
+        <Container fluid style={{ margin: "0px", padding: "0px" }}>
 
             <div className="container">
                 <NavbarStaffDashboard />
@@ -14,6 +14,7 @@ function MainStaffLayout({children}) {
                     {children}
                 </Container>
             </div>
+
         </Container>
     )
 }
