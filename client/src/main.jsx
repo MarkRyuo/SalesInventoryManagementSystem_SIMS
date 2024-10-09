@@ -45,6 +45,10 @@ const router = createBrowserRouter([
   path: "SLogin",
     element: <SLogin /> ,
   },
+  {
+    path: "SDashboard",
+    element: <SLogin />,
+  },
 
 ]);
 
