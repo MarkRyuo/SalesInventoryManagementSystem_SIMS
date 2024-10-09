@@ -8,8 +8,6 @@ import ReportPage from './pages/ReportPage.jsx' ;
 import StaffAccount from './pages/StaffAccount.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import MyProfile from './pages/MyProfile.jsx';
-import StaffApp from './StaffApp.jsx';
-
 import {
   createBrowserRouter,
   RouterProvider,
