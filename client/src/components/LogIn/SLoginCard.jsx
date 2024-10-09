@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function SLoginCard() {
 
     const navigate = useNavigate();
-    const handleLogin = () => navigate("/SDashboard)
+    const handleLogin = () => navigate("/SDashboard")
 
     return (
         <>
