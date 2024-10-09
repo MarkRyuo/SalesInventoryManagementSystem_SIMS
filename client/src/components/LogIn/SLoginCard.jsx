@@ -1,8 +1,12 @@
 import { Button, Form, FloatingLabel } from 'react-bootstrap';
-
+import { useNavigate } from 'react-router-dom';
 
 //* Child
 function SLoginCard() {
+
+    const navigate = useNavigate();
+    const handleLogin = () => navigate("/DashboardPage")
+
     return (
         <>
             <Form>
