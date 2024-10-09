@@ -8,10 +8,7 @@ import ReportPage from './pages/ReportPage.jsx' ;
 import StaffAccount from './pages/StaffAccount.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import MyProfile from './pages/MyProfile.jsx';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
