@@ -20,7 +20,7 @@ const ProfileComp = () => {
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>FIRST NAME</Form.Label>
-                        <Form.Control type="text" value={profileData.firstname}/>
+                        <Form.Control type="text" />
                     </Form.Group>
                 </Col>
                 <Col lg={6}>
