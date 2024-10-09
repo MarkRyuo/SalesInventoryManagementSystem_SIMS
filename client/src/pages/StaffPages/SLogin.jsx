@@ -4,13 +4,14 @@ import { RiBox3Fill } from "react-icons/ri";
 // import { FcGoogle } from "react-icons/fc";
 import LoginStyle from '../Css/Login.module.css'
 import SLoginCard from '../../components/LogIn/SLoginCard';
+import NavStaffLogin from '../../components/NavBar/NavStaffLogin';
 
 export const SLogin = () => {
 
 
     return (
         <>
-            <Container fluid className='mb-5 p-0'> <NavLogin /> </Container> {/** 100% width */}
+            <Container fluid className='mb-5 p-0'> <NavStaffLogin/> </Container> {/** 100% width */}
 
             <Container fluid className={LoginStyle.containerSpace}></Container> {/* Space */}
 
