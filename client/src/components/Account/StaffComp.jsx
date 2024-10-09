@@ -23,7 +23,7 @@ const StaffComp = () => {
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>LAST NAME</Form.Label>
-                        <Form.Control type="text" value={staffData.lastname} />
+                        <Form.Control type="text"/>
                     </Form.Group>
                 </Col>
             </Row>
