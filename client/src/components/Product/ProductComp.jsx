@@ -1,7 +1,10 @@
 
 
 const ProductComp = () => {
-    return (  );
+    return (
+        
+    );
 }
  
-export default ProductComp;
+export default Product
+mp;
