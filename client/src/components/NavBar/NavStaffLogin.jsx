@@ -1,6 +1,6 @@
 import { BsBox } from "react-icons/bs";
 import { Row, Col, Container, Navbar, Dropdown } from 'react-bootstrap';
-import Navbars from './Navbar.module.css';
+import Navbars from '../NavBar/Navbar.module.css';
 import { Link } from 'react-router-dom';
 
 
@@ -24,7 +24,6 @@ function NavStaffLogin() {
 
                             {/* Dropdown function */}
                             <Dropdown.Menu style={{ width: 100 }}>
-                                <Dropdown.Item as={Link} to='/SLogin' >Sales </Dropdown.Item> {/* Staff Account*/}
                                 <Dropdown.Item as={Link} to='DeveloperPage' >Developer</Dropdown.Item>
                                 <Dropdown.Item as={Link} to='/AboutPage' >About</Dropdown.Item>
                             </Dropdown.Menu>
