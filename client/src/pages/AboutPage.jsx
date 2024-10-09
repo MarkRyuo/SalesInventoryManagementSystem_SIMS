@@ -1,10 +1,11 @@
 
 
-export const AboutPage = () => {
-
-    return (
-        <>
-            <h1>AboutPage</h1>
-        </>
-    )
+function AboutPage() {
+  return (
+    <div>
+      
+    </div>
+  )
 }
+
+export default AboutPage
