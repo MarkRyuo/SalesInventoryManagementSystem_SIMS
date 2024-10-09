@@ -1,9 +1,9 @@
 
 function NavbarStaffDashboard() {
     return (
-        <div>
-
-        </div>
+        <>
+            
+        </>
     )
 }
 
