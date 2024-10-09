@@ -6,12 +6,15 @@ import NavbarStaffDashboard from "../components/NavBar/NavbarStaffDashboard"
 
 function MainStaffLayout({children}) {
     return (
-        <div className="container">
-            <NavbarStaffDashboard />
-            <Container fluid className="content"> {/**Content */}
-                {children}
-            </Container>
-        </div>
+        <Container fluid >
+
+            <div className="container">
+                <NavbarStaffDashboard />
+                <Container fluid className="content"> {/**Content */}
+                    {children}
+                </Container>
+            </div>
+        </Container>
     )
 }
 
