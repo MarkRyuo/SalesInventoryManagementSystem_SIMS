@@ -40,7 +40,7 @@ const router = createBrowserRouter([
     element: <AboutPage /> ,
   },
   {
-    path: "AboutPage",
+    path: "SLogin",
     element: <AboutPage />,
   },
 
