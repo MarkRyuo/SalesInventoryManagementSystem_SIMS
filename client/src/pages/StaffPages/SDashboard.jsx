@@ -20,7 +20,8 @@ function SDashboard() {
                     width: "100%", 
                     maxWidth: 300, 
                     height: 200, 
-                    alignContent: "center"}}>
+                    alignContent: "center"
+                    }}>
                     <AddNewAssets />
                 </Col>
                 <Col lg={12} style={{ border: "1px solid red", borderRadius: "10px", width: "100%", maxWidth: 300, height: 200, alignContent: "center" }}>
