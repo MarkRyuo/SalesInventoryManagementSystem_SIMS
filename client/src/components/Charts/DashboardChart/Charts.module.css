@@ -10,5 +10,6 @@
 
 .contentChart {
     border: 1px solid;
-    
+    text-align: center;
+    height: 150px;
 }
