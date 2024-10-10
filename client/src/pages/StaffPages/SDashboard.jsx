@@ -6,7 +6,7 @@ function SDashboard() {
     return (
         <MainStaffLayout>
             <Row style={{
-                border: "1px solid", 
+                
                 width: "100%", 
                 height: "700px", 
                 margin: 0, 
