@@ -9,7 +9,7 @@ function AddNewAssets() {
     const handleAddNewAssets = () => navigate("/") //* Add a page here 
 
     return (
-        <a>
+        <a onClick={handleAddNewAssets}> 
 
         </a>
     )
