@@ -1,18 +1,18 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
+  import 'bootstrap/dist/css/bootstrap.min.css';
+  import './App.css'
 
-// * Imported Pages
-import Login from '../src/pages/LoginPage'
+  // * Imported Pages
+  import Login from '../src/pages/LoginPage'
 
 
 
-function App() {
+  function App() {
 
-  return (
-    <>
-      <Login />
-    </>
-  )
-}
+    return (
+      <>
+        <Login />
+      </>
+    )
+  }
 
-export default App
+  export default App

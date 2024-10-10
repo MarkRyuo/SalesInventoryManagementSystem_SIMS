@@ -1,11 +1,13 @@
-import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown} from 'react-bootstrap';
+import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown, Alert } from 'react-bootstrap';
 import { useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
-
+import { auth } from '../../firebase'; // Firebase setup
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { db } from '../../firebase'; // Firebase Firestore
+import { setDoc, doc } from "firebase/firestore"; // Firestore functions
 
 const ProfileComp = () => {
-    //? Logics
-    
+    // Profile Data State
     const [profileData, setProfileData] = useState({
         firstname: '',
         lastname: '',
@@ -13,7 +15,12 @@ const ProfileComp = () => {
         password: ''
     });
 
-    //* Handler to update state on input change
+    const [email, setEmail] = useState('');
+    const [gender, setGender] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
+    // Handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProfileData({
@@ -22,30 +29,58 @@ const ProfileComp = () => {
         });
     };
 
-    const [gender, setGender] = useState('');
-
-    //* Function to handle gender selection
+    // Handle gender selection
     const handleGenderSelect = (eventKey) => {
-        setGender(eventKey); // Updates the gender state with the selected value
+        setGender(eventKey);
+    };
+
+    // Handle staff login
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setError('');
+        setSuccess('');
+
+        try {
+            // Log in with email and password
+            const userCredential = await signInWithEmailAndPassword(auth, email, profileData.password);
+            const user = userCredential.user;
+
+            // Save staff data to Firestore
+            await setDoc(doc(db, "staff", user.uid), {
+                firstname: profileData.firstname,
+                lastname: profileData.lastname,
+                username: profileData.username,
+                gender: gender,
+                email: email
+            });
+
+            setSuccess('Staff logged in and data saved successfully!');
+        } catch (err) {
+            setError(`Error logging in: ${err.message}`);
+        }
     };
 
     return (
-        <Form>
+        <Form onSubmit={handleLogin}>
+            {/* Success/Error Messages */}
+            {error && <Alert variant="danger">{error}</Alert>}
+            {success && <Alert variant="success">{success}</Alert>}
 
-            <Row style={{width: "100%", margin: 0, padding: 0}}>
+            <Row style={{ width: "100%", margin: 0, padding: 0 }}>
                 <Col lg={6}>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Group className="mb-3">
                         <Form.Label>FIRST NAME</Form.Label>
-                        <Form.Control type="text" value={profileData.firstname}/>
+                        <Form.Control type="text" name="firstname" value={profileData.firstname} onChange={handleChange} />
                     </Form.Group>
                 </Col>
                 <Col lg={6}>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Group className="mb-3">
                         <Form.Label>LAST NAME</Form.Label>
-                        <Form.Control type="text" value={profileData.lastname}/>
+                        <Form.Control type="text" name="lastname" value={profileData.lastname} onChange={handleChange} />
                     </Form.Group>
                 </Col>
             </Row>
+
             {/* DropDown (Male or Female) */}
             <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
                 <Form.Control
@@ -66,30 +101,21 @@ const ProfileComp = () => {
             </InputGroup>
 
             {/* Username */}
-            <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+            <Form.Group className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" value={profileData.username}/>
+                <Form.Control type="text" name="username" value={profileData.username} onChange={handleChange} />
             </Form.Group>
 
             {/* Password */}
-            <Form.Group 
-                className="mb-3" 
-                controlId="exampleForm.ControlInput1" 
-                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+            <Form.Group className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" value={profileData.password} onChange={handleChange} />
+                <Form.Control type="password" name="password" value={profileData.password} onChange={handleChange} />
             </Form.Group>
 
             {/* Email */}
-            <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+            <Form.Group className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="name@example.com" />
+                <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </Form.Group>
 
             {/* Button Connect to Google */}
@@ -98,10 +124,9 @@ const ProfileComp = () => {
                 Connect to Google
             </Button>
 
-            {/* Container of button(Save, Edit) */}
+            {/* Container of button(Save) */}
             <div className='mt-3'>
-                <Button variant='primary' className='ms-2'>Save</Button>
-                <Button variant='primary' className='ms-2'>Edit</Button>
+                <Button type="submit" variant='primary' className='ms-2'>Login and Save Staff Data</Button>
             </div>
         </Form>
     );
