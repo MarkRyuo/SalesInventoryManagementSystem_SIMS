@@ -1,4 +1,4 @@
-
+import Chartcss from './Charts.module.css'
 
 //* Chart1 Small
 function Chart1() {
