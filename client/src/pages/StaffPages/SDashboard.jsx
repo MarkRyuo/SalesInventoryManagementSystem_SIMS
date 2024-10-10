@@ -1,4 +1,4 @@
-import AddNewAssets from "../../components/AddNewAssets/AddNewAssets";
+import AddNewAssets from "../../components/StaffPortal/AddNewAssets/AddNewAssets";
 import ScanAsset from "../../components/StaffPortal/ScanAsset/ScanAsset";
 import MainStaffLayout from "../../layout/MainStaffLayout";
 import { Row, Col } from "react-bootstrap";
