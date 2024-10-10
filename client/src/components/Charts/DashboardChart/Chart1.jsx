@@ -5,11 +5,11 @@ function Chart1() {
     return (
         <div className={Chartcss.containerContent}>
                 <div>
-                    <p>Text Here</p>
+                    <p className='fs-4'>Text Here</p>
                 </div>
                 <div className={Chartcss.contentChart}>
                     <p className="fs-4">Chart1</p>
-                    <p className="fs-5">$0000</p>
+                    <p className="fs-5">From the running month</p>
                 </div>
         </div>
     )
