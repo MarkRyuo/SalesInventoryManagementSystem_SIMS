@@ -1,5 +1,5 @@
 import AddNewAssets from "../../components/AddNewAssets/AddNewAssets";
-import ScanAsset from "../../components/ScanAsset/ScanAsset";
+import ScanAsset from "../../components/StaffPortal/ScanAsset/ScanAsset";
 import MainStaffLayout from "../../layout/MainStaffLayout";
 import { Row, Col } from "react-bootstrap";
 
