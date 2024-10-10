@@ -11,7 +11,7 @@ function SearchAssets() {
     return (
         <div style={{ width: "100%", height: 100, alignContent: 'center' }}>
             <Button size='lg' variant="outline-success" onClick={handleAddNewAssets}>
-                Add New Assets
+                SearchAsset
             </Button>
         </div>
     )
