@@ -9,14 +9,7 @@ function SDashboard() {
     return (
         <MainStaffLayout>
             <Row className={SDashboardCss.rowContainer}>
-                <Col lg={12} style={{
-                    borderRadius: "10px", 
-                    width: "100%", 
-                    maxWidth: 300, 
-                    height: 200, 
-                    alignContent: "center",
-                    boxShadow: "0px 8px 5px "
-                    }}>
+                <Col lg={12} className={SDashboardCss.colContainer}>
                     <AddNewAssets />
                 </Col>
                 <Col lg={12} style={{
