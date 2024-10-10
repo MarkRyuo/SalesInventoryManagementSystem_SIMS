@@ -9,13 +9,13 @@ function SDashboard() {
     return (
         <MainStaffLayout>
             <Row className={SDashboardCss.rowContainer}>
-                <Col lg={12} className={SDashboardCss.colContainer}>
+                <Col lg={4} sm={12} className={SDashboardCss.colContainer}>
                     <AddNewAssets />
                 </Col>
-                <Col lg={12} className={SDashboardCss.colContainer}>
+                <Col lg={4} sm={12} className={SDashboardCss.colContainer}>
                     <ScanAsset />
                 </Col>
-                <Col lg={12} className={SDashboardCss.colContainer}>
+                <Col lg={4} sm={12} className={SDashboardCss.colContainer}>
                     <SearchAssets />
                 </Col>
                 
