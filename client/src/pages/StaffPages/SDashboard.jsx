@@ -6,7 +6,7 @@ function SDashboard() {
         <MainStaffLayout>
             <Row>
                 <Col>
-                    
+                    <Add
                 </Col>
                 <Col>
 
