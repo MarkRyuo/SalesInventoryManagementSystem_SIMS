@@ -5,7 +5,7 @@ function Chart1() {
     return (
         <div className={Chartcss.containerContent}>
                 <div>
-                    
+                    <p>Text Here</p>
                 </div>
                 <div className={Chartcss.contentChart}>
                     <p className="fs-4">Chart1</p>
