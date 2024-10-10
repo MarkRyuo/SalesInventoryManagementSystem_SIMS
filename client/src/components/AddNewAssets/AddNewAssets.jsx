@@ -1,5 +1,5 @@
 import { useNavigate }  from 'react-router-dom' ;
-
+import { Button } from 'react-bootstrap';
 
 
 function AddNewAssets() {
@@ -9,9 +9,11 @@ function AddNewAssets() {
     const handleAddNewAssets = () => navigate("/") //* Add a page here 
 
     return (
-        <a onClick={handleAddNewAssets} style={{border: "1px solid", width: "100%", }}> 
-            Add New Assets
-        </a>
+        <div style={{ border: "1px solid", width: "100%", height: 100 }}>
+            <Button size='lg' onClick={handleAddNewAssets} style={{border: "1px solid"}}>
+                Add New Assets
+            </Button>
+        </div>
     )
 }
 
