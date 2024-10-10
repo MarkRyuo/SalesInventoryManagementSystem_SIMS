@@ -1,10 +1,10 @@
 
 function Chart1() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+
+        </div>
+    )
 }
 
-export default Chart1
+export default Chart1 ;
