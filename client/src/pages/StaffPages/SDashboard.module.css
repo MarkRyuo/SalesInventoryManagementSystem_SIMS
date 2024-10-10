@@ -1,5 +1,9 @@
 
 
 .rowContent {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    justify-content: space-around;
     
 }
