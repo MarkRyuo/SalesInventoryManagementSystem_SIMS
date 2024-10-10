@@ -10,7 +10,7 @@ function AddNewAssets() {
     const handleAddNewAssets = () => navigate("") //* Add a page here 
 
     return (
-        <div style={{ border: "1px solid" ,width: "100%", height: 100, alignContent: 'center' }}>
+        <div style={{width: "100%", height: 100, alignContent: 'center' }}>
             <Button size='lg' variant="outline-success" onClick={handleAddNewAssets} style={{margin: 20}}>
                 <TiDocumentAdd size={30}/> Add New Assets
             </Button>
