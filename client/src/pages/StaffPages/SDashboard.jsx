@@ -1,5 +1,6 @@
 import AddNewAssets from "../../components/StaffPortal/AddNewAssets/AddNewAssets";
 import ScanAsset from "../../components/StaffPortal/ScanAsset/ScanAsset";
+import SearchAssets from "../../components/StaffPortal/SearchAsset/SearchAsset";
 import MainStaffLayout from "../../layout/MainStaffLayout";
 import { Row, Col } from "react-bootstrap";
 
@@ -43,7 +44,7 @@ function SDashboard() {
                     alignContent: "center",
                     boxShadow: "0px 8px 5px "
                 }}>
-                    <AddNewAssets />
+                    <SearchAssets
                 </Col>
                 
             </Row>
