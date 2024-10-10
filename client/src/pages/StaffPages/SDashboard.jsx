@@ -14,7 +14,13 @@ function SDashboard() {
                 flexDirection: "column", 
                 alignContent: "center",
                 }}>
-                <Col lg={12} style={{border: "1px solid red", borderRadius: "10px", width: "100%", maxWidth: 300, height: 200, alignContent: "center"}}>
+                <Col lg={12} style={{
+                    border: "1px solid", 
+                    borderRadius: "10px", 
+                    width: "100%", 
+                    maxWidth: 300, 
+                    height: 200, 
+                    alignContent: "center"}}>
                     <AddNewAssets />
                 </Col>
                 <Col lg={12} style={{ border: "1px solid red", borderRadius: "10px", width: "100%", maxWidth: 300, height: 200, alignContent: "center" }}>
