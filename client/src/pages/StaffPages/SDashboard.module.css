@@ -1,6 +1,6 @@
 
 :root {
-    --colshadow: #ffffff ;
+    --colshadow: #e2dfdf ;
 }
 
 
@@ -20,5 +20,5 @@
     max-width: 300px;
     height: 200px;
     align-content: center;
-    box-shadow: 0px 8px 5px;
+    box-shadow: 0px 8px 5px var(--colshadow);
 }
