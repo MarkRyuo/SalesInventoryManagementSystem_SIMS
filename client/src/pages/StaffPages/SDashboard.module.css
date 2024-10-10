@@ -8,3 +8,8 @@
     flex-direction: column;
     align-content: center;
 }
+
+.colContainer {
+    border-radius: 10px;
+    width: 100%;
+}
