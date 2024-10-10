@@ -5,8 +5,8 @@ import { Row, Col } from "react-bootstrap";
 function SDashboard() {
     return (
         <MainStaffLayout>
-            <Row>
-                <Col style={{border: "1px solid red", borderRadius: "10px"}}>
+            <Row style={{border: "1px solid", width: "100%"}}>
+                <Col sm={12} style={{border: "1px solid red", borderRadius: "10px"}}>
                     <AddNewAssets />
                 </Col>
                 <Col>

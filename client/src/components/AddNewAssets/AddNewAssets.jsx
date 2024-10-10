@@ -10,7 +10,7 @@ function AddNewAssets() {
 
     return (
         <a onClick={handleAddNewAssets} style={{border: "1px solid"}}> 
-
+            Add New Assets
         </a>
     )
 }
