@@ -22,7 +22,7 @@ function NavbarStaffDashboard() {
 
     //* Buttons 
     const [buttons, setBottons] = useState([
-        { icon: <MdSpaceDashboard />, btnName: "Text1", id: "b-6", path: "/Path" }, 
+        { icon: <MdSpaceDashboard />, btnName: "Account", id: "b-6", path: "/Path" }, 
         { icon: <AiOutlineProduct />, btnName: "Text2", id: "b-7", path: "/Path" },
         { icon: <TbReportAnalytics />, btnName: "Text3", id: "b-8", path: "/Path" },
         { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/AccountPage" },
@@ -58,9 +58,9 @@ function NavbarStaffDashboard() {
                     <div className={Navbars.buttonOffcanvas}>
                         <div className={Navbars.buttonsList}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-8")} />
-                            <AccountDropdown /> {/*! Waiting... if we have dropdown */}
+                            {/* <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-8")} /> */}
+                            {/* <AccountDropdown /> ! Waiting... if we have dropdown */}
                         </div>
                         <div style={{ height: "150px" }}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-10")} />

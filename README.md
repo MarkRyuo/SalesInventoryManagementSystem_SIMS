@@ -11,6 +11,7 @@
 
 ### v5.0.1 (Latest)
 - Adding Staff Account
+- Adding Pages in Dashboard
 
 ### v4.1.1
 - Re-Create the Design
