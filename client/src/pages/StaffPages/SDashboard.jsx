@@ -5,7 +5,15 @@ function SDashboard() {
     return (
         <MainStaffLayout>
             <Row>
-                
+                <Col>
+                    
+                </Col>
+                <Col>
+
+                </Col>
+                <Col>
+
+                </Col>
             </Row>
         </MainStaffLayout>
     )
