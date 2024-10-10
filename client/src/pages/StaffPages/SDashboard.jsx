@@ -8,7 +8,7 @@ import SDashboardCss from './SDashboard.module.css' ;
 function SDashboard() {
     return (
         <MainStaffLayout>
-            <Row className="">
+            <Row className={SDashboardCss.rowContainer}>
                 <Col lg={12} style={{
                     borderRadius: "10px", 
                     width: "100%", 
