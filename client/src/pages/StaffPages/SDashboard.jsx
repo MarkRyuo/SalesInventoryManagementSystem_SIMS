@@ -15,12 +15,12 @@ function SDashboard() {
                 alignContent: "center",
                 }}>
                 <Col lg={12} style={{
-                    border: "1px solid", 
                     borderRadius: "10px", 
                     width: "100%", 
                     maxWidth: 300, 
                     height: 200, 
-                    alignContent: "center"
+                    alignContent: "center",
+                    boxShadow: "0px 8px 5px "
                     }}>
                     <AddNewAssets />
                 </Col>
