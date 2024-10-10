@@ -10,7 +10,7 @@
 ## Changelog
 
 ### v5.1 (Latest)
--
+- Update Design of StaffDashBoard
 
 ### v5.0.1
 - Adding Staff Account
