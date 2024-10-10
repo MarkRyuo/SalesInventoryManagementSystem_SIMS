@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom' ;
 
 function AddNewAssets() {
     return (
-        <div>
+        <a as={Link}>
 
-        </div>
+        </a>
     )
 }
 
