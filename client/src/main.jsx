@@ -6,12 +6,11 @@ import DashboardPage from '../src/pages/DashboardPage' ;
 import ProductPage from './pages/ProductPage.jsx' ;
 import ReportPage from './pages/ReportPage.jsx' ;
 import StaffAccount from './pages/StaffAccount.jsx'
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import AboutPage from './pages/AboutPage.jsx'
 import MyProfile from './pages/MyProfile.jsx';
+import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+import SLogin from './pages/StaffPages/SLogin.jsx';
+import SDashboard from './pages/StaffPages/SDashboard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +36,19 @@ const router = createBrowserRouter([
   {
     path: "MyProfile",
     element: <MyProfile />,
+  },
+  {
+    path: "AboutPage",
+    element: <AboutPage /> ,
+  },
+  //? Staff Portal
+  {
+  path: "SLogin",
+    element: <SLogin /> ,
+  },
+  {
+    path: "SDashboard",
+    element: <SDashboard /> ,
   },
 
 ]);
