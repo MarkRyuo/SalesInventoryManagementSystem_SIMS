@@ -9,9 +9,13 @@
 
 ## Changelog
 
+<<<<<<< Updated upstream
 ### v5.0.1 (Latest)
 - Adding Staff Account
 - Adding Pages in Dashboard
+=======
+### v5.0 (Latest)
+>>>>>>> Stashed changes
 
 ### v4.1.1
 - Re-Create the Design
