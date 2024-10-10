@@ -6,7 +6,7 @@ function Chart1() {
         <div className="containerContent">
                 <div className="contentChart" style={{ border: "1px solid", textAlign: "center", height: "150px", alignContent: "center", borderRadius: "10px" }}>
                     <p className="fs-4">Chart1</p>
-                    <p className="fs-5">Chart2</p>
+                    <p className="fs-5">$0000</p>
                 </div>
         </div>
     )
