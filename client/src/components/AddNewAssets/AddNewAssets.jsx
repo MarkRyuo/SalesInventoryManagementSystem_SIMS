@@ -1,4 +1,4 @@
-
+import { Link } from 'react-router-dom' ;
 
 function AddNewAssets() {
     return (
@@ -8,4 +8,4 @@ function AddNewAssets() {
     )
 }
 
-export default AddNewAssets
+export default AddNewAssets ;
