@@ -44,7 +44,7 @@ function SDashboard() {
                     alignContent: "center",
                     boxShadow: "0px 8px 5px "
                 }}>
-                    <SearchAssets
+                    <SearchAssets />
                 </Col>
                 
             </Row>
