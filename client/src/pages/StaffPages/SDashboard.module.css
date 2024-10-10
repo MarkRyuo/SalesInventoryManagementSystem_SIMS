@@ -15,6 +15,7 @@
 }
 
 .colContainer {
+    border: 1px solid red;
     border-radius: 10px;
     width: 100%;
     max-width: 300px;
