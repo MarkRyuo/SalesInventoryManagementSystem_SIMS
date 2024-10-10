@@ -145,7 +145,7 @@ const StaffComp = () => {
             </Form.Group>
 
             {/* Add Button */}
-            <Button variant='primary' type='submit'>Register Staff</Button>
+            <Button variant='primary' type='submit'>Add</Button>
         </Form>
     );
 }
