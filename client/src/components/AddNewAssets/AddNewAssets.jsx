@@ -9,7 +9,7 @@ function AddNewAssets() {
     const handleAddNewAssets = () => navigate("/") //* Add a page here 
 
     return (
-        <a onClick={handleAddNewAssets} style={{border: "1"}}> 
+        <a onClick={handleAddNewAssets} style={{border: "1px solid"}}> 
 
         </a>
     )
