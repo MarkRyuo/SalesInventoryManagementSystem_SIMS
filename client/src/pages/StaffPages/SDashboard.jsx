@@ -1,4 +1,5 @@
 import AddNewAssets from "../../components/AddNewAssets/AddNewAssets";
+import ScanAsset from "../../components/ScanAsset/ScanAsset";
 import MainStaffLayout from "../../layout/MainStaffLayout";
 import { Row, Col } from "react-bootstrap";
 
@@ -32,7 +33,7 @@ function SDashboard() {
                     alignContent: "center",
                     boxShadow: "0px 8px 5px "
                 }}>
-                    
+                    <ScanAsset />
                 </Col>
                 <Col lg={12} style={{
                     borderRadius: "10px",
