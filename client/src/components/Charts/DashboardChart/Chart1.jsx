@@ -1,4 +1,6 @@
 
+
+//* Chart1 Small
 function Chart1() {
     return (
         <div className="containerContent">
