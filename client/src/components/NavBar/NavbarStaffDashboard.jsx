@@ -63,7 +63,7 @@ function NavbarStaffDashboard() {
                             {/* <AccountDropdown /> ! Waiting... if we have dropdown */}
                         </div>
                         <div style={{ height: "150px" }}>
-                            {/* <Buttons buttons={buttons.filter((button) => button.id === "b-10")} /> */}
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-10")} />
                         </div>
                     </div>
                 </Offcanvas.Body>
