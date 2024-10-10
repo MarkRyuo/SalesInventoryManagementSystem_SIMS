@@ -18,7 +18,6 @@ function SDashboard() {
                 <Col lg={4} sm={12} className={SDashboardCss.colContainer}>
                     <SearchAssets />
                 </Col>
-                
             </Row>
         </MainStaffLayout>
     )
