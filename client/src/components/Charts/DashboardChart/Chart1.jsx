@@ -1,8 +1,11 @@
 
 function Chart1() {
     return (
-        <div>
-            
+        <div className="containerContent">
+                <div className="contentChart" key={chart.id} style={{ border: "1px solid", textAlign: "center", height: "150px", alignContent: "center", borderRadius: "10px" }}>
+                    <p className="fs-4"></p>
+                    <p className="fs-5"></p>
+                </div>
         </div>
     )
 }
