@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase'; // Import the auth instance
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { db } from '../../firebase'; // Import Firestore database
-import { getDatabase, ref, get } from 'firebase/database'; // Import necessary functions from Firebase
+import { ref, get } from 'firebase/database'; // Import necessary functions from Firebase
 
 export const LoginCard = () => {
     const navigate = useNavigate();
@@ -23,38 +23,24 @@ export const LoginCard = () => {
             return;
         }
 
+        // Construct email from username
+        const email = `${username}@example.com`; // Ensure this matches your user creation pattern
+
+        console.log("Attempting to log in with email:", email); // Log the email for debugging
+
         try {
-            // Fetch the email associated with the username from Firestore
-            const dbRef = ref(db, 'staff'); // Reference to the 'staff' node
-            const snapshot = await get(dbRef);
-
-            let userEmail = null;
-
-            // Loop through the staff data to find the matching username
-            snapshot.forEach((childSnapshot) => {
-                const staffData = childSnapshot.val();
-                if (staffData.username === username) {
-                    userEmail = staffData.email; // Get the email associated with the username
-                }
-            });
-
-            // If no email was found for the username
-            if (!userEmail) {
-                setError("Username not found.");
-                return;
-            }
-
-            // Attempt to sign in the user with Firebase Authentication using the retrieved email
-            await signInWithEmailAndPassword(auth, userEmail, password);
+            // Attempt to sign in the user with Firebase Authentication
+            await signInWithEmailAndPassword(auth, email, password);
             navigate("/DashboardPage"); // Navigate to the dashboard on successful login
         } catch (err) {
-            // Handle errors (e.g., incorrect password, user not found, invalid credentials)
-            if (err.code === 'auth/wrong-password') {
-                setError("Incorrect password.");
-            } else if (err.code === 'auth/user-not-found') {
-                setError("User not found.");
+            // Handle invalid credentials or wrong username/password
+            if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {
+                setError("Username or password is incorrect."); // Display general error for wrong credentials
+            } else if (err.code === 'auth/invalid-email') {
+                setError("The email address is not valid. Please check the username."); // Specific error for invalid email
             } else {
-                setError(err.message); // For other errors, show the original error message
+                setError("An error occurred. Please try again.");
+                console.error("Login error:", err); // Log the error for debugging
             }
         }
     };
