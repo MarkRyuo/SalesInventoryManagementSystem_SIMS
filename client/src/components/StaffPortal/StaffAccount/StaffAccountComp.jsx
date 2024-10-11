@@ -76,17 +76,6 @@ const StaffAccountComp = () => {
                 <Form.Control type="email" placeholder="name@example.com" />
             </Form.Group>
 
-            {/* Button Connect to Google */}
-            <Button variant="light" size='sm' className='ms-2'>
-                <FcGoogle size={35} className='me-2' />
-                Connect to Google
-            </Button>
-
-            {/* Container of button(Save, Edit) */}
-            <div className='mt-3'>
-                <Button variant='primary' className='ms-2'>Save</Button>
-                <Button variant='primary' className='ms-2'>Edit</Button>
-            </div>
         </Form>
     );
 }
