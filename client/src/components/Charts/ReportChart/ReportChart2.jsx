@@ -1,7 +1,7 @@
 import { FaReact } from "react-icons/fa";
 import ReportChartcss from './ReportChart.module.css'
 //* ReportChart1 Small
-function Chart2() {
+function ReportChart2() {
     return (
         <div className={ReportChartcss.containerChart1}>
             <div className={ReportChartcss.containerText}>
@@ -16,4 +16,4 @@ function Chart2() {
     )
 }
 
-export default Chart2;
+export default ReportChart2;
