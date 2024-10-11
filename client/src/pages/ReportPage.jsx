@@ -9,6 +9,7 @@ import { useState } from 'react';
 import BigChart from '../components/Comps/BigChart';
 import ReportChart1 from '../components/Charts/ReportChart/ReportChart1'
 import ReportChart2 from '../components/Charts/ReportChart/ReportChart2';
+import ReportChart3 from '../components/Charts/ReportChart/ReportChart3';
 
 
 //* Report Page
@@ -30,7 +31,7 @@ export const ReportPage = () => {
                         <ReportChart2 />
                     </Col>
                     <Col lg={4} md={12}>
-
+                        <ReportChart3 />
                     </Col>
                 </Row>
 
