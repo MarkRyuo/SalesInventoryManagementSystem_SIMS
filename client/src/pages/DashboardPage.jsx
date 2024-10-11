@@ -5,6 +5,8 @@ import Chart1 from '../components/Charts/DashboardChart/Chart1';
 import Chart2 from '../components/Charts/DashboardChart/Chart2';
 import Chart3 from '../components/Charts/DashboardChart/Chart3';
 
+import DashboardCss from './Css/Dashboard.module.css'
+
 export const DashboardPage = () => {
 
 
@@ -18,7 +20,7 @@ export const DashboardPage = () => {
                 Dashboard
             </p>
 
-            <Row className='rowContainer' style={{ border: "1px solid red", width: "100%", height: "auto", padding: 10, margin: 0 }}>
+            <Row className={} >
                 <Col className='colContainer' sm={12} md={12} lg={4}>
                     <Chart1 />
                 </Col>
