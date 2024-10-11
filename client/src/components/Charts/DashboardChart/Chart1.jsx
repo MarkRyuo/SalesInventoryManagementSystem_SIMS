@@ -5,8 +5,8 @@ function Chart1() {
     return (
         <div className={Chartcss.containerContent}>
                 <div className={Chartcss.containerText}>
-                    <FaReact />
-                    <p className='fs-5'>Text Here</p>
+                    <FaReact size={25}/>
+                    <p className='fs-5 m-0'>Text Here</p>
                 </div>
                 <div className={Chartcss.contentChart}>
                     <p className="fs-4">00000</p>

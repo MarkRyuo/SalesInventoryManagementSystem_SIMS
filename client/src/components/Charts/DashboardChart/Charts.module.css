@@ -24,6 +24,10 @@
 }
 
 .containerText {
-    
+    /* border: 1px solid; */
+    width: auto;
+    display: flex;
+    padding: 5px ;
+    gap: 5px;
 }
 
