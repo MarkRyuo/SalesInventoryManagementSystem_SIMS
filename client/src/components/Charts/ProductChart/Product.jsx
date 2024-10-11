@@ -1,5 +1,6 @@
 import Search from "../components/Comps/Search";
 import ProductCategory from "../components/Comps/ProductCategory";
+import { Row } from "react-bootstrap";
 
 
 //* Props 
@@ -10,6 +11,7 @@ function ProductChart() {
                 <Search />
                 <ProductCategory />
             </div>
+
             <div style={{border: "1px solid red"}}>
                 Item 1 
                 {/* Insert Logic */}
