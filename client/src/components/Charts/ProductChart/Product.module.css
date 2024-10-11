@@ -23,6 +23,8 @@
     overflow: auto;
     padding: 5px;
     width: 100%;
+    min-width: 530px;
+
     /** Can't lower in 400px*/
 
 }
