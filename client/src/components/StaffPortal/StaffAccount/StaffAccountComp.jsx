@@ -6,12 +6,6 @@ import { FcGoogle } from "react-icons/fc";
 const StaffAccountComp = () => {
     //? Logics
 
-    const [gender, setGender] = useState('');
-
-    //* Function to handle gender selection
-    const handleGenderSelect = (eventKey) => {
-        setGender(eventKey); // * Update the gender state with the selected value
-    };
 
     return (
         <Form>
