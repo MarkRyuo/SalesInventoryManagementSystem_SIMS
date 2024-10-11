@@ -20,8 +20,8 @@ function ProductChart() {
                                     className=" mr-sm-2"
                                 />
                             </Col>
-                            <Col lg={1} xs={2} md={2}>
-                                <Button type="submit" variant="primary"><IoSearch /></Button>
+                            <Col lg={1} xs={2} md={2} style={{width: "auto"}} className="me-2">
+                                <Button type="submit" variant="primary"><IoSearch/></Button>
                             </Col>
                         </Row>
                     </Form>
