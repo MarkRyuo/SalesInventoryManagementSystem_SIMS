@@ -2,7 +2,7 @@ import { Container, Navbar, Button, Offcanvas, Image } from 'react-bootstrap';
 import { useState } from 'react';
 import Navbars from './Navbar.module.css';
 import { Buttons } from './Buttons';
-import AccountDropdown from '../Comps/AccountDropdown';
+import AccountDropdown from './AccountDropdown';
 
 //* Icons
 import { GiHamburgerMenu } from "react-icons/gi";
