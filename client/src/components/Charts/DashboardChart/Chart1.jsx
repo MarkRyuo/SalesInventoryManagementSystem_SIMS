@@ -4,7 +4,7 @@ import { FaReact } from "react-icons/fa";
 function Chart1() {
     return (
         <div className={Chartcss.containerContent}>
-                <div className={Chartcss.contentText}>
+                <div className={Chartcss.containerText}>
                     <FaReact />
                     <p className='fs-5'>Text Here</p>
                 </div>
