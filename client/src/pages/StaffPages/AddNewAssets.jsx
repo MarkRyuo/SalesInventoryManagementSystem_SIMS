@@ -8,4 +8,4 @@ function AddNewAssets() {
     )
 }
 
-export default AddNewAssets
+export default AddNewAssets ;
