@@ -10,6 +10,7 @@ import BigChart from '../components/Comps/BigChart';
 import ReportChart1 from '../components/Charts/ReportChart/ReportChart1'
 import ReportChart2 from '../components/Charts/ReportChart/ReportChart2';
 import ReportChart3 from '../components/Charts/ReportChart/ReportChart3';
+import ReportChart4 from '../components/Charts/ReportChart/ReportChart4';
 
 
 //* Report Page
@@ -24,14 +25,17 @@ export const ReportPage = () => {
 
             <div className={Reportcss.contentReport}>
                 <Row className={Reportcss.rowReport}>
-                    <Col lg={4} md={12}>
+                    <Col lg={3} md={12}>
                         <ReportChart1 />
                     </Col>
-                    <Col lg={4} md={12}>
+                    <Col lg={3} md={12}>
                         <ReportChart2 />
                     </Col>
-                    <Col lg={4} md={12}>
+                    <Col lg={3} md={12}>
                         <ReportChart3 />
+                    </Col>
+                    <Col lg={3} md={12}>
+                        <ReportChart4 />
                     </Col>
                 </Row>
 
