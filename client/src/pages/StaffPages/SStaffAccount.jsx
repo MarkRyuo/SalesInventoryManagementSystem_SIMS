@@ -8,4 +8,4 @@ function SStaffAccount() {
     )
 }
 
-export default SStaffAccount
+export default SStaffAccount ;
