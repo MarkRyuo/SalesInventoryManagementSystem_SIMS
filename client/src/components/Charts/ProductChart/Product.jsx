@@ -27,7 +27,7 @@ function ProductChart() {
                     </Form>
                 </Col>
                 <Col lg={12}>
-                    <DropdownButton id="dropdown-basic-button" title="Category">
+                    <DropdownButton id="dropdown-basic-button" title="Category" className="ms-3">
                         <Dropdown.Item >Product 1</Dropdown.Item>
                         <Dropdown.Item >Product 2</Dropdown.Item>
                         <Dropdown.Item >Product 3</Dropdown.Item>
