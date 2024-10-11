@@ -39,7 +39,6 @@ function ProductChart() {
             <div className={Productcss.containerProduct}> {/* fix width(cannot lower 530px), overflow(On)*/}
                 <div className={Productcss.colProduct}> {/* fix width(cannot lower 530px), overflow(On)*/}
                     <div className={Productcss.productContent}>
-                        Items
                         {/* Insert Logic */}
                     </div>
                 </div>
