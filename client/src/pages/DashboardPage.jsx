@@ -20,7 +20,7 @@ export const DashboardPage = () => {
                 Dashboard
             </p>
 
-            <Row className={} >
+            <Row className={DashboardCss.rowContainer} >
                 <Col className='colContainer' sm={12} md={12} lg={4}>
                     <Chart1 />
                 </Col>
