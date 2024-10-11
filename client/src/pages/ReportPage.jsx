@@ -26,9 +26,9 @@ export const ReportPage = () => {
                         <ReportChart1 />
                     </Col>
                     <Col lg={4} md={12}>
+
                     </Col>
                     <Col lg={4} md={12}>
-                        <ReportCharts reports={reports.filter((report) => report.id === 3)} />
                     </Col>
                 </Row>
 
