@@ -1,6 +1,4 @@
 
-import React from 'react'
-
 function ScanAsset() {
     return (
         <div>
@@ -9,4 +7,4 @@ function ScanAsset() {
     )
 }
 
-export default ScanAsset
+export default ScanAsset ;
