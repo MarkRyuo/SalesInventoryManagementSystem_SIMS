@@ -16,8 +16,8 @@ export const DashboardPage = () => {
                 Dashboard
                 </p>
                 
-                <Row>
-                    <Col>
+                <Row className='rowContainer'>
+                    <Col className='colContainer'>
                         <Chart1 />
                     </Col>
                 </Row>
