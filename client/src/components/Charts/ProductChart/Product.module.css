@@ -13,14 +13,18 @@
     overflow: auto;
     padding: 10px;
     margin: 0;
+    min-width: 530px;
+    overflow: auto;
 }
 
 .colProduct {
     box-shadow: 1px 1px 5px var(--chartShadow);
     height: 500px;
     overflow: auto;
+    padding: 5px;
     width: 100%;
     min-width: 400px;
+
     /** Can't lower in 400px*/
 
 }
