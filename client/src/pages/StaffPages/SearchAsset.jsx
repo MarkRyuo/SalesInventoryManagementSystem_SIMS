@@ -7,4 +7,4 @@ function SearchAsset() {
     )
 }
 
-export default SearchAsset
+export default SearchAsset ;
