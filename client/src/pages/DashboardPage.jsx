@@ -12,11 +12,11 @@ export const DashboardPage = () => {
 
                 {/* Dashboard Components */}
                 <p className='fs-3 text-center d-inline'>
-                <span style={{marginRight: "8px"}}><RxDashboard /></span>
-                Dashboard
+                    <span style={{marginRight: "8px"}}><RxDashboard /></span>
+                    Dashboard
                 </p>
                 
-                <Row className='rowContainer' style={{border: "1px solid red"}}>
+                <Row className='rowContainer' style={{border: "1px solid red", width: "100%", height: "auto"}}>
                     <Col className='colContainer'>
                         <Chart1 />
                     </Col>
