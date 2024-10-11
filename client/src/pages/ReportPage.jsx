@@ -29,16 +29,17 @@ export const ReportPage = () => {
 
                     </Col>
                     <Col lg={4} md={12}>
+
                     </Col>
                 </Row>
 
                 {/* Big-Charts */}
                 <Row>
                     <Col>
-                        <BigChart bigreports={bigreports.filter((bigreport) => bigreport.id === 4)} />
+                        
                     </Col>
                     <Col lg={5}>
-                        <BigChart bigreports={bigreports.filter((bigreport) => bigreport.id === 5)} />
+                    
                     </Col>
                 </Row>
             </div>
