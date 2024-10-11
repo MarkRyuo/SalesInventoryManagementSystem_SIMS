@@ -1,4 +1,4 @@
-import {Container} from 'react-bootstrap' ;
+import {Row, Col} from 'react-bootstrap' ;
 import { MainLayout } from '../layout/MainLayout';
 import { RxDashboard } from "react-icons/rx";
 
@@ -15,6 +15,11 @@ export const DashboardPage = () => {
                 Dashboard
                 </p>
                 
+                <Row>
+                    <Col>
+                        
+                    </Col>
+                </Row>
 
         </MainLayout>
 
