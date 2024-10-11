@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import ReportCharts from '../components/Comps/ReportCharts';
 import { MainLayout } from '../layout/MainLayout';
 import { TbReport } from "react-icons/tb";
 import { Row, Col } from 'react-bootstrap';
