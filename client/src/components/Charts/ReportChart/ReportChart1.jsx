@@ -4,7 +4,7 @@ import ReportChartcss from './ReportChart.module.css'
 function Chart1() {
     return (
         <div className={ReportChartcss.containerChart1}>
-            <div className={Chartcss.containerText}>
+            <div className={ReportChartcss.containerText}>
                 <FaReact size={25} />
                 <p className='fs-5 m-0'>Text Here</p>
             </div>
