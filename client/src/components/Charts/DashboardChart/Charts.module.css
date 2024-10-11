@@ -1,8 +1,8 @@
 
 :root {
     --chart1Color: #CDC3FF ;
-    --chart2Color: #AAC9FF ;
-    --chart3Color: #92E3B8 ;
+    --char3Color: #AAC9FF ;
+    --chart2Color: #92E3B8 ;
     --chartShadow: #d3d0d0 ; /*! Change This Color */
 }
 
@@ -44,12 +44,23 @@
 }
 
 /* ?Chart 2 */
-.containerChart1 {
+.containerChart2 {
     /* border: 1px solid; */
     border-radius: 10px;
     padding: 5px;
     height: 100%;
     max-height: 200px;
-    background-color: var(--chart1Color);
+    background-color: var(--chart2Color);
+    box-shadow: 2px 2px 5px var(--chartShadow);
+}
+
+/* ?Chart 3 */
+.containerChart3 {
+    /* border: 1px solid; */
+    border-radius: 10px;
+    padding: 5px;
+    height: 100%;
+    max-height: 200px;
+    background-color: var(--char3Color);
     box-shadow: 2px 2px 5px var(--chartShadow);
 }
