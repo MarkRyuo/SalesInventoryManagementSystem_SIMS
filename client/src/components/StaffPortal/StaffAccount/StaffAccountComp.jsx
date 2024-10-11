@@ -30,24 +30,14 @@ const StaffAccountComp = () => {
                     </Form.Group>
                 </Col>
             </Row>
-            {/* DropDown (Male or Female) */}
-            <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
-                <Form.Control
-                    aria-label="Text input with dropdown button"
-                    placeholder={gender || 'Select Gender'}
-                    readOnly
-                />
-                <DropdownButton
-                    variant="outline-secondary"
-                    title="Dropdown"
-                    id="input-group-dropdown-2"
-                    align="end"
-                    onSelect={handleGenderSelect}
-                >
-                    <Dropdown.Item eventKey="Male">Male</Dropdown.Item>
-                    <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
-                </DropdownButton>
-            </InputGroup>
+            {/* (Male or Female) */}
+            <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                <Form.Label>Gender</Form.Label>
+                <Form.Control type="text" />
+            </Form.Group>
 
             {/* Username */}
             <Form.Group
@@ -65,15 +55,6 @@ const StaffAccountComp = () => {
                 style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" />
-            </Form.Group>
-
-            {/* Email */}
-            <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="name@example.com" />
             </Form.Group>
 
         </Form>
