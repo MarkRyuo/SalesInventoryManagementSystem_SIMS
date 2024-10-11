@@ -1,4 +1,4 @@
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Form, Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { IoSearch } from "react-icons/io5";
 
 
@@ -9,7 +9,11 @@ function ProductChart() {
 
             <Row>
                 <Col>
-
+                    <DropdownButton id="dropdown-basic-button" title="Category">
+                        <Dropdown.Item href="#">Product 1</Dropdown.Item>
+                        <Dropdown.Item href="#">Product 2</Dropdown.Item>
+                        <Dropdown.Item href="#">Product 3</Dropdown.Item>
+                    </DropdownButton>
                 </Col>
                 <Col>
                     {/* Search */}
@@ -31,12 +35,12 @@ function ProductChart() {
                 </Col>
             </Row>
 
-            <div style={{border: "1px solid red"}}>
-                Item 1 
+            <div style={{ border: "1px solid red" }}>
+                Item 1
                 {/* Insert Logic */}
             </div>
         </>
     )
 }
 
-export default ProductChart ;
+export default ProductChart;
