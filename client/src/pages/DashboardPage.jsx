@@ -18,14 +18,14 @@ export const DashboardPage = () => {
                 Dashboard
             </p>
 
-            <Row className='rowContainer' style={{ border: "1px solid red", width: "100%", height: "auto", padding: 10 }}>
-                <Col className='colContainer' sm={12} md={12}>
+            <Row className='rowContainer' style={{ border: "1px solid red", width: "100%", height: "auto", padding: 10, margin: 0 }}>
+                <Col className='colContainer' sm={12} md={12} lg={4}>
                     <Chart1 />
                 </Col>
-                <Col className='colContainer' sm={12}>
+                <Col className='colContainer' sm={12} md={12} lg={4}>
                     <Chart2 />
                 </Col>
-                <Col className='colContainer' sm={12}>
+                <Col className='colContainer' sm={12} md={12} lg={4}>
                     <Chart3 />
                 </Col>
             </Row>
