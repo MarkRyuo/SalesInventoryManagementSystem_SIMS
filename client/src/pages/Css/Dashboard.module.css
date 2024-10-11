@@ -9,6 +9,7 @@
     padding: 10;
     margin: 12px 0;
     min-width: 400px;
-    gap: 5px;
+    gap: 10px;
+    justify-content: space-around;
 }
 

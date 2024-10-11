@@ -21,13 +21,13 @@ export const DashboardPage = () => {
             </p>
 
             <Row className={DashboardCss.rowContainer} > {/* Fix width(sm-screen) 400px */}
-                <Col className='colContainer' sm={12} md={12} lg={4}>
+                <Col className='colContainer' sm={12} md={12} lg={3}>
                     <Chart1 />
                 </Col>
-                <Col className='colContainer' sm={12} md={12} lg={4}>
+                <Col className='colContainer' sm={12} md={12} lg={5}>
                     <Chart2 />
                 </Col>
-                <Col className='colContainer' sm={12} md={12} lg={4}>
+                <Col className='colContainer' sm={12} md={12} lg={3}>
                     <Chart3 />
                 </Col>
             </Row>
