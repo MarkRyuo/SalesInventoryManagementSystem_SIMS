@@ -1,4 +1,4 @@
-import { Row, Col } from "react-bootstrap";
+
 import { MainLayout } from "../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
 import Product from '../components/Charts/ProductChart/Product'
