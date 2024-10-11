@@ -1,6 +1,6 @@
 import ReportChartcss from './ReportChart.module.css'
 
-function ChartLg1() {
+function ReportChartLg1() {
     return (
         <div className={ReportChartcss.containerChartLg}>
             {/* Code for Chart Here */}
@@ -8,4 +8,4 @@ function ChartLg1() {
     )
 }
 
-export default ChartLg1;
+export default ReportChartLg1ChartLg1;
