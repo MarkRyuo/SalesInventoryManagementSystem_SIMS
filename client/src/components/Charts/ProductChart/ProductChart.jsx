@@ -13,4 +13,4 @@ function ProductChart() {
     )
 }
 
-export default ProductChart
+export default ProductChart ;
