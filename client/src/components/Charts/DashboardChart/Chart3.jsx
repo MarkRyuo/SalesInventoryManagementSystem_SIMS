@@ -6,10 +6,10 @@ function Chart3() {
         <div className={Chartcss.containerContent}>
             <div>
                 {/* Icon Here */}
-                <p className='fs-4'>Text Here</p>
+                <p className='fs-5'>Text Here</p>
             </div>
             <div className={Chartcss.contentChart}>
-                <p className="fs-4">Chart3</p>
+                <p className="fs-4">000000</p>
                 <p className="fs-5">From the running month</p>
             </div>
         </div>
