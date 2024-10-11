@@ -20,7 +20,7 @@ export const DashboardPage = () => {
                 Dashboard
             </p>
 
-            <Row className={DashboardCss.rowContainer} >
+            <Row className={DashboardCss.rowContainer} > {/* Fix width(sm-screen) 412px */}
                 <Col className='colContainer' sm={12} md={12} lg={4}>
                     <Chart1 />
                 </Col>
