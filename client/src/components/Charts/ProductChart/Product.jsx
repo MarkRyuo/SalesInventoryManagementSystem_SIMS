@@ -9,7 +9,7 @@ function ProductChart() {
         <>
 
             <Row>
-                <Col>
+                <Col lg={12}>
                     {/* Search */}
                     <Form inline>
                         <Row className="d-flex justify-content-end g-1 my-4">
@@ -25,13 +25,13 @@ function ProductChart() {
                             </Col>
                         </Row>
                     </Form>
-                    <Col>
-                        <DropdownButton id="dropdown-basic-button" title="Category">
-                            <Dropdown.Item >Product 1</Dropdown.Item>
-                            <Dropdown.Item >Product 2</Dropdown.Item>
-                            <Dropdown.Item >Product 3</Dropdown.Item>
-                        </DropdownButton>
-                    </Col>
+                </Col>
+                <Col lg={12}>
+                    <DropdownButton id="dropdown-basic-button" title="Category">
+                        <Dropdown.Item >Product 1</Dropdown.Item>
+                        <Dropdown.Item >Product 2</Dropdown.Item>
+                        <Dropdown.Item >Product 3</Dropdown.Item>
+                    </DropdownButton>
                 </Col>
             </Row>
             
