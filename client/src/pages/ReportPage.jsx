@@ -41,7 +41,7 @@ export const ReportPage = () => {
                 <Col className={Reportcss.colContainerLg}>
                     <ReportChartLg1 />
                 </Col>
-                <Col lg={5}>
+                <Col className={Reportcss.colContainerLg}>
                     <ReportChartLg2 />
                 </Col>
             </Row>
