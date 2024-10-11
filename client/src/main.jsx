@@ -50,6 +50,10 @@ const router = createBrowserRouter([
     path: "SDashboard",
     element: <SDashboard /> ,
   },
+  {
+    path: "SStaffAccount",
+    element: <SDashboard />,
+  },
 
 ]);
 
