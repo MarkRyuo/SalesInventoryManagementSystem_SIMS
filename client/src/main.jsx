@@ -11,6 +11,7 @@ import MyProfile from './pages/MyProfile.jsx';
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import SLogin from './pages/StaffPages/SLogin.jsx';
 import SDashboard from './pages/StaffPages/SDashboard.jsx';
+import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
   },
   {
     path: "SStaffAccount",
-    element: <SDashboard />,
+    element: <SStaffAccount /> ,
   },
 
 ]);
