@@ -13,7 +13,9 @@ function ProductChart() {
             </div>
 
             <Row>
-                
+                <Col>
+                    
+                </Col>
             </Row>
 
             <div style={{border: "1px solid red"}}>
