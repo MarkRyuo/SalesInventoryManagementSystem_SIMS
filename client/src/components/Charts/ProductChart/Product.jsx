@@ -1,6 +1,6 @@
 import Search from "../components/Comps/Search";
 import ProductCategory from "../components/Comps/ProductCategory";
-import { Row } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 
 //* Props 
