@@ -6,7 +6,7 @@ function Chart1() {
         <div className={Chartcss.containerContent}>
                 <div>
                     {/* Icon Here */}
-                    <p className='fs-4'>Text Here</p>
+                    <p className='fs-5'>Text Here</p>
                 </div>
                 <div className={Chartcss.contentChart}>
                     <p className="fs-4">Chart1</p>
