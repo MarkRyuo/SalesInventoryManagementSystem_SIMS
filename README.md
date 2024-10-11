@@ -9,7 +9,13 @@
 
 ## Changelog
 
-### v5.0.1 (Latest)
+### v5.1 (Latest)
+- Update Design of StaffDashBoard
+- Admin Dashboard Chart Changes 
+- Product Changes
+- Report Changes
+
+### v5.0.1
 - Adding Staff Account
 - Adding Pages in Dashboard
 

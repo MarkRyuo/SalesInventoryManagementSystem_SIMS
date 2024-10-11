@@ -3,20 +3,38 @@
 /* * Reportcss */
 
 .contentReport {
-    /* border: 1px solid; */
+    border: 1px solid;
     height: 800px;
     padding-top: 20px;
 }
 
 .rowReport {
-    
+
     /* border: 1px solid; */
-    height: auto;  /* fix height */
+    margin-top: 10px ;
+    width: 100%;
+    height: auto;
+    justify-content: space-around;
+    margin: 0;
+    min-width: 400px;
+    gap: 10px;
 }
 
+/* !(Warning): This is for ReportChartLg */
 
-/* @media screen and (min-width: 400px) {
-    .colContent {
-        margin-top: 5px;
-    }
-} */
+.rowContainerLg {
+    /* border: 1px solid green; */
+    padding: 5px;
+    margin: 10px 0px;
+    width: 100%;
+    height: auto;
+    gap: 15px;
+    justify-content: space-evenly;
+    min-width: 600px;
+    overflow: auto;
+}
+
+.colContainerLg {
+    /* border: 1px solid; */
+    padding: 0;
+}

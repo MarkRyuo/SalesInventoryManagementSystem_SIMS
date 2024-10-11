@@ -1,0 +1,33 @@
+
+:root {
+    --chartShadow: #d3d0d0; /*! Change This Color */
+}
+
+
+
+.containerProduct {
+    /* border: 1px solid; */
+    height: 100%;
+    width: 100%;
+    max-height: 600px;
+    overflow: auto;
+    padding: 10px;
+    margin: 20px 0px;
+    min-width: 530px;
+    overflow: auto;
+}
+
+.colProduct {
+    box-shadow: 1px 1px 5px var(--chartShadow);
+    height: 500px;
+    padding: 7px;
+    width: 100%;
+    min-width: 600px; /** Can't lower in 600px*/
+    border-radius: 10px;
+    overflow: auto;
+
+}
+
+.productContent {
+    padding: 5px;
+}

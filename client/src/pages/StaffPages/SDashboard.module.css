@@ -1,0 +1,25 @@
+
+:root {
+    --colshadow: #e2dfdf ;
+}
+
+
+.rowContainer {
+    /* border: 1px solid; */
+    width: 100%;
+    height: auto;
+    margin: 0;
+    justify-content: space-around;
+    /* flex-direction: column; */
+    align-content: center;
+}
+
+.colContainer {
+    /* border: 1px solid red; */
+    border-radius: 10px;
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    align-content: center;
+    box-shadow: 0px 8px 5px var(--colshadow);
+}

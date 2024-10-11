@@ -1,2 +1,34 @@
 
 
+
+/* !(Warning): This is for ChartSm */
+
+.rowContainer {
+    /* border: 1px solid red; */
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin: 12px 0;
+    min-width: 400px;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+
+/* !(Warning): This is for ChartLg */
+
+.rowContainerLg {
+    /* border: 1px solid green; */
+    padding: 5px;
+    margin: 0px;
+    width: 100%;
+    height: auto;
+    gap: 15px;
+    justify-content: space-evenly;
+    min-width: 500px;
+}
+
+.colContainerLg {
+    /* border: 1px solid; */
+    padding: 0;
+}
