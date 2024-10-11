@@ -16,4 +16,4 @@ function ReportChart1() {
     )
 }
 
-export default ReportChart1Chart1;
+export default ReportChart1;
