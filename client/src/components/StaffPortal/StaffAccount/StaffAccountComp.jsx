@@ -1,6 +1,5 @@
 import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
-import { useState } from 'react';
-import { FcGoogle } from "react-icons/fc";
+
 
 
 const StaffAccountComp = () => {
