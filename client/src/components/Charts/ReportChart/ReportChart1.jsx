@@ -1,6 +1,5 @@
-import Chartcss from './Charts.module.css';
 import { FaReact } from "react-icons/fa";
-
+import ReportChartcss from './ReportChart.module.css'
 //* ReportChart1 Small
 function Chart1() {
     return (
