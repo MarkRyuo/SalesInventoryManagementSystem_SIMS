@@ -33,8 +33,8 @@ export const DashboardPage = () => {
             </Row>
 
             <Row>
-                <Col>
-                    
+                <Col className='colContainerLg'>
+
                 </Col>
             </Row>
 
