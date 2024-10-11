@@ -13,18 +13,6 @@ import BigChart from '../components/Comps/BigChart';
 
 export const ReportPage = () => {
 
-    //* need Unique id 
-    const [reports, setReport] = useState([
-        { title: "Total Revenue", total: "$1000", id: 1 },
-        { title: "Total Units Sold", total: "500 units", id: 2 },
-        { title: "No. of Transactions", total: "2000 Transaction", id: 3 },
-    ]);
-
-    const [bigreports, setBigrepots] = useState([
-        { title: "Bigchart1", id: 4 },
-        { title: "Bigchart2", id: 5 }
-    ])
-
 
     return (
         <MainLayout>
