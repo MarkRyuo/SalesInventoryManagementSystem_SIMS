@@ -1,6 +1,7 @@
 import {Row, Col} from 'react-bootstrap' ;
 import { MainLayout } from '../layout/MainLayout';
 import { RxDashboard } from "react-icons/rx";
+import Chart1 from '../components/Charts/DashboardChart/Chart1';
 
 export const DashboardPage = () => {
 
@@ -17,7 +18,7 @@ export const DashboardPage = () => {
                 
                 <Row>
                     <Col>
-                        
+                        <Chart1 />
                     </Col>
                 </Row>
 
