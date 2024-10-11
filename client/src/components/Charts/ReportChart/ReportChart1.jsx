@@ -1,7 +1,7 @@
 import Chartcss from './Charts.module.css';
 import { FaReact } from "react-icons/fa";
 
-//* Chart1 Small
+//* ReportChart1 Small
 function Chart1() {
     return (
         <div className={Chartcss.containerChart1}>
