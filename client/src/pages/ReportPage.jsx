@@ -7,6 +7,7 @@ import { Row, Col } from 'react-bootstrap';
 import Reportcss from './Css/Report.module.css';
 import { useState } from 'react';
 import BigChart from '../components/Comps/BigChart';
+import ReportChart1 from '../components/Charts/ReportChart/ReportChart1''
 
 
 //* Report Page
