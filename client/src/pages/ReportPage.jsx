@@ -38,7 +38,7 @@ export const ReportPage = () => {
 
             {/* Big-Charts */}
             <Row className={Reportcss.rowContainerLg}>
-                <Col className={Reportcss.colContainerLg}>
+                <Col className={Reportcss.colContainerLg} sm={12} lg={6}>
                     <ReportChartLg1 />
                 </Col>
                 <Col className={Reportcss.colContainerLg}>
