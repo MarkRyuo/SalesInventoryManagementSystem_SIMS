@@ -21,8 +21,8 @@ function NavbarStaffDashboard() {
 
     //* Buttons 
     const [buttons, setBottons] = useState([
-        { icon: <MdSpaceDashboard />, btnName: "Account", id: "b-6", path: "/SStaffAccount" }, 
-        { icon: <AiOutlineProduct />, btnName: "Text2", id: "b-7", path: "/Path" },
+        { icon: <MdSpaceDashboard />, btnName: "Account", id: "b-6", path: "/" }, 
+        { icon: <AiOutlineProduct />, btnName: "Dashboard", id: "b-7", path: "/SStaffAccount" },
         { icon: <TbReportAnalytics />, btnName: "Text3", id: "b-8", path: "/Path" },
         { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/AccountPage" },
         { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" }
@@ -57,8 +57,8 @@ function NavbarStaffDashboard() {
                     <div className={Navbars.buttonOffcanvas}>
                         <div className={Navbars.buttonsList}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
-                            {/* <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-8")} /> */}
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-8")} /> 
                             {/* <AccountDropdown /> ! Waiting... if we have dropdown */}
                         </div>
                         <div style={{ height: "150px" }}>
