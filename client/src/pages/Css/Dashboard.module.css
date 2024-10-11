@@ -3,11 +3,12 @@
 
 
 .rowContainer {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
     height: auto;
     padding: 10;
     margin: 12px 0;
     min-width: 400px;
+    gap: 5px;
 }
 
