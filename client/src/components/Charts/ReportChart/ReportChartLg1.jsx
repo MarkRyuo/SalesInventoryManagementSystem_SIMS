@@ -8,4 +8,4 @@ function ReportChartLg1() {
     )
 }
 
-export default ReportChartLg1ChartLg1;
+export default ReportChartLg1;
