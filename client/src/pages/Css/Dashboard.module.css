@@ -28,4 +28,6 @@
     min-width: 400px;
 }
 
-.colContainerLg
+.colContainerLg {
+    border: 1px solid;
+}
