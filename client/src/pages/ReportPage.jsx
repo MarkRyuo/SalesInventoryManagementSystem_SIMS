@@ -22,7 +22,7 @@ export const ReportPage = () => {
             <div className={Reportcss.contentReport}>
                 <Row className={Reportcss.rowReport}>
                     <Col lg={4} md={12}>
-                        <ReportCharts reports={reports.filter((report) => report.id === 1)} />
+                        <ReportChart1 />
                     </Col>
                     <Col lg={4} md={12}>
                         <ReportCharts reports={reports.filter((report) => report.id === 2)} />
