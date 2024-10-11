@@ -22,8 +22,7 @@ export const ReportPage = () => {
         <MainLayout>
 
             <p className='fs-4'><span><TbReport /></span> Sales Report</p>
-
-            <div className={Reportcss.contentReport}>
+            
                 <Row className={Reportcss.rowReport}>
                     <Col lg={3} md={12}>
                         <ReportChart1 />
