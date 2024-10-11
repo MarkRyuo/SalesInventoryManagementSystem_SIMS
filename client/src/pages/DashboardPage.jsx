@@ -36,6 +36,9 @@ export const DashboardPage = () => {
                 <Col className='colContainerLg'>
 
                 </Col>
+                <Col className='colContainerLg'>
+
+                </Col>
             </Row>
 
         </MainLayout>
