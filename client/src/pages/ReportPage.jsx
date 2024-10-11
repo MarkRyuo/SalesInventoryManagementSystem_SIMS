@@ -21,7 +21,7 @@ export const ReportPage = () => {
     return (
         <MainLayout>
 
-            <p className='fs-4'><span><TbReport /></span> Sales Report</p>
+            <p className='fs-4 m-4'><span><TbReport /></span> Sales Report</p>
 
             <Row className={Reportcss.rowReport}>
                 <Col lg={6} md={12}>
