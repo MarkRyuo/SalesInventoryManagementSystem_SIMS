@@ -52,7 +52,7 @@
     height: 100%;
     max-height: 200px;
     background-color: var(--chart2Color);
-    box-shadow: 2px 2px 5px var(--chartShadow);
+    box-shadow: 1px 1px 5px var(--chartShadow);
 }
 
 /* ?Chart 3 */
@@ -63,7 +63,7 @@
     height: 100%;
     max-height: 200px;
     background-color: var(--char3Color);
-    box-shadow: 2px 2px 5px var(--chartShadow);
+    box-shadow: 1px 1px 3px var(--chartShadow);
 }
 
 
