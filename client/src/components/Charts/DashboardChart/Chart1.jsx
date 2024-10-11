@@ -1,11 +1,11 @@
 import Chartcss from './Charts.module.css' ;
-
+import { FaReact } from "react-icons/fa";
 //* Chart1 Small
 function Chart1() {
     return (
         <div className={Chartcss.containerContent}>
                 <div>
-                    {/* Icon Here */}
+                    <FaReact />
                     <p className='fs-5'>Text Here</p>
                 </div>
                 <div className={Chartcss.contentChart}>
