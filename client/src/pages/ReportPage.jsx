@@ -36,7 +36,7 @@ export const ReportPage = () => {
                 {/* Big-Charts */}
                 <Row>
                     <Col>
-                        
+                    
                     </Col>
                     <Col lg={5}>
                     
