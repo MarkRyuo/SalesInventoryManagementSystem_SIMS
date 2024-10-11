@@ -22,32 +22,32 @@ export const ReportPage = () => {
         <MainLayout>
 
             <p className='fs-4'><span><TbReport /></span> Sales Report</p>
-            
-                <Row className={Reportcss.rowReport}>
-                    <Col lg={3} md={12}>
-                        <ReportChart1 />
-                    </Col>
-                    <Col lg={3} md={12}>
-                        <ReportChart2 />
-                    </Col>
-                    <Col lg={3} md={12}>
-                        <ReportChart3 />
-                    </Col>
-                    <Col lg={3} md={12}>
-                        <ReportChart4 />
-                    </Col>
-                </Row>
 
-                {/* Big-Charts */}
-                <Row>
-                    <Col>
-                    
-                    </Col>
-                    <Col lg={5}>
-                    
-                    </Col>
-                </Row>
-            </div>
+            <Row className={Reportcss.rowReport}>
+                <Col lg={3} md={12}>
+                    <ReportChart1 />
+                </Col>
+                <Col lg={3} md={12}>
+                    <ReportChart2 />
+                </Col>
+                <Col lg={3} md={12}>
+                    <ReportChart3 />
+                </Col>
+                <Col lg={3} md={12}>
+                    <ReportChart4 />
+                </Col>
+            </Row>
+
+            {/* Big-Charts */}
+            <Row>
+                <Col>
+
+                </Col>
+                <Col lg={5}>
+
+                </Col>
+            </Row>
+
         </MainLayout>
     )
 }

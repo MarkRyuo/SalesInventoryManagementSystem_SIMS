@@ -9,8 +9,11 @@
 }
 
 .rowReport {
-    
+
     border: 1px solid;
+    height: 800px;
+    padding-top: 20px;
+    
     width: 100%;
     height: auto;  /* fix height */
 }
