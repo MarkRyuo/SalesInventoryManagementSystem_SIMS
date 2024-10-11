@@ -2,7 +2,7 @@
 function ReportChart1() {
     return (
         <div>
-
+            
         </div>
     )
 }
