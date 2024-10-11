@@ -1,5 +1,6 @@
 import Chartcss from './Charts.module.css';
 import { FaReact } from "react-icons/fa";
+
 //* Chart1 Small
 function Chart1() {
     return (
