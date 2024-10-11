@@ -32,7 +32,7 @@ export const DashboardPage = () => {
                 </Col>
             </Row>
 
-            <Row>
+            <Row className='rowContainerLg'>
                 <Col className='colContainerLg'>
 
                 </Col>
