@@ -1,3 +1,4 @@
+import Chartcss from './Charts.module.css';
 
 
 function ChartLg2() {
