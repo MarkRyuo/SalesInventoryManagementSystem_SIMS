@@ -35,7 +35,7 @@ export const DashboardPage = () => {
             </Row>
 
             <Row className={DashboardCss.rowContainerLg}>
-                <Col className='colContainerLg' lg={7} md={12}>
+                <Col className='colContainerLg'>
                     <ChartLg1 />
                 </Col>
                 <Col className='colContainerLg' lg={5} md={12}>

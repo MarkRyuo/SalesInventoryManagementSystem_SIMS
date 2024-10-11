@@ -21,4 +21,8 @@
     border: 1px solid green;
     padding: 5px;
     margin: 0px;
+    width: 100%;
+    height: auto;
+    gap: 10px;
+    justify-content: space-between;
 }
