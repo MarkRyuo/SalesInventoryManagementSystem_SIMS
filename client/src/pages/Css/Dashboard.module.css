@@ -7,7 +7,7 @@
     /* border: 1px solid red; */
     width: 100%;
     height: auto;
-    padding: 10;
+    padding: 10px;
     margin: 12px 0;
     min-width: 400px;
     gap: 10px;
@@ -16,3 +16,9 @@
 
 
 /* !(Warning): This is for ChartLg */
+
+.rowContainerLg {
+    border: 1px solid green;
+    padding: 5px;
+    margin: 0px;
+}

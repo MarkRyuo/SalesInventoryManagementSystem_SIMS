@@ -34,11 +34,11 @@ export const DashboardPage = () => {
                 </Col>
             </Row>
 
-            <Row className='rowContainerLg'>
-                <Col className='colContainerLg'>
+            <Row className={DashboardCss.rowContainerLg}>
+                <Col className='colContainerLg' lg={7} md={12}>
                     <ChartLg1 />
                 </Col>
-                <Col className='colContainerLg'>
+                <Col className='colContainerLg' lg={5} md={12}>
                     <ChartLg2 />
                 </Col>  
             </Row>
