@@ -23,15 +23,15 @@ function ProductChart() {
                             <Col lg={1} xs={2} md={2}>
                                 <Button type="submit" variant="primary"><IoSearch /></Button>
                             </Col>
-                            <Col>
-                                <DropdownButton id="dropdown-basic-button" title="Category">
-                                    <Dropdown.Item >Product 1</Dropdown.Item>
-                                    <Dropdown.Item >Product 2</Dropdown.Item>
-                                    <Dropdown.Item >Product 3</Dropdown.Item>
-                                </DropdownButton>
-                            </Col>
                         </Row>
                     </Form>
+                </Col>
+                <Col>
+                    <DropdownButton id="dropdown-basic-button" title="Category">
+                        <Dropdown.Item >Product 1</Dropdown.Item>
+                        <Dropdown.Item >Product 2</Dropdown.Item>
+                        <Dropdown.Item >Product 3</Dropdown.Item>
+                    </DropdownButton>
                 </Col>
             </Row>
             
