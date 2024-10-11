@@ -4,6 +4,7 @@
     --char3Color: #AAC9FF ;
     --chart2Color: #92E3B8 ;
     --chartShadow: #d3d0d0 ; /*! Change This Color */
+    --BgColor: #EFF3F4 ;
 }
 
 
@@ -72,7 +73,9 @@
 /* !Warning This is for ChartLg */
 
 .containerChartLg {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
     height: 400px; /*! Change this in auto if chart-lg is coded*/
+    box-shadow: 1px 1px 3px var(--chartShadow);
+    background-color: var(--BgColor);
 }
