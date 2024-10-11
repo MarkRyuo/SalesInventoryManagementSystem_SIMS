@@ -27,7 +27,7 @@ export const ReportPage = () => {
                 <Col lg={6} md={12}>
                     <ReportChart1 />
                 </Col>
-                <Col lg={5 } md={12}>
+                <Col lg={5} md={12}>
                     <ReportChart2 />
                 </Col>
                 <Col lg={6} md={12}>
