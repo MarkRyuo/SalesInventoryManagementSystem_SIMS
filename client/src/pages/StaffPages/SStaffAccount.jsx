@@ -1,11 +1,12 @@
 import StaffAccountComp from "../../components/StaffPortal/StaffAccount/StaffAccountComp";
+import MainStaffLayout from "../../layout/MainStaffLayout";
 
 
 function SStaffAccount() {
     return (
-        <div>
+        <MainStaffLayout>
             <StaffAccountComp />
-        </div>
+        </MainStaffLayout>
     )
 }
 
