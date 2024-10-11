@@ -2,20 +2,20 @@
 
 /* * Reportcss */
 
-.contentReport {
-    border: 1px solid;
-    height: 800px;
-    padding-top: 20px;
-}
+/* !(Warning): This is for ChartLg */
 
-.rowReport {
-
-    /* border: 1px solid; */
-    margin-top: 10px ;
+.rowContainerLg {
+    /* border: 1px solid green; */
+    padding: 5px;
+    margin: 0px;
     width: 100%;
     height: auto;
-    justify-content: space-around;
-    margin: 0;
+    gap: 5px;
+    justify-content: space-evenly;
     min-width: 400px;
-    gap: 10px;
+}
+
+.colContainerLg {
+    /* border: 1px solid; */
+    padding: 0;
 }

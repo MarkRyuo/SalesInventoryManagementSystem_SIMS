@@ -37,7 +37,7 @@ export const ReportPage = () => {
             </Row>
 
             {/* Big-Charts */}
-            <Row>
+            <Row className={Reportcss.rowContainerLg}>
                 <Col>
                     <ReportChartLg1 />
                 </Col>
