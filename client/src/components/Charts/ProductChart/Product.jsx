@@ -14,6 +14,9 @@ function ProductChart() {
 
             <Row>
                 <Col>
+
+                </Col>
+                <Col>
                     
                 </Col>
             </Row>
