@@ -74,5 +74,5 @@
 .containerChartLg {
     border: 1px solid red;
     width: 100%;
-    height: auto; /*! Change this in auto if chart-lg is coded*/
+    height: 400px; /*! Change this in auto if chart-lg is coded*/
 }
