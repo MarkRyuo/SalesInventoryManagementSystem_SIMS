@@ -33,7 +33,9 @@ export const DashboardPage = () => {
             </Row>
 
             <Row>
-                
+                <Col>
+                    
+                </Col>
             </Row>
 
         </MainLayout>
