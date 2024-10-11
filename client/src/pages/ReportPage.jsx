@@ -11,6 +11,7 @@ import ReportChart1 from '../components/Charts/ReportChart/ReportChart1'
 import ReportChart2 from '../components/Charts/ReportChart/ReportChart2';
 import ReportChart3 from '../components/Charts/ReportChart/ReportChart3';
 import ReportChart4 from '../components/Charts/ReportChart/ReportChart4';
+import ReportChartLg1 from '../components/Charts/ReportChart/ReportChartLg1';
 
 
 //* Report Page
@@ -41,7 +42,7 @@ export const ReportPage = () => {
             {/* Big-Charts */}
             <Row>
                 <Col>
-
+                    <ReportChartLg1 />
                 </Col>
                 <Col lg={5}>
 
