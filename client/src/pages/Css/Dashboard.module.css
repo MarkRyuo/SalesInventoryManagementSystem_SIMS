@@ -18,14 +18,14 @@
 /* !(Warning): This is for ChartLg */
 
 .rowContainerLg {
-    /* border: 1px solid green; */
+    border: 1px solid green;
     padding: 5px;
     margin: 0px;
     width: 100%;
     height: auto;
-    gap: 5px;
+    gap: 15px;
     justify-content: space-evenly;
-    min-width: 400px;
+    min-width: 500px;
 }
 
 .colContainerLg {
