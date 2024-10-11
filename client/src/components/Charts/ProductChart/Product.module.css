@@ -1,4 +1,10 @@
 
+:root {
+    --chartShadow: #d3d0d0; /*! Change This Color */
+}
+
+
+
 .containerProduct {
     /* border: 1px solid; */
     height: 100%;
