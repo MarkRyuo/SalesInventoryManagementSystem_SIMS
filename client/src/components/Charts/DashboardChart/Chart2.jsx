@@ -1,6 +1,6 @@
 import Chartcss from './Charts.module.css';
 
-//* Chart1 Small
+//* Chart2 Small
 function Chart2() {
     return (
         <div className={Chartcss.containerContent}>
