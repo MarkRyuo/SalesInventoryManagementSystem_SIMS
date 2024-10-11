@@ -38,7 +38,7 @@ function ProductChart() {
 
             <div className={Productcss.containerProduct}>
                 <div className={Productcss.colProduct}>
-                    <div style={{ border: "1px solid red" }}>
+                    <div className={Productcss.productContent}>
                         Items
                         {/* Insert Logic */}
                     </div>
