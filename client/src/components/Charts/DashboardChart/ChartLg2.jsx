@@ -2,8 +2,8 @@
 
 function ChartLg2() {
     return (
-        <div>
-
+        <div className="containerChartLg">
+            {/* Code for Chart Here */}
         </div>
     )
 }
