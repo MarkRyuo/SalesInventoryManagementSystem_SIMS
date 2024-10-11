@@ -8,7 +8,7 @@ function ProductChart() {
         <>
 
             <Row>
-                <Col>
+                <Col> {/* Search */}
                     <Form inline>
                         <Row className="d-flex justify-content-end g-1 my-4">
                             <Col lg={3} xs={8} md={5}>
