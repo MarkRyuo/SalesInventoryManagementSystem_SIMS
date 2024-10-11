@@ -35,10 +35,10 @@ export const DashboardPage = () => {
             </Row>
 
             <Row className={DashboardCss.rowContainerLg}>
-                <Col className='colContainerLg'>
+                <Col className='colContainerLg' sm={12} lg={6}>
                     <ChartLg1 />
                 </Col>
-                <Col className='colContainerLg' lg={5} md={12}>
+                <Col className='colContainerLg' lg={5} md={9} sm={10} xs={10}>
                     <ChartLg2 />
                 </Col>  
             </Row>

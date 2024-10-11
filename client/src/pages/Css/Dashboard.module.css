@@ -23,6 +23,9 @@
     margin: 0px;
     width: 100%;
     height: auto;
-    gap: 10px;
-    justify-content: space-between;
+    gap: 5px;
+    justify-content: space-around;
+    min-width: 400px;
 }
+
+.colContainerLg
