@@ -1,4 +1,5 @@
 import Search from "../components/Comps/Search";
+import ProductCategory from "../components/Comps/ProductCategory";
 
 
 //* Props 
