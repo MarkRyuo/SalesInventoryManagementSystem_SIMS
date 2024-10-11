@@ -13,6 +13,7 @@
 - Update Design of StaffDashBoard
 - Admin Dashboard Chart Changes 
 - Product Changes
+- Report Changes
 
 ### v5.0.1
 - Adding Staff Account
