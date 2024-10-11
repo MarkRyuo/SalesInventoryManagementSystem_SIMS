@@ -3,8 +3,6 @@ import { MainLayout } from "../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
 import ProductChart from "../components/Comps/ProductChart";
 import Productcss from './Css/Product.module.css';
-import ProductCategory from "../components/Comps/ProductCategory";
-
 
 //* Product Page
 
