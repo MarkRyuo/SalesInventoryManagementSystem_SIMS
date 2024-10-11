@@ -6,6 +6,8 @@ import Chart2 from '../components/Charts/DashboardChart/Chart2';
 import Chart3 from '../components/Charts/DashboardChart/Chart3';
 
 import DashboardCss from './Css/Dashboard.module.css'
+import ChartLg1 from '../components/Charts/DashboardChart/ChartLg1';
+import ChartLg2 from '../components/Charts/DashboardChart/ChartLg2';
 
 export const DashboardPage = () => {
 
@@ -34,11 +36,11 @@ export const DashboardPage = () => {
 
             <Row className='rowContainerLg'>
                 <Col className='colContainerLg'>
-
+                    <ChartLg1 />
                 </Col>
                 <Col className='colContainerLg'>
-
-                </Col>
+                    <ChartLg2 />
+                </Col>  
             </Row>
 
         </MainLayout>
