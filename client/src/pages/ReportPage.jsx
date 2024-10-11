@@ -24,16 +24,16 @@ export const ReportPage = () => {
             <p className='fs-4'><span><TbReport /></span> Sales Report</p>
 
             <Row className={Reportcss.rowReport}>
-                <Col lg={3} md={12}>
+                <Col lg={6} md={12}>
                     <ReportChart1 />
                 </Col>
-                <Col lg={3} md={12}>
+                <Col lg={4} md={12}>
                     <ReportChart2 />
                 </Col>
-                <Col lg={3} md={12}>
+                <Col lg={6} md={12}>
                     <ReportChart3 />
                 </Col>
-                <Col lg={3} md={12}>
+                <Col lg={4} md={12}>
                     <ReportChart4 />
                 </Col>
             </Row>

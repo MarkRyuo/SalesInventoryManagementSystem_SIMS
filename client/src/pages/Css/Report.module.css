@@ -11,12 +11,13 @@
 .rowReport {
 
     border: 1px solid;
-    padding-top: 20px;
+    padding-top: 10px;
     width: 100%;
     height: auto;
     justify-content: space-evenly;
     margin: 0;
     min-width: 400px;
+    gap: 10px;
 }
 
 
