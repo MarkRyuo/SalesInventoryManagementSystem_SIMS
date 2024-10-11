@@ -32,7 +32,6 @@ function ProductChart() {
                             </Col>
                         </Row>
                     </Form>
-
                 </Col>
             </Row>
             
