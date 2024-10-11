@@ -9,6 +9,9 @@ function ProductChart() {
 
             <Row>
                 <Col>
+
+                </Col>
+                <Col>
                     {/* Search */}
                     <Form inline>
                         <Row className="d-flex justify-content-end g-1 my-4">
@@ -24,9 +27,6 @@ function ProductChart() {
                             </Col>
                         </Row>
                     </Form>
-
-                </Col>
-                <Col>
 
                 </Col>
             </Row>
