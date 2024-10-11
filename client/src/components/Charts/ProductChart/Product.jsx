@@ -37,7 +37,7 @@ function ProductChart() {
             
 
             <div className={Productcss.containerProduct}> {/* fix width(cannot lower 530px), overflow(On)*/}
-                <div className={Productcss.colProduct}> {/* fix width(cannot lower 530px), overflow(On)*/}
+                <div className={Productcss.colProduct}> {/* fix width(cannot lower 600px), overflow(On)*/}
                     <div className={Productcss.productContent}>
                         {/* Insert Logic */}
                     </div>

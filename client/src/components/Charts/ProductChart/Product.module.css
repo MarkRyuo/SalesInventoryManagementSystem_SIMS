@@ -22,7 +22,7 @@
     height: 500px;
     padding: 7px;
     width: 100%;
-    min-width: 530px; /** Can't lower in 530px*/
+    min-width: 600px; /** Can't lower in 530px*/
     border-radius: 10px;
     overflow: auto;
 
