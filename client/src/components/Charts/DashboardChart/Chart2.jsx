@@ -10,7 +10,7 @@ function Chart2() {
             </div>
             <div className={Chartcss.contentChart}>
                 <p className="fs-4">000000</p>
-                <p className="fs-5">From the running month</p>
+                <p>From the running month</p>
             </div>
         </div>
     )
