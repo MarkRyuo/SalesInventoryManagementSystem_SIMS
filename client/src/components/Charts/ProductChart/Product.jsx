@@ -10,9 +10,9 @@ function ProductChart() {
             <Row>
                 <Col>
                     <DropdownButton id="dropdown-basic-button" title="Category">
-                        <Dropdown.Item href="#">Product 1</Dropdown.Item>
-                        <Dropdown.Item href="#">Product 2</Dropdown.Item>
-                        <Dropdown.Item href="#">Product 3</Dropdown.Item>
+                        <Dropdown.Item >Product 1</Dropdown.Item>
+                        <Dropdown.Item >Product 2</Dropdown.Item>
+                        <Dropdown.Item >Product 3</Dropdown.Item>
                     </DropdownButton>
                 </Col>
                 <Col>
