@@ -39,7 +39,7 @@ const LoginStaff = async (username, password, navigate) => {
 
     } catch (error) {
         console.error("Staff Login error:", error.message);
-        throw error; // Rethrow the error for handling in the calling component
+        throw error; //? Rethrow the error for handling in the calling component
     }
 };
 
