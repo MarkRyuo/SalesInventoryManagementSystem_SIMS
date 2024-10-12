@@ -10,7 +10,7 @@ function SLoginCard() {
     const [username, setUsername] = useState(""); //* State for username
     const [password, setPassword] = useState(""); //* State for password
     const [loading, setLoading] = useState(false); //* Loading state
-    const [error, setError] = useState(""); // State for error messages
+    const [error, setError] = useState(""); //* State for error messages
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent default form submission
