@@ -17,22 +17,24 @@ function SLoginCard() {
         setLoading(true); // Start loading
 
         try {
-            // Access the users collection
-            const usersCollection = collection(db, "users");
+            // Access the staff collection
+            const staffCollection = collection(db, "staff");
 
             // Create a query to find the user by username
-            const q = query(usersCollection, where("username", "==", username));
-            const querySnapshot = await getDocs(q);
+            const staffQuery = query(staffCollection, where("username", "==", username));
 
-            // Check if the user exists
-            if (querySnapshot.empty) {
+            // Fetch staff user documents
+            const staffSnapshot = await getDocs(staffQuery);
+
+            // Check if the user exists in the staff collection
+            if (staffSnapshot.empty) {
                 alert("Login failed. Username not found.");
                 setLoading(false); // Stop loading
                 return;
             }
 
-            // Get the first matching user document
-            const userDoc = querySnapshot.docs[0];
+            // Get the first matching staff user document
+            const userDoc = staffSnapshot.docs[0];
             const storedPassword = userDoc.data().password;
 
             // Check if the password matches
@@ -45,7 +47,8 @@ function SLoginCard() {
             // Successful login
             console.log("User logged in successfully");
             localStorage.setItem('userId', userDoc.id); // Store user ID
-            navigate("/SDashboard"); // Navigate to dashboard or profile
+            navigate("/SDashboard"); // Navigate to staff dashboard
+
         } catch (error) {
             console.error("Login error:", error.message);
             alert("Login failed. Please try again.");
@@ -90,7 +93,7 @@ function SLoginCard() {
                 </Button>
             </Form>
         </>
-    )
+    );
 }
 
 export default SLoginCard;
