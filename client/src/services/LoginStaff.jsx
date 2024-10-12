@@ -35,7 +35,7 @@ const LoginStaff = async (username, password, navigate) => {
         console.log("Staff user logged in:", staffId);
 
         //? Redirect after successful login
-        navigate("/SDashboard"); // Navigate to staff dashboard
+        navigate("/SDashboard"); //? Navigate to staff dashboard
 
     } catch (error) {
         console.error("Staff Login error:", error.message);
