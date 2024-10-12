@@ -2,19 +2,19 @@ import { db } from '../firebase'; //? firebaseConfig
 import { getDocs, collection, query, where } from "firebase/firestore";
 
 const LoginStaff = async (username, password, navigate) => {
-    
+
     try {
-        // Access the staff collection
+        //? Access the staff collection
         const staffCollection = collection(db, "staffs");
 
-        // Create a query to find the staff user by username
+        //? Create a query to find the staff user by username
         const q = query(staffCollection, where("username", "==", username));
         const querySnapshot = await getDocs(q);
 
         console.log("Attempting to log in with staff username:", username);
-        console.log("Staff Query Snapshot:", querySnapshot.docs); // Log the snapshot
+        console.log("Staff Query Snapshot:", querySnapshot.docs); //? Log the snapshot
 
-        // Check if the staff user exists
+        //? Check if the staff user exists
         if (querySnapshot.empty) {
             throw new Error("Username not found."); // Throw error instead of alert
         }
