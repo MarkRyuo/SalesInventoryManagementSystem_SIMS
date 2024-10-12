@@ -18,7 +18,7 @@ const ForgotPassword = () => {
         try {
             await sendPasswordResetEmail(auth, email);
             setMessage("Password reset email sent! Please check your inbox.");
-            // Navigate back to login after a delay (optional)
+            // Optionally, navigate back to login
             setTimeout(() => {
                 navigate("/"); // Adjust the path as necessary
             }, 2000);
