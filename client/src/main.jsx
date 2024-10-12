@@ -56,6 +56,12 @@ const router = createBrowserRouter([
     element: <SStaffAccount /> ,
   },
 
+  //? Forgot Password
+  {
+    path: "ForgotPassword",
+    element: <,
+  },
+
 ]);
 
 createRoot(document.getElementById('root')).render(
