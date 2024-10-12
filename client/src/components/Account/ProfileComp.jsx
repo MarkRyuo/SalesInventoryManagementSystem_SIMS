@@ -1,10 +1,9 @@
-// src/components/ProfileComp.js
-
 import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { FcGoogle } from "react-icons/fc";
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { db, auth } from '../../firebase'; // Ensure you import auth from your firebase config
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const ProfileComp = () => {
@@ -20,18 +19,18 @@ const ProfileComp = () => {
     const [isEditing, setIsEditing] = useState(false);
     const userId = localStorage.getItem('userId'); // Assume this was saved during login
 
-    //* Function to handle gender selection
+    // Function to handle gender selection
     const handleGenderSelect = (eventKey) => {
         setUserData({ ...userData, gender: eventKey });
     };
 
-    //* Function to handle input changes
+    // Function to handle input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUserData({ ...userData, [name]: value });
     };
 
-    //* Function to fetch user data
+    // Function to fetch user data
     useEffect(() => {
         const fetchUserData = async () => {
             if (!userId) {
@@ -60,7 +59,7 @@ const ProfileComp = () => {
         fetchUserData();
     }, [userId, navigate]);
 
-    //* Function to save updated user data
+    // Function to save updated user data
     const handleSave = async () => {
         try {
             console.log("Updating user data:", userData); // Log user data
@@ -71,6 +70,54 @@ const ProfileComp = () => {
         } catch (error) {
             console.error("Error updating profile:", error); // Full error log
             alert(`Failed to update profile: ${error.message}`);
+        }
+    };
+
+    // Function to handle Google Sign-In
+    const handleGoogleSignIn = async () => {
+        const provider = new GoogleAuthProvider();
+
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            const userRef = doc(db, 'users', user.uid);
+
+            // Fetch existing user data
+            const userDoc = await getDoc(userRef);
+            if (userDoc.exists()) {
+                // User already exists, just update their Firestore document
+                await updateDoc(userRef, {
+                    // Optional: You can choose which fields to update
+                    email: user.email,
+                    // Retain existing data, you can modify this if needed
+                });
+                alert("Profile connected to Google account.");
+            } else {
+                // Save new user data in Firestore
+                await setDoc(userRef, {
+                    firstname: user.displayName.split(' ')[0] || "", // Get first name
+                    lastname: user.displayName.split(' ')[1] || "", // Get last name
+                    gender: "", // Default to empty; modify if needed
+                    username: user.displayName || user.email, // Use display name or email as username
+                    email: user.email,
+                    // Add more user properties as needed
+                }, { merge: true }); // Merge if document exists
+                alert("Google Sign-In successful. New account created.");
+            }
+
+            console.log("Google Sign-In successful:", user);
+            localStorage.setItem('userId', user.uid); // Store the user ID in local storage
+            setUserData({ // Update userData state
+                firstname: user.displayName.split(' ')[0] || "",
+                lastname: user.displayName.split(' ')[1] || "",
+                gender: "",
+                username: user.displayName || user.email,
+                email: user.email,
+                password: "", // You won't have the password in this case
+            });
+        } catch (error) {
+            console.error("Error during Google Sign-In:", error);
+            alert(`Failed to connect to Google: ${error.message}`);
         }
     };
 
@@ -170,7 +217,7 @@ const ProfileComp = () => {
             </Form.Group>
 
             {/* Button Connect to Google */}
-            <Button variant="light" size='sm' className='ms-2'>
+            <Button variant="light" size='sm' className='ms-2' onClick={handleGoogleSignIn}>
                 <FcGoogle size={35} className='me-2' />
                 Connect to Google
             </Button>
