@@ -69,7 +69,7 @@ export const LoginCard = () => {
 
             {/* Link to Forgot Password */}
             <div style={{ marginTop: '10px' }}>
-                <Link to="/ResetPassword">Forgot Password?</Link>
+                <Link to="/ForgotPassword">Forgot Password?</Link>
             </div>
         </Form>
     );
