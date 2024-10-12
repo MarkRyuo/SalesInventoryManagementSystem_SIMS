@@ -13,21 +13,22 @@ export const LoginCard = () => {
 
     const handleLogin = async () => {
         try {
-            // Step 1: Find user by username in Firestore
+            // Query to find the user by username in Firestore
             const usersCollection = collection(db, "users");
             const q = query(usersCollection, where("username", "==", username));
             const querySnapshot = await getDocs(q);
 
+            // Check if user with the given username exists
             if (querySnapshot.empty) {
                 alert("Login failed. Username not found.");
                 return;
             }
 
-            // Step 2: Extract the email from the document found
+            // Extract the email from the user document
             const userDoc = querySnapshot.docs[0];
             const userEmail = userDoc.data().email;
 
-            // Step 3: Log in with email and password using Firebase Authentication
+            // Authenticate using the found email and provided password
             await signInWithEmailAndPassword(auth, userEmail, password);
             navigate("/DashboardPage");
         } catch (error) {
@@ -65,5 +66,5 @@ export const LoginCard = () => {
                 Login
             </Button>
         </Form>
-    )
-}
+    );
+};
