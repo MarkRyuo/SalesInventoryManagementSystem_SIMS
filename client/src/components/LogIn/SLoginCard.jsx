@@ -1,8 +1,8 @@
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { Button, Form, Alert } from 'react-bootstrap'; // Import Alert for error messages
+import { Button, Form, Alert } from 'react-bootstrap'; //? Import Alert for error messages
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginStaff from '../../services/LoginStaff'; // Import the LoginStaff service
+import LoginStaff from '../../services/LoginStaff'; //? Import the LoginStaff service
 
 //* Child
 function SLoginCard() {
