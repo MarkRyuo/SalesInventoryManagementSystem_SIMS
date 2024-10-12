@@ -80,41 +80,33 @@ const ProfileComp = () => {
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            const userRef = doc(db, 'users', user.uid);
+            const userRef = doc(db, 'users', userId); // Get the reference to the user's document based on the stored userId
 
             // Fetch existing user data
             const userDoc = await getDoc(userRef);
             if (userDoc.exists()) {
-                // User already exists, just update their Firestore document
+                // User already exists, update their Firestore document with Google info
                 await updateDoc(userRef, {
-                    // Optional: You can choose which fields to update
                     email: user.email,
-                    // Retain existing data, you can modify this if needed
+                    // Optionally retain or update other fields if needed
+                    // firstname: user.displayName.split(' ')[0] || "",
+                    // lastname: user.displayName.split(' ')[1] || "",
                 });
                 alert("Profile connected to Google account.");
             } else {
-                // Save new user data in Firestore
-                await setDoc(userRef, {
-                    firstname: user.displayName.split(' ')[0] || "", // Get first name
-                    lastname: user.displayName.split(' ')[1] || "", // Get last name
-                    gender: "", // Default to empty; modify if needed
-                    username: user.displayName || user.email, // Use display name or email as username
-                    email: user.email,
-                    // Add more user properties as needed
-                }, { merge: true }); // Merge if document exists
-                alert("Google Sign-In successful. New account created.");
+                alert("User not found. Please log in first.");
+                navigate("/login");
+                return;
             }
 
             console.log("Google Sign-In successful:", user);
-            localStorage.setItem('userId', user.uid); // Store the user ID in local storage
-            setUserData({ // Update userData state
-                firstname: user.displayName.split(' ')[0] || "",
-                lastname: user.displayName.split(' ')[1] || "",
-                gender: "",
-                username: user.displayName || user.email,
+            // Update the local state with the user's info
+            setUserData({
+                ...userData, // Retain existing user data
                 email: user.email,
-                password: "", // You won't have the password in this case
+                // Optional: You can update other fields as well
             });
+
         } catch (error) {
             console.error("Error during Google Sign-In:", error);
             alert(`Failed to connect to Google: ${error.message}`);
