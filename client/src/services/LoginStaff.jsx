@@ -19,7 +19,7 @@ const LoginStaff = async (username, password, navigate) => {
             throw new Error("Username not found."); //? Throw error instead of alert
         }
 
-        // Get the first matching staff user document
+        //? Get the first matching staff user document
         const staffDoc = querySnapshot.docs[0];
         console.log("Staff User Document Data:", staffDoc.data()); // Log user data
         const storedPassword = staffDoc.data().password;
