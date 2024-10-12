@@ -49,7 +49,7 @@ function SLoginCard() {
                     <Form.Control
                         type="password"
                         placeholder="Password"
-                        value={password} // Bind value to state
+                        value={password}
                         onChange={(e) => setPassword(e.target.value)} // Update password state
                         required
                     />
