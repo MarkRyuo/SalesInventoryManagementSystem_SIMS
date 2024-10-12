@@ -20,6 +20,7 @@ const ProfileComp = () => {
             console.log("Current User:", currentUser); // Debugging line
             setUser(currentUser); // Set user state when authentication state changes
             if (currentUser) {
+                console.log("User is logged in"); // Confirm user is logged in
                 setEmail(currentUser.email || ""); // Default to user's email
                 fetchUserData(currentUser.uid); // Fetch user data
             } else {
@@ -37,6 +38,7 @@ const ProfileComp = () => {
 
         if (userDoc.exists()) {
             const userData = userDoc.data();
+            console.log("Fetched User Data:", userData); // Log user data
             // Set state with fetched data
             setFirstname(userData.firstname || "");
             setLastname(userData.lastname || "");
@@ -63,7 +65,6 @@ const ProfileComp = () => {
             // Update password if provided
             if (password) {
                 await updatePassword(user, password);
-                // Optionally, avoid storing passwords in Firestore for security reasons
             }
 
             // Update other details in Firestore
@@ -72,6 +73,7 @@ const ProfileComp = () => {
                 lastname,
                 gender,
                 username,
+                email, // Optionally update the email
             });
 
             alert("Profile updated successfully!");
@@ -84,78 +86,84 @@ const ProfileComp = () => {
     // Render Profile Form
     return (
         <Form>
-            <Row style={{ width: "100%", margin: 0, padding: 0 }}>
-                <Col lg={6}>
-                    <Form.Group className="mb-3" controlId="firstname">
-                        <Form.Label>FIRST NAME</Form.Label>
+            {user ? (
+                <>
+                    <Row style={{ width: "100%", margin: 0, padding: 0 }}>
+                        <Col lg={6}>
+                            <Form.Group className="mb-3" controlId="firstname">
+                                <Form.Label>FIRST NAME</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={firstname}
+                                    onChange={(e) => setFirstname(e.target.value)}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col lg={6}>
+                            <Form.Group className="mb-3" controlId="lastname">
+                                <Form.Label>LAST NAME</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={lastname}
+                                    onChange={(e) => setLastname(e.target.value)}
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+
+                    {/* Dropdown for Gender */}
+                    <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
+                        <Form.Control
+                            aria-label="Text input with dropdown button"
+                            placeholder={gender || 'Select Gender'}
+                            readOnly
+                        />
+                        <DropdownButton
+                            variant="outline-secondary"
+                            title="Gender"
+                            id="input-group-dropdown-2"
+                            align="end"
+                            onSelect={handleGenderSelect}
+                        >
+                            <Dropdown.Item eventKey="Male">Male</Dropdown.Item>
+                            <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
+                        </DropdownButton>
+                    </InputGroup>
+
+                    <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                        <Form.Label>Username</Form.Label>
                         <Form.Control
                             type="text"
-                            value={firstname}
-                            onChange={(e) => setFirstname(e.target.value)}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                     </Form.Group>
-                </Col>
-                <Col lg={6}>
-                    <Form.Group className="mb-3" controlId="lastname">
-                        <Form.Label>LAST NAME</Form.Label>
+
+                    <Form.Group className="mb-3" controlId="password" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                        <Form.Label>Password</Form.Label>
                         <Form.Control
-                            type="text"
-                            value={lastname}
-                            onChange={(e) => setLastname(e.target.value)}
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </Form.Group>
-                </Col>
-            </Row>
 
-            {/* Dropdown for Gender */}
-            <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
-                <Form.Control
-                    aria-label="Text input with dropdown button"
-                    placeholder={gender || 'Select Gender'}
-                    readOnly
-                />
-                <DropdownButton
-                    variant="outline-secondary"
-                    title="Gender"
-                    id="input-group-dropdown-2"
-                    align="end"
-                    onSelect={handleGenderSelect}
-                >
-                    <Dropdown.Item eventKey="Male">Male</Dropdown.Item>
-                    <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
-                </DropdownButton>
-            </InputGroup>
+                    <Form.Group className="mb-3" controlId="email" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </Form.Group>
 
-            <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="password" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="email" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </Form.Group>
-
-            <div className='mt-3'>
-                <Button variant='primary' className='ms-2' onClick={handleSave}>Save</Button>
-            </div>
+                    <div className='mt-3'>
+                        <Button variant='primary' className='ms-2' onClick={handleSave}>Save</Button>
+                    </div>
+                </>
+            ) : (
+                <p>Please log in to view and edit your profile.</p>
+            )}
         </Form>
     );
 }
