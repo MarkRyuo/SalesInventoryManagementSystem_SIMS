@@ -50,7 +50,7 @@ function SLoginCard() {
                         type="password"
                         placeholder="Password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)} // Update password state
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </FloatingLabel>
