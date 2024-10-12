@@ -38,7 +38,7 @@ function SLoginCard() {
                     <Form.Control
                         type="text"
                         placeholder='Username'
-                        value={username} // Bind value to state
+                        value={username}
                         onChange={(e) => setUsername(e.target.value)} // Update username state
                         required
                     />
