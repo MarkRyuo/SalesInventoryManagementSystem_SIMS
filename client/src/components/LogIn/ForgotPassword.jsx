@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
-import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
@@ -11,20 +10,6 @@ const ForgotPassword = () => {
     const auth = getAuth();
     const navigate = useNavigate();
 
-    const updateAdminPasswordInFirestore = async (newPassword) => {
-        const db = getFirestore();
-        const adminDocRef = doc(db, "admins", "adminId"); // Replace with the actual admin document ID
-
-        try {
-            await updateDoc(adminDocRef, {
-                password: newPassword, // Update the password field
-            });
-            console.log("Admin password updated in Firestore!");
-        } catch (error) {
-            console.error("Error updating password in Firestore:", error);
-        }
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -32,13 +17,8 @@ const ForgotPassword = () => {
 
         try {
             await sendPasswordResetEmail(auth, email);
-            setMessage("Password reset email sent!");
-            // Prompt the user to enter the new password (you might want to do this differently)
-            const newPassword = prompt("Enter your new password:"); // This is just for illustration
-            if (newPassword) {
-                await updateAdminPasswordInFirestore(newPassword); // Update Firestore with the new password
-            }
-            // Navigate back to login after a delay
+            setMessage("Password reset email sent! Please check your inbox.");
+            // Navigate back to login after a delay (optional)
             setTimeout(() => {
                 navigate("/"); // Adjust the path as necessary
             }, 2000);
