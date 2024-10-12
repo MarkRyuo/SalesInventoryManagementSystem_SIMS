@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getAuth, updatePassword } from "firebase/auth";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
-import { app } from "./firebase"; // Import your Firebase configuration
+import { app } from "../../firebase"; // Import your Firebase configuration
 
 const ResetPasswordWithCode = () => {
     const [username, setUsername] = useState("");

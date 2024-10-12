@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { app } from "./firebase"; // Import your Firebase config
+import { app } from "../firebase"; // Import your Firebase config
 
 const RequestResetCode = () => {
     const [username, setUsername] = useState(""); // Change to username

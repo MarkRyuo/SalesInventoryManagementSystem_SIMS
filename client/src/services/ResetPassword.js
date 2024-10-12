@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "./firebase"; // Import your Firebase configuration
+import { app } from "../firebase"; // Import your Firebase configuration
 
 const ResetPassword = () => {
     const [email, setEmail] = useState("");
@@ -8,6 +8,7 @@ const ResetPassword = () => {
     const [error, setError] = useState("");
 
     const handlePasswordReset = async () => {
+        const auth = getAuth(app); // Initialize auth using the app instance
         try {
             await sendPasswordResetEmail(auth, email);
             setMessage("Password reset email sent! Please check your inbox.");
