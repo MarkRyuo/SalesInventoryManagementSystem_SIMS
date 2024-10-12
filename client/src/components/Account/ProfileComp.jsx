@@ -1,7 +1,7 @@
 import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getAuth, updateEmail, updatePassword, sendEmailVerification } from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from '../../firebase'; // Import Firebase configuration
 
 const ProfileComp = () => {
@@ -13,6 +13,26 @@ const ProfileComp = () => {
     const [email, setEmail] = useState(user?.email || "");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    // Fetch user data from Firestore when component mounts
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (user) {
+                const userDocRef = doc(db, "users", user.uid);
+                const userDoc = await getDoc(userDocRef);
+
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    setFirstname(userData.firstname || "");
+                    setLastname(userData.lastname || "");
+                    setGender(userData.gender || "");
+                    setUsername(userData.username || "");
+                }
+            }
+        };
+
+        fetchUserData();
+    }, [user]);
 
     const handleGenderSelect = (eventKey) => {
         setGender(eventKey);
@@ -43,6 +63,7 @@ const ProfileComp = () => {
             alert("Profile updated successfully!");
         } catch (error) {
             console.error("Error updating profile:", error);
+            alert("Error updating profile: " + error.message);
         }
     };
 
