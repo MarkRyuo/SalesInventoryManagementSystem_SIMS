@@ -30,8 +30,8 @@ const LoginStaff = async (username, password, navigate) => {
         }
 
         //? Successful login
-        const staffId = staffDoc.id; // Use Firestore document ID as staff ID
-        localStorage.setItem('staffId', staffId); // Store the staff user's UID
+        const staffId = staffDoc.id; //? Use Firestore document ID as staff ID
+        localStorage.setItem('staffId', staffId); //? Store the staff user's UID
         console.log("Staff user logged in:", staffId);
 
         // Redirect after successful login
