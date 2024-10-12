@@ -1,18 +1,18 @@
 // ResetPassword.js
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 
 const db = getFirestore();
 
 const ResetPassword = () => {
-    const [newPassword, setNewPassword] = useState("");
+    const navigate = useNavigate();
+    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
-    const location = useLocation();
-    const params = new URLSearchParams(location.search);
-    const token = params.get('token');
-    const email = params.get('email');
+    const [token, setToken] = useState(new URLSearchParams(window.location.search).get('token'));
+    const [email, setEmail] = useState(new URLSearchParams(window.location.search).get('email'));
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
@@ -20,37 +20,41 @@ const ResetPassword = () => {
         setMessage("");
 
         try {
-            // Verify the token from Firestore
             const tokenDoc = await getDoc(doc(db, "passwordResetTokens", email));
-            if (tokenDoc.exists() && tokenDoc.data().token === token) {
-                // Update password in Firestore (you should handle password hashing)
-                await setDoc(doc(db, "admins", email), { password: newPassword });
-                setMessage("Password has been reset successfully!");
-            } else {
-                setMessage("Invalid or expired token.");
+            if (!tokenDoc.exists() || tokenDoc.data().token !== token) {
+                throw new Error("Invalid or expired token.");
             }
+
+            // Here, you would typically hash the password before storing it
+            await updateDoc(doc(db, "admins", email), { password }); // Update the password in Firestore
+            setMessage("Password has been reset successfully.");
+            setTimeout(() => {
+                navigate("/"); // Redirect after successful reset
+            }, 2000);
         } catch (error) {
-            console.error("Error resetting password:", error);
-            setMessage("Error resetting password.");
+            setMessage("Error resetting password: " + error.message);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <form onSubmit={handleResetPassword}>
-            <input
-                type="password"
-                placeholder="New Password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                required
-            />
-            <button type="submit" disabled={loading}>
+        <Form onSubmit={handleResetPassword}>
+            <Form.Group controlId="formBasicPassword">
+                <Form.Label>New Password</Form.Label>
+                <Form.Control
+                    type="password"
+                    placeholder="Enter your new password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+            </Form.Group>
+            <Button variant="primary" type="submit" disabled={loading}>
                 {loading ? "Resetting..." : "Reset Password"}
-            </button>
+            </Button>
             {message && <p>{message}</p>}
-        </form>
+        </Form>
     );
 };
 

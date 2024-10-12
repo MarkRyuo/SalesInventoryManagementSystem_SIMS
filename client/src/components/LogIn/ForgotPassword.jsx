@@ -4,6 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid'; // Import UUID for generating unique tokens
+import { sendEmail } from '../../services/emailService'; // Adjust the path as necessary
 
 const db = getFirestore();
 
@@ -28,35 +29,12 @@ const ForgotPassword = () => {
     };
 
     // Function to send the email with the reset link
-    const sendEmail = async (email, resetLink) => {
-        // You can use an email-sending service like SendGrid, Nodemailer, etc.
-        // Here is a sample logic using a hypothetical email API
-        // Make sure to replace this with actual implementation
-
-        const response = await fetch("YOUR_EMAIL_SERVICE_API_URL", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                to: email,
-                subject: "Password Reset Request",
-                text: `You requested a password reset. Click the link to reset your password: ${resetLink}`,
-            }),
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to send email.");
-        }
-    };
-
-    // Function to create the reset link and send it
     const sendResetEmail = async () => {
         const token = await storeToken(email); // Store the token and get the generated token
         const resetLink = `${window.location.origin}/reset-password?token=${token}&email=${email}`; // Create reset link
 
         try {
-            await sendEmail(email, resetLink); // Send the email with the reset link
+            await sendEmail(email, "Password Reset Request", `You requested a password reset. Click the link to reset your password: ${resetLink}`); // Send the email with the reset link
             setMessage("Password reset email sent! Please check your inbox.");
             setTimeout(() => {
                 navigate("/"); // Adjust the path as necessary
