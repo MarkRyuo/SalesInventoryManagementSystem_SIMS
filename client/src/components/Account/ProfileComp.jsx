@@ -24,10 +24,12 @@ const ProfileComp = () => {
 
                 if (userDoc.exists()) {
                     const userData = userDoc.data();
+                    // Set state with fetched data
                     setFirstname(userData.firstname || "");
                     setLastname(userData.lastname || "");
                     setGender(userData.gender || "");
                     setUsername(userData.username || "");
+                    setEmail(userData.email || user.email); // Default to user's email
                 } else {
                     console.log("User document does not exist.");
                 }
@@ -54,7 +56,8 @@ const ProfileComp = () => {
             // Update password if provided
             if (password) {
                 await updatePassword(user, password);
-                await updateDoc(doc(db, "users", user.uid), { password });
+                // You might want to remove this line for security reasons
+                // await updateDoc(doc(db, "users", user.uid), { password });
             }
 
             // Update other details in Firestore
