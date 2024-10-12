@@ -5,7 +5,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from '../../firebase'; // Import Firebase configuration
 
 const ProfileComp = () => {
-    const user = auth.currentUser;
+    const user = auth.currentUser; // Get current user
 
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
@@ -108,7 +108,7 @@ const ProfileComp = () => {
                 />
                 <DropdownButton
                     variant="outline-secondary"
-                    title="Dropdown"
+                    title="Gender"
                     id="input-group-dropdown-2"
                     align="end"
                     onSelect={handleGenderSelect}
