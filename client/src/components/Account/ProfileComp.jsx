@@ -80,7 +80,7 @@ const ProfileComp = () => {
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            const userRef = doc(db, 'users', userId); // Get the reference to the user's document based on the stored userId
+            const userRef = doc(db, 'admin', userId); // Get the reference to the user's document based on the stored userId
 
             // Fetch existing user data
             const userDoc = await getDoc(userRef);

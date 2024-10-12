@@ -6,7 +6,7 @@ import { getDocs, collection, query, where } from "firebase/firestore";
 const LoginUser = async (username, password) => {
     try {
         // Access the admins collection
-        const adminsCollection = collection(db, "admin");
+        const adminsCollection = collection(db, "admins");
 
         // Create a query to find the admin by username
         const q = query(adminsCollection, where("username", "==", username));
