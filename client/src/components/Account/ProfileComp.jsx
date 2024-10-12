@@ -17,10 +17,13 @@ const ProfileComp = () => {
     // Listen for authentication state changes
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(currentUser => {
+            console.log("Current User:", currentUser); // Debugging line
             setUser(currentUser); // Set user state when authentication state changes
             if (currentUser) {
                 setEmail(currentUser.email || ""); // Default to user's email
                 fetchUserData(currentUser.uid); // Fetch user data
+            } else {
+                console.log("User is not logged in.");
             }
         });
 
