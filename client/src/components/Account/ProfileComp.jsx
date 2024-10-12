@@ -46,6 +46,11 @@ const ProfileComp = () => {
     };
 
     const handleSave = async () => {
+        if (!user) {
+            alert("User is not authenticated. Please log in to update your profile.");
+            return;
+        }
+
         try {
             // Update email in Firebase Auth and Firestore
             if (email !== user.email) {
