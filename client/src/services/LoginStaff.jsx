@@ -26,7 +26,7 @@ const LoginStaff = async (username, password, navigate) => {
 
         // Check if the password matches
         if (storedPassword.trim() !== password.trim()) {
-            throw new Error("Incorrect password."); // Throw error instead of alert
+            throw new Error("Incorrect password."); //? Throw error instead of alert
         }
 
         // Successful login
