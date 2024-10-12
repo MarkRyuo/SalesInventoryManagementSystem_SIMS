@@ -14,6 +14,7 @@ export const LoginCard = () => {
         try {
             // Access the users collection
             const usersCollection = collection(db, "users");
+
             // Create a query to find the user by username
             const q = query(usersCollection, where("username", "==", username));
             const querySnapshot = await getDocs(q);
