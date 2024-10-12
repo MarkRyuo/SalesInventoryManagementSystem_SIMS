@@ -12,20 +12,23 @@ export const LoginCard = () => {
 
     const handleLogin = async () => {
         try {
-            // Step 1: Find user by username in Firestore
             const usersCollection = collection(db, "users");
             const q = query(usersCollection, where("username", "==", username));
             const querySnapshot = await getDocs(q);
 
-            // Step 2: Check if the user exists
             if (querySnapshot.empty) {
                 alert("Login failed. Username not found.");
                 return;
             }
 
-            // Step 3: Verify password directly (ensure your Firestore rules allow this)
             const userDoc = querySnapshot.docs[0];
             const storedPassword = userDoc.data().password;
+
+            // Logging for debugging
+            console.log("Input Username:", username);
+            console.log("Stored Username:", userDoc.data().username);
+            console.log("Input Password:", password);
+            console.log("Stored Password:", storedPassword);
 
             if (storedPassword !== password) {
                 alert("Login failed. Incorrect password.");
@@ -39,6 +42,7 @@ export const LoginCard = () => {
             alert("Login failed. Please try again.");
         }
     };
+
 
     return (
         <Form>
