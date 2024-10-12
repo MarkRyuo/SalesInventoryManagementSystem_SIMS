@@ -18,7 +18,7 @@ function SLoginCard() {
 
         try {
             // Access the users collection
-            const usersCollection = collection(db, "staffuser");
+            const usersCollection = collection(db, "users");
 
             // Create a query to find the user by username
             const q = query(usersCollection, where("username", "==", username));
