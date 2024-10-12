@@ -11,6 +11,7 @@ const ProfileComp = () => {
     const [lastname, setLastname] = useState("");
     const [gender, setGender] = useState('');
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState(""); // Added email state
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(true); // Loading state
 
@@ -45,6 +46,7 @@ const ProfileComp = () => {
             setLastname(userData.lastname || "");
             setGender(userData.gender || "");
             setUsername(userData.username || "");
+            setEmail(userData.email || ""); // Set email from Firestore
         } else {
             console.log("User document does not exist.");
         }
@@ -75,6 +77,7 @@ const ProfileComp = () => {
                 lastname,
                 gender,
                 username,
+                email, // Update email in Firestore
             });
 
             alert("Profile updated successfully!");
@@ -116,6 +119,16 @@ const ProfileComp = () => {
                             </Form.Group>
                         </Col>
                     </Row>
+
+                    {/* Email Field */}
+                    <Form.Group className="mb-3" controlId="email" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </Form.Group>
 
                     {/* Dropdown for Gender */}
                     <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
