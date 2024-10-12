@@ -16,7 +16,7 @@ const LoginStaff = async (username, password, navigate) => {
 
         //? Check if the staff user exists
         if (querySnapshot.empty) {
-            throw new Error("Username not found."); // Throw error instead of alert
+            throw new Error("Username not found."); //? Throw error instead of alert
         }
 
         // Get the first matching staff user document
