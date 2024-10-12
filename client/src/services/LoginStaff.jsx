@@ -1,6 +1,5 @@
-// src/services/LoginStaff.js
 
-import { db } from '../firebase'; // firebaseConfig
+import { db } from '../firebase'; //? firebaseConfig
 import { getDocs, collection, query, where } from "firebase/firestore";
 
 const LoginStaff = async (username, password, navigate) => {
