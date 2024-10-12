@@ -21,7 +21,7 @@ const LoginStaff = async (username, password, navigate) => {
 
         //? Get the first matching staff user document
         const staffDoc = querySnapshot.docs[0];
-        console.log("Staff User Document Data:", staffDoc.data()); // Log user data
+        console.log("Staff User Document Data:", staffDoc.data()); //? Log user data
         const storedPassword = staffDoc.data().password;
 
         // Check if the password matches
