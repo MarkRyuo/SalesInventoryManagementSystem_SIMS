@@ -64,7 +64,7 @@ function SLoginCard() {
                     style={{ width: "70%", marginTop: "20px" }}
                     type="submit"
                     size='lg'
-                    disabled={loading} // Disable button while loading
+                    disabled={loading}
                 >
                     {loading ? 'Logging in...' : 'Login'} {/* Show loading text */}
                 </Button>
