@@ -1,40 +1,51 @@
-// src/PasswordReset.js
-import { useState } from "react";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import app from "./firebaseConfig";
-
-const auth = getAuth(app);
+import { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
+    const auth = getAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setMessage("");
+
         try {
             await sendPasswordResetEmail(auth, email);
-            setMessage("Password reset email sent!");
-            setEmail(""); // Clear the input field
+            setMessage("Password reset email sent! Please check your inbox.");
+            // Optionally, navigate back to login
+            setTimeout(() => {
+                navigate("/"); // Adjust the path as necessary
+            }, 2000);
         } catch (error) {
             setMessage("Error sending password reset email: " + error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div>
-            <h2>Reset Password</h2>
-            <form onSubmit={handleSubmit}>
-                <input
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
                     type="email"
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <button type="submit">Send Reset Email</button>
-            </form>
+            </Form.Group>
+            <Button variant="primary" type="submit" disabled={loading}>
+                {loading ? "Sending..." : "Send Password Reset Email"}
+            </Button>
             {message && <p>{message}</p>}
-        </div>
+        </Form>
     );
 };
 
