@@ -2,6 +2,8 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase'; // Import Firebase auth
+import { signInWithEmailAndPassword } from "firebase/auth"; // Import auth method
 import { db } from '../../firebase';
 import { getDocs, collection, query, where } from "firebase/firestore";
 
@@ -27,13 +29,10 @@ export const LoginCard = () => {
 
             // Get the first matching user document
             const userDoc = querySnapshot.docs[0];
-            const storedPassword = userDoc.data().password;
+            const email = userDoc.data().email;
 
-            // Check if the password matches
-            if (storedPassword !== password) {
-                alert("Login failed. Incorrect password.");
-                return;
-            }
+            // Sign in the user with Firebase Authentication
+            await signInWithEmailAndPassword(auth, email, password);
 
             // Successful login
             navigate("/DashboardPage");
