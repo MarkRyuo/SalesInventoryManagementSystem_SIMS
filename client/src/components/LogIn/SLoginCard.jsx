@@ -15,6 +15,7 @@ function SLoginCard() {
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent default form submission
         setLoading(true); // Start loading
+        console.log("Attempting to log in with:", username, password);
 
         try {
             // Access the staff collection
@@ -22,8 +23,6 @@ function SLoginCard() {
 
             // Create a query to find the user by username
             const staffQuery = query(staffCollection, where("username", "==", username));
-
-            // Fetch staff user documents
             const staffSnapshot = await getDocs(staffQuery);
 
             // Check if the user exists in the staff collection
@@ -33,7 +32,7 @@ function SLoginCard() {
                 return;
             }
 
-            // Get the first matching staff user document
+            // Get the first matching staff user
             const userDoc = staffSnapshot.docs[0];
             const storedPassword = userDoc.data().password;
 
