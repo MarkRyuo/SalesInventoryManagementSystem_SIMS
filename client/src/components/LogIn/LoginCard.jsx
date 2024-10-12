@@ -1,5 +1,3 @@
-// src/components/LoginCard.js
-
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
