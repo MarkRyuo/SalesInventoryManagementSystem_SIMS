@@ -2,84 +2,59 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebase';
-import { getDocs, collection, query, where } from "firebase/firestore";
+import LoginStaff from '../../services/LoginStaff'; // Import the LoginStaff service
 
+//* Child
 function SLoginCard() {
     const navigate = useNavigate();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [username, setUsername] = useState(""); // State for username
+    const [password, setPassword] = useState(""); // State for password
+    const [loading, setLoading] = useState(false); // Loading state
 
     const handleLogin = async (e) => {
-        e.preventDefault();
-        setLoading(true);
+        e.preventDefault(); // Prevent default form submission
+        setLoading(true); // Start loading
         console.log("Attempting to log in with:", username, password);
 
-        try {
-            const staffCollection = collection(db, "staff");
-            const staffQuery = query(staffCollection, where("username", "==", username));
-            const staffSnapshot = await getDocs(staffQuery);
-
-            console.log("Staff Snapshot:", staffSnapshot.docs); // Log the snapshot
-
-            if (staffSnapshot.empty) {
-                alert("Login failed. Username not found.");
-                setLoading(false);
-                return;
-            }
-
-            const userDoc = staffSnapshot.docs[0];
-            const storedPassword = userDoc.data().password;
-
-            if (storedPassword !== password) {
-                alert("Login failed. Incorrect password.");
-                setLoading(false);
-                return;
-            }
-
-            console.log("User logged in successfully");
-            localStorage.setItem('userId', userDoc.id);
-            navigate("/SDashboard");
-
-        } catch (error) {
-            console.error("Login error:", error.message);
-            alert("Login failed. Please try again.");
-            setLoading(false);
-        }
+        // Call LoginStaff with the provided username and password
+        await LoginStaff(username, password);
+        setLoading(false); // Stop loading after the login attempt
     };
 
     return (
         <>
             <Form onSubmit={handleLogin}>
+                {/* Username */}
                 <FloatingLabel controlId="floatingInput" label="Username" className="mb-4">
                     <Form.Control
                         type="text"
                         placeholder='Username'
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={username} // Bind value to state
+                        onChange={(e) => setUsername(e.target.value)} // Update username state
                         required
                     />
                 </FloatingLabel>
 
+                {/* Password */}
                 <FloatingLabel controlId="floatingPassword" label="Password">
                     <Form.Control
                         type="password"
                         placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={password} // Bind value to state
+                        onChange={(e) => setPassword(e.target.value)} // Update password state
                         required
                     />
                 </FloatingLabel>
 
+                {/* Button of Login */}
                 <Button
                     variant="primary"
                     style={{ width: "70%", marginTop: "20px" }}
-                    type="submit"
+                    type="submit" // Change to submit type for form submission
                     size='lg'
-                    disabled={loading}
+                    disabled={loading} // Disable button while loading
                 >
-                    {loading ? 'Logging in...' : 'Login'}
+                    {loading ? 'Logging in...' : 'Login'} {/* Show loading text */}
                 </Button>
             </Form>
         </>
