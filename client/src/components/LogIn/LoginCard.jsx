@@ -1,45 +1,23 @@
-// src/components/LoginCard.js
+// LoginCard.jsx
 
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebase';
-import { getDocs, collection, query, where } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // Importing signInWithEmailAndPassword
 
 export const LoginCard = () => {
     const navigate = useNavigate();
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState(""); // Changed to email
     const [password, setPassword] = useState("");
 
     const handleLogin = async () => {
+        const auth = getAuth();
         try {
-            // Access the users collection
-            const usersCollection = collection(db, "users");
-
-            // Create a query to find the user by username
-            const q = query(usersCollection, where("username", "==", username));
-            const querySnapshot = await getDocs(q);
-
-            // Check if the user exists
-            if (querySnapshot.empty) {
-                alert("Login failed. Username not found.");
-                return;
-            }
-
-            // Get the first matching user document
-            const userDoc = querySnapshot.docs[0];
-            const storedPassword = userDoc.data().password;
-
-            // Check if the password matches
-            if (storedPassword !== password) {
-                alert("Login failed. Incorrect password.");
-                return;
-            }
-
-            // Successful login
+            // Sign in the user
+            await signInWithEmailAndPassword(auth, email, password);
             console.log("User logged in successfully");
-            navigate("/DashboardPage"); // Navigate to dashboard or profile
+            navigate("/DashboardPage"); // Navigate to the dashboard after successful login
         } catch (error) {
             console.error("Login error:", error.message);
             alert("Login failed. Please try again.");
@@ -48,13 +26,13 @@ export const LoginCard = () => {
 
     return (
         <Form>
-            {/* Username Field */}
-            <FloatingLabel controlId="floatingInput" label="Username" className="mb-4">
+            {/* Email Field */}
+            <FloatingLabel controlId="floatingInput" label="Email" className="mb-4">
                 <Form.Control
-                    type="text"
-                    placeholder='Username'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    type="email"
+                    placeholder='Email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)} // Updated to email input
                 />
             </FloatingLabel>
 

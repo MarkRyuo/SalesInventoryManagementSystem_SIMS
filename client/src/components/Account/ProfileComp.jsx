@@ -1,48 +1,58 @@
-// src/components/ProfileComp.js
+// ProfileComp.jsx
 
 import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown, Spinner } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { getAuth, updatePassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from '../../firebase'; // Import Firebase configuration
 
 const ProfileComp = () => {
-    const auth = getAuth(); // Get the Auth instance
-    const [user, setUser] = useState(""); // State for user
+    const auth = getAuth();
+    const [user, setUser] = useState(null);
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [gender, setGender] = useState('');
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(true); // Loading state
+    const [loading, setLoading] = useState(true);
+
+    // Set persistence for authentication
+    useEffect(() => {
+        setPersistence(auth, browserLocalPersistence)
+            .then(() => {
+                console.log("Persistence set to local");
+            })
+            .catch((error) => {
+                console.error("Persistence error:", error);
+            });
+    }, [auth]);
 
     // Listen for authentication state changes
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(currentUser => {
-            console.log("Current User:", currentUser); // Debugging line
-            setUser(currentUser); // Set user state when authentication state changes
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            console.log("Current User in ProfileComp:", currentUser);
+            setUser(currentUser);
             if (currentUser) {
-                console.log("User is logged in"); // Confirm user is logged in
-                fetchUserData(currentUser.uid); // Fetch user data
+                console.log("User is logged in");
+                fetchUserData(currentUser.uid);
             } else {
                 console.log("User is not logged in.");
-                setLoading(false); // Set loading to false if user is not logged in
+                setLoading(false);
             }
         });
 
-        return () => unsubscribe(); // Clean up the listener on unmount
+        return () => unsubscribe();
     }, [auth]);
 
     // Fetch user data from Firestore
     const fetchUserData = async (uid) => {
-        setLoading(true); // Set loading to true while fetching data
+        setLoading(true);
         const userDocRef = doc(db, "users", uid);
         const userDoc = await getDoc(userDocRef);
 
         if (userDoc.exists()) {
             const userData = userDoc.data();
-            console.log("Fetched User Data:", userData); // Log user data
-            // Set state with fetched data
+            console.log("Fetched User Data:", userData);
             setFirstname(userData.firstname || "");
             setLastname(userData.lastname || "");
             setGender(userData.gender || "");
@@ -50,7 +60,7 @@ const ProfileComp = () => {
         } else {
             console.log("User document does not exist.");
         }
-        setLoading(false); // Set loading to false after fetching data
+        setLoading(false);
     };
 
     const handleGenderSelect = (eventKey) => {
@@ -68,6 +78,7 @@ const ProfileComp = () => {
 
             // Update password if provided
             if (password) {
+                // You may need to use re-authentication if updating the password
                 await updatePassword(user, password);
             }
 
