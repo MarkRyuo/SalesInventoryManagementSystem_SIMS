@@ -13,9 +13,9 @@ function SLoginCard() {
     const [error, setError] = useState(""); //* State for error messages
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // Prevent default form submission
-        setLoading(true); // Start loading
-        setError(""); // Reset error message
+        e.preventDefault(); //? Prevent default form submission
+        setLoading(true); //? Start loading
+        setError(""); //? Reset error message
         console.log("Attempting to log in with:", username, password);
 
         try {
