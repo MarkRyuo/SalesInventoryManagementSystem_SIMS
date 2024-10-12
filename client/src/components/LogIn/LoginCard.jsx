@@ -26,7 +26,7 @@ export const LoginCard = () => {
     };
 
     return (
-        
+
         <Form onSubmit={handleLogin}>
             <FloatingLabel controlId="floatingInput" label="Username" className="mb-4">
                 <Form.Control
@@ -58,5 +58,6 @@ export const LoginCard = () => {
                 {loading ? "Loading..." : "Login"}
             </Button>
         </Form>
+        
     );
 };
