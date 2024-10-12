@@ -40,7 +40,7 @@ const ProfileComp = () => {
             }
 
             try {
-                const userDocRef = doc(db, 'admin', userId);
+                const userDocRef = doc(db, 'admins', userId);
                 const userDoc = await getDoc(userDocRef);
 
                 if (userDoc.exists()) {
