@@ -18,9 +18,8 @@ const LoginUser = async (username, password) => {
 
         // Check if the admin exists
         if (querySnapshot.empty) {
-            alert("Login failed. Admin username not found.");
             console.log("Username not found.");
-            return;
+            throw new Error("Admin username not found."); // Throw an error for non-existent username
         }
 
         // Get the first matching admin document
@@ -30,9 +29,8 @@ const LoginUser = async (username, password) => {
 
         // Check if the password matches
         if (storedPassword !== password) {
-            alert("Login failed. Incorrect password.");
             console.log("Incorrect password.");
-            return;
+            throw new Error("Incorrect password."); // Throw an error for incorrect password
         }
 
         // Successful login
@@ -42,7 +40,7 @@ const LoginUser = async (username, password) => {
 
     } catch (error) {
         console.error("Login error:", error.message);
-        alert("Login failed. Please try again.");
+        throw error; // Rethrow the error to be caught in handleLogin
     }
 };
 
