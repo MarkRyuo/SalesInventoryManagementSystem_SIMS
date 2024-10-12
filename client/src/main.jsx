@@ -13,6 +13,7 @@ import SLogin from './pages/StaffPages/SLogin.jsx';
 import SDashboard from './pages/StaffPages/SDashboard.jsx';
 import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
 import ForgotPassword from './components/LogIn/ForgotPassword.jsx';
+import ResetPassword from './services/ResetPassword.jsx';
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "ForgotPassword",
     element: <ForgotPassword /> ,
+  },
+  {
+    path: "ResetPassword",
+    element: <ResetPassword /> ,
   },
 
 ]);
