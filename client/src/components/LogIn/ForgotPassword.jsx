@@ -21,7 +21,7 @@ const ForgotPassword = () => {
             setMessage("Password reset email sent!");
             // Navigate back to login after a delay
             setTimeout(() => {
-                navigate("/LoginPage"); // Adjust the path as necessary
+                navigate("/"); // Adjust the path as necessary
             }, 2000);
         } catch (error) {
             setMessage("Error sending password reset email: " + error.message);
