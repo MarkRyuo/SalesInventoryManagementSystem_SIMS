@@ -2,8 +2,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, db } from '../../firebase'; // Import Firebase configuration
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { db } from '../../firebase'; // Import Firebase configuration
 import { getDocs, collection, query, where } from "firebase/firestore";
 
 export const LoginCard = () => {
@@ -25,11 +24,7 @@ export const LoginCard = () => {
             }
 
             // Extract the email from the user document
-            const userDoc = querySnapshot.docs[0];
-            const userEmail = userDoc.data().email;
-
             // Authenticate using the found email and provided password
-            await signInWithEmailAndPassword(auth, userEmail, password);
             navigate("/DashboardPage");
         } catch (error) {
             console.error("Login error:", error.message);
