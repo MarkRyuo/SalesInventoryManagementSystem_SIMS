@@ -1,62 +1,52 @@
-import  { useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+import { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
-const ResetPassword = () => {
-    const [newPassword, setNewPassword] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+const ForgotPassword = () => {
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+    const auth = getAuth();
+    const navigate = useNavigate();
 
-    const handleResetPassword = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const oobCode = urlParams.get('oobCode'); // Get the token from the URL
-
-        if (!oobCode) {
-            setErrorMessage("Invalid reset link.");
-            return;
-        }
+        setLoading(true);
+        setMessage("");
 
         try {
-            // Confirm the password reset with the token and new password
-            await firebase.auth().confirmPasswordReset(oobCode, newPassword);
-
-            // After resetting the password, update the Firestore database
-            const user = firebase.auth().currentUser;
-            if (user) {
-                // Update the user document in Firestore
-                const userRef = firebase.firestore().collection('admins').doc(user.uid); // Assuming 'admins' is your collection
-                await userRef.update({
-                    password: newPassword // Update the password field or any other relevant fields
-                });
-            }
-
-            setSuccessMessage("Password has been reset successfully!");
-            setNewPassword(''); // Clear the input
+            await sendPasswordResetEmail(auth, email);
+            setMessage("Password reset email sent! Please check your inbox.");
+            // Optionally, navigate back to login
+            setTimeout(() => {
+                navigate("/"); // Adjust the path as necessary
+            }, 2000);
         } catch (error) {
-            setErrorMessage("Error resetting password: " + error.message);
+            setMessage("Error sending password reset email: " + error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div>
-            <h2>Reset Password</h2>
-            <form onSubmit={handleResetPassword}>
-                <input
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="Enter new password"
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <button type="submit">Reset Password</button>
-            </form>
-            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-        </div>
+            </Form.Group>
+            <Button variant="primary" type="submit" disabled={loading}>
+                {loading ? "Sending..." : "Send Password Reset Email"}
+            </Button>
+            {message && <p>{message}</p>}
+        </Form>
     );
 };
 
-export default ResetPassword;
+export default ForgotPassword;
