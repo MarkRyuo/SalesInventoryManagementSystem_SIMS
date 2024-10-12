@@ -1,5 +1,3 @@
-// src/services/LoginUser.js
-
 import { db } from '../firebase';
 import { getDocs, collection, query, where } from "firebase/firestore";
 

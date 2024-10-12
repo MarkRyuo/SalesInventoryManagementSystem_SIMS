@@ -21,6 +21,7 @@ export const LoginCard = () => {
             navigate("/DashboardPage"); //? Navigate to dashboard after successful login
         } catch (error) {
             console.error("Login error:", error);
+            alert("Invalid username or password. Please try again."); // Alert on failed login
         } finally {
             setLoading(false); //? Stop loading
         }
