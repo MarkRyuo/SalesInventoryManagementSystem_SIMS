@@ -2,44 +2,47 @@ import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 're
 import { useState, useEffect } from 'react';
 import { getAuth, updateEmail, updatePassword, sendEmailVerification } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db, auth } from '../../firebase'; // Import Firebase configuration
+import { db } from '../../firebase'; // Import Firebase configuration
 
 const ProfileComp = () => {
-    const user = auth.currentUser; // Get current user
-
-    // State variables
+    const auth = getAuth(); // Get the Auth instance
+    const [user, setUser] = useState(null); // State for user
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [gender, setGender] = useState('');
-    const [email, setEmail] = useState(user?.email || "");
+    const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    // Fetch user data from Firestore when component mounts
+    // Listen for authentication state changes
     useEffect(() => {
-        const fetchUserData = async () => {
-            if (user) {
-                const userDocRef = doc(db, "users", user.uid);
-                const userDoc = await getDoc(userDocRef);
-
-                if (userDoc.exists()) {
-                    const userData = userDoc.data();
-                    // Set state with fetched data
-                    setFirstname(userData.firstname || "");
-                    setLastname(userData.lastname || "");
-                    setGender(userData.gender || "");
-                    setUsername(userData.username || "");
-                    setEmail(userData.email || user.email); // Default to user's email
-                } else {
-                    console.log("User document does not exist.");
-                }
-            } else {
-                console.log("No user is logged in.");
+        const unsubscribe = auth.onAuthStateChanged(currentUser => {
+            setUser(currentUser); // Set user state when authentication state changes
+            if (currentUser) {
+                setEmail(currentUser.email || ""); // Default to user's email
+                fetchUserData(currentUser.uid); // Fetch user data
             }
-        };
+        });
 
-        fetchUserData();
-    }, [user]);
+        return () => unsubscribe(); // Clean up the listener on unmount
+    }, [auth]);
+
+    // Fetch user data from Firestore
+    const fetchUserData = async (uid) => {
+        const userDocRef = doc(db, "users", uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (userDoc.exists()) {
+            const userData = userDoc.data();
+            // Set state with fetched data
+            setFirstname(userData.firstname || "");
+            setLastname(userData.lastname || "");
+            setGender(userData.gender || "");
+            setUsername(userData.username || "");
+        } else {
+            console.log("User document does not exist.");
+        }
+    };
 
     const handleGenderSelect = (eventKey) => {
         setGender(eventKey);
@@ -52,15 +55,7 @@ const ProfileComp = () => {
         }
 
         try {
-            // Check if the user document exists
             const userDocRef = doc(db, "users", user.uid);
-            const userDoc = await getDoc(userDocRef);
-
-            if (!userDoc.exists()) {
-                console.error("User document does not exist.");
-                alert("User document does not exist. Cannot update profile.");
-                return;
-            }
 
             // Update email in Firebase Auth and Firestore
             if (email !== user.email) {
@@ -72,7 +67,6 @@ const ProfileComp = () => {
             if (password) {
                 await updatePassword(user, password);
                 // Optionally, avoid storing passwords in Firestore for security reasons
-                // await updateDoc(userDocRef, { password });
             }
 
             // Update other details in Firestore
