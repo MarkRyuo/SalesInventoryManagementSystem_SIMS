@@ -1,6 +1,6 @@
+// ResetPassword.js
 import { useState } from "react";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { app } from "../firebase"; // Import your Firebase configuration
+import axios from "axios";
 
 const ResetPassword = () => {
     const [email, setEmail] = useState("");
@@ -8,13 +8,20 @@ const ResetPassword = () => {
     const [error, setError] = useState("");
 
     const handlePasswordReset = async () => {
-        const auth = getAuth(app); // Initialize auth using the app instance
         try {
-            await sendPasswordResetEmail(auth, email);
-            setMessage("Password reset email sent! Please check your inbox.");
+            // Generate a random verification code
+            const code = Math.floor(100000 + Math.random() * 900000).toString();
+
+            // Call your server endpoint to send the verification code
+            const response = await axios.post('http://localhost:3000/send-code', {
+                email: email,
+                code: code
+            });
+
+            setMessage(response.data); // Success message from server
             setError("");
-        } catch (error) {
-            setError(error.message);
+        } catch (err) {
+            setError(err.response ? err.response.data : "Error sending code.");
             setMessage("");
         }
     };
@@ -28,7 +35,7 @@ const ResetPassword = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
-            <button onClick={handlePasswordReset}>Send Reset Email</button>
+            <button onClick={handlePasswordReset}>Send Reset Code</button>
             {message && <p style={{ color: "green" }}>{message}</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
