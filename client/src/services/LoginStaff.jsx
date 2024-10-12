@@ -24,12 +24,12 @@ const LoginStaff = async (username, password, navigate) => {
         console.log("Staff User Document Data:", staffDoc.data()); //? Log user data
         const storedPassword = staffDoc.data().password;
 
-        // Check if the password matches
+        //? Check if the password matches
         if (storedPassword.trim() !== password.trim()) {
             throw new Error("Incorrect password."); //? Throw error instead of alert
         }
 
-        // Successful login
+        //? Successful login
         const staffId = staffDoc.id; // Use Firestore document ID as staff ID
         localStorage.setItem('staffId', staffId); // Store the staff user's UID
         console.log("Staff user logged in:", staffId);
