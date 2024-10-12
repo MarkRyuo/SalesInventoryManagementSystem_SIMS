@@ -1,8 +1,8 @@
-
 import { db } from '../firebase'; //? firebaseConfig
 import { getDocs, collection, query, where } from "firebase/firestore";
 
 const LoginStaff = async (username, password, navigate) => {
+    
     try {
         // Access the staff collection
         const staffCollection = collection(db, "staffs");
