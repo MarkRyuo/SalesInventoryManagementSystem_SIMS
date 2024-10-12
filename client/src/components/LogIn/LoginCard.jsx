@@ -1,3 +1,5 @@
+// src/components/LoginCard.js
+
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
@@ -29,9 +31,6 @@ export const LoginCard = () => {
             const userDoc = querySnapshot.docs[0];
             const storedPassword = userDoc.data().password;
 
-            // Log the stored password for debugging
-            console.log("Stored Password:", storedPassword); // Debugging line
-
             // Check if the password matches
             if (storedPassword !== password) {
                 alert("Login failed. Incorrect password.");
@@ -39,7 +38,8 @@ export const LoginCard = () => {
             }
 
             // Successful login
-            navigate("/DashboardPage");
+            console.log("User logged in successfully");
+            navigate("/DashboardPage"); // Navigate to dashboard or profile
         } catch (error) {
             console.error("Login error:", error.message);
             alert("Login failed. Please try again.");
