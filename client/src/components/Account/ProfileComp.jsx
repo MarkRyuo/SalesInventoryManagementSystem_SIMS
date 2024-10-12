@@ -60,12 +60,6 @@ const ProfileComp = () => {
         try {
             const userDocRef = doc(db, "users", user.uid);
 
-            // Update email in Firebase Auth and Firestore
-            if (email !== user.email) {
-                await updateEmail(user, email);
-                await updateDoc(userDocRef, { email });
-            }
-
             // Update password if provided
             if (password) {
                 await updatePassword(user, password);
@@ -84,13 +78,6 @@ const ProfileComp = () => {
         } catch (error) {
             console.error("Error updating profile:", error);
             alert("Error updating profile: " + error.message);
-        }
-    };
-
-    const handleEmailVerification = async () => {
-        if (user && !user.emailVerified) {
-            await sendEmailVerification(user);
-            alert("Verification email sent. Please check your inbox.");
         }
     };
 
