@@ -7,6 +7,7 @@ import { db, auth } from '../../firebase'; // Import Firebase configuration
 const ProfileComp = () => {
     const user = auth.currentUser; // Get current user
 
+    // State variables
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [gender, setGender] = useState('');
@@ -27,7 +28,11 @@ const ProfileComp = () => {
                     setLastname(userData.lastname || "");
                     setGender(userData.gender || "");
                     setUsername(userData.username || "");
+                } else {
+                    console.log("User document does not exist.");
                 }
+            } else {
+                console.log("No user is logged in.");
             }
         };
 
@@ -74,6 +79,7 @@ const ProfileComp = () => {
         }
     };
 
+    // Render Profile Form
     return (
         <Form>
             <Row style={{ width: "100%", margin: 0, padding: 0 }}>
