@@ -34,7 +34,7 @@ const LoginStaff = async (username, password, navigate) => {
         localStorage.setItem('staffId', staffId); //? Store the staff user's UID
         console.log("Staff user logged in:", staffId);
 
-        // Redirect after successful login
+        //? Redirect after successful login
         navigate("/SDashboard"); // Navigate to staff dashboard
 
     } catch (error) {
