@@ -38,7 +38,7 @@ const StaffComp = () => {
             const staffDocRef = doc(db, 'staffs', staffData.username); // Using username as the document ID
             await setDoc(staffDocRef, staffData);
             alert('Staff added successfully.');
-            // Optionally, clear the form fields after successful addition
+            //? Optionally, clear the form fields after successful addition
             setStaffData({
                 firstname: '',
                 lastname: '',
