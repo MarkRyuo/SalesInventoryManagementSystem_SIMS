@@ -1,5 +1,5 @@
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Alert } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginUser from '../../services/LoginUser';
@@ -10,10 +10,12 @@ export const LoginCard = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(""); // State for error message
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setError(""); // Reset error state
 
         try {
             //? Attempt login through the LoginUser service
@@ -21,7 +23,7 @@ export const LoginCard = () => {
             navigate("/DashboardPage"); //? Navigate to dashboard after successful login
         } catch (error) {
             console.error("Login error:", error);
-            alert("Invalid username or password. Please try again."); // Alert on failed login
+            setError("Invalid username or password. Please try again."); // Set error message
         } finally {
             setLoading(false); //? Stop loading
         }
@@ -48,6 +50,12 @@ export const LoginCard = () => {
                     required
                 />
             </FloatingLabel>
+
+            {error && ( // Conditionally render the error message
+                <Alert variant="danger" style={{ marginTop: '10px' }}>
+                    {error}
+                </Alert>
+            )}
 
             <Button
                 variant="primary"
