@@ -12,24 +12,29 @@ export const LoginCard = () => {
 
     const handleLogin = async () => {
         try {
+            // Access the users collection
             const usersCollection = collection(db, "users");
+            // Create a query to find the user by username
             const q = query(usersCollection, where("username", "==", username));
             const querySnapshot = await getDocs(q);
 
+            // Check if the user exists
             if (querySnapshot.empty) {
                 alert("Login failed. Username not found.");
                 return;
             }
 
+            // Get the first matching user document
             const userDoc = querySnapshot.docs[0];
             const storedPassword = userDoc.data().password;
 
-            // Logging for debugging
+            // Debugging logs
             console.log("Input Username:", username);
             console.log("Stored Username:", userDoc.data().username);
             console.log("Input Password:", password);
             console.log("Stored Password:", storedPassword);
 
+            // Check if the password matches
             if (storedPassword !== password) {
                 alert("Login failed. Incorrect password.");
                 return;
@@ -43,10 +48,9 @@ export const LoginCard = () => {
         }
     };
 
-
     return (
         <Form>
-            {/* Username */}
+            {/* Username Field */}
             <FloatingLabel controlId="floatingInput" label="Username" className="mb-4">
                 <Form.Control
                     type="text"
@@ -56,7 +60,7 @@ export const LoginCard = () => {
                 />
             </FloatingLabel>
 
-            {/* Password */}
+            {/* Password Field */}
             <FloatingLabel controlId="floatingPassword" label="Password">
                 <Form.Control
                     type="password"
