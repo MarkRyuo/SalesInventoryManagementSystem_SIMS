@@ -7,9 +7,9 @@ import LoginStaff from '../../services/LoginStaff'; //? Import the LoginStaff se
 //* Child
 function SLoginCard() {
     const navigate = useNavigate();
-    const [username, setUsername] = useState(""); // State for username
-    const [password, setPassword] = useState(""); // State for password
-    const [loading, setLoading] = useState(false); // Loading state
+    const [username, setUsername] = useState(""); //* State for username
+    const [password, setPassword] = useState(""); //* State for password
+    const [loading, setLoading] = useState(false); //* Loading state
     const [error, setError] = useState(""); // State for error messages
 
     const handleLogin = async (e) => {
