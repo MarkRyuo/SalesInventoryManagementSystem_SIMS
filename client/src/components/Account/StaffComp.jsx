@@ -1,7 +1,7 @@
 import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../firebase'; // Make sure to adjust the import path as needed
+import { db } from '../../firebase'; // ? firebase Config
 
 const StaffComp = () => {
     const [staffData, setStaffData] = useState({
@@ -11,9 +11,9 @@ const StaffComp = () => {
         password: '',
         gender: ''
     });
-    const [userDetails, setUserDetails] = useState(null); // State to hold user details
+    const [userDetails, setUserDetails] = useState(null); //? State to hold user details
 
-    // Simulated user data (replace this with your actual user data fetching logic)
+    //? Simulated user data (replace this with your actual user data fetching logic)
     useEffect(() => {
         const loggedInUser = JSON.parse(localStorage.getItem('userDetails'));
         if (loggedInUser) {
@@ -21,12 +21,12 @@ const StaffComp = () => {
         }
     }, []);
 
-    // Function to handle gender selection
+    //? Function to handle gender selection
     const handleGenderSelect = (eventKey) => {
         setStaffData({ ...staffData, gender: eventKey });
     };
 
-    // Function to handle input changes
+    //? Function to handle input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setStaffData({ ...staffData, [name]: value });
