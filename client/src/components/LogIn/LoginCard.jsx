@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginUser from '../../services/LoginUser';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 
 export const LoginCard = () => {
     const navigate = useNavigate();
@@ -26,7 +27,6 @@ export const LoginCard = () => {
     };
 
     return (
-
         <Form onSubmit={handleLogin}>
             <FloatingLabel controlId="floatingInput" label="Username" className="mb-4">
                 <Form.Control
@@ -57,7 +57,11 @@ export const LoginCard = () => {
             >
                 {loading ? "Loading..." : "Login"}
             </Button>
+
+            {/* Link to Forgot Password */}
+            <div style={{ marginTop: '10px' }}>
+                <Link to="/ForgotPassword">Forgot Password?</Link>
+            </div>
         </Form>
-        
     );
 };
