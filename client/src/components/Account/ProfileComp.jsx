@@ -166,10 +166,6 @@ const ProfileComp = () => {
                 />
             </Form.Group>
 
-            <Button variant="light" size='sm' className='ms-2' onClick={handleEmailVerification}>
-                Connect to Email
-            </Button>
-
             <div className='mt-3'>
                 <Button variant='primary' className='ms-2' onClick={handleSave}>Save</Button>
             </div>
