@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase'; // Ensure you import your Firebase config
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase'; // Import your Firestore instance
 
 function SLoginCard() {
     const navigate = useNavigate();
@@ -14,10 +16,21 @@ function SLoginCard() {
         e.preventDefault(); // Prevent default form submission
 
         try {
-            // Sign in with Firebase Authentication
-            await signInWithEmailAndPassword(auth, username, password);
-            // Navigate to the dashboard on successful login
-            navigate("/SDashboard");
+            // Fetch user document using the username
+            const userDocRef = doc(db, 'users', username);
+            const userDoc = await getDoc(userDocRef);
+
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+                const email = userData.email; // Assuming you have an email field in your user document
+
+                // Sign in with Firebase Authentication
+                await signInWithEmailAndPassword(auth, email, password);
+                // Navigate to the dashboard on successful login
+                navigate("/SDashboard");
+            } else {
+                setError("User not found. Please check your username.");
+            }
         } catch (err) {
             console.error("Login error:", err);
             setError(err.message); // Set error message
