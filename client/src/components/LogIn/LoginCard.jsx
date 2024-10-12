@@ -27,7 +27,7 @@ export const LoginCard = () => {
             const userDoc = querySnapshot.docs[0];
             const storedPassword = userDoc.data().password;
 
-            if (storedPassword !== password) {
+            if (storedPassword == password) {
                 alert("Login failed. Incorrect password.");
                 return;
             }
