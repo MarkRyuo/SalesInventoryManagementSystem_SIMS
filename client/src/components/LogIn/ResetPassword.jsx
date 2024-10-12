@@ -1,7 +1,6 @@
-import  { useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+// src/ResetPassword.js
+import { useState } from 'react';
+import { auth } from '../../firebase'; // Use the correct imports
 
 const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState('');
@@ -21,17 +20,7 @@ const ResetPassword = () => {
 
         try {
             // Confirm the password reset with the token and new password
-            await firebase.auth().confirmPasswordReset(oobCode, newPassword);
-
-            // After resetting the password, update the Firestore database
-            const user = firebase.auth().currentUser;
-            if (user) {
-                // Update the user document in Firestore
-                const userRef = firebase.firestore().collection('admins').doc(user.uid); // Assuming 'admins' is your collection
-                await userRef.update({
-                    password: newPassword // Update the password field or any other relevant fields
-                });
-            }
+            await auth.confirmPasswordReset(oobCode, newPassword);
 
             setSuccessMessage("Password has been reset successfully!");
             setNewPassword(''); // Clear the input
