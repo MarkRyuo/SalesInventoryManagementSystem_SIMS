@@ -39,7 +39,7 @@ function SLoginCard() {
                         type="text"
                         placeholder='Username'
                         value={username}
-                        onChange={(e) => setUsername(e.target.value)} // Update username state
+                        onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </FloatingLabel>
