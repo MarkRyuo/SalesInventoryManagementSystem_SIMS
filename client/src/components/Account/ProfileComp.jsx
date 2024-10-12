@@ -1,4 +1,4 @@
-import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown, Spinner } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { getAuth, updatePassword } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
@@ -12,6 +12,7 @@ const ProfileComp = () => {
     const [gender, setGender] = useState('');
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(true); // Loading state
 
     // Listen for authentication state changes
     useEffect(() => {
@@ -23,6 +24,7 @@ const ProfileComp = () => {
                 fetchUserData(currentUser.uid); // Fetch user data
             } else {
                 console.log("User is not logged in.");
+                setLoading(false); // Set loading to false if user is not logged in
             }
         });
 
@@ -31,6 +33,7 @@ const ProfileComp = () => {
 
     // Fetch user data from Firestore
     const fetchUserData = async (uid) => {
+        setLoading(true); // Set loading to true while fetching data
         const userDocRef = doc(db, "users", uid);
         const userDoc = await getDoc(userDocRef);
 
@@ -45,6 +48,7 @@ const ProfileComp = () => {
         } else {
             console.log("User document does not exist.");
         }
+        setLoading(false); // Set loading to false after fetching data
     };
 
     const handleGenderSelect = (eventKey) => {
@@ -83,7 +87,12 @@ const ProfileComp = () => {
     // Render Profile Form
     return (
         <Form>
-            {user ? (
+            {loading ? (
+                <div className="text-center">
+                    <Spinner animation="border" role="status" />
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            ) : user ? (
                 <>
                     <Row style={{ width: "100%", margin: 0, padding: 0 }}>
                         <Col lg={6}>
