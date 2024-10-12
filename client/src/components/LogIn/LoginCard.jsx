@@ -29,14 +29,18 @@ export const LoginCard = () => {
             const userDoc = querySnapshot.docs[0];
             const storedPassword = userDoc.data().password;
 
+            // Trim both inputs to avoid issues with whitespace
+            const trimmedPassword = password.trim();
+            const trimmedStoredPassword = storedPassword.trim();
+
             // Debugging logs
             console.log("Input Username:", username);
             console.log("Stored Username:", userDoc.data().username);
-            console.log("Input Password:", password);
-            console.log("Stored Password:", storedPassword);
+            console.log("Input Password:", trimmedPassword);
+            console.log("Stored Password:", trimmedStoredPassword);
 
             // Check if the password matches
-            if (storedPassword !== password) {
+            if (trimmedStoredPassword !== trimmedPassword) {
                 alert("Login failed. Incorrect password.");
                 return;
             }
