@@ -2,7 +2,7 @@ import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 're
 import { useState } from 'react';
 import { getAuth, updateEmail, updatePassword, sendEmailVerification } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
-import { db, auth } from './firebase'; // Import Firebase configuration
+import { db, auth } from '../../firebase'; // Import Firebase configuration
 
 const ProfileComp = () => {
     const user = auth.currentUser;

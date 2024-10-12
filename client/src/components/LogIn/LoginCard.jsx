@@ -2,7 +2,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from './firebase'; // Import Firebase configuration
+import { auth } from '../../firebase'; // Import Firebase configuration
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export const LoginCard = () => {
