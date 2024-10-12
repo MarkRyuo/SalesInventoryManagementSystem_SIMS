@@ -8,7 +8,7 @@ import { db } from '../../firebase'; // Import Firebase configuration
 
 const ProfileComp = () => {
     const auth = getAuth(); // Get the Auth instance
-    const [user, setUser] = useState(); // State for user
+    const [user, setUser] = useState(""); // State for user
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [gender, setGender] = useState('');
