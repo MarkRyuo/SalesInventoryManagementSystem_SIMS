@@ -1,45 +1,41 @@
-// ResetPassword.js
-import { useState } from "react";
-import axios from "axios";
+import { useState } from 'react';
+import axios from 'axios';
 
-const ResetPassword = () => {
-    const [email, setEmail] = useState("");
-    const [message, setMessage] = useState("");
-    const [error, setError] = useState("");
+function ResetPasswordPage() {
+    const [newPassword, setNewPassword] = useState('');
+    const [error, setError] = useState(null);
 
-    const handlePasswordReset = async () => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const token = queryParams.get('token');
+    const email = queryParams.get('adminId');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
         try {
-            // Generate a random verification code
-            const code = Math.floor(100000 + Math.random() * 900000).toString();
-
-            // Call your server endpoint to send the verification code
-            const response = await axios.post('http://localhost:3000/send-code', {
-                email: email,
-                code: code
-            });
-
-            setMessage(response.data); // Success message from server
-            setError("");
+            await axios.post('/api/reset-password', { email, token, newPassword });
+            alert('Password reset successfully!');
         } catch (err) {
-            setError(err.response ? err.response.data : "Error sending code.");
-            setMessage("");
+            setError(err.response.data.message);
         }
     };
 
     return (
         <div>
             <h2>Reset Password</h2>
-            <input
-                type="email"
-                placeholder="Enter admin email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <button onClick={handlePasswordReset}>Send Reset Code</button>
-            {message && <p style={{ color: "green" }}>{message}</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p>{error}</p>}
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="New Password"
+                    required
+                />
+                <button type="submit">Reset Password</button>
+            </form>
         </div>
     );
-};
+}
 
-export default ResetPassword;
+export default ResetPasswordPage;
