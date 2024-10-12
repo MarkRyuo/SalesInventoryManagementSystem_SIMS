@@ -52,21 +52,31 @@ const ProfileComp = () => {
         }
 
         try {
+            // Check if the user document exists
+            const userDocRef = doc(db, "users", user.uid);
+            const userDoc = await getDoc(userDocRef);
+
+            if (!userDoc.exists()) {
+                console.error("User document does not exist.");
+                alert("User document does not exist. Cannot update profile.");
+                return;
+            }
+
             // Update email in Firebase Auth and Firestore
             if (email !== user.email) {
                 await updateEmail(user, email);
-                await updateDoc(doc(db, "users", user.uid), { email });
+                await updateDoc(userDocRef, { email });
             }
 
             // Update password if provided
             if (password) {
                 await updatePassword(user, password);
-                // You might want to remove this line for security reasons
-                // await updateDoc(doc(db, "users", user.uid), { password });
+                // Optionally, avoid storing passwords in Firestore for security reasons
+                // await updateDoc(userDocRef, { password });
             }
 
             // Update other details in Firestore
-            await updateDoc(doc(db, "users", user.uid), {
+            await updateDoc(userDocRef, {
                 firstname,
                 lastname,
                 gender,
