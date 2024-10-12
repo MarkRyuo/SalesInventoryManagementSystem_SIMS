@@ -27,11 +27,11 @@ export const LoginCard = () => {
 
             // Get the first matching user document
             const userDoc = querySnapshot.docs[0];
-            const storedPassword = userDoc.Data().password;
+            const storedPassword = userDoc.data().password;
 
             // Debugging logs
             console.log("Input Username:", username);
-            console.log("Stored Username:", userDoc.Data().username);
+            console.log("Stored Username:", userDoc.data().username);
             console.log("Input Password:", password);
             console.log("Stored Password:", storedPassword);
 
