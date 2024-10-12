@@ -1,6 +1,6 @@
 import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { getAuth, updateEmail, updatePassword, sendEmailVerification } from "firebase/auth";
+import { getAuth, updatePassword } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from '../../firebase'; // Import Firebase configuration
 
@@ -10,7 +10,6 @@ const ProfileComp = () => {
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [gender, setGender] = useState('');
-    const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -21,7 +20,6 @@ const ProfileComp = () => {
             setUser(currentUser); // Set user state when authentication state changes
             if (currentUser) {
                 console.log("User is logged in"); // Confirm user is logged in
-                setEmail(currentUser.email || ""); // Default to user's email
                 fetchUserData(currentUser.uid); // Fetch user data
             } else {
                 console.log("User is not logged in.");
@@ -73,7 +71,6 @@ const ProfileComp = () => {
                 lastname,
                 gender,
                 username,
-                email, // Optionally update the email
             });
 
             alert("Profile updated successfully!");
@@ -145,15 +142,6 @@ const ProfileComp = () => {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="email" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </Form.Group>
 
