@@ -1,9 +1,9 @@
-import { db } from '../firebase'; // Adjust the path to your Firebase configuration
-import { getDocs, collection, query, where } from "firebase/firestore";
-import { useNavigate } from 'react-router-dom'; // Import navigate
+// src/services/LoginStaff.js
 
-const LoginStaff = async (username, password) => {
-    const navigate = useNavigate(); // Initialize navigate
+import { db } from '../../firebase'; // Adjust the path to your Firebase configuration
+import { getDocs, collection, query, where } from "firebase/firestore";
+
+const LoginStaff = async (username, password, navigate) => {
     try {
         // Access the staff collection
         const staffCollection = collection(db, "staff");

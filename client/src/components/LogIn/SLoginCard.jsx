@@ -17,7 +17,7 @@ function SLoginCard() {
         console.log("Attempting to log in with:", username, password);
 
         // Call LoginStaff with the provided username and password
-        await LoginStaff(username, password);
+        await LoginStaff(username, password, navigate); // Pass navigate as an argument
         setLoading(false); // Stop loading after the login attempt
     };
 
