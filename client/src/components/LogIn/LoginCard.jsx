@@ -15,7 +15,7 @@ export const LoginCard = () => {
         setLoading(true);
 
         try {
-            // Attempt login through the LoginUser service
+            //? Attempt login through the LoginUser service
             await LoginUser(username, password);
             navigate("/DashboardPage"); // Navigate to dashboard after successful login
         } catch (error) {
