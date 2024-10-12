@@ -22,7 +22,7 @@ function SLoginCard() {
             //? Call LoginStaff with the provided username and password
             await LoginStaff(username, password, navigate); // Pass navigate as an argument
         } catch (err) {
-            // Set error message on failed login
+            //? Set error message on failed login
             setError("Invalid username or password. Please try again.");
             console.error("Login failed:", err);
         } finally {
