@@ -1,7 +1,7 @@
 import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { FcGoogle } from "react-icons/fc";
-import { doc, getDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebase'; // Ensure you import auth from your firebase config
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ const ProfileComp = () => {
         email: ""
     });
     const [isEditing, setIsEditing] = useState(false);
-    const userId = localStorage.getItem('userId'); // Assume this was saved during login
+    const adminId = localStorage.getItem('adminId'); // Assume this was saved during login
 
     // Function to handle gender selection
     const handleGenderSelect = (eventKey) => {
@@ -33,19 +33,19 @@ const ProfileComp = () => {
     // Function to fetch user data
     useEffect(() => {
         const fetchUserData = async () => {
-            if (!userId) {
+            if (!adminId) {
                 alert("No user ID found. Please log in.");
                 navigate("/");
                 return;
             }
 
             try {
-                const userDocRef = doc(db, 'admins', userId);
-                const userDoc = await getDoc(userDocRef);
+                const adminDocRef = doc(db, 'admins', adminId);
+                const adminDoc = await getDoc(adminDocRef);
 
-                if (userDoc.exists()) {
-                    setUserData(userDoc.data());
-                    console.log("Fetched user data:", userDoc.data()); // Log fetched data
+                if (adminDoc.exists()) {
+                    setUserData(adminDoc.data());
+                    console.log("Fetched user data:", adminDoc.data()); // Log fetched data
                 } else {
                     alert("User data not found.");
                     navigate("/login");
@@ -57,14 +57,14 @@ const ProfileComp = () => {
         };
 
         fetchUserData();
-    }, [userId, navigate]);
+    }, [adminId, navigate]);
 
     // Function to save updated user data
     const handleSave = async () => {
         try {
             console.log("Updating user data:", userData); // Log user data
-            const userDocRef = doc(db, 'users', userId);
-            await updateDoc(userDocRef, userData);
+            const adminDocRef = doc(db, 'admins', adminId);
+            await updateDoc(adminDocRef, userData);
             alert("Profile updated successfully.");
             setIsEditing(false);
         } catch (error) {
@@ -80,31 +80,27 @@ const ProfileComp = () => {
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            const userRef = doc(db, 'admin', userId); // Get the reference to the user's document based on the stored userId
+            const adminDocRef = doc(db, 'admins', adminId); // Reference to the admin's document
 
-            // Fetch existing user data
-            const userDoc = await getDoc(userRef);
-            if (userDoc.exists()) {
-                // User already exists, update their Firestore document with Google info
-                await updateDoc(userRef, {
+            // Fetch existing admin data
+            const adminDoc = await getDoc(adminDocRef);
+            if (adminDoc.exists()) {
+                // Admin exists, update their Firestore document with Google info
+                await updateDoc(adminDocRef, {
                     email: user.email,
-                    // Optionally retain or update other fields if needed
-                    // firstname: user.displayName.split(' ')[0] || "",
-                    // lastname: user.displayName.split(' ')[1] || "",
                 });
                 alert("Profile connected to Google account.");
             } else {
-                alert("User not found. Please log in first.");
+                alert("Admin not found. Please log in first.");
                 navigate("/login");
                 return;
             }
 
             console.log("Google Sign-In successful:", user);
-            // Update the local state with the user's info
+            // Update the local state with the admin's info
             setUserData({
-                ...userData, // Retain existing user data
+                ...userData,
                 email: user.email,
-                // Optional: You can update other fields as well
             });
 
         } catch (error) {
@@ -141,7 +137,6 @@ const ProfileComp = () => {
                     </Form.Group>
                 </Col>
             </Row>
-            {/* DropDown (Male or Female) */}
             <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
                 <Form.Control
                     aria-label="Text input with dropdown button"
@@ -163,11 +158,7 @@ const ProfileComp = () => {
                 </DropdownButton>
             </InputGroup>
 
-            {/* Username */}
-            <Form.Group
-                className="mb-3"
-                controlId="username"
-                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+            <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                     type="text"
@@ -178,11 +169,7 @@ const ProfileComp = () => {
                 />
             </Form.Group>
 
-            {/* Password */}
-            <Form.Group
-                className="mb-3"
-                controlId="password"
-                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+            <Form.Group className="mb-3" controlId="password" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                     type="password"
@@ -193,11 +180,7 @@ const ProfileComp = () => {
                 />
             </Form.Group>
 
-            {/* Email */}
-            <Form.Group
-                className="mb-3"
-                controlId="email"
-                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+            <Form.Group className="mb-3" controlId="email" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
                     type="email"
@@ -208,13 +191,11 @@ const ProfileComp = () => {
                 />
             </Form.Group>
 
-            {/* Button Connect to Google */}
             <Button variant="light" size='sm' className='ms-2' onClick={handleGoogleSignIn}>
                 <FcGoogle size={35} className='me-2' />
                 Connect to Google
             </Button>
 
-            {/* Container of button (Save, Edit) */}
             <div className='mt-3'>
                 <Button
                     variant='primary'
@@ -233,6 +214,6 @@ const ProfileComp = () => {
             </div>
         </Form>
     );
-}
+};
 
 export default ProfileComp;
