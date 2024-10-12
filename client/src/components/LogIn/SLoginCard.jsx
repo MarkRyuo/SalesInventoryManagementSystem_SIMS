@@ -62,7 +62,7 @@ function SLoginCard() {
                 <Button
                     variant="primary"
                     style={{ width: "70%", marginTop: "20px" }}
-                    type="submit" // Change to submit type for form submission
+                    type="submit"
                     size='lg'
                     disabled={loading} // Disable button while loading
                 >
