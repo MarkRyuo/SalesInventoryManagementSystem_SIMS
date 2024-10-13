@@ -1,6 +1,6 @@
 //* Local Storage
 
-import { db } from './firebase'; //? firebaseConfig
+import { db } from './firebase.js'; //? firebaseConfig
 import { getDocs, collection, query, where } from "firebase/firestore";
 
 const LoginStaff = async (username, password, navigate) => {
