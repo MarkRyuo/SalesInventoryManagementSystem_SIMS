@@ -1,64 +1,48 @@
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { getFirestore, query, where, getDocs, collection } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
 const ForgotPassword = () => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
-    const db = getFirestore();
+    const auth = getAuth();
+    const navigate = useNavigate();
 
-    const handleVerifyUsername = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setMessage("");
 
         try {
-            const q = query(collection(db, "admins"), where("username", "==", username));
-            const querySnapshot = await getDocs(q);
-
-            if (!querySnapshot.empty) {
-                // Assuming you want to send the email of the first matching document
-                const adminData = querySnapshot.docs[0].data();
-                sendVerificationCode(adminData.email); // Send code to admin's email
-                setMessage("Verification code sent to registered email.");
-            } else {
-                setMessage("Username not found.");
-            }
+            await sendPasswordResetEmail(auth, email);
+            setMessage("Password reset email sent! Please check your inbox.");
+            // Optionally, navigate back to login
+            setTimeout(() => {
+                navigate("/"); // Adjust the path as necessary
+            }, 2000);
         } catch (error) {
-            setMessage("Error verifying username: " + error.message);
+            setMessage("Error sending password reset email: " + error.message);
         } finally {
             setLoading(false);
         }
     };
 
-    const sendVerificationCode = (email) => {
-        // Generate a random verification code
-        const verificationCode = Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit code
-        console.log(`Verification code sent to ${email}: ${verificationCode}`);
-
-        // Optionally, store the verification code temporarily
-        localStorage.setItem('verificationCode', verificationCode);
-
-        // Here, you would integrate with your email sending service
-        // Example: sendEmail(email, verificationCode);
-        // For example, using a service like SendGrid or Firebase Cloud Functions
-    };
-
     return (
-        <Form onSubmit={handleVerifyUsername}>
-            <Form.Group controlId="formBasicUsername">
-                <Form.Label>Username</Form.Label>
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
                 <Form.Control
-                    type="text"
-                    placeholder="Enter your username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                 />
             </Form.Group>
             <Button variant="primary" type="submit" disabled={loading}>
-                {loading ? "Verifying..." : "Send Verification Code"}
+                {loading ? "Sending..." : "Send Password Reset Email"}
             </Button>
             {message && <p>{message}</p>}
         </Form>
