@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Form, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../services/firebase'; // Update path as needed
+import { db } from '../../../services/firebase'; // Update path as needed
 
 const StaffAccountComp = () => {
     const [staffData, setStaffData] = useState(null); // State to hold staff data
