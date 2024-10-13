@@ -2,7 +2,7 @@ import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 're
 import { useState, useEffect } from 'react';
 import { FcGoogle } from "react-icons/fc";
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db, auth } from '../../firebase'; // Ensure you import auth from your firebase config
+import { db, auth } from '../../firebase';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,11 +17,39 @@ const ProfileComp = () => {
         email: ""
     });
     const [isEditing, setIsEditing] = useState(false);
-    const adminId = localStorage.getItem('adminId'); // Assume this was saved during login
+    const [selectedQuestions, setSelectedQuestions] = useState([]); // New state for selected questions
+    const [answers, setAnswers] = useState(['', '', '']); // State for answers corresponding to selected questions
+    const adminId = localStorage.getItem('adminId');
+
+    // Array of questions
+    const questions = [
+        "What is your pet's name?",
+        "What was the name of your first school?",
+        "What is your favorite color?",
+        "What is your mother's maiden name?",
+        "What city were you born in?",
+        "What is the name of your childhood best friend?",
+        "What was your first job?",
+        "What is your favorite book?"
+    ];
 
     // Function to handle gender selection
     const handleGenderSelect = (eventKey) => {
         setUserData({ ...userData, gender: eventKey });
+    };
+
+    // Function to handle question selection
+    const handleQuestionSelect = (question) => {
+        if (selectedQuestions.length < 3 && !selectedQuestions.includes(question)) {
+            setSelectedQuestions([...selectedQuestions, question]);
+        }
+    };
+
+    // Function to handle answer input changes
+    const handleAnswerChange = (index, value) => {
+        const updatedAnswers = [...answers];
+        updatedAnswers[index] = value;
+        setAnswers(updatedAnswers);
     };
 
     // Function to handle input changes
@@ -45,7 +73,7 @@ const ProfileComp = () => {
 
                 if (adminDoc.exists()) {
                     setUserData(adminDoc.data());
-                    console.log("Fetched user data:", adminDoc.data()); // Log fetched data
+                    console.log("Fetched user data:", adminDoc.data());
                 } else {
                     alert("User data not found.");
                     navigate("/login");
@@ -62,13 +90,17 @@ const ProfileComp = () => {
     // Function to save updated user data
     const handleSave = async () => {
         try {
-            console.log("Updating user data:", userData); // Log user data
+            console.log("Updating user data:", userData);
             const adminDocRef = doc(db, 'admins', adminId);
-            await updateDoc(adminDocRef, userData);
+            await updateDoc(adminDocRef, {
+                ...userData,
+                securityQuestions: selectedQuestions,
+                answers: answers
+            });
             alert("Profile updated successfully.");
             setIsEditing(false);
         } catch (error) {
-            console.error("Error updating profile:", error); // Full error log
+            console.error("Error updating profile:", error);
             alert(`Failed to update profile: ${error.message}`);
         }
     };
@@ -80,12 +112,10 @@ const ProfileComp = () => {
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            const adminDocRef = doc(db, 'admins', adminId); // Reference to the admin's document
+            const adminDocRef = doc(db, 'admins', adminId);
 
-            // Fetch existing admin data
             const adminDoc = await getDoc(adminDocRef);
             if (adminDoc.exists()) {
-                // Admin exists, update their Firestore document with Google info
                 await updateDoc(adminDocRef, {
                     email: user.email,
                 });
@@ -97,7 +127,6 @@ const ProfileComp = () => {
             }
 
             console.log("Google Sign-In successful:", user);
-            // Update the local state with the admin's info
             setUserData({
                 ...userData,
                 email: user.email,
@@ -147,8 +176,8 @@ const ProfileComp = () => {
                 />
                 <DropdownButton
                     variant="outline-secondary"
-                    title="Dropdown"
-                    id="input-group-dropdown-2"
+                    title="Gender"
+                    id="input-group-dropdown-1"
                     align="end"
                     onSelect={handleGenderSelect}
                     disabled={!isEditing}
@@ -157,6 +186,34 @@ const ProfileComp = () => {
                     <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
                 </DropdownButton>
             </InputGroup>
+
+            {/* New Dropdown for Questions */}
+            <Form.Group className="mb-3" controlId="securityQuestions" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                <Form.Label>Select Security Questions</Form.Label>
+                <DropdownButton
+                    variant="outline-secondary"
+                    title="Choose a question"
+                    id="question-dropdown"
+                    disabled={!isEditing}
+                >
+                    {questions.map((question, index) => (
+                        <Dropdown.Item key={index} onClick={() => handleQuestionSelect(question)}>{question}</Dropdown.Item>
+                    ))}
+                </DropdownButton>
+            </Form.Group>
+
+            {/* Render selected questions and answer inputs */}
+            {selectedQuestions.map((question, index) => (
+                <Form.Group key={index} className="mb-3" controlId={`answer${index}`} style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                    <Form.Label>{question}</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={answers[index]}
+                        onChange={(e) => handleAnswerChange(index, e.target.value)}
+                        disabled={!isEditing}
+                    />
+                </Form.Group>
+            ))}
 
             <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Username</Form.Label>
