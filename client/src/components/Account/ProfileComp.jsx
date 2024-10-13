@@ -17,7 +17,7 @@ const ProfileComp = () => {
     });
     const [isEditing, setIsEditing] = useState(false);
     const [showRecovery, setShowRecovery] = useState(false);
-    const [recoveryEdited, setRecoveryEdited] = useState(false);
+    const [showAnswers, setShowAnswers] = useState(false); // New state to toggle answer visibility
     const adminId = localStorage.getItem('adminId');
 
     const availableQuestions = [
@@ -78,7 +78,6 @@ const ProfileComp = () => {
             alert("Profile updated successfully.");
             setIsEditing(false);
             setShowRecovery(false);
-            setRecoveryEdited(true);
         } catch (error) {
             console.error("Error updating profile:", error);
             alert(`Failed to update profile: ${error.message}`);
@@ -193,7 +192,7 @@ const ProfileComp = () => {
                                 title="Choose a Recovery Question"
                                 id="recovery-question-dropdown"
                                 onSelect={handleAddQuestion}
-                                disabled={userData.recoveryQuestions.length >= 3 || recoveryEdited}
+                                disabled={userData.recoveryQuestions.length >= 3}
                             >
                                 {availableQuestions.map((question) => (
                                     <Dropdown.Item key={question} eventKey={question}>
@@ -206,12 +205,18 @@ const ProfileComp = () => {
                                 <Form.Group key={question} className="mb-3" style={{ position: "relative" }}>
                                     <Form.Label>Your Answer for: {question}</Form.Label>
                                     <Form.Control
-                                        type="text"
+                                        type={showAnswers ? "text" : "password"} // Toggle answer visibility
                                         value={userData.answers[question] || ''}
                                         onChange={(e) => handleAnswerChange(question, e.target.value)}
-                                        disabled={!isEditing}
+                                        readOnly // Make answers read-only
                                     />
-                                    {/* Removed the X button */}
+                                    <Button
+                                        variant="link"
+                                        onClick={() => setShowAnswers(!showAnswers)} // Toggle answer visibility
+                                        style={{ padding: 0 }}
+                                    >
+                                        {showAnswers ? "Hide Answers" : "Show Answers"}
+                                    </Button>
                                 </Form.Group>
                             ))}
                         </>
