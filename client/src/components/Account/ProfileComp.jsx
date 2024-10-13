@@ -1,48 +1,43 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import { Button, Form, FloatingLabel, Card } from 'react-bootstrap';
-import { db } from '../../services/firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../../services/firebase';
 
 const ProfileComp = ({ adminId }) => {
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [gender, setGender] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [selectedQuestions, setSelectedQuestions] = useState([]);
-    const [answers, setAnswers] = useState({});
-
-    const availableQuestions = [
+    const [userData, setUserData] = useState({
+        firstname: '',
+        lastname: '',
+        gender: '',
+        username: '',
+        password: '',
+        selectedQuestions: [],
+        answers: {}
+    });
+    const [availableQuestions] = useState([
         "In which city was your first business located?",
         "What year did you start your business?",
         "What is the name of your first school?",
         "What is your favorite color?",
         "What city were you born in?"
-    ];
+    ]);
 
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                // Log the adminId to ensure it's being passed correctly
-                console.log('Fetching data for adminId:', adminId);
-
-                // Example of a hardcoded adminId for testing:
-                // const docRef = doc(db, 'admins', 'exampleAdminId');
-                const docRef = doc(db, 'admins', adminId); // Use the adminId prop
+                const docRef = doc(db, 'admins', adminId);
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
                     const data = docSnap.data();
-                    console.log('Fetched data:', data); // See what data is retrieved
-
-                    setFirstname(data.firstname || '');
-                    setLastname(data.lastname || '');
-                    setGender(data.gender || '');
-                    setUsername(data.username || '');
-                    setPassword(data.password || '');
-                    setSelectedQuestions(data.selectedQuestions || []);
-                    setAnswers(data.answers || {});
+                    setUserData({
+                        firstname: data.firstname || '',
+                        lastname: data.lastname || '',
+                        gender: data.gender || '',
+                        username: data.username || '',
+                        password: data.password || '',
+                        selectedQuestions: data.selectedQuestions || [],
+                        answers: data.answers || {}
+                    });
                 } else {
                     console.error('Admin profile not found.');
                 }
@@ -54,17 +49,51 @@ const ProfileComp = ({ adminId }) => {
         fetchProfileData();
     }, [adminId]);
 
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setUserData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
     const handleQuestionChange = (question, answer) => {
-        setAnswers((prevAnswers) => ({ ...prevAnswers, [question]: answer }));
+        setUserData((prevData) => ({
+            ...prevData,
+            answers: {
+                ...prevData.answers,
+                [question]: answer,
+            },
+        }));
+    };
+
+    const handleQuestionSelection = (question) => {
+        setUserData((prevData) => {
+            const { selectedQuestions } = prevData;
+            if (selectedQuestions.includes(question)) {
+                return {
+                    ...prevData,
+                    selectedQuestions: selectedQuestions.filter((q) => q !== question),
+                };
+            } else if (selectedQuestions.length < 3) {
+                return {
+                    ...prevData,
+                    selectedQuestions: [...selectedQuestions, question],
+                };
+            }
+            return prevData;
+        });
     };
 
     const handleSubmit = async () => {
-        try {
-            if (selectedQuestions.length !== 3) {
-                alert('Please select exactly 3 recovery questions.');
-                return;
-            }
+        const { firstname, lastname, gender, username, password, selectedQuestions, answers } = userData;
 
+        if (selectedQuestions.length !== 3) {
+            alert('Please select exactly 3 recovery questions.');
+            return;
+        }
+
+        try {
             const docRef = doc(db, 'admins', adminId);
             await updateDoc(docRef, {
                 firstname,
@@ -83,17 +112,6 @@ const ProfileComp = ({ adminId }) => {
         }
     };
 
-    const handleQuestionSelection = (question) => {
-        setSelectedQuestions((prevQuestions) => {
-            if (prevQuestions.includes(question)) {
-                return prevQuestions.filter((q) => q !== question);
-            } else if (prevQuestions.length < 3) {
-                return [...prevQuestions, question];
-            }
-            return prevQuestions;
-        });
-    };
-
     return (
         <Card style={{ padding: '20px', margin: '20px' }}>
             <h2>Profile Information</h2>
@@ -102,8 +120,9 @@ const ProfileComp = ({ adminId }) => {
                     <Form.Control
                         type="text"
                         placeholder="First Name"
-                        value={firstname}
-                        onChange={(e) => setFirstname(e.target.value)}
+                        name="firstname"
+                        value={userData.firstname}
+                        onChange={handleInputChange}
                     />
                 </FloatingLabel>
 
@@ -111,15 +130,17 @@ const ProfileComp = ({ adminId }) => {
                     <Form.Control
                         type="text"
                         placeholder="Last Name"
-                        value={lastname}
-                        onChange={(e) => setLastname(e.target.value)}
+                        name="lastname"
+                        value={userData.lastname}
+                        onChange={handleInputChange}
                     />
                 </FloatingLabel>
 
                 <FloatingLabel controlId="floatingGender" label="Gender" className="mb-3">
                     <Form.Select
-                        value={gender}
-                        onChange={(e) => setGender(e.target.value)}
+                        name="gender"
+                        value={userData.gender}
+                        onChange={handleInputChange}
                     >
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
@@ -132,8 +153,10 @@ const ProfileComp = ({ adminId }) => {
                     <Form.Control
                         type="text"
                         placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        name="username"
+                        value={userData.username}
+                        onChange={handleInputChange}
+                        disabled
                     />
                 </FloatingLabel>
 
@@ -141,8 +164,9 @@ const ProfileComp = ({ adminId }) => {
                     <Form.Control
                         type="password"
                         placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        name="password"
+                        value={userData.password}
+                        onChange={handleInputChange}
                     />
                 </FloatingLabel>
 
@@ -152,15 +176,15 @@ const ProfileComp = ({ adminId }) => {
                         <Form.Check
                             type="checkbox"
                             label={question}
-                            checked={selectedQuestions.includes(question)}
+                            checked={userData.selectedQuestions.includes(question)}
                             onChange={() => handleQuestionSelection(question)}
                         />
-                        {selectedQuestions.includes(question) && (
+                        {userData.selectedQuestions.includes(question) && (
                             <FloatingLabel controlId={`answer-${question}`} label="Your Answer" className="mt-2">
                                 <Form.Control
                                     type="text"
                                     placeholder="Answer"
-                                    value={answers[question] || ''}
+                                    value={userData.answers[question] || ''}
                                     onChange={(e) => handleQuestionChange(question, e.target.value)}
                                 />
                             </FloatingLabel>
