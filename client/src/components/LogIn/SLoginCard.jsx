@@ -39,7 +39,13 @@ function SLoginCard() {
                 />
             </FloatingLabel>
             {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
-            <Button variant="primary" type="submit">Login</Button>
+            <Button
+                variant="primary"
+                style={{ width: "70%", marginTop: "20px" }}
+                type='submit'
+                size='lg'>
+                Login
+            </Button>
         </Form>
     );
 }
