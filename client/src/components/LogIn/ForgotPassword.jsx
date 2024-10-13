@@ -11,6 +11,7 @@ const ForgotPassword = () => {
     const [newPassword, setNewPassword] = useState('');
     const [isVerified, setIsVerified] = useState(false);
     const [adminDoc, setAdminDoc] = useState(null); // State to hold admin document data
+    const [answersVerified, setAnswersVerified] = useState(false); // New state to track answers verification
     const navigate = useNavigate();
 
     const handleVerification = async () => {
@@ -24,7 +25,7 @@ const ForgotPassword = () => {
                 return;
             }
 
-            const adminDocument = querySnapshot.docs[0];
+            const adminDocument = querySnapshot.docs[0]; // Get the first document
             const recoveryQuestions = adminDocument.data().recoveryQuestions || [];
 
             // Ensure we have at least 3 questions to display
@@ -33,16 +34,17 @@ const ForgotPassword = () => {
                 return;
             }
 
-            // Randomly select 2 questions from the 3 available
+            // Randomly select 2 questions from the available questions
             const selectedQuestions = recoveryQuestions.sort(() => 0.5 - Math.random()).slice(0, 2);
             setCustomQuestions(selectedQuestions);
 
             // Store the admin document in state for later use
-            setAdminDoc(adminDocument);
+            setAdminDoc(adminDocument); // Store the entire document snapshot
 
             // Reset the answer state for new questions
             setCustomAnswers({});
-            setIsVerified(false); // Reset verification state
+            setIsVerified(true); // Set isVerified to true after successful verification
+            setAnswersVerified(false); // Reset answers verification state
         } catch (error) {
             console.error('Verification error:', error.message);
             alert('An error occurred during verification. Please try again.');
@@ -69,7 +71,7 @@ const ForgotPassword = () => {
         });
 
         if (correctCount >= 2) {
-            setIsVerified(true);
+            setAnswersVerified(true); // Set answers verification state to true
             alert('Verification successful. You can now reset your password.');
         } else {
             alert('Incorrect answers to the security questions. Please try again.');
@@ -78,13 +80,25 @@ const ForgotPassword = () => {
 
     const handlePasswordReset = async () => {
         try {
-            if (!adminDoc) return; // Ensure adminDoc is available
-            await adminDoc.ref.update({ password: newPassword });
-            alert('Password reset successfully. Please login with your new password.');
-            navigate('/login');
+            if (!adminDoc) {
+                alert('No admin document found.');
+                return;
+            }
+
+            // Extract the document reference directly from the adminDoc
+            const adminDocRef = adminDoc.ref; // This should be a valid Firestore document reference
+
+            // Check if adminDocRef is a valid reference before calling update
+            if (adminDocRef) {
+                await adminDocRef.update({ password: newPassword }); // Update the password
+                alert('Password reset successfully. Please login with your new password.');
+                navigate('/');
+            } else {
+                alert('Could not retrieve document reference.');
+            }
         } catch (error) {
-            console.error('Password reset error:', error.message);
-            alert('An error occurred while resetting your password. Please try again.');
+            console.error('Password reset error:', error); // Log the full error object
+            alert(`An error occurred: ${error.message}`); // Provide the error message
         }
     };
 
@@ -109,7 +123,7 @@ const ForgotPassword = () => {
             )}
 
             {/* Display security questions only if username is verified */}
-            {customQuestions.map((question, index) => (
+            {isVerified && customQuestions.map((question, index) => (
                 <FloatingLabel key={index} controlId={`floatingAnswer${index}`} label={question} className="mb-3">
                     <Form.Control
                         type="text"
@@ -119,7 +133,15 @@ const ForgotPassword = () => {
                 </FloatingLabel>
             ))}
 
-            {isVerified && (
+            {/* Show Verify Answers Button only if username is verified and answers are not verified */}
+            {isVerified && !answersVerified && (
+                <Button variant="primary" onClick={checkAnswersAndReset} className="mt-3">
+                    Verify Answers
+                </Button>
+            )}
+
+            {/* Show Reset Password Button only if answers are verified */}
+            {answersVerified && (
                 <>
                     <FloatingLabel controlId="floatingNewPassword" label="New Password" className="mb-3">
                         <Form.Control
@@ -130,19 +152,11 @@ const ForgotPassword = () => {
                         />
                     </FloatingLabel>
 
-                    {/* Show Reset Password Button only if verified */}
                     <Button variant="primary" onClick={handlePasswordReset}>
                         Reset Password
                     </Button>
                 </>
             )}
-
-            {/* Show Verify Answers Button only if username is verified */}
-            {isVerified ? (
-                <Button variant="primary" onClick={checkAnswersAndReset}>
-                    Verify Answers
-                </Button>
-            ) : null}
         </Form>
     );
 };
