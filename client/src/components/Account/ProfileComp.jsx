@@ -14,8 +14,8 @@ const ProfileComp = ({ adminId }) => {
     const [answers, setAnswers] = useState({});
 
     const availableQuestions = [
-        "What is your pet's name?",
-        "What is your mother's maiden name?",
+        "In which city was your first business located?",
+        "What year did you start your business?",
         "What is the name of your first school?",
         "What is your favorite color?",
         "What city were you born in?"
@@ -24,11 +24,18 @@ const ProfileComp = ({ adminId }) => {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                const docRef = doc(db, 'admins', adminId);
+                // Log the adminId to ensure it's being passed correctly
+                console.log('Fetching data for adminId:', adminId);
+
+                // Example of a hardcoded adminId for testing:
+                // const docRef = doc(db, 'admins', 'exampleAdminId');
+                const docRef = doc(db, 'admins', adminId); // Use the adminId prop
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
                     const data = docSnap.data();
+                    console.log('Fetched data:', data); // See what data is retrieved
+
                     setFirstname(data.firstname || '');
                     setLastname(data.lastname || '');
                     setGender(data.gender || '');
