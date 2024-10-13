@@ -17,7 +17,7 @@ const ProfileComp = () => {
     });
     const [isEditing, setIsEditing] = useState(false);
     const [showRecovery, setShowRecovery] = useState(false);
-    const [showAnswers, setShowAnswers] = useState(false); // New state to toggle answer visibility
+    const [answerVisibility, setAnswerVisibility] = useState({}); // State for individual answer visibility
     const adminId = localStorage.getItem('adminId');
 
     const availableQuestions = [
@@ -77,7 +77,8 @@ const ProfileComp = () => {
             await updateDoc(adminDocRef, userData);
             alert("Profile updated successfully.");
             setIsEditing(false);
-            setShowRecovery(false);
+            setShowRecovery(false); // Hide recovery questions after saving
+            setAnswerVisibility({}); // Reset answer visibility to keep answers hidden
         } catch (error) {
             console.error("Error updating profile:", error);
             alert(`Failed to update profile: ${error.message}`);
@@ -90,6 +91,11 @@ const ProfileComp = () => {
                 ...prevData,
                 recoveryQuestions: [...prevData.recoveryQuestions, question],
             }));
+            // Initialize visibility state for the new question
+            setAnswerVisibility((prevVisibility) => ({
+                ...prevVisibility,
+                [question]: false // Initially set to false (hidden)
+            }));
         }
     };
 
@@ -100,6 +106,18 @@ const ProfileComp = () => {
                 ...prevData.answers,
                 [question]: answer,
             },
+        }));
+        // Hide the answer input field after the answer is filled
+        setAnswerVisibility((prevVisibility) => ({
+            ...prevVisibility,
+            [question]: false
+        }));
+    };
+
+    const toggleAnswerVisibility = (question) => {
+        setAnswerVisibility((prevVisibility) => ({
+            ...prevVisibility,
+            [question]: !prevVisibility[question] // Toggle visibility for this specific question
         }));
     };
 
@@ -205,17 +223,17 @@ const ProfileComp = () => {
                                 <Form.Group key={question} className="mb-3" style={{ position: "relative" }}>
                                     <Form.Label>Your Answer for: {question}</Form.Label>
                                     <Form.Control
-                                        type={showAnswers ? "text" : "password"} // Toggle answer visibility
+                                        type={answerVisibility[question] ? "text" : "password"} // Toggle individual answer visibility
                                         value={userData.answers[question] || ''}
                                         onChange={(e) => handleAnswerChange(question, e.target.value)}
-                                        readOnly // Make answers read-only
+                                        readOnly={!isEditing} // Make answers read-only when not editing
                                     />
                                     <Button
                                         variant="link"
-                                        onClick={() => setShowAnswers(!showAnswers)} // Toggle answer visibility
+                                        onClick={() => toggleAnswerVisibility(question)} // Toggle answer visibility for this specific question
                                         style={{ padding: 0 }}
                                     >
-                                        {showAnswers ? "Hide Answers" : "Show Answers"}
+                                        {answerVisibility[question] ? "Hide Answer" : "Show Answer"}
                                     </Button>
                                 </Form.Group>
                             ))}
