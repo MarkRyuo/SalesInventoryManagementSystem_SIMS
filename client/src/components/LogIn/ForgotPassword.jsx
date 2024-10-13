@@ -2,9 +2,9 @@
 
 function ForgotPassword() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
