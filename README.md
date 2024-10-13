@@ -9,8 +9,9 @@
 
 ## Changelog
 
+### v6.1 (Latest)
 
-### v6.0 (Lates)
+### v6.0
 - Redesigning
 
 ### v5.1
