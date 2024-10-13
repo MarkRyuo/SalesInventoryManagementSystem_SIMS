@@ -5,9 +5,9 @@ const ProfileComp = () => {
     //* firstname, lastname, gender, username, password, recovery questions
 
     return (
-        <Form>
+        <>
             {/* Design Here */}
-        </Form>
+        </>
     );
 }
 
