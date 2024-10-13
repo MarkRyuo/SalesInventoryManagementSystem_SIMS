@@ -1,6 +1,7 @@
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
@@ -36,6 +37,11 @@ export const LoginCard = () => {
                 size='lg'>
                 Login
             </Button>
+
+            {/* Forgot Password Link */}
+            <Link to="/ForgotPassword" style={{ display: 'block', textAlign: 'center', marginTop: '10px', textDecoration: 'none', color: '#007bff' }}>
+                Forgot Password?
+            </Link>
 
             
         </Form>
