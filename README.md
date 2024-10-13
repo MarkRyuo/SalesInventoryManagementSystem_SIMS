@@ -10,6 +10,7 @@
 ## Changelog
 
 ### v6.1 (Latest)
+- Login Backend
 
 ### v6.0
 - Redesigning
