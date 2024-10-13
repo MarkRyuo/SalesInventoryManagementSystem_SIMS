@@ -1,3 +1,5 @@
+//* Local Storage
+
 import { db } from './firebase'; //? firebaseConfig
 import { getDocs, collection, query, where } from "firebase/firestore";
 

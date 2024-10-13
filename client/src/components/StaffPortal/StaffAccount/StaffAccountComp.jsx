@@ -1,70 +1,93 @@
-import { useState } from 'react';
-import { Spinner, Alert, Button } from 'react-bootstrap'; // Ensure you have react-bootstrap installed
-import { db } from '../../../services/firebase'; // Update path as needed
+import { Row, Form, Col } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { db } from '../../../services/firebase'; // Adjust the path to your Firebase configuration
 import { doc, getDoc } from "firebase/firestore";
 
 const StaffAccountComp = () => {
-    // States to store the logged-in staff data, loading state, and error messages
-    const [staffData, setStaffData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
-    const staffId = localStorage.getItem('staffId'); // Get the logged-in staff ID from local storage
+    const [staffData, setStaffData] = useState(null); // State to hold staff data
 
-    // Function to fetch logged-in staff account details
-    const fetchStaffAccount = async () => {
-        if (!staffId) {
-            setError("No staff ID found. Please log in again.");
-            setLoading(false);
-            return; // Check if staffId exists
-        }
-
-        try {
-            const staffDocRef = doc(db, "staffs", staffId); // Reference to the specific staff document
-            const staffDoc = await getDoc(staffDocRef); // Get the staff document
-
-            if (staffDoc.exists()) {
-                setStaffData({ id: staffDoc.id, ...staffDoc.data() }); // Set staff data if document exists
-            } else {
-                setError("No such staff account found!");
+    useEffect(() => {
+        const fetchStaffData = async () => {
+            const staffId = localStorage.getItem('staffId'); // Get the staffId from localStorage
+            if (staffId) {
+                try {
+                    const staffDoc = await getDoc(doc(db, "staffs", staffId)); // Fetch the staff document
+                    if (staffDoc.exists()) {
+                        setStaffData(staffDoc.data()); // Set the staff data to state
+                    } else {
+                        console.error("No such staff document!");
+                    }
+                } catch (error) {
+                    console.error("Error fetching staff data:", error);
+                }
             }
-        } catch (error) {
-            console.error("Error fetching staff account details:", error);
-            setError("Error fetching account details. Please try again later.");
-        } finally {
-            setLoading(false); // Set loading to false regardless of success or failure
-        }
-    };
+        };
 
-    // Flag to track if the fetch has already been executed
-    if (loading) {
-        fetchStaffAccount();
-    }
-
-    // Handle logout action
-    const handleLogout = () => {
-        localStorage.removeItem('staffId'); // Clear the staff ID from local storage
-        // Optionally navigate to the login page or perform other logout actions
-        // navigate("/login"); // Uncomment and import navigate if needed
-    };
+        fetchStaffData(); // Call the fetch function
+    }, []);
 
     return (
-        <>
-            <h1>Your Account Details</h1>
-            {loading ? (
-                <Spinner animation="border" /> // Show loading spinner while fetching data
-            ) : error ? (
-                <Alert variant="danger">{error}</Alert> // Show error message if there's an error
-            ) : (
-                <div>
-                    <p><strong>First Name:</strong> {staffData.firstname}</p>
-                    <p><strong>Last Name:</strong> {staffData.lastname}</p>
-                    <p><strong>Username:</strong> {staffData.username}</p>
-                    <p><strong>Gender:</strong> {staffData.gender}</p>
-                    <p><strong>Active:</strong> {staffData.active ? 'Yes' : 'No'}</p>
-                </div>
-            )}
-            <Button variant="danger" onClick={handleLogout}>Logout</Button> {/* Add a logout button */}
-        </>
+        <Form>
+
+            <Row style={{ width: "100%", margin: 0, padding: 0 }}>
+                <Col lg={6}>
+                    <Form.Group className="mb-3" controlId="firstName">
+                        <Form.Label>FIRST NAME</Form.Label>
+                        <Form.Control
+                            type="text"
+                            defaultValue={staffData ? staffData.firstname : ''} // Bind first name
+                        />
+                    </Form.Group>
+                </Col>
+                <Col lg={6}>
+                    <Form.Group className="mb-3" controlId="lastName">
+                        <Form.Label>LAST NAME</Form.Label>
+                        <Form.Control
+                            type="text"
+                            defaultValue={staffData ? staffData.lastname : ''} // Bind last name
+                        />
+                    </Form.Group>
+                </Col>
+            </Row>
+
+            {/* Gender */}
+            <Form.Group
+                className="mb-3"
+                controlId="gender"
+                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                <Form.Label>Gender</Form.Label>
+                <Form.Control
+                    type="text"
+                    defaultValue={staffData ? staffData.gender : ''} // Bind gender
+                />
+            </Form.Group>
+
+            {/* Username */}
+            <Form.Group
+                className="mb-3"
+                controlId="username"
+                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                    type="text"
+                    defaultValue={staffData ? staffData.username : ''} // Bind username
+                />
+            </Form.Group>
+
+            {/* Password */}
+            <Form.Group
+                className="mb-3"
+                controlId="password"
+                style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                    type="password"
+                    defaultValue={staffData ? staffData.password : ''} // Bind password
+                    readOnly // Make the password field read-only
+                />
+            </Form.Group>
+
+        </Form>
     );
 }
 
