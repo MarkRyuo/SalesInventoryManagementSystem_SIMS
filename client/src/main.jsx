@@ -12,6 +12,7 @@ import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import SLogin from './pages/StaffPages/SLogin.jsx';
 import SDashboard from './pages/StaffPages/SDashboard.jsx';
 import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
+import ForgotPassword from './components/LogIn/ForgotPassword.jsx';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   },
 
   //? Forgot Password
+  {
+    path: "ForgotPassword",
+    element: <ForgotPassword /> ,
+  },
 
 ]);
 
