@@ -1,9 +1,7 @@
 import { Row, Form, Col, Button, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { FcGoogle } from "react-icons/fc";
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db, auth } from '../../firebase'; // Ensure you import auth from your firebase config
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { db } from '../../services/firebase';
 import { useNavigate } from 'react-router-dom';
 
 const ProfileComp = () => {
@@ -14,23 +12,31 @@ const ProfileComp = () => {
         gender: "",
         username: "",
         password: "",
-        email: ""
+        recoveryQuestions: [],
+        answers: {}
     });
     const [isEditing, setIsEditing] = useState(false);
-    const adminId = localStorage.getItem('adminId'); // Assume this was saved during login
+    const [showAnswers, setShowAnswers] = useState(false);
+    const [questionAdded, setQuestionAdded] = useState(false); // Track if a question has been added
+    const adminId = localStorage.getItem('adminId');
 
-    // Function to handle gender selection
+    const availableQuestions = [
+        "In which city was your first business located?",
+        "What year did you start your business?",
+        "What is the name of your first school?",
+        "What is your favorite color?",
+        "What city were you born in?"
+    ];
+
     const handleGenderSelect = (eventKey) => {
         setUserData({ ...userData, gender: eventKey });
     };
 
-    // Function to handle input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUserData({ ...userData, [name]: value });
     };
 
-    // Function to fetch user data
     useEffect(() => {
         const fetchUserData = async () => {
             if (!adminId) {
@@ -44,8 +50,14 @@ const ProfileComp = () => {
                 const adminDoc = await getDoc(adminDocRef);
 
                 if (adminDoc.exists()) {
-                    setUserData(adminDoc.data());
-                    console.log("Fetched user data:", adminDoc.data()); // Log fetched data
+                    const data = adminDoc.data();
+                    setUserData({
+                        ...data,
+                        recoveryQuestions: data.recoveryQuestions || [],
+                        answers: data.answers || {}
+                    });
+                    setQuestionAdded(data.recoveryQuestions.length > 0); // Check if recovery questions exist
+                    console.log("Fetched user data:", data);
                 } else {
                     alert("User data not found.");
                     navigate("/login");
@@ -59,54 +71,41 @@ const ProfileComp = () => {
         fetchUserData();
     }, [adminId, navigate]);
 
-    // Function to save updated user data
     const handleSave = async () => {
         try {
-            console.log("Updating user data:", userData); // Log user data
+            console.log("Updating user data:", userData);
             const adminDocRef = doc(db, 'admins', adminId);
             await updateDoc(adminDocRef, userData);
             alert("Profile updated successfully.");
             setIsEditing(false);
         } catch (error) {
-            console.error("Error updating profile:", error); // Full error log
+            console.error("Error updating profile:", error);
             alert(`Failed to update profile: ${error.message}`);
         }
     };
 
-    // Function to handle Google Sign-In
-    const handleGoogleSignIn = async () => {
-        const provider = new GoogleAuthProvider();
-
-        try {
-            const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-            const adminDocRef = doc(db, 'admins', adminId); // Reference to the admin's document
-
-            // Fetch existing admin data
-            const adminDoc = await getDoc(adminDocRef);
-            if (adminDoc.exists()) {
-                // Admin exists, update their Firestore document with Google info
-                await updateDoc(adminDocRef, {
-                    email: user.email,
-                });
-                alert("Profile connected to Google account.");
-            } else {
-                alert("Admin not found. Please log in first.");
-                navigate("/login");
-                return;
-            }
-
-            console.log("Google Sign-In successful:", user);
-            // Update the local state with the admin's info
-            setUserData({
-                ...userData,
-                email: user.email,
-            });
-
-        } catch (error) {
-            console.error("Error during Google Sign-In:", error);
-            alert(`Failed to connect to Google: ${error.message}`);
+    const handleAddQuestion = (question) => {
+        if (!userData.recoveryQuestions.includes(question) && userData.recoveryQuestions.length < 3) {
+            setUserData((prevData) => ({
+                ...prevData,
+                recoveryQuestions: [...prevData.recoveryQuestions, question],
+            }));
+            setQuestionAdded(true); // Mark question as added
         }
+    };
+
+    const handleAnswerChange = (question, answer) => {
+        setUserData((prevData) => ({
+            ...prevData,
+            answers: {
+                ...prevData.answers,
+                [question]: answer,
+            },
+        }));
+    };
+
+    const toggleAnswersVisibility = () => {
+        setShowAnswers((prev) => !prev);
     };
 
     return (
@@ -180,20 +179,39 @@ const ProfileComp = () => {
                 />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="email" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                    type="email"
-                    name="email"
-                    value={userData.email}
-                    onChange={handleInputChange}
-                    disabled={!isEditing}
-                />
-            </Form.Group>
+            <h4>Select Recovery Questions</h4>
+            <DropdownButton
+                variant="outline-secondary"
+                title="Choose a 3 Recovery Question"
+                id="recovery-question-dropdown"
+                onSelect={handleAddQuestion}
+                disabled={!isEditing || questionAdded} // Disable if question has been added
+            >
+                {availableQuestions.map((question) => (
+                    <Dropdown.Item key={question} eventKey={question}>
+                        {question}
+                    </Dropdown.Item>
+                ))}
+            </DropdownButton>
 
-            <Button variant="light" size='sm' className='ms-2' onClick={handleGoogleSignIn}>
-                <FcGoogle size={35} className='me-2' />
-                Connect to Google
+            {userData.recoveryQuestions.map((question) => (
+                <Form.Group key={question} className="mb-3">
+                    <Form.Label>Your Answer for: {question}</Form.Label>
+                    <Form.Control
+                        type={showAnswers ? "text" : "password"} // Toggle between text and password
+                        value={userData.answers[question] || ''}
+                        onChange={(e) => handleAnswerChange(question, e.target.value)}
+                        disabled={!isEditing}
+                    />
+                </Form.Group>
+            ))}
+
+            <Button
+                variant="link"
+                onClick={toggleAnswersVisibility}
+                style={{ textDecoration: "none" }}
+            >
+                {showAnswers ? "Hide Answers" : "Show Answers"}
             </Button>
 
             <div className='mt-3'>
