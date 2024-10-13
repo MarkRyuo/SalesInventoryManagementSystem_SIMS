@@ -9,7 +9,11 @@
 
 ## Changelog
 
-### v5.1 (Latest)
+
+### v6.0 (Lates)
+- Redesigning
+
+### v5.1
 - Update Design of StaffDashBoard
 - Admin Dashboard Chart Changes 
 - Product Changes
