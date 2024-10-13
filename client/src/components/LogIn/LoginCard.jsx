@@ -39,7 +39,14 @@ export const LoginCard = () => {
             </Button>
 
             {/* Forgot Password Link */}
-            <Link to="/ForgotPassword" style={{ display: 'block', textAlign: 'center', marginTop: '10px', textDecoration: 'none', color: '#007bff' }}>
+            <Link to="/ForgotPassword" 
+            style={{
+                display: 'block',
+                textAlign: 'center',
+                marginTop: '10px',
+                textDecoration: 'none', 
+                color: '#007bff' 
+            }}>
                 Forgot Password?
             </Link>
 
