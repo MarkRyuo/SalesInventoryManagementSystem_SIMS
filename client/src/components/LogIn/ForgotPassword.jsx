@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button, Form, FloatingLabel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../services/firebase';
-import { getDocs, collection, query, where } from 'firebase/firestore';
+import { getDocs, collection, query, where, doc, updateDoc } from 'firebase/firestore';
 
 const ForgotPassword = () => {
     const [username, setUsername] = useState('');
@@ -85,17 +85,13 @@ const ForgotPassword = () => {
                 return;
             }
 
-            // Extract the document reference directly from the adminDoc
-            const adminDocRef = adminDoc.ref; // This should be a valid Firestore document reference
+            // Create a document reference using adminDoc.id
+            const adminDocRef = doc(db, 'admins', adminDoc.id);
 
-            // Check if adminDocRef is a valid reference before calling update
-            if (adminDocRef) {
-                await adminDocRef.update({ password: newPassword }); // Update the password
-                alert('Password reset successfully. Please login with your new password.');
-                navigate('/');
-            } else {
-                alert('Could not retrieve document reference.');
-            }
+            // Update the password in Firestore
+            await updateDoc(adminDocRef, { password: newPassword });
+            alert('Password reset successfully. Please login with your new password.');
+            navigate('/'); // Redirect to login page after password reset
         } catch (error) {
             console.error('Password reset error:', error); // Log the full error object
             alert(`An error occurred: ${error.message}`); // Provide the error message
