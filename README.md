@@ -11,7 +11,7 @@
 
 
 ### v6.0 (Lates)
-- 
+- Redesigning
 
 ### v5.1
 - Update Design of StaffDashBoard
