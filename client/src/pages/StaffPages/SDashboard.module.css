@@ -12,6 +12,7 @@
     justify-content: space-around;
     /* flex-direction: column; */
     align-content: center;
+    min-width: 400px;
 }
 
 .colContainer {
