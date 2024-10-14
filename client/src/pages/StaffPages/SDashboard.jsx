@@ -1,11 +1,9 @@
-import AddNewAssets from "../../components/StaffPortal/AddNewAssets/AddNewAssets";
-import ScanAsset from "../../components/StaffPortal/ScanAsset/ScanAsset";
-import SearchAssets from "../../components/StaffPortal/SearchAsset/SearchAsset";
 import MainStaffLayout from "../../layout/MainStaffLayout";
 import { Row, Col } from "react-bootstrap";
 import SDashboardCss from './SDashboard.module.css' ;
 import { useState } from "react";
-
+import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons";
+import { TiDocumentAdd } from "react-icons/ti";
 function SDashboard() {
 
     const [buttons, setButtons] = useState([
@@ -18,13 +16,13 @@ function SDashboard() {
         <MainStaffLayout>
             <Row className={SDashboardCss.rowContainer}>
                 <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                    <AddNewAssets />
+                    <StaffButtons buttons={buttons.filter(button => button.id === 1)}/>
                 </Col>
                 <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                    <ScanAsset />
+                    <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
                 </Col>
                 <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                    <SearchAssets />
+                    <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
                 </Col>
             </Row>
         </MainStaffLayout>

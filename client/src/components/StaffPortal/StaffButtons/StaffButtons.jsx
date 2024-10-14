@@ -1,14 +1,17 @@
+/* eslint-disable react/prop-types */
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-function StaffButtons({buttons}) {
+function StaffButtons({buttons, handleAddNewAssets}) {
     
     return (
         <>
             {buttons.map((button) => (
                 <div key={button.id}>
-                    <Button size='lg' variant="outline-success" onClick={handleAddNewAssets} style={{ margin: 20 }}>
-                        <TiDocumentAdd size={30} /> Add New Assets
-                    </Button>
+                    <Link as={Button} size='lg' variant="outline-success" onClick={handleAddNewAssets} style={button.btnmargin}>
+                        <span>{button.btnIcon}</span> 
+                        {button.btnName}
+                    </Link>
                 </div>
             ))}
         </>
