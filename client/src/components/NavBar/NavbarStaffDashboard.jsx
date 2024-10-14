@@ -20,7 +20,7 @@ function NavbarStaffDashboard() {
     const handleShow = () => setShow(true);
 
     //* Buttons 
-    const [buttons, setBottons] = useState([
+    const [buttons] = useState([
         { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-6", path: "/SDashboard" }, 
         { icon: <AiOutlineProduct />, btnName: "Account", id: "b-7", path: "/SStaffAccount" },
         { icon: <TbReportAnalytics />, btnName: "Text3", id: "b-8", path: "/Path" },
@@ -58,7 +58,7 @@ function NavbarStaffDashboard() {
                         <div className={Navbars.buttonsList}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-8")} /> 
+                            {/* <Buttons buttons={buttons.filter((button) => button.id === "b-8")} />    */}
                             {/* <AccountDropdown /> ! Waiting... if we have dropdown */}
                         </div>
                         <div style={{ height: "150px" }}>

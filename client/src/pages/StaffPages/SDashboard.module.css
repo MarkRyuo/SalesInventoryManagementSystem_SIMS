@@ -8,10 +8,11 @@
     /* border: 1px solid; */
     width: 100%;
     height: auto;
-    margin: 0;
-    justify-content: space-around;
+    margin: 30px 0px;
+    justify-content: space-evenly;
     /* flex-direction: column; */
     align-content: center;
+    min-width: 300px;
 }
 
 .colContainer {
@@ -22,4 +23,25 @@
     height: 200px;
     align-content: center;
     box-shadow: 0px 8px 5px var(--colshadow);
+}
+
+
+/* ! Button Container */
+
+.btnContainer1 {
+    width: 100%;
+    height: auto;
+    padding: 0px 30px;
+}
+
+.btnContainer2 {
+    width: 100%;
+    height: auto;
+    padding: 0px 46px;
+}
+
+.btnContainer3 {
+    width: 100%;
+    height: auto;
+    padding: 0px 35px;
 }

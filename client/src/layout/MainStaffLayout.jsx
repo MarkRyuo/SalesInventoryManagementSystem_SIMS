@@ -8,9 +8,9 @@ function MainStaffLayout({children}) {
     return (
         <Container fluid style={{ margin: "0px", padding: "0px" }}>
 
-            <div className="Staffcontainer">
+            <div className="Staff-container">
                 <NavbarStaffDashboard />
-                <Container fluid='lg' className="content"> {/**Content */}
+                <Container fluid='lg' className="p-0 mt-5"> {/**Content */}
                     {children}
                 </Container>
             </div>
