@@ -5,7 +5,7 @@ function StaffNavBar({backBtn}) {
 
     return (
         <>
-            <Navbar className="bg-body-tertiary" style={{border: "1px solid red"}}>
+            <Navbar className="bg-body-tertiary" style={{boxShadow: "1px 1px 4px "}}>
                 <Container>
                     <Navbar.Brand>
                         {backBtn.map((Backbtn) => (
@@ -13,7 +13,7 @@ function StaffNavBar({backBtn}) {
                                 as={Link} 
                                 key={Backbtn.id} 
                                 to={Backbtn.path}
-                                
+                                variant='light'
                             >
                                 {Backbtn.btnIcon}
                             </Button>
