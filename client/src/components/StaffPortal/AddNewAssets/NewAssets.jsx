@@ -1,5 +1,5 @@
 
-
+//? 2nd See Add Product Detailsq
 function NewAssets() {
     return (
         <>
