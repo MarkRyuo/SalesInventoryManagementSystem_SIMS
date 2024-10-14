@@ -64,7 +64,7 @@ const router = createBrowserRouter([
     element: <NewAssets /> , //* Add New Assets Products After Scan
   },
   
-  //? Staff buttons
+  //? Staff Buttons
   {
     path: "AddNewAssets",
     element: <AddNewAssets /> ,
