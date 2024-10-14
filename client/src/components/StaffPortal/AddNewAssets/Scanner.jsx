@@ -1,9 +1,9 @@
 
 function Scanner() {
     return (
-        <>
+        <div>
 
-        </>
+        </div>
     )
 }
 
