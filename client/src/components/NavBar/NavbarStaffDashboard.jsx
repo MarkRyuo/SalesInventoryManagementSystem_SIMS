@@ -58,7 +58,7 @@ function NavbarStaffDashboard() {
                         <div className={Navbars.buttonsList}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-8")} /> 
+                            {/* <Buttons buttons={buttons.filter((button) => button.id === "b-8")} />    */}
                             {/* <AccountDropdown /> ! Waiting... if we have dropdown */}
                         </div>
                         <div style={{ height: "150px" }}>
