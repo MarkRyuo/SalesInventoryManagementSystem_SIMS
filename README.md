@@ -110,6 +110,10 @@
     ```bash
     npm install react-router-dom
     ```
+5. **Install Firebase**
+    ```bash 
+    npm install firebase
+    ```
 
 ### How to Run the Project
 
