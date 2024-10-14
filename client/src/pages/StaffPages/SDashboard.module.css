@@ -27,4 +27,18 @@
 
 .btnContainer1 {
     width: 100%;
+    height: auto;
+    padding: 0px 30px;
+}
+
+.btnContainer2 {
+    width: 100%;
+    height: auto;
+    padding: 0px 30px;
+}
+
+.btnContainer3 {
+    width: 100%;
+    height: auto;
+    padding: 0px 30px;
 }
