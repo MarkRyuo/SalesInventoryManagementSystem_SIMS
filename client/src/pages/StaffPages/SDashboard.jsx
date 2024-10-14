@@ -8,8 +8,8 @@ function SDashboard() {
 
     const [buttons, setButtons] = useState([
         { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 1 },
-        { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 2 },
-        { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 3 },
+        { btnName: "ScanAssets", btnIcon: <TiDocumentAdd size={30} />, id: 2 },
+        { btnName: "SearchAssets", btnIcon: <TiDocumentAdd size={30} />, id: 3 },
     ])
 
     return (
