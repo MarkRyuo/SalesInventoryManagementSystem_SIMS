@@ -4,8 +4,16 @@ import SearchAssets from "../../components/StaffPortal/SearchAsset/SearchAsset";
 import MainStaffLayout from "../../layout/MainStaffLayout";
 import { Row, Col } from "react-bootstrap";
 import SDashboardCss from './SDashboard.module.css' ;
+import { useState } from "react";
 
 function SDashboard() {
+
+    const [buttons, setButtons] = useState([
+        { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 1 },
+        { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 2 },
+        { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 3 },
+    ])
+
     return (
         <MainStaffLayout>
             <Row className={SDashboardCss.rowContainer}>
