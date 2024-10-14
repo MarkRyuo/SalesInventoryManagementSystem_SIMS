@@ -8,11 +8,11 @@
     /* border: 1px solid; */
     width: 100%;
     height: auto;
-    margin: 0px;
-    justify-content: space-around;
+    margin: 30px 0px;
+    justify-content: space-evenly;
     /* flex-direction: column; */
     align-content: center;
-    min-width: 400px;
+    min-width: 300px;
 }
 
 .colContainer {
