@@ -29,7 +29,7 @@ function SDashboard() {
                     </div>
                 </Col>
                 <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                    <div className={SDashboardCss.btnContainer3>
+                    <div className={SDashboardCss.btnContainer3}>
                         <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
                     </div>
                 </Col>
