@@ -1,16 +1,7 @@
 import { useState } from "react";
 import {Button, Container, Navbar} from 'react-bootstrap' ;
-import { IoMdArrowBack } from "react-icons/io";
 
 function StaffNavBar() {
-
-    const [backBtn] = useState([
-        {
-            btnIcon: <IoMdArrowBack />,
-            path: "#",
-            id: 1
-        }
-    ])
 
     return (
         <>
