@@ -24,3 +24,7 @@
     align-content: center;
     box-shadow: 0px 8px 5px var(--colshadow);
 }
+
+.btnContainer1 {
+    width: 100%;
+}
