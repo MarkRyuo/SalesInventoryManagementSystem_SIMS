@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from 'react-bootstrap' ;
+import {Button, Container, Navbar} from 'react-bootstrap' ;
 import { IoMdArrowBack } from "react-icons/io";
 
 function StaffNavBtn() {
@@ -14,11 +14,17 @@ function StaffNavBtn() {
 
     return (
         <>
-            {backBtn.map((Backbtn) => (
-                <Button key={Backbtn.id}>
-                    {Backbtn.btnIcon}
-                </Button>
-            ))}
+            <Navbar className="bg-body-tertiary">
+                <Container>
+                    <Navbar.Brand>
+                        {backBtn.map((Backbtn) => (
+                            <Button key={Backbtn.id}>
+                                {Backbtn.btnIcon}
+                            </Button>
+                        ))}
+                    </Navbar.Brand>
+                </Container>
+            </Navbar>
         </>
     )
 }
