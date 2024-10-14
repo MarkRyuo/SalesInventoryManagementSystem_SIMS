@@ -14,6 +14,7 @@ import SDashboard from './pages/StaffPages/SDashboard.jsx';
 import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
 import ForgotPassword from './components/LogIn/ForgotPassword.jsx';
 import AddNewAssets from './pages/StaffPages/AddNewAssets.jsx';
+import NewAssets from './components/StaffPortal/AddNewAssets/NewAssets.jsx';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
     path: "SStaffAccount",
     element: <SStaffAccount /> ,
   },
+  {
+    path: "NewAssets",
+    element: <NewAssets /> ,
+  },
+  
   //? Staff buttons 
   {
     path: "AddNewAssets",
