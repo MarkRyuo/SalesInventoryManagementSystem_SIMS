@@ -19,7 +19,7 @@ function SDashboard() {
         <MainStaffLayout>
             <Row className={SDashboardCss.rowContainer}>
                 <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                    <div style={{ border: "1px solid", width: "100%", height: "auto", padding: "0px 30px" }}>
+                    <div style={{width: "100%", height: "auto", padding: "0px 30px" }}>
                         <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
                     </div>
                 </Col>
