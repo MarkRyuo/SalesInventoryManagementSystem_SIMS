@@ -49,6 +49,13 @@ const router = createBrowserRouter([
     path: "AboutPage",
     element: <AboutPage /> ,
   },
+
+  //? Forgot Password
+  {
+    path: "ForgotPassword",
+    element: <ForgotPassword />,
+  },
+
   //? Staff Portal
   {
   path: "SLogin",
@@ -87,12 +94,6 @@ const router = createBrowserRouter([
     element: <NewAssetsScanner /> ,
   },
   
-
-  //? Forgot Password
-  {
-    path: "ForgotPassword",
-    element: <ForgotPassword /> ,
-  },
 
 ]);
 
