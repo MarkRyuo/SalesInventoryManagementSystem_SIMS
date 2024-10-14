@@ -8,6 +8,7 @@ function StaffButtons() {
         { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 2 },
         { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 3 },
     ])
+    
     return (
         {buttons.map((button) => (
             <div key={button.id}>
