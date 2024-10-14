@@ -4,6 +4,7 @@ import SDashboardCss from './SDashboard.module.css' ;
 import { useState } from "react";
 import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons";
 import { TiDocumentAdd } from "react-icons/ti";
+import { BiScan } from "react-icons/bi";
 function SDashboard() {
 
     const [buttons, setButtons] = useState([
