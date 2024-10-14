@@ -12,7 +12,7 @@ function AddNewAssets() {
             path: "/SDashboard",
             id: 1
         }
-    ])
+    ]) ;
 
     return (
         <Container fluid className="p-0">
