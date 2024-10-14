@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from 'react-bootstrap' ;
 
 function StaffNavBtn() {
 
@@ -13,9 +14,9 @@ function StaffNavBtn() {
     return (
         <>
             {backBtn.map((Backbtn) => (
-                <div key={Backbtn.id}>
-                    <span>{Backbtn.btnIcon}</span>
-                </div>
+                <Button key={Backbtn.id}>
+                    {Backbtn.btnIcon}
+                </Button>
             ))}
         </>
     )
