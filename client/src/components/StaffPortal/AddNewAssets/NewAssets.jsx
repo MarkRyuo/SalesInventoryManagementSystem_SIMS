@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function AddNewAssets() {
+function NewAssets() {
     const [productName, setProductName] = useState('');
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState('');
@@ -126,4 +126,4 @@ const styles = {
     },
 };
 
-export default AddNewAssets;
+export default NewAssets;
