@@ -5,12 +5,14 @@ import { useState } from "react";
 import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons";
 import { TiDocumentAdd } from "react-icons/ti";
 import { BiScan } from "react-icons/bi";
+import { MdOutlineManageSearch } from "react-icons/md";
+
 function SDashboard() {
 
     const [buttons, setButtons] = useState([
         { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 1 },
-        { btnName: "ScanAssets", btnIcon: <TiDocumentAdd size={30} />, id: 2 },
-        { btnName: "SearchAssets", btnIcon: <TiDocumentAdd size={30} />, id: 3 },
+        { btnName: "ScanAssets", btnIcon: <BiScan size={30} />, id: 2 },
+        { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={30} />, id: 3 },
     ])
 
     return (
