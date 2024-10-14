@@ -6,7 +6,7 @@ function NewAssetsScanner() {
 
     return (
         <>
-            
+            {/* Code Of Scanner */}
         </>
     )
 }
