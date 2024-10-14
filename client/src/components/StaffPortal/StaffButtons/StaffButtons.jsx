@@ -2,13 +2,13 @@
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-function StaffButtons({buttons, handleAddNewAssets}) {
+function StaffButtons({buttons}) {
     
     return (
         <>
             {buttons.map((button) => (
                 <div key={button.id}>
-                    <Link as={Button} size='lg' variant="outline-success" onClick={handleAddNewAssets} style={button.btnmargin}>
+                    <Link as={Button} size='lg' variant="outline-success" style={button.btnmargin}>
                         <span>{button.btnIcon}</span> 
                         {button.btnName}
                     </Link>
