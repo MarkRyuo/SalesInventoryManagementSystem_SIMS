@@ -9,7 +9,7 @@ function NewAssetsScanner() {
     const [backBtn] = useState([
         {
             btnIcon: <IoMdArrowBack />,
-            path: "#",
+            path: "/SDashboard",
             id: 1
         }
     ])
