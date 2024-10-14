@@ -12,7 +12,7 @@ function SDashboard() {
     const [buttons, setButtons] = useState([
         { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, path: "#", id: 1 },
         { btnName: "ScanAssets", btnIcon: <BiScan size={30} />, path: "#", id: 2},
-        { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={30} />, id: 3, path: "#" },
+        { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={30} />, path: "#", id: 3 },
     ])
 
     return (
