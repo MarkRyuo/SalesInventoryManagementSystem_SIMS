@@ -1,9 +1,9 @@
 
 function StaffNavbar() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
