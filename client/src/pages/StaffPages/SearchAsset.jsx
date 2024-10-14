@@ -2,7 +2,7 @@
 function SearchAsset() {
     return (
         <>
-
+            <h1>SearchAsset</h1>
         </>
     )
 }
