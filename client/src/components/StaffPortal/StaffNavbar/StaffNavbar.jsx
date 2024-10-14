@@ -1,11 +1,10 @@
-import React from 'react'
 
 function StaffNavbar() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+
+        </div>
+    )
 }
 
-export default StaffNavbar
+export default StaffNavbar;
