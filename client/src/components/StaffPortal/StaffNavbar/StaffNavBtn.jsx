@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function () {
+function StaffNavBtn() {
 
     const [backBtn] = useState([
         {
@@ -21,4 +21,4 @@ function () {
     )
 }
 
-export default StaffNavbar;
+export default StaffNavBtn;
