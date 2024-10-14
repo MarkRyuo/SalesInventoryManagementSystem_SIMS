@@ -2,7 +2,7 @@ import { useState } from "react";
 import {Button, Container, Navbar} from 'react-bootstrap' ;
 import { IoMdArrowBack } from "react-icons/io";
 
-function StaffNavBtn() {
+function StaffNavBar() {
 
     const [backBtn] = useState([
         {
@@ -29,4 +29,4 @@ function StaffNavBtn() {
     )
 }
 
-export default StaffNavBtn;
+export default StaffNavBar;
