@@ -25,7 +25,9 @@ function SDashboard() {
                     <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
                 </Col>
                 <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                    <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
+                    <div style={{ width: "100%", height: 100, alignContent: 'center' }}>
+                        <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
+                    </div>
                 </Col>
             </Row>
         </MainStaffLayout>
