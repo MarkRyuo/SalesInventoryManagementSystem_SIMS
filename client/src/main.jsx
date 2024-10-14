@@ -17,6 +17,7 @@ import AddNewAssets from './pages/StaffPages/AddNewAssets.jsx';
 import NewAssets from './components/StaffPortal/AddNewAssets/NewAssets.jsx';
 import NewAssetsScanner from './components/StaffPortal/AddNewAssets/NewAssetsScanner.jsx';
 import ScanAsset from './pages/StaffPages/ScanAsset.jsx';
+import SearchAsset from './pages/StaffPages/SearchAsset.jsx';
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
   {
     path: "ScanAssets",
     element: <ScanAsset />,
+  },
+  {
+    path: "SearchAssets",
+    element: <SearchAsset /> ,
   },
 
   
