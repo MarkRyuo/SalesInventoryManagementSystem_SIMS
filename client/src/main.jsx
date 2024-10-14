@@ -2,13 +2,14 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+//? Pages Import
 import DashboardPage from '../src/pages/DashboardPage' ;
 import ProductPage from './pages/ProductPage.jsx' ;
 import ReportPage from './pages/ReportPage.jsx' ;
 import StaffAccount from './pages/StaffAccount.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import MyProfile from './pages/MyProfile.jsx';
-import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import SLogin from './pages/StaffPages/SLogin.jsx';
 import SDashboard from './pages/StaffPages/SDashboard.jsx';
 import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
@@ -66,7 +67,7 @@ const router = createBrowserRouter([
     element: <NewAssets /> , //* Add New Assets Products After Scan
   },
   
-  //? Staff Buttons
+  //? Staff Buttons in Dashboard
   {
     path: "AddNewAssets",
     element: <AddNewAssets /> ,
@@ -79,14 +80,13 @@ const router = createBrowserRouter([
     path: "SearchAssets",
     element: <SearchAsset /> ,
   },
-
   
+  //? Staff Comps 
   {
     path: "NewAssetsScanner",
     element: <NewAssetsScanner /> ,
   },
   
-
 
   //? Forgot Password
   {
