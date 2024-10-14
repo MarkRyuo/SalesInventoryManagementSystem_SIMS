@@ -1,6 +1,8 @@
 import StaffNavBar from "../../components/StaffPortal/StaffNavbar/StaffNavBar";
 import { Container } from "react-bootstrap"
 import { useState } from "react";
+import { IoMdArrowBack } from "react-icons/io";
+
 
 function SearchAsset() {
 
