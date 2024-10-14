@@ -10,7 +10,7 @@ import { MdOutlineManageSearch } from "react-icons/md";
 function SDashboard() {
 
     const [buttons, setButtons] = useState([
-        { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 1,  },
+        { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={30} />, id: 1, btnMargin: "style={{margin: "20px"}}"  },
         { btnName: "ScanAssets", btnIcon: <BiScan size={30} />, id: 2 },
         { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={30} />, id: 3 },
     ])
