@@ -23,7 +23,7 @@ import SearchAsset from './pages/StaffPages/SearchAsset.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App />, //* Root This is Login in DashBoard
   },
   {
     path: "DashboardPage",
