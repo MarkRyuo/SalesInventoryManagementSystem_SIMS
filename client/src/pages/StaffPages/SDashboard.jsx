@@ -19,13 +19,17 @@ function SDashboard() {
         <MainStaffLayout>
             <Row className={SDashboardCss.rowContainer}>
                 <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                    <StaffButtons buttons={buttons.filter(button => button.id === 1)}/>
+                    <div style={{ border: "1px solid", width: "100%", height: "auto", padding: "0px 30px" }}>
+                        <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
+                    </div>
                 </Col>
                 <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                    <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
+                    <div style={{ border: "1px solid", width: "100%", height: "auto", padding: "0px 46px" }}>
+                        <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
+                    </div>
                 </Col>
                 <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                    <div style={{ border: "1px solid" ,width: "100%", height: "auto", padding: "0px 30px"}}>
+                    <div style={{ border: "1px solid" ,width: "100%", height: "auto", padding: "0px 35px"}}>
                         <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
                     </div>
                 </Col>
