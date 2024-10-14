@@ -61,7 +61,7 @@ const router = createBrowserRouter([
   },
   {
     path: "NewAssets",
-    element: <NewAssets /> ,
+    element: <NewAssets /> , //* Add New Products 
   },
   
   //? Staff buttons 
