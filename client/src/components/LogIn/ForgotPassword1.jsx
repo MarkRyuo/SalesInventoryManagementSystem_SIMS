@@ -1,4 +1,4 @@
-
+import { Form, FloatingLabel } from "react-bootstrap"
 
 function ForgotPassword1() {
     return (
@@ -7,6 +7,19 @@ function ForgotPassword1() {
                 <span>{/*Icon */}</span>
                 <p className="fs-4">ForgotPassword</p>
                 <p>Text Here</p>
+            </div>
+
+            <div>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label="Username"
+                    className="mb-3"
+                >
+                    <Form.Control type="text" placeholder="name@example.com" />
+                </FloatingLabel>
+                <FloatingLabel controlId="floatingPassword" label="Password">
+                    <Form.Control type="password" placeholder="Password" />
+                </FloatingLabel>
             </div>
         </div>
     )
