@@ -56,7 +56,7 @@ function EnableRecoveryMode() {
     };
 
     return (
-        <Container fluid='lg'>
+        <Container fluid='lg' className={ResetModecss.containerMode}>
             <div className="Container-" style={{ border: "1px solid", borderRadius: "15px", padding: "20px" }}>
                 <div>
                     <span><FaLock size={20} /></span>
