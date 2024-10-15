@@ -136,7 +136,7 @@ function EnableRecoveryMode() {
                     )}
 
                     {customQuestions.map((question, index) => (
-                        <FloatingLabel key={index} controlId={`floatingAnswer${index}`} label={question} className="mb-3">
+                        <FloatingLabel key={index} controlId={`floatingAnswer${index}`} label={question} className="mb-3" style={{width: '100%', minWidth: '400px'}}>
                             <Form.Control
                                 type="text"
                                 placeholder="Answer"
@@ -145,7 +145,7 @@ function EnableRecoveryMode() {
                         </FloatingLabel>
                     ))}
                     <div className="d-flex justify-content-center mb-3">
-                        <Button variant="primary" onClick={checkAnswers} disabled={loading}>
+                        <Button variant="primary" onClick={checkAnswers} disabled={loading} size='lg'>
                             {loading ? (
                                 <>
                                     <Spinner animation="border" size="sm" role="status" aria-hidden="true" /> Verifying...
