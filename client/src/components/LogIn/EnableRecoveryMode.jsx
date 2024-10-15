@@ -97,7 +97,7 @@ function EnableRecoveryMode() {
         <Container fluid='lg' className={ResetModecss.containerMode}>
             <div className={ResetModecss.containerContent}>
                 <div>
-                    <span><FaLock size={20} /></span>
+                    <span><FaLock size={30} /></span>
                     <p className="fs-4">Enable Recovery Mode</p>
                     <p>To continue the password recovery process, please answer the security questions below. Make sure to enter the answers you previously set up. You need to answer at least two questions correctly to proceed.</p>
                 </div>
