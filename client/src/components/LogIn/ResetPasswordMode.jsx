@@ -35,7 +35,7 @@ function ResetPasswordMode() {
 
     return (
         <Container fluid='lg' className={ResetModecss.containerMode}>
-            <div className="Container-" style={{ border: "1px solid", borderRadius: "15px", padding: "20px" }}>
+            <div className={ResetModecss.containerContent}>
                 <div>
                     <span><FaUnlock size={20} /></span>
                     <p className="fs-4">Reset Password</p>
