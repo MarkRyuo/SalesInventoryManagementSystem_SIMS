@@ -22,7 +22,7 @@ function EnableRecoveryMode() {
                     <Form.Control type="text" placeholder="Username" />
                 </FloatingLabel>
 
-                <Button variant="primary">Verify Username</Button>
+                <Button variant="primary">Verify Answers</Button>
             </div>
         </div>
     )

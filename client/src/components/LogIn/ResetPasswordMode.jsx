@@ -22,7 +22,7 @@ function ResetPasswordMode() {
                     <Form.Control type="text" placeholder="Username" />
                 </FloatingLabel>
 
-                <Button variant="primary">Verify Username</Button>
+                <Button variant="primary">Reset Password</Button>
             </div>
         </div>
     )
