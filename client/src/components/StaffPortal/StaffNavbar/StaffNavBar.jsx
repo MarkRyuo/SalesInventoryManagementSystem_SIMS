@@ -9,9 +9,14 @@ function StaffNavBar({backBtn}) {
                 <Container>
                     <Navbar.Brand>
                         {backBtn.map((Backbtn) => (
-                            <Link as={Button} key={Backbtn.id} to={Backbtn.path}>
+                            <Button 
+                                as={Link} 
+                                key={Backbtn.id} 
+                                to={Backbtn.path}
+                                
+                            >
                                 {Backbtn.btnIcon}
-                            </Link>
+                            </Button>
                         ))}
                     </Navbar.Brand>
                 </Container>
