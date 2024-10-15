@@ -3,7 +3,7 @@ import { FaBoxOpen } from "react-icons/fa6";
 
 function ForgotPassword1() {
     return (
-        <div className="Container-" style={{border: "1px solid"}}>
+        <div className="Container-" style={{border: "1px solid", borderRadius: "15px"}}>
             <div>
                 <span><FaBoxOpen size={20}/></span>
                 <p className="fs-4">ForgotPassword</p>
