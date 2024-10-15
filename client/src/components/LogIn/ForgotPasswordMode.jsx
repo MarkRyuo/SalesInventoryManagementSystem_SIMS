@@ -24,7 +24,7 @@ function ForgotPasswordMode() {
             // Store the admin document data temporarily (e.g., in local storage or state management)
             const adminDocument = querySnapshot.docs[0];
             localStorage.setItem('adminDocId', adminDocument.id);
-            navigate('/enable-recovery-mode'); // Navigate to the next page
+            navigate('/EnableRecoveryMode'); // Navigate to the next page
         } catch (error) {
             console.error('Verification error:', error.message);
             setError('An error occurred during verification.');
