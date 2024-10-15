@@ -19,6 +19,8 @@ import NewAssetsScanner from './components/StaffPortal/AddNewAssets/NewAssetsSca
 import ScanAsset from './pages/StaffPages/ScanAsset.jsx';
 import SearchAsset from './pages/StaffPages/SearchAsset.jsx';
 import ForgotPasswordMode from './components/LogIn/ForgotPasswordMode.jsx';
+import EnableRecoveryMode from './components/LogIn/EnableRecoveryMode.jsx';
+import ResetPasswordMode from './components/LogIn/ResetPasswordMode.jsx';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,14 @@ const router = createBrowserRouter([
   {
     path: "ForgotPasswordMode",
     element: <ForgotPasswordMode />,
+  },
+  {
+    path: "EnableRecoveryMode",
+    element: <EnableRecoveryMode />,
+  },
+  {
+    path: "ResetPasswordMode",
+    element: <ResetPasswordMode /> ,
   },
 
   //? Staff Portal
