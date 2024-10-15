@@ -18,8 +18,8 @@ function EnableRecoveryMode() {
                     className="mb-3"
                 >
                     <Form.Control type="text" placeholder="" />
-                </FloatingLabel>
-                <FloatingLabel controlId="floatingPassword" label="">
+                        </FloatingLabel>
+                        <FloatingLabel controlId="floatingPassword" label="">
                     <Form.Control type="text" placeholder="" />
                 </FloatingLabel>
 
