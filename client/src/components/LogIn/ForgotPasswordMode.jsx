@@ -5,7 +5,7 @@ function ForgotPasswordMode() {
     return (
         <div className="Container-" style={{border: "1px solid", borderRadius: "15px", padding: "20px"}}>
             <div>
-                <span><FaBoxOpen size={20}/></span>
+                <span><GoShieldLock size={20}/></span>
                 <p className="fs-4">ForgotPassword</p>
                 <p>Text Here</p>
             </div>
