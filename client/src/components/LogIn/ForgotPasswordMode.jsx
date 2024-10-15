@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Form, FloatingLabel, Button, Container, Alert } from 'react-bootstrap';
+import { Form, FloatingLabel, Button, Container, Alert, Spinner } from 'react-bootstrap';
 import { GoShieldLock } from 'react-icons/go';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../services/firebase';
@@ -9,9 +9,11 @@ function ForgotPasswordMode() {
     const [username, setUsername] = useState('');
     const [error, setError] = useState('');
     const [showError, setShowError] = useState(false); // State to manage error alert visibility
+    const [loading, setLoading] = useState(false); // State for loading indicator
     const navigate = useNavigate();
 
     const handleVerification = async () => {
+        setLoading(true); // Start loading
         try {
             const adminsCollection = collection(db, 'admins');
             const q = query(adminsCollection, where('username', '==', username));
@@ -21,6 +23,7 @@ function ForgotPasswordMode() {
                 setError('Username not found.');
                 setShowError(true); // Show error alert
                 setUsername(''); // Clear the input field
+                setLoading(false); // Stop loading
                 return;
             }
 
@@ -33,6 +36,8 @@ function ForgotPasswordMode() {
             setError('An error occurred during verification.');
             setShowError(true); // Show error alert
             setUsername(''); // Clear the input field
+        } finally {
+            setLoading(false); // Stop loading regardless of the outcome
         }
     };
 
@@ -82,8 +87,14 @@ function ForgotPasswordMode() {
                         />
                     </FloatingLabel>
                     <div className="d-flex justify-content-center mb-3">
-                        <Button variant="primary" size='lg' onClick={handleVerification}>
-                            Verify Username
+                        <Button variant="primary" size='lg' onClick={handleVerification} disabled={loading}>
+                            {loading ? (
+                                <>
+                                    <Spinner animation="border" size="sm" role="status" aria-hidden="true" /> Verifying...
+                                </>
+                            ) : (
+                                'Verify Username'
+                            )}
                         </Button>
                     </div>
                 </div>
