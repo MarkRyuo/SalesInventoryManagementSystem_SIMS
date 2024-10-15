@@ -1,5 +1,5 @@
 import { Form, FloatingLabel, Button } from "react-bootstrap"
-import { FaBoxOpen } from "react-icons/fa6";
+import { FaLock } from "react-icons/fa";
 
 function EnableRecoveryMode() {
     return (
