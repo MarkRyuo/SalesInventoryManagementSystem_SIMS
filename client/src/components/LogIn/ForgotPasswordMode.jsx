@@ -13,14 +13,14 @@ import ResetModecss from './CSS/ResetMode.module.css' ;
 function ForgotPasswordMode() {
     const [username, setUsername] = useState('');
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState(''); // State to manage success message
-    const [showError, setShowError] = useState(false); // State to manage error alert visibility
+    const [success, setSuccess] = useState(''); //* State to manage success message
+    const [showError, setShowError] = useState(false); //* State to manage error alert visibility
     const [loading, setLoading] = useState(false); // State for loading indicator
     const navigate = useNavigate();
 
     const handleVerification = async () => {
-        setLoading(true); // Start loading
-        setError(''); // Clear any previous errors
+        setLoading(true); //* Start loading
+        setError(''); //* Clear any previous errors
         setSuccess(''); // Clear previous success messages
         try {
             const adminsCollection = collection(db, 'admins');
