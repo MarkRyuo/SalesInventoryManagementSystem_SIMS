@@ -1,0 +1,218 @@
+@import url(https://fonts.googleapis.com/css?family=Archivo+Narrow);
+
+$size: 50px;
+$primary-color: white;
+
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    transform: $transform;
+}
+
+@mixin animation($animation) {
+    -webkit-animation: $animation;
+    -moz-animation: $animation;
+    animation: $animation;
+}
+
+@mixin opacity($opacity) {
+    -webkit-opacity: $opacity;
+    -moz-opacity: $opacity;
+    opacity: $opacity;
+}
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+// Cube Animation Styles
+.cube-folding {
+    width: $size;
+    height: $size;
+    display: inline-block;
+    @include transform(rotate(45deg));
+    font-size: 0;
+
+    span {
+        position: relative;
+        width: $size / 2;
+        height: $size / 2;
+        @include transform(scale(1.1));
+        display: inline-block;
+
+        &::before {
+            content: "";
+            background-color: $primary-color;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: block;
+            width: $size / 2;
+            height: $size / 2;
+            transform-origin: 100% 100%;
+            @include animation(folding 2.5s infinite linear both);
+        }
+    }
+
+    .leaf2 {
+        @include transform(rotateZ(90deg) scale(1.1));
+
+        &::before {
+            animation-delay: 0.3s;
+            background-color: darken($primary-color, 5%);
+        }
+    }
+
+    .leaf3 {
+        @include transform(rotateZ(270deg) scale(1.1));
+
+        &::before {
+            animation-delay: 0.9s;
+            background-color: darken($primary-color, 5%);
+        }
+    }
+
+    .leaf4 {
+        @include transform(rotateZ(180deg) scale(1.1));
+
+        &::before {
+            animation-delay: 0.6s;
+            background-color: darken($primary-color, 10%);
+        }
+    }
+}
+
+// Animation Keyframes
+@include keyframes(folding) {
+
+    0%,
+    10% {
+        @include transform(perspective(140px) rotateX(-180deg));
+        @include opacity(0);
+    }
+
+    25%,
+    75% {
+        @include transform(perspective(140px) rotateX(0deg));
+        @include opacity(1);
+    }
+
+    90%,
+    100% {
+        @include transform(perspective(140px) rotateY(180deg));
+        @include opacity(0);
+    }
+}
+
+@include keyframes(text) {
+    100% {
+        top: ($size / 2) + 10px;
+    }
+}
+
+@include keyframes(shadow) {
+    100% {
+        bottom: -18px;
+        width: $size * 2;
+    }
+}
+
+// Loader Wrapper
+.cube-wrapper {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: $size * 2;
+    height: $size * 2;
+    text-align: center;
+
+    &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -20px;
+        margin: auto;
+        width: $size * 1.8;
+        height: 6px;
+        background-color: rgba(black, 0.1);
+        @include border-radius(100%);
+        @include animation(shadow 0.5s ease infinite alternate);
+    }
+
+    .loading {
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        color: $primary-color;
+        position: relative;
+        top: $size / 2;
+        @include animation(text 0.5s ease infinite alternate);
+    }
+}
+
+// Background and Fonts
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    background: linear-gradient(to left, #00c6ff, #0072ff);
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 26px;
+    text-align: center;
+    color: #fff;
+    padding: 50px 20px;
+    font-weight: 300;
+    font-family: "Archivo Narrow", sans-serif;
+}
+
+.made-with-love {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    bottom: 10px;
+    text-align: center;
+    font-size: 10px;
+    color: #fff;
+
+    i {
+        color: #f50057;
+        font-size: 14px;
+        position: relative;
+        top: 2px;
+    }
+
+    a {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
