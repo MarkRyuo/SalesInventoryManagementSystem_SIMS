@@ -58,7 +58,7 @@ export const LoginCard = () => {
 
             {/* Forgot Password Link */}
             <Link
-                to="/ForgotPassword"
+                to="/ForgotPasswordMode"
                 style={{
                     display: 'block',
                     textAlign: 'center',
