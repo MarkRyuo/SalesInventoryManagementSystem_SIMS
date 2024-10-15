@@ -57,11 +57,11 @@ const router = createBrowserRouter([
   },
   {
     path: "SStaffAccount",
-    element: <SStaffAccount /> ,
+    element: <SStaffAccount /> , //* Staff Account Page
   },
   {
     path: "NewAssets",
-    element: <NewAssets /> , //* Add New Products After Scan
+    element: <NewAssets /> , //* Add New Assets Products After Scan
   },
   
   //? Staff buttons
