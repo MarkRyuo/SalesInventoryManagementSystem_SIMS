@@ -49,11 +49,11 @@ const router = createBrowserRouter([
   //? Staff Portal
   {
   path: "SLogin",
-    element: <SLogin /> ,
+    element: <SLogin /> , //* Staff Login Page
   },
   {
     path: "SDashboard",
-    element: <SDashboard /> ,
+    element: <SDashboard /> , //* Staff Dashboard Page
   },
   {
     path: "SStaffAccount",
