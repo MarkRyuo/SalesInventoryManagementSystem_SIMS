@@ -47,7 +47,7 @@ function ForgotPasswordMode() {
     }, [showError]);
 
     return (
-        <Container fluid='lg' style={{ border: "1px solid red", width: "100%", height: "auto", marginTop: "100px", justifyContent: 'center', display: "flex" }}>
+        <Container fluid='lg' style={{ width: "100%", height: "auto", marginTop: "100px", justifyContent: 'center', display: "flex" }}>
             <div className="Container-" style={{ boxShadow: '1px 1px 5px', borderRadius: "20px", padding: "20px", height: "auto", width: "500px", display: "flex", flexDirection: 'column', gap: '10px' }}>
                 <div>
                     <span><GoShieldLock size={35} /></span>
@@ -81,7 +81,7 @@ function ForgotPasswordMode() {
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </FloatingLabel>
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center mb-3">
                         <Button variant="primary" size='lg' onClick={handleVerification}>
                             Verify Username
                         </Button>
