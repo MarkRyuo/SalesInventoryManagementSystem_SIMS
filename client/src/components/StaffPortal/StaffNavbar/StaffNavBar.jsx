@@ -1,7 +1,7 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
 import {Button, Container, Navbar} from 'react-bootstrap' ;
 
-function StaffNavBar() {
+function StaffNavBar({backBtn}) {
 
     return (
         <>
