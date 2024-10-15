@@ -1,9 +1,9 @@
-import { Form, FloatingLabel, Button } from "react-bootstrap"
+import { Form, FloatingLabel, Button, Container } from "react-bootstrap"
 import { GoShieldLock } from "react-icons/go";
 
 function ForgotPasswordMode() {
     return (
-        <div className="Container-" style={{border: "1px solid", borderRadius: "15px", padding: "20px"}}>
+        <Container fluid='lg' className="Container-" style={{border: "1px solid", borderRadius: "15px", padding: "20px"}}>
             <div>
                 <span><GoShieldLock size={20}/></span>
                 <p className="fs-4">ForgotPassword</p>
@@ -24,7 +24,7 @@ function ForgotPasswordMode() {
 
                 <Button variant="primary">Verify Username</Button>
             </div>
-        </div>
+        </Container>
     )
 }
 
