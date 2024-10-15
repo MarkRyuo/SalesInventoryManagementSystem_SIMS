@@ -49,7 +49,7 @@ function EnableRecoveryMode() {
         });
 
         if (correctCount >= 2) {
-            navigate('/ResetPasswordMode'); // Navigate to reset password page
+            navigate('/ResetPasswordMode'); //* Navigate to reset password page
         } else {
             setError('Incorrect answers to the security questions.');
         }
