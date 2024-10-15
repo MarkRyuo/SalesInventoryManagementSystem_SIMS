@@ -69,10 +69,7 @@ const router = createBrowserRouter([
     path: "SStaffAccount",
     element: <SStaffAccount /> , //* Staff Account Page
   },
-  {
-    path: "NewAssets",
-    element: <NewAssets /> , //* Add New Assets Products After Scan
-  },
+
   
   //? Staff Buttons in Dashboard
   {
@@ -91,7 +88,12 @@ const router = createBrowserRouter([
   //? Staff Comps 
   {
     path: "NewAssetsScanner",
-    element: <NewAssetsScanner /> ,
+    element: <NewAssetsScanner /> , //* Scanner of AddNewAssets
+  },
+
+  {
+    path: "NewAssets",
+    element: <NewAssets />, //* Add New Assets Products After Scan
   },
   
 
