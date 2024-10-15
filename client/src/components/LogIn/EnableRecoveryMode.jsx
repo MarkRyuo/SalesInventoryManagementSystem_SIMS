@@ -6,7 +6,7 @@ function EnableRecoveryMode() {
         <div className="Container-" style={{ border: "1px solid", borderRadius: "15px", padding: "20px" }}>
             <div>
                 <span><FaBoxOpen size={20} /></span>
-                <p className="fs-4">ForgotPassword</p>
+                <p className="fs-4">Enable Recovery Mode</p>
                 <p>Text Here</p>
             </div>
 
