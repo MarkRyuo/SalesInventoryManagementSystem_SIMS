@@ -11,19 +11,19 @@ export const NavLogin = () => {
             <Navbar>
                 <Container>
                     <Row>
-                        <Col> <BsBox size={40} /> </Col>
-                        <Col style={{ paddingTop: 4 }}>
+                        <Col> <BsBox size={40} className="d-none d-md-block"/> </Col>
+                        <Col className="pt-1 m-0 p-0">
                             <Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand>
                         </Col>
                     </Row>
 
                     <Dropdown>
-                        <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-3">
+                        <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-5">
                             Option
                         </Dropdown.Toggle>
 
                         {/* Dropdown function */}
-                        <Dropdown.Menu style={{ width: 100 }}>
+                        <Dropdown.Menu className="p-1">
                             <Dropdown.Item as={Link} to='/SLogin' >Staff Portal</Dropdown.Item> {/* Staff Account*/}
                             <Dropdown.Item as={Link} to='DeveloperPage' >Developer</Dropdown.Item>
                             <Dropdown.Item as={Link} to='/AboutPage' >About</Dropdown.Item>

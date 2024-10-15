@@ -10,8 +10,9 @@
 }
 
 .containerRow {
-    width: 450px;
-    min-width: 412px;
+    width: 100%;
+    max-width: 450px;
+    min-width: 350px;
 }
 
 .btnLogin {

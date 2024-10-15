@@ -22,7 +22,7 @@ export const NavDashboard = () => {
     const handleShow = () => setShow(true);
 
     //* Buttons 
-    const [buttons, setBottons] = useState([
+    const [buttons] = useState([
         { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-1", path:"/DashboardPage" },
         { icon: <AiOutlineProduct />, btnName: "Product", id: "b-2", path: "/ProductPage" },
         { icon: <TbReportAnalytics />, btnName: "Report", id: "b-3", path: "/ReportPage" },
