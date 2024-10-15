@@ -14,4 +14,7 @@
 .containerContent {
     box-shadow: 2px 8px 5px var(--shadowColor);
     border-radius: 20px;
+    padding: 20px;
+    height: auto;
+    width: 500px;
 }
