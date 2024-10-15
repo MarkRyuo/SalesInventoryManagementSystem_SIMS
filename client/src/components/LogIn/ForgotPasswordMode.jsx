@@ -3,7 +3,10 @@ import { GoShieldLock } from "react-icons/go";
 
 function ForgotPasswordMode() {
     return (
-        <Container fluid='lg' className="Container-" style={{border: "1px solid", borderRadius: "15px", padding: "20px"}}>
+        <Container fluid='lg'>
+
+        </Container>
+        <div className="Container-" style={{border: "1px solid", borderRadius: "15px", padding: "20px"}}>
             <div>
                 <span><GoShieldLock size={20}/></span>
                 <p className="fs-4">ForgotPassword</p>
@@ -24,7 +27,7 @@ function ForgotPasswordMode() {
 
                 <Button variant="primary">Verify Username</Button>
             </div>
-        </Container>
+        </div>
     )
 }
 
