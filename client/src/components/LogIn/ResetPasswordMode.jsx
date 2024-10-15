@@ -1,8 +1,11 @@
-import { Form, FloatingLabel, Button } from "react-bootstrap"
+import { Form, FloatingLabel, Button, Container } from "react-bootstrap"
 import { FaUnlock } from "react-icons/fa";
 
 function ResetPasswordMode() {
     return (
+        <Container fluid='lg'>
+
+        </Container>
         <div className="Container-" style={{ border: "1px solid", borderRadius: "15px", padding: "20px" }}>
             <div>
                 <span><FaUnlock size={20}/></span>
