@@ -18,7 +18,6 @@ function NewAssetsScanner() {
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)}/>
             <Container fluid='lg'>
                 <h2>New Assets Scanner</h2>
-
             </Container>
         </Container>
     )
