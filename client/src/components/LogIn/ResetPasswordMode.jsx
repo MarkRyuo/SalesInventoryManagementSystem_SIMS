@@ -8,22 +8,24 @@ import { db } from '../../services/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
 //? Css
 import ResetModecss from './CSS/ResetMode.module.css';
+//? Components
+import ResetRendering from './ResetRendering';
 
 function ResetPasswordMode() {
     const [newPassword, setNewPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [show, setShow] = useState(false);
-    const [alertOpacity, setAlertOpacity] = useState(1); // State to manage alert opacity for fade-out effect
+    const [alertOpacity, setAlertOpacity] = useState(1);
+    const [isLoading, setIsLoading] = useState(false); // State for managing loading screen
     const adminDocId = localStorage.getItem('adminDocId');
     const navigate = useNavigate();
 
     const handlePasswordReset = async () => {
         setError('');
         setSuccess('');
-        setAlertOpacity(1); // Reset opacity when showing a new alert
+        setAlertOpacity(1);
 
-        // Validate the password requirements before proceeding
         const lengthRequirement = newPassword.length >= 8;
         const uppercaseRequirement = /[A-Z]/.test(newPassword);
         const lowercaseRequirement = /[a-z]/.test(newPassword);
@@ -34,11 +36,11 @@ function ResetPasswordMode() {
             setError('Password does not meet the required criteria.');
             setShow(true);
             setTimeout(() => {
-                setAlertOpacity(0); // Start fade-out by reducing opacity
+                setAlertOpacity(0);
                 setTimeout(() => {
-                    setShow(false); // Hide alert after fade-out
-                }, 500); // Wait for the fade-out to complete
-            }, 2000); // Show error for 2 seconds before starting fade-out
+                    setShow(false);
+                }, 500);
+            }, 2000);
             return;
         }
 
@@ -58,16 +60,15 @@ function ResetPasswordMode() {
             const adminDocRef = doc(db, 'admins', adminDocId);
             await updateDoc(adminDocRef, { password: newPassword });
 
-            setSuccess('Password reset successfully. Please login with your new password.');
+            setSuccess('Password reset successfully.');
             setShow(true);
+            setIsLoading(true); // Show loading screen for 5 seconds
+
             setTimeout(() => {
-                setAlertOpacity(0);
-                setTimeout(() => {
-                    setShow(false);
-                    localStorage.removeItem('adminDocId');
-                    navigate('/');
-                }, 500);
-            }, 2000);
+                setIsLoading(false); // Hide loading screen
+                localStorage.removeItem('adminDocId');
+                navigate('/');
+            }, 5000); // 5 seconds delay before navigating
         } catch (error) {
             console.error('Password reset error:', error);
             setError(`An error occurred: ${error.message}`);
@@ -81,7 +82,6 @@ function ResetPasswordMode() {
         }
     };
 
-    // Function to display password requirements
     const passwordRequirements = () => {
         const lengthRequirement = newPassword.length >= 8;
         const uppercaseRequirement = /[A-Z]/.test(newPassword);
@@ -110,6 +110,11 @@ function ResetPasswordMode() {
         );
     };
 
+    // If loading, display the ResetRendering component
+    if (isLoading) {
+        return <ResetRendering />;
+    }
+
     return (
         <Container fluid='lg' className={ResetModecss.containerMode}>
             <div className={ResetModecss.containerContent}>
@@ -119,7 +124,6 @@ function ResetPasswordMode() {
                     <p>Please enter your new password below.</p>
                 </div>
                 <div>
-                    {/* Display alert for success or error */}
                     {show && (
                         <Alert
                             variant={error ? 'danger' : 'success'}
@@ -145,7 +149,6 @@ function ResetPasswordMode() {
                             onChange={(e) => setNewPassword(e.target.value)}
                         />
                     </FloatingLabel>
-                    {/* Display password requirements */}
                     <div className="mb-3">
                         <h6>Password Requirements:</h6>
                         {passwordRequirements()}
