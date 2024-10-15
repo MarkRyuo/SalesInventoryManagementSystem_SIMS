@@ -1,7 +1,7 @@
 import { Form, FloatingLabel, Button } from "react-bootstrap"
 import { FaBoxOpen } from "react-icons/fa6";
 
-function ForgotPassword1() {
+function ForgotPasswordMode() {
     return (
         <div className="Container-" style={{border: "1px solid", borderRadius: "15px", padding: "20px"}}>
             <div>
@@ -28,4 +28,4 @@ function ForgotPassword1() {
     )
 }
 
-export default ForgotPassword1 ;
+export default ForgotPasswordMode ;
