@@ -14,13 +14,13 @@ function ResetPasswordMode() {
                 <div>
                     <FloatingLabel
                         controlId="floatingInput"
-                        label="Username"
+                        label=""
                         className="mb-3"
                     >
-                        <Form.Control type="text" placeholder="name@example.com" />
+                        <Form.Control type="text" placeholder="" />
                     </FloatingLabel>
-                    <FloatingLabel controlId="floatingPassword" label="Username">
-                        <Form.Control type="text" placeholder="Username" />
+                    <FloatingLabel controlId="floatingPassword" label="">
+                        <Form.Control type="text" placeholder="" />
                     </FloatingLabel>
 
                     <Button variant="primary">Reset Password</Button>
