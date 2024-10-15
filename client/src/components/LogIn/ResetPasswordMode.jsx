@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { Form, FloatingLabel, Button, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+//? Icon
 import { FaUnlock } from 'react-icons/fa';
+//? Services
 import { db } from '../../services/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+
+//? Css
+import ResetModecss from './CSS/ResetMode.module.css';
 
 function ResetPasswordMode() {
     const [newPassword, setNewPassword] = useState('');
