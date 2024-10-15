@@ -21,7 +21,7 @@ function ResetRendering() {
         // Navigate to '/' after 5 seconds
         const timeout = setTimeout(() => {
             navigate('/');
-        }, 5000);
+        }, 7000);
 
         // Clean up intervals and timeout when the component is unmounted
         return () => {
