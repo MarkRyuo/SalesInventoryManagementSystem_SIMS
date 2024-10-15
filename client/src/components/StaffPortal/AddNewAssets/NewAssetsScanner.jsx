@@ -2,7 +2,7 @@
 function NewAssetsScanner() {
     return (
         <>
-            
+            <h2>New Assets Scanner</h2>
         </>
     )
 }
