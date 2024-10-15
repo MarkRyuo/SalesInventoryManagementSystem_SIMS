@@ -17,8 +17,8 @@ function ForgotPassword1() {
                 >
                     <Form.Control type="text" placeholder="name@example.com" />
                 </FloatingLabel>
-                <FloatingLabel controlId="floatingPassword" label="Password">
-                    <Form.Control type="password" placeholder="Password" />
+                <FloatingLabel controlId="floatingPassword" label="Username">
+                    <Form.Control type="text" placeholder="Username" />
                 </FloatingLabel>
             </div>
         </div>
