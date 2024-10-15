@@ -17,4 +17,7 @@
     padding: 20px;
     height: auto;
     width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
