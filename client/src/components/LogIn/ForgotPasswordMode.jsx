@@ -70,20 +70,14 @@ function ForgotPasswordMode() {
     }, [success]);
 
     return (
-        <Container fluid='lg' style={{
-            width: "100%", 
-            height: "auto", 
-            marginTop: "200px", 
-            justifyContent: 'center', 
-            display: "flex" 
-        }}>
+        <Container fluid='lg' style={{ width: "100%", height: "auto", marginTop: "200px", justifyContent: 'center', display: "flex" }}>
             <div className="Container-" style={{ boxShadow: '2px 8px 5px #EFF3F4', borderRadius: "20px", padding: "20px", height: "auto", width: "500px", display: "flex", flexDirection: 'column', gap: '10px' }}>
                 <div>
                     <Button variant="link" onClick={() => navigate('/')} size='lg' className='p-0'>
                         <FaArrowLeft size={25} /> {/* Back icon */}
                     </Button>
                 </div>
-                <div>
+                <div >
                     <span><GoShieldLock size={35} /></span>
                     <p className="fs-4">Forgot Password</p>
                 </div>
