@@ -5,6 +5,7 @@ import { FaArrowLeft } from 'react-icons/fa'; // Importing back icon
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../services/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
+import ResetModecss from './CSS/ResetMode.module.css' ;
 
 function ForgotPasswordMode() {
     const [username, setUsername] = useState('');
