@@ -1,5 +1,5 @@
 import { Form, FloatingLabel, Button } from "react-bootstrap"
-import { FaBoxOpen } from "react-icons/fa6";
+import { GoShieldLock } from "react-icons/go";
 
 function ForgotPasswordMode() {
     return (
