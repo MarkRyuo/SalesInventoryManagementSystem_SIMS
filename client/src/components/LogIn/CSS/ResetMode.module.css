@@ -6,4 +6,7 @@
 .ContainerMode {
     width: 100%;
     height: auto;
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
 }
