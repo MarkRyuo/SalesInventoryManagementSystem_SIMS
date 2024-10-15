@@ -49,18 +49,18 @@ function ForgotPasswordMode() {
             setShowError(true); //* Show error alert
             setUsername(''); //* Clear the input field
         } finally {
-            setLoading(false); // Stop loading regardless of the outcome
+            setLoading(false); //* Stop loading regardless of the outcome
         }
     };
 
-    // Automatically clear the error and success messages after 3 seconds with a smooth fade-out
+    //* Automatically clear the error and success messages after 3 seconds with a smooth fade-out
     useEffect(() => {
         if (showError) {
             const timer = setTimeout(() => {
                 setShowError(false);
                 setError('');
             }, 3000);
-            return () => clearTimeout(timer); // Cleanup the timer
+            return () => clearTimeout(timer); //* Cleanup the timer
         }
     }, [showError]);
 
