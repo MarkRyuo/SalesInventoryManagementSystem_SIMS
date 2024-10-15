@@ -32,8 +32,8 @@ function ForgotPasswordMode() {
     };
 
     return (
-        <Container fluid='lg'>
-            <div className="Container-" style={{ border: "1px solid", borderRadius: "15px", padding: "20px" }}>
+        <Container fluid='lg' style={{border: "1px solid red", width: "100%", height: "500px", marginTop: "100px", alignContent: 'center', alignItems: 'center'}}>
+            <div className="Container-" style={{ border: "1px solid", borderRadius: "15px", padding: "20px", height: "auto", width: "500px" }}>
                 <div>
                     <span><GoShieldLock size={20} /></span>
                     <p className="fs-4">ForgotPassword</p>
