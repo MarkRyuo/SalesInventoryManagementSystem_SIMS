@@ -78,7 +78,7 @@ function ForgotPasswordMode() {
             <div className={ResetModecss.containerContent}>
                 <div>
                     <Button variant="link" onClick={() => navigate('/')} size='lg' className='p-0'>
-                        <FaArrowLeft size={25} /> {/* Back icon */}
+                        <FaArrowLeft size={25} /> 
                     </Button>
                 </div>
                 <div>
