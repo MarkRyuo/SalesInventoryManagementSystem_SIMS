@@ -18,12 +18,12 @@ export const NavLogin = () => {
                     </Row>
 
                     <Dropdown>
-                        <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-3">
+                        <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-5">
                             Option
                         </Dropdown.Toggle>
 
                         {/* Dropdown function */}
-                        <Dropdown.Menu style={{ width: 100 }}>
+                        <Dropdown.Menu className="p-1">
                             <Dropdown.Item as={Link} to='/SLogin' >Staff Portal</Dropdown.Item> {/* Staff Account*/}
                             <Dropdown.Item as={Link} to='DeveloperPage' >Developer</Dropdown.Item>
                             <Dropdown.Item as={Link} to='/AboutPage' >About</Dropdown.Item>
