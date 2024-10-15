@@ -1,10 +1,11 @@
 import { Form, FloatingLabel } from "react-bootstrap"
+import { FaBoxOpen } from "react-icons/fa6";
 
 function ForgotPassword1() {
     return (
         <div className="Container-" style={{border: "1px solid"}}>
             <div>
-                <span>{/*Icon */}</span>
+                <span><FaBoxOpen size={20}/></span>
                 <p className="fs-4">ForgotPassword</p>
                 <p>Text Here</p>
             </div>
