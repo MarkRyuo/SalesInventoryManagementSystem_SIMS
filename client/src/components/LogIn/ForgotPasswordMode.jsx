@@ -15,13 +15,13 @@ function ForgotPasswordMode() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(''); //* State to manage success message
     const [showError, setShowError] = useState(false); //* State to manage error alert visibility
-    const [loading, setLoading] = useState(false); // State for loading indicator
+    const [loading, setLoading] = useState(false); //* State for loading indicator
     const navigate = useNavigate();
 
     const handleVerification = async () => {
         setLoading(true); //* Start loading
         setError(''); //* Clear any previous errors
-        setSuccess(''); // Clear previous success messages
+        setSuccess(''); //* Clear previous success messages
         try {
             const adminsCollection = collection(db, 'admins');
             const q = query(adminsCollection, where('username', '==', username));
@@ -29,16 +29,16 @@ function ForgotPasswordMode() {
 
             if (querySnapshot.empty) {
                 setError('Username not found.');
-                setShowError(true); // Show error alert
-                setUsername(''); // Clear the input field
+                setShowError(true); //* Show error alert
+                setUsername(''); //* Clear the input field
                 return;
             }
 
-            // Store the admin document data temporarily (e.g., in local storage or state management)
+            //* Store the admin document data temporarily (e.g., in local storage or state management)
             const adminDocument = querySnapshot.docs[0];
             localStorage.setItem('adminDocId', adminDocument.id);
 
-            // Set success message
+            //* Set success message
             setSuccess('Username verified successfully. Redirecting to recovery process...');
             setTimeout(() => {
                 navigate('/EnableRecoveryMode'); // Navigate to the next page
