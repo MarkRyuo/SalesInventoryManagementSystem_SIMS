@@ -1,20 +1,20 @@
 import { useState } from "react";
-import Container from 'react-bootstrap/Container';
 
-function StaffNavbar() {
+function () {
 
     const [backBtn] = useState([
         {
             btnIcon: "",
-            path: "#"
+            path: "#",
+            id: 1
         }
     ])
 
     return (
         <>
             {backBtn.map((Backbtn) => (
-                <div>
-                    
+                <div key={Backbtn.id}>
+                    <span>{Backbtn.btnIcon}</span>
                 </div>
             ))}
         </>
