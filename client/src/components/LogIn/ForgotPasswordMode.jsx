@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 //? Service
 import { db } from '../../services/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
+//? Css
 import ResetModecss from './CSS/ResetMode.module.css' ;
 
 function ForgotPasswordMode() {
