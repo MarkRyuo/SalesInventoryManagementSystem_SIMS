@@ -6,6 +6,7 @@ function ForgotPassword1() {
             <div>
                 <span>{/*Icon */}</span>
                 <p className="fs-4">ForgotPassword</p>
+                <p>Text Here</p>
             </div>
         </div>
     )
