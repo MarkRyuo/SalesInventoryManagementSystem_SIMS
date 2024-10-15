@@ -6,7 +6,6 @@ import { FaUnlock } from 'react-icons/fa';
 //? Services
 import { db } from '../../services/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
-
 //? Css
 import ResetModecss from './CSS/ResetMode.module.css';
 
@@ -35,7 +34,7 @@ function ResetPasswordMode() {
     };
 
     return (
-        <Container fluid='lg'>
+        <Container fluid='lg' className={ResetModecss.containerMode}>
             <div className="Container-" style={{ border: "1px solid", borderRadius: "15px", padding: "20px" }}>
                 <div>
                     <span><FaUnlock size={20} /></span>
