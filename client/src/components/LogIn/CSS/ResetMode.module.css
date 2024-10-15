@@ -3,10 +3,14 @@
     --shadowColor: #EFF3F4 ;
 }
 
-.ContainerMode {
+.containerMode {
     width: 100%;
     height: auto;
     margin-top: 200px;
     display: flex;
     justify-content: center;
+}
+
+.containerContent {
+    box-shadow: 2px 8px 5px var(--shadowColor);
 }
