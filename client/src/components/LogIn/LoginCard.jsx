@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState, useEffect } from 'react';
 import { Alert, FloatingLabel, Button, Form } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import LoginUser from '../../services/LoginUser'; // Import the LoginUser function
@@ -8,6 +8,7 @@ export const LoginCard = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const [show, setShow] = useState(false);
 
     const handleLogin = async () => {
         try {
@@ -17,11 +18,17 @@ export const LoginCard = () => {
         } catch (error) {
             // Handle login errors (e.g., incorrect username or password)
             setError(error.message);
+            setShow(true);
 
-            // Automatically clear the error after 2 seconds
+            // Automatically clear the error after 2 seconds with a smooth fade-out
+            setTimeout(() => {
+                setShow(false);
+            }, 2000);
+
+            // Clear the error message from state after the transition ends
             setTimeout(() => {
                 setError(null);
-            }, 2000);
+            }, 2500); // Slightly longer to ensure the fade-out completes
         }
     };
 
@@ -29,7 +36,16 @@ export const LoginCard = () => {
         <Form>
             {/* Display error message if login fails */}
             {error && (
-                <Alert variant="danger" onClose={() => setError(null)} dismissible>
+                <Alert 
+                    variant="danger" 
+                    show={show} 
+                    onClose={() => setShow(false)} 
+                    dismissible 
+                    style={{ 
+                        opacity: show ? 1 : 0,
+                        transition: 'opacity 0.5s ease-in-out'
+                    }}
+                >
                     <Alert.Heading>Login Failed</Alert.Heading>
                     <p>
                         {error} Please check your username and password and try again.
