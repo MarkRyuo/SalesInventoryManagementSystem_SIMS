@@ -33,11 +33,11 @@ function ForgotPasswordMode() {
 
     return (
         <Container fluid='lg' style={{border: "1px solid red", width: "100%", height: "auto", marginTop: "100px", justifyContent: 'center', display: "flex"}}>
-            <div className="Container-" style={{ border: "1px solid", borderRadius: "15px", padding: "20px", height: "350px", width: "500px" }}>
+            <div className="Container-" style={{ boxShadow: '1px 1px 5px', borderRadius: "20px", padding: "20px", height: "350px", width: "500px", display: "flex", flexDirection: 'column', gap: '10px' }}>
                 <div>
-                    <span><GoShieldLock size={20} /></span>
+                    <span><GoShieldLock size={35} /></span>
                     <p className="fs-4">ForgotPassword</p>
-                    <p>Text Here</p>
+                    <p>Please enter your username associated with your account. We will send you a recovery link to reset your password.</p>
                 </div>
                 <div>
                     <FloatingLabel controlId="floatingUsername" label="Username" className="mb-3">
@@ -48,10 +48,13 @@ function ForgotPasswordMode() {
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </FloatingLabel>
-                    <Button variant="primary" onClick={handleVerification}>
-                        Verify Username
-                    </Button>
+                    <div className="d-flex justify-content-center">
+                        <Button variant="primary" size='lg' onClick={handleVerification}>
+                            Verify Username
+                        </Button>
+                    </div>
                     {error && <p className="text-danger mt-2">{error}</p>}
+
                 </div>
             </div>
         </Container>
