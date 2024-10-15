@@ -12,7 +12,7 @@ export const NavLogin = () => {
                 <Container>
                     <Row>
                         <Col> <BsBox size={40} className="d-none d-md-block"/> </Col>
-                        <Col style={{ paddingTop: 4 , margin: 0}}>
+                        <Col className="pt-4">
                             <Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand>
                         </Col>
                     </Row>
