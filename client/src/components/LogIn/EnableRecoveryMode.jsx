@@ -1,4 +1,4 @@
-import { Form, FloatingLabel } from "react-bootstrap"
+import { Form, FloatingLabel, Button } from "react-bootstrap"
 import { FaBoxOpen } from "react-icons/fa6";
 
 function EnableRecoveryMode() {
@@ -21,6 +21,8 @@ function EnableRecoveryMode() {
                 <FloatingLabel controlId="floatingPassword" label="Username">
                     <Form.Control type="text" placeholder="Username" />
                 </FloatingLabel>
+
+                <Button variant="primary">Verify Username</Button>
             </div>
         </div>
     )
