@@ -1,8 +1,11 @@
-import { Form, FloatingLabel, Button } from "react-bootstrap"
+import { Form, FloatingLabel, Button, Container } from "react-bootstrap"
 import { FaLock } from "react-icons/fa";
 
 function EnableRecoveryMode() {
     return (
+        <Container fluid='lg'>
+
+        </Container>
         <div className="Container-" style={{ border: "1px solid", borderRadius: "15px", padding: "20px" }}>
             <div>
                 <span><FaLock  size={20}/></span>
