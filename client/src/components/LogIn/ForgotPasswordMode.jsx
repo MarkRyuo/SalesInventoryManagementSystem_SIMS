@@ -77,9 +77,9 @@ function ForgotPasswordMode() {
                         <FaArrowLeft size={25} /> {/* Back icon */}
                     </Button>
                 </div>
-                <div className='d-flex align-items-center'>
+                <div>
                     <span><GoShieldLock size={35} /></span>
-                    <p className="fs-4 ms-2">Forgot Password</p>
+                    <p className="fs-4">Forgot Password</p>
                 </div>
                 <p>Forgot your password? Don’t worry! Just enter your username, and we’ll guide you through the recovery process.</p>
                 <div>
