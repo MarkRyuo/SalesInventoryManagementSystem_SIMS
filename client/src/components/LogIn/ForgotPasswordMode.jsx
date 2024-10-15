@@ -41,12 +41,12 @@ function ForgotPasswordMode() {
             //* Set success message
             setSuccess('Username verified successfully. Redirecting to recovery process...');
             setTimeout(() => {
-                navigate('/EnableRecoveryMode'); // Navigate to the next page
-            }, 2000); // Redirect after 2 seconds
+                navigate('/EnableRecoveryMode'); //* Navigate to the next page
+            }, 2000); //* Redirect after 2 seconds
         } catch (error) {
             console.error('Verification error:', error.message);
             setError('An error occurred during verification.');
-            setShowError(true); // Show error alert
+            setShowError(true); //* Show error alert
             setUsername(''); // Clear the input field
         } finally {
             setLoading(false); // Stop loading regardless of the outcome
