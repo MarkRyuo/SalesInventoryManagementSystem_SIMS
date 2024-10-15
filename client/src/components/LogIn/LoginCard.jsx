@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert, FloatingLabel, Button, Form } from 'react-bootstrap';
+import { Alert, FloatingLabel, Button, Form, Spinner } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import LoginUser from '../../services/LoginUser'; // Import the LoginUser function
 
@@ -8,17 +8,27 @@ export const LoginCard = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const [show, setShow] = useState(false);
+    const [showError, setShowError] = useState(false);
+    const [loading, setLoading] = useState(false); // State for loading indicator
+    const [success, setSuccess] = useState(false); // State for success message
 
     const handleLogin = async () => {
+        setLoading(true); // Start loading
+        setSuccess(false); // Reset success message
+        setError(null); // Reset error message
         try {
             // Attempt to log in using the provided username and password
             await LoginUser(username, password);
-            navigate('/DashboardPage'); // Navigate to the dashboard if successful
+            setSuccess(true); // Set success state
+            setUsername(''); // Clear the username input field
+            setPassword(''); // Clear the password input field
+            setTimeout(() => {
+                navigate('/DashboardPage'); // Navigate to the dashboard after a delay
+            }, 2500); // Delay for success message display
         } catch (error) {
             // Handle login errors (e.g., incorrect username or password)
             setError(error.message);
-            setShow(true);
+            setShowError(true);
 
             // Clear username and password input fields when login fails
             setUsername('');
@@ -26,27 +36,44 @@ export const LoginCard = () => {
 
             // Automatically clear the error after 3 seconds with a smooth fade-out
             setTimeout(() => {
-                setShow(false);
+                setShowError(false);
             }, 3000);
 
             // Clear the error message from state after the transition ends
             setTimeout(() => {
                 setError(null);
             }, 3500); // Slightly longer to ensure the fade-out completes
+        } finally {
+            setLoading(false); // Stop loading
         }
     };
 
     return (
         <Form>
+            {/* Display success message if login is successful */}
+            {success && (
+                <Alert
+                    variant="success"
+                    style={{
+                        opacity: 1,
+                        transition: 'opacity 0.5s ease-in-out',
+                        marginBottom: '20px'
+                    }}
+                >
+                    <Alert.Heading>Login Successful!</Alert.Heading>
+                    <p>You are being redirected to your dashboard...</p>
+                </Alert>
+            )}
+
             {/* Display error message if login fails */}
             {error && (
                 <Alert
                     variant="danger"
-                    show={show}
-                    onClose={() => setShow(false)}
+                    show={showError}
+                    onClose={() => setShowError(false)}
                     dismissible
                     style={{
-                        opacity: show ? 1 : 0,
+                        opacity: showError ? 1 : 0,
                         transition: 'opacity 0.5s ease-in-out'
                     }}
                 >
@@ -64,6 +91,7 @@ export const LoginCard = () => {
                     placeholder='Username'
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    disabled={loading} // Disable input while loading
                 />
             </FloatingLabel>
 
@@ -74,6 +102,7 @@ export const LoginCard = () => {
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    disabled={loading} // Disable input while loading
                 />
             </FloatingLabel>
 
@@ -82,8 +111,16 @@ export const LoginCard = () => {
                 variant="primary"
                 style={{ width: "70%", marginTop: "20px" }}
                 onClick={handleLogin}
-                size='lg'>
-                Login
+                size='lg'
+                disabled={loading} // Disable button while loading
+            >
+                {loading ? (
+                    <>
+                        <Spinner animation="border" size="sm" role="status" aria-hidden="true" /> Logging in...
+                    </>
+                ) : (
+                    'Login'
+                )}
             </Button>
 
             {/* Forgot Password Link */}
