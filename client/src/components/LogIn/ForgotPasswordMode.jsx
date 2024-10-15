@@ -47,7 +47,7 @@ function ForgotPasswordMode() {
             console.error('Verification error:', error.message);
             setError('An error occurred during verification.');
             setShowError(true); //* Show error alert
-            setUsername(''); // Clear the input field
+            setUsername(''); //* Clear the input field
         } finally {
             setLoading(false); // Stop loading regardless of the outcome
         }
