@@ -69,7 +69,7 @@ function ForgotPasswordMode() {
             const timer = setTimeout(() => {
                 setSuccess('');
             }, 3000);
-            return () => clearTimeout(timer); // Cleanup the timer
+            return () => clearTimeout(timer); //* Cleanup the timer
         }
     }, [success]);
 
