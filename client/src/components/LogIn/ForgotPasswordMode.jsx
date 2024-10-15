@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Form, FloatingLabel, Button, Container, Alert, Spinner } from 'react-bootstrap';
 import { GoShieldLock } from 'react-icons/go';
+import { FaArrowLeft } from 'react-icons/fa'; // Importing back icon
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../services/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
@@ -52,13 +53,16 @@ function ForgotPasswordMode() {
     }, [showError]);
 
     return (
-        <Container fluid='lg' style={{ width: "100%", height: "auto", marginTop: "100px", justifyContent: 'center', display: "flex" }}>
-            <div className="Container-" style={{ boxShadow: '1px 1px 5px', borderRadius: "20px", padding: "20px", height: "auto", width: "500px", display: "flex", flexDirection: 'column', gap: '10px' }}>
-                <div>
+        <Container fluid='lg' style={{ width: "100%", height: "auto", marginTop: "200px", justifyContent: 'center', display: "flex" }}>
+            <div className="Container-" style={{ boxShadow: '2px 8px 5px #EFF3F4', borderRadius: "20px", padding: "20px", height: "auto", width: "500px", display: "flex", flexDirection: 'column', gap: '10px' }}>
+                <div> {/* Flexbox for alignment */}
+                    <Button variant="link" onClick={() => navigate('/')} style={{ marginRight: '10px' }}>
+                        <FaArrowLeft size={20} /> {/* Back icon */}
+                    </Button>
                     <span><GoShieldLock size={35} /></span>
-                    <p className="fs-4">Forgot Password</p>
-                    <p>Forgot your password? Dont worry! Just enter your username, and well guide you through the recovery process.</p>
+                    <p className="fs-4 ms-2">Forgot Password</p> {/* Added margin to separate the icon */}
                 </div>
+                <p>Forgot your password? Don’t worry! Just enter your username, and we’ll guide you through the recovery process.</p>
                 <div>
                     {/* Display error message if verification fails */}
                     {error && (
