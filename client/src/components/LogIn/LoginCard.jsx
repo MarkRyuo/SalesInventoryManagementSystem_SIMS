@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { Button, Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useState} from 'react';
+import { Alert, FloatingLabel, Button, Form } from 'react-bootstrap';
+import { useNavigate, Link } from 'react-router-dom';
 import LoginUser from '../../services/LoginUser'; // Import the LoginUser function
 
 export const LoginCard = () => {
@@ -19,13 +17,25 @@ export const LoginCard = () => {
         } catch (error) {
             // Handle login errors (e.g., incorrect username or password)
             setError(error.message);
+
+            // Automatically clear the error after 2 seconds
+            setTimeout(() => {
+                setError(null);
+            }, 2000);
         }
     };
 
     return (
         <Form>
             {/* Display error message if login fails */}
-            {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
+            {error && (
+                <Alert variant="danger" onClose={() => setError(null)} dismissible>
+                    <Alert.Heading>Login Failed</Alert.Heading>
+                    <p>
+                        {error} Please check your username and password and try again.
+                    </p>
+                </Alert>
+            )}
 
             {/* Username */}
             <FloatingLabel controlId="floatingInput" label="Username" className="mb-4">
