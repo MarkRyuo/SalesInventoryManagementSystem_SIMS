@@ -12,7 +12,7 @@ export const NavLogin = () => {
                 <Container>
                     <Row>
                         <Col> <BsBox size={40} className="d-none d-md-block"/> </Col>
-                        <Col className="pt-4">
+                        <Col className="pt-1 m-0 p-0">
                             <Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand>
                         </Col>
                     </Row>
