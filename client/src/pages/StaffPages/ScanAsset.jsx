@@ -1,9 +1,9 @@
 
 function ScanAsset() {
     return (
-        <div>
-
-        </div>
+        <>
+            <h1>ScanAsset</h1>
+        </>
     )
 }
 
