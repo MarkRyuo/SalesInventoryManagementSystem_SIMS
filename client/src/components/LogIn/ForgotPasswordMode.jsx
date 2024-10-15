@@ -72,14 +72,14 @@ function ForgotPasswordMode() {
     return (
         <Container fluid='lg' style={{ width: "100%", height: "auto", marginTop: "200px", justifyContent: 'center', display: "flex" }}>
             <div className="Container-" style={{ boxShadow: '2px 8px 5px #EFF3F4', borderRadius: "20px", padding: "20px", height: "auto", width: "500px", display: "flex", flexDirection: 'column', gap: '10px' }}>
-                <div className='d-flex justify-content-between align-items-center'>
-                    <div className='d-flex align-items-center'>
-                        <span><GoShieldLock size={35} /></span>
-                        <p className="fs-4 ms-2">Forgot Password</p>
-                    </div>
+                <div>
                     <Button variant="link" onClick={() => navigate('/')} size='lg' className='p-0'>
                         <FaArrowLeft size={25} /> {/* Back icon */}
                     </Button>
+                </div>
+                <div className='d-flex align-items-center'>
+                    <span><GoShieldLock size={35} /></span>
+                    <p className="fs-4 ms-2">Forgot Password</p>
                 </div>
                 <p>Forgot your password? Don’t worry! Just enter your username, and we’ll guide you through the recovery process.</p>
                 <div>
