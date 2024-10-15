@@ -2,7 +2,7 @@ import { Form, FloatingLabel } from "react-bootstrap"
 
 function ForgotPassword1() {
     return (
-        <div className="Container-">
+        <div className="Container-" style={{border: "1px solid"}}>
             <div>
                 <span>{/*Icon */}</span>
                 <p className="fs-4">ForgotPassword</p>
