@@ -13,7 +13,7 @@ function ProfileMode() {
                     <p>Administrator</p>
                 </div>
 
-                <Button variant="outline-primary"></Button>
+                <Button variant="outline-primary">Edit Profile</Button>
 
                 <div>
                     <p className="fs-4">Personal Information</p>
