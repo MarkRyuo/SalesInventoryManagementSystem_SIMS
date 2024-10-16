@@ -9,7 +9,8 @@ function ProfileMode() {
                     <div style={{width: '100%', maxWidth: 200}}>
                         <Image src="" roundedCircle />
                     </div>
-
+                    <p>Admin Name</p>
+                    <p>Administrator</p>
                 </div>
 
                 <div>
