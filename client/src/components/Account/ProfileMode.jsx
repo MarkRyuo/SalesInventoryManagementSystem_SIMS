@@ -1,4 +1,4 @@
-import { Container, Image } from "react-bootstrap"
+import { Container, Image, Button } from "react-bootstrap"
 
 function ProfileMode() {
     return (
@@ -12,6 +12,8 @@ function ProfileMode() {
                     <p>Admin firstname</p>
                     <p>Administrator</p>
                 </div>
+
+                <Button variant="outline-primary"></Button>
 
                 <div>
                     <p className="fs-4">Personal Information</p>
