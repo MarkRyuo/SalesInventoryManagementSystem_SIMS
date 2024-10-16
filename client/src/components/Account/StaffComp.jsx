@@ -13,6 +13,7 @@ const StaffComp = () => {
     const [staffList, setStaffList] = useState([]);
     const [editingStaffId, setEditingStaffId] = useState(null); // Track staff being edited
     const [errorMessage, setErrorMessage] = useState(''); // For error messages
+    const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Track password field focus
 
     // Password requirement states
     const [lengthRequirement, setLengthRequirement] = useState(false);
@@ -152,7 +153,7 @@ const StaffComp = () => {
     return (
         <Row style={{ display: 'flex', width: "100%", margin: 0, justifyContent: "space-between" }}>
             <Col className='p-0' lg={5} md={12} sm={12}>
-                <Form onSubmit={handleAddStaff} style={{padding: "20px", width: '100%' }}>
+                <Form onSubmit={handleAddStaff} style={{ padding: "20px", width: '100%' }}>
                     <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
                         <Form.Control
                             type="text"
@@ -197,6 +198,8 @@ const StaffComp = () => {
                             type="password"
                             placeholder="Password"
                             value={password}
+                            onFocus={() => setIsPasswordFocused(true)} // Set focus state to true
+                            onBlur={() => setIsPasswordFocused(false)} // Set focus state to false
                             onChange={(e) => {
                                 setPassword(e.target.value);
                                 validatePassword(e.target.value); // Validate on change
@@ -206,21 +209,25 @@ const StaffComp = () => {
 
                     {errorMessage && <p className="text-danger">{errorMessage}</p>}
 
-                    <p className={lengthRequirement ? 'text-success' : 'text-danger'}>
-                        {lengthRequirement ? '✓ At least 8 characters' : '✗ At least 8 characters'}
-                    </p>
-                    <p className={uppercaseRequirement ? 'text-success' : 'text-danger'}>
-                        {uppercaseRequirement ? '✓ At least one uppercase letter' : '✗ At least one uppercase letter'}
-                    </p>
-                    <p className={lowercaseRequirement ? 'text-success' : 'text-danger'}>
-                        {lowercaseRequirement ? '✓ At least one lowercase letter' : '✗ At least one lowercase letter'}
-                    </p>
-                    <p className={numberRequirement ? 'text-success' : 'text-danger'}>
-                        {numberRequirement ? '✓ At least one number' : '✗ At least one number'}
-                    </p>
-                    <p className={specialCharRequirement ? 'text-success' : 'text-danger'}>
-                        {specialCharRequirement ? '✓ At least one special character (e.g., !@#$%^&*)' : '✗ At least one special character (e.g., !@#$%^&*)'}
-                    </p>
+                    {isPasswordFocused && ( // Show requirements only if focused
+                        <>
+                            <p className={lengthRequirement ? 'text-success' : 'text-danger'}>
+                                {lengthRequirement ? '✓ At least 8 characters' : '✗ At least 8 characters'}
+                            </p>
+                            <p className={uppercaseRequirement ? 'text-success' : 'text-danger'}>
+                                {uppercaseRequirement ? '✓ At least one uppercase letter' : '✗ At least one uppercase letter'}
+                            </p>
+                            <p className={lowercaseRequirement ? 'text-success' : 'text-danger'}>
+                                {lowercaseRequirement ? '✓ At least one lowercase letter' : '✗ At least one lowercase letter'}
+                            </p>
+                            <p className={numberRequirement ? 'text-success' : 'text-danger'}>
+                                {numberRequirement ? '✓ At least one number' : '✗ At least one number'}
+                            </p>
+                            <p className={specialCharRequirement ? 'text-success' : 'text-danger'}>
+                                {specialCharRequirement ? '✓ At least one special character (e.g., !@#$%^&*)' : '✗ At least one special character (e.g., !@#$%^&*)'}
+                            </p>
+                        </>
+                    )}
 
                     <Form.Check
                         type="switch"
@@ -230,16 +237,16 @@ const StaffComp = () => {
                         onChange={(e) => setActive(e.target.checked)}
                     />
 
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" className='mt-3'>
                         {editingStaffId ? 'Update Staff' : 'Add Staff'}
                     </Button>
-                    <Button variant="secondary" className="ms-2" onClick={clearForm}>
+                    <Button variant="secondary" className="ms-2 mt-3" onClick={clearForm}>
                         Clear
                     </Button>
                 </Form>
             </Col>
 
-            <Col style={{ border: "1px solid violet", width: "auto" }} lg={4} md={12} sm={12}>
+            <Col style={{ width: "auto" }} lg={4} md={12} sm={12}>
                 <h4>Staff List</h4>
                 <Table striped bordered hover responsive>
                     <thead>
