@@ -238,9 +238,6 @@ const StaffComp = () => {
                     <Button variant="secondary" className="ms-2" onClick={clearForm}>
                         Clear
                     </Button>
-                    <Button variant="danger" onClick={() => handleDeleteStaff(staff.id)} className="ms-2">
-                        Delete
-                    </Button>
                 </Form>
             </Col>
 
@@ -253,7 +250,6 @@ const StaffComp = () => {
                                 <th>Last Name</th>
                                 <th>Gender</th>
                                 <th>Username</th>
-                                <th>Password</th>
                                 <th>Active</th>
                                 <th>Actions</th>
                             </tr>
@@ -277,6 +273,9 @@ const StaffComp = () => {
                                     <td>
                                         <Button variant="info" onClick={() => handleEditStaff(staff)}>
                                             Edit
+                                        </Button>
+                                        <Button variant="danger" onClick={() => handleDeleteStaff(staff.id)} className="ms-2">
+                                            Delete
                                         </Button>
                                     </td>
                                 </tr>
