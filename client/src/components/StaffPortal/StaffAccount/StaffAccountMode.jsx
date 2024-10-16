@@ -14,7 +14,7 @@ function ProfileMode() {
                                         <p className="fs-4 m-0">{/** Fetch firstname and lastname */}</p>
                                         <p className="fs-6 m-0">REYES ELECTRONICS Staff</p>
                                     </div>
-                                    <p>{/** fetch if active */}</p>
+                                    <p>{/** fetch if active design a green dot color*/}</p>
                                 </div>
                             </div>
 
