@@ -6,6 +6,10 @@ function ProfileMode() {
 
             <div className="content">
                 <div>
+
+                </div>
+
+                <div>
                     
                 </div>
             </div>
