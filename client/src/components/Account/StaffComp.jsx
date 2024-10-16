@@ -143,8 +143,8 @@ const StaffComp = () => {
     }, []);
 
     return (
-        <Row style={{border: "1px solid red", gap: 2}}>
-            <Col lg={6} className='p-0'>
+        <Row style={{border: "1px solid red", display: 'flex', justifyContent: "space-evenly"}}>
+            <Col lg={5} className='p-0'>
                 <Form onSubmit={handleAddStaff} style={{ border: "1px solid green", padding: "20px"}}>
                     <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
                         <Form.Control
@@ -231,8 +231,8 @@ const StaffComp = () => {
             </Col>
             
 
-            <Col style={{ border: "1px solid violet", width: "100%"}} lg={4} className='p-0'>
-                <div className='p-4'>
+            <Col style={{ border: "1px solid violet", width: "auto"}} lg={4} className='p-0'>
+                <div className='p-3'>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
