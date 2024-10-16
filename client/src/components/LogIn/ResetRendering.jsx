@@ -27,7 +27,7 @@ function ResetRendering() {
                     return prevIndex;
                 }
             });
-        }, 2000); // Change the message every 2 seconds
+        }, 1000); // Change the message every 2 seconds
 
         // Navigate to '/' after displaying all messages (6 messages * 2 seconds = 12 seconds)
         const timeout = setTimeout(() => {
