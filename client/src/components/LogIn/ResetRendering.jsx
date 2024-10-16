@@ -17,7 +17,7 @@ function ResetRendering() {
         // Change the message every 2 seconds with a fade-out effect
         const interval = setInterval(() => {
             setMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
-        }, 1000); // Change the message every 2 seconds
+        }, 1000); // Change the message every 1 seconds
 
         // Navigate to '/' after 12 seconds (6 messages * 2 seconds + 2 seconds extra)
         const timeout = setTimeout(() => {
