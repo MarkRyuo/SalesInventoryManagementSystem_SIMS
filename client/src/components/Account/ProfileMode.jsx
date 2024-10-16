@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 function ProfileMode() {
     return (
         <MainLayout>
-            <div style={{ padding: '20px', marginTop: 100, boxShadow: '2px 4px 5px ' }}>
+            <div style={{ padding: '20px', marginTop: 100, boxShadow: '2px 4px 5px ', borderRadius: 20 }}>
 
                 <div className="content">
                     <div style={{ display: "flex", padding: 20}}>
@@ -23,10 +23,12 @@ function ProfileMode() {
                     <div style={{padding: 20}}>
                         <p className="fs-4">Personal Information</p>
                         <hr />
-                        <p>FirstName: <span></span></p>
-                        <p>LastName: <span></span></p>
-                        <p>Gender: <span></span></p>
-                        <p>Username: <span></span></p>
+                        <div>
+                            <p>FirstName: <span></span></p>
+                            <p>LastName: <span></span></p>
+                            <p>Gender: <span></span></p>
+                            <p>Username: <span></span></p>
+                        </div>
                     </div>
                 </div>
 
