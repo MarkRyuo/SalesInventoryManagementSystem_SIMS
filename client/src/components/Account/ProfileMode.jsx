@@ -1,10 +1,10 @@
-import { Container, Image, Button } from "react-bootstrap"
+import { Image, Button } from "react-bootstrap"
 import { MainLayout } from "../../layout/MainLayout"
 
 function ProfileMode() {
     return (
         <MainLayout>
-            <divstyle={{ border: '1px solid' }}>
+            <div style={{ border: '1px solid' }}>
 
                 <div className="content" style={{ border: '1px solid' }}>
                     <div style={{ display: "flex", border: '1px solid' }}>
@@ -27,7 +27,7 @@ function ProfileMode() {
                     </div>
                 </div>
 
-            </divstyle=>
+            </div>
         </MainLayout>
     )
 }
