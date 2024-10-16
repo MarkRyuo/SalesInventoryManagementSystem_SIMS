@@ -262,10 +262,10 @@ const StaffComp = () => {
                     <tbody>
                         {staffList.map(staff => (
                             <tr key={staff.id}>
-                                <td>{staff.firstname}</td>
-                                <td>{staff.lastname}</td>
-                                <td>{staff.gender}</td>
-                                <td>{staff.username}</td>
+                                <td className='lead fs-6'>{staff.firstname}</td>
+                                <td className='lead fs-6'>{staff.lastname}</td>
+                                <td className='lead fs-6'>{staff.gender}</td>
+                                <td className='lead fs-6'>{staff.username}</td>
                                 <td>
                                     <Form.Check
                                         type="switch"
