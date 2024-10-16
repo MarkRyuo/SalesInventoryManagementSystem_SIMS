@@ -8,34 +8,38 @@ function SLoginCard() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [showError, setShowError] = useState(false);
-    const [loading, setLoading] = useState(false); // State for loading indicator
-    const [success, setSuccess] = useState(false); // State for success message
-    const [showSuccess, setShowSuccess] = useState(false); // State for showing success message
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // Prevent default form submission
-        setError(null); // Clear any previous error messages
-        setSuccess(false); // Reset success message
-        setLoading(true); // Set loading state
+        e.preventDefault();
+        setError(null);
+        setSuccess(false);
+        setLoading(true);
 
         try {
-            await LoginStaff(username, password, navigate); // Call the login function
-            setSuccess(true); // Set success state
-            setShowSuccess(true); // Show success message
-            setUsername(''); // Clear the username input field
-            setPassword(''); // Clear the password input field
-            
+            await LoginStaff(username, password, navigate);
+            console.log("Login successful"); // Log for success
+            setSuccess(true);
+            setShowSuccess(true);
+            console.log("Success state set to true"); // Log for state change
+            setUsername('');
+            setPassword('');
+
             // Automatically hide the success message and navigate after 2.5 seconds
             setTimeout(() => {
+                console.log("Navigating to SDashboard..."); // Log before navigation
                 setShowSuccess(false);
-                navigate('/SDashboard'); // Navigate to the dashboard after a delay
+                navigate('/SDashboard'); 
             }, 2500); // Delay for success message display
         } catch (error) {
             setError(error.message); // Display the error message
             setShowError(true);
-            setUsername(''); // Clear username when login fails
-            setPassword(''); // Clear password when login fails
+            console.log("Login failed:", error.message); // Log for error
+            setUsername('');
+            setPassword('');
 
             // Automatically clear the error after 3 seconds with a smooth fade-out
             setTimeout(() => {
@@ -45,7 +49,7 @@ function SLoginCard() {
             // Clear the error message from state after the transition ends
             setTimeout(() => {
                 setError(null);
-            }, 3500); // Slightly longer to ensure the fade-out completes
+            }, 3500);
         } finally {
             setLoading(false); // Reset loading state
         }
