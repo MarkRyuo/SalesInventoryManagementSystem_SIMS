@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Form, FloatingLabel, Table } from 'react-bootstrap';
+import { Button, Form, FloatingLabel, Table, Row, Col } from 'react-bootstrap';
 import { db } from '../../services/firebase'; // Update path as needed
 import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
