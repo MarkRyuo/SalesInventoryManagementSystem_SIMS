@@ -153,9 +153,11 @@ function ResetPasswordMode() {
                         <h6>Password Requirements:</h6>
                         {passwordRequirements()}
                     </div>
-                    <Button variant="primary" onClick={handlePasswordReset}>
-                        Reset Password
-                    </Button>
+                    <div className="d-flex justify-content-center w-100">
+                        <Button variant="primary" onClick={handlePasswordReset} className="w-100">
+                            Reset Password
+                        </Button>
+                    </div>
                 </div>
             </div>
         </Container>
