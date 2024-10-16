@@ -10,20 +10,29 @@ function ResetRendering() {
         'Please wait...',
         'Still working on it...',
         'Almost there...',
-        'Finalizing the Password update...'
+        'Finalizing the Password update...',
+        'Done...'
     ];
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Change the message every 2 seconds with a fade-out effect
+        // Change the message every 2 seconds
         const interval = setInterval(() => {
-            setMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
-        }, 1000); // Change the message every 1 seconds
+            setMessageIndex((prevIndex) => {
+                // Only increment if not at the last message
+                if (prevIndex < messages.length - 1) {
+                    return prevIndex + 1;
+                } else {
+                    clearInterval(interval); // Stop interval when the last message is reached
+                    return prevIndex;
+                }
+            });
+        }, 2000); // Change the message every 2 seconds
 
-        // Navigate to '/' after 12 seconds (6 messages * 2 seconds + 2 seconds extra)
+        // Navigate to '/' after displaying all messages (6 messages * 2 seconds = 12 seconds)
         const timeout = setTimeout(() => {
             navigate('/');
-        }, 12000);
+        }, messages.length * 1000);
 
         // Clean up intervals and timeout when the component is unmounted
         return () => {
@@ -33,8 +42,12 @@ function ResetRendering() {
     }, [navigate]);
 
     return (
-        <Container fluid="lg" className="d-flex flex-column align-items-center justify-content-center" style={{ height: '100vh' }}>
-            <p className='fs-3'>{messages[messageIndex]}</p>
+        <Container
+            fluid="lg"
+            className="d-flex flex-column align-items-center justify-content-center"
+            style={{ height: '100vh' }}
+        >
+            <p className="fs-3">{messages[messageIndex]}</p>
         </Container>
     );
 }
