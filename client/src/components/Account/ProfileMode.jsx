@@ -6,8 +6,8 @@ function ProfileMode() {
 
             <div className="content" style={{border: '1px solid'}}>
                 <div>
-                    <div>
-                        <Image src="holder.js/171x180" roundedCircle />
+                    <div style={{width: '100%'}}>
+                        <Image src="" roundedCircle />
                     </div>
 
                 </div>
