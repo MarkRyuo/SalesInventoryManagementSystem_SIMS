@@ -1,9 +1,9 @@
 
 function ProfileMode() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
