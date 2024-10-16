@@ -25,7 +25,7 @@ const LoginStaff = async (username, password, navigate) => {
         // Check if the staff is active
         const isActive = staffDoc.data().active; // Ensure the 'active' field exists in Firestore
         if (!isActive) {
-            throw new Error("Your account is inactive. Please contact support."); // Error for inactive account
+            throw new Error("Your account is inactive. Please contact Admin."); // Error for inactive account
         }
 
         const storedPassword = staffDoc.data().password;
