@@ -9,7 +9,6 @@ function ResetRendering() {
         'Processing your password...',
         'Please wait...',
         'Still working on it...',
-        'Almost there...',
         'Finalizing the Password update...',
         'Done...'
     ];
