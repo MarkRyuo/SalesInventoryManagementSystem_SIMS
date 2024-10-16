@@ -144,7 +144,7 @@ const StaffComp = () => {
 
     return (
         <div style={{border: "1px solid red", padding: "10px"}}>
-            <Form onSubmit={handleAddStaff}>
+            <Form onSubmit={handleAddStaff} style={{border: "1px solid green"}}>
                 <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
                     <Form.Control
                         type="text"
@@ -229,33 +229,35 @@ const StaffComp = () => {
             </Form>
 
             <h2 className="mt-4">Active Staff Accounts</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                        <th>Gender</th>
-                        <th>Active</th> {/* Added Active Column */}
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {staffList.map((staff) => (
-                        <tr key={staff.id}>
-                            <td>{staff.firstname}</td>
-                            <td>{staff.lastname}</td>
-                            <td>{staff.username}</td>
-                            <td>{staff.gender}</td>
-                            <td>{staff.active ? 'Yes' : 'No'}</td> {/* Display active status */}
-                            <td>
-                                <Button variant="warning" onClick={() => handleEditStaff(staff)}>Edit</Button>
-                                <Button variant="danger" className="ms-2" onClick={() => handleDeleteStaff(staff.id)}>Delete</Button>
-                            </td>
+            <div style={{ border: "1px solid violet" }}>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                            <th>Gender</th>
+                            <th>Active</th> {/* Added Active Column */}
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody>
+                        {staffList.map((staff) => (
+                            <tr key={staff.id}>
+                                <td>{staff.firstname}</td>
+                                <td>{staff.lastname}</td>
+                                <td>{staff.username}</td>
+                                <td>{staff.gender}</td>
+                                <td>{staff.active ? 'Yes' : 'No'}</td> {/* Display active status */}
+                                <td>
+                                    <Button variant="warning" onClick={() => handleEditStaff(staff)}>Edit</Button>
+                                    <Button variant="danger" className="ms-2" onClick={() => handleDeleteStaff(staff.id)}>Delete</Button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </div>
         </div>
     );
 };
