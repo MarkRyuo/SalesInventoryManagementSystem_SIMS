@@ -228,7 +228,6 @@ const StaffComp = () => {
                 </Button>
             </Form>
 
-            <h2 className="mt-4">Active Staff Accounts</h2>
             <div style={{ border: "1px solid violet" }}>
                 <Table striped bordered hover>
                     <thead>
