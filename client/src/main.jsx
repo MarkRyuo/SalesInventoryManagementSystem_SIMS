@@ -52,6 +52,10 @@ const router = createBrowserRouter([
     path: "AboutPage",
     element: <AboutPage /> ,
   },
+  {
+    path: "ProfileMode",
+    element: <AboutPage />,
+  },
 
   //? Forgot Password
   {
