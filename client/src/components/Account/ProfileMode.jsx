@@ -11,7 +11,7 @@ function ProfileMode() {
                     <div style={{ display: "flex", padding: 20}}>
                         <Image style={{ width: "100%", maxWidth: '100px', marginRight: 10 }} src="https://i.pinimg.com/564x/01/19/1f/01191fd3ece2dcd44122ff6d88149abc.jpg" roundedCircle />
                         <div style={{display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center"}}>
-                            <div style={{ border: '1px solid', display: "flex", flexDirection: 'column' }}>
+                            <div style={{ display: "flex", flexDirection: 'column' }}>
                                 <p className="fs-4 m-0">Admin firstname</p>
                                 <p className="fs-6 m-1">Administrator</p>
                             </div>
