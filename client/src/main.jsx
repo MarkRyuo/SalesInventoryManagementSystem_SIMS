@@ -23,6 +23,7 @@ import EnableRecoveryMode from './components/LogIn/EnableRecoveryMode.jsx';
 import ResetPasswordMode from './components/LogIn/ResetPasswordMode.jsx';
 import ResetRendering from './components/LogIn/ResetRendering.jsx';
 import ProfileMode from './components/Account/ProfileMode.jsx';
+import StaffAccountMode from './components/StaffPortal/StaffAccount/StaffAccountMode.jsx';
 
 const router = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
   {
     path: "SStaffAccount",
     element: <SStaffAccount /> , //* Staff Account Page
+  },
+  {
+    path: "StaffAccountMode",
+    element: <StaffAccountMode />, //* Staff Account Page
   },
 
   
