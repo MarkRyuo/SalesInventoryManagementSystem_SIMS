@@ -22,7 +22,7 @@ function SLoginCard() {
         try {
             await LoginStaff(username, password, navigate);
             console.log("Login successful"); // Log for success
-            setSuccess(true);
+            setSuccess(false);
             setShowSuccess(true);
             console.log("Success state set to true"); // Log for state change
             setUsername('');
