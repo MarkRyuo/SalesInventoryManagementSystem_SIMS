@@ -79,11 +79,12 @@ const StaffComp = () => {
         setLastname('');
         setGender('');
         setUsername('');
-        setPassword('');
+        setPassword(''); // Ensure this is cleared
         setActive(true);
         setEditingStaffId(null);
         setErrorMessage('');
 
+        // Reset password requirement states
         setLengthRequirement(false);
         setUppercaseRequirement(false);
         setLowercaseRequirement(false);
@@ -115,11 +116,8 @@ const StaffComp = () => {
         setEditingStaffId(staff.id);
         setErrorMessage('');
 
-        setLengthRequirement(false);
-        setUppercaseRequirement(false);
-        setLowercaseRequirement(false);
-        setNumberRequirement(false);
-        setSpecialCharRequirement(false);
+        // Validate the existing password
+        validatePassword(staff.password); // Validate the password when editing
     };
 
     const handleDeleteStaff = async (staffId) => {
@@ -201,7 +199,7 @@ const StaffComp = () => {
                             value={password}
                             onChange={(e) => {
                                 setPassword(e.target.value);
-                                validatePassword(e.target.value);
+                                validatePassword(e.target.value); // Validate on change
                             }}
                         />
                     </FloatingLabel>
@@ -241,48 +239,41 @@ const StaffComp = () => {
                 </Form>
             </Col>
 
-            <Col style={{ border: "1px solid violet", width: "auto" }} lg={4} md={12} sm={12} className='p-0'>
-                <div className='p-2'>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Gender</th>
-                                <th>Username</th>
-                                <th>Active</th>
-                                <th>Actions</th>
+            <Col style={{ border: "1px solid violet", width: "auto" }} lg={4} md={12} sm={12}>
+                <h4>Staff List</h4>
+                <Table striped bordered hover responsive>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>Username</th>
+                            <th>Active</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {staffList.map(staff => (
+                            <tr key={staff.id}>
+                                <td>{staff.firstname}</td>
+                                <td>{staff.lastname}</td>
+                                <td>{staff.gender}</td>
+                                <td>{staff.username}</td>
+                                <td>
+                                    <Form.Check
+                                        type="switch"
+                                        checked={staff.active}
+                                        onChange={() => handleToggleActive(staff)}
+                                    />
+                                </td>
+                                <td>
+                                    <Button variant="warning" onClick={() => handleEditStaff(staff)}>Edit</Button>
+                                    <Button variant="danger" onClick={() => handleDeleteStaff(staff.id)}>Delete</Button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {staffList.map((staff) => (
-                                <tr key={staff.id}>
-                                    <td>{staff.firstname}</td>
-                                    <td>{staff.lastname}</td>
-                                    <td>{staff.gender}</td>
-                                    
-                                    <td>{staff.username}</td>
-                                    <td>
-                                        <Form.Check
-                                            type="switch"
-                                            id={`activeSwitch-${staff.id}`}
-                                            checked={staff.active}
-                                            onChange={() => handleToggleActive(staff)}
-                                        />
-                                    </td>
-                                    <td>
-                                        <Button variant="info" onClick={() => handleEditStaff(staff)}>
-                                            Edit
-                                        </Button>
-                                        <Button variant="danger" onClick={() => handleDeleteStaff(staff.id)} className="ms-2">
-                                            Delete
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                </div>
+                        ))}
+                    </tbody>
+                </Table>
             </Col>
         </Row>
     );
