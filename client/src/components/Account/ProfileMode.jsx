@@ -35,7 +35,7 @@ function ProfileMode() {
 
     return (
         <MainLayout>
-            <div style={{ padding: '20px', marginTop: 100, boxShadow: '2px 4px 5px ', borderRadius: 20 }}>
+            <div style={{ padding: '20px', marginTop: 100, boxShadow: '2px 4px 5px ', borderRadius: 15, width: '100%', minWidth: 370 }}>
                 <div className="content">
                     {loading ? (
                         <div style={{ textAlign: 'center', padding: '50px' }}>
@@ -43,12 +43,12 @@ function ProfileMode() {
                         </div>
                     ) : (
                         <>
-                            <div style={{ display: "flex", padding: 20 }}>
-                                <Image style={{ width: "100%", maxWidth: '100px', marginRight: 10 }} src="https://i.pinimg.com/564x/01/19/1f/01191fd3ece2dcd44122ff6d88149abc.jpg" roundedCircle />
+                            <div style={{ display: "flex", padding: 15 }}>
+                                <Image style={{ width: "100px", marginRight: 10 }} src="https://i.pinimg.com/564x/01/19/1f/01191fd3ece2dcd44122ff6d88149abc.jpg" roundedCircle />
                                 <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
                                     <div style={{ display: "flex", flexDirection: 'column' }}>
-                                        <p className="fs-4 m-0">{adminData ? adminData.firstname : 'N/A'}</p>
-                                        <p className="fs-6 m-1">Administrator</p>
+                                        <p className="fs-4 m-0">{adminData ? adminData.firstname : 'N/A'} {adminData ? adminData.lastname : 'N/A'}</p>
+                                        <p className="fs-6 m-0">Administrator</p>
                                     </div>
                                     <Button as={Link} to={'/MyProfile'} variant="outline-primary">Edit Profile</Button>
                                 </div>
