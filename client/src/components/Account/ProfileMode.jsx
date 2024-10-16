@@ -14,7 +14,7 @@ function ProfileMode() {
                                 <p className="fs-4 m-0">Admin firstname</p>
                                 <p className="fs-6 m-1">Administrator</p>
                             </div>
-                            <Button variant="outline-primary" style={{height: 50}}>Edit Profile</Button>
+                            <Button variant="outline-primary">Edit Profile</Button>
                         </div>
                     </div>
 
