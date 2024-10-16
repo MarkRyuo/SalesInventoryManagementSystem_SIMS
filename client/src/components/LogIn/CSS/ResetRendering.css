@@ -1,5 +1,6 @@
 .fade {
     transition: opacity 0.5s ease-in-out;
+    opacity: 1;
 }
 
 .fade-out {
@@ -7,6 +8,18 @@
 }
 
 .dots {
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
+    display: inline-block;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }

@@ -1,24 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import './ResetRendering.css'; // Import the CSS file for styling
+import './CSS/ResetRendering.css';
 
 function ResetRendering() {
     const [messageIndex, setMessageIndex] = useState(0);
     const [fadeOut, setFadeOut] = useState(false);
     const [dotCount, setDotCount] = useState(1);
     const messages = [
-        'Processing your password...',
-        'Please wait...',
-        'Still working on it...',
-        'Almost there...',
-        'Finalizing the update...'
+        'Processing your password',
+        'Please wait',
+        'Still working on it',
+        'Almost there',
+        'Finalizing the update'
     ];
     const navigate = useNavigate();
 
     useEffect(() => {
         // Change the message with a fade-out effect every 3 seconds
-        const interval = setInterval(() => {
+        const messageInterval = setInterval(() => {
             setFadeOut(true); // Start fade-out
             setTimeout(() => {
                 setMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
@@ -38,7 +38,7 @@ function ResetRendering() {
 
         // Clean up intervals and timeout when the component is unmounted
         return () => {
-            clearInterval(interval);
+            clearInterval(messageInterval);
             clearInterval(dotInterval);
             clearTimeout(timeout);
         };
