@@ -9,7 +9,7 @@ function ResetRendering() {
         'Please wait...',
         'Still working on it...',
         'Almost there...',
-        'Finalizing the update...'
+        'Finalizing the Password update...'
     ];
     const navigate = useNavigate();
 
