@@ -6,7 +6,7 @@ function ProfileMode() {
 
             <div className="content" style={{border: '1px solid'}}>
                 <div>
-                    <div style={{width: '100%'}}>
+                    <div style={{width: '100%', maxWidth: 200}}>
                         <Image src="" roundedCircle />
                     </div>
 
