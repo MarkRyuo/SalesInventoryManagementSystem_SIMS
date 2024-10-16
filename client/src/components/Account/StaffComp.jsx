@@ -12,9 +12,32 @@ const StaffComp = () => {
     const [active, setActive] = useState(true); // Default active status
     const [staffList, setStaffList] = useState([]);
     const [editingStaffId, setEditingStaffId] = useState(null); // Track staff being edited
+    const [errorMessage, setErrorMessage] = useState(''); // For error messages
+
+    // Password requirement states
+    const [lengthRequirement, setLengthRequirement] = useState(false);
+    const [uppercaseRequirement, setUppercaseRequirement] = useState(false);
+    const [lowercaseRequirement, setLowercaseRequirement] = useState(false);
+    const [numberRequirement, setNumberRequirement] = useState(false);
+    const [specialCharRequirement, setSpecialCharRequirement] = useState(false);
+
+    const validatePassword = (password) => {
+        setLengthRequirement(password.length >= 8);
+        setUppercaseRequirement(/[A-Z]/.test(password));
+        setLowercaseRequirement(/[a-z]/.test(password));
+        setNumberRequirement(/\d/.test(password));
+        setSpecialCharRequirement(/[!@#$%^&*]/.test(password));
+    };
 
     const handleAddStaff = async (e) => {
         e.preventDefault(); // Prevent default form submission
+
+        // Check if all requirements are met
+        if (!(lengthRequirement && uppercaseRequirement && lowercaseRequirement && numberRequirement && specialCharRequirement)) {
+            setErrorMessage('Password must meet all requirements.');
+            return;
+        }
+
         try {
             const staffCollection = collection(db, 'staffs');
 
@@ -59,6 +82,14 @@ const StaffComp = () => {
         setPassword('');
         setActive(true); // Reset active status
         setEditingStaffId(null); // Reset editing state
+        setErrorMessage(''); // Clear error message
+
+        // Reset password requirement states
+        setLengthRequirement(false);
+        setUppercaseRequirement(false);
+        setLowercaseRequirement(false);
+        setNumberRequirement(false);
+        setSpecialCharRequirement(false);
     };
 
     const fetchStaff = async () => {
@@ -83,6 +114,14 @@ const StaffComp = () => {
         setPassword(staff.password);
         setActive(staff.active); // Set active status for editing
         setEditingStaffId(staff.id); // Set the ID of the staff being edited
+        setErrorMessage(''); // Clear error message
+
+        // Reset password requirement states
+        setLengthRequirement(false);
+        setUppercaseRequirement(false);
+        setLowercaseRequirement(false);
+        setNumberRequirement(false);
+        setSpecialCharRequirement(false);
     };
 
     const handleDeleteStaff = async (staffId) => {
@@ -104,8 +143,8 @@ const StaffComp = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Staff Management</h1>
+        <div style={{border: "1px solid red"}}>
+            <p className='fs-3'>Staff Management</p>
 
             <Form onSubmit={handleAddStaff}>
                 <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
@@ -149,9 +188,31 @@ const StaffComp = () => {
                         type="password"
                         placeholder="Password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                            validatePassword(e.target.value); // Validate password as user types
+                        }}
                     />
                 </FloatingLabel>
+
+                {errorMessage && <p className="text-danger">{errorMessage}</p>} {/* Display error message */}
+
+                {/* Password requirements */}
+                <p className={lengthRequirement ? 'text-success' : 'text-danger'}>
+                    {lengthRequirement ? '✓ At least 8 characters' : '✗ At least 8 characters'}
+                </p>
+                <p className={uppercaseRequirement ? 'text-success' : 'text-danger'}>
+                    {uppercaseRequirement ? '✓ At least one uppercase letter' : '✗ At least one uppercase letter'}
+                </p>
+                <p className={lowercaseRequirement ? 'text-success' : 'text-danger'}>
+                    {lowercaseRequirement ? '✓ At least one lowercase letter' : '✗ At least one lowercase letter'}
+                </p>
+                <p className={numberRequirement ? 'text-success' : 'text-danger'}>
+                    {numberRequirement ? '✓ At least one number' : '✗ At least one number'}
+                </p>
+                <p className={specialCharRequirement ? 'text-success' : 'text-danger'}>
+                    {specialCharRequirement ? '✓ At least one special character (e.g., !@#$%^&*)' : '✗ At least one special character (e.g., !@#$%^&*)'}
+                </p>
 
                 <Form.Check
                     type="switch"
@@ -190,12 +251,8 @@ const StaffComp = () => {
                             <td>{staff.gender}</td>
                             <td>{staff.active ? 'Yes' : 'No'}</td> {/* Display active status */}
                             <td>
-                                <Button variant="warning" onClick={() => handleEditStaff(staff)}>
-                                    Edit
-                                </Button>
-                                <Button variant="danger" onClick={() => handleDeleteStaff(staff.id)} className="ms-2">
-                                    Delete
-                                </Button>
+                                <Button variant="warning" onClick={() => handleEditStaff(staff)}>Edit</Button>
+                                <Button variant="danger" className="ms-2" onClick={() => handleDeleteStaff(staff.id)}>Delete</Button>
                             </td>
                         </tr>
                     ))}
