@@ -22,10 +22,10 @@ function ProfileMode() {
                                 <p className="fs-4">Personal Information</p>
                                 <hr />
                                 <div style={{ borderRadius: 20, padding: 20, boxShadow: '1px 4px 5px #E1E4E4' }}>
-                                    <p>FirstName: <span>{/** */}</span></p>
-                                    <p>LastName: <span>{/** */}</span></p>
-                                    <p>Gender: <span>{/** */}</span></p>
-                                    <p>Username: <span>{/** */}</span></p>
+                                    <p>FirstName: <span>{/* Fetch firstname */}</span></p>
+                                    <p>LastName: <span>{/* Fetch lastname */}</span></p>
+                                    <p>Gender: <span>{/* Fetch gender */}</span></p>
+                                    <p>Username: <span>{/* Fetch username */}</span></p>
                                 </div>
                             </div>
                 </div>
