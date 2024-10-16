@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Form, FloatingLabel } from 'react-bootstrap';
+import { Button, Form, FloatingLabel, Alert, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import LoginStaff from '../../services/LoginStaff'; // Adjust the import path
 
@@ -7,16 +7,28 @@ function SLoginCard() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const [loading, setLoading] = useState(false); // State to manage loading
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // Prevent default form submission
-        setErrorMessage(''); // Clear any previous error messages
+        e.preventDefault();
+        setErrorMessage('');
+        setSuccessMessage('');
+        setLoading(true); // Start loading
 
         try {
-            await LoginStaff(username, password, navigate); // Call the login function
+            await LoginStaff(username, password, navigate);
+            setSuccessMessage('Login successful. Redirecting...');
+            setLoading(false); // Stop loading
+
+            // Optionally, you can set a delay before redirecting
+            setTimeout(() => {
+                navigate('/dashboard'); // Adjust this route as needed
+            }, 2000); // Redirect after 2 seconds
         } catch (error) {
-            setErrorMessage(error.message); // Display the error message
+            setErrorMessage(error.message);
+            setLoading(false); // Stop loading
         }
     };
 
@@ -38,13 +50,34 @@ function SLoginCard() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </FloatingLabel>
-            {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
+
+            {/* Display success or error messages */}
+            {errorMessage && (
+                <Alert variant="danger" className="mt-3">
+                    {errorMessage}
+                </Alert>
+            )}
+            {successMessage && (
+                <Alert variant="success" className="mt-3">
+                    {successMessage}
+                </Alert>
+            )}
+
             <Button
                 variant="primary"
                 style={{ width: "70%", marginTop: "20px" }}
                 type='submit'
-                size='lg'>
-                Login
+                size='lg'
+                disabled={loading} // Disable button when loading
+            >
+                {loading ? (
+                    <>
+                        <Spinner animation="border" size="sm" role="status" className="me-2" />
+                        Logging in...
+                    </>
+                ) : (
+                    'Login'
+                )}
             </Button>
         </Form>
     );
