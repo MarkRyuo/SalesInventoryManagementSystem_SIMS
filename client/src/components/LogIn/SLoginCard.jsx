@@ -28,7 +28,7 @@ function SLoginCard() {
 
             // Automatically hide the success message and navigate after 2.5 seconds
             setTimeout(() => {
-                setShowSuccess(true);
+                setShowSuccess(false);
                 navigate('/SDashboard'); 
             }, 2500); // Delay for success message display
         } catch (error) {
