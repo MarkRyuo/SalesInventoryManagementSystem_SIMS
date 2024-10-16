@@ -21,16 +21,13 @@ function SLoginCard() {
 
         try {
             await LoginStaff(username, password, navigate);
-            console.log("Login successful"); // Log for success
             setSuccess(true);
             setShowSuccess(true);
-            console.log("Success state set to true"); // Log for state change
             setUsername('');
             setPassword('');
 
             // Automatically hide the success message and navigate after 2.5 seconds
             setTimeout(() => {
-                console.log("Navigating to SDashboard..."); // Log before navigation
                 setShowSuccess(false);
                 navigate('/SDashboard'); 
             }, 2500); // Delay for success message display
