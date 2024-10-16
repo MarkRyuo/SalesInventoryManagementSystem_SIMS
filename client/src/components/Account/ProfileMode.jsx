@@ -5,7 +5,9 @@ function ProfileMode() {
         <Container fluid='lg' style={{border: '1px solid'}}>
 
             <div className="content">
-
+                <div>
+                    
+                </div>
             </div>
 
         </Container>
