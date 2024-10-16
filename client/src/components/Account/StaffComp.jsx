@@ -231,7 +231,7 @@ const StaffComp = () => {
             </Col>
             
 
-            <div style={{ border: "1px solid violet" }}>
+            <Col style={{ border: "1px solid violet" }}>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -259,7 +259,7 @@ const StaffComp = () => {
                         ))}
                     </tbody>
                 </Table>
-            </div>
+            </Col>
         </Row>
     );
 };
