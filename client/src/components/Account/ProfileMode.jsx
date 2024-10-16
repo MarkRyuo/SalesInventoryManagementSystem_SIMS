@@ -4,7 +4,7 @@ import { MainLayout } from "../../layout/MainLayout"
 function ProfileMode() {
     return (
         <MainLayout>
-            <div style={{ border: '1px solid' }}>
+            <div style={{ border: '1px solid', padding: '20px' }}>
 
                 <div className="content" style={{ border: '1px solid' }}>
                     <div style={{ display: "flex", border: '1px solid' }}>
@@ -13,7 +13,7 @@ function ProfileMode() {
                             <p>Admin firstname</p>
                             <p>Administrator</p>
                         </div>
-                        <Button variant="outline-primary" style={{ justifySelf: "flex-end" }}>Edit Profile</Button>
+                        <Button variant="outline-primary">Edit Profile</Button>
                     </div>
 
 
