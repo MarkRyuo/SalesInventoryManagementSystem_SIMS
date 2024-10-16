@@ -12,7 +12,7 @@ function ProfileMode() {
                         <div style={{display: 'flex', border: '1px solid', width: '100%', justifyContent: "space-between", alignItems: "center"}}>
                             <div style={{ border: '1px solid', display: "flex", flexDirection: 'column' }}>
                                 <p className="fs-4 m-0">Admin firstname</p>
-                                <p>Administrator</p>
+                                <p className="fs-6 m-1">Administrator</p>
                             </div>
                             <Button variant="outline-primary" style={{height: 50}}>Edit Profile</Button>
                         </div>
