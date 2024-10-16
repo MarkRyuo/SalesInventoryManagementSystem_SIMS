@@ -5,9 +5,9 @@ import { Link } from "react-router-dom"
 function ProfileMode() {
     return (
         <MainLayout>
-            <div style={{ border: '1px solid', padding: '20px', marginTop: 100 }}>
+            <div style={{ border: '1px solid', padding: '20px', marginTop: 100, boxShadow: '2px 4px 5px ' }}>
 
-                <div className="content" style={{ border: '1px solid' }}>
+                <div className="content">
                     <div style={{ display: "flex", padding: 20}}>
                         <Image style={{ width: "100%", maxWidth: '100px', marginRight: 10 }} src="https://i.pinimg.com/564x/01/19/1f/01191fd3ece2dcd44122ff6d88149abc.jpg" roundedCircle />
                         <div style={{display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center"}}>
