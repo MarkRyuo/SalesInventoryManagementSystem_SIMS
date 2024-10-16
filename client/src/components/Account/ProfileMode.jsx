@@ -35,7 +35,7 @@ function ProfileMode() {
 
     return (
         <MainLayout>
-            <div style={{ marginTop: 100, boxShadow: '2px 4px 5px ', borderRadius: 15, width: '100%', minWidth: 370}}>
+            <div style={{ marginTop: 100, boxShadow: '2px 4px 5px ', borderRadius: 15, width: '100%', minWidth: 400}}>
                 <div className="content">
                     {loading ? (
                         <div style={{ textAlign: 'center', padding: '50px' }}>
