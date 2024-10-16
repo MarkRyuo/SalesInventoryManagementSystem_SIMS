@@ -1,6 +1,5 @@
 import MainStaffLayout from "../../../layout/MainStaffLayout";
-import { Image, Button  } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Image} from "react-bootstrap";
 
 function ProfileMode() {
 
@@ -15,7 +14,6 @@ function ProfileMode() {
                                         <p className="fs-4 m-0">{/** Fetch firstname and lastname */}</p>
                                         <p className="fs-6 m-0">REYES ELECTRONICS Staff</p>
                                     </div>
-                                    <Button as={Link} to={'/MyProfile'} variant="outline-primary">Edit Profile</Button>
                                 </div>
                             </div>
 
