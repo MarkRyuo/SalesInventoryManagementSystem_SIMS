@@ -17,7 +17,7 @@ function ProfileMode() {
                     <p>Personal Information</p>
                     <p>FirstName: <span></span></p>
                     <p>LastName: <span></span></p>
-                    <p>FirstName: <span></span></p>
+                    <p>Gender: <span></span></p>
                     <p>FirstName: <span></span></p>
                     
 
