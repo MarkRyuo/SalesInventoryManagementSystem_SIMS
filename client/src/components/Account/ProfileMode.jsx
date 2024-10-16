@@ -35,7 +35,7 @@ function ProfileMode() {
 
     return (
         <MainLayout>
-            <div style={{ marginTop: 100, boxShadow: '2px 4px 5px ', borderRadius: 15, width: '100%', minWidth: 400}}>
+            <div style={{ marginTop: 100, boxShadow: '2px 5px 5px #E1E4E4 ', borderRadius: 15, width: '100%', minWidth: 400}}>
                 <div className="content">
                     {loading ? (
                         <div style={{ textAlign: 'center', padding: '50px' }}>
@@ -57,7 +57,7 @@ function ProfileMode() {
                             <div style={{ padding: 20 }}>
                                 <p className="fs-4">Personal Information</p>
                                 <hr />
-                                <div style={{ borderRadius: 20, padding: 20, boxShadow: '1px 1px 5px' }}>
+                                    <div style={{ borderRadius: 20, padding: 20, boxShadow: '1px 4px 5px #E1E4E4' }}>
                                     <p>FirstName: <span>{adminData ? adminData.firstname : 'N/A'}</span></p>
                                     <p>LastName: <span>{adminData ? adminData.lastname : 'N/A'}</span></p>
                                     <p>Gender: <span>{adminData ? adminData.gender : 'N/A'}</span></p>
