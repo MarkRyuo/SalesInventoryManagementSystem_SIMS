@@ -1,4 +1,5 @@
 import { Container, Image, Button } from "react-bootstrap"
+import { MainLayout } from "../../layout/MainLayout"
 
 function ProfileMode() {
     return (
@@ -11,7 +12,7 @@ function ProfileMode() {
                         <p>Admin firstname</p>
                         <p>Administrator</p>
                     </div>
-                    <Button variant="outline-primary" style={{justifySelf: "self-end"}}>Edit Profile</Button>
+                    <Button variant="outline-primary" style={{justifySelf: "flex-end"}}>Edit Profile</Button>
                 </div>
 
 
