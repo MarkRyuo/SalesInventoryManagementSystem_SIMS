@@ -39,7 +39,6 @@ function SLoginCard() {
                 setError("Incorrect username or password."); // General error for other login issues
             }
             setShowError(true);
-            console.log("Login failed:", error.message); // Log for error
             setUsername('');
             setPassword('');
 
