@@ -4,8 +4,8 @@ function ProfileMode() {
     return (
         <Container fluid='lg' style={{border: '1px solid'}}>
 
-            <div>
-                
+            <div className="content">
+
             </div>
 
         </Container>
