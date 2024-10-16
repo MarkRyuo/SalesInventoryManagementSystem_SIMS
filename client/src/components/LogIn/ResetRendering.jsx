@@ -14,14 +14,15 @@ function ResetRendering() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Change the message every 2 seconds with a fade-out effect
         const interval = setInterval(() => {
             setMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
-        }, 2000); // Change the message every second
+        }, 1000); // Change the message every 2 seconds
 
-        // Navigate to '/' after 5 seconds
+        // Navigate to '/' after 12 seconds (6 messages * 2 seconds + 2 seconds extra)
         const timeout = setTimeout(() => {
             navigate('/');
-        }, 10000);
+        }, 12000);
 
         // Clean up intervals and timeout when the component is unmounted
         return () => {
