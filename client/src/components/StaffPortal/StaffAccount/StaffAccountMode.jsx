@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import MainStaffLayout from "../../../layout/MainStaffLayout";
 import { Image } from "react-bootstrap";
-import { db } from './firebase.js'; // Import your Firebase configuration
+import { db } from '../../../services/firebase'; // Import your Firebase configuration
 import { doc, getDoc } from "firebase/firestore";
 
 function StaffAccountMode() {
