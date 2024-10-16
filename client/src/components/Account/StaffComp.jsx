@@ -152,7 +152,7 @@ const StaffComp = () => {
     return (
         <Row style={{ display: 'flex', width: "100%", margin: 0, justifyContent: "space-between" }}>
             <Col className='p-0' lg={5} md={12} sm={12}>
-                <Form onSubmit={handleAddStaff} style={{ border: "1px solid green", padding: "20px", width: '100%' }}>
+                <Form onSubmit={handleAddStaff} style={{padding: "20px", width: '100%' }}>
                     <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
                         <Form.Control
                             type="text"
@@ -267,7 +267,7 @@ const StaffComp = () => {
                                     />
                                 </td>
                                 <td>
-                                    <Button variant="warning" onClick={() => handleEditStaff(staff)}>Edit</Button>
+                                    <Button variant="warning" className='mx-3' onClick={() => handleEditStaff(staff)}>Edit</Button>
                                     <Button variant="danger" onClick={() => handleDeleteStaff(staff.id)}>Delete</Button>
                                 </td>
                             </tr>
