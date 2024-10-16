@@ -14,13 +14,14 @@ export const StaffAccount = () => {
             <div className='contentAccount' style={{ 
                 border: "1px solid #e6e6e6",
                 height: "auto", 
-                padding: 50, 
+                width: "100%", 
+                padding: "30px" ,  
                 boxShadow: "5px 8px 8px #e6e6e6", 
                 background: " #ffffff", 
                 borderRadius: "50px" 
             }}>
-                <p className='fs-4'>Staff Details</p>
-                <p style={{ borderBottom: "1px solid gray", padding: "20px 10px" }}>Personal Information</p>
+                <p className='fs-4'>Staff Management</p>
+                <p style={{ borderBottom: "1px solid gray", padding: "15px 10px" }}>Personal Information</p>
                 <StaffComp />
 
             </div>

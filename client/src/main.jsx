@@ -21,6 +21,9 @@ import SearchAsset from './pages/StaffPages/SearchAsset.jsx';
 import ForgotPasswordMode from './components/LogIn/ForgotPasswordMode.jsx';
 import EnableRecoveryMode from './components/LogIn/EnableRecoveryMode.jsx';
 import ResetPasswordMode from './components/LogIn/ResetPasswordMode.jsx';
+import ResetRendering from './components/LogIn/ResetRendering.jsx';
+import ProfileMode from './components/Account/ProfileMode.jsx';
+import StaffAccountMode from './components/StaffPortal/StaffAccount/StaffAccountMode.jsx';
 
 const router = createBrowserRouter([
   {
@@ -51,6 +54,10 @@ const router = createBrowserRouter([
     path: "AboutPage",
     element: <AboutPage /> ,
   },
+  {
+    path: "ProfileMode",
+    element: <ProfileMode /> ,
+  },
 
   //? Forgot Password
   {
@@ -65,6 +72,10 @@ const router = createBrowserRouter([
     path: "ResetPasswordMode",
     element: <ResetPasswordMode /> ,
   },
+  {
+    path: "ResetRendering",
+    element: <ResetRendering /> ,
+  },
 
   //? Staff Portal
   {
@@ -78,6 +89,10 @@ const router = createBrowserRouter([
   {
     path: "SStaffAccount",
     element: <SStaffAccount /> , //* Staff Account Page
+  },
+  {
+    path: "StaffAccountMode",
+    element: <StaffAccountMode />, //* Staff Account Page
   },
 
   
