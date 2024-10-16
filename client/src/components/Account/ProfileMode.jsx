@@ -14,6 +14,13 @@ function ProfileMode() {
                 </div>
 
                 <div>
+                    <p>Personal Information</p>
+                    <p>FirstName: <span></span></p>
+                    <p>LastName: <span></span></p>
+                    <p>FirstName: <span></span></p>
+                    <p>FirstName: <span></span></p>
+                    
+
 
                 </div>
             </div>
