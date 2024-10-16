@@ -9,19 +9,17 @@ function SLoginCard() {
     const [error, setError] = useState(null);
     const [showError, setShowError] = useState(false);
     const [loading, setLoading] = useState(false); // State for loading indicator
-    const [success, setSuccess] = useState(false); // State for success message
     const [showSuccess, setShowSuccess] = useState(false); // State for showing success message
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent default form submission
         setError(null); // Clear any previous error messages
-        setSuccess(false); // Reset success message
+        setShowSuccess(false); // Reset success message
         setLoading(true); // Set loading state
 
         try {
-            await LoginStaff(username, password, navigate); // Call the login function
-            setSuccess(true); // Set success state
+            await LoginStaff(username, password); // Call the login function (ensure it returns a promise)
             setShowSuccess(true); // Show success message
             setUsername(''); // Clear the username input field
             setPassword(''); // Clear the password input field
@@ -54,7 +52,7 @@ function SLoginCard() {
     return (
         <Form onSubmit={handleLogin}>
             {/* Display success message if login is successful */}
-            {success && showSuccess && (
+            {showSuccess && (
                 <Alert
                     variant="success"
                     style={{
@@ -69,7 +67,7 @@ function SLoginCard() {
             )}
 
             {/* Display error message if login fails */}
-            {error && showError && (
+            {showError && (
                 <Alert
                     variant="danger"
                     onClose={() => setShowError(false)}
