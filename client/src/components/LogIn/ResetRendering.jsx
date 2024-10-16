@@ -34,7 +34,7 @@ function ResetRendering() {
 
     return (
         <Container fluid="lg" className="d-flex flex-column align-items-center justify-content-center" style={{ height: '100vh' }}>
-            <h2>{messages[messageIndex]}</h2>
+            <p className='fs-3'>{messages[messageIndex]}</p>
         </Container>
     );
 }
