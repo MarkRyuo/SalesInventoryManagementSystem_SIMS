@@ -22,9 +22,9 @@ function NavbarStaffDashboard() {
     //* Buttons 
     const [buttons] = useState([
         { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-6", path: "/SDashboard" }, 
-        { icon: <AiOutlineProduct />, btnName: "Account", id: "b-7", path: "/SStaffAccount" },
+        { icon: <AiOutlineProduct />, btnName: "Account", id: "b-7", path: "/StaffAccountMode" },
         { icon: <TbReportAnalytics />, btnName: "Text3", id: "b-8", path: "/Path" },
-        { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/StaffAccountMode" },
+        { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/AccountPage" },
         { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" }
     ])
 
