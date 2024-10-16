@@ -260,8 +260,8 @@ const StaffComp = () => {
                                     <td>{staff.firstname}</td>
                                     <td>{staff.lastname}</td>
                                     <td>{staff.gender}</td>
+                                    
                                     <td>{staff.username}</td>
-                                    <td>{staff.password}</td>
                                     <td>
                                         <Form.Check
                                             type="switch"
