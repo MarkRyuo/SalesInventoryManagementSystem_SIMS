@@ -24,7 +24,7 @@ function SLoginCard() {
 
             // Optionally, you can set a delay before redirecting
             setTimeout(() => {
-                navigate('/dashboard'); // Adjust this route as needed
+                navigate('/SDashboard'); // Adjust this route as needed
             }, 2000); // Redirect after 2 seconds
         } catch (error) {
             setErrorMessage(error.message);
