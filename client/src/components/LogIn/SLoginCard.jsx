@@ -29,10 +29,15 @@ function SLoginCard() {
             // Automatically hide the success message and navigate after 2.5 seconds
             setTimeout(() => {
                 setShowSuccess(false);
-                navigate('/SDashboard'); 
+                navigate('/SDashboard');
             }, 2500); // Delay for success message display
         } catch (error) {
-            setError(error.message); // Display the error message
+            // Show specific error messages based on the error
+            if (error.message === "Your account is inactive. Please contact Admin.") {
+                setError("Your account is inactive. Please contact Admin."); // Show inactive account error
+            } else {
+                setError("Incorrect username or password."); // General error for other login issues
+            }
             setShowError(true);
             console.log("Login failed:", error.message); // Log for error
             setUsername('');
@@ -81,9 +86,7 @@ function SLoginCard() {
                     }}
                 >
                     <Alert.Heading>Login Failed</Alert.Heading>
-                    <p>
-                        {error} Please check your username and password and try again.
-                    </p>
+                    <p>{error}</p> {/* Display specific error message */}
                 </Alert>
             )}
 
