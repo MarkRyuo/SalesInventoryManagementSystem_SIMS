@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap"
+import { Container, Image } from "react-bootstrap"
 
 function ProfileMode() {
     return (
