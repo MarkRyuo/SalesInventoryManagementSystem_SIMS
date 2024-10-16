@@ -9,25 +9,27 @@ function SLoginCard() {
     const [error, setError] = useState(null);
     const [showError, setShowError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false); // Renamed from showSuccess to success
+    const [success, setSuccess] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError(null);
-        setSuccess(false); // Reset success state
+        setSuccess(false);
         setLoading(true);
 
         try {
             await LoginStaff(username, password, navigate);
-            setSuccess(true); // Set success state to true
+            setSuccess(true);
+            setShowSuccess(true);
             setUsername('');
             setPassword('');
 
             // Automatically hide the success message and navigate after 2.5 seconds
             setTimeout(() => {
-                setSuccess(false); // Clear success state
-                navigate('/SDashboard');
+                setShowSuccess(false);
+                navigate('/SDashboard'); 
             }, 2500); // Delay for success message display
         } catch (error) {
             setError(error.message); // Display the error message
@@ -53,7 +55,7 @@ function SLoginCard() {
     return (
         <Form onSubmit={handleLogin}>
             {/* Display success message if login is successful */}
-            {success && (
+            {success && showSuccess && (
                 <Alert
                     variant="success"
                     style={{
