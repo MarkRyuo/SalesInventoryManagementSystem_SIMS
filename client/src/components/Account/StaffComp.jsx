@@ -144,8 +144,6 @@ const StaffComp = () => {
 
     return (
         <div style={{border: "1px solid red"}}>
-            <p className='fs-3'>Staff Management</p>
-
             <Form onSubmit={handleAddStaff}>
                 <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
                     <Form.Control
