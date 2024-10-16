@@ -247,16 +247,16 @@ const StaffComp = () => {
             </Col>
 
             <Col style={{ width: "auto" }} lg={4} md={12} sm={12}>
-                <h4>Staff List</h4>
+                <p className='fs-4'>Staff list Preview</p>
                 <Table striped bordered hover responsive>
                     <thead>
                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Gender</th>
-                            <th>Username</th>
-                            <th>Active</th>
-                            <th>Actions</th>
+                            <th className='lead fs-6'>First Name</th>
+                            <th className='lead fs-6'>Last Name</th>
+                            <th className='lead fs-6'>Gender</th>
+                            <th className='lead fs-6'>Username</th>
+                            <th className='lead fs-6'>Active</th>
+                            <th className='lead fs-6'>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
