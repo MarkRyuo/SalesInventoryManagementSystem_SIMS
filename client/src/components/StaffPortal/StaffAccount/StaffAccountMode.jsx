@@ -3,7 +3,7 @@ import MainStaffLayout from "../../../layout/MainStaffLayout";
 function ProfileMode() {
 
     return (
-        <MainLayout>
+        <MainStaffLayout>
             <div style={{ marginTop: 100, boxShadow: '2px 5px 5px #E1E4E4 ', borderRadius: 15, width: '100%', minWidth: 400 }}>
                 <div className="content">
                     {loading ? (
@@ -37,7 +37,7 @@ function ProfileMode() {
                     )}
                 </div>
             </div>
-        </MainLayout>
+        </MainStaffLayout>
     );
 }
 
