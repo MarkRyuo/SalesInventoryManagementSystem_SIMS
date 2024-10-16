@@ -1,7 +1,7 @@
 import MainStaffLayout from "../../../layout/MainStaffLayout";
 import { Image} from "react-bootstrap";
 
-function ProfileMode() {
+function StaffAccountMode() {
 
     return (
         <MainStaffLayout>
@@ -34,4 +34,4 @@ function ProfileMode() {
     );
 }
 
-export default ProfileMode;
+export default StaffAccountMode;
