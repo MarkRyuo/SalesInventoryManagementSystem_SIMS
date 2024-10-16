@@ -26,8 +26,8 @@ function ProfileMode() {
                         <div style={{borderRadius: 20, padding: 20, boxShadow: '1px 1px 5px' }}>
                             <p>FirstName: <span>{/* fetch firstname */}</span></p>
                             <p>LastName: <span>{/* fetch lastname */}</span></p>
-                            <p>Gender: <span></span></p>
-                            <p>Username: <span></span></p>
+                            <p>Gender: <span>{/* fetch gender */}</span></p>
+                            <p>Username: <span>{/* fetch username */}</span></p>
                         </div>
                     </div>
                 </div>
