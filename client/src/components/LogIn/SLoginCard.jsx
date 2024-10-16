@@ -39,6 +39,7 @@ function SLoginCard() {
                 setError("Incorrect username or password."); // General error for other login issues
             }
             setShowError(true);
+            // Clear the username and password fields after an unsuccessful login attempt
             setUsername('');
             setPassword('');
 
