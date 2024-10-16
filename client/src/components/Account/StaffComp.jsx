@@ -143,90 +143,93 @@ const StaffComp = () => {
     }, []);
 
     return (
-        <div style={{border: "1px solid red", padding: "10px"}}>
-            <Form onSubmit={handleAddStaff} style={{border: "1px solid green"}}>
-                <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
-                    <Form.Control
-                        type="text"
-                        placeholder="First Name"
-                        value={firstname}
-                        onChange={(e) => setFirstname(e.target.value)}
+        <Row style={{border: "1px solid red", padding: "10px"}}>
+            <Col>
+                <Form onSubmit={handleAddStaff} style={{ border: "1px solid green" }}>
+                    <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
+                        <Form.Control
+                            type="text"
+                            placeholder="First Name"
+                            value={firstname}
+                            onChange={(e) => setFirstname(e.target.value)}
+                        />
+                    </FloatingLabel>
+
+                    <FloatingLabel controlId="floatingLastname" label="Last Name" className="mb-3">
+                        <Form.Control
+                            type="text"
+                            placeholder="Last Name"
+                            value={lastname}
+                            onChange={(e) => setLastname(e.target.value)}
+                        />
+                    </FloatingLabel>
+
+                    <FloatingLabel controlId="floatingGender" label="Gender" className="mb-3">
+                        <Form.Control
+                            type="text"
+                            placeholder="Gender"
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                        />
+                    </FloatingLabel>
+
+                    <FloatingLabel controlId="floatingUsername" label="Username" className="mb-3">
+                        <Form.Control
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </FloatingLabel>
+
+                    <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
+                        <Form.Control
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                                validatePassword(e.target.value); // Validate password as user types
+                            }}
+                        />
+                    </FloatingLabel>
+
+                    {errorMessage && <p className="text-danger">{errorMessage}</p>} {/* Display error message */}
+
+                    {/* Password requirements */}
+                    <p className={lengthRequirement ? 'text-success' : 'text-danger'}>
+                        {lengthRequirement ? '✓ At least 8 characters' : '✗ At least 8 characters'}
+                    </p>
+                    <p className={uppercaseRequirement ? 'text-success' : 'text-danger'}>
+                        {uppercaseRequirement ? '✓ At least one uppercase letter' : '✗ At least one uppercase letter'}
+                    </p>
+                    <p className={lowercaseRequirement ? 'text-success' : 'text-danger'}>
+                        {lowercaseRequirement ? '✓ At least one lowercase letter' : '✗ At least one lowercase letter'}
+                    </p>
+                    <p className={numberRequirement ? 'text-success' : 'text-danger'}>
+                        {numberRequirement ? '✓ At least one number' : '✗ At least one number'}
+                    </p>
+                    <p className={specialCharRequirement ? 'text-success' : 'text-danger'}>
+                        {specialCharRequirement ? '✓ At least one special character (e.g., !@#$%^&*)' : '✗ At least one special character (e.g., !@#$%^&*)'}
+                    </p>
+
+                    <Form.Check
+                        type="switch"
+                        id="activeSwitch"
+                        label="Active Account"
+                        checked={active}
+                        onChange={(e) => setActive(e.target.checked)} // Toggle active status
                     />
-                </FloatingLabel>
 
-                <FloatingLabel controlId="floatingLastname" label="Last Name" className="mb-3">
-                    <Form.Control
-                        type="text"
-                        placeholder="Last Name"
-                        value={lastname}
-                        onChange={(e) => setLastname(e.target.value)}
-                    />
-                </FloatingLabel>
-
-                <FloatingLabel controlId="floatingGender" label="Gender" className="mb-3">
-                    <Form.Control
-                        type="text"
-                        placeholder="Gender"
-                        value={gender}
-                        onChange={(e) => setGender(e.target.value)}
-                    />
-                </FloatingLabel>
-
-                <FloatingLabel controlId="floatingUsername" label="Username" className="mb-3">
-                    <Form.Control
-                        type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </FloatingLabel>
-
-                <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                            validatePassword(e.target.value); // Validate password as user types
-                        }}
-                    />
-                </FloatingLabel>
-
-                {errorMessage && <p className="text-danger">{errorMessage}</p>} {/* Display error message */}
-
-                {/* Password requirements */}
-                <p className={lengthRequirement ? 'text-success' : 'text-danger'}>
-                    {lengthRequirement ? '✓ At least 8 characters' : '✗ At least 8 characters'}
-                </p>
-                <p className={uppercaseRequirement ? 'text-success' : 'text-danger'}>
-                    {uppercaseRequirement ? '✓ At least one uppercase letter' : '✗ At least one uppercase letter'}
-                </p>
-                <p className={lowercaseRequirement ? 'text-success' : 'text-danger'}>
-                    {lowercaseRequirement ? '✓ At least one lowercase letter' : '✗ At least one lowercase letter'}
-                </p>
-                <p className={numberRequirement ? 'text-success' : 'text-danger'}>
-                    {numberRequirement ? '✓ At least one number' : '✗ At least one number'}
-                </p>
-                <p className={specialCharRequirement ? 'text-success' : 'text-danger'}>
-                    {specialCharRequirement ? '✓ At least one special character (e.g., !@#$%^&*)' : '✗ At least one special character (e.g., !@#$%^&*)'}
-                </p>
-
-                <Form.Check
-                    type="switch"
-                    id="activeSwitch"
-                    label="Active Account"
-                    checked={active}
-                    onChange={(e) => setActive(e.target.checked)} // Toggle active status
-                />
-
-                <Button variant="primary" type="submit">
-                    {editingStaffId ? 'Update Staff' : 'Add Staff'}
-                </Button>
-                <Button variant="secondary" className="ms-2" onClick={clearForm}>
-                    Clear
-                </Button>
-            </Form>
+                    <Button variant="primary" type="submit">
+                        {editingStaffId ? 'Update Staff' : 'Add Staff'}
+                    </Button>
+                    <Button variant="secondary" className="ms-2" onClick={clearForm}>
+                        Clear
+                    </Button>
+                </Form>
+            </Col>
+            
 
             <div style={{ border: "1px solid violet" }}>
                 <Table striped bordered hover>
@@ -257,7 +260,7 @@ const StaffComp = () => {
                     </tbody>
                 </Table>
             </div>
-        </div>
+        </Row>
     );
 };
 
