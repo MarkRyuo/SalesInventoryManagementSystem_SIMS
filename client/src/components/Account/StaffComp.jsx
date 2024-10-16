@@ -49,7 +49,7 @@ const StaffComp = () => {
                     lastname,
                     gender,
                     username,
-                    password, // Ensure password management is secure in production
+                    password,
                     active, // Update active status
                 });
                 alert('Staff member updated successfully!');
@@ -59,7 +59,7 @@ const StaffComp = () => {
                     lastname,
                     gender,
                     username,
-                    password, // Ensure password management is secure in production
+                    password,
                     active, // Set initial active status
                 });
                 alert('Staff member added successfully!');
@@ -80,11 +80,10 @@ const StaffComp = () => {
         setGender('');
         setUsername('');
         setPassword('');
-        setActive(true); // Reset active status
-        setEditingStaffId(null); // Reset editing state
-        setErrorMessage(''); // Clear error message
+        setActive(true);
+        setEditingStaffId(null);
+        setErrorMessage('');
 
-        // Reset password requirement states
         setLengthRequirement(false);
         setUppercaseRequirement(false);
         setLowercaseRequirement(false);
@@ -112,11 +111,10 @@ const StaffComp = () => {
         setGender(staff.gender);
         setUsername(staff.username);
         setPassword(staff.password);
-        setActive(staff.active); // Set active status for editing
-        setEditingStaffId(staff.id); // Set the ID of the staff being edited
-        setErrorMessage(''); // Clear error message
+        setActive(staff.active);
+        setEditingStaffId(staff.id);
+        setErrorMessage('');
 
-        // Reset password requirement states
         setLengthRequirement(false);
         setUppercaseRequirement(false);
         setLowercaseRequirement(false);
@@ -130,11 +128,22 @@ const StaffComp = () => {
                 const staffDoc = doc(db, 'staffs', staffId);
                 await deleteDoc(staffDoc);
                 alert('Staff member deleted successfully!');
-                fetchStaff(); // Refresh the staff list after deletion
+                fetchStaff();
             } catch (error) {
                 console.error('Error deleting staff:', error);
                 alert('Error deleting staff. Please try again.');
             }
+        }
+    };
+
+    const handleToggleActive = async (staff) => {
+        try {
+            const staffDoc = doc(db, 'staffs', staff.id);
+            await updateDoc(staffDoc, { active: !staff.active }); // Toggle the active status
+            fetchStaff(); // Refresh the staff list after updating
+        } catch (error) {
+            console.error('Error updating staff active status:', error);
+            alert('Error updating status. Please try again.');
         }
     };
 
@@ -143,9 +152,9 @@ const StaffComp = () => {
     }, []);
 
     return (
-        <Row style={{display: 'flex', width: "100%", margin: 0, justifyContent: "space-between"}}>
+        <Row style={{ display: 'flex', width: "100%", margin: 0, justifyContent: "space-between" }}>
             <Col className='p-0' lg={5} md={12} sm={12}>
-                <Form onSubmit={handleAddStaff} style={{ border: "1px solid green", padding: "20px", width: '100%'}}>
+                <Form onSubmit={handleAddStaff} style={{ border: "1px solid green", padding: "20px", width: '100%' }}>
                     <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
                         <Form.Control
                             type="text"
@@ -165,12 +174,15 @@ const StaffComp = () => {
                     </FloatingLabel>
 
                     <FloatingLabel controlId="floatingGender" label="Gender" className="mb-3">
-                        <Form.Control
-                            type="text"
-                            placeholder="Gender"
+                        <Form.Select
                             value={gender}
                             onChange={(e) => setGender(e.target.value)}
-                        />
+                        >
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Rather not say">Rather not say</option>
+                        </Form.Select>
                     </FloatingLabel>
 
                     <FloatingLabel controlId="floatingUsername" label="Username" className="mb-3">
@@ -189,14 +201,13 @@ const StaffComp = () => {
                             value={password}
                             onChange={(e) => {
                                 setPassword(e.target.value);
-                                validatePassword(e.target.value); // Validate password as user types
+                                validatePassword(e.target.value);
                             }}
                         />
                     </FloatingLabel>
 
-                    {errorMessage && <p className="text-danger">{errorMessage}</p>} {/* Display error message */}
+                    {errorMessage && <p className="text-danger">{errorMessage}</p>}
 
-                    {/* Password requirements */}
                     <p className={lengthRequirement ? 'text-success' : 'text-danger'}>
                         {lengthRequirement ? '✓ At least 8 characters' : '✗ At least 8 characters'}
                     </p>
@@ -218,7 +229,7 @@ const StaffComp = () => {
                         id="activeSwitch"
                         label="Active Account"
                         checked={active}
-                        onChange={(e) => setActive(e.target.checked)} // Toggle active status
+                        onChange={(e) => setActive(e.target.checked)}
                     />
 
                     <Button variant="primary" type="submit">
@@ -227,20 +238,23 @@ const StaffComp = () => {
                     <Button variant="secondary" className="ms-2" onClick={clearForm}>
                         Clear
                     </Button>
+                    <Button variant="danger" onClick={() => handleDeleteStaff(staff.id)} className="ms-2">
+                        Delete
+                    </Button>
                 </Form>
             </Col>
-            
 
-            <Col style={{ border: "1px solid violet", width: "auto"}} lg={4} md={12} sm={12} className='p-0'>
-                <div className='p-3'>
-                <Table striped bordered hover>
+            <Col style={{ border: "1px solid violet", width: "auto" }} lg={4} md={12} sm={12} className='p-0'>
+                <div className='p-2'>
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Username</th>
                                 <th>Gender</th>
-                                <th>Active</th> {/* Added Active Column */}
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Active</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -249,12 +263,21 @@ const StaffComp = () => {
                                 <tr key={staff.id}>
                                     <td>{staff.firstname}</td>
                                     <td>{staff.lastname}</td>
-                                    <td>{staff.username}</td>
                                     <td>{staff.gender}</td>
-                                    <td>{staff.active ? 'Yes' : 'No'}</td> {/* Display active status */}
+                                    <td>{staff.username}</td>
+                                    <td>{staff.password}</td>
                                     <td>
-                                        <Button variant="warning" onClick={() => handleEditStaff(staff)}>Edit</Button>
-                                        <Button variant="danger" className="ms-2" onClick={() => handleDeleteStaff(staff.id)}>Delete</Button>
+                                        <Form.Check
+                                            type="switch"
+                                            id={`activeSwitch-${staff.id}`}
+                                            checked={staff.active}
+                                            onChange={() => handleToggleActive(staff)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <Button variant="info" onClick={() => handleEditStaff(staff)}>
+                                            Edit
+                                        </Button>
                                     </td>
                                 </tr>
                             ))}
