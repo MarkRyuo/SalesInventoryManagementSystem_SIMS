@@ -44,7 +44,7 @@ function ResetRendering() {
         <Container
             fluid="lg"
             className="d-flex flex-column align-items-center justify-content-center"
-            style={{ height: '100vh' }}
+            style={{ height: '70vh' }}
         >
             <p className="fs-3">{messages[messageIndex]}</p>
         </Container>
