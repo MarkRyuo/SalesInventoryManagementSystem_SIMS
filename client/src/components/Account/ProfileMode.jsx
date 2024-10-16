@@ -23,7 +23,7 @@ function ProfileMode() {
                     <div style={{padding: 20}}>
                         <p className="fs-4">Personal Information</p>
                         <hr />
-                        <div style={{borderRadius: 20, border: '1px solid', padding: 20 }}>
+                        <div style={{borderRadius: 20, border: '1px solid', padding: 20, boxShadow: '1px 1px 5px' }}>
                             <p>FirstName: <span></span></p>
                             <p>LastName: <span></span></p>
                             <p>Gender: <span></span></p>
