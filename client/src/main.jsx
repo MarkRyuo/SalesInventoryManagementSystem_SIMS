@@ -22,6 +22,7 @@ import ForgotPasswordMode from './components/LogIn/ForgotPasswordMode.jsx';
 import EnableRecoveryMode from './components/LogIn/EnableRecoveryMode.jsx';
 import ResetPasswordMode from './components/LogIn/ResetPasswordMode.jsx';
 import ResetRendering from './components/LogIn/ResetRendering.jsx';
+import ProfileMode from './components/Account/ProfileMode.jsx';
 
 const router = createBrowserRouter([
   {
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
   },
   {
     path: "ProfileMode",
-    element: <AboutPage />,
+    element: <ProfileMode /> ,
   },
 
   //? Forgot Password
