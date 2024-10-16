@@ -231,7 +231,7 @@ const StaffComp = () => {
             </Col>
             
 
-            <Col style={{ border: "1px solid violet" }} lg={4} className='m-0 p-0'>
+            <Col style={{ border: "1px solid violet", width: "auto"}} lg={4} className='m-0 p-0'>
                 <Table striped bordered hover>
                     <thead>
                         <tr>

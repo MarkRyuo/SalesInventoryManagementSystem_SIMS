@@ -14,7 +14,6 @@ export const StaffAccount = () => {
             <div className='contentAccount' style={{ 
                 border: "1px solid #e6e6e6",
                 height: "auto", 
-                padding: 35, 
                 boxShadow: "5px 8px 8px #e6e6e6", 
                 background: " #ffffff", 
                 borderRadius: "50px" 
