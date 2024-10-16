@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 function ProfileMode() {
     return (
         <MainLayout>
-            <div style={{ border: '1px solid', padding: '20px', marginTop: 100, boxShadow: '2px 4px 5px ' }}>
+            <div style={{ padding: '20px', marginTop: 100, boxShadow: '2px 4px 5px ' }}>
 
                 <div className="content">
                     <div style={{ display: "flex", padding: 20}}>
