@@ -1,5 +1,6 @@
 import { Image, Button } from "react-bootstrap"
 import { MainLayout } from "../../layout/MainLayout"
+import { Link } from "react-router-dom"
 
 function ProfileMode() {
     return (
@@ -14,7 +15,7 @@ function ProfileMode() {
                                 <p className="fs-4 m-0">Admin firstname</p>
                                 <p className="fs-6 m-1">Administrator</p>
                             </div>
-                            <Button variant="outline-primary">Edit Profile</Button>
+                            <Button as={Link} to={'/MyProfile'} variant="outline-primary">Edit Profile</Button>
                         </div>
                     </div>
 
