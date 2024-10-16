@@ -11,7 +11,7 @@ function ProfileMode() {
                                 <Image style={{ width: "100px", marginRight: 10 }} src="https://i.pinimg.com/564x/01/19/1f/01191fd3ece2dcd44122ff6d88149abc.jpg" roundedCircle />
                                 <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
                                     <div style={{ display: "flex", flexDirection: 'column' }}>
-                                        <p className="fs-4 m-0">{adminData ? adminData.firstname : 'N/A'} {adminData ? adminData.lastname : 'N/A'}</p>
+                                        <p className="fs-4 m-0">{/** */}</p>
                                         <p className="fs-6 m-0">Administrator</p>
                                     </div>
                                     <Button as={Link} to={'/MyProfile'} variant="outline-primary">Edit Profile</Button>
