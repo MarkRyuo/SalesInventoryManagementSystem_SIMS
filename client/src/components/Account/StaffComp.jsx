@@ -153,7 +153,7 @@ const StaffComp = () => {
     return (
         <Row style={{ display: 'flex', width: "100%", margin: 0, justifyContent: "space-between" }}>
             <Col className='p-0' lg={5} md={12} sm={12}>
-                <p className='m-0 p-0 ps-3'>Reminder: Please ensure that all staff details are accurately filled before saving.</p>
+                <p className='m-0 p-0 ps-3'><span className='fw-semibold'>Reminder : </span>Please ensure that all staff details are accurately filled before saving.</p>
                 <Form onSubmit={handleAddStaff} style={{ padding: "20px", width: '100%' }}>
                     <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
                         <Form.Control
