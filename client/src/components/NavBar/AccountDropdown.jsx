@@ -7,12 +7,12 @@ const AccountDropdown = () => {
     return (
         <>
             <Dropdown>
-                <Dropdown.Toggle as="div" style={{ cursor: 'pointer', padding: "10px" }}>
+                <Dropdown.Toggle as="div" style={{ cursor: 'pointer', padding: "10px",  }}>
                     <span><VscAccount /></span>
                     Account
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu style={{}}>
                     <Dropdown.Item as={Link} to={"/ProfileMode"}>My Profile</Dropdown.Item>
                     <Dropdown.Item as={Link} to={"/StaffAccount"}>Staff Account</Dropdown.Item>
                 </Dropdown.Menu>
