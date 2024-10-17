@@ -10,6 +10,9 @@
 ## Changelog
 
 ### v6.1.2 (Latest)
+- Redesigning Dashboards
+
+### v6.1.2 
 - Redesigning
 
 ### v6.1.1
