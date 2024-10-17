@@ -12,7 +12,7 @@ const AccountDropdown = () => {
                     Account
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu style={{}}>
+                <Dropdown.Menu>
                     <Dropdown.Item as={Link} to={"/ProfileMode"}>My Profile</Dropdown.Item>
                     <Dropdown.Item as={Link} to={"/StaffAccount"}>Staff Account</Dropdown.Item>
                 </Dropdown.Menu>
