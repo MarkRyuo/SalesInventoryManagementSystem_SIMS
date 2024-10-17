@@ -29,12 +29,13 @@
     width: 100%;
     height: auto;
     gap: 15px;
-    justify-content: space-evenly;
+    justify-content: space-between;
     min-width: 600px;
-    overflow: auto;
 }
 
 .colContainerLg {
     /* border: 1px solid; */
     padding: 0;
+    overflow: auto;
+    width: auto;
 }

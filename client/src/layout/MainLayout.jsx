@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { NavDashboard } from "../components/NavBar/NavDashboard"
 import { Container } from "react-bootstrap"
-import MainLayoutCss from './MainLayout.module.css' ;
 
 export const MainLayout = ({children}) => {
 
@@ -10,7 +9,7 @@ export const MainLayout = ({children}) => {
             
             <div className="mainContainer">
                 <NavDashboard />
-                <Container fluid='lg' className={MainLayoutCss.MainLayout}>
+                <Container fluid='lg' className='p-0'>
                     {children}
                 </Container>
             </div>

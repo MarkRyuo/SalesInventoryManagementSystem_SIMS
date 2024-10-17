@@ -9,7 +9,7 @@
     height: auto;
     padding: 10px;
     margin: 12px 0;
-    min-width: 400px;
+    min-width: 370px;
     gap: 10px;
     justify-content: space-around;
 }
@@ -31,4 +31,6 @@
 .colContainerLg {
     /* border: 1px solid; */
     padding: 0;
+    overflow: auto;
+    width: auto;
 }

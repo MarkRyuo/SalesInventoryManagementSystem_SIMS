@@ -49,7 +49,7 @@ export const NavDashboard = () => {
 
             {/* Off-canvas function */}
 
-            <Offcanvas show={show} onHide={handleClose}>
+            <Offcanvas show={show} onHide={handleClose} style={{width: 320}}>
                 <Offcanvas.Header closeButton className={Navbars.offCanvasHeader}>
                     <Offcanvas.Title>
                         <Image width={40} className='me-2' 
