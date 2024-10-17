@@ -9,7 +9,10 @@
 
 ## Changelog
 
-### v6.1.1 (Latest)
+### v6.1.2 (Latest)
+- 
+
+### v6.1.1
 - Designing Staff
 - Create Design Forgot Password
 - Many Changes
