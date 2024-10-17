@@ -23,13 +23,13 @@
 /* !(Warning): This is for ReportChartLg */
 
 .rowContainerLg {
-    /* border: 1px solid green; */
+    border: 1px solid green;
     padding: 5px;
     margin: 10px 0px;
     width: 100%;
     height: auto;
     gap: 15px;
-    justify-content: space-evenly;
+    justify-content: space-between;
     min-width: 600px;
     overflow: auto;
 }
