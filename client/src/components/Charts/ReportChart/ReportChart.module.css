@@ -77,15 +77,15 @@
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 1px 3px var(--chartShadow);
     background-color: var(--BgColor);
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .containerChartLg2 {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 500px;
     height: 400px;
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 1px 3px var(--chartShadow);
     background-color: var(--BgColor);
-    border-radius: 10px;
+    border-radius: 20px;
 }
