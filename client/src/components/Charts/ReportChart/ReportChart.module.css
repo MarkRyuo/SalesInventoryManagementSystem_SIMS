@@ -70,7 +70,17 @@
 
 /* !Warning This is for ChartLg */
 
-.containerChartLg {
+.containerChartLg1 {
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 400px;
+    /*! Change this in auto if chart-lg is coded*/
+    box-shadow: 1px 1px 3px var(--chartShadow);
+    background-color: var(--BgColor);
+    border-radius: 10px;
+}
+
+.containerChartLg2 {
     /* border: 1px solid red; */
     width: 100%;
     height: 400px;
