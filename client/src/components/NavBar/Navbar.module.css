@@ -2,7 +2,7 @@
 
 :root {
     --navBorder: #E1E4E4 ;
-    --hoverbuttons: #CDC3FF ;
+    --hoverbuttons: rgb(205, 195, 255, 80%) ;
 }
 
 /* *NavLogin.jsx */
