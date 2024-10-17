@@ -23,7 +23,7 @@
 /* !(Warning): This is for ReportChartLg */
 
 .rowContainerLg {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     padding: 5px;
     margin: 10px 0px;
     width: 100%;

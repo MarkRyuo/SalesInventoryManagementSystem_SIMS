@@ -71,8 +71,8 @@
 /* !Warning This is for ChartLg */
 
 .containerChartLg1 {
-    border: 1px solid red;
-    width: 900px;
+    /* border: 1px solid red; */
+    width: 780px;
     height: 400px;
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 1px 3px var(--chartShadow);
