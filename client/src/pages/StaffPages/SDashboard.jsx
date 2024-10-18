@@ -7,6 +7,7 @@ import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons
 import { TiDocumentAdd } from "react-icons/ti";
 import { BiScan } from "react-icons/bi";
 import { MdOutlineManageSearch } from "react-icons/md";
+import { MdQrCodeScanner } from "react-icons/md";
 
 function SDashboard() {
 
@@ -36,7 +37,8 @@ function SDashboard() {
                 <div className={SDashboardCss.containerHeroCard}>
                     <p className="fs-4">Services</p>
                     <div className={SDashboardCss.buttonsHeroCard}>
-                        <div>
+                        <div style={{display: "flex", flexDirection: "column", border: "1px solid"}}>
+                            <span className="text-center"><MdQrCodeScanner size={100}/></span>
                             <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
                         </div>
                         <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
