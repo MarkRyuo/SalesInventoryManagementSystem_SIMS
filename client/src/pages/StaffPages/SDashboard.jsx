@@ -44,8 +44,8 @@ function SDashboard() {
 
                 <div>
                     <p>Product Add Today: </p>
-                    <div>
-                        
+                    <div className="">
+
                     </div>
                 </div>
             </div>
