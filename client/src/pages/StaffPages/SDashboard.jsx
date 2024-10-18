@@ -1,5 +1,5 @@
 import MainStaffLayout from "../../layout/MainStaffLayout";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Image } from "react-bootstrap";
 import SDashboardCss from './SDashboard.module.css' ;
 import { useState } from "react";
 import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons";
@@ -20,7 +20,7 @@ function SDashboard() {
         <MainStaffLayout>
 
             <div className="mainContainer">
-
+                <Image src="holder.js/171x180" roundedCircle />
             </div>
 
             <Row className={SDashboardCss.rowContainer}>
