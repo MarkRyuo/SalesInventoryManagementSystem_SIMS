@@ -42,5 +42,11 @@
 .mainComponent {
     margin: 0;
     padding: 0;
-    border: 1px sold red;
+    border: 1px solid red;
+}
+
+.componentHeroCard {
+    margin: 0;
+    padding: 0;
+    border: 1px solid;
 }
