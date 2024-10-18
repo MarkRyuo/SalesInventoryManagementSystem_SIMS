@@ -9,6 +9,7 @@ import { BiScan } from "react-icons/bi";
 import { MdOutlineManageSearch } from "react-icons/md";
 
 import { LiaProductHunt } from "react-icons/lia";
+import CardProduct from "../../components/StaffPortal/Cards/CardProduct";
 
 
 function SDashboard() {
@@ -57,7 +58,7 @@ function SDashboard() {
                 <div>
                     <p>Product Add Today: </p>
                     <div className="">
-
+                        <CardProduct cardProduct={cardProduct.filter(CardProducts => CardProducts.id === 'p1')}/>
                     </div>
                 </div>
             </div>
