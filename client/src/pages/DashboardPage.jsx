@@ -18,7 +18,7 @@ export const DashboardPage = () => {
             <div className='main-component'>
                 {/* Dashboard Components */}
                 <div>
-                    <Image src="holder.js/171x180" roundedCircle />
+                    <Image src="holder.js/171x180" roundedCircle style={{width: 150}} />
                 </div>
 
                 <Row className={DashboardCss.rowContainer} > {/* Fix width(sm-screen) 400px */}
