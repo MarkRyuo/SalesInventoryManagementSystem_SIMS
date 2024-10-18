@@ -1,6 +1,7 @@
+import { useState } from "react"
+import { LiaProductHunt } from "react-icons/lia";
 
-
-function CardProduct({cardProduct}) 
+function CardProduct({cardProduct}) {
 
     return (
         <>
