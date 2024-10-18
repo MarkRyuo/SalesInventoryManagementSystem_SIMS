@@ -1,9 +1,15 @@
+import { useState } from "react"
 
 function CardProduct() {
-    return (
-        <div>
 
-        </div>
+    const [cardProduct] = useState([
+        
+    ])
+
+    return (
+        <>
+
+        </>
     )
 }
 
