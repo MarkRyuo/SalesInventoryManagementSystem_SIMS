@@ -16,6 +16,15 @@ function SDashboard() {
         { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={80} />, path: "/SearchAssets", id: 3 },
     ])
 
+    const [cardProduct] = useState([
+        {
+            productIcon: <LiaProductHunt />,
+            productName: 'Sample',
+            productValue: '01213224234',
+            id: 'p1'
+        }
+    ])
+
     return (
         <MainStaffLayout>
 
