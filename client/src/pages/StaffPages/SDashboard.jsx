@@ -7,7 +7,6 @@ import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons
 import { TiDocumentAdd } from "react-icons/ti";
 import { BiScan } from "react-icons/bi";
 import { MdOutlineManageSearch } from "react-icons/md";
-import { MdQrCodeScanner } from "react-icons/md";
 
 function SDashboard() {
 
