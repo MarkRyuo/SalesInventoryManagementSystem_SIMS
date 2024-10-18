@@ -1,11 +1,10 @@
-import React from 'react'
 
 function CardProduct() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+
+        </div>
+    )
 }
 
 export default CardProduct
