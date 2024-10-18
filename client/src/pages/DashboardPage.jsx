@@ -1,6 +1,5 @@
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Image } from 'react-bootstrap';
 import { MainLayout } from '../layout/MainLayout';
-import { RxDashboard } from "react-icons/rx";
 import Chart1 from '../components/Charts/DashboardChart/Chart1';
 import Chart2 from '../components/Charts/DashboardChart/Chart2';
 import Chart3 from '../components/Charts/DashboardChart/Chart3';
@@ -18,7 +17,9 @@ export const DashboardPage = () => {
 
             <div className='main-component'>
                 {/* Dashboard Components */}
-                
+                <div>
+                    <Image src="holder.js/171x180" roundedCircle />
+                </div>
 
                 <Row className={DashboardCss.rowContainer} > {/* Fix width(sm-screen) 400px */}
                     <Col className='colContainer' sm={12} md={12} lg={3}>
