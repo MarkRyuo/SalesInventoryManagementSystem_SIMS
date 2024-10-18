@@ -77,7 +77,8 @@ export const DashboardPage = () => {
                         style={{ width: '100%', maxWidth: '100px', height: '100px' }}
                     />
                     <div>
-                        <p className='fs-4 m-0'><span className='fw-bold'>Hello,</span> {adminName || 'Admin'}</p>
+                        <p className='fs-4 m-0'><span className='fw-semibold'>Hello,</span> {adminName || 'Admin'}</p>
+                        <p className='m-0'>REYES ELECTRONICS.</p>
                         <p className='m-0'>{currentDate}</p>
                     </div>
                 </div>
