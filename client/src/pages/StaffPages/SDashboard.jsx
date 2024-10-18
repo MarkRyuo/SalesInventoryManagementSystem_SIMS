@@ -43,7 +43,10 @@ function SDashboard() {
                 </div>
 
                 <div>
-
+                    <p>Product Add Today: </p>
+                    <div>
+                        
+                    </div>
                 </div>
             </div>
         </MainStaffLayout>
