@@ -21,7 +21,7 @@ function AddNewAssets() {
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='md' className="mt-4">
                 <div style={{border: '1px solid'}}>
-                    <div style={{width: 400, textAlign: "center", padding: 30, borderRadius: 20, boxShadow: '2px 2px 5px #E1E4E4'}}>
+                    <div style={{width: '100%', maxWidth: "400px", textAlign: "center", padding: 30, borderRadius: 20, boxShadow: '2px 2px 5px #E1E4E4',}}>
                         <p className="fs-4 m-0">Scan Product</p>
                         <p className="">Scan new products to add them to your inventory. Click the Scan button below to start scanning using the QR code scanner.</p>
                     </div>
