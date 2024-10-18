@@ -1,9 +1,8 @@
 import { Row, Col, Image } from 'react-bootstrap';
 import { MainLayout } from '../layout/MainLayout';
-import DashboardCss from './Css/Dashboard.module.css'
-
+import DashboardCss from './Css/Dashboard.module.css';
 import { useEffect, useState } from 'react';
-import { db } from '../services/firebase'; // Make sure to import your Firebase setup correctly
+import { db } from '../services/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
 //? Charts
@@ -14,12 +13,12 @@ import ChartLg1 from '../components/Charts/DashboardChart/ChartLg1';
 import ChartLg2 from '../components/Charts/DashboardChart/ChartLg2';
 
 export const DashboardPage = () => {
-
     const [adminName, setAdminName] = useState('');
+    const [adminGender, setAdminGender] = useState('');
     const [currentDate, setCurrentDate] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch admin data when the component mounts
         const fetchAdminData = async () => {
             try {
                 const adminId = localStorage.getItem('adminId');
@@ -32,13 +31,16 @@ export const DashboardPage = () => {
                 const adminDoc = await getDoc(adminDocRef);
 
                 if (adminDoc.exists()) {
-                    const { firstname, lastname } = adminDoc.data();
+                    const { firstname, lastname, gender } = adminDoc.data();
                     setAdminName(`${firstname} ${lastname}`);
+                    setAdminGender(gender || ''); // Store gender if it exists
                 } else {
                     console.error('Admin document not found.');
                 }
             } catch (error) {
                 console.error('Error fetching admin data:', error);
+            } finally {
+                setIsLoading(false); // Stop loading when data fetch is complete
             }
         };
 
@@ -62,47 +64,59 @@ export const DashboardPage = () => {
         return () => clearInterval(dateInterval); // Clean up the interval on component unmount
     }, []);
 
-
+    const getSalutation = (gender) => {
+        if (gender.toLowerCase() === 'male') return 'Mr.';
+        if (gender.toLowerCase() === 'female') return 'Ms.';
+        return ''; // Return an empty string if gender is not specified
+    };
 
     return (
-
         <MainLayout>
-
             <div className={DashboardCss.mainComponent}>
-                {/* Dashboard Components */}
                 <div className={DashboardCss.componentHeroCard}>
-                    <Image
-                        src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg"
-                        roundedCircle
-                        style={{ width: '100%', maxWidth: '100px', height: '100px' }}
-                    />
-                    <div>
-                        <p className='fs-4 m-0'><span className='fw-semibold'>Hello,</span> {adminName || 'Admin'}</p>
-                        <p className='m-0'>REYES ELECTRONICS.</p>
-                        <p className='m-0'>{currentDate}</p>
-                    </div>
+                    {isLoading ? (
+                        <div className={DashboardCss.loadingContainer}>
+                            <p>Loading admin data...</p>
+                        </div>
+                    ) : (
+                        <>
+                            <Image
+                                src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg"
+                                roundedCircle
+                                style={{ width: '100%', maxWidth: '100px', height: '100px' }}
+                            />
+                            <div>
+                                <p className='fs-4 m-0'>
+                                    <span className='fw-semibold'>Hello,</span> <span>{getSalutation(adminGender)}</span> {adminName || 'Admin'}
+                                </p>
+                                <p className='m-0'>REYES ELECTRONICS.</p>
+                                <p className='m-0'>{currentDate}</p>
+                            </div>
+                        </>
+                    )}
                 </div>
 
-                <div className={DashboardCss.rowContainer}>
-                    <Chart1 />
-                    <Chart2 />
-                    <Chart3 />
-                </div>
+                {!isLoading && (
+                    <>
+                        <div className={DashboardCss.rowContainer}>
+                            <Chart1 />
+                            <Chart2 />
+                            <Chart3 />
+                        </div>
 
-                <Row className={DashboardCss.rowContainerLg}>
-                    <Col className={DashboardCss.colContainerLg} sm={12} lg={6}>
-                        <ChartLg1 />
-                    </Col>
-                    <Col className={DashboardCss.colContainerLg} lg={5} md={9} sm={10} xs={10}>
-                        <ChartLg2 />
-                    </Col>
-                </Row>
+                        <Row className={DashboardCss.rowContainerLg}>
+                            <Col className={DashboardCss.colContainerLg} sm={12} lg={6}>
+                                <ChartLg1 />
+                            </Col>
+                            <Col className={DashboardCss.colContainerLg} lg={5} md={9} sm={10} xs={10}>
+                                <ChartLg2 />
+                            </Col>
+                        </Row>
+                    </>
+                )}
             </div>
-
         </MainLayout>
-
-
-    )
-}
+    );
+};
 
 export default DashboardPage;
