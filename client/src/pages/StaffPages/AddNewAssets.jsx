@@ -19,7 +19,7 @@ function AddNewAssets() {
     return (
         <Container fluid className="p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' className="mt-4" style={{ border: "1px solid", width: "100%", height: "auto", padding: 0, display: 'flex', justifyContent: 'center', minWidth: 400}}>
+            <Container fluid='lg' className="mt-4" style={{ border: "1px solid", width: "100%", height: "auto", padding: 0, display: 'flex', justifyContent: 'center'}}>
                 <div style={{height: "600px", width: "500px", display: "flex", flexDirection: "column", padding: 20, justifyContent: "space-between", flexShrink: 0}}>
                     <p className="fs-5">Text Here</p>
                     <div style={{width: '400px', textAlign: 'center', padding: 30, boxShadow: '2px 2px 5px #E1E4E4', borderRadius: 20}}>
