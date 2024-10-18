@@ -15,7 +15,7 @@ export const DashboardPage = () => {
 
         <MainLayout>
 
-            <div className='main-component'>
+            <div className={DashboardCss.mainComponent}>
                 {/* Dashboard Components */}
                 <div>
                     <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle style={{width: 100}} />
