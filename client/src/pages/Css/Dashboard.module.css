@@ -10,9 +10,11 @@
     padding: 10px;
     margin: 12px 0;
     gap: 10px;
-    justify-content: space-around;
     display: flex;
-    overflow: auto;
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 
@@ -45,6 +47,7 @@
     padding: 0;
     border: 1px solid red;
     width: 100%;
+    min-width: 370px;
 }
 
 .componentHeroCard {
