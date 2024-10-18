@@ -8,13 +8,16 @@ function CardProduct() {
             productIcon: <LiaProductHunt /> ,
             productName: '' ,
             productValue: '',
+            id: 'p1'
         }
     ])
 
     return (
         <>
             {cardProduct.map((cardProducts) => (
-                
+                <div>
+
+                </div>
             ))}
         </>
     )
