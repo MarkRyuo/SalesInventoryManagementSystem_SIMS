@@ -2,7 +2,6 @@ import { Button, Container } from "react-bootstrap"
 import { useState } from "react"
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../components/StaffPortal/StaffNavbar/StaffNavBar";
-import NewAssetsScanner from "../../components/StaffPortal/AddNewAssets/NewAssetsScanner";
 import { MdQrCodeScanner } from "react-icons/md";
 import { Link } from "react-router-dom";
 
