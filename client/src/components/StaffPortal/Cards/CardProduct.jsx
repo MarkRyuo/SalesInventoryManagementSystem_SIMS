@@ -16,7 +16,7 @@ function CardProduct() {
         <>
             {cardProduct.map((cardProducts) => (
                 <div key={cardProducts.id}>
-
+                    <p>{cardProducts.productName}</p>
                 </div>
             ))}
         </>
