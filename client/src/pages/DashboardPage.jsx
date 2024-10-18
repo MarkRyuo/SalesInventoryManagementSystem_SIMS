@@ -20,7 +20,7 @@ export const DashboardPage = () => {
                 <div>
                     <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle style={{width: 100}} />
                     <p className='fs-4'>Hello, <span>Admin Name{/* Fetch admin firstname & lastname */}</span></p>
-                    <p className='fs-5'>Date: <span>{/* Realtime Date */}</span></p>
+                    <p>Date: <span>{/* Realtime Date */}</span></p>
                 </div>
 
                 <Row className={DashboardCss.rowContainer} > {/* Fix width(sm-screen) 400px */}
