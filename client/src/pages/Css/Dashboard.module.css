@@ -50,7 +50,7 @@
 .componentHeroCard {
     margin: 0;
     padding: 10px 10px;
-    border: 1px solid;
+    /* border: 1px solid; */
     width: 100%;
     height: auto;
     max-width: 370px;
