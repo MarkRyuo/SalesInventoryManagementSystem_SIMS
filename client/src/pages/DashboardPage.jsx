@@ -18,7 +18,7 @@ export const DashboardPage = () => {
             <div className={DashboardCss.mainComponent}>
                 {/* Dashboard Components */}
                 <div className={DashboardCss.componentHeroCard}>
-                    <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle style={{width: "100%", maxWidth: '100px', height: '100px'}} />
+                    <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle style={{ width: "100%", maxWidth: '100px', height: '100px' }} />
                     <div>
                         <p className='fs-4 m-0'>Hello, <span>Admin Name{/* Fetch admin firstname & lastname */}</span></p>
                         <p className='m-0'>Date: <span>{/* Realtime Date */}</span></p>
@@ -26,17 +26,9 @@ export const DashboardPage = () => {
                 </div>
 
                 <div className={DashboardCss.rowContainer}>
-                    <Row> {/* Fix width(sm-screen) 400px */}
-                        <Col className='colContainer'>
-                            <Chart1 />
-                        </Col>
-                        <Col className='colContainer'>
-                            <Chart2 />
-                        </Col>
-                        <Col className='colContainer'>
-                            <Chart3 />
-                        </Col>
-                    </Row>
+                    <Chart1 />
+                    <Chart2 />
+                    <Chart3 />
                 </div>
 
                 <Row className={DashboardCss.rowContainerLg}>
@@ -46,7 +38,7 @@ export const DashboardPage = () => {
                     <Col className={DashboardCss.colContainerLg} lg={5} md={9} sm={10} xs={10}>
                         <ChartLg2 />
                     </Col>
-                </Row>  
+                </Row>
             </div>
 
         </MainLayout>
