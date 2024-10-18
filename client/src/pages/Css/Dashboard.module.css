@@ -49,11 +49,11 @@
 
 .componentHeroCard {
     margin: 0;
-    padding: 10px 0px;
+    padding: 10px 10px;
     border: 1px solid;
     width: 100%;
     height: auto;
-    max-width: 420px;
+    max-width: 370px;
     display: flex;
     gap: 5px;
     justify-content: space-evenly;
