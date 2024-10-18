@@ -1,5 +1,5 @@
 import MainStaffLayout from "../../layout/MainStaffLayout";
-import { Row, Col, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import SDashboardCss from './SDashboard.module.css' ;
 import { useState } from "react";
 import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons";
