@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { LiaProductHunt } from "react-icons/lia";
+/* eslint-disable react/prop-types */
+
 
 function CardProduct({cardProduct}) {
 
@@ -16,4 +16,4 @@ function CardProduct({cardProduct}) {
     )
 }
 
-export default CardProduct
+export default CardProduct ;
