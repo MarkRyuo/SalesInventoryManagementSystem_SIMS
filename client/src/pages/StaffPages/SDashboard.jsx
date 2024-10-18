@@ -41,24 +41,6 @@ function SDashboard() {
                             <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
                     </div>
                 </div>
-
-                {/* <Row className={SDashboardCss.rowContainer}>
-                    <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                        <div className={SDashboardCss.btnContainer1}>
-                            <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
-                        </div>
-                    </Col>
-                    <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                        <div className={SDashboardCss.btnContainer2}>
-                            <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
-                        </div>
-                    </Col>
-                    <Col lg={4} md={12} sm={12} className={SDashboardCss.colContainer}>
-                        <div className={SDashboardCss.btnContainer3}>
-                            <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
-                        </div>
-                    </Col>
-                </Row> */}
             </div>
         </MainStaffLayout>
     )
