@@ -4,6 +4,7 @@ import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../components/StaffPortal/StaffNavbar/StaffNavBar";
 import NewAssetsScanner from "../../components/StaffPortal/AddNewAssets/NewAssetsScanner";
 import { MdQrCodeScanner } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 
 function AddNewAssets() {
@@ -24,6 +25,10 @@ function AddNewAssets() {
                     <div style={{width: '400px', textAlign: 'center', padding: 30, boxShadow: '2px 2px 5px #E1E4E4', borderRadius: 20}}>
                         <MdQrCodeScanner size={300} style={{ color: '#688DCE'}} />
                     </div>
+                    <p className="fs-4">Text Here</p>
+                    <Link>
+                        
+                    </Link>
                 </div>
             </Container>
         </Container>
