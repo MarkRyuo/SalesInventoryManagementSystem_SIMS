@@ -1,11 +1,10 @@
 
-
 //? 1st See
 function NewAssetsScanner() {
 
     return (
         <>
-            {/* Code Of Scanner */}
+            {/* Code Of Scanner */} <h1>Scanner</h1>
         </>
     )
 }

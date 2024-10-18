@@ -42,6 +42,8 @@
     max-height: 200px;
     background-color: var(--chart1Color);
     box-shadow: 1px 1px 3px var(--chartShadow);
+    width: 350px;
+    flex-shrink: 0;
 }
 
 /* ?Chart 2 */
@@ -53,6 +55,8 @@
     max-height: 200px;
     background-color: var(--chart2Color);
     box-shadow: 1px 1px 3px var(--chartShadow);
+    width: 350px;
+    flex-shrink: 0;
 }
 
 /* ?Chart 3 */
@@ -64,6 +68,8 @@
     max-height: 200px;
     background-color: var(--char3Color);
     box-shadow: 1px 1px 3px var(--chartShadow);
+    width: 350px;
+    flex-shrink: 0;
 }
 
 

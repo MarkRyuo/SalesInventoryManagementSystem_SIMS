@@ -9,7 +9,11 @@
 
 ## Changelog
 
-### v6.1.2 (Latest)
+### v6.1.3 (Latest)
+- Redesigning Dashboards
+- Designing Staff System
+
+### v6.1.2 
 - Redesigning
 
 ### v6.1.1

@@ -5,7 +5,9 @@ function StaffNavBar({backBtn}) {
 
     return (
         <>
-            <Navbar className="bg-body-tertiary" style={{boxShadow: "1px 1px 4px "}}>
+            <Navbar 
+                className="bg-body-tertiary" 
+                style={{ boxShadow: "1px 1px 4px #E1E4E4 "}}>
                 <Container>
                     <Navbar.Brand>
                         {backBtn.map((Backbtn) => (
