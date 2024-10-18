@@ -70,6 +70,12 @@
     align-items: center;
 }
 
-.buttonsHeroCard {
+.containerHeroCard {
+    
+}
 
+.buttonsHeroCard {
+    display: flex;
+    border:  1px solid;
+    width: auto;
 }
