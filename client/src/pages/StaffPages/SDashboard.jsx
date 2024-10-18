@@ -55,7 +55,7 @@ function SDashboard() {
                     </div>
                 </div>
 
-                <div>
+                <div style={{border: '1px solid', padding: 20}}>
                     <p>Product Add Today: </p>
                     <div className="">
                         <CardProduct cardProduct={cardProduct.filter(CardProducts => CardProducts.id === 'p1')}/>
