@@ -41,6 +41,10 @@ function SDashboard() {
                             <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
                     </div>
                 </div>
+
+                <div>
+
+                </div>
             </div>
         </MainStaffLayout>
     )
