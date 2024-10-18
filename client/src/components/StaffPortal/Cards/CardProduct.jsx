@@ -5,8 +5,9 @@ function CardProduct() {
 
     const [cardProduct] = useState([
         {
-            ProductIcon: <LiaProductHunt /> ,
-
+            productIcon: <LiaProductHunt /> ,
+            productName: '' ,
+            productValue: '',
         }
     ])
 
