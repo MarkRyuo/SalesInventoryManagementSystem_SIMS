@@ -18,6 +18,7 @@ function CardProduct() {
                 <div key={cardProducts.id}>
                     <span>{cardProducts.productIcon}</span>
                     <p>{cardProducts.productName}</p>
+                    <p>{cardProducts.productValue}</p>
                 </div>
             ))}
         </>
