@@ -16,12 +16,9 @@ export const DashboardPage = () => {
 
         <MainLayout>
 
-            <div>
+            <div className='main-component'>
                 {/* Dashboard Components */}
-                <p className='fs-3 text-center d-inline'>
-                    <span style={{ marginRight: "8px" }}><RxDashboard /></span>
-                    Dashboard
-                </p>
+                
 
                 <Row className={DashboardCss.rowContainer} > {/* Fix width(sm-screen) 400px */}
                     <Col className='colContainer' sm={12} md={12} lg={3}>
@@ -42,7 +39,7 @@ export const DashboardPage = () => {
                     <Col className={DashboardCss.colContainerLg} lg={5} md={9} sm={10} xs={10}>
                         <ChartLg2 />
                     </Col>
-                </Row>
+                </Row>  
             </div>
 
         </MainLayout>
