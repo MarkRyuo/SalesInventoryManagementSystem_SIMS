@@ -21,6 +21,7 @@ function SDashboard() {
 
             <div className="mainContainer">
                 <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle />
+                <p className="fs-4"><span className="fw-semibold">Hello, </span></p>
             </div>
 
             <Row className={SDashboardCss.rowContainer}>
