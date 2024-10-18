@@ -19,8 +19,8 @@ function AddNewAssets() {
     return (
         <Container fluid className="p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='md' className="mt-4" style={{ border: "1px solid", width: "100%", height: "auto", padding: 0, display: 'flex', justifyContent: 'center'}}>
-                <div style={{height: "600px", width: "500px", padding: 20, gap: 30 ,flexShrink: 0}}>
+            <Container fluid='md' className="mt-4" style={{width: "100%", height: "auto", padding: 0, display: 'flex', justifyContent: 'center'}}>
+                <div style={{height: "600px", width: "auto", padding: 20 ,flexShrink: 0, textAlign: 'center', border: '1px solid'}}>
                     <p className="fs-5">Text Here</p>
                     <div style={{width: '400px', textAlign: 'center', padding: 30, boxShadow: '2px 2px 5px #E1E4E4', borderRadius: 20}}>
                         <MdQrCodeScanner size={300} style={{ color: '#688DCE'}} />
