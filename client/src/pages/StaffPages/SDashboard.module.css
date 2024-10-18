@@ -51,7 +51,7 @@
 
 .mainComponent {
     margin: 0;
-    padding: 0;
+    padding: 20px;
     border: 1px solid red;
     width: 100%;
     min-width: 370px;
@@ -60,18 +60,18 @@
 .componentHeroCard {
     margin: 0;
     padding: 10px 10px;
-    /* border: 1px solid; */
+    border: 1px solid;
     width: 100%;
     height: auto;
     max-width: 390px;
     display: flex;
-    gap: 5px;
     justify-content: space-evenly;
     align-items: center;
 }
 
 .containerHeroCard {
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    border-top: 1px solid ;
     padding: 20px;
     overflow: auto;
     width: 100%;
@@ -80,7 +80,9 @@
 .buttonsHeroCard {
     display: flex;
     /* border:  1px solid; */
-    width: 800px;
+    width: 900px;
     justify-content: space-between;
+    border-bottom: 1px solid;
+    padding: 20px;
 
 }
