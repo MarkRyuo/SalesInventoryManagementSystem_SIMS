@@ -22,7 +22,7 @@ function SDashboard() {
 
     const [cardProduct] = useState([
         {
-            productIcon: <LiaProductHunt />,
+            productIcon: <LiaProductHunt size={30} />,
             productName: 'Sample',
             productValue: '01213224234',
             id: 'p1'
