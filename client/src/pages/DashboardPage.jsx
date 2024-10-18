@@ -18,7 +18,8 @@ export const DashboardPage = () => {
             <div className='main-component'>
                 {/* Dashboard Components */}
                 <div>
-                    <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle style={{width: 150}} />
+                    <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle style={{width: 100}} />
+                    <p className='fs-4'>Hello, <span>Admin Name{/* Fetch admin firstname & lastname */}</span></p>
                 </div>
 
                 <Row className={DashboardCss.rowContainer} > {/* Fix width(sm-screen) 400px */}
