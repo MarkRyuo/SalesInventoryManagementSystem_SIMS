@@ -8,7 +8,7 @@ function StaffButtons({buttons}) {
         <>
             {buttons.map((button) => (
                 <div key={button.id}>
-                    <Link size='lg' variant="outline-success" to={button.path}>
+                    <Link to={button.path}>
                         <span>{button.btnIcon}</span> 
                         {button.btnName}
                     </Link>
