@@ -13,7 +13,9 @@ function CardProduct() {
 
     return (
         <>
-
+            {cardProduct.map((cardProducts) => (
+                
+            ))}
         </>
     )
 }
