@@ -11,6 +11,7 @@
 
 ### v6.1.3 (Latest)
 - Redesigning Dashboards
+- Designing Staff System
 
 ### v6.1.2 
 - Redesigning
