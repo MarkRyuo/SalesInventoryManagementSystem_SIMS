@@ -25,7 +25,7 @@ function AddNewAssets() {
                     <div style={{width: 'auto', textAlign: 'center', padding: 30, boxShadow: '2px 2px 5px #E1E4E4', borderRadius: 20}}>
                         <MdQrCodeScanner size={300} style={{ color: '#688DCE', width: 300}} />
                     </div>
-                    <Button as={Link} to={'/'} size="lg" className="my-5" style={{width: '100%'}}>
+                    <Button as={Link} to={'/NewAssetsScanner'} size="lg" className="my-5" style={{width: '100%'}}>
                         Scan
                     </Button>
                 </div>
