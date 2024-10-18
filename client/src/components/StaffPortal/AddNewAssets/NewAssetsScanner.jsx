@@ -1,5 +1,4 @@
 
-
 //? 1st See
 function NewAssetsScanner() {
 
