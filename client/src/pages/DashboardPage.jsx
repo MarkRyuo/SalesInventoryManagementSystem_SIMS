@@ -1,10 +1,11 @@
 import { Row, Col, Image } from 'react-bootstrap';
 import { MainLayout } from '../layout/MainLayout';
+import DashboardCss from './Css/Dashboard.module.css'
+
 import Chart1 from '../components/Charts/DashboardChart/Chart1';
 import Chart2 from '../components/Charts/DashboardChart/Chart2';
 import Chart3 from '../components/Charts/DashboardChart/Chart3';
 
-import DashboardCss from './Css/Dashboard.module.css'
 import ChartLg1 from '../components/Charts/DashboardChart/ChartLg1';
 import ChartLg2 from '../components/Charts/DashboardChart/ChartLg2';
 
