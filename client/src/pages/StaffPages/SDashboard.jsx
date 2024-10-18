@@ -37,12 +37,18 @@ function SDashboard() {
                 <div className={SDashboardCss.containerHeroCard}>
                     <p className="fs-4">Services</p>
                     <div className={SDashboardCss.buttonsHeroCard}>
-                        <div style={{ display: "flex", flexDirection: "column", padding: 20, boxShadow: '2px 2px 5px #e2dfdf', borderRadius: 20 }}>
+                        <div style={{ display: "flex", flexDirection: "column", padding: 20, boxShadow: '2px 2px 5px #e2dfdf', borderRadius: 20, width: 250, height: 150 }}>
                             <span className="text-center"><MdQrCodeScanner size={100}/></span>
                             <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
                         </div>
-                        <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
-                        <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
+                        <div style={{ display: "flex", flexDirection: "column", padding: 20, boxShadow: '2px 2px 5px #e2dfdf', borderRadius: 20 }}>
+                            <span className="text-center"><MdQrCodeScanner size={100} /></span>
+                            <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", padding: 20, boxShadow: '2px 2px 5px #e2dfdf', borderRadius: 20 }}>
+                            <span className="text-center"><MdQrCodeScanner size={100} /></span>
+                            <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
+                        </div>
 
                     </div>
                 </div>
