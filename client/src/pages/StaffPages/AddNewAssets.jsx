@@ -26,7 +26,7 @@ function AddNewAssets() {
                         <MdQrCodeScanner size={300} style={{ color: '#688DCE'}} />
                     </div>
                     <p className="fs-4">Text Here</p>
-                    <Button as={Link} to={''}>
+                    <Button as={Link} to={'/'}>
                         Scan
                     </Button>
                 </div>
