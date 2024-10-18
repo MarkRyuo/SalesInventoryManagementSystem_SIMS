@@ -26,9 +26,11 @@ function SDashboard() {
                         roundedCircle 
                         style={{ width: '100%', maxWidth: '100px', height: '100px' }}
                         />
-                    <p className="fs-4"><span className="fw-semibold">Hello, </span> <span>{/* fetch the gender if male is Mr if female is Ms */}</span> {/* fetch staff firstname and lastname */}</p>
-                    <p>REYES ELECTRONICS.</p>
-                    <p>Date: {/* Add a realtime date */}</p>
+                    <div>
+                        <p className="fs-4"><span className="fw-semibold">Hello, </span> <span>{/* fetch the gender if male is Mr if female is Ms */}</span> {/* fetch staff firstname and lastname */}</p>
+                        <p>REYES ELECTRONICS.</p>
+                        <p>Date: {/* Add a realtime date */}</p>
+                    </div>
                 </div>
 
                 <Row className={SDashboardCss.rowContainer}>
