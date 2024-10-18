@@ -33,7 +33,7 @@ export const DashboardPage = () => {
                         <Col className='colContainer'>
                             <Chart2 />
                         </Col>
-                        <Col className='colContainer' sm={12} md={12} lg={3}>
+                        <Col className='colContainer'>
                             <Chart3 />
                         </Col>
                     </Row>
