@@ -16,6 +16,7 @@ function CardProduct() {
         <>
             {cardProduct.map((cardProducts) => (
                 <div key={cardProducts.id}>
+                    <span>{cardProducts.productIcon}</span>
                     <p>{cardProducts.productName}</p>
                 </div>
             ))}
