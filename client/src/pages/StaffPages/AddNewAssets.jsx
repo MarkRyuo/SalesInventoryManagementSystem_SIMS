@@ -25,9 +25,9 @@ function AddNewAssets() {
                         <p className="fs-4 m-0">Scan Product</p>
                         <p className="">Scan new products to add them to your inventory. Click the Scan button below to start scanning using the QR code scanner.</p>
                     </div>
-                    <div style={{ height: "auto", width: "100%", padding: 20, textAlign: 'center',display: 'flex', justifyContent: 'center' }}>
-                        <div style={{width: 400}}>
-                            <div style={{textAlign: 'center', padding: 30, boxShadow: '2px 2px 5px #E1E4E4', borderRadius: 20 }}>
+                    <div style={{ height: "auto", width: "100%", padding: 20, textAlign: 'center',display: 'flex', justifyContent: 'center'}}>
+                        <div style={{ width: 400, boxShadow: '2px 2px 5px #E1E4E4', borderRadius: 20, padding: 30}}>
+                            <div style={{textAlign: 'center'}}>
                                 <MdQrCodeScanner size={300} style={{ color: '#688DCE', width: 300 }} />
                             </div>
                             <Button as={Link} to={'/NewAssetsScanner'} size="lg" className="my-5" style={{ width: '100%' }}>
