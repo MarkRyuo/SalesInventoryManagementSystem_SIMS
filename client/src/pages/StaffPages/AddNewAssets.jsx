@@ -22,8 +22,8 @@ function AddNewAssets() {
             <Container fluid='lg' className="mt-4" style={{ border: "1px solid", width: "100%", height: "auto" }}>
                 <h2>New Assets Scanner</h2> {/*Temporary */}
                 <div style={{border: "1px solid red", height: "500px", width: "100%", minWidth: "350px"}}>
-                    <div>
-                        <MdQrCodeScanner size={300} style={{color: }} />
+                    <div style={{width: '400px', textAlign: 'center', padding: 30, boxShadow: '2px 2px 5px #E1E4E4'}}>
+                        <MdQrCodeScanner size={300} style={{ color: '#AAC9FF'}} />
                     </div>
                 </div>
             </Container>
