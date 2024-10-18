@@ -57,7 +57,7 @@ function SDashboard() {
 
                 <div className={SDashboardCss.containerCardProduct}>
                     <p>Product Add Today: </p>
-                    <div className="">
+                    <div className={SDashboardCss.contentCardProduct}>
                         <CardProduct cardProduct={cardProduct.filter(CardProducts => CardProducts.id === 'p1')}/>
                     </div>
                 </div>
