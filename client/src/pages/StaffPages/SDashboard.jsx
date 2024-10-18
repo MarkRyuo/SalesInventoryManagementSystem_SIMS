@@ -21,7 +21,7 @@ function SDashboard() {
 
             <div className="mainContainer">
                 <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle />
-                <p className="fs-4"><span className="fw-semibold">Hello, </span></p>
+                <p className="fs-4"><span className="fw-semibold">Hello, </span> <span>{/* fetch the gender if male is Mr if female is Ms */}</span> {/* fetch staff firstname and lastname */}</p>
             </div>
 
             <Row className={SDashboardCss.rowContainer}>
