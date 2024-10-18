@@ -18,8 +18,8 @@ export const DashboardPage = () => {
             <div className={DashboardCss.mainComponent}>
                 {/* Dashboard Components */}
                 <div className={DashboardCss.componentHeroCard}>
-                    <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle style={{width: 100}} />
-                    <div>
+                    <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle style={{width: "100%", maxWidth: '100px', height: '100px'}} />
+                    <div className=''>
                         <p className='fs-4'>Hello, <span>Admin Name{/* Fetch admin firstname & lastname */}</span></p>
                         <p>Date: <span>{/* Realtime Date */}</span></p>
                     </div>
