@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap"
+import { Button, Container } from "react-bootstrap"
 import { useState } from "react"
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../components/StaffPortal/StaffNavbar/StaffNavBar";
@@ -26,9 +26,9 @@ function AddNewAssets() {
                         <MdQrCodeScanner size={300} style={{ color: '#688DCE'}} />
                     </div>
                     <p className="fs-4">Text Here</p>
-                    <Link>
-                        
-                    </Link>
+                    <Button as={Link} to={''}>
+                        Scan
+                    </Button>
                 </div>
             </Container>
         </Container>
