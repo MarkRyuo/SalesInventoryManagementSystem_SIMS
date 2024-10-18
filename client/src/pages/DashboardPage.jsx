@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 import { db } from '../services/firebase'; // Make sure to import your Firebase setup correctly
 import { doc, getDoc } from 'firebase/firestore';
 
+//? Charts
 import Chart1 from '../components/Charts/DashboardChart/Chart1';
 import Chart2 from '../components/Charts/DashboardChart/Chart2';
 import Chart3 from '../components/Charts/DashboardChart/Chart3';
-
 import ChartLg1 from '../components/Charts/DashboardChart/ChartLg1';
 import ChartLg2 from '../components/Charts/DashboardChart/ChartLg2';
 
