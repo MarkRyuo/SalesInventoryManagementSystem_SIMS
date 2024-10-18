@@ -73,12 +73,14 @@
 .containerHeroCard {
     border: 1px solid red;
     padding: 20px;
-    width: 800px;
     overflow: auto;
+    width: 100%;
 }
 
 .buttonsHeroCard {
     display: flex;
     /* border:  1px solid; */
-    width: auto;
+    width: 800px;
+    justify-content: space-between;
+
 }
