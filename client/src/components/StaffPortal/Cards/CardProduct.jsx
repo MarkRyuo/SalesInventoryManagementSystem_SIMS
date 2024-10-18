@@ -1,16 +1,6 @@
-import { useState } from "react"
-import { LiaProductHunt } from "react-icons/lia";
 
-function CardProduct({cardProduct}) {
 
-    const [cardProduct] = useState([
-        {
-            productIcon: <LiaProductHunt /> ,
-            productName: '' ,
-            productValue: '',
-            id: 'p1'
-        }
-    ])
+function CardProduct({cardProduct}) 
 
     return (
         <>
