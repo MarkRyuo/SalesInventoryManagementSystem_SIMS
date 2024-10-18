@@ -43,15 +43,17 @@
     margin: 0;
     padding: 0;
     border: 1px solid red;
+    width: 100%;
+    min-width: 380px;
 }
 
 .componentHeroCard {
     margin: 0;
-    padding: 0;
+    padding: 10px 0px;
     border: 1px solid;
     width: 100%;
     height: auto;
-    max-width: 430px;
+    max-width: 420px;
     display: flex;
     gap: 5px;
     min-width: 380px;
