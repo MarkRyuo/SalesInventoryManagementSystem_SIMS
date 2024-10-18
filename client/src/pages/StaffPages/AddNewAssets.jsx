@@ -3,6 +3,8 @@ import { useState } from "react"
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../components/StaffPortal/StaffNavbar/StaffNavBar";
 import NewAssetsScanner from "../../components/StaffPortal/AddNewAssets/NewAssetsScanner";
+import { MdQrCodeScanner } from "react-icons/md";
+
 
 function AddNewAssets() {
 
@@ -20,7 +22,7 @@ function AddNewAssets() {
             <Container fluid='lg' className="mt-4" style={{ border: "1px solid", width: "100%", height: "auto" }}>
                 <h2>New Assets Scanner</h2> {/*Temporary */}
                 <div style={{border: "1px solid red", height: "500px", width: "100%", minWidth: "350px"}}>
-                    <NewAssetsScanner /> {/* Scanner Here */}
+                
                 </div>
             </Container>
         </Container>
