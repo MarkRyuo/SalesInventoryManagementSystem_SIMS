@@ -14,6 +14,7 @@ import { doc, getDoc } from "firebase/firestore";
 function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
     const [currentDate, setCurrentDate] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const [buttons] = useState([
         { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={80} />, path: "/AddNewAssets", id: 1 },
@@ -46,6 +47,8 @@ function SDashboard() {
                 }
             } catch (error) {
                 console.error("Error fetching staff data:", error);
+            } finally {
+                setLoading(false); // Set loading to false once data is fetched
             }
         };
 
@@ -70,38 +73,47 @@ function SDashboard() {
     return (
         <MainStaffLayout>
             <div className={SDashboardCss.mainComponent}>
-                <div className={SDashboardCss.componentHeroCard}>
-                    <Image
-                        src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg"
-                        roundedCircle
-                        style={{ width: '100%', maxWidth: '100px', height: '100px' }}
-                    />
-                    <div>
-                        <p className="fs-4 m-0">
-                            <span className="fw-semibold">Hello, </span>
-                            <span>{getTitle(staffName.gender)} {staffName.firstname} {staffName.lastname}</span>
-                        </p>
-                        <p className="m-0">REYES ELECTRONICS.</p>
-                        <p>Date: {currentDate}</p>
+                {loading ? (
+                    // Display a loading indicator while data is being fetched
+                    <div className={SDashboardCss.loadingContainer}>
+                        <p>Loading staff Dashboard...</p>
                     </div>
-                </div>
+                ) : (
+                    <>
+                        <div className={SDashboardCss.componentHeroCard}>
+                            <Image
+                                src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg"
+                                roundedCircle
+                                style={{ width: '100%', maxWidth: '100px', height: '100px' }}
+                            />
+                            <div>
+                                <p className="fs-4 m-0">
+                                    <span className="fw-semibold">Hello, </span>
+                                    <span>{getTitle(staffName.gender)} {staffName.firstname} {staffName.lastname}</span>
+                                </p>
+                                <p className="m-0">REYES ELECTRONICS.</p>
+                                <p>Date: {currentDate}</p>
+                            </div>
+                        </div>
 
-                <div className={SDashboardCss.containerHeroCard}>
-                    <p className="fs-5 m-0 ps-4">Services</p>
-                    <div className={SDashboardCss.buttonsHeroCard}>
-                        <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
-                        <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
-                        <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
-                    </div>
-                </div>
+                        <div className={SDashboardCss.containerHeroCard}>
+                            <p className="fs-5 m-0 ps-4">Services</p>
+                            <div className={SDashboardCss.buttonsHeroCard}>
+                                <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
+                                <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
+                                <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
+                            </div>
+                        </div>
 
-                <div className={SDashboardCss.containerCardProduct}>
-                    <p className="fs-5 m-0 ps-4">Product Add Today:</p>
-                    <div className={SDashboardCss.contentCardProduct}>
-                        <CardProduct cardProduct={cardProduct.filter(CardProducts => CardProducts.id === 'p1')} />
-                        <CardProduct cardProduct={cardProduct.filter(CardProducts => CardProducts.id === 'p1')} />
-                    </div>
-                </div>
+                        <div className={SDashboardCss.containerCardProduct}>
+                            <p className="fs-5 m-0 ps-4">Product Add Today:</p>
+                            <div className={SDashboardCss.contentCardProduct}>
+                                <CardProduct cardProduct={cardProduct.filter(CardProducts => CardProducts.id === 'p1')} />
+                                <CardProduct cardProduct={cardProduct.filter(CardProducts => CardProducts.id === 'p1')} />
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
         </MainStaffLayout>
     );
