@@ -76,7 +76,7 @@ export const DashboardPage = () => {
                 <div className={DashboardCss.componentHeroCard}>
                     {isLoading ? (
                         <div className={DashboardCss.loadingContainer}>
-                            <p>Loading admin data...</p>
+                            <p>Loading admin Dashboard</p>
                         </div>
                     ) : (
                         <>
