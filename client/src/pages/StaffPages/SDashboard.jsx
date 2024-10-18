@@ -21,7 +21,11 @@ function SDashboard() {
 
             <div className={SDashboardCss.mainComponent}>
                 <div className={SDashboardCss.componentHeroCard}>
-                    <Image src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" roundedCircle />
+                    <Image 
+                        src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg" 
+                        roundedCircle 
+                        style={{ width: '100%', maxWidth: '100px', height: '100px' }}
+                        />
                     <p className="fs-4"><span className="fw-semibold">Hello, </span> <span>{/* fetch the gender if male is Mr if female is Ms */}</span> {/* fetch staff firstname and lastname */}</p>
                     <p>REYES ELECTRONICS.</p>
                     <p>Date: {/* Add a realtime date */}</p>
