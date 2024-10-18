@@ -23,7 +23,7 @@ function AddNewAssets() {
                 <h2>New Assets Scanner</h2> {/*Temporary */}
                 <div style={{border: "1px solid red", height: "500px", width: "100%", minWidth: "350px"}}>
                     <div>
-                        <MdQrCodeScanner size={100} />
+                        <MdQrCodeScanner size={300} style={{color: }} />
                     </div>
                 </div>
             </Container>
