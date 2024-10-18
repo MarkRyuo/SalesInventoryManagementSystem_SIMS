@@ -36,7 +36,9 @@ function SDashboard() {
                 <div className={SDashboardCss.containerHeroCard}>
                     <p className="fs-4">Services</p>
                     <div className={SDashboardCss.buttonsHeroCard}>
-                        <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
+                        <div>
+                            <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
+                        </div>
                         <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
                         <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
 
