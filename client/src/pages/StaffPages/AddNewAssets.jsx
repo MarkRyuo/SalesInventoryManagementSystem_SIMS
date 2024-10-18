@@ -30,8 +30,8 @@ function AddNewAssets() {
                             marginBottom: 20
                         }}
                     >
-                        <p className="fs-4 m-0">Scan QR Code & Barcode</p>
-                        <p className="m-0" style={{ marginTop: 10 }}>
+                        <p className="fs-4 m-0 fw-semibold">Scan QR Code & Barcode</p>
+                        <p className="mt-3" style={{ marginTop: 10, fontSize: 15 }}>
                             Scan new products to add them to your inventory. Click the Scan button below to start scanning using the QR code scanner.
                         </p>
                     </div>
