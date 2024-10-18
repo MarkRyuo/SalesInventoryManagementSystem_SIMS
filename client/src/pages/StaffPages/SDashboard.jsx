@@ -19,8 +19,8 @@ function SDashboard() {
     return (
         <MainStaffLayout>
 
-            <div>
-                
+            <div className="mainContainer">
+
             </div>
 
             <Row className={SDashboardCss.rowContainer}>
