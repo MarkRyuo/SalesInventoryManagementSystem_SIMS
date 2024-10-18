@@ -25,17 +25,19 @@ export const DashboardPage = () => {
                     </div>
                 </div>
 
-                <Row className={DashboardCss.rowContainer} > {/* Fix width(sm-screen) 400px */}
-                    <Col className='colContainer' sm={12} md={12} lg={3}>
-                        <Chart1 />
-                    </Col>
-                    <Col className='colContainer' sm={12} md={12} lg={5}>
-                        <Chart2 />
-                    </Col>
-                    <Col className='colContainer' sm={12} md={12} lg={3}>
-                        <Chart3 />
-                    </Col>
-                </Row>
+                <div className={DashboardCss.rowContainer}>
+                    <Row> {/* Fix width(sm-screen) 400px */}
+                        <Col className='colContainer'>
+                            <Chart1 />
+                        </Col>
+                        <Col className='colContainer'>
+                            <Chart2 />
+                        </Col>
+                        <Col className='colContainer' sm={12} md={12} lg={3}>
+                            <Chart3 />
+                        </Col>
+                    </Row>
+                </div>
 
                 <Row className={DashboardCss.rowContainerLg}>
                     <Col className={DashboardCss.colContainerLg} sm={12} lg={6}>
