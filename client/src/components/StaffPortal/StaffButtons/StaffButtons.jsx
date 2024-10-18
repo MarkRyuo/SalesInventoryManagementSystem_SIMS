@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function StaffButtons({buttons}) {
