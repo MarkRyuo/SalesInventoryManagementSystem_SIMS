@@ -1,6 +1,7 @@
 
 :root {
     --colshadow: #e2dfdf ;
+    --colorleft: #92E3B8 ;
 }
 
 
@@ -52,7 +53,7 @@
 .mainComponent {
     margin: 0;
     padding: 20px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100%;
     min-width: 370px;
 }
@@ -60,7 +61,7 @@
 .componentHeroCard {
     margin: 0;
     padding: 10px 10px;
-    border: 1px solid;
+    /* border: 1px solid; */
     width: 100%;
     height: auto;
     max-width: 390px;
@@ -71,7 +72,7 @@
 
 .containerHeroCard {
     /* border: 1px solid red; */
-    border-top: 1px solid ;
+    border-top: 1px solid var(--colshadow) ;
     padding: 20px;
     overflow: auto;
     width: 100%;
@@ -82,7 +83,7 @@
     /* border:  1px solid; */
     width: 900px;
     justify-content: space-between;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--colshadow);
     padding: 20px;
 
 }
