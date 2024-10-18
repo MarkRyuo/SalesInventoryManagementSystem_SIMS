@@ -19,16 +19,22 @@ function AddNewAssets() {
     return (
         <Container fluid className="p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='md' className="mt-4" style={{width: "100%", height: "auto", padding: 0, display: 'flex', justifyContent: 'center', marginTop: 100}}>
-                <div></div>
-                <p className="fs-5">Scan new products to add them to your inventory. Click the Scan button below to start scanning using the QR code scanner.</p>                    
-                <div style={{height: "600px", width: "auto", padding: 20 ,textAlign: 'center'}}>
-                    <div style={{width: 'auto', textAlign: 'center', padding: 30, boxShadow: '2px 2px 5px #E1E4E4', borderRadius: 20}}>
-                        <MdQrCodeScanner size={300} style={{ color: '#688DCE', width: 300}} />
+            <Container fluid='md' className="mt-4">
+                <div style={{border: '1px solid'}}>
+                    <div style={{width: 400, textAlign: "center", padding: 30, borderRadius: 20, boxShadow: '2px 2px 5px #E1E4E4'}}>
+                        <p className="fs-4 m-0">Scan Product</p>
+                        <p className="">Scan new products to add them to your inventory. Click the Scan button below to start scanning using the QR code scanner.</p>
                     </div>
-                    <Button as={Link} to={'/NewAssetsScanner'} size="lg" className="my-5" style={{width: '100%'}}>
-                        Scan
-                    </Button>
+                    <div style={{ height: "600px", width: "100%", padding: 20, textAlign: 'center', border: '1px solid red', display: 'flex', justifyContent: 'center' }}>
+                        <div style={{border: '1px solid green', width: 400}}>
+                            <div style={{textAlign: 'center', padding: 30, boxShadow: '2px 2px 5px #E1E4E4', borderRadius: 20 }}>
+                                <MdQrCodeScanner size={300} style={{ color: '#688DCE', width: 300 }} />
+                            </div>
+                            <Button as={Link} to={'/NewAssetsScanner'} size="lg" className="my-5" style={{ width: '100%' }}>
+                                Scan
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </Container>
         </Container>
