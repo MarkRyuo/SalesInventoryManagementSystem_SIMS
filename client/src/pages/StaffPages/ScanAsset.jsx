@@ -48,7 +48,7 @@ function ScanAsset() {
                         <MdQrCodeScanner size={300} style={{ color: "#688DCE" }} />
                         <Button
                             as={Link}
-                            to={'/NewAssetsScanner'}
+                            to={'/'}
                             size="lg"
                             className="my-4"
                             style={{ width: '100%' }}
