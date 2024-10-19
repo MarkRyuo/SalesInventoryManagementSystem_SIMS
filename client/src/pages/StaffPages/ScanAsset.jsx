@@ -62,4 +62,4 @@ function ScanAsset() {
     );
 }
 
-export default AddNewAssets;
+export default ScanAsset;
