@@ -54,6 +54,11 @@
     padding: 15px;
 }
 
+.btnOffcanvas:hover {
+    background-color: var(--hoverbuttons);
+    border: 1px solid var(--hoverbuttons);
+}
+
 .buttonsList {
     /* border: 1px solid green; */
     height: auto;
