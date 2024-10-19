@@ -1,4 +1,4 @@
-import { Container, Navbar, Button, Offcanvas, Image } from 'react-bootstrap';
+import { Container, Navbar, Button, Offcanvas, Image, Alert } from 'react-bootstrap';
 import { useState } from 'react';
 import Navbars from './Navbar.module.css';
 import { Buttons } from './Buttons';
@@ -14,6 +14,9 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 
 export const NavDashboard = () => {
     const [show, setShow] = useState(false);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const [logoutSuccess, setLogoutSuccess] = useState(false);
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -26,14 +29,18 @@ export const NavDashboard = () => {
     ]);
 
     //* Handle logout with confirmation and loading state
-    const [isLoggingOut, setIsLoggingOut] = useState(false);
     const handleLogout = () => {
         const confirmLogout = window.confirm("Are you sure you want to log out?");
         if (confirmLogout) {
             setIsLoggingOut(true); //* Start loading
             setTimeout(() => {
                 localStorage.removeItem('adminId'); //? Clear the stored adminId from localStorage
-                window.location.href = "/"; //? Redirect the user to the login page or home page
+                setIsLoggingOut(false); //* End loading state
+                setLogoutSuccess(true); //* Show success message
+                setTimeout(() => {
+                    setLogoutSuccess(false); //* Hide the success message after a delay
+                    window.location.href = "/"; //? Redirect the user to the login page or home page
+                }, 2000); //* Show success message for 2 seconds
             }, 2000); //? Simulate a 2-second loading time (can adjust as needed)
         }
     };
@@ -50,6 +57,13 @@ export const NavDashboard = () => {
                     </Navbar.Brand>
                 </Container>
             </Navbar>
+
+            {/* Show logout success message */}
+            {logoutSuccess && (
+                <Alert variant="success" className="m-2">
+                    You have successfully logged out.
+                </Alert>
+            )}
 
             {/* Off-canvas function */}
             <Offcanvas show={show} onHide={handleClose} style={{ width: 320 }}>
@@ -87,5 +101,5 @@ export const NavDashboard = () => {
                 </Offcanvas.Body>
             </Offcanvas>
         </Container>
-    )
-}
+    );
+};
