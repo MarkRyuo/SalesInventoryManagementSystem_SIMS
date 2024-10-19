@@ -37,10 +37,12 @@ export const NavDashboard = () => {
                 localStorage.removeItem('adminId'); //? Clear the stored adminId from localStorage
                 setIsLoggingOut(false); //* End loading state
                 setLogoutSuccess(true); //* Show success message
-                setTimeout(() => {
-                    setLogoutSuccess(false); //* Hide the success message after a delay
-                    window.location.href = "/"; //? Redirect the user to the login page or home page
-                }, 2000); //* Show success message for 2 seconds
+
+                // Show window alert for successful logout
+                window.alert("You have successfully logged out.");
+
+                // Redirect after showing the alert
+                window.location.href = "/"; //? Redirect the user to the login page or home page
             }, 2000); //? Simulate a 2-second loading time (can adjust as needed)
         }
     };
