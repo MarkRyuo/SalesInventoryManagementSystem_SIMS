@@ -32,9 +32,9 @@ export const NavDashboard = () => {
         if (confirmLogout) {
             setIsLoggingOut(true); //* Start loading
             setTimeout(() => {
-                localStorage.removeItem('adminId'); //* Clear the stored adminId from localStorage
-                window.location.href = "/"; //* Redirect the user to the login page or home page
-            }, 2000); //* Simulate a 2-second loading time (can adjust as needed)
+                localStorage.removeItem('adminId'); //? Clear the stored adminId from localStorage
+                window.location.href = "/"; //? Redirect the user to the login page or home page
+            }, 2000); //? Simulate a 2-second loading time (can adjust as needed)
         }
     };
 
