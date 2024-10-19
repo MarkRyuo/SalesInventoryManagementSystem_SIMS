@@ -1,4 +1,4 @@
-import { Container, Navbar, Button, Offcanvas, Image, Alert } from 'react-bootstrap';
+import { Container, Navbar, Button, Offcanvas, Image } from 'react-bootstrap';
 import { useState } from 'react';
 import Navbars from './Navbar.module.css';
 import { Buttons } from './Buttons';
@@ -15,7 +15,6 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 export const NavDashboard = () => {
     const [show, setShow] = useState(false);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
-    const [logoutSuccess, setLogoutSuccess] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -36,7 +35,6 @@ export const NavDashboard = () => {
             setTimeout(() => {
                 localStorage.removeItem('adminId'); //? Clear the stored adminId from localStorage
                 setIsLoggingOut(false); //* End loading state
-                setLogoutSuccess(true); //* Show success message
 
                 // Show window alert for successful logout
                 window.alert("You have successfully logged out.");
@@ -59,13 +57,6 @@ export const NavDashboard = () => {
                     </Navbar.Brand>
                 </Container>
             </Navbar>
-
-            Show logout success message
-            {logoutSuccess && (
-                <Alert variant="success" className="m-2">
-                    You have successfully logged out.
-                </Alert>
-            )}
 
             {/* Off-canvas function */}
             <Offcanvas show={show} onHide={handleClose} style={{ width: 320 }}>
