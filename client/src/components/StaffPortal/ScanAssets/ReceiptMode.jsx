@@ -1,4 +1,5 @@
 
+//* Receipt with digital receipt paper via digital
 function ReceiptMode() {
     return (
         <>
