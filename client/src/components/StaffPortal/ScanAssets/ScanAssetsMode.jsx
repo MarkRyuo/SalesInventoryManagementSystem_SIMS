@@ -2,9 +2,9 @@
 //* Inputs
 function ScanAssetsMode() {
     return (
-        <div>
-
-        </div>
+        <>
+            <h1>Inputs</h1>
+        </>
     )
 }
 
