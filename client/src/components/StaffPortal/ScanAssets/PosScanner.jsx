@@ -1,12 +1,11 @@
 
-import React from 'react'
 
 function PosScanner() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <>
+            <h1>POS SCANNER</h1>
+        </>
+    )
 }
 
 export default PosScanner
