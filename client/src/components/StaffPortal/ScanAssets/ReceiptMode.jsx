@@ -1,11 +1,10 @@
-import React from 'react'
 
 function ReceiptMode() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <>
+            <h1>ReceiptMode</h1>
+        </>
+    )
 }
 
 export default ReceiptMode
