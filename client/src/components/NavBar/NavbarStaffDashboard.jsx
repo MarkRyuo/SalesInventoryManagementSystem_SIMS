@@ -37,6 +37,7 @@ function NavbarStaffDashboard() {
             setTimeout(() => {
                 localStorage.removeItem('staffId'); // Clear the stored staffId from localStorage
                 setLoading(false); // End the loading state
+                window.alert("You have successfully logged out."); // Show a success alert
                 navigate("/SLogin"); // Redirect the user to the login page
             }, 2000); // Simulate a delay (e.g., 2 seconds)
         }
@@ -70,8 +71,7 @@ function NavbarStaffDashboard() {
                         <div className={Navbars.buttonsList}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
-                            {/* <Buttons buttons={buttons.filter((button) => button.id === "b-8")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-9")} /> */}
+                            {/* Additional buttons can be added here if needed */}
                         </div>
                         <div style={{ height: "150px" }}>
                             <Button

@@ -60,7 +60,7 @@ export const NavDashboard = () => {
                 </Container>
             </Navbar>
 
-            {/* Show logout success message */}
+            Show logout success message
             {logoutSuccess && (
                 <Alert variant="success" className="m-2">
                     You have successfully logged out.
