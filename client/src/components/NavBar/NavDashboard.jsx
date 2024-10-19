@@ -74,7 +74,7 @@ export const NavDashboard = () => {
                                 variant="light"
                                 className={Navbars.btnOffcanvas}
                                 onClick={handleLogout}
-                                disabled={isLoggingOut} // Disable the button while logging out
+                                disabled={isLoggingOut} //? Disable the button while logging out
                             >
                                 {isLoggingOut ? "Logging out..." : (
                                     <>
