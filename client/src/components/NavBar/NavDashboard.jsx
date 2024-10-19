@@ -25,16 +25,16 @@ export const NavDashboard = () => {
         { icon: <VscAccount />, btnName: "Account", id: "b-4", path: "/AccountPage" }
     ]);
 
-    // Handle logout with confirmation and loading state
+    //* Handle logout with confirmation and loading state
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const handleLogout = () => {
         const confirmLogout = window.confirm("Are you sure you want to log out?");
         if (confirmLogout) {
-            setIsLoggingOut(true); // Start loading
+            setIsLoggingOut(true); //* Start loading
             setTimeout(() => {
-                localStorage.removeItem('adminId'); // Clear the stored adminId from localStorage
-                window.location.href = "/"; // Redirect the user to the login page or home page
-            }, 2000); // Simulate a 2-second loading time (can adjust as needed)
+                localStorage.removeItem('adminId'); //* Clear the stored adminId from localStorage
+                window.location.href = "/"; //* Redirect the user to the login page or home page
+            }, 2000); //* Simulate a 2-second loading time (can adjust as needed)
         }
     };
 
