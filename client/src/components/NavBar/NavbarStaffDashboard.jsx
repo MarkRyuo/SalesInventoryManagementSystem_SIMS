@@ -70,8 +70,8 @@ function NavbarStaffDashboard() {
                         <div className={Navbars.buttonsList}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-8")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-9")} />
+                            {/* <Buttons buttons={buttons.filter((button) => button.id === "b-8")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-9")} /> */}
                         </div>
                         <div style={{ height: "150px" }}>
                             <Button
