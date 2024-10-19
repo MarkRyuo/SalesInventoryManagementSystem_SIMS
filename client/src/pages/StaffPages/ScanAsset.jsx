@@ -33,7 +33,8 @@ function ScanAsset() {
                         <p className="fs-4 m-0 fw-semibold" style={{ color: '#616161' }}>Scan QR Code & Barcode</p>
                         <p className="mt-3" style={{ marginTop: 10, fontSize: 15 }}>
                             Scan items to add them to the POS system. Click the Scan button below to start scanning using the QR/Barcode scanner.
-                        </p>                    </div>
+                        </p>                    
+                    </div>
                     <div
                         style={{
                             width: "100%",
