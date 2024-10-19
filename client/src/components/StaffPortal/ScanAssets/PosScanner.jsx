@@ -1,5 +1,6 @@
 
 
+//* Scanner Code 
 function PosScanner() {
     return (
         <>
