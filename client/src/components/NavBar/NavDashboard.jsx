@@ -2,7 +2,7 @@ import { Container, Navbar, Button, Offcanvas, Image } from 'react-bootstrap';
 import { useState } from 'react';
 import Navbars from './Navbar.module.css';
 import { Buttons } from './Buttons';
-import AccountDropdown from './AccountDropdown' ;
+import AccountDropdown from './AccountDropdown';
 
 //* Icons
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -12,30 +12,34 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
 
-
-
-
 export const NavDashboard = () => {
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    //* Buttons 
+    //* Buttons
     const [buttons] = useState([
-        { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-1", path:"/DashboardPage" },
+        { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-1", path: "/DashboardPage" },
         { icon: <AiOutlineProduct />, btnName: "Product", id: "b-2", path: "/ProductPage" },
         { icon: <TbReportAnalytics />, btnName: "Report", id: "b-3", path: "/ReportPage" },
-        { icon: <VscAccount />, btnName: "Account", id: "b-4", path:"/AccountPage" },
-        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-5", path: "/" }
-    ])
+        { icon: <VscAccount />, btnName: "Account", id: "b-4", path: "/AccountPage" }
+    ]);
 
-
+    // Handle logout with confirmation and loading state
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const handleLogout = () => {
+        const confirmLogout = window.confirm("Are you sure you want to log out?");
+        if (confirmLogout) {
+            setIsLoggingOut(true); // Start loading
+            setTimeout(() => {
+                localStorage.removeItem('adminId'); // Clear the stored adminId from localStorage
+                window.location.href = "/"; // Redirect the user to the login page or home page
+            }, 2000); // Simulate a 2-second loading time (can adjust as needed)
+        }
+    };
 
     return (
-
         <Container fluid style={{ margin: "0px", padding: "0px" }}>
-
             <Navbar className={Navbars.navDashboard}>
                 <Container>
                     <Navbar.Brand>
@@ -48,12 +52,11 @@ export const NavDashboard = () => {
             </Navbar>
 
             {/* Off-canvas function */}
-
-            <Offcanvas show={show} onHide={handleClose} style={{width: 320}}>
+            <Offcanvas show={show} onHide={handleClose} style={{ width: 320 }}>
                 <Offcanvas.Header closeButton className={Navbars.offCanvasHeader}>
                     <Offcanvas.Title>
-                        <Image width={40} className='me-2' 
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvTQPW7YrgwGyYJ3o3tDB2hRSGOPUyCo8rnQ&s" rounded/>
+                        <Image width={40} className='me-2'
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvTQPW7YrgwGyYJ3o3tDB2hRSGOPUyCo8rnQ&s" rounded />
                         REYES ELECTRONICS
                     </Offcanvas.Title>
                 </Offcanvas.Header>
@@ -66,13 +69,23 @@ export const NavDashboard = () => {
                             <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
                             <AccountDropdown />
                         </div>
-                        <div style={{height: "150px"}}>
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-5")} />
+                        <div style={{ height: "150px" }}>
+                            <Button
+                                variant="light"
+                                className={Navbars.btnOffcanvas}
+                                onClick={handleLogout}
+                                disabled={isLoggingOut} // Disable the button while logging out
+                            >
+                                {isLoggingOut ? "Logging out..." : (
+                                    <>
+                                        <RiLogoutCircleLine size={20} className='me-2' /> Logout
+                                    </>
+                                )}
+                            </Button>
                         </div>
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>
-
         </Container>
     )
 }
