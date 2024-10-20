@@ -3,7 +3,7 @@ import { Form, Button, Dropdown } from "react-bootstrap"
 //* Search Product
 function SearchAssetsMode() {
     return (
-        <div style={{width: "100%", height: "auto", padding: 10}}>
+        <div style={{width: "100%", height: "auto", padding: 10}}> {/* fix width 370 */}
             <div style={{display: 'flex', gap: '30px', flexDirection: 'column-reverse'}}>
                 <Dropdown>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
