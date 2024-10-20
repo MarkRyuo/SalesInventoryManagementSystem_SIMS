@@ -2,9 +2,9 @@
 //* Search Product
 function SearchAssetsMode() {
     return (
-        <>
+        <div>
 
-        </>
+        </div>
     )
 }
 
