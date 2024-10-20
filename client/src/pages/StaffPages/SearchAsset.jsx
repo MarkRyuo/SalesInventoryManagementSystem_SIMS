@@ -17,7 +17,7 @@ function SearchAsset() {
     return (
         <Container fluid className="p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' className="mt-4 p-0" style={{width: '100%', minWidth: 380}}>
+            <Container fluid='md' className="mt-4 p-0" style={{width: '100%', minWidth: 370}}>
                 <SearchAssetsMode />
             </Container>
         </Container>
