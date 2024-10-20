@@ -16,7 +16,7 @@ function SearchAssetsMode() {
                         <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-                <Form className="d-flex">
+                <Form className="d-flex" style={{width: 400}}>
                     <Form.Control
                         type="search"
                         placeholder="Search"
