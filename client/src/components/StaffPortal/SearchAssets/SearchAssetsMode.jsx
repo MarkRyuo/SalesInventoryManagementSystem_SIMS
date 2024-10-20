@@ -28,8 +28,8 @@ function SearchAssetsMode() {
                     </Form>
                 </div>
             </div>
-            <div style={{width: '100%'}}>
-                <div>
+            <div style={{width: '100%', marginTop: 20}}>
+                <div style={{width: 'auto', height: 400, boxShadow: '2px 2px 5px', borderRadius: 15}}>
                     {/* Code Here */}
                 </div>
             </div>
