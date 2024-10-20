@@ -29,7 +29,7 @@ function SearchAssetsMode() {
                 </div>
             </div>
             <div style={{width: '100%', marginTop: 20}}>
-                <div style={{ width: 'auto', height: 400, boxShadow: '2px 2px 5px #E1E4E4', borderRadius: 15}}>
+                <div style={{ width: 'auto', height: 400, boxShadow: '2px 2px 5px #E1E4E4', borderRadius: 15, overflow: 'auto'}}>
                     {/* Code Here */}
                 </div>
             </div>
