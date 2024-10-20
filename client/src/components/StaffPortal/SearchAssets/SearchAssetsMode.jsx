@@ -28,8 +28,10 @@ function SearchAssetsMode() {
                     </Form>
                 </div>
             </div>
-            <div>
-
+            <div style={{width: '100%'}}>
+                <div>
+                    {/* Code Here */}
+                </div>
             </div>
         </div>
     )
