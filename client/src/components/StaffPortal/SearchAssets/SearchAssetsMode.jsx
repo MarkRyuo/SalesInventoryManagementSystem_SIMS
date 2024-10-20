@@ -1,9 +1,9 @@
 
 function SearchAssetsMode() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
