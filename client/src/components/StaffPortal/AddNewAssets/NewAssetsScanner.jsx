@@ -5,11 +5,11 @@ function NewAssetsScanner() {
 
     return (
         <Container fluid>
-            <Container fluid='md'>
-                <div style={{border: '1px solid red'}}>
-                    <div>
+            <Container fluid='md' className='' style={{border: '1px solid green'}}>
+                <div style={{border: '1px solid red', padding: 20}}>
+                    <div style={{border: '1px solid'}}>
                         {/* Camera Here */}
-                        <p>Place a Barcode/QRcode inside the rectangle to scan it</p>
+                        <p className="fs-6">Place a Barcode/QRcode inside the rectangle to scan it</p>
                     </div>
                 </div>
             </Container>
