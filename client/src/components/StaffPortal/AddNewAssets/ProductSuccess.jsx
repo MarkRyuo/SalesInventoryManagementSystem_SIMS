@@ -5,7 +5,7 @@ function ProductSuccess() {
     return (
         <Container fluid='md'>
             <div>
-                <span>{/*Icon */}</span>
+                <span>{/* Icon Check */}</span>
                 <p>Success</p>
             </div>
         </Container>
