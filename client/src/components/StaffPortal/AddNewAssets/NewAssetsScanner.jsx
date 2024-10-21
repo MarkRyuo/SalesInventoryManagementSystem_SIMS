@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 function NewAssetsScanner() {
 
     return (
-        <Container>
+        <Container className="">
         </Container>
     )
 }
