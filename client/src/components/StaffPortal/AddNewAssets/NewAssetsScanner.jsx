@@ -4,11 +4,11 @@ import { Container } from "react-bootstrap";
 function NewAssetsScanner() {
 
     return (
-        <Container fluid>
-            <Container fluid='md' className='' style={{border: '1px solid green'}}>
-                <div style={{border: '1px solid red', padding: 20}}>
-                    <div style={{border: '1px solid'}}>
-                        <video ref={videoRef} style={{ width: '100%', height: 'auto' }} />
+        <Container fluid className="p-0">
+            <Container fluid='md' className='' style={{ border: '1px solid green', minWidth: 380}}>
+                <div style={{border: '1px solid red', padding: 0}}>
+                    <div style={{border: '1px solid', width: 'auto', display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                        <video style={{ width: '600px', height: '80vh', border: '1px solid red'}} />
                         {/* Camera Here */}
                         <p className="fs-6">Place a Barcode/QRcode inside the rectangle to scan it</p>
                     </div>
