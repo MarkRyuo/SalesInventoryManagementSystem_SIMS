@@ -7,7 +7,7 @@ function NewAssetsScanner() {
         <Container fluid className="p-0">
             <Container fluid='md' className='' style={{ border: '1px solid green', minWidth: 380}}>
                 <div style={{border: '1px solid red', padding: 0}}>
-                    <div style={{border: '1px solid', width: 'auto', display: "flex", flexDirection: "column", justifyContent: "center"}}>
+                    <div style={{border: '1px solid', width: 'auto'}}>
                         <video style={{ width: '600px', height: '80vh', border: '1px solid red'}} />
                         {/* Camera Here */}
                         <p className="fs-6">Place a Barcode/QRcode inside the rectangle to scan it</p>
