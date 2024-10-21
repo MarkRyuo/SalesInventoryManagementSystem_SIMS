@@ -8,7 +8,9 @@ function ProductSuccess() {
                 <span>{/* Icon Check */}</span>
                 <p>Success</p>
             </div>
-            
+            <div>
+                <Button></Button>
+            </div>
         </Container>
     )
 }
