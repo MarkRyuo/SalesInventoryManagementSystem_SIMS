@@ -13,7 +13,7 @@ function NewAssets() {
         // Handle form submission logic here (e.g., save the data to Firestore)
 
         // Navigate to a success page or display a success message
-        history.push('/product-added-success');
+        history.push('/ProductSuccess');
     };
 
     return (

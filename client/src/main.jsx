@@ -24,6 +24,7 @@ import ResetPasswordMode from './components/LogIn/ResetPasswordMode.jsx';
 import ResetRendering from './components/LogIn/ResetRendering.jsx';
 import ProfileMode from './components/Account/ProfileMode.jsx';
 import StaffAccountMode from './components/StaffPortal/StaffAccount/StaffAccountMode.jsx';
+import ProductSuccess from './components/StaffPortal/AddNewAssets/ProductSuccess.jsx';
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ const router = createBrowserRouter([
   {
     path: "NewAssets",
     element: <NewAssets />, //* Add New Assets Products After Scan
+  },
+  {
+    path: "ProductSuccess",
+    element: <ProductSuccess /> , //* Product Success Add
   },
   
 
