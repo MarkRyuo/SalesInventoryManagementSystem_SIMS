@@ -6,7 +6,7 @@ function ProductSuccess() {
         <Container fluid='md'>
             <div>
                 <span>{/* Icon Check */}</span>
-                <p>Success</p>
+                <p className="fs-3">Success</p>
             </div>
             <div>
                 <Button variant="outline-success">Done</Button>
