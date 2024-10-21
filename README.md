@@ -9,7 +9,10 @@
 
 ## Changelog
 
-### v6.1.3 (Latest)
+### v6.2.1 (Latest)
+- Scanner
+
+### v6.1.3
 - Redesigning Dashboards
 - Designing Staff System
 
