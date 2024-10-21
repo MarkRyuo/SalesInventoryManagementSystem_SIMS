@@ -9,4 +9,4 @@ function NewAssetsScanner() {
     )
 }
 
-export default NewAssetsScanner
+export default NewAssetsScanner ;
