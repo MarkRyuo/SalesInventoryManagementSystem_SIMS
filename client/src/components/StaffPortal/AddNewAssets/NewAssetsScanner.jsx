@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 function NewAssetsScanner() {
 
     return (
-        <Container fluid='lg'>
+        <Container fluid>
         </Container>
     )
 }
