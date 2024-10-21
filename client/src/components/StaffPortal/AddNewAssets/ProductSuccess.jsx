@@ -8,6 +8,7 @@ function ProductSuccess() {
                 <span>{/* Icon Check */}</span>
                 <p>Success</p>
             </div>
+            
         </Container>
     )
 }
