@@ -6,7 +6,10 @@ function NewAssetsScanner() {
     return (
         <Container fluid>
             <Container fluid='md'>
-                
+                <div>
+                    {/* Camera Here */}
+                    <p>Place a Barcode/QRcode inside the rectangle to scan it</p>
+                </div>
             </Container>
         </Container>
     )
