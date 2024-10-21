@@ -5,8 +5,8 @@ function NewAssets() {
     return (
         <Container fluid>
 
-            <Container>
-                
+            <Container fluid='md'>
+
             </Container>
 
         </Container>
