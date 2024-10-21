@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
 import { Container, Row, Col, Alert, Card } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function NewAssetsScanner() {
     const videoRef = useRef(null);
     const [error, setError] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
@@ -18,10 +18,7 @@ function NewAssetsScanner() {
                 codeReader.decodeFromVideoDevice(firstDeviceId, videoRef.current, (result, err) => {
                     if (result) {
                         // Navigate to the "AddNewProduct" page with the scanned result
-                        history.push({
-                            pathname: '/NewAssets',
-                            state: { barcode: result.text }
-                        });
+                        navigate('/NewAssets', { state: { barcode: result.text } });
                     }
                     if (err) {
                         if (!(err instanceof NotFoundException)) {
@@ -39,7 +36,7 @@ function NewAssetsScanner() {
         return () => {
             codeReader.reset();
         };
-    }, [history]);
+    }, [navigate]);
 
     return (
         <Container className="mt-4">

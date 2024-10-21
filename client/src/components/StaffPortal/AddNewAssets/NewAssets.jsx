@@ -1,10 +1,10 @@
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useState } from 'react';
 
 function NewAssets() {
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
     const barcode = location.state?.barcode || '';
     const [productName, setProductName] = useState('');
     const [quantity, setQuantity] = useState('');
@@ -13,7 +13,7 @@ function NewAssets() {
         // Handle form submission logic here (e.g., save the data to Firestore)
 
         // Navigate to a success page or display a success message
-        history.push('/ProductSuccess');
+        navigate('/ProductSuccess');
     };
 
     return (
