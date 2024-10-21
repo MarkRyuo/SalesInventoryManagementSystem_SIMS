@@ -4,7 +4,9 @@ import { Container } from "react-bootstrap";
 function ProductSuccess() {
     return (
         <Container fluid='md'>
-            
+            <div>
+                <p>Success</p>
+            </div>
         </Container>
     )
 }
