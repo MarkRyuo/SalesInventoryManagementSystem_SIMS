@@ -5,6 +5,9 @@ function NewAssetsScanner() {
 
     return (
         <Container fluid>
+            <Container>
+                
+            </Container>
         </Container>
     )
 }
