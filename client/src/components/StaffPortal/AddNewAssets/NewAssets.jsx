@@ -4,11 +4,9 @@ import { Container } from "react-bootstrap";
 function NewAssets() {
     return (
         <Container fluid>
-
             <Container fluid='md'>
-
+                
             </Container>
-
         </Container>
     )
 }
