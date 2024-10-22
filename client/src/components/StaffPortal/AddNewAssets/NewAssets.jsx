@@ -1,31 +1,23 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useState } from 'react';
-import { getDatabase, ref, set } from 'firebase/database'; // Import required functions from Firebase
+import { addNewProduct } from '../../../services/s'; // Import the service
 
 function NewAssets() {
     const location = useLocation();
     const navigate = useNavigate();
     const barcode = location.state?.barcode || '';
     const [productName, setProductName] = useState('');
-    const [quantity] = useState(1); // Initialize quantity to 1
+    const [quantity] = useState(1);
 
     const handleDone = async () => {
-        const db = getDatabase(); // Get a reference to the Realtime Database
-        const productRef = ref(db, 'products/' + barcode); // Create a reference to the 'products' node
-
         try {
-            // Set the product data in Realtime Database
-            await set(productRef, {
-                barcode: barcode,
-                productName: productName,
-                quantity: quantity, // This will always be 1
-            });
-
-            // Navigate to a success page or display a success message
+            // Add a new product in Firebase
+            await addNewProduct(barcode, productName, quantity);
+            // Navigate to a success page
             navigate('/ProductSuccess');
         } catch (error) {
-            console.error("Error adding product: ", error);
+            console.error(error.message);
         }
     };
 
@@ -58,7 +50,7 @@ function NewAssets() {
                                 <Form.Control
                                     type="number"
                                     value={quantity}
-                                    readOnly // Optional: Make quantity read-only if you want it fixed at 1
+                                    readOnly
                                 />
                             </Form.Group>
                             <Button variant="primary" onClick={handleDone}>

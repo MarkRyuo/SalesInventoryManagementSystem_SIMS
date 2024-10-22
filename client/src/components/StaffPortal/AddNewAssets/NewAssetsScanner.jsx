@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
 import { Container, Row, Col, Alert, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { getDatabase, ref, get, set } from 'firebase/database';
+import { fetchProductByBarcode, updateProductQuantity } from './firebaseService'; // Import the services
 
-//* Perfect
 function NewAssetsScanner() {
     const videoRef = useRef(null);
     const [error, setError] = useState('');
@@ -22,37 +21,23 @@ function NewAssetsScanner() {
                 codeReader.decodeFromVideoDevice(firstDeviceId, videoRef.current, async (result, err) => {
                     if (result) {
                         const barcode = result.text;
-                        const db = getDatabase();
-                        const productRef = ref(db, 'products/' + barcode);
 
                         try {
-                            // Check if the product exists in the database
-                            const snapshot = await get(productRef);
-                            if (snapshot.exists()) {
-                                const existingProduct = snapshot.val();
-
-                                // Ensure quantity is treated as a number
-                                const updatedQuantity = (existingProduct.quantity || 0) + 1; // Default to 0 if quantity is undefined
-
-                                // Update the product's quantity in the database
-                                await set(ref(db, 'products/' + barcode), {
-                                    ...existingProduct,
-                                    quantity: updatedQuantity, // Increment existing quantity
-                                });
-
-                                setMessage(`Quantity updated for ${existingProduct.productName}: +1 added.`);
+                            const product = await fetchProductByBarcode(barcode);
+                            if (product) {
+                                // Update product quantity
+                                const updatedQuantity = await updateProductQuantity(barcode, product);
+                                setMessage(`Quantity updated for ${product.productName}: New Quantity is ${updatedQuantity}.`);
                             } else {
-                                // If the product does not exist, navigate to NewAssets
+                                // If product does not exist, navigate to NewAssets
                                 navigate('/NewAssets', { state: { barcode: barcode } });
                             }
                         } catch (error) {
-                            setError("Error fetching product: " + error.message);
+                            setError(error.message);
                         }
                     }
-                    if (err) {
-                        if (!(err instanceof NotFoundException)) {
-                            setError(err.message);
-                        }
+                    if (err && !(err instanceof NotFoundException)) {
+                        setError(err.message);
                     }
                 });
             } catch (err) {
@@ -62,9 +47,9 @@ function NewAssetsScanner() {
 
         startScanner();
 
-        // Cleanup function to reset the scanner on unmount
+        // Cleanup on unmount
         return () => {
-            codeReader.reset(); // Stop the scanner
+            codeReader.reset();
         };
     }, [navigate]);
 
