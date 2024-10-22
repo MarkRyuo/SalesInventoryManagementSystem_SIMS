@@ -12,6 +12,7 @@ function NewAssetsScanner() {
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
+
         const startScanner = async () => {
             try {
                 const videoInputDevices = await codeReader.listVideoInputDevices();
@@ -60,8 +61,9 @@ function NewAssetsScanner() {
 
         startScanner();
 
+        // Cleanup function to reset the scanner on unmount
         return () => {
-            codeReader.reset();
+            codeReader.reset(); // Stop the scanner
         };
     }, [navigate]);
 
