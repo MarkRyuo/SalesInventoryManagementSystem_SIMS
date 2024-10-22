@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useState } from 'react';
-import { addNewProduct } from '../../../services/s'; // Import the service
+import { addNewProduct } from '../../../services/ProductService'; // Import the service
 
 function NewAssets() {
     const location = useLocation();
