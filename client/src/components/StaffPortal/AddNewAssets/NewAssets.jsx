@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getDatabase, ref, set } from 'firebase/database';
 
 function NewAssets() {
     const location = useLocation();
@@ -8,12 +10,40 @@ function NewAssets() {
     const barcode = location.state?.barcode || '';
     const [productName, setProductName] = useState('');
     const [quantity, setQuantity] = useState('');
+    const [sku, setSku] = useState(''); // State for SKU
+
+    useEffect(() => {
+        // Here you could fetch SKU or any other product details using the barcode
+        const db = getDatabase();
+        const productRef = ref(db, 'products/' + barcode);
+
+        // Fetch product data from Firebase
+        get(productRef).then(snapshot => {
+            if (snapshot.exists()) {
+                const productData = snapshot.val();
+                setProductName(productData.name); // Assuming you have a 'name' field
+                setSku(productData.sku); // Assuming you have a 'sku' field
+            }
+        });
+    }, [barcode]);
 
     const handleDone = () => {
-        // Handle form submission logic here (e.g., save the data to Firestore)
+        const newProduct = {
+            barcode,
+            name: productName,
+            sku,
+            quantity: parseInt(quantity), // Ensure quantity is a number
+        };
 
-        // Navigate to a success page or display a success message
-        navigate('/ProductSuccess');
+        // Save the new product to Firebase
+        const db = getDatabase();
+        set(ref(db, 'products/' + barcode), newProduct)
+            .then(() => {
+                navigate('/ProductSuccess');
+            })
+            .catch((error) => {
+                console.error('Error adding product: ', error);
+            });
     };
 
     return (
@@ -29,6 +59,14 @@ function NewAssets() {
                                     type="text"
                                     value={barcode}
                                     readOnly
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="sku">
+                                <Form.Label>SKU</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={sku}
+                                    readOnly // Set to readOnly if SKU is fetched automatically
                                 />
                             </Form.Group>
                             <Form.Group controlId="productName">
