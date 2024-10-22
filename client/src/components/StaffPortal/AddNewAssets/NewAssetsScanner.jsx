@@ -8,6 +8,7 @@ function NewAssetsScanner() {
     const videoRef = useRef(null);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+    const [scanning, setScanning] = useState(true); // Manage scanning state to prevent multiple rapid scans
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,10 +20,11 @@ function NewAssetsScanner() {
                 const firstDeviceId = videoInputDevices[0].deviceId;
 
                 codeReader.decodeFromVideoDevice(firstDeviceId, videoRef.current, async (result, err) => {
-                    if (result) {
+                    if (result && scanning) {
                         const barcode = result.text;
 
                         try {
+                            setScanning(false); // Disable scanning temporarily
                             const product = await fetchProductByBarcode(barcode);
                             if (product) {
                                 // Update product quantity
@@ -32,8 +34,13 @@ function NewAssetsScanner() {
                                 // If product does not exist, navigate to NewAssets
                                 navigate('/NewAssets', { state: { barcode: barcode } });
                             }
+
+                            // Add a 2-second delay before allowing another scan
+                            setTimeout(() => setScanning(true), 2000);
+
                         } catch (error) {
                             setError(error.message);
+                            setScanning(true); // Re-enable scanning after error
                         }
                     }
                     if (err && !(err instanceof NotFoundException)) {
@@ -51,7 +58,7 @@ function NewAssetsScanner() {
         return () => {
             codeReader.reset();
         };
-    }, [navigate]);
+    }, [navigate, scanning]); // `scanning` added as a dependency
 
     return (
         <Container className="mt-4">

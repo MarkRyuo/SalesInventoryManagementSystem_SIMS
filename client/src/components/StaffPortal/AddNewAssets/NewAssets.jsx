@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col, Card, Alert } from 'react-bootstrap';
 import { useState } from 'react';
 import { addNewProduct } from '../../../services/ProductService'; // Import the service
 
@@ -9,15 +9,17 @@ function NewAssets() {
     const barcode = location.state?.barcode || '';
     const [productName, setProductName] = useState('');
     const [quantity] = useState(1);
+    const [error, setError] = useState('');
 
     const handleDone = async () => {
         try {
-            // Add a new product in Firebase
+            // Try to add a new product, if barcode exists, catch the error
             await addNewProduct(barcode, productName, quantity);
             // Navigate to a success page
             navigate('/ProductSuccess');
         } catch (error) {
-            console.error(error.message);
+            // Show error message if barcode already exists
+            setError(error.message);
         }
     };
 
@@ -27,6 +29,7 @@ function NewAssets() {
                 <Col md={8}>
                     <Card className="p-4 shadow">
                         <h1 className="text-center">Add New Product</h1>
+                        {error && <Alert variant="danger">{error}</Alert>}
                         <Form>
                             <Form.Group controlId="barcode">
                                 <Form.Label>Barcode</Form.Label>
