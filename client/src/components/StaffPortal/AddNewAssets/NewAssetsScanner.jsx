@@ -4,6 +4,7 @@ import { Container, Row, Col, Alert, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { getDatabase, ref, get, set } from 'firebase/database';
 
+//* Perfect
 function NewAssetsScanner() {
     const videoRef = useRef(null);
     const [error, setError] = useState('');
