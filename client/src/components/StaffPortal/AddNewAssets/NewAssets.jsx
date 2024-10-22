@@ -1,49 +1,32 @@
-/* eslint-disable no-undef */
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
-import { getDatabase, ref, set } from 'firebase/database';
+import { useState } from 'react';
+import { getDatabase, ref, set } from 'firebase/database'; // Import required functions from Firebase
 
 function NewAssets() {
     const location = useLocation();
     const navigate = useNavigate();
     const barcode = location.state?.barcode || '';
     const [productName, setProductName] = useState('');
-    const [quantity, setQuantity] = useState('');
-    const [sku, setSku] = useState(''); // State for SKU
+    const [quantity] = useState(1); // Initialize quantity to 1
 
-    useEffect(() => {
-        // Here you could fetch SKU or any other product details using the barcode
-        const db = getDatabase();
-        const productRef = ref(db, 'products/' + barcode);
+    const handleDone = async () => {
+        const db = getDatabase(); // Get a reference to the Realtime Database
+        const productRef = ref(db, 'products/' + barcode); // Create a reference to the 'products' node
 
-        // Fetch product data from Firebase
-        get(productRef).then(snapshot => {
-            if (snapshot.exists()) {
-                const productData = snapshot.val();
-                setProductName(productData.name); // Assuming you have a 'name' field
-                setSku(productData.sku); // Assuming you have a 'sku' field
-            }
-        });
-    }, [barcode]);
-
-    const handleDone = () => {
-        const newProduct = {
-            barcode,
-            name: productName,
-            sku,
-            quantity: parseInt(quantity), // Ensure quantity is a number
-        };
-
-        // Save the new product to Firebase
-        const db = getDatabase();
-        set(ref(db, 'products/' + barcode), newProduct)
-            .then(() => {
-                navigate('/ProductSuccess');
-            })
-            .catch((error) => {
-                console.error('Error adding product: ', error);
+        try {
+            // Set the product data in Realtime Database
+            await set(productRef, {
+                barcode: barcode,
+                productName: productName,
+                quantity: quantity, // This will always be 1
             });
+
+            // Navigate to a success page or display a success message
+            navigate('/ProductSuccess');
+        } catch (error) {
+            console.error("Error adding product: ", error);
+        }
     };
 
     return (
@@ -61,14 +44,6 @@ function NewAssets() {
                                     readOnly
                                 />
                             </Form.Group>
-                            <Form.Group controlId="sku">
-                                <Form.Label>SKU</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    value={sku}
-                                    readOnly // Set to readOnly if SKU is fetched automatically
-                                />
-                            </Form.Group>
                             <Form.Group controlId="productName">
                                 <Form.Label>Product Name</Form.Label>
                                 <Form.Control
@@ -83,8 +58,7 @@ function NewAssets() {
                                 <Form.Control
                                     type="number"
                                     value={quantity}
-                                    onChange={(e) => setQuantity(e.target.value)}
-                                    placeholder="Enter quantity"
+                                    readOnly // Optional: Make quantity read-only if you want it fixed at 1
                                 />
                             </Form.Group>
                             <Button variant="primary" onClick={handleDone}>

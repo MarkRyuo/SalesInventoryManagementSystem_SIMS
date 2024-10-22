@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
 import { Container, Row, Col, Alert, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { getDatabase, ref, get, update } from 'firebase/database'; // Import Firebase Realtime Database functions
+import { getDatabase, ref, get, set } from 'firebase/database';
 
 function NewAssetsScanner() {
     const videoRef = useRef(null);
     const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
     const navigate = useNavigate();
-    const db = getDatabase(); // Get the database instance
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
@@ -20,22 +20,31 @@ function NewAssetsScanner() {
                 codeReader.decodeFromVideoDevice(firstDeviceId, videoRef.current, async (result, err) => {
                     if (result) {
                         const barcode = result.text;
+                        const db = getDatabase();
+                        const productRef = ref(db, 'products/' + barcode);
 
-                        // Check if the product exists in the database
-                        const productRef = ref(db, 'products/' + barcode); // Assuming 'products' is your database node
-                        const snapshot = await get(productRef);
+                        try {
+                            // Check if the product exists in the database
+                            const snapshot = await get(productRef);
+                            if (snapshot.exists()) {
+                                const existingProduct = snapshot.val();
 
-                        if (snapshot.exists()) {
-                            // Product exists, update quantity
-                            const productData = snapshot.val();
-                            const newQuantity = productData.quantity + 1; // Increase quantity by 1
+                                // Ensure quantity is treated as a number
+                                const updatedQuantity = (existingProduct.quantity || 0) + 1; // Default to 0 if quantity is undefined
 
-                            // Update the product in the database
-                            await update(productRef, { quantity: newQuantity });
-                            alert('Product quantity updated!'); // Optional: Display success message
-                        } else {
-                            // Product does not exist, navigate to NewAssets
-                            navigate('/NewAssets', { state: { barcode } });
+                                // Update the product's quantity in the database
+                                await set(ref(db, 'products/' + barcode), {
+                                    ...existingProduct,
+                                    quantity: updatedQuantity, // Increment existing quantity
+                                });
+
+                                setMessage(`Quantity updated for ${existingProduct.productName}: +1 added.`);
+                            } else {
+                                // If the product does not exist, navigate to NewAssets
+                                navigate('/NewAssets', { state: { barcode: barcode } });
+                            }
+                        } catch (error) {
+                            setError("Error fetching product: " + error.message);
                         }
                     }
                     if (err) {
@@ -54,7 +63,7 @@ function NewAssetsScanner() {
         return () => {
             codeReader.reset();
         };
-    }, [navigate, db]);
+    }, [navigate]);
 
     return (
         <Container className="mt-4">
@@ -64,6 +73,7 @@ function NewAssetsScanner() {
                     <Card className="p-4 shadow">
                         <div className="text-center">
                             {error && <Alert variant="danger">Error: {error}</Alert>}
+                            {message && <Alert variant="success">{message}</Alert>}
                             <video ref={videoRef} style={{ width: '100%', height: 'auto' }} />
                         </div>
                     </Card>
