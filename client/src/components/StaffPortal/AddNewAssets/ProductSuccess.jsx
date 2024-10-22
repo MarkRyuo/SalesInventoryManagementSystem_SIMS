@@ -7,4 +7,4 @@ function ProductSuccess() {
     )
 }
 
-export default ProductSuccess
+export default ProductSuccess ;
