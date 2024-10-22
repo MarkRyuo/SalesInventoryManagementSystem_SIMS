@@ -12,6 +12,8 @@ function NewAssetsScanner() {
     const [lastScannedBarcode, setLastScannedBarcode] = useState(''); // Track the last scanned barcode
     const [isProcessing, setIsProcessing] = useState(false); // Loading state for processing
     const [fadeOut, setFadeOut] = useState(false); // Manage fade out state
+    const [videoFade, setVideoFade] = useState(true); // State to control video fade
+    const [barcodeDetected, setBarcodeDetected] = useState(false); // State to indicate if barcode is detected
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,10 +33,12 @@ function NewAssetsScanner() {
 
                         // Check if it's the same barcode as the last scanned one
                         if (barcode !== lastScannedBarcode) {
+                            setBarcodeDetected(true); // Set state to indicate barcode is detected
                             try {
                                 setScanning(false); // Disable scanning temporarily
                                 setLastScannedBarcode(barcode); // Update the last scanned barcode
                                 setIsProcessing(true); // Start processing
+                                setVideoFade(false); // Fade out video before processing
 
                                 // Stop the video stream to prevent lag issues
                                 codeReader.reset();
@@ -52,23 +56,29 @@ function NewAssetsScanner() {
                                 // Freeze camera for 2 seconds and display processing indicator
                                 setTimeout(() => {
                                     setIsProcessing(false); // Stop processing
-                                    setFadeOut(true); // Start fade out
+                                    setFadeOut(true); // Start fade out for alerts
 
                                     // Reset fade out and re-initialize the scanner after 2 seconds
                                     setTimeout(() => {
                                         setFadeOut(false);
                                         setMessage(''); // Clear message after fade out
+                                        setVideoFade(true); // Fade in video before restarting scanner
+                                        setBarcodeDetected(false); // Reset barcode detected state
                                         startScanner(); // Re-initialize the scanner
-                                    }, 2000); // Fade out duration
-                                }, 2000);
+                                    }, 1000); // Fade out duration of 1 second
+                                }, 2000); // Keep this as is for processing time
 
                             } catch (error) {
                                 setError(error.message);
                                 setScanning(true); // Re-enable scanning after error
                                 setLastScannedBarcode(''); // Reset last scanned barcode in case of error
                                 setIsProcessing(false); // Stop processing
+                                setVideoFade(true); // Fade in video after error
+                                setBarcodeDetected(false); // Reset barcode detected state
                             }
                         }
+                    } else {
+                        setBarcodeDetected(false); // Reset state when no barcode is detected
                     }
                     if (err && !(err instanceof NotFoundException)) {
                         setError(err.message);
@@ -93,12 +103,12 @@ function NewAssetsScanner() {
             <Row className="justify-content-center">
                 <Col md={8}>
                     <Card className="p-4 shadow">
-                        <div className="text-center">
+                        <div className="text-center" style={{ position: 'relative' }}>
                             {error && (
                                 <Alert variant="danger"
                                     style={{
                                         opacity: fadeOut ? 0 : 1,
-                                        transition: 'opacity 2s ease-in-out',
+                                        transition: 'opacity 1s ease-in-out', // Updated to 1 second
                                     }}>
                                     Error: {error}
                                 </Alert>
@@ -107,13 +117,44 @@ function NewAssetsScanner() {
                                 <Alert variant="success"
                                     style={{
                                         opacity: fadeOut ? 0 : 1,
-                                        transition: 'opacity 2s ease-in-out',
+                                        transition: 'opacity 1s ease-in-out', // Updated to 1 second
                                     }}>
                                     {message}
                                 </Alert>
                             )}
                             {isProcessing && <Spinner animation="border" />} {/* Show spinner while processing */}
-                            <video ref={videoRef} style={{ width: '100%', height: 'auto', display: isProcessing ? 'none' : 'block' }} />
+                            <video
+                                ref={videoRef}
+                                style={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    display: isProcessing ? 'none' : 'block',
+                                    opacity: videoFade ? 1 : 0, // Control video opacity
+                                    transition: 'opacity 1s ease-in-out', // Updated to 1 second
+                                }}
+                            />
+                            {barcodeDetected && (
+                                <div
+                                    style={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        left: '50%',
+                                        transform: 'translate(-50%, -50%)',
+                                        width: '80%',
+                                        height: '40%',
+                                        border: '2px dashed green',
+                                        boxShadow: '0 0 10px rgba(0, 255, 0, 0.5)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        background: 'rgba(0, 0, 0, 0.5)',
+                                        color: 'white',
+                                        opacity: 0.8,
+                                    }}
+                                >
+                                    <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Align Barcode Here</span>
+                                </div>
+                            )}
                         </div>
                     </Card>
                 </Col>
