@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
-import { Container, Row, Col, Alert, Card } from 'react-bootstrap';
+import { Container, Row, Col, Alert, Card, Spinner } from 'react-bootstrap'; // Import Spinner from react-bootstrap
 import { useNavigate } from 'react-router-dom';
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService'; // Import the services
-import scanningLogo from '../../../assets/scanning-logo.png'; // Import your scanning logo
 
 function NewAssetsScanner() {
     const videoRef = useRef(null);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
-    const [scanning, setScanning] = useState(false); // Manage scanning state to prevent multiple rapid scans
+    const [scanning, setScanning] = useState(true); // Manage scanning state to prevent multiple rapid scans
     const [lastScannedBarcode, setLastScannedBarcode] = useState(''); // Track the last scanned barcode
+    const [isProcessing, setIsProcessing] = useState(false); // Loading state for processing
+    const [fadeOut, setFadeOut] = useState(false); // Manage fade out state
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,7 +23,7 @@ function NewAssetsScanner() {
                 const firstDeviceId = videoInputDevices[0].deviceId;
 
                 codeReader.decodeFromVideoDevice(firstDeviceId, videoRef.current, async (result, err) => {
-                    if (result) {
+                    if (result && scanning) {
                         const barcode = result.text;
 
                         // Debugging information
@@ -31,8 +32,9 @@ function NewAssetsScanner() {
                         // Check if it's the same barcode as the last scanned one
                         if (barcode !== lastScannedBarcode) {
                             try {
-                                setScanning(true); // Start scanning
+                                setScanning(false); // Disable scanning temporarily
                                 setLastScannedBarcode(barcode); // Update the last scanned barcode
+                                setIsProcessing(true); // Start processing
 
                                 // Stop the video stream to prevent lag issues
                                 codeReader.reset();
@@ -47,17 +49,24 @@ function NewAssetsScanner() {
                                     navigate('/NewAssets', { state: { barcode: barcode } });
                                 }
 
-                                // Hide the scanning logo after 2 seconds
+                                // Freeze camera for 2 seconds and display processing indicator
                                 setTimeout(() => {
-                                    setScanning(false); // End scanning
-                                    setLastScannedBarcode(''); // Reset last scanned barcode
-                                    startScanner(); // Re-initialize the scanner
+                                    setIsProcessing(false); // Stop processing
+                                    setFadeOut(true); // Start fade out
+
+                                    // Reset fade out and re-initialize the scanner after 2 seconds
+                                    setTimeout(() => {
+                                        setFadeOut(false);
+                                        setMessage(''); // Clear message after fade out
+                                        startScanner(); // Re-initialize the scanner
+                                    }, 2000); // Fade out duration
                                 }, 2000);
 
                             } catch (error) {
                                 setError(error.message);
-                                setScanning(false); // End scanning after error
+                                setScanning(true); // Re-enable scanning after error
                                 setLastScannedBarcode(''); // Reset last scanned barcode in case of error
+                                setIsProcessing(false); // Stop processing
                             }
                         }
                     }
@@ -76,7 +85,7 @@ function NewAssetsScanner() {
         return () => {
             codeReader.reset();
         };
-    }, [navigate, lastScannedBarcode]); // Remove scanning from dependencies
+    }, [navigate, scanning, lastScannedBarcode]); // Add lastScannedBarcode to dependencies
 
     return (
         <Container className="mt-4">
@@ -85,32 +94,30 @@ function NewAssetsScanner() {
                 <Col md={8}>
                     <Card className="p-4 shadow">
                         <div className="text-center">
-                            {error && <Alert variant="danger">Error: {error}</Alert>}
-                            {message && <Alert variant="success">{message}</Alert>}
-                            <video ref={videoRef} style={{ width: '100%', height: 'auto' }} />
-                            {scanning && (
-                                <div className="scanning-overlay">
-                                    <img src={scanningLogo} alt="Scanning..." style={{ width: '100px', height: '100px' }} />
-                                    <p>Scanning...</p>
-                                </div>
+                            {error && (
+                                <Alert variant="danger"
+                                    style={{
+                                        opacity: fadeOut ? 0 : 1,
+                                        transition: 'opacity 2s ease-in-out',
+                                    }}>
+                                    Error: {error}
+                                </Alert>
                             )}
+                            {message && (
+                                <Alert variant="success"
+                                    style={{
+                                        opacity: fadeOut ? 0 : 1,
+                                        transition: 'opacity 2s ease-in-out',
+                                    }}>
+                                    {message}
+                                </Alert>
+                            )}
+                            {isProcessing && <Spinner animation="border" />} {/* Show spinner while processing */}
+                            <video ref={videoRef} style={{ width: '100%', height: 'auto', display: isProcessing ? 'none' : 'block' }} />
                         </div>
                     </Card>
                 </Col>
             </Row>
-            <style>{`
-                .scanning-overlay {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    text-align: center;
-                    z-index: 10; /* Ensure it appears above other content */
-                    background-color: rgba(255, 255, 255, 0.8); /* Optional: semi-transparent background */
-                    padding: 20px; /* Optional: padding for aesthetics */
-                    border-radius: 10px; /* Optional: rounded corners */
-                }
-            `}</style>
         </Container>
     );
 }
