@@ -13,7 +13,7 @@ function NewAssetsScanner() {
     const [isProcessing, setIsProcessing] = useState(false);
     const [fadeOut, setFadeOut] = useState(false);
     const [videoFade, setVideoFade] = useState(true);
-    const [guideFade, setGuideFade] = useState(true); // New state for guideline visibility
+    const [guideFade, setGuideFade] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,22 +28,26 @@ function NewAssetsScanner() {
                     if (result && scanning) {
                         const barcode = result.text;
 
-                        console.log(`Scanned barcode: ${barcode}`);
-
                         if (barcode !== lastScannedBarcode) {
+                            setLastScannedBarcode(barcode);
+                            setScanning(false);
+                            setIsProcessing(true);
+                            setVideoFade(false);
+                            setGuideFade(false);
+
+                            codeReader.reset();
+
                             try {
-                                setScanning(false);
-                                setLastScannedBarcode(barcode);
-                                setIsProcessing(true);
-                                setVideoFade(false);
-                                setGuideFade(false); // Fade out guideline
-
-                                codeReader.reset();
-
                                 const product = await fetchProductByBarcode(barcode);
+
                                 if (product) {
-                                    const updatedQuantity = await updateProductQuantity(barcode, product);
-                                    setMessage(`Quantity updated for ${product.productName}: New Quantity is ${updatedQuantity}.`);
+                                    const additionalQuantity = 1; // Increment quantity as needed
+                                    const updatedQuantity = await updateProductQuantity(barcode, additionalQuantity);
+
+                                    const productName = product.productName || "Unknown Product";
+                                    const newQuantity = updatedQuantity || "N/A";
+
+                                    setMessage(`Quantity updated for ${productName}: New Quantity is ${newQuantity}.`);
                                 } else {
                                     navigate('/NewAssets', { state: { barcode: barcode } });
                                 }
@@ -56,23 +60,21 @@ function NewAssetsScanner() {
                                         setFadeOut(false);
                                         setMessage('');
                                         setVideoFade(true);
-                                        setGuideFade(true); // Fade in guideline
-                                        startScanner();
+                                        setGuideFade(true);
+                                        setScanning(true);
+                                        startScanner(); // Restart scanning
                                     }, 1000);
                                 }, 2000);
 
                             } catch (error) {
-                                setError(error.message);
-                                setScanning(true);
-                                setLastScannedBarcode('');
-                                setIsProcessing(false);
-                                setVideoFade(true);
-                                setGuideFade(true); // Fade in guideline after error
+                                setError(error.message || "An unexpected error occurred.");
+                                resetScanner();
                             }
                         }
                     }
+
                     if (err && !(err instanceof NotFoundException)) {
-                        setError(err.message);
+                        setError(err.message || "An unexpected error occurred.");
                     }
                 });
             } catch (err) {
@@ -86,6 +88,14 @@ function NewAssetsScanner() {
             codeReader.reset();
         };
     }, [navigate, scanning, lastScannedBarcode]);
+
+    const resetScanner = () => {
+        setScanning(true);
+        setLastScannedBarcode('');
+        setIsProcessing(false);
+        setVideoFade(true);
+        setGuideFade(true);
+    };
 
     return (
         <Container className="mt-4">
@@ -124,8 +134,8 @@ function NewAssetsScanner() {
                                     border: '1px dashed rgba(255, 255, 255, 0.8)',
                                     backgroundColor: 'rgba(0, 0, 0, 0.3)',
                                     pointerEvents: 'none',
-                                    opacity: guideFade ? 1 : 0, // Control guideline opacity
-                                    transition: 'opacity 1s ease-in-out', // Updated to 1 second
+                                    opacity: guideFade ? 1 : 0,
+                                    transition: 'opacity 1s ease-in-out',
                                 }}
                             />
 
