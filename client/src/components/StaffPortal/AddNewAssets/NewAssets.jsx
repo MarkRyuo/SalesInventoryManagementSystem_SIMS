@@ -223,6 +223,8 @@ function NewAssets() {
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
                                     required
+                                    step="0.01"  // Allows for decimal input without increment arrows
+                                    style={{ appearance: 'textfield' }}  // Hides default increment arrows
                                 />
                             </Form.Group>
 
