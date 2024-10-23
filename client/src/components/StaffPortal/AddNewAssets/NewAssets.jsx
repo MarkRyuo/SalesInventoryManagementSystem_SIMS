@@ -155,7 +155,7 @@ function NewAssets() {
                                 </Form.Group>
 
                                 <Form.Group controlId="size" className="mt-3">
-                                    <Form.Label>Size <span className="text-danger">*</span></Form.Label>
+                                    <Form.Label>Size</Form.Label>
                                     <Dropdown>
                                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                                             {size || 'Select Size'}
