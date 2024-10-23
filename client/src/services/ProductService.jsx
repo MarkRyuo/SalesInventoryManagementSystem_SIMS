@@ -18,25 +18,31 @@ export const fetchProductByBarcode = async (barcode) => {
 };
 
 // Update the quantity of a product in Firebase
-export const updateProductQuantity = async (barcode, productData, additionalQuantity = 1) => {
+export const updateProductQuantity = async (barcode, additionalQuantity = 1) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
 
     try {
-        // Increment quantity and update the product data
-        const updatedQuantity = (productData.quantity || 0) + additionalQuantity;
-        await set(productRef, {
-            ...productData,
-            quantity: updatedQuantity,
-        });
-        return updatedQuantity;
+        const snapshot = await get(productRef);
+        if (snapshot.exists()) {
+            const productData = snapshot.val();
+            // Increment quantity
+            const updatedQuantity = (productData.quantity || 0) + additionalQuantity;
+            await set(productRef, {
+                ...productData, // Spread existing product data
+                quantity: updatedQuantity, // Update quantity
+            });
+            return updatedQuantity;
+        } else {
+            throw new Error("Product does not exist.");
+        }
     } catch (error) {
         throw new Error("Error updating product quantity: " + error.message);
     }
 };
 
 // Add a new product in Firebase
-export const addNewProduct = async ({ barcode, productName, quantity = 1, sku, price, category }) => {
+export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, category, dateAdded }) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
 
@@ -44,10 +50,15 @@ export const addNewProduct = async ({ barcode, productName, quantity = 1, sku, p
         await set(productRef, {
             barcode: barcode,
             productName: productName,
+            size: size, // Added size
+            color: color, // Added color
+            wattage: wattage, // Added wattage
+            voltage: voltage, // Include voltage here
             quantity: quantity,
             sku: sku,
             price: price,
-            category: category
+            category: category,
+            dateAdded: dateAdded // Added dateAdded
         });
     } catch (error) {
         throw new Error("Error adding product: " + error.message);
