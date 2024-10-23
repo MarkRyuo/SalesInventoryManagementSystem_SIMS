@@ -36,7 +36,7 @@ export const updateProductQuantity = async (barcode, productData, additionalQuan
 };
 
 // Add a new product in Firebase
-export const addNewProduct = async (barcode, productName, quantity = 1) => {
+export const addNewProduct = async ({ barcode, productName, quantity = 1, sku, price, category }) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
 
@@ -45,6 +45,9 @@ export const addNewProduct = async (barcode, productName, quantity = 1) => {
             barcode: barcode,
             productName: productName,
             quantity: quantity,
+            sku: sku,
+            price: price,
+            category: category
         });
     } catch (error) {
         throw new Error("Error adding product: " + error.message);
