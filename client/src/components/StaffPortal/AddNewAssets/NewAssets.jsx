@@ -110,7 +110,6 @@ function NewAssets() {
             <Row className="justify-content-center">
                 <Col md={8}>
                     <Card className="p-4 shadow">
-                        <h1 className="text-center">Add New Product</h1>
                         {error && <Alert variant="danger">{error}</Alert>}
                         {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
                         <Form>
