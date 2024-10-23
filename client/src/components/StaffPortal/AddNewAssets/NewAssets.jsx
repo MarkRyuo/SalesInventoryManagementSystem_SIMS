@@ -178,7 +178,6 @@ function NewAssets() {
                                         placeholder="Enter color (e.g., Red)"
                                         value={color}
                                         onChange={(e) => setColor(e.target.value)}
-                                        required
                                     />
                                 </Form.Group>
 
