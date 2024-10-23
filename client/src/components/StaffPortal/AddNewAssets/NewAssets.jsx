@@ -151,6 +151,7 @@ function NewAssets() {
                                         onChange={(e) => setProductName(e.target.value)}
                                         required
                                     />
+                                    {!productName && <small className="text-danger">Please enter a product name.</small>}
                                 </Form.Group>
 
                                 <Form.Group controlId="size" className="mt-3">
@@ -168,6 +169,7 @@ function NewAssets() {
                                             ))}
                                         </Dropdown.Menu>
                                     </Dropdown>
+                                    {!size && <small className="text-danger">Please select a size.</small>}
                                 </Form.Group>
 
                                 <Form.Group controlId="color" className="mt-3">
@@ -178,6 +180,7 @@ function NewAssets() {
                                         value={color}
                                         onChange={(e) => setColor(e.target.value)}
                                     />
+                                    {!color && <small className="text-danger">Please enter a color.</small>}
                                 </Form.Group>
 
                                 <Form.Group controlId="wattage" className="mt-3">
@@ -211,6 +214,7 @@ function NewAssets() {
                                     onChange={(e) => setQuantity(Number(e.target.value))}
                                     required
                                 />
+                                {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
                             </Form.Group>
 
                             <Form.Group controlId="price" className="mt-3">
@@ -221,9 +225,10 @@ function NewAssets() {
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
                                     required
-                                    step="0.01"  // Allows for decimal input without increment arrows
-                                    style={{ appearance: 'textfield' }}  // Hides default increment arrows
+                                    step="0.01"
+                                    style={{ appearance: 'textfield' }}
                                 />
+                                {!price && <small className="text-danger">Please enter a price.</small>}
                             </Form.Group>
 
                             <Form.Group controlId="category" className="mt-3">
@@ -234,6 +239,7 @@ function NewAssets() {
                                         <option key={index} value={cat}>{cat}</option>
                                     ))}
                                 </Form.Control>
+                                {!category && <small className="text-danger">Please select a category.</small>}
                                 <Button variant="link" onClick={handleAddNewCategoryClick}>Add New Category</Button>
                             </Form.Group>
 
