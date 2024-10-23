@@ -172,7 +172,7 @@ function NewAssets() {
                                 </Form.Group>
 
                                 <Form.Group controlId="color" className="mt-3">
-                                    <Form.Label>Color <span className="text-danger">*</span></Form.Label>
+                                    <Form.Label>Color</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter color (e.g., Red)"
