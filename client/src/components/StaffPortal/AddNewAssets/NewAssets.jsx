@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Card, Alert, Spinner } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { addNewProduct } from '../../../services/ProductService'; // Import the service
+import { addNewProduct, addCategory, getCategories } from '../../../services/ProductService'; // Import the services
 
 function NewAssets() {
     const location = useLocation();
@@ -14,13 +14,13 @@ function NewAssets() {
     const [wattage, setWattage] = useState('');
     const [voltage, setVoltage] = useState('');
     const [quantity, setQuantity] = useState(1);
-    const [price, setPrice] = useState(''); // Price state
+    const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
     const [newCategory, setNewCategory] = useState('');
     const [isAddingNewCategory, setIsAddingNewCategory] = useState(false);
-    const [categories, setCategories] = useState(['Electronics', 'Clothing', 'Furniture', 'Groceries', 'Stationery']);
+    const [categories, setCategories] = useState([]);
     const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(false); // Loading state
+    const [isLoading, setIsLoading] = useState(false);
     const [dateAdded, setDateAdded] = useState('');
 
     const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
@@ -30,7 +30,19 @@ function NewAssets() {
         setDateAdded(currentDate);
     }, []);
 
-    // Updated SKU generation logic
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const fetchedCategories = await getCategories();
+                setCategories(fetchedCategories);
+            } catch (error) {
+                setError(error.message);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
     const generateSKU = (productName, size, color, wattage, voltage) => {
         const productCode = productName.slice(0, 3).toUpperCase().replace(/\s+/g, '');
         const sizeCode = size ? size.toUpperCase() : '';
@@ -49,12 +61,17 @@ function NewAssets() {
         setIsAddingNewCategory(true);
     };
 
-    const handleSaveNewCategory = () => {
+    const handleSaveNewCategory = async () => {
         if (newCategory) {
-            setCategories([...categories, newCategory]);
-            setCategory(newCategory);
-            setNewCategory('');
-            setIsAddingNewCategory(false);
+            try {
+                await addCategory(newCategory); // Save the new category in the database
+                setCategories([...categories, newCategory]);
+                setCategory(newCategory);
+                setNewCategory('');
+                setIsAddingNewCategory(false);
+            } catch (error) {
+                setError(error.message);
+            }
         }
     };
 
@@ -187,7 +204,6 @@ function NewAssets() {
                                 />
                             </Form.Group>
 
-                            {/* Price Input */}
                             <Form.Group controlId="price" className="mt-3">
                                 <Form.Label>Price <span className="text-danger">*</span></Form.Label>
                                 <Form.Control
@@ -199,7 +215,6 @@ function NewAssets() {
                                 />
                             </Form.Group>
 
-                            {/* Category Selection */}
                             <Form.Group controlId="category" className="mt-3">
                                 <Form.Label>Category <span className="text-danger">*</span></Form.Label>
                                 <Form.Control as="select" value={category} onChange={handleCategoryChange} required>

@@ -14,7 +14,7 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
             wattage: wattage,
             voltage: voltage,
             quantity: quantity, // Store current quantity
-            quantityHistory: [{ date: dateAdded.split('T')[0], quantity }], // Store date and quantity (only date)
+            quantityHistory: [`${dateAdded.split('T')[0]}: ${quantity}`], // Store date and initial quantity as a single string
             sku: sku,
             price: price,
             category: category,
@@ -42,15 +42,24 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         const updatedQuantity = currentQuantity + additionalQuantity;
 
         // Update quantity history
-        const newQuantityHistory = [
-            ...(productData.quantityHistory || []),
-            { date: new Date().toISOString().split('T')[0], quantity: updatedQuantity } // Store the updated quantity on this date
-        ];
+        const newQuantityHistory = [...(productData.quantityHistory || [])];
+        const today = new Date().toISOString().split('T')[0];
+
+        // Check if today's entry exists in the history
+        const existingEntryIndex = newQuantityHistory.findIndex(entry => entry.startsWith(today));
+
+        if (existingEntryIndex > -1) {
+            // If today's entry exists, update it
+            newQuantityHistory[existingEntryIndex] = `${today}: ${updatedQuantity}`;
+        } else {
+            // Otherwise, add a new entry
+            newQuantityHistory.push(`${today}: ${updatedQuantity}`);
+        }
 
         await update(productRef, {
             quantity: updatedQuantity, // Update quantity
             quantityHistory: newQuantityHistory, // Update quantity history
-            lastUpdated: new Date().toISOString().split('T')[0], // Update last updated date (only date)
+            lastUpdated: today, // Update last updated date (only date)
         });
 
         return updatedQuantity; // Return the updated quantity
@@ -92,5 +101,30 @@ export const getAllProducts = async () => {
         return snapshot.val();
     } catch (error) {
         throw new Error(`Error retrieving products: ${error.message}`);
+    }
+};
+
+// Function to add a new category
+export const addCategory = async (category) => {
+    const db = getDatabase();
+    const categoryRef = ref(db, 'categories/' + category); // Save category by name
+
+    try {
+        await set(categoryRef, { name: category }); // Store category
+    } catch (error) {
+        throw new Error(`Error adding category: ${error.message}`);
+    }
+};
+
+// Function to retrieve all categories
+export const getCategories = async () => {
+    const db = getDatabase();
+    const categoriesRef = ref(db, 'categories');
+
+    try {
+        const snapshot = await get(categoriesRef);
+        return snapshot.exists() ? Object.keys(snapshot.val()) : []; // Return an array of category names
+    } catch (error) {
+        throw new Error(`Error retrieving categories: ${error.message}`);
     }
 };
