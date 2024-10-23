@@ -169,7 +169,6 @@ function NewAssets() {
                                             ))}
                                         </Dropdown.Menu>
                                     </Dropdown>
-                                    {!size && <small className="text-danger">Please select a size.</small>}
                                 </Form.Group>
 
                                 <Form.Group controlId="color" className="mt-3">
@@ -180,7 +179,6 @@ function NewAssets() {
                                         value={color}
                                         onChange={(e) => setColor(e.target.value)}
                                     />
-                                    {!color && <small className="text-danger">Please enter a color.</small>}
                                 </Form.Group>
 
                                 <Form.Group controlId="wattage" className="mt-3">
