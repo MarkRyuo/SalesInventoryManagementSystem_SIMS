@@ -10,7 +10,7 @@
 ## Changelog
 
 ### v6.2.1 (Latest)
-- Scanner
+- Scanner (Unstable but Good)
 
 ### v6.1.3
 - Redesigning Dashboards
