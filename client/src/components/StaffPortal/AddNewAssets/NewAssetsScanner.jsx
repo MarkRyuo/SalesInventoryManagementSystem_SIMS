@@ -42,10 +42,10 @@ function NewAssetsScanner() {
 
                                 if (product) {
                                     const additionalQuantity = 1; // Increment quantity as needed
-                                    const updatedQuantity = await updateProductQuantity(barcode, additionalQuantity);
+                                    const updatedQuantity = await updateProductQuantity(barcode, additionalQuantity); // Get updated quantity
 
                                     const productName = product.productName || "Unknown Product";
-                                    const newQuantity = updatedQuantity || "N/A";
+                                    const newQuantity = updatedQuantity; // This now holds the updated quantity
 
                                     setMessage(`Quantity updated for ${productName}: New Quantity is ${newQuantity}.`);
                                 } else {
