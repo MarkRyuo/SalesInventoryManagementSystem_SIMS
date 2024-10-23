@@ -204,7 +204,7 @@ function NewAssets() {
                             </div>
 
                             <Form.Group controlId="quantity" className="mt-3">
-                                <Form.Label>Quantity <span className="text-danger">*</span></Form.Label>
+                                <Form.Label>Quantity<span className="text-danger">*</span></Form.Label>
                                 <Form.Control
                                     type="number"
                                     value={quantity}
