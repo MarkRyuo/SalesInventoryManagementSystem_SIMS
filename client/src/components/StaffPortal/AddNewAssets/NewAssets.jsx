@@ -216,7 +216,7 @@ function NewAssets() {
                             </Form.Group>
 
                             <Form.Group controlId="price" className="mt-3">
-                                <Form.Label>Price <span className="text-danger">*</span></Form.Label>
+                                <Form.Label>Price<span className="text-danger">*</span></Form.Label>
                                 <Form.Control
                                     type="number"
                                     placeholder="Enter price (e.g., 100.00)"
@@ -229,7 +229,7 @@ function NewAssets() {
                             </Form.Group>
 
                             <Form.Group controlId="category" className="mt-3">
-                                <Form.Label>Category <span className="text-danger">*</span></Form.Label>
+                                <Form.Label>Category<span className="text-danger">*</span></Form.Label>
                                 <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
                                     <option value="">Select Category</option>
                                     {categories.map((cat, index) => (
