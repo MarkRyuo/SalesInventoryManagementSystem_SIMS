@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Container, Form, Button, Row, Col, Card, Alert, Spinner } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col, Card, Alert, Spinner, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { addNewProduct, addCategory, getCategories } from '../../../services/ProductService'; // Import the services
+import { addNewProduct, addCategory, getCategories } from '../../../services/ProductService';
 
 function NewAssets() {
     const location = useLocation();
@@ -46,7 +46,7 @@ function NewAssets() {
     const generateSKU = (productName, size, color, wattage, voltage) => {
         const productCode = productName.slice(0, 3).toUpperCase().replace(/\s+/g, '');
         const sizeCode = size ? size.toUpperCase() : '';
-        const colorCode = color ? color.toUpperCase() : ''; // Include full color name
+        const colorCode = color ? color.toUpperCase() : '';
         const wattageCode = wattage ? wattage + 'W' : '';
         const voltageCode = voltage ? voltage + 'V' : '';
         const uniqueID = Date.now().toString().slice(-4);
@@ -64,7 +64,7 @@ function NewAssets() {
     const handleSaveNewCategory = async () => {
         if (newCategory) {
             try {
-                await addCategory(newCategory); // Save the new category in the database
+                await addCategory(newCategory);
                 setCategories([...categories, newCategory]);
                 setCategory(newCategory);
                 setNewCategory('');
@@ -141,57 +141,67 @@ function NewAssets() {
                                 </Form.Group>
                             </div>
 
-                            <Form.Group controlId="productName">
-                                <Form.Label>Product Name <span className="text-danger">*</span></Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter product name"
-                                    value={productName}
-                                    onChange={(e) => setProductName(e.target.value)}
-                                    required
-                                />
-                            </Form.Group>
+                            <div className="mb-3">
+                                <p className='fs-4'>Product Details</p>
+                                <Form.Group controlId="productName">
+                                    <Form.Label>Product Name <span className="text-danger">*</span></Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter product name (e.g., LED Bulb)"
+                                        value={productName}
+                                        onChange={(e) => setProductName(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
 
-                            <Form.Group controlId="size" className="mt-3">
-                                <Form.Label>Size <span className="text-danger">*</span></Form.Label>
-                                <Form.Control as="select" value={size} onChange={(e) => setSize(e.target.value)} required>
-                                    <option value="">Select Size</option>
-                                    {sizes.map((size) => (
-                                        <option key={size} value={size}>{size}</option>
-                                    ))}
-                                </Form.Control>
-                            </Form.Group>
+                                <Form.Group controlId="size" className="mt-3">
+                                    <Form.Label>Size <span className="text-danger">*</span></Form.Label>
+                                    <Dropdown>
+                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                            {size || 'Select Size'}
+                                        </Dropdown.Toggle>
 
-                            <Form.Group controlId="color" className="mt-3">
-                                <Form.Label>Color <span className="text-danger">*</span></Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter color"
-                                    value={color}
-                                    onChange={(e) => setColor(e.target.value)}
-                                    required
-                                />
-                            </Form.Group>
+                                        <Dropdown.Menu>
+                                            {sizes.map((size) => (
+                                                <Dropdown.Item key={size} onClick={() => setSize(size)}>
+                                                    {size}
+                                                </Dropdown.Item>
+                                            ))}
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </Form.Group>
 
-                            <Form.Group controlId="wattage" className="mt-3">
-                                <Form.Label>Wattage</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter wattage"
-                                    value={wattage}
-                                    onChange={(e) => setWattage(e.target.value)}
-                                />
-                            </Form.Group>
+                                <Form.Group controlId="color" className="mt-3">
+                                    <Form.Label>Color <span className="text-danger">*</span></Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter color (e.g., Red)"
+                                        value={color}
+                                        onChange={(e) => setColor(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
 
-                            <Form.Group controlId="voltage" className="mt-3">
-                                <Form.Label>Voltage</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter voltage"
-                                    value={voltage}
-                                    onChange={(e) => setVoltage(e.target.value)}
-                                />
-                            </Form.Group>
+                                <Form.Group controlId="wattage" className="mt-3">
+                                    <Form.Label>Wattage</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter wattage (e.g., 60W)"
+                                        value={wattage}
+                                        onChange={(e) => setWattage(e.target.value)}
+                                    />
+                                </Form.Group>
+
+                                <Form.Group controlId="voltage" className="mt-3">
+                                    <Form.Label>Voltage</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter voltage (e.g., 220V)"
+                                        value={voltage}
+                                        onChange={(e) => setVoltage(e.target.value)}
+                                    />
+                                </Form.Group>
+                            </div>
 
                             <Form.Group controlId="quantity" className="mt-3">
                                 <Form.Label>Quantity <span className="text-danger">*</span></Form.Label>
@@ -199,6 +209,7 @@ function NewAssets() {
                                     type="number"
                                     value={quantity}
                                     min={1}
+                                    placeholder="Enter quantity (e.g., 10)"
                                     onChange={(e) => setQuantity(Number(e.target.value))}
                                     required
                                 />
@@ -208,7 +219,7 @@ function NewAssets() {
                                 <Form.Label>Price <span className="text-danger">*</span></Form.Label>
                                 <Form.Control
                                     type="number"
-                                    placeholder="Enter price"
+                                    placeholder="Enter price (e.g., 100.00)"
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
                                     required
@@ -231,7 +242,7 @@ function NewAssets() {
                                     <Form.Label>New Category</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        placeholder="Enter new category"
+                                        placeholder="Enter new category (e.g., Electronics)"
                                         value={newCategory}
                                         onChange={(e) => setNewCategory(e.target.value)}
                                     />
