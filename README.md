@@ -11,7 +11,7 @@
 
 ### v6.3 (Latest)
 - Scanner Design
-- convert v6.2.2-beta
+- convert to v6.2.2-beta
 
 ### v6.1.3 (Latest)
 - Redesigning Dashboards
