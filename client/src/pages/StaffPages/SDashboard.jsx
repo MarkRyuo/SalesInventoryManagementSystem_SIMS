@@ -6,8 +6,9 @@ import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons
 import { TiDocumentAdd } from "react-icons/ti";
 import { BiScan } from "react-icons/bi";
 import { MdOutlineManageSearch } from "react-icons/md";
-import { LiaProductHunt } from "react-icons/lia";
+import { getAllProducts } from "../../services/ProductService"; // Import your product service
 import CardProduct from "../../components/StaffPortal/Cards/CardProduct";
+import { LiaProductHunt } from 'react-icons/lia'; // Ensure this is correctly imported
 import { db } from "../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -15,20 +16,12 @@ function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
     const [currentDate, setCurrentDate] = useState("");
     const [loading, setLoading] = useState(true);
+    const [productsToday, setProductsToday] = useState([]);
 
     const [buttons] = useState([
         { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={80} />, path: "/AddNewAssets", id: 1 },
         { btnName: "ScanAssets", btnIcon: <BiScan size={80} />, path: "/ScanAsset", id: 2 },
         { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={80} />, path: "/SearchAssets", id: 3 },
-    ]);
-
-    const [cardProduct] = useState([
-        {
-            productIcon: <LiaProductHunt size={30} />,
-            productName: 'Sample',
-            productValue: '01213224234',
-            id: 'p1'
-        }
     ]);
 
     useEffect(() => {
@@ -52,8 +45,44 @@ function SDashboard() {
             }
         };
 
-        // Fetch staff details on component mount
+        // Fetch products added today and existing products with updated quantity
+        const fetchProductsAddedOrUpdatedToday = async () => {
+            try {
+                const products = await getAllProducts(); // Fetch all products
+                const today = new Date().toISOString().split('T')[0]; // Get today's date in yyyy-mm-dd format
+
+                // Filter products that are either added today or have an updated quantity today
+                const productsToday = Object.values(products).filter(product =>
+                    product.dateAdded === today ||
+                    (product.quantityHistory && product.quantityHistory.some(entry => entry.startsWith(today)))
+                );
+
+                // Map the filtered products to include the correct quantity based on today's date
+                const mappedProductsToday = productsToday.map(product => {
+                    let quantity = product.quantity; // Default to current quantity
+
+                    // Check if today's entry exists in the quantity history
+                    const todayEntry = product.quantityHistory?.find(entry => entry.startsWith(today));
+                    if (todayEntry) {
+                        const [, updatedQuantity] = todayEntry.split(': '); // Get updated quantity from history
+                        quantity = updatedQuantity; // Update quantity to today's quantity from history
+                    }
+
+                    return {
+                        ...product,
+                        quantity, // Set the correct quantity
+                    };
+                });
+
+                setProductsToday(mappedProductsToday);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
+
+        // Fetch staff details and products on component mount
         fetchStaffDetails();
+        fetchProductsAddedOrUpdatedToday();
 
         // Set the current date
         const today = new Date();
@@ -106,9 +135,20 @@ function SDashboard() {
                         </div>
 
                         <div className={SDashboardCss.containerCardProduct}>
-                            <p className="fs-5 m-0 ps-4">Product Add Today:</p>
+                            <p className="fs-5 m-0 ps-4">Products Added or Updated Today:</p>
                             <div className={SDashboardCss.contentCardProduct}>
-                                <CardProduct cardProduct={cardProduct.filter(CardProducts => CardProducts.id === 'p1')} />
+                                {productsToday.length > 0 ? (
+                                    <CardProduct
+                                        cardProduct={productsToday.map(product => ({
+                                            productIcon: <LiaProductHunt size={30} />,
+                                            productName: product.productName,
+                                            productValue: `SKU: ${product.sku}, Quantity: ${product.quantity}`, // Display SKU and Quantity
+                                            id: product.barcode
+                                        }))}
+                                    />
+                                ) : (
+                                    <p>No products added or updated today.</p>
+                                )}
                             </div>
                         </div>
                     </>
