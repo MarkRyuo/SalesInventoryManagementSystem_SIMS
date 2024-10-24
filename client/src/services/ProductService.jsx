@@ -26,7 +26,7 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
     }
 };
 
-// Function to update the product quantity
+// Function to update the product quantity (with fix applied)
 export const updateProductQuantity = async (barcode, additionalQuantity) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
@@ -49,15 +49,17 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         const existingEntryIndex = newQuantityHistory.findIndex(entry => entry.startsWith(today));
 
         if (existingEntryIndex > -1) {
-            // If today's entry exists, update it
-            newQuantityHistory[existingEntryIndex] = `${today}: ${updatedQuantity}`;
+            // If today's entry exists, only update it with today's added quantity
+            const [, previousQuantity] = newQuantityHistory[existingEntryIndex].split(': '); // Destructuring only previousQuantity
+            const updatedHistoryQuantity = parseInt(previousQuantity) + additionalQuantity;
+            newQuantityHistory[existingEntryIndex] = `${today}: ${updatedHistoryQuantity}`;
         } else {
-            // Otherwise, add a new entry
-            newQuantityHistory.push(`${today}: ${updatedQuantity}`);
+            // Otherwise, add a new entry with today's added quantity
+            newQuantityHistory.push(`${today}: ${additionalQuantity}`);
         }
 
         await update(productRef, {
-            quantity: updatedQuantity, // Update quantity
+            quantity: updatedQuantity, // Update total quantity
             quantityHistory: newQuantityHistory, // Update quantity history
             lastUpdated: today, // Update last updated date (only date)
         });
