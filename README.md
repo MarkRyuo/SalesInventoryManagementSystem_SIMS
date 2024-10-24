@@ -9,7 +9,10 @@
 
 ## Changelog
 
-### v6.2.1 (Latest)
+### v6.2.2 (Latest)
+- Scanner Update
+
+### v6.2.1 
 - Scanner (Unstable but Good)
 
 ### v6.1.3
