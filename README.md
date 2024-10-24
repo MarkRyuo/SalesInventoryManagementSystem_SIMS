@@ -9,6 +9,9 @@
 
 ## Changelog
 
+### v6.3.1 (Latest)
+- Admin Search Product
+
 ### v6.3 (Latest)
 - Scanner Design
 - Convert to v6.2.2-beta
