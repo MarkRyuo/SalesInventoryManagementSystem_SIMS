@@ -3,7 +3,7 @@ import { IoSearch } from "react-icons/io5";
 import Productcss from './Css/Product.module.css';
 import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../services/ProductService"; // Ensure to import your service
-import MainLayout from '../layout/MainLayout' ;
+import { MainLayout } from '../layout/MainLayout';
 
 function ProductChart() {
     const [searchTerm, setSearchTerm] = useState("");
