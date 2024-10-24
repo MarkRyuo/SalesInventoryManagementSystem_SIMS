@@ -1,6 +1,6 @@
 import { Row, Col, Form, Button, Dropdown, DropdownButton, Spinner } from "react-bootstrap";
 import { IoSearch } from "react-icons/io5";
-import Productcss from './Product.module.css';
+import Productcss from './Css/Product.module.css';
 import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../services/ProductService"; // Ensure to import your service
 
