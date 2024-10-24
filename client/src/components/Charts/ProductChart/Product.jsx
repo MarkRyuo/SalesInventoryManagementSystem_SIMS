@@ -88,7 +88,7 @@ function ProductChart() {
                                         {/* Display your product details here */}
                                         <p className="fs-4">{product.productName}</p>
                                         <p className="fs-6 m-0 p-0">SKU: {product.sku}</p>
-                                        <p>Quantity: {product.quantity}</p>
+                                        <p className="fs-6 m-0 p-0">Quantity: {product.quantity}</p>
                                         <p>Category: {product.category}</p>
                                     </div>
                                 ))
