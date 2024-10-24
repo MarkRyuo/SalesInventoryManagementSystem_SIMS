@@ -11,8 +11,10 @@
 
 ### v6.3 (Latest)
 - Scanner Design
+- Convert to v6.2.2-beta
+- Search Assets Working
 
-### v6.1.3 (Latest)
+### v6.1.3
 - Redesigning Dashboards
 - Designing Staff System
 
@@ -127,6 +129,10 @@
 5. **Install Firebase**
     ```bash 
     npm install firebase
+    ```
+6. **Install zxing scanner** 
+    ```bash
+    npm install @zxing/library
     ```
 
 ### How to Run the Project
