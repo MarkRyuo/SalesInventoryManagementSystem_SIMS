@@ -130,6 +130,10 @@
     npm install firebase
     ```
 
+    ```bash
+    npm install @zxing/library
+    ```
+
 ### How to Run the Project
 
 1. After installing the dependencies, you can run the project using:
