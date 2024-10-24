@@ -1,4 +1,4 @@
-import { Form, Button, Dropdown, Card, Spinner } from "react-bootstrap";
+import { Form, Dropdown, Card, Spinner } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService"; // Import your product service
 import SDashboardCss from './SearchAssets.module.css'; // Create a CSS module for styling
@@ -113,7 +113,6 @@ function SearchAssetsMode() {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)} // Update search term
                     />
-                    <Button variant="outline-success">Search</Button>
                 </Form>
             </div>
             <div className={SDashboardCss.resultsContainer}>
