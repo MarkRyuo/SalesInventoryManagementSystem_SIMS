@@ -88,7 +88,7 @@ function ProductChart() {
                         ) : (
                             filteredProducts.length > 0 ? (
                                 filteredProducts.map(product => (
-                                    <div key={product.barcode} style={{border: '1px solid'}}>
+                                    <div key={product.barcode} className={Productcss.productCard}>
                                         {/* Display your product details here */}
                                         <h5>{product.productName}</h5>
                                         <p>SKU: {product.sku}</p>
