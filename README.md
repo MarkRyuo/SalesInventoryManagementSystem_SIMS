@@ -11,6 +11,7 @@
 
 ### v6.2.2 (Latest)
 - Scanner Update
+- Search Working 
 
 ### v6.2.1 
 - Scanner (Unstable but Good)
