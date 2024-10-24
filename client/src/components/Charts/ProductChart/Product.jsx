@@ -1,4 +1,4 @@
-import { Row, Col, Form, Button, Dropdown, DropdownButton, Spinner } from "react-bootstrap";
+import { Row, Col, Form, Dropdown, DropdownButton, Spinner } from "react-bootstrap";
 import Productcss from './Product.module.css';
 import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService"; // Ensure to import your service
