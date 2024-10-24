@@ -1,4 +1,4 @@
-import { Form, Button, Dropdown, Card } from "react-bootstrap";
+import { Form, Button, Dropdown, Card, Spinner } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService"; // Import your product service
 import SDashboardCss from './SearchAssets.module.css'; // Create a CSS module for styling
@@ -10,24 +10,31 @@ function SearchAssetsMode() {
     const [filterOption, setFilterOption] = useState("All");
     const [categories, setCategories] = useState([]); // State for categories
     const [selectedCategory, setSelectedCategory] = useState("All"); // State for selected category
+    const [loading, setLoading] = useState(true); // State for loading
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true); // Set loading to true before fetching
             try {
                 const allProducts = await getAllProducts();
                 setProducts(Object.values(allProducts)); // Store products in state
                 setFilteredProducts(Object.values(allProducts)); // Initially display all products
             } catch (error) {
                 console.error("Error fetching products:", error);
+            } finally {
+                setLoading(false); // Set loading to false after fetching
             }
         };
 
         const fetchCategories = async () => {
+            setLoading(true); // Set loading to true before fetching
             try {
                 const allCategories = await getCategories();
                 setCategories(allCategories); // Set categories state
             } catch (error) {
                 console.error("Error fetching categories:", error);
+            } finally {
+                setLoading(false); // Set loading to false after fetching
             }
         };
 
@@ -102,7 +109,9 @@ function SearchAssetsMode() {
                 </Form>
             </div>
             <div className={SDashboardCss.resultsContainer}>
-                {filteredProducts.length > 0 ? (
+                {loading ? (
+                    <Spinner animation="border" variant="primary" />
+                ) : filteredProducts.length > 0 ? (
                     filteredProducts.map(product => (
                         <Card key={product.barcode} className={SDashboardCss.productCard}>
                             <Card.Body>
