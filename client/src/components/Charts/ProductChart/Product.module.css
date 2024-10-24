@@ -31,3 +31,18 @@
 .productContent {
     padding: 5px;
 }
+
+.productCard {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    width: 200px;
+    /* Set width for product cards */
+    text-align: left;
+    /* Align text to the left */
+    background-color: #f9f9f9;
+    /* Light background color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Slight shadow for depth */
+}
