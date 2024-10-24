@@ -86,8 +86,8 @@ function ProductChart() {
                                 filteredProducts.map(product => (
                                     <div key={product.barcode} className={Productcss.productCard}>
                                         {/* Display your product details here */}
-                                        <h5>{product.productName}</h5>
-                                        <p>SKU: {product.sku}</p>
+                                        <p className="fs-4">{product.productName}</p>
+                                        <p className="fs-6 m-0 p-0">SKU: {product.sku}</p>
                                         <p>Quantity: {product.quantity}</p>
                                         <p>Category: {product.category}</p>
                                     </div>
