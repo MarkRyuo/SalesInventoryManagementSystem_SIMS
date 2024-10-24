@@ -53,7 +53,7 @@ function ProductChart() {
                         <Col lg={3} xs={8} md={5}>
                             <Form.Control
                                 type="text"
-                                placeholder="Search Products"
+                                placeholder= "Search Products"
                                 className="mr-sm-2"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)} // Update search term
