@@ -59,11 +59,6 @@ function ProductChart() {
                                 onChange={(e) => setSearchTerm(e.target.value)} // Update search term
                             />
                         </Col>
-                        <Col lg={1} xs={2} md={2} style={{ width: "auto" }} className="me-2">
-                            <Button variant="primary" onClick={(e) => e.preventDefault()}>
-                                <IoSearch />
-                            </Button>
-                        </Col>
                     </Form>
                 </Col>
                 <Col lg={12}>
