@@ -45,6 +45,7 @@ function SearchAssetsMode() {
     useEffect(() => {
         const filterProducts = () => {
             const lowercasedSearchTerm = searchTerm.toLowerCase();
+            console.log("Searching for:", lowercasedSearchTerm, "with filter option:", filterOption);
 
             const filtered = products.filter(product => {
                 const matchesSearchTerm = (
@@ -66,6 +67,7 @@ function SearchAssetsMode() {
                 return matchesSearchTerm && (filterOption !== "All" ? matchesCategory : true);
             });
 
+            console.log("Filtered products:", filtered);
             setFilteredProducts(filtered);
         };
 
