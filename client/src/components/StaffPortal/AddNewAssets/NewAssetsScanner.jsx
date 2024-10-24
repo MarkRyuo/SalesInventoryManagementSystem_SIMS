@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
 import { Container, Row, Col, Alert, Card, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { fetchProductByBarcode, updateProductQuantity } from '../../../services/';
+import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
 
 function NewAssetsScanner() {
     const videoRef = useRef(null);
