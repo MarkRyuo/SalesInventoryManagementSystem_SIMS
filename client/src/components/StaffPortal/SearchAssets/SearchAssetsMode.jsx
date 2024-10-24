@@ -112,19 +112,39 @@ function SearchAssetsMode() {
                 {loading ? (
                     <Spinner animation="border" variant="primary" />
                 ) : filteredProducts.length > 0 ? (
-                    filteredProducts.map(product => (
-                        <Card key={product.barcode} className={SDashboardCss.productCard}>
-                            <Card.Body>
-                                <Card.Title>{product.productName}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">SKU: {product.sku}</Card.Subtitle>
-                                <Card.Text>
-                                    <strong>Barcode:</strong> {product.barcode}<br />
-                                    <strong>Quantity:</strong> {product.quantity}<br />
-                                    <strong>Category:</strong> {product.category} {/* Display category */}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    ))
+                    filteredProducts.map(product => {
+                        // Determine stock status
+                        let stockStatus;
+                        let statusColor;
+
+                        if (product.quantity < 5) {
+                            stockStatus = "Low Stock";
+                            statusColor = "red"; // Color for low stock
+                        } else if (product.quantity > 20) {
+                            stockStatus = "High Stock";
+                            statusColor = "green"; // Color for high stock
+                        } else {
+                            stockStatus = "In Stock";
+                            statusColor = "yellow"; // Color for normal stock
+                        }
+
+                        return (
+                            <Card key={product.barcode} className={SDashboardCss.productCard}>
+                                <Card.Body>
+                                    <Card.Title>{product.productName}</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">SKU: {product.sku}</Card.Subtitle>
+                                    <Card.Text>
+                                        <strong>Barcode:</strong> {product.barcode}<br />
+                                        <strong>Quantity:</strong> {product.quantity}<br />
+                                        <strong>Category:</strong> {product.category} {/* Display category */}
+                                        <div style={{ color: statusColor, marginTop: '10px' }}>
+                                            {stockStatus} {/* Display stock status */}
+                                        </div>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        );
+                    })
                 ) : (
                     <p>No products found.</p>
                 )}
