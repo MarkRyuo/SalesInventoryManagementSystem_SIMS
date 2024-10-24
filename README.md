@@ -129,7 +129,7 @@
     ```bash 
     npm install firebase
     ```
-
+6. **Install zxing scanner** 
     ```bash
     npm install @zxing/library
     ```
