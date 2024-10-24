@@ -14,7 +14,7 @@
 - Convert to v6.2.2-beta
 - Search Assets Working
 
-### v6.1.3 (Latest
+### v6.1.3
 - Redesigning Dashboards
 - Designing Staff System
 
