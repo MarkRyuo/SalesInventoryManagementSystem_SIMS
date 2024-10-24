@@ -48,6 +48,7 @@ function SearchAssetsMode() {
 
             const filtered = products.filter(product => {
                 const matchesSearchTerm = (
+                    (filterOption === "All") || // If "All" is selected, all products match
                     (filterOption === "Filter by" && (
                         product.productName.toLowerCase().includes(lowercasedSearchTerm) ||
                         product.sku.toLowerCase().includes(lowercasedSearchTerm) ||
@@ -61,7 +62,8 @@ function SearchAssetsMode() {
 
                 const matchesCategory = selectedCategory === "Select a Category" || selectedCategory === "All" || product.category === selectedCategory;
 
-                return matchesSearchTerm && matchesCategory; // Both search term and category must match
+                // Only apply category filter if filterOption is not "All"
+                return matchesSearchTerm && (filterOption !== "All" ? matchesCategory : true);
             });
 
             setFilteredProducts(filtered);
