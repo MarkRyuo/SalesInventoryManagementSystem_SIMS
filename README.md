@@ -12,7 +12,7 @@
 ### v6.3.1 (Latest)
 - Admin Search Product
 
-### v6.3 (Latest)
+### v6.3
 - Scanner Design
 - Convert to v6.2.2-beta
 - Search Assets Working
