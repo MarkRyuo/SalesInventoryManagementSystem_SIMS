@@ -7,6 +7,7 @@
 }
 
 .colProduct {
+    border: 1px solid;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -18,7 +19,7 @@
     border-radius: 5px;
     padding: 15px;
     margin: 10px;
-    width: 200px;
+    width: 100%;
     /* Set width for product cards */
     text-align: left;
     /* Align text to the left */
