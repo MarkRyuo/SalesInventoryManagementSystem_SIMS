@@ -9,6 +9,7 @@ function ProductChart() {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const [selectedStock, setSelectedStock] = useState("All");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -36,13 +37,28 @@ function ProductChart() {
             const filtered = products.filter(product => {
                 const matchesSearchTerm = product.productName.toLowerCase().includes(lowercasedSearchTerm);
                 const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
-                return matchesSearchTerm && matchesCategory;
+                const matchesStock = (selectedStock === "All" ||
+                    (selectedStock === "In Stock" && product.quantity > 10) ||  // Adjust threshold as needed
+                    (selectedStock === "Low Stock" && product.quantity > 0 && product.quantity <= 10) ||
+                    (selectedStock === "High Stock" && product.quantity === 0));
+
+                return matchesSearchTerm && matchesCategory && matchesStock;
             });
             setFilteredProducts(filtered);
         };
 
         filterProducts();
-    }, [searchTerm, selectedCategory, products]);
+    }, [searchTerm, selectedCategory, selectedStock, products]);
+
+    const getStockStatus = (quantity) => {
+        if (quantity > 10) {
+            return { text: "In Stock", color: "green" };
+        } else if (quantity > 0) {
+            return { text: "Low Stock", color: "orange" };
+        } else {
+            return { text: "Out of Stock", color: "red" };
+        }
+    };
 
     return (
         <>
@@ -52,7 +68,7 @@ function ProductChart() {
                         <Col lg={3} xs={8} md={5}>
                             <Form.Control
                                 type="text"
-                                placeholder= "Search Products"
+                                placeholder="Search Products"
                                 className="mr-sm-2"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)} // Update search term
@@ -67,6 +83,12 @@ function ProductChart() {
                             <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
                         ))}
                     </DropdownButton>
+                    <DropdownButton id="stock-dropdown" title={selectedStock} className="ms-3" onSelect={(eventKey) => setSelectedStock(eventKey)}>
+                        <Dropdown.Item eventKey="All">All</Dropdown.Item>
+                        <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
+                        <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
+                        <Dropdown.Item eventKey="High Stock">High Stock</Dropdown.Item>
+                    </DropdownButton>
                 </Col>
             </Row>
 
@@ -77,15 +99,20 @@ function ProductChart() {
                             <Spinner animation="border" variant="primary" />
                         ) : (
                             filteredProducts.length > 0 ? (
-                                filteredProducts.map(product => (
-                                    <div key={product.barcode} className={Productcss.productCard}>
-                                        {/* Display your product details here */}
-                                        <p className="fs-4">{product.productName}</p>
-                                        <p className="fs-6 m-0 p-0">SKU: {product.sku}</p>
-                                        <p className="fs-6 m-0 p-0">Quantity: {product.quantity}</p>
-                                        <p>Category: {product.category}</p>
-                                    </div>
-                                ))
+                                filteredProducts.map(product => {
+                                    const { text, color } = getStockStatus(product.quantity);
+                                    return (
+                                        <div key={product.barcode} className={Productcss.productCard}>
+                                            <p className="fs-4">{product.productName}</p>
+                                            <p className="fs-6 m-0 p-0">SKU: {product.sku}</p>
+                                            <p className="fs-6 m-0 p-0">Quantity: {product.quantity}</p>
+                                            <p>Category: {product.category}</p>
+                                            <p style={{ color: color }}>
+                                                <span style={{ color: color }}>•</span> {text}
+                                            </p>
+                                        </div>
+                                    );
+                                })
                             ) : (
                                 <p>No products found.</p>
                             )
