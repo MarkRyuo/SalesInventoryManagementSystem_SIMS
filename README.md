@@ -11,7 +11,7 @@
 
 ### v6.3 (Latest)
 - Scanner Design
-- convert to v6.2.2-beta
+- Convert to v6.2.2-beta
 - Search Assets Working
 
 ### v6.1.3 (Latest)
