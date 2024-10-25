@@ -77,7 +77,7 @@ function SearchAssetsMode() {
     return (
         <div className={SDashboardCss.searchContainer}>
             <Row className={SDashboardCss.searchHeader}>
-                <Col lg={12} style={{display: "flex", border: '1px solid', justifyContent: "flex-end"}} className="d-flex justify-content-flex-end">
+                <Col lg={12} style={{display: "flex", border: '1px solid', justifyContent: "flex-end"}}>
                     <Form>
                         <Form.Control
                             type="search"
