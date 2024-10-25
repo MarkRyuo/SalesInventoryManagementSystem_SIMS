@@ -76,8 +76,8 @@ function ProductChart() {
                         </Col>
                     </Form>
                 </Col>
-                <Row>
-                    <Col lg={3}>
+                <Row style={{display: "flex"}}>
+                    <Col lg={}>
                         <DropdownButton id="dropdown-basic-button" title={selectedCategory} className="ms-3" onSelect={(eventKey) => setSelectedCategory(eventKey)}>
                             <Dropdown.Item eventKey="All">All</Dropdown.Item>
                             {categories.map((category, index) => (
