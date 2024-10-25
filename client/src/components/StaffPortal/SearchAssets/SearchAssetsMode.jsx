@@ -147,7 +147,7 @@ function SearchAssetsMode() {
                                     <Card.Text>
                                         <p>Barcode: {product.barcode} </p>
                                         <p>Quantity: {product.quantity}</p>
-                                        <p>Category:</p> {product.category}
+                                        <p>Category: {product.category}</p>
                                         <div style={{ color: statusColor, marginTop: '10px' }}>
                                             {stockStatus} {/* Display stock status */}
                                         </div>
