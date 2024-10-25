@@ -78,7 +78,7 @@ function SearchAssetsMode() {
         <div className={SDashboardCss.searchContainer}>
             <Row className={SDashboardCss.searchHeader}>
                 <Col lg={12} style={{display: "flex", justifyContent: "flex-end"}}>
-                    <Form className="p-4">
+                    <Form className="p-2">
                         <Form.Control
                             type="search"
                             placeholder="Search"
@@ -89,7 +89,7 @@ function SearchAssetsMode() {
                         />
                     </Form>
                 </Col>
-                <div style={{display: "flex", gap: 10}}>
+                <div style={{display: "flex", gap: 10, padding: 10}}>
                     <Dropdown>
                         <Dropdown.Toggle variant="success" id="filter-dropdown">
                             {filterOption}
