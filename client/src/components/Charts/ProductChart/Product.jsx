@@ -76,7 +76,24 @@ function ProductChart() {
                         </Col>
                     </Form>
                 </Col>
-                <Row></Row>
+                <Row>
+                    <Col lg={3}>
+                        <DropdownButton id="dropdown-basic-button" title={selectedCategory} className="ms-3" onSelect={(eventKey) => setSelectedCategory(eventKey)}>
+                            <Dropdown.Item eventKey="All">All</Dropdown.Item>
+                            {categories.map((category, index) => (
+                                <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
+                            ))}
+                        </DropdownButton>
+                    </Col>
+                    <Col lg={3}>
+                        <DropdownButton id="stock-dropdown" title={selectedStock} className="ms-3" onSelect={(eventKey) => setSelectedStock(eventKey)}>
+                            <Dropdown.Item eventKey="All">All</Dropdown.Item>
+                            <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
+                            <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
+                            <Dropdown.Item eventKey="High Stock">High Stock</Dropdown.Item>
+                        </DropdownButton>
+                    </Col>
+                </Row>
             </Row>
 
             <div className={Productcss.containerProduct}>
