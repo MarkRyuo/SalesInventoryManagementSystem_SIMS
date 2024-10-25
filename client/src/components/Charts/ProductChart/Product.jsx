@@ -84,7 +84,7 @@ function ProductChart() {
                             className="ms-3" 
                             onSelect={(eventKey) => setSelectedCategory(eventKey)}
                         >
-                            <Dropdown.Item eventKey="Category">Category</Dropdown.Item>
+                            <Dropdown.Item eventKey="Category">filter by AllCategory</Dropdown.Item>
                             {categories.map((category, index) => (
                                 <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
                             ))}
