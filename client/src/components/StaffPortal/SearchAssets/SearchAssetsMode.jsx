@@ -145,7 +145,7 @@ function SearchAssetsMode() {
                                     <Card.Title>{product.productName}</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">SKU: {product.sku}</Card.Subtitle>
                                     <Card.Text>
-                                        <p>Barcode: {product.barcode} </p>
+                                        <p className="p-0 m-0">Barcode: {product.barcode} </p>
                                         <p>Quantity: {product.quantity}</p>
                                         <p>Category: {product.category}</p>
                                         <div style={{ color: statusColor, marginTop: '10px' }}>
