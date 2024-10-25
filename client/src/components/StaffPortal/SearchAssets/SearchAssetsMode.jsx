@@ -142,7 +142,11 @@ function SearchAssetsMode() {
                         return (
                             <Card key={product.barcode} className={SDashboardCss.productCard}>
                                 <Card.Body>
-                                    <Card.Title>{product.productName}</Card.Title>
+                                    <Card.Title>
+                                        <div>
+                                            {product.productName}
+                                        </div>
+                                    </Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted p-0 m-0">SKU: {product.sku}</Card.Subtitle>
                                     <Card.Text>
                                         <p className="p-0 m-0">Barcode: {product.barcode} </p>
