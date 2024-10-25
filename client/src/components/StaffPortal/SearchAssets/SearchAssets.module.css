@@ -24,7 +24,7 @@
 
     border: 1px solid;
     padding: 10px;
-    
+    min-width: 3;
 }
 
 .productCard {
