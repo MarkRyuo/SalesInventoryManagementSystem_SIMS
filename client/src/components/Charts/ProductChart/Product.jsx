@@ -8,8 +8,8 @@ function ProductChart() {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("All");
-    const [selectedStock, setSelectedStock] = useState("All");
+    const [selectedCategory, setSelectedCategory] = useState("Filter by Category");
+    const [selectedStock, setSelectedStock] = useState("Filter by Stock");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -36,9 +36,9 @@ function ProductChart() {
             const lowercasedSearchTerm = searchTerm.toLowerCase();
             const filtered = products.filter(product => {
                 const matchesSearchTerm = product.productName.toLowerCase().includes(lowercasedSearchTerm);
-                const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
-                const matchesStock = (selectedStock === "All" ||
-                    (selectedStock === "In Stock" && product.quantity > 10) ||  // Adjust threshold as needed
+                const matchesCategory = selectedCategory === "Filter by Category" || product.category === selectedCategory;
+                const matchesStock = (selectedStock === "Filter by Stock" ||
+                    (selectedStock === "In Stock" && product.quantity > 10) ||  
                     (selectedStock === "Low Stock" && product.quantity > 0 && product.quantity <= 10) ||
                     (selectedStock === "High Stock" && product.quantity === 0));
 
@@ -71,23 +71,33 @@ function ProductChart() {
                                 placeholder="Search Products"
                                 className="mr-sm-2"
                                 value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)} // Update search term
+                                onChange={(e) => setSearchTerm(e.target.value)}
                             />
                         </Col>
                     </Form>
                 </Col>
-                <div style={{display: "inline-flex",gap: 100, marginTop: 10}}>
+                <div style={{display: "inline-flex", gap: 70, marginTop: 10}}>
                     <div>
-                        <DropdownButton id="dropdown-basic-button" title={selectedCategory} className="ms-3" onSelect={(eventKey) => setSelectedCategory(eventKey)}>
-                            <Dropdown.Item eventKey="All">All</Dropdown.Item>
+                        <DropdownButton 
+                            id="dropdown-basic-button" 
+                            title={selectedCategory} 
+                            className="ms-3" 
+                            onSelect={(eventKey) => setSelectedCategory(eventKey)}
+                        >
+                            <Dropdown.Item eventKey="Filter by Category">Filter by Category</Dropdown.Item>
                             {categories.map((category, index) => (
                                 <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
                             ))}
                         </DropdownButton>
                     </div>
                     <div>
-                        <DropdownButton id="stock-dropdown" title={selectedStock} className="ms-3" onSelect={(eventKey) => setSelectedStock(eventKey)}>
-                            <Dropdown.Item eventKey="All">All</Dropdown.Item>
+                        <DropdownButton 
+                            id="stock-dropdown" 
+                            title={selectedStock} 
+                            className="ms-3" 
+                            onSelect={(eventKey) => setSelectedStock(eventKey)}
+                        >
+                            <Dropdown.Item eventKey="Filter by Stock">Filter by Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="High Stock">High Stock</Dropdown.Item>
