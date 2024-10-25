@@ -36,8 +36,8 @@ function ProductChart() {
             const lowercasedSearchTerm = searchTerm.toLowerCase();
             const filtered = products.filter(product => {
                 const matchesSearchTerm = product.productName.toLowerCase().includes(lowercasedSearchTerm);
-                const matchesCategory = selectedCategory === "Category" || product.category === selectedCategory;
-                const matchesStock = (selectedStock === "Stock" ||
+                const matchesCategory = selectedCategory === "Filter by Category" || product.category === selectedCategory;
+                const matchesStock = (selectedStock === "Filter by Stock" ||
                     (selectedStock === "In Stock" && product.quantity > 10) ||  
                     (selectedStock === "Low Stock" && product.quantity > 0 && product.quantity <= 10) ||
                     (selectedStock === "High Stock" && product.quantity === 0));
