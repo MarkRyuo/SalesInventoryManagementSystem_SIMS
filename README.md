@@ -10,7 +10,7 @@
 ## Changelog
 
 ### v6.3.1 (Latest)
-- Admin Search Product
+- Search Products
 - Update Images
 
 ### v6.3
