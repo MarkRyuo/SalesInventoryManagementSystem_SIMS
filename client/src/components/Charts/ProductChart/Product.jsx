@@ -1,7 +1,7 @@
 import { Row, Col, Form, Dropdown, DropdownButton, Spinner } from "react-bootstrap";
 import Productcss from './Product.module.css';
 import { useEffect, useState } from "react";
-import { getAllProducts, getCategories } from "../../../services/ProductService"; // Ensure to import your service
+import { getAllProducts, getCategories } from "../../../services/ProductService";
 
 function ProductChart() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -17,8 +17,8 @@ function ProductChart() {
             setLoading(true);
             try {
                 const allProducts = await getAllProducts();
-                setProducts(Object.values(allProducts)); // Convert object to array
-                setFilteredProducts(Object.values(allProducts)); // Initially display all products
+                setProducts(Object.values(allProducts));
+                setFilteredProducts(Object.values(allProducts));
                 const allCategories = await getCategories();
                 setCategories(allCategories);
             } catch (error) {
@@ -38,7 +38,7 @@ function ProductChart() {
                 const matchesSearchTerm = product.productName.toLowerCase().includes(lowercasedSearchTerm);
                 const matchesCategory = selectedCategory === "All Category" || product.category === selectedCategory;
                 const matchesStock = (selectedStock === "All Stock" ||
-                    (selectedStock === "In Stock" && product.quantity > 10) ||  
+                    (selectedStock === "In Stock" && product.quantity > 10) ||
                     (selectedStock === "Low Stock" && product.quantity > 0 && product.quantity <= 10) ||
                     (selectedStock === "High Stock" && product.quantity === 0));
 
@@ -76,28 +76,28 @@ function ProductChart() {
                         </Col>
                     </Form>
                 </Col>
-                <div style={{display: "inline-flex", gap: 70, marginTop: 10}}>
+                <div style={{ display: "inline-flex", gap: 70, marginTop: 10 }}>
                     <div>
-                        <DropdownButton 
-                            id="dropdown-basic-button" 
-                            title={selectedCategory} 
-                            className="ms-3" 
+                        <DropdownButton
+                            id="dropdown-basic-button"
+                            title={selectedCategory}
+                            className="ms-3"
                             onSelect={(eventKey) => setSelectedCategory(eventKey)}
                         >
-                            <Dropdown.Item eventKey="Category">Category</Dropdown.Item>
+                            <Dropdown.Item eventKey="All Category">All Category</Dropdown.Item>
                             {categories.map((category, index) => (
                                 <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
                             ))}
                         </DropdownButton>
                     </div>
                     <div>
-                        <DropdownButton 
-                            id="stock-dropdown" 
-                            title={selectedStock} 
-                            className="ms-3" 
+                        <DropdownButton
+                            id="stock-dropdown"
+                            title={selectedStock}
+                            className="ms-3"
                             onSelect={(eventKey) => setSelectedStock(eventKey)}
                         >
-                            <Dropdown.Item eventKey="Stock">Stock</Dropdown.Item>
+                            <Dropdown.Item eventKey="All Stock">All Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="High Stock">High Stock</Dropdown.Item>
@@ -121,7 +121,7 @@ function ProductChart() {
                                                 <div className="d-flex">
                                                     <p className="fs-4 m-0 p-0">{product.productName}</p>
                                                     <p style={{ color: color, fontSize: '0.9rem' }} className="p-2">
-                                                        <span style={{ color: color}}>•</span> {text}
+                                                        <span style={{ color: color }}>•</span> {text}
                                                     </p>
                                                 </div>
                                                 <p className="fs-6 m-0 p-0">SKU: {product.sku}</p>
