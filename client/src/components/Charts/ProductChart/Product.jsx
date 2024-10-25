@@ -118,7 +118,9 @@ function ProductChart() {
                                     return (
                                         <div key={product.barcode} className={Productcss.productCard}>
                                             <div>
-                                                <p className="fs-4">{product.productName}</p>
+                                                <div className="fs-4">
+                                                    <p className="fs-4">{product.productName}</p>
+                                                </div>
                                                 <p className="fs-6 m-0 p-0">SKU: {product.sku}</p>
                                                 <p className="fs-6 m-0 p-0">Quantity: {product.quantity}</p>
                                                 <p>Category: {product.category}</p>
