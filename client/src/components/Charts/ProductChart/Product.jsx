@@ -76,7 +76,7 @@ function ProductChart() {
                         </Col>
                     </Form>
                 </Col>
-                <div style={{display: "inline-flex", border: '1px solid'}}>
+                <div style={{display: "inline-flex", border: '1px solid', gap: 100, marginTop: 10}}>
                     <div>
                         <DropdownButton id="dropdown-basic-button" title={selectedCategory} className="ms-3" onSelect={(eventKey) => setSelectedCategory(eventKey)}>
                             <Dropdown.Item eventKey="All">All</Dropdown.Item>
