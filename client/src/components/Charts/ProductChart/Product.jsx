@@ -118,16 +118,16 @@ function ProductChart() {
                                     return (
                                         <div key={product.barcode} className={Productcss.productCard}>
                                             <div>
-                                                <div className="fs-4">
-                                                    <p className="fs-4">{product.productName}</p>
+                                                <div className="d-flex">
+                                                    <p className="fs-4 m-0 p-0">{product.productName}</p>
+                                                    <p style={{ color: color, fontSize: '0.9rem' }} className="p-2">
+                                                        <span style={{ color: color}}>•</span> {text}
+                                                    </p>
                                                 </div>
                                                 <p className="fs-6 m-0 p-0">SKU: {product.sku}</p>
                                                 <p className="fs-6 m-0 p-0">Quantity: {product.quantity}</p>
                                                 <p>Category: {product.category}</p>
                                             </div>
-                                            <p style={{ color: color }}>
-                                                <span style={{ color: color }}>•</span> {text}
-                                            </p>
                                         </div>
                                     );
                                 })
