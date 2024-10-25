@@ -1,15 +1,15 @@
 import { Row, Col, Form, Dropdown, DropdownButton, Spinner } from "react-bootstrap";
 import Productcss from './Product.module.css';
 import { useEffect, useState } from "react";
-import { getAllProducts, getCategories } from "../../../services/ProductService"; // Ensure to import your service
+import { getAllProducts, getCategories } from "../../../services/ProductService";
 
 function ProductChart() {
     const [searchTerm, setSearchTerm] = useState("");
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("Category");
-    const [selectedStock, setSelectedStock] = useState("Stock");
+    const [selectedCategory, setSelectedCategory] = useState("All Category");
+    const [selectedStock, setSelectedStock] = useState("All Stock");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -17,10 +17,10 @@ function ProductChart() {
             setLoading(true);
             try {
                 const allProducts = await getAllProducts();
-                setProducts(Object.values(allProducts)); // Convert object to array
-                setFilteredProducts(Object.values(allProducts)); // Initially display all products
+                setProducts(Object.values(allProducts));
+                setFilteredProducts(Object.values(allProducts));
                 const allCategories = await getCategories();
-                setCategories(allCategories);
+                setCategories(["All", ...allCategories]);  // Add "All" as the first option
             } catch (error) {
                 console.error("Error fetching products or categories:", error);
             } finally {
@@ -36,9 +36,9 @@ function ProductChart() {
             const lowercasedSearchTerm = searchTerm.toLowerCase();
             const filtered = products.filter(product => {
                 const matchesSearchTerm = product.productName.toLowerCase().includes(lowercasedSearchTerm);
-                const matchesCategory = selectedCategory === "Category" || product.category === selectedCategory;
-                const matchesStock = (selectedStock === "Stock" ||
-                    (selectedStock === "In Stock" && product.quantity > 10) ||  
+                const matchesCategory = selectedCategory === "Category" || selectedCategory === "All" || product.category === selectedCategory;
+                const matchesStock = (selectedStock === "Stock" || selectedStock === "All" ||
+                    (selectedStock === "In Stock" && product.quantity > 10) ||
                     (selectedStock === "Low Stock" && product.quantity > 0 && product.quantity <= 10) ||
                     (selectedStock === "High Stock" && product.quantity === 0));
 
@@ -76,7 +76,7 @@ function ProductChart() {
                         </Col>
                     </Form>
                 </Col>
-                <div style={{display: "inline-flex", gap: 70, marginTop: 10}}>
+                <div style={{ display: "inline-flex", gap: 70, marginTop: 10 }}>
                     <div>
                         <DropdownButton 
                             id="dropdown-basic-button" 
@@ -84,7 +84,7 @@ function ProductChart() {
                             className="ms-3" 
                             onSelect={(eventKey) => setSelectedCategory(eventKey)}
                         >
-                            <Dropdown.Item eventKey="Category">Category</Dropdown.Item>
+                            <Dropdown.Item eventKey="Category">All Categories</Dropdown.Item>
                             {categories.map((category, index) => (
                                 <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
                             ))}
@@ -97,7 +97,7 @@ function ProductChart() {
                             className="ms-3" 
                             onSelect={(eventKey) => setSelectedStock(eventKey)}
                         >
-                            <Dropdown.Item eventKey="Stock">Stock</Dropdown.Item>
+                            <Dropdown.Item eventKey="Stock">All Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="High Stock">High Stock</Dropdown.Item>
