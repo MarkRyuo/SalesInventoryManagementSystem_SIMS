@@ -121,9 +121,11 @@ function ProductChart() {
                                             <p className="fs-6 m-0 p-0">SKU: {product.sku}</p>
                                             <p className="fs-6 m-0 p-0">Quantity: {product.quantity}</p>
                                             <p>Category: {product.category}</p>
-                                            <p style={{ color: color }}>
-                                                <span style={{ color: color }}>•</span> {text}
-                                            </p>
+                                            <div>
+                                                <p style={{ color: color }}>
+                                                    <span style={{ color: color }}>•</span> {text}
+                                                </p>
+                                            </div>
                                         </div>
                                     );
                                 })
