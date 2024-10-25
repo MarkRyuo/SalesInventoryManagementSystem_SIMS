@@ -11,6 +11,7 @@
 
 ### v6.3.1 (Latest)
 - Admin Search Product
+- Update Images
 
 ### v6.3
 - Scanner Design
