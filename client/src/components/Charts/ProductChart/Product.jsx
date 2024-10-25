@@ -84,8 +84,8 @@ function ProductChart() {
                         ))}
                     </DropdownButton>
                 </Col>
-                <Col>
-                <DropdownButton id="stock-dropdown" title={selectedStock} className="ms-3" onSelect={(eventKey) => setSelectedStock(eventKey)}>
+                <Col lg={12}>
+                    <DropdownButton id="stock-dropdown" title={selectedStock} className="ms-3" onSelect={(eventKey) => setSelectedStock(eventKey)}>
                         <Dropdown.Item eventKey="All">All</Dropdown.Item>
                         <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
                         <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
