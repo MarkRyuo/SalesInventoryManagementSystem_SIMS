@@ -143,7 +143,7 @@ function SearchAssetsMode() {
                             <Card key={product.barcode} className={SDashboardCss.productCard}>
                                 <Card.Body>
                                     <Card.Title>
-                                        <div className="d-inline-flex gap-3" style={{border: '1px solid'}}>
+                                        <div className="d-inline-flex gap-3">
                                             <p className="fs-4 m-0 p-0">{product.productName}</p>
                                             <p style={{ color: statusColor}} className="p-0 m-0">
                                                 <span style={{ color: statusColor }}>•</span>{stockStatus} {/* Display stock status */}
