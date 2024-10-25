@@ -84,7 +84,7 @@ function ProductChart() {
                             className="ms-3" 
                             onSelect={(eventKey) => setSelectedCategory(eventKey)}
                         >
-                            <Dropdown.Item eventKey="Category">Filter by Category</Dropdown.Item>
+                            <Dropdown.Item eventKey="Category">Category</Dropdown.Item>
                             {categories.map((category, index) => (
                                 <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
                             ))}
@@ -97,7 +97,7 @@ function ProductChart() {
                             className="ms-3" 
                             onSelect={(eventKey) => setSelectedStock(eventKey)}
                         >
-                            <Dropdown.Item eventKey="Stock">Filter by Stock</Dropdown.Item>
+                            <Dropdown.Item eventKey="Stock">Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="High Stock">High Stock</Dropdown.Item>
