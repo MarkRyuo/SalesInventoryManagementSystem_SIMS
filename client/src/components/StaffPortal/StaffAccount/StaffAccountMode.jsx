@@ -52,8 +52,8 @@ function StaffAccountMode() {
                     <div className="content">
                         <div style={{ display: "flex", padding: 15 }}>
                             <Image
-                                style={{ width: "100px", marginRight: 10 }}
-                                src="https://i.pinimg.com/564x/1c/ea/a9/1ceaa9f13fcff14ffcb5236be236972c.jpg"
+                                style={{ width: 80, marginRight: 10, height:  }}
+                                src="../../../../public/ReyesElectronicsLogo.png"
                                 roundedCircle
                             />
                             <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
