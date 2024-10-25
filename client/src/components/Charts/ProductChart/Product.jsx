@@ -76,14 +76,7 @@ function ProductChart() {
                         </Col>
                     </Form>
                 </Col>
-                <Col lg={12}>
-                    <DropdownButton id="dropdown-basic-button" title={selectedCategory} className="ms-3" onSelect={(eventKey) => setSelectedCategory(eventKey)}>
-                        <Dropdown.Item eventKey="All">All</Dropdown.Item>
-                        {categories.map((category, index) => (
-                            <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
-                        ))}
-                    </DropdownButton>
-                </Col>
+                <Row></Row>
             </Row>
 
             <div className={Productcss.containerProduct}>
