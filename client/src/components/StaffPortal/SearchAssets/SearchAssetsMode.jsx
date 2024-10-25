@@ -146,7 +146,7 @@ function SearchAssetsMode() {
                                         <div>
                                             <p className="">{product.productName}</p>
                                             <p style={{ color: statusColor, marginTop: '10px' }}>
-                                                {stockStatus} {/* Display stock status */}
+                                                <span style={{ color: statusColor }}>•</span>{stockStatus} {/* Display stock status */}
                                             </p>
                                         </div>
                                     </Card.Title>
