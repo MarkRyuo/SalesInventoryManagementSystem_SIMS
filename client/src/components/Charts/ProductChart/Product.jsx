@@ -37,7 +37,7 @@ function ProductChart() {
             const filtered = products.filter(product => {
                 const matchesSearchTerm = product.productName.toLowerCase().includes(lowercasedSearchTerm);
                 const matchesCategory = selectedCategory === "Category" || product.category === selectedCategory;
-                const matchesStock = (selectedStock === "Filter by Stock" ||
+                const matchesStock = (selectedStock === "Stock" ||
                     (selectedStock === "In Stock" && product.quantity > 10) ||  
                     (selectedStock === "Low Stock" && product.quantity > 0 && product.quantity <= 10) ||
                     (selectedStock === "High Stock" && product.quantity === 0));
@@ -84,7 +84,7 @@ function ProductChart() {
                             className="ms-3" 
                             onSelect={(eventKey) => setSelectedCategory(eventKey)}
                         >
-                            <Dropdown.Item eventKey="Filter by Category">Filter by Category</Dropdown.Item>
+                            <Dropdown.Item eventKey="Category">Filter by Category</Dropdown.Item>
                             {categories.map((category, index) => (
                                 <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
                             ))}
