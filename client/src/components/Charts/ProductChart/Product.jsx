@@ -106,7 +106,7 @@ function ProductChart() {
                 </div>
             </Row>
 
-            <div className={Productcss.containerProduct}>
+            <div>
                 <div className={Productcss.colProduct}>
                     <div className={Productcss.productContent}>
                         {loading ? (
