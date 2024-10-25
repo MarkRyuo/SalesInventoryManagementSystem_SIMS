@@ -4,6 +4,7 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .searchHeader {
@@ -26,4 +27,5 @@
     border: 1px solid #E1E4E4;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    height: 100%;
 }
