@@ -106,8 +106,8 @@ function ProductChart() {
                 </div>
             </Row>
 
-            <div>
-                <div>
+            <div className={Productcss.containerProduct}>
+                <div className={Productcss.colProduct}>
                     <div className={Productcss.productContent}>
                         {loading ? (
                             <Spinner animation="border" variant="primary" />
