@@ -145,6 +145,9 @@ function SearchAssetsMode() {
                                     <Card.Title>
                                         <div>
                                             <p className="">{product.productName}</p>
+                                            <p style={{ color: statusColor, marginTop: '10px' }}>
+                                                {stockStatus} {/* Display stock status */}
+                                            </p>
                                         </div>
                                     </Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted p-0 m-0">SKU: {product.sku}</Card.Subtitle>
@@ -152,9 +155,6 @@ function SearchAssetsMode() {
                                         <p className="p-0 m-0">Barcode: {product.barcode} </p>
                                         <p className="p-0 m-0">Quantity: {product.quantity}</p>
                                         <p>Category: {product.category}</p>
-                                        <div style={{ color: statusColor, marginTop: '10px' }}>
-                                            {stockStatus} {/* Display stock status */}
-                                        </div>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
