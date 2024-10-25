@@ -46,7 +46,7 @@ export const NavDashboard = () => {
     };
 
     return (
-        <Container fluid style={{ margin: "0px", padding: "0px", position: 'sticky', top: 0 }}>
+        <Container fluid style={{ margin: "0px", padding: "0px" }}>
             <Navbar className={Navbars.navDashboard}>
                 <Container>
                     <Navbar.Brand>
