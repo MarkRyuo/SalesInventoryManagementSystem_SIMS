@@ -8,8 +8,8 @@ function ProductChart() {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("Filter by Category");
-    const [selectedStock, setSelectedStock] = useState("Filter by Stock");
+    const [selectedCategory, setSelectedCategory] = useState("Category");
+    const [selectedStock, setSelectedStock] = useState("Stock");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
