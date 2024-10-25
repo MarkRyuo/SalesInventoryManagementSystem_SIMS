@@ -97,7 +97,7 @@ function ProductChart() {
                             className="ms-3" 
                             onSelect={(eventKey) => setSelectedStock(eventKey)}
                         >
-                            <Dropdown.Item eventKey="Filter by Stock">Filter by Stock</Dropdown.Item>
+                            <Dropdown.Item eventKey="Stock">Filter by Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="High Stock">High Stock</Dropdown.Item>
