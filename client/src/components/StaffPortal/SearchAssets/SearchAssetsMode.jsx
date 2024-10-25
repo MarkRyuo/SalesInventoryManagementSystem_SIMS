@@ -144,7 +144,7 @@ function SearchAssetsMode() {
                                 <Card.Body>
                                     <Card.Title>
                                         <div>
-                                            {product.productName}
+                                            <p className="">{product.productName}</p>
                                         </div>
                                     </Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted p-0 m-0">SKU: {product.sku}</Card.Subtitle>
