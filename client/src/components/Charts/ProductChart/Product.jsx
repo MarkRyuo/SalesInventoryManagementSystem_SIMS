@@ -65,7 +65,7 @@ function ProductChart() {
             <Row className="my-4">
                 <Col lg={12}>
                     <Form inline className="d-flex justify-content-end">
-                        <Col lg={3} xs={8} md={5}>
+                        <Col lg={3}>
                             <Form.Control
                                 type="text"
                                 placeholder="Search Products"
