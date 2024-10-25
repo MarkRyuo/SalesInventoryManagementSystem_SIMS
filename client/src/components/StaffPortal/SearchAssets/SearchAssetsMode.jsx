@@ -144,7 +144,7 @@ function SearchAssetsMode() {
                                 <Card.Body>
                                     <Card.Title>
                                         <div className="d-inline-flex gap-2" style={{border: '1px solid'}}>
-                                            <p className="">{product.productName}</p>
+                                            <p className="m-0 p-0">{product.productName}</p>
                                             <p style={{ color: statusColor, marginTop: '10px' }}>
                                                 <span style={{ color: statusColor }}>•</span>{stockStatus} {/* Display stock status */}
                                             </p>
