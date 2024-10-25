@@ -8,7 +8,7 @@ export const ProductPage = () => {
 
     return (
         <MainLayout>
-            <p className="fs-3"><span><AiFillProduct /></span>Product</p> {/*  */}
+            <p className="fs-3 ms-3"><span><AiFillProduct /></span>Product</p> {/*  */}
             <div>
                 <Product />
             </div>
