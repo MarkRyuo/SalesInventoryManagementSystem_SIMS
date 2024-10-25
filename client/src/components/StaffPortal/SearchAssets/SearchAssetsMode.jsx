@@ -1,4 +1,4 @@
-import { Form, Dropdown, Card, Spinner } from "react-bootstrap";
+import { Form, Dropdown, Card, Spinner, Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService"; // Import your product service
 import SDashboardCss from './SearchAssets.module.css'; // Create a CSS module for styling
@@ -76,7 +76,7 @@ function SearchAssetsMode() {
 
     return (
         <div className={SDashboardCss.searchContainer}>
-            <div className={SDashboardCss.searchHeader}>
+            <Row className={SDashboardCss.searchHeader}>
                 <Dropdown>
                     <Dropdown.Toggle variant="success" id="filter-dropdown">
                         {filterOption}
@@ -114,7 +114,7 @@ function SearchAssetsMode() {
                         onChange={(e) => setSearchTerm(e.target.value)} // Update search term
                     />
                 </Form>
-            </div>
+            </Row>
             <div className={SDashboardCss.resultsContainer}>
                 {loading ? (
                     <Spinner animation="border" variant="primary" />
