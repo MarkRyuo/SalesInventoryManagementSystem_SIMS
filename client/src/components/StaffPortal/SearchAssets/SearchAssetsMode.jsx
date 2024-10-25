@@ -77,43 +77,47 @@ function SearchAssetsMode() {
     return (
         <div className={SDashboardCss.searchContainer}>
             <Row className={SDashboardCss.searchHeader}>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="filter-dropdown">
-                        {filterOption}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => setFilterOption("Filter by")}>Filter by</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setFilterOption("All")}>All</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setFilterOption("Name")}>Name</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setFilterOption("Low Stock")}>Low Stock</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setFilterOption("In Stock")}>In Stock</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setFilterOption("High Stock")}>High Stock</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="category-dropdown">
-                        {selectedCategory}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => setSelectedCategory("Select a Category")}>Select a Category</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setSelectedCategory("All")}>All</Dropdown.Item>
-                        {categories.map(category => (
-                            <Dropdown.Item key={category} onClick={() => setSelectedCategory(category)}>
-                                {category}
-                            </Dropdown.Item>
-                        ))}
-                    </Dropdown.Menu>
-                </Dropdown>
-                <Form className="d-flex" style={{ width: 380 }}>
-                    <Form.Control
-                        type="search"
-                        placeholder="Search"
-                        className="me-2"
-                        aria-label="Search"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)} // Update search term
-                    />
-                </Form>
+                <Col>
+                    <Form className="d-flex" style={{ width: 380 }}>
+                        <Form.Control
+                            type="search"
+                            placeholder="Search"
+                            className="me-2"
+                            aria-label="Search"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)} // Update search term
+                        />
+                    </Form>
+                </Col>
+                <div style={{display: "flex", gap: 10}}>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="filter-dropdown">
+                            {filterOption}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => setFilterOption("Filter by")}>Filter by</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilterOption("All")}>All</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilterOption("Name")}>Name</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilterOption("Low Stock")}>Low Stock</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilterOption("In Stock")}>In Stock</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilterOption("High Stock")}>High Stock</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="category-dropdown">
+                            {selectedCategory}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => setSelectedCategory("Select a Category")}>Select a Category</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSelectedCategory("All")}>All</Dropdown.Item>
+                            {categories.map(category => (
+                                <Dropdown.Item key={category} onClick={() => setSelectedCategory(category)}>
+                                    {category}
+                                </Dropdown.Item>
+                            ))}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
             </Row>
             <div className={SDashboardCss.resultsContainer}>
                 {loading ? (
