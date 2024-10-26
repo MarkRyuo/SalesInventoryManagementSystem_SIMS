@@ -98,7 +98,7 @@ function NewAssetsScanner() {
     };
 
     return (
-        <Container fluid='lg' className="mt-4" style={{border: '1px solid'}}>  {//* Parent */}
+        <Container fluid='lg' className="mt-4" style={{border: '1px solid'}}>  {/* Parent */}
             <Row className="justify-content-center" style={{border: '1px solid'}}> 
                 <Col md={8}>
                     <Card className="p-4">
