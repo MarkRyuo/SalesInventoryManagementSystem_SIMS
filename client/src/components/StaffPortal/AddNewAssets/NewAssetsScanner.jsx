@@ -98,10 +98,10 @@ function NewAssetsScanner() {
     };
 
     return (
-        <Container className="mt-4">
-            <Row className="justify-content-center">
+        <Container className="mt-4" style={{border: '1px solid'}}> 
+            <Row className="justify-content-center" style={{border: '1px solid'}}>
                 <Col md={8}>
-                    <Card className="p-4 shadow">
+                    <Card className="p-4">
                         <div className="text-center position-relative">
                             {error && (
                                 <Alert variant="danger"
