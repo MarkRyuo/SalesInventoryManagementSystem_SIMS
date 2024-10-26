@@ -104,7 +104,7 @@ function NewAssetsScanner() {
     const [backBtn] = useState([
         {
             btnIcon: <IoMdArrowBack size={20} />,
-            path: "/SDashboard",
+            path: "/ScanAssets",
             id: 1
         }
     ]);
@@ -161,7 +161,7 @@ function NewAssetsScanner() {
                                         maxHeight: '80vh',  // Limits height to fit within the viewport
                                         display: isProcessing ? 'none' : 'block',
                                         opacity: videoFade ? 1 : 0,
-                                        transition: 'opacity 1s ease-in-out',
+                                        transition: 'opacity 1s ease-in-out'
                                     }}
                                 />
                             </div>
