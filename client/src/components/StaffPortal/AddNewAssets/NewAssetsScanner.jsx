@@ -147,6 +147,7 @@ function NewAssetsScanner() {
                                     display: isProcessing ? 'none' : 'block',
                                     opacity: videoFade ? 1 : 0,
                                     transition: 'opacity 1s ease-in-out',
+                                    border: '1px solid '
                                 }}
                             />
                         </div>
