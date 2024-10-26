@@ -150,7 +150,6 @@ function NewAssetsScanner() {
                                         pointerEvents: 'none',
                                         opacity: guideFade ? 1 : 0,
                                         transition: 'opacity 1s ease-in-out',
-                                        marginTop: 100
                                     }}
                                 />
 
@@ -163,7 +162,6 @@ function NewAssetsScanner() {
                                         opacity: videoFade ? 1 : 0,
                                         transition: 'opacity 1s ease-in-out',
                                         border: '1px solid',
-                                        marginTop: 200
                                     }}
                                 />
                             </div>
