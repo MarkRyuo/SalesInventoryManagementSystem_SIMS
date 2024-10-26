@@ -12,6 +12,7 @@
 ### v6.3.1 (Latest)
 - Search Products
 - Update Images
+- Update Camera Design
 
 ### v6.3
 - Scanner Design
