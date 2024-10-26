@@ -115,7 +115,7 @@ function NewAssetsScanner() {
             <Container fluid='lg' style={{ width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
                 <Row className="justify-content-center" style={{ border: '1px solid', height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
                     <Col md={8} className='p-0' style={{ border: '1px solid red', display: 'flex', justifyContent: 'center' }}> {/* Child */}
-                        <Card style={{ border: '1px solid green', height: '100%' }}>
+                        <Card style={{ border: '1px solid green', height: '100%', display: 'flex', justifyContent: 'center' }}>
                             <div className="text-center position-relative">
                                 {error && (
                                     <Alert variant="danger"
@@ -157,12 +157,11 @@ function NewAssetsScanner() {
                                     ref={videoRef}
                                     style={{
                                         width: '100%',
-                                        height: '100%',
+                                        height: 'auto',
+                                        maxHeight: '80vh',  // Limits height to fit within the viewport
                                         display: isProcessing ? 'none' : 'block',
                                         opacity: videoFade ? 1 : 0,
                                         transition: 'opacity 1s ease-in-out',
-                                        border: '1px solid',
-                                        maxWidth: 600,
                                     }}
                                 />
                             </div>
