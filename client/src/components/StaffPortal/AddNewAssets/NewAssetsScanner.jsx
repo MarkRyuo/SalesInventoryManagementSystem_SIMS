@@ -98,7 +98,7 @@ function NewAssetsScanner() {
     };
 
     return (
-        <Container fluid='lg' className="mt-4" style={{width: '100%', height: 'auto'}}>  {/* Parent */}
+        <Container fluid='lg' style={{width: '100%', height: 'auto'}}>  {/* Parent */}
             <Row className="justify-content-center" style={{border: '1px solid'}}> {/* Sub parent */} 
                 <Col md={8} style={{border: '1px solid red'}}> {/* Child */}
                     <Card className="p-4" style={{border: '1px solid green', height: '100vh'}}> 
@@ -136,6 +136,7 @@ function NewAssetsScanner() {
                                     pointerEvents: 'none',
                                     opacity: guideFade ? 1 : 0,
                                     transition: 'opacity 1s ease-in-out',
+                                    marginTop: 100
                                 }}
                             />
 
@@ -147,7 +148,8 @@ function NewAssetsScanner() {
                                     display: isProcessing ? 'none' : 'block',
                                     opacity: videoFade ? 1 : 0,
                                     transition: 'opacity 1s ease-in-out',
-                                    border: '1px solid '
+                                    border: '1px solid',
+                                    marginTop: 200
                                 }}
                             />
                         </div>
