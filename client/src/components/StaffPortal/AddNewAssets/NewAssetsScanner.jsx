@@ -115,7 +115,7 @@ function NewAssetsScanner() {
             <Container fluid='lg' style={{ width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
                 <Row className="justify-content-center" style={{ height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
                     <Col md={8} className='p-0' style={{ display: 'flex', justifyContent: 'center' }}> {/* Child */}
-                        <Card style={{ border: '1px solid green', height: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <Card style={{ height: '100%', display: 'flex', justifyContent: 'center' }}>
                             <div className="text-center position-relative">
                                 {error && (
                                     <Alert variant="danger"
