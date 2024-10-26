@@ -3,6 +3,10 @@ import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
 import { Container, Row, Col, Alert, Card, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
+import { IoMdArrowBack } from "react-icons/io";
+import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
+
+
 
 function NewAssetsScanner() {
     const videoRef = useRef(null);
@@ -97,66 +101,79 @@ function NewAssetsScanner() {
         setGuideFade(true);
     };
 
+    const [backBtn] = useState([
+        {
+            btnIcon: <IoMdArrowBack size={20} />,
+            path: "/SDashboard",
+            id: 1
+        }
+    ]);
+
     return (
-        <Container fluid='lg' style={{width: '100%', height: 'auto'}}>  {/* Parent */}
-            <Row className="justify-content-center" style={{border: '1px solid'}}> {/* Sub parent */} 
-                <Col md={8} style={{border: '1px solid red'}}> {/* Child */}
-                    <Card className="p-4" style={{border: '1px solid green', height: '100vh'}}> 
-                        <div className="text-center position-relative">
-                            {error && (
-                                <Alert variant="danger"
-                                    style={{
-                                        opacity: fadeOut ? 0 : 1,
-                                        transition: 'opacity 1s ease-in-out',
-                                    }}>
-                                    Error: {error}
-                                </Alert>
-                            )}
-                            {message && (
-                                <Alert variant="success"
-                                    style={{
-                                        opacity: fadeOut ? 0 : 1,
-                                        transition: 'opacity 1s ease-in-out',
-                                    }}>
-                                    {message}
-                                </Alert>
-                            )}
-                            {isProcessing && <Spinner animation="border" />}
+        <Container fluid>
+            <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
+            <Container fluid='lg' style={{ width: '100%', height: 'auto' }}>  {/* Parent */}
+                <Row className="justify-content-center" style={{ border: '1px solid' }}> {/* Sub parent */}
+                    <Col md={8} style={{ border: '1px solid red' }}> {/* Child */}
+                        <Card className="p-4" style={{ border: '1px solid green' }}>
+                            <div className="text-center position-relative">
+                                {error && (
+                                    <Alert variant="danger"
+                                        style={{
+                                            opacity: fadeOut ? 0 : 1,
+                                            transition: 'opacity 1s ease-in-out',
+                                        }}>
+                                        Error: {error}
+                                    </Alert>
+                                )}
+                                {message && (
+                                    <Alert variant="success"
+                                        style={{
+                                            opacity: fadeOut ? 0 : 1,
+                                            transition: 'opacity 1s ease-in-out',
+                                        }}>
+                                        {message}
+                                    </Alert>
+                                )}
+                                {isProcessing && <Spinner animation="border" />}
 
-                            <div
-                                style={{
-                                    position: 'absolute',
-                                    top: '50%',
-                                    left: '50%',
-                                    transform: 'translate(-50%, -50%)',
-                                    width: '70%',
-                                    height: '50%',
-                                    border: '1px dashed rgba(255, 255, 255, 0.8)',
-                                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                                    pointerEvents: 'none',
-                                    opacity: guideFade ? 1 : 0,
-                                    transition: 'opacity 1s ease-in-out',
-                                    marginTop: 100
-                                }}
-                            />
+                                <div
+                                    style={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        left: '50%',
+                                        transform: 'translate(-50%, -50%)',
+                                        width: '70%',
+                                        height: '50%',
+                                        border: '1px dashed rgba(255, 255, 255, 0.8)',
+                                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                                        pointerEvents: 'none',
+                                        opacity: guideFade ? 1 : 0,
+                                        transition: 'opacity 1s ease-in-out',
+                                        marginTop: 100
+                                    }}
+                                />
 
-                            <video
-                                ref={videoRef}
-                                style={{
-                                    width: '100%',
-                                    height: 'auto',
-                                    display: isProcessing ? 'none' : 'block',
-                                    opacity: videoFade ? 1 : 0,
-                                    transition: 'opacity 1s ease-in-out',
-                                    border: '1px solid',
-                                    marginTop: 200
-                                }}
-                            />
-                        </div>
-                    </Card>
-                </Col>
-            </Row>
+                                <video
+                                    ref={videoRef}
+                                    style={{
+                                        width: '100%',
+                                        height: 'auto',
+                                        display: isProcessing ? 'none' : 'block',
+                                        opacity: videoFade ? 1 : 0,
+                                        transition: 'opacity 1s ease-in-out',
+                                        border: '1px solid',
+                                        marginTop: 200
+                                    }}
+                                />
+                            </div>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+
         </Container>
+        
     );
 }
 
