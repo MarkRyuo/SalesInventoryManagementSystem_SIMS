@@ -112,10 +112,10 @@ function NewAssetsScanner() {
     return (
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' style={{ width: '100%', height: 'auto' }}>  {/* Parent */}
-                <Row className="justify-content-center" style={{ border: '1px solid' }}> {/* Sub parent */}
-                    <Col md={8} style={{ border: '1px solid red' }}> {/* Child */}
-                        <Card style={{ border: '1px solid green' }}>
+            <Container fluid='lg' style={{ width: '100%', height: '80vh' }}>  {/* Parent */}
+                <Row className="justify-content-center" style={{ border: '1px solid', height: '100%' }}> {/* Sub parent */}
+                    <Col md={8} className='p-0' style={{ border: '1px solid red' }}> {/* Child */}
+                        <Card style={{ border: '1px solid green', height: '100%' }}>
                             <div className="text-center position-relative">
                                 {error && (
                                     <Alert variant="danger"
