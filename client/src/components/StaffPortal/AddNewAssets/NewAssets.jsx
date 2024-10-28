@@ -112,7 +112,7 @@ function NewAssets() {
     const [backBtn] = useState([
         {
             btnIcon: <IoMdArrowBack size={20} />,
-            path: "/ScanAsset",
+            path: "",
             id: 1
         }
     ]);
