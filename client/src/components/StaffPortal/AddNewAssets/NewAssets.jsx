@@ -207,18 +207,21 @@ function NewAssets() {
                                             />
                                         </Form.Group>
                                     </Col>
+
+                                    <Col>
+                                        <Form.Group controlId="voltage" className="mt-3">
+                                            <p className='m-0'>Voltage</p>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Enter voltage (e.g., 220V)"
+                                                value={voltage}
+                                                onChange={(e) => setVoltage(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
                                 </Row>
 
 
-                                <Form.Group controlId="voltage" className="mt-3">
-                                    <p className='m-0'>Voltage</p>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter voltage (e.g., 220V)"
-                                        value={voltage}
-                                        onChange={(e) => setVoltage(e.target.value)}
-                                    />
-                                </Form.Group>
                             </div>
 
                             <Col md={12}>
