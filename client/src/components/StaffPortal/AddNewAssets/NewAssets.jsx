@@ -164,7 +164,7 @@ function NewAssets() {
                                 </Form.Group>
 
                                 <Form.Group controlId="size" className="">
-                                    <p className='m-0'>Product Size</p>
+                                    <p className='m-1'>Product Size <sup>(Optional)</sup> </p>
                                     <Dropdown>
                                         <Dropdown.Toggle variant="outline-success" id="dropdown-basic" size='sm'>
                                             {size || 'Select Size'}
@@ -181,7 +181,7 @@ function NewAssets() {
                                 </Form.Group>
 
                                 <Form.Group controlId="color" className="mt-1">
-                                    <p className='m-0'>Product Color (Optional)</p>
+                                    <p className='m-0 mt-2'>Product Color <sup>(Optional)</sup></p>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter color (e.g., Red)"
@@ -191,7 +191,7 @@ function NewAssets() {
                                 </Form.Group>
 
                                 <Form.Group controlId="wattage" className="mt-3">
-                                    <Form.Label>Wattage</Form.Label>
+                                    <p className='m-0'>Wattage</p>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter wattage (e.g., 60W)"
