@@ -214,7 +214,10 @@ function NewAssets() {
                         </Col>
                     </Row>
                 </Col>
-
+                    
+                <Col>
+                    
+                </Col>
                 <Row className='justify-content-center'>
                     <Col md={8}>
                         <Form.Group controlId="quantity" className="mt-3">
