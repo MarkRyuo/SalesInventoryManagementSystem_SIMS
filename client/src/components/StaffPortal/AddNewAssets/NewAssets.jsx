@@ -164,8 +164,8 @@ function NewAssets() {
                                 </Form.Group>
 
                                 
-                                <Row>
-                                    <Col>
+                                <Row className='mt-1'>
+                                    <Col lg={6} sm={12}>
                                         <Form.Group controlId="size" className="">
                                             <p className='m-1'>Product Size <sup>(Optional)</sup> </p>
                                             <Dropdown>
@@ -184,7 +184,7 @@ function NewAssets() {
                                         </Form.Group>
                                     </Col>
 
-                                    <Col>
+                                    <Col lg={6} sm={12}>
                                         <Form.Group controlId="color" className="mt-1">
                                             <p className='m-0 mt-2'>Product Color <sup>(Optional)</sup></p>
                                             <Form.Control
@@ -196,7 +196,7 @@ function NewAssets() {
                                         </Form.Group>
                                     </Col>
 
-                                    <Col>
+                                    <Col lg={6} sm={12}>
                                         <Form.Group controlId="wattage" className="mt-3">
                                             <p className='m-0'>Wattage</p>
                                             <Form.Control
@@ -208,7 +208,7 @@ function NewAssets() {
                                         </Form.Group>
                                     </Col>
 
-                                    <Col>
+                                    <Col lg={6} sm={12}>
                                         <Form.Group controlId="voltage" className="mt-3">
                                             <p className='m-0'>Voltage</p>
                                             <Form.Control
@@ -220,8 +220,6 @@ function NewAssets() {
                                         </Form.Group>
                                     </Col>
                                 </Row>
-
-
                             </div>
 
                             <Col md={12}>
