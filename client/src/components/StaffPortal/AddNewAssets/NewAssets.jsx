@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Container, Form, Button, Row, Col, Card, Alert, Spinner, Dropdown } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col, Alert, Spinner, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { addNewProduct, addCategory, getCategories } from '../../../services/ProductService';
 
