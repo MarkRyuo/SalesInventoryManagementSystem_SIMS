@@ -13,7 +13,8 @@ function CardProduct({ cardProduct }) {
                         borderRadius: 15,
                         flexShrink: 0,
                         borderLeft: '2px solid #92E3B8',
-                        boxSizing: "border-box",                    }}
+                        boxSizing: "border-box",
+                    }}
                 >
                     <span>{cardProducts.productIcon}</span>
                     <p className="fs-5 m-0">{cardProducts.productName}</p>
