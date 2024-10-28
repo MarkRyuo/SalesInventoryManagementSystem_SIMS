@@ -9,7 +9,8 @@ function CardProduct({ cardProduct }) {
                 <div
                     key={cardProducts.id}
                     style={{
-                        width: 250, padding: 20, boxShadow: '1px 1px 5px #e2dfdf', borderRadius: 15, flexShrink: 0, borderLeft: '2px solid #92E3B8' }}>
+                        width: 250, 
+                        padding: 20, boxShadow: '1px 1px 5px #e2dfdf', borderRadius: 15, flexShrink: 0, borderLeft: '2px solid #92E3B8' }}>
                     <span>{cardProducts.productIcon}</span>
                     <p className="fs-5 m-0">{cardProducts.productName}</p>
                     <p>{cardProducts.productValue}</p>
