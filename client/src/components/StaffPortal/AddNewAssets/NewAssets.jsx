@@ -111,7 +111,7 @@ function NewAssets() {
                 {error && <Alert variant="danger">{error}</Alert>}
                 {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
 
-                <Col lg={12}>
+                <Col lg={4} sm={12}>
                     <Row className="justify-content-center">
                         <Col md={8}>
                                 <Form>
@@ -146,7 +146,7 @@ function NewAssets() {
                     </Row>
                 </Col>
                 
-                <Col lg={12}>
+                <Col lg={4} sm={12}>
                     <Row className='justify-content-center'>
                         <Col md={8}>
                             <div className="mb-3">
