@@ -143,8 +143,8 @@ function SDashboard() {
                                                 productIcon: <LiaProductHunt size={25} />,
                                                 productName: product.productName,
                                                 productValue: `${product.sku}`,
-                                                Quantity: `${product.quantity}`,
                                                 price: `${product.price}`, // Add the price here
+                                                Quantity: `${product.quantity}`,
                                                 id: product.barcode
                                             }))}
                                         />
