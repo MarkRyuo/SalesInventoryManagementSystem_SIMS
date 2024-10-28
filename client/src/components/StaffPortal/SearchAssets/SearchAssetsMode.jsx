@@ -1,4 +1,4 @@
-import { Form, Dropdown, Card, Spinner } from "react-bootstrap";
+import { Form, Dropdown, Card, Spinner, Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService"; // Import your product service
 import SDashboardCss from './SearchAssets.module.css'; // Create a CSS module for styling
@@ -76,45 +76,49 @@ function SearchAssetsMode() {
 
     return (
         <div className={SDashboardCss.searchContainer}>
-            <div className={SDashboardCss.searchHeader}>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="filter-dropdown">
-                        {filterOption}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => setFilterOption("Filter by")}>Filter by</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setFilterOption("All")}>All</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setFilterOption("Name")}>Name</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setFilterOption("Low Stock")}>Low Stock</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setFilterOption("In Stock")}>In Stock</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setFilterOption("High Stock")}>High Stock</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="category-dropdown">
-                        {selectedCategory}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => setSelectedCategory("Select a Category")}>Select a Category</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setSelectedCategory("All")}>All</Dropdown.Item>
-                        {categories.map(category => (
-                            <Dropdown.Item key={category} onClick={() => setSelectedCategory(category)}>
-                                {category}
-                            </Dropdown.Item>
-                        ))}
-                    </Dropdown.Menu>
-                </Dropdown>
-                <Form className="d-flex" style={{ width: 380 }}>
-                    <Form.Control
-                        type="search"
-                        placeholder="Search"
-                        className="me-2"
-                        aria-label="Search"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)} // Update search term
-                    />
-                </Form>
-            </div>
+            <Row className={SDashboardCss.searchHeader}>
+                <Col lg={12} style={{display: "flex", justifyContent: "flex-end"}}>
+                    <Form className="p-2">
+                        <Form.Control
+                            type="search"
+                            placeholder="Search"
+                            className="me-2"
+                            aria-label="Search"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)} // Update search term
+                        />
+                    </Form>
+                </Col>
+                <div style={{display: "flex", gap: 10, padding: 10}}>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="filter-dropdown">
+                            {filterOption}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => setFilterOption("Filter by")}>Filter by</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilterOption("All")}>All</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilterOption("Name")}>Name</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilterOption("Low Stock")}>Low Stock</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilterOption("In Stock")}>In Stock</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setFilterOption("High Stock")}>High Stock</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="category-dropdown">
+                            {selectedCategory}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => setSelectedCategory("Select a Category")}>Select a Category</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSelectedCategory("All")}>All</Dropdown.Item>
+                            {categories.map(category => (
+                                <Dropdown.Item key={category} onClick={() => setSelectedCategory(category)}>
+                                    {category}
+                                </Dropdown.Item>
+                            ))}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
+            </Row>
             <div className={SDashboardCss.resultsContainer}>
                 {loading ? (
                     <Spinner animation="border" variant="primary" />
@@ -138,15 +142,19 @@ function SearchAssetsMode() {
                         return (
                             <Card key={product.barcode} className={SDashboardCss.productCard}>
                                 <Card.Body>
-                                    <Card.Title>{product.productName}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">SKU: {product.sku}</Card.Subtitle>
-                                    <Card.Text>
-                                        <strong>Barcode:</strong> {product.barcode}<br />
-                                        <strong>Quantity:</strong> {product.quantity}<br />
-                                        <strong>Category:</strong> {product.category} {/* Display category */}
-                                        <div style={{ color: statusColor, marginTop: '10px' }}>
-                                            {stockStatus} {/* Display stock status */}
+                                    <Card.Title>
+                                        <div className="d-inline-flex gap-3">
+                                            <p className="fs-4 m-0 p-0">{product.productName}</p>
+                                            <p style={{ color: statusColor}} className="p-0 m-0">
+                                                <span style={{ color: statusColor }}>•</span>{stockStatus} {/* Display stock status */}
+                                            </p>
                                         </div>
+                                    </Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted p-0 m-0">SKU: {product.sku}</Card.Subtitle>
+                                    <Card.Text>
+                                        <p className="p-0 m-0">Barcode: {product.barcode} </p>
+                                        <p className="p-0 m-0">Quantity: {product.quantity}</p>
+                                        <p>Category: {product.category}</p>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

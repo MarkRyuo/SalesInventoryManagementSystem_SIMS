@@ -19,9 +19,9 @@ function SDashboard() {
     const [productsToday, setProductsToday] = useState([]);
 
     const [buttons] = useState([
-        { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={80} />, path: "/AddNewAssets", id: 1 },
-        { btnName: "ScanAssets", btnIcon: <BiScan size={80} />, path: "/ScanAsset", id: 2 },
-        { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={80} />, path: "/SearchAssets", id: 3 },
+        { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={60} />, path: "/AddNewAssets", id: 1 },
+        { btnName: "ScanAssets", btnIcon: <BiScan size={60} />, path: "/ScanAsset", id: 2 },
+        { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={60} />, path: "/SearchAssets", id: 3 },
     ]);
 
     useEffect(() => {
@@ -111,7 +111,7 @@ function SDashboard() {
                     <>
                         <div className={SDashboardCss.componentHeroCard}>
                             <Image
-                                src="https://i.pinimg.com/control/564x/6a/61/32/6a6132119767a37330924720a5733a96.jpg"
+                                src="/ReyesElectronicsLogo.png"
                                 roundedCircle
                                 style={{ width: '100%', maxWidth: '100px', height: '100px' }}
                             />
@@ -134,23 +134,26 @@ function SDashboard() {
                             </div>
                         </div>
 
-                        <div className={SDashboardCss.containerCardProduct}>
-                            <p className="fs-5 m-0 ps-4">Products Added or Updated Today:</p>
-                            <div className={SDashboardCss.contentCardProduct}>
-                                {productsToday.length > 0 ? (
-                                    <CardProduct
-                                        cardProduct={productsToday.map(product => ({
-                                            productIcon: <LiaProductHunt size={30} />,
-                                            productName: product.productName,
-                                            productValue: `SKU: ${product.sku}, Quantity: ${product.quantity}`, // Display SKU and Quantity
-                                            id: product.barcode
-                                        }))}
-                                    />
-                                ) : (
-                                    <p>No products added or updated today.</p>
-                                )}
+                            <div className={SDashboardCss.containerCardProduct}>
+                                <p className="fs-6 m-0 ps-4">Products Added or Updated Today</p>
+                                <div className={SDashboardCss.contentCardProduct}>
+                                    {productsToday.length > 0 ? (
+                                        <CardProduct
+                                            cardProduct={productsToday.map(product => ({
+                                                productIcon: <LiaProductHunt size={25} />,
+                                                productName: product.productName,
+                                                productValue: `${product.sku}`,
+                                                price: `${product.price}`, // Add the price here
+                                                Quantity: `${product.quantity}`,
+                                                id: product.barcode
+                                            }))}
+                                        />
+                                    ) : (
+                                        <p>No products added or updated today.</p>
+                                    )}
+                                </div>
                             </div>
-                        </div>
+
                     </>
                 )}
             </div>

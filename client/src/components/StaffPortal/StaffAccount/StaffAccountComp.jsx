@@ -14,7 +14,7 @@ const StaffAccountComp = () => {
             const staffId = localStorage.getItem('staffId'); // Get the staffId from localStorage
             if (!staffId) {
                 alert("No staff ID found. Please log in.");
-                navigate("/login"); // Redirect to login if no ID found
+                navigate("/SLogin"); // Redirect to login if no ID found
                 return;
             }
 

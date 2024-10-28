@@ -9,7 +9,12 @@
 
 ## Changelog
 
-### v6.3 (Latest)
+### v6.3.1 (Latest)
+- Search Products
+- Update Images
+- Update Camera Design
+
+### v6.3
 - Scanner Design
 - Convert to v6.2.2-beta
 - Search Assets Working

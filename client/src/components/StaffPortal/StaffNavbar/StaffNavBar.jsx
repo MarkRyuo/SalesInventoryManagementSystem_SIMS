@@ -6,7 +6,7 @@ function StaffNavBar({backBtn}) {
     return (
         <>
             <Navbar 
-                className="bg-body-tertiary" 
+                className="bg-body-tertiary m-0" 
                 style={{ boxShadow: "1px 1px 4px #E1E4E4 "}}>
                 <Container>
                     <Navbar.Brand>
