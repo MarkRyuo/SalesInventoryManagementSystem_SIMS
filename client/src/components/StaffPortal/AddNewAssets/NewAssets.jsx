@@ -240,7 +240,7 @@ function NewAssets() {
                                 </Form.Group>
 
                                 <Form.Group controlId="category" className="mt-3">
-                                    <p className='0'>Category<span className="text-danger">*</span></p>
+                                    <p className='m-0'>Category<span className="text-danger">*</span></p>
                                     <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
                                         <option value="">Select Category</option>
                                         {categories.map((cat, index) => (
@@ -253,7 +253,7 @@ function NewAssets() {
 
                                 {isAddingNewCategory && (
                                     <Form.Group controlId="newCategory" className="mt-3">
-                                        <Form.Label>New Category</Form.Label>
+                                        <p className='m-0'>New Category</p>
                                         <Form.Control
                                             type="text"
                                             placeholder="Enter new category (e.g., Electronics)"
