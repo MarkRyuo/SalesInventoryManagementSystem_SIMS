@@ -106,7 +106,7 @@ function NewAssets() {
     };
 
     return (
-        <Container fluid>
+        <Container fluid style={{}}>
             <Row className="justify-content-center">
                 <Col md={8}>
                     <Card className="p-4 shadow">
@@ -139,7 +139,7 @@ function NewAssets() {
                                     />
                                 </Form.Group>
                             </div>
-
+                </Col>
                             <div className="mb-3">
                                 <p className='fs-4'>Product Details</p>
                                 <Form.Group controlId="productName">
