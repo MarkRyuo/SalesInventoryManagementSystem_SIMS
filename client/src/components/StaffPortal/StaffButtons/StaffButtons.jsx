@@ -19,7 +19,8 @@ function StaffButtons({buttons}) {
                             justifyContent: 'center', 
                             color: 'black', 
                             textDecoration: 'none', 
-                            borderLeft: '1px solid #92E3B8' }}>
+                            borderLeft: '1px solid #92E3B8' 
+                        }}>
                     <span className='text-center' style={{ color: '#92E3B8' }}>{button.btnIcon}</span>
                         <span className='text-center'>{button.btnName}</span>
                     </Link>
