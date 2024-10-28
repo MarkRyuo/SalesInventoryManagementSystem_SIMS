@@ -9,7 +9,7 @@ function CardProduct({ cardProduct }) {
                 <div
                     key={cardProducts.id}
                     style={{
-                        width: 250, 
+                        width: 'aut', 
                         padding: 20, 
                         boxShadow: '1px 1px 5px #e2dfdf', 
                         borderRadius: 15, 
