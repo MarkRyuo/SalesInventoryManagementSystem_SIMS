@@ -233,7 +233,7 @@ function NewAssets() {
                                             </Form.Group>
                                         </Col>
 
-                                        <Col>
+                                        <Col lg={6} sm={12}>
                                             <Form.Group controlId="quantity" className="mt-3">
                                                 <p className='m-0'>Quantity<span className="text-danger">*</span></p>
                                                 <Form.Control
