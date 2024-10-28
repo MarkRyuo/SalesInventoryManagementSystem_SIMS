@@ -135,15 +135,15 @@ function SDashboard() {
                         </div>
 
                         <div className={SDashboardCss.containerCardProduct}>
-                            <p className="fs-6 m-0 ps-4">Products Added or Updated Today</p>
+                            <p className="fs-5 m-0 ps-4">Products Added or Updated Today:</p>
                             <div className={SDashboardCss.contentCardProduct}>
                                 {productsToday.length > 0 ? (
                                     <CardProduct
                                         cardProduct={productsToday.map(product => ({
                                             productIcon: <LiaProductHunt size={25} />,
                                             productName: product.productName,
-                                            productValue: `${product.sku}`, 
-                                            Quantity: `${product.quantity}`, // Display SKU and Quantity
+                                            productValue: `SKU: ${product.sku}, 
+                                            Quantity: ${product.quantity}`, // Display SKU and Quantity
                                             id: product.barcode
                                         }))}
                                     />
