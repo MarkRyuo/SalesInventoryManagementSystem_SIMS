@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { addNewProduct, addCategory, getCategories } from '../../../services/ProductService';
-import { FaBoxOpen } from "react-icons/fa";
+import { FaBoxOpen } from "react-icons/fa"; 
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
 
 function NewAssets() {
@@ -57,9 +57,9 @@ function NewAssets() {
         return `${productCode}-${sizeCode}-${colorCode}-${wattageCode}-${voltageCode}-${uniqueID}`;
     };
 
-    const handleCategoryChange = (e) => {
-        setCategory(e.target.value);
-    };
+    // const handleCategoryChange = (e) => {
+    //     setCategory(e.target.value);
+    // };
 
     const handleAddNewCategoryClick = () => {
         setIsAddingNewCategory(true);
@@ -139,7 +139,6 @@ function NewAssets() {
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
                 <Row style={{ boxSizing: 'border-box', padding: 20, height: '80vh', paddingTop: 25 }}>
-
                     <Col lg={4} sm={12}>
                         <Row className="justify-content-center">
                             <Col md={8}>
