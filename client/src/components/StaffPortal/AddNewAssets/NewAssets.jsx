@@ -232,23 +232,26 @@ function NewAssets() {
                                                 />
                                             </Form.Group>
                                         </Col>
+
+                                        <Col>
+                                            <Form.Group controlId="quantity" className="mt-3">
+                                                <p className='m-0'>Quantity<span className="text-danger">*</span></p>
+                                                <Form.Control
+                                                    type="number"
+                                                    value={quantity}
+                                                    min={1}
+                                                    placeholder="Enter quantity (e.g., 10)"
+                                                    onChange={(e) => setQuantity(Number(e.target.value))}
+                                                    required
+                                                />
+                                                {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
+                                            </Form.Group>
+                                        </Col>
                                     </Row>
 
                                 </div>
 
                                 <Col md={8}>
-                                    <Form.Group controlId="quantity" className="mt-3">
-                                        <p className='m-0'>Quantity<span className="text-danger">*</span></p>
-                                        <Form.Control
-                                            type="number"
-                                            value={quantity}
-                                            min={1}
-                                            placeholder="Enter quantity (e.g., 10)"
-                                            onChange={(e) => setQuantity(Number(e.target.value))}
-                                            required
-                                        />
-                                        {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
-                                    </Form.Group>
 
                                     <Form.Group controlId="price" className="mt-3">
                                         <p className='m-0'>Price<span className="text-danger">*</span></p>
