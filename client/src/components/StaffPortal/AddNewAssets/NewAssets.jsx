@@ -139,126 +139,135 @@ function NewAssets() {
                                     />
                                 </Form.Group>
                             </div>
-
-                            <div className="mb-3">
-                                <p className='fs-4'>Product Details</p>
-                                <Form.Group controlId="productName">
-                                    <Form.Label>Product Name <span className="text-danger">*</span></Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter product name (e.g., LED Bulb)"
-                                        value={productName}
-                                        onChange={(e) => setProductName(e.target.value)}
-                                        required
-                                    />
-                                    {!productName && <small className="text-danger">Please enter a product name.</small>}
-                                </Form.Group>
-
-                                <Form.Group controlId="size" className="mt-3">
-                                    <Form.Label>Size</Form.Label>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                            {size || 'Select Size'}
-                                        </Dropdown.Toggle>
-
-                                        <Dropdown.Menu>
-                                            {sizes.map((size) => (
-                                                <Dropdown.Item key={size} onClick={() => setSize(size)}>
-                                                    {size}
-                                                </Dropdown.Item>
-                                            ))}
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </Form.Group>
-
-                                <Form.Group controlId="color" className="mt-3">
-                                    <Form.Label>Color</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter color (e.g., Red)"
-                                        value={color}
-                                        onChange={(e) => setColor(e.target.value)}
-                                    />
-                                </Form.Group>
-
-                                <Form.Group controlId="wattage" className="mt-3">
-                                    <Form.Label>Wattage</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter wattage (e.g., 60W)"
-                                        value={wattage}
-                                        onChange={(e) => setWattage(e.target.value)}
-                                    />
-                                </Form.Group>
-
-                                <Form.Group controlId="voltage" className="mt-3">
-                                    <Form.Label>Voltage</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter voltage (e.g., 220V)"
-                                        value={voltage}
-                                        onChange={(e) => setVoltage(e.target.value)}
-                                    />
-                                </Form.Group>
-                            </div>
-
-                            <Form.Group controlId="quantity" className="mt-3">
-                                <Form.Label>Quantity<span className="text-danger">*</span></Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    value={quantity}
-                                    min={1}
-                                    placeholder="Enter quantity (e.g., 10)"
-                                    onChange={(e) => setQuantity(Number(e.target.value))}
-                                    required
-                                />
-                                {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
-                            </Form.Group>
-
-                            <Form.Group controlId="price" className="mt-3">
-                                <Form.Label>Price<span className="text-danger">*</span></Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Enter price (e.g., 100.00)"
-                                    value={price}
-                                    onChange={(e) => setPrice(e.target.value)}
-                                    required
-                                    step="0.01"
-                                    style={{ appearance: 'textfield' }}
-                                />
-                                {!price && <small className="text-danger">Please enter a price.</small>}
-                            </Form.Group>
-
-                            <Form.Group controlId="category" className="mt-3">
-                                <Form.Label>Category<span className="text-danger">*</span></Form.Label>
-                                <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
-                                    <option value="">Select Category</option>
-                                    {categories.map((cat, index) => (
-                                        <option key={index} value={cat}>{cat}</option>
-                                    ))}
-                                </Form.Control>
-                                {!category && <small className="text-danger">Please select a category.</small>}
-                                <Button variant="link" onClick={handleAddNewCategoryClick}>Add New Category</Button>
-                            </Form.Group>
-
-                            {isAddingNewCategory && (
-                                <Form.Group controlId="newCategory" className="mt-3">
-                                    <Form.Label>New Category</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter new category (e.g., Electronics)"
-                                        value={newCategory}
-                                        onChange={(e) => setNewCategory(e.target.value)}
-                                    />
-                                    <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
-                                </Form.Group>
-                            )}
-
-                            <Button variant="primary" className="mt-4" onClick={handleDone}>Add Product</Button>
                         </Form>
                     </Card>
                 </Col>
+            
+            <Row>
+                <Col>
+                        <div className="mb-3">
+                            <p className='fs-4'>Product Details</p>
+                            <Form.Group controlId="productName">
+                                <Form.Label>Product Name <span className="text-danger">*</span></Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter product name (e.g., LED Bulb)"
+                                    value={productName}
+                                    onChange={(e) => setProductName(e.target.value)}
+                                    required
+                                />
+                                {!productName && <small className="text-danger">Please enter a product name.</small>}
+                            </Form.Group>
+
+                            <Form.Group controlId="size" className="mt-3">
+                                <Form.Label>Size</Form.Label>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        {size || 'Select Size'}
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        {sizes.map((size) => (
+                                            <Dropdown.Item key={size} onClick={() => setSize(size)}>
+                                                {size}
+                                            </Dropdown.Item>
+                                        ))}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Form.Group>
+
+                            <Form.Group controlId="color" className="mt-3">
+                                <Form.Label>Color</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter color (e.g., Red)"
+                                    value={color}
+                                    onChange={(e) => setColor(e.target.value)}
+                                />
+                            </Form.Group>
+
+                            <Form.Group controlId="wattage" className="mt-3">
+                                <Form.Label>Wattage</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter wattage (e.g., 60W)"
+                                    value={wattage}
+                                    onChange={(e) => setWattage(e.target.value)}
+                                />
+                            </Form.Group>
+
+                            <Form.Group controlId="voltage" className="mt-3">
+                                <Form.Label>Voltage</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter voltage (e.g., 220V)"
+                                    value={voltage}
+                                    onChange={(e) => setVoltage(e.target.value)}
+                                />
+                            </Form.Group>
+                        </div>
+                </Col>
             </Row>
+            
+            <Row>
+                <Col>
+                        <Form.Group controlId="quantity" className="mt-3">
+                            <Form.Label>Quantity<span className="text-danger">*</span></Form.Label>
+                            <Form.Control
+                                type="number"
+                                value={quantity}
+                                min={1}
+                                placeholder="Enter quantity (e.g., 10)"
+                                onChange={(e) => setQuantity(Number(e.target.value))}
+                                required
+                            />
+                            {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
+                        </Form.Group>
+
+                        <Form.Group controlId="price" className="mt-3">
+                            <Form.Label>Price<span className="text-danger">*</span></Form.Label>
+                            <Form.Control
+                                type="number"
+                                placeholder="Enter price (e.g., 100.00)"
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                                required
+                                step="0.01"
+                                style={{ appearance: 'textfield' }}
+                            />
+                            {!price && <small className="text-danger">Please enter a price.</small>}
+                        </Form.Group>
+
+                        <Form.Group controlId="category" className="mt-3">
+                            <Form.Label>Category<span className="text-danger">*</span></Form.Label>
+                            <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
+                                <option value="">Select Category</option>
+                                {categories.map((cat, index) => (
+                                    <option key={index} value={cat}>{cat}</option>
+                                ))}
+                            </Form.Control>
+                            {!category && <small className="text-danger">Please select a category.</small>}
+                            <Button variant="link" onClick={handleAddNewCategoryClick}>Add New Category</Button>
+                        </Form.Group>
+
+                        {isAddingNewCategory && (
+                            <Form.Group controlId="newCategory" className="mt-3">
+                                <Form.Label>New Category</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter new category (e.g., Electronics)"
+                                    value={newCategory}
+                                    onChange={(e) => setNewCategory(e.target.value)}
+                                />
+                                <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
+                            </Form.Group>
+                        )}
+
+                        <Button variant="primary" className="mt-4" onClick={handleDone}>Add Product</Button>
+                </Col>
+            </Row>                
+        
+        </Row>
         </Container>
     );
 }
