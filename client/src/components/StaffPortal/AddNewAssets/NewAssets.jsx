@@ -163,32 +163,42 @@ function NewAssets() {
                                     {!productName && <small className="text-danger">Please enter a product name.</small>}
                                 </Form.Group>
 
-                                <Form.Group controlId="size" className="">
-                                    <p className='m-1'>Product Size <sup>(Optional)</sup> </p>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="outline-success" id="dropdown-basic" size='sm'>
-                                            {size || 'Select Size'}
-                                        </Dropdown.Toggle>
+                                
+                                <Row>
+                                    <Col>
+                                        <Form.Group controlId="size" className="">
+                                            <p className='m-1'>Product Size <sup>(Optional)</sup> </p>
+                                            <Dropdown>
+                                                <Dropdown.Toggle variant="outline-success" id="dropdown-basic" size='sm'>
+                                                    {size || 'Select Size'}
+                                                </Dropdown.Toggle>
 
-                                        <Dropdown.Menu>
-                                            {sizes.map((size) => (
-                                                <Dropdown.Item key={size} onClick={() => setSize(size)}>
-                                                    {size}
-                                                </Dropdown.Item>
-                                            ))}
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </Form.Group>
+                                                <Dropdown.Menu>
+                                                    {sizes.map((size) => (
+                                                        <Dropdown.Item key={size} onClick={() => setSize(size)}>
+                                                            {size}
+                                                        </Dropdown.Item>
+                                                    ))}
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col>
+                                        <Form.Group controlId="color" className="mt-1">
+                                            <p className='m-0 mt-2'>Product Color <sup>(Optional)</sup></p>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Enter color (e.g., Red)"
+                                                value={color}
+                                                onChange={(e) => setColor(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
 
-                                <Form.Group controlId="color" className="mt-1">
-                                    <p className='m-0 mt-2'>Product Color <sup>(Optional)</sup></p>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter color (e.g., Red)"
-                                        value={color}
-                                        onChange={(e) => setColor(e.target.value)}
-                                    />
-                                </Form.Group>
+                                    <Col>
+
+                                    </Col>
+                                </Row>
 
                                 <Form.Group controlId="wattage" className="mt-3">
                                     <p className='m-0'>Wattage</p>
