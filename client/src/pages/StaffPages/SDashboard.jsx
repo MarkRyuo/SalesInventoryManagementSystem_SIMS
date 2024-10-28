@@ -21,7 +21,7 @@ function SDashboard() {
     const [buttons] = useState([
         { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={60} />, path: "/AddNewAssets", id: 1 },
         { btnName: "ScanAssets", btnIcon: <BiScan size={60} />, path: "/ScanAsset", id: 2 },
-        { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={} />, path: "/SearchAssets", id: 3 },
+        { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={60} />, path: "/SearchAssets", id: 3 },
     ]);
 
     useEffect(() => {
