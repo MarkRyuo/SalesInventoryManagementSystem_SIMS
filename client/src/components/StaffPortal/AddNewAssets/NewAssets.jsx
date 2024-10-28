@@ -147,10 +147,10 @@ function NewAssets() {
                 </Col>
                 
                 <Col lg={8} sm={12}>
-                    <Row className='justify-content-center shadow p-3'>
+                    <Row className='justify-content-center shadow p-3' style={{borderRadius: 20}}>
                         <Col md={12}>
                             <div className="mb-3">
-                                <p className='fs-4'>Product Details</p>
+                                <p style={{fontSize: '1.6rem'}}>Product Details</p>
                                 <Form.Group controlId="productName">
                                     <p className='m-0'>Product Name <span className="text-danger">*</span></p>
                                     <Form.Control
@@ -276,7 +276,7 @@ function NewAssets() {
                                     </Form.Group>
                                 )}
 
-                                <Button variant="primary" className="mt-4" onClick={handleDone}>Add Product</Button>
+                                <Button variant="primary" className="my-3" onClick={handleDone}>Add Product</Button>
                             </Col>
                         </Col>
                     </Row>
