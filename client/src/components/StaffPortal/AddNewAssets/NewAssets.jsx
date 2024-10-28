@@ -164,7 +164,7 @@ function NewAssets() {
                                 </Form.Group>
 
                                 <Form.Group controlId="size" className="">
-                                    <p>Product Size</p>
+                                    <p className='m-0'>Product Size</p>
                                     <Dropdown>
                                         <Dropdown.Toggle variant="outline-success" id="dropdown-basic" size='sm'>
                                             {size || 'Select Size'}
