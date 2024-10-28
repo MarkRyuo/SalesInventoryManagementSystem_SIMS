@@ -18,7 +18,7 @@ function CardProduct({ cardProduct }) {
                     }}>
                     <span>{cardProducts.productIcon}</span>
                     <p className="fs-6 m-0">{cardProducts.productName}</p>
-                    <p className="fs-6 m-0">{cardProducts.productValue}</p>
+                    <p className="fs-6 m-0">SKU {cardProducts.productValue}</p>
                 </div>
             ))}
         </>
