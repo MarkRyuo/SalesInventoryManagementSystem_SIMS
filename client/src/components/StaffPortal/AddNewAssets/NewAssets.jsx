@@ -107,7 +107,7 @@ function NewAssets() {
 
     return (
         <Container fluid style={{}}>
-            <Row className='border'>
+            <Row style={{border: '1px solid red'}}>
                 <Row className="justify-content-center">
                     <Col md={8}>
                         <Card className="p-4 shadow">
@@ -144,7 +144,7 @@ function NewAssets() {
                         </Card>
                     </Col>
                 </Row>
-                
+
                 <Row>
                     <Col>
                         <div className="mb-3">
