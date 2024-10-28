@@ -268,8 +268,6 @@ function NewAssets() {
                                 </div>
 
                                 <Col md={12}>
-
-
                                     <Form.Group controlId="category" className="mt-3">
                                         <p className='m-0'>Category<span className="text-danger">*</span></p>
                                         <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
