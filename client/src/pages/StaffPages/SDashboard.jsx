@@ -140,7 +140,7 @@ function SDashboard() {
                                 {productsToday.length > 0 ? (
                                     <CardProduct
                                         cardProduct={productsToday.map(product => ({
-                                            productIcon: <LiaProductHunt size={30} />,
+                                            productIcon: <LiaProductHunt size={20} />,
                                             productName: product.productName,
                                             productValue: `SKU: ${product.sku}, Quantity: ${product.quantity}`, // Display SKU and Quantity
                                             id: product.barcode
