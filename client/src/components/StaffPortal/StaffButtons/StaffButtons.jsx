@@ -12,10 +12,11 @@ function StaffButtons({buttons}) {
                         style={{ 
                             display: "flex", 
                             flexDirection: "column", 
-                            padding: 20, boxShadow: '2px 2px 5px #e2dfdf', 
+                            padding: 30, 
+                            boxShadow: '2px 2px 5px #e2dfdf', 
                             borderRadius: 20, 
                             width: 250, 
-                            height: 150, 
+                            height: 100, 
                             justifyContent: 'center', 
                             color: 'black', 
                             textDecoration: 'none', 
