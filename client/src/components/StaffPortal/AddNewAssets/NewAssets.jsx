@@ -152,7 +152,7 @@ function NewAssets() {
                             <div className="mb-3">
                                 <p className='fs-4'>Product Details</p>
                                 <Form.Group controlId="productName">
-                                    <p>Product Name <span className="text-danger">*</span></p>
+                                    <p className='m-0'>Product Name <span className="text-danger">*</span></p>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter product name (e.g., LED Bulb)"
