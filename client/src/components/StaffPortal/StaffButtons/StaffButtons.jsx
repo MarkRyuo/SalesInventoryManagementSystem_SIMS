@@ -16,7 +16,7 @@ function StaffButtons({buttons}) {
                             boxShadow: '2px 2px 5px #e2dfdf', 
                             borderRadius: 20, 
                             width: 250, 
-                            height: 100, 
+                            height: 125, 
                             justifyContent: 'center', 
                             color: 'black', 
                             textDecoration: 'none', 
