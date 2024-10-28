@@ -169,7 +169,7 @@ function NewAssets() {
                                         <Form.Group controlId="size" className="">
                                             <p className='m-1'>Product Size <sup>(Optional)</sup> </p>
                                             <Dropdown>
-                                                <Dropdown.Toggle variant="outline-success" id="dropdown-basic" size='sm'>
+                                                <Dropdown.Toggle variant="outline-primary" id="dropdown-basic" size=''>
                                                     {size || 'Select Size'}
                                                 </Dropdown.Toggle>
 
