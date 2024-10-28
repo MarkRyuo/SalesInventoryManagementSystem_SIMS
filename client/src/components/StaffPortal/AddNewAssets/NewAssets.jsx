@@ -247,25 +247,28 @@ function NewAssets() {
                                                 {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
                                             </Form.Group>
                                         </Col>
+
+                                        <Col>
+                                            <Form.Group controlId="price" className="mt-3">
+                                                <p className='m-0'>Price<span className="text-danger">*</span></p>
+                                                <Form.Control
+                                                    type="number"
+                                                    placeholder="Enter price (e.g., 100.00)"
+                                                    value={price}
+                                                    onChange={(e) => setPrice(e.target.value)}
+                                                    required
+                                                    step="0.01"
+                                                    style={{ appearance: 'textfield' }}
+                                                />
+                                                {!price && <small className="text-danger">Please enter a price.</small>}
+                                            </Form.Group>
+                                        </Col>
                                     </Row>
 
                                 </div>
 
                                 <Col md={8}>
 
-                                    <Form.Group controlId="price" className="mt-3">
-                                        <p className='m-0'>Price<span className="text-danger">*</span></p>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Enter price (e.g., 100.00)"
-                                            value={price}
-                                            onChange={(e) => setPrice(e.target.value)}
-                                            required
-                                            step="0.01"
-                                            style={{ appearance: 'textfield' }}
-                                        />
-                                        {!price && <small className="text-danger">Please enter a price.</small>}
-                                    </Form.Group>
 
                                     <Form.Group controlId="category" className="mt-3">
                                         <p className='m-0'>Category<span className="text-danger">*</span></p>
