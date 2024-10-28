@@ -134,24 +134,26 @@ function SDashboard() {
                             </div>
                         </div>
 
-                        <div className={SDashboardCss.containerCardProduct}>
-                            <p className="fs-5 m-0 ps-4">Products Added or Updated Today:</p>
-                            <div className={SDashboardCss.contentCardProduct}>
-                                {productsToday.length > 0 ? (
-                                    <CardProduct
-                                        cardProduct={productsToday.map(product => ({
-                                            productIcon: <LiaProductHunt size={25} />,
-                                            productName: product.productName,
-                                            productValue: `${product.sku}`, 
-                                            Quantity: `${product.quantity}`,
-                                            id: product.barcode
-                                        }))}
-                                    />
-                                ) : (
-                                    <p>No products added or updated today.</p>
-                                )}
+                            <div className={SDashboardCss.containerCardProduct}>
+                                <p className="fs-5 m-0 ps-4">Products Added or Updated Today:</p>
+                                <div className={SDashboardCss.contentCardProduct}>
+                                    {productsToday.length > 0 ? (
+                                        <CardProduct
+                                            cardProduct={productsToday.map(product => ({
+                                                productIcon: <LiaProductHunt size={25} />,
+                                                productName: product.productName,
+                                                productValue: `${product.sku}`,
+                                                Quantity: `${product.quantity}`,
+                                                price: `${product.price}`, // Add the price here
+                                                id: product.barcode
+                                            }))}
+                                        />
+                                    ) : (
+                                        <p>No products added or updated today.</p>
+                                    )}
+                                </div>
                             </div>
-                        </div>
+
                     </>
                 )}
             </div>

@@ -18,8 +18,8 @@ function CardProduct({ cardProduct }) {
                     <span>{cardProducts.productIcon}</span>
                     <p className="fs-6 m-0">{cardProducts.productName}</p>
                     <p className="fs-6 m-0">SKU: {cardProducts.productValue}</p>
-                    <p className="fs-6 m-0">Quantity: {cardProducts.Quantity}</p> {/* Display quantity here */}
-                    <p className="">Price: {cardProducts.price}</p>
+                    <p className="fs-6 m-0">Quantity: {cardProducts.Quantity}</p>
+                    <p className="fs-6 m-0">Price: {cardProducts.price}</p> {/* Display price here */}
                 </div>
             ))}
         </>
