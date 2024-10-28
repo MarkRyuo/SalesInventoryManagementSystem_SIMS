@@ -107,7 +107,7 @@ function NewAssets() {
 
     return (
         <Container fluid='lg' style={{}}>
-            <Row style={{border: '1px solid red', boxSizing: 'border-box', padding: 20}} className='shadow'>
+            <Row style={{border: '1px solid red', boxSizing: 'border-box', padding: 20, height: '100vh', paddingTop: 50}} className='shadow'>
                 {error && <Alert variant="danger">{error}</Alert>}
                 {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
 
