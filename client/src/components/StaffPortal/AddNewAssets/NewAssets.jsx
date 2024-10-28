@@ -139,7 +139,7 @@ function NewAssets() {
                                     />
                                 </Form.Group>
                             </div>
-                </Col>
+
                             <div className="mb-3">
                                 <p className='fs-4'>Product Details</p>
                                 <Form.Group controlId="productName">
