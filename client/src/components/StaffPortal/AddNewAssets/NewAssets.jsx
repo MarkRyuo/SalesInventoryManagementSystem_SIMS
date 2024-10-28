@@ -111,7 +111,7 @@ function NewAssets() {
 
     const [backBtn] = useState([
         {
-            btnIcon: <IoMdArrowBack size={20} />,
+            btnIcon: 'SIMS',
             id: 1
         }
     ]);
