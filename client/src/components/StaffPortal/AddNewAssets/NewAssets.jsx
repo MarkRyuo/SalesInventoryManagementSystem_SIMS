@@ -147,7 +147,7 @@ function NewAssets() {
                 </Col>
                 
                 <Col lg={8} sm={12}>
-                    <Row className='justify-content-center shadow p-3' style={{borderRadius: 20}}>
+                    <Row className='justify-content-center p-3' style={{borderRadius: 20, boxShadow: '2px 2px 4px #E1E4E4'}}>
                         <Col md={12}>
                             <div className="mb-3">
                                 <p style={{fontSize: '1.6rem'}}>Product Details</p>
@@ -259,8 +259,8 @@ function NewAssets() {
                                             <option key={index} value={cat}>{cat}</option>
                                         ))}
                                     </Form.Control>
-                                    {!category && <small className="text-danger">Please select a category.</small>}
-                                    <Button variant="link" onClick={handleAddNewCategoryClick}>Add New Category</Button>
+                                    {!category && <small className="text-danger mx-2">Please select a category.</small>}
+                                    <Button variant="link" onClick={handleAddNewCategoryClick} className='m-0 p-0'>Add New Category</Button>
                                 </Form.Group>
 
                                 {isAddingNewCategory && (
