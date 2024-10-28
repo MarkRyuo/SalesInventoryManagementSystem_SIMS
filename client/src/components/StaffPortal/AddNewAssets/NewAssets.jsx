@@ -267,7 +267,7 @@ function NewAssets() {
 
                                 </div>
 
-                                <Col md={8}>
+                                <Col md={12}>
 
 
                                     <Form.Group controlId="category" className="mt-3">
@@ -295,7 +295,7 @@ function NewAssets() {
                                         </Form.Group>
                                     )}
 
-                                    <Button variant="primary" className="my-3" onClick={handleDone}>Add Product</Button>
+                                    <Button variant="success" className="my-3 px-5" onClick={handleDone}>Done</Button>
                                 </Col>
                             </Col>
                         </Row>
