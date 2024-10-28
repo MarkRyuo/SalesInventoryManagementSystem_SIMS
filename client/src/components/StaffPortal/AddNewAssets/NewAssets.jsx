@@ -120,11 +120,11 @@ function NewAssets() {
         <Container fluid className='m-0 p-0'>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
-                <Row style={{ boxSizing: 'border-box', padding: 20, height: '80vh', paddingTop: 50 }}>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
+                <Row style={{ boxSizing: 'border-box', padding: 20, height: '80vh', paddingTop: 25 }}>
 
                     <Col lg={4} sm={12}>
+                        {error && <Alert variant="danger">{error}</Alert>}
+                        {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
                         <Row className="justify-content-center">
                             <Col md={8}>
                                 <Form>
