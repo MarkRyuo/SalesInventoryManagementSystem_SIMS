@@ -107,7 +107,7 @@ function NewAssets() {
 
     return (
         <Container fluid='lg' style={{}}>
-            <Row style={{boxSizing: 'border-box', padding: 20, height: '100vh', paddingTop: 50}} className='shadow'>
+            <Row style={{boxSizing: 'border-box', padding: 20, height: '100vh', paddingTop: 50, borderRadius: 20}}>
                 {error && <Alert variant="danger">{error}</Alert>}
                 {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
 
@@ -220,9 +220,10 @@ function NewAssets() {
                                         </Form.Group>
                                     </Col>
                                 </Row>
+
                             </div>
 
-                            <Col md={12}>
+                            <Col md={8}>
                                 <Form.Group controlId="quantity" className="mt-3">
                                     <p className='m-0'>Quantity<span className="text-danger">*</span></p>
                                     <Form.Control
