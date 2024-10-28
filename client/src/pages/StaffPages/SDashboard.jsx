@@ -126,7 +126,7 @@ function SDashboard() {
                         </div>
 
                         <div className={SDashboardCss.containerHeroCard}>
-                            <p className="fs-5 m-0 ps-4">Services</p>
+                            <p className="fs-6 m-0 ps-4">Services</p>
                             <div className={SDashboardCss.buttonsHeroCard}>
                                 <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
                                 <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
@@ -135,7 +135,7 @@ function SDashboard() {
                         </div>
 
                         <div className={SDashboardCss.containerCardProduct}>
-                            <p className="fs-5 m-0 ps-4">Products Added or Updated Today:</p>
+                            <p className="fs-6 m-0 ps-4">Products Added or Updated Today:</p>
                             <div className={SDashboardCss.contentCardProduct}>
                                 {productsToday.length > 0 ? (
                                     <CardProduct
