@@ -143,7 +143,7 @@ function SDashboard() {
                                             productIcon: <LiaProductHunt size={25} />,
                                             productName: product.productName,
                                             productValue: `SKU: ${product.sku}`, 
-                                            Quantity: `${product.quantity}`, // Display SKU and Quantity
+                                            Quantity: `${product.quantity}`,
                                             id: product.barcode
                                         }))}
                                     />
