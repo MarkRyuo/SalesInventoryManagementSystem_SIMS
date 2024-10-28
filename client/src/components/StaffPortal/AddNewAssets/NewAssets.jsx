@@ -114,7 +114,6 @@ function NewAssets() {
                 <Col lg={12}>
                     <Row className="justify-content-center">
                         <Col md={8}>
-                            <div className="p-4">
                                 <Form>
                                     <div className="mb-3">
                                         <Form.Group controlId="barcode">
@@ -143,7 +142,6 @@ function NewAssets() {
                                         </Form.Group>
                                     </div>
                                 </Form>
-                            </div>
                         </Col>
                     </Row>
                 </Col>
