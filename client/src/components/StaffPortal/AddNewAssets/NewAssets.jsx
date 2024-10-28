@@ -147,12 +147,12 @@ function NewAssets() {
                 </Col>
                 
                 <Col lg={8} sm={12}>
-                    <Row className='justify-content-center'>
+                    <Row className='justify-content-center shadow p-3'>
                         <Col md={12}>
                             <div className="mb-3">
                                 <p className='fs-4'>Product Details</p>
                                 <Form.Group controlId="productName">
-                                    <Form.Label>Product Name <span className="text-danger">*</span></Form.Label>
+                                    <p>Product Name <span className="text-danger">*</span></p>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter product name (e.g., LED Bulb)"
@@ -163,10 +163,10 @@ function NewAssets() {
                                     {!productName && <small className="text-danger">Please enter a product name.</small>}
                                 </Form.Group>
 
-                                <Form.Group controlId="size" className="mt-3">
-                                    <Form.Label>Size</Form.Label>
+                                <Form.Group controlId="size" className="">
+                                    <p>Product Size</p>
                                     <Dropdown>
-                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        <Dropdown.Toggle variant="outline-success" id="dropdown-basic" size='sm'>
                                             {size || 'Select Size'}
                                         </Dropdown.Toggle>
 
@@ -180,8 +180,8 @@ function NewAssets() {
                                     </Dropdown>
                                 </Form.Group>
 
-                                <Form.Group controlId="color" className="mt-3">
-                                    <Form.Label>Color</Form.Label>
+                                <Form.Group controlId="color" className="mt-1">
+                                    <p className='m-0'>Product Color (Optional)</p>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter color (e.g., Red)"
