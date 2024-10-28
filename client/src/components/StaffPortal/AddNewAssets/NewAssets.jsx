@@ -201,7 +201,7 @@ function NewAssets() {
                                 </Form.Group>
 
                                 <Form.Group controlId="voltage" className="mt-3">
-                                    <Form.Label>Voltage</Form.Label>
+                                    <p className='m-0'>Voltage</p>
                                     <Form.Control
                                         type="text"
                                         placeholder="Enter voltage (e.g., 220V)"
@@ -213,7 +213,7 @@ function NewAssets() {
 
                             <Col md={12}>
                                 <Form.Group controlId="quantity" className="mt-3">
-                                    <Form.Label>Quantity<span className="text-danger">*</span></Form.Label>
+                                    <p className='m-0'>Quantity<span className="text-danger">*</span></p>
                                     <Form.Control
                                         type="number"
                                         value={quantity}
@@ -226,7 +226,7 @@ function NewAssets() {
                                 </Form.Group>
 
                                 <Form.Group controlId="price" className="mt-3">
-                                    <Form.Label>Price<span className="text-danger">*</span></Form.Label>
+                                    <p className='m-0'>Price<span className="text-danger">*</span></p>
                                     <Form.Control
                                         type="number"
                                         placeholder="Enter price (e.g., 100.00)"
@@ -240,7 +240,7 @@ function NewAssets() {
                                 </Form.Group>
 
                                 <Form.Group controlId="category" className="mt-3">
-                                    <Form.Label>Category<span className="text-danger">*</span></Form.Label>
+                                    <p className='0'>Category<span className="text-danger">*</span></p>
                                     <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
                                         <option value="">Select Category</option>
                                         {categories.map((cat, index) => (
