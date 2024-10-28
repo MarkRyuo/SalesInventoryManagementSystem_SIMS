@@ -135,7 +135,7 @@ function SDashboard() {
                         </div>
 
                         <div className={SDashboardCss.containerCardProduct}>
-                            <p className="fs-6 m-0 ps-4">Products Added or Updated Today:</p>
+                            <p className="fs-6 m-0 ps-4">Products Added or Updated Today</p>
                             <div className={SDashboardCss.contentCardProduct}>
                                 {productsToday.length > 0 ? (
                                     <CardProduct
