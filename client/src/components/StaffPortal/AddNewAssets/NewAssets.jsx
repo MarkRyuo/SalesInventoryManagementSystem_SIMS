@@ -110,11 +110,11 @@ function NewAssets() {
             <Row style={{border: '1px solid red', boxSizing: 'border-box', padding: 20}}>
                 {error && <Alert variant="danger">{error}</Alert>}
                 {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
-                
+
                 <Col lg={12}>
                     <Row className="justify-content-center">
                         <Col md={8}>
-                            <Card className="p-4 shadow">
+                            <div className="p-4">
                                 <Form>
                                     <div className="mb-3">
                                         <Form.Group controlId="barcode">
@@ -143,7 +143,7 @@ function NewAssets() {
                                         </Form.Group>
                                     </div>
                                 </Form>
-                            </Card>
+                            </div>
                         </Col>
                     </Row>
                 </Col>
