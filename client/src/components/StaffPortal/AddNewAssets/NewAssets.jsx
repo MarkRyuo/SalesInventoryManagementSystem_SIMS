@@ -183,6 +183,7 @@ function NewAssets() {
                                             </Dropdown>
                                         </Form.Group>
                                     </Col>
+
                                     <Col>
                                         <Form.Group controlId="color" className="mt-1">
                                             <p className='m-0 mt-2'>Product Color <sup>(Optional)</sup></p>
@@ -196,19 +197,18 @@ function NewAssets() {
                                     </Col>
 
                                     <Col>
-
+                                        <Form.Group controlId="wattage" className="mt-3">
+                                            <p className='m-0'>Wattage</p>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Enter wattage (e.g., 60W)"
+                                                value={wattage}
+                                                onChange={(e) => setWattage(e.target.value)}
+                                            />
+                                        </Form.Group>
                                     </Col>
                                 </Row>
 
-                                <Form.Group controlId="wattage" className="mt-3">
-                                    <p className='m-0'>Wattage</p>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter wattage (e.g., 60W)"
-                                        value={wattage}
-                                        onChange={(e) => setWattage(e.target.value)}
-                                    />
-                                </Form.Group>
 
                                 <Form.Group controlId="voltage" className="mt-3">
                                     <p className='m-0'>Voltage</p>
