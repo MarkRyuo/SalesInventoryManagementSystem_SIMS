@@ -215,66 +215,65 @@ function NewAssets() {
                     </Row>
                 </Col>
                     
-                <Col>
-                    
-                </Col>
-                <Row className='justify-content-center'>
-                    <Col md={8}>
-                        <Form.Group controlId="quantity" className="mt-3">
-                            <Form.Label>Quantity<span className="text-danger">*</span></Form.Label>
-                            <Form.Control
-                                type="number"
-                                value={quantity}
-                                min={1}
-                                placeholder="Enter quantity (e.g., 10)"
-                                onChange={(e) => setQuantity(Number(e.target.value))}
-                                required
-                            />
-                            {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
-                        </Form.Group>
-
-                        <Form.Group controlId="price" className="mt-3">
-                            <Form.Label>Price<span className="text-danger">*</span></Form.Label>
-                            <Form.Control
-                                type="number"
-                                placeholder="Enter price (e.g., 100.00)"
-                                value={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                                required
-                                step="0.01"
-                                style={{ appearance: 'textfield' }}
-                            />
-                            {!price && <small className="text-danger">Please enter a price.</small>}
-                        </Form.Group>
-
-                        <Form.Group controlId="category" className="mt-3">
-                            <Form.Label>Category<span className="text-danger">*</span></Form.Label>
-                            <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
-                                <option value="">Select Category</option>
-                                {categories.map((cat, index) => (
-                                    <option key={index} value={cat}>{cat}</option>
-                                ))}
-                            </Form.Control>
-                            {!category && <small className="text-danger">Please select a category.</small>}
-                            <Button variant="link" onClick={handleAddNewCategoryClick}>Add New Category</Button>
-                        </Form.Group>
-
-                        {isAddingNewCategory && (
-                            <Form.Group controlId="newCategory" className="mt-3">
-                                <Form.Label>New Category</Form.Label>
+                <Col lg={12}>
+                    <Row className='justify-content-center'>
+                        <Col md={8}>
+                            <Form.Group controlId="quantity" className="mt-3">
+                                <Form.Label>Quantity<span className="text-danger">*</span></Form.Label>
                                 <Form.Control
-                                    type="text"
-                                    placeholder="Enter new category (e.g., Electronics)"
-                                    value={newCategory}
-                                    onChange={(e) => setNewCategory(e.target.value)}
+                                    type="number"
+                                    value={quantity}
+                                    min={1}
+                                    placeholder="Enter quantity (e.g., 10)"
+                                    onChange={(e) => setQuantity(Number(e.target.value))}
+                                    required
                                 />
-                                <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
+                                {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
                             </Form.Group>
-                        )}
 
-                        <Button variant="primary" className="mt-4" onClick={handleDone}>Add Product</Button>
-                    </Col>
-                </Row>
+                            <Form.Group controlId="price" className="mt-3">
+                                <Form.Label>Price<span className="text-danger">*</span></Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    placeholder="Enter price (e.g., 100.00)"
+                                    value={price}
+                                    onChange={(e) => setPrice(e.target.value)}
+                                    required
+                                    step="0.01"
+                                    style={{ appearance: 'textfield' }}
+                                />
+                                {!price && <small className="text-danger">Please enter a price.</small>}
+                            </Form.Group>
+
+                            <Form.Group controlId="category" className="mt-3">
+                                <Form.Label>Category<span className="text-danger">*</span></Form.Label>
+                                <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
+                                    <option value="">Select Category</option>
+                                    {categories.map((cat, index) => (
+                                        <option key={index} value={cat}>{cat}</option>
+                                    ))}
+                                </Form.Control>
+                                {!category && <small className="text-danger">Please select a category.</small>}
+                                <Button variant="link" onClick={handleAddNewCategoryClick}>Add New Category</Button>
+                            </Form.Group>
+
+                            {isAddingNewCategory && (
+                                <Form.Group controlId="newCategory" className="mt-3">
+                                    <Form.Label>New Category</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter new category (e.g., Electronics)"
+                                        value={newCategory}
+                                        onChange={(e) => setNewCategory(e.target.value)}
+                                    />
+                                    <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
+                                </Form.Group>
+                            )}
+
+                            <Button variant="primary" className="mt-4" onClick={handleDone}>Add Product</Button>
+                        </Col>
+                    </Row>
+                </Col>
             </Row>
         </Container>
     );
