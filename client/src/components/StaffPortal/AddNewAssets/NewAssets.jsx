@@ -5,6 +5,8 @@ import { addNewProduct, addCategory, getCategories } from '../../../services/Pro
 import { FaBoxOpen } from "react-icons/fa"; 
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
 
+
+
 function NewAssets() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -24,8 +26,6 @@ function NewAssets() {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [dateAdded, setDateAdded] = useState('');
-    const [alertVisible, setAlertVisible] = useState(false);
-    const [fadeOut, setFadeOut] = useState(false); // State for fade-out effect
 
     const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
@@ -57,9 +57,9 @@ function NewAssets() {
         return `${productCode}-${sizeCode}-${colorCode}-${wattageCode}-${voltageCode}-${uniqueID}`;
     };
 
-    // const handleCategoryChange = (e) => {
-    //     setCategory(e.target.value);
-    // };
+    const handleCategoryChange = (e) => {
+        setCategory(e.target.value);
+    };
 
     const handleAddNewCategoryClick = () => {
         setIsAddingNewCategory(true);
@@ -75,12 +75,6 @@ function NewAssets() {
                 setIsAddingNewCategory(false);
             } catch (error) {
                 setError(error.message);
-                setAlertVisible(true);
-                setFadeOut(false); // Reset fadeOut to false before showing
-                setTimeout(() => {
-                    setFadeOut(true); // Trigger fade out
-                    setTimeout(() => setAlertVisible(false), 1000); // Hide alert after fade out
-                }, 2000); // Show for 2 seconds
             }
         }
     };
@@ -88,12 +82,6 @@ function NewAssets() {
     const handleDone = async () => {
         if (!productName || !size || !color || !category || !quantity || !price) {
             setError('Please fill in all required fields.');
-            setAlertVisible(true);
-            setFadeOut(false); // Reset fadeOut to false before showing
-            setTimeout(() => {
-                setFadeOut(true); // Trigger fade out
-                setTimeout(() => setAlertVisible(false), 1000); // Hide alert after fade out
-            }, 2000); // Show for 2 seconds
             return;
         }
 
@@ -116,12 +104,6 @@ function NewAssets() {
             navigate('/ProductSuccess');
         } catch (error) {
             setError(error.message);
-            setAlertVisible(true);
-            setFadeOut(false); // Reset fadeOut to false before showing
-            setTimeout(() => {
-                setFadeOut(true); // Trigger fade out
-                setTimeout(() => setAlertVisible(false), 1000); // Hide alert after fade out
-            }, 2000); // Show for 2 seconds
         } finally {
             setIsLoading(false);
         }
@@ -139,6 +121,7 @@ function NewAssets() {
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
                 <Row style={{ boxSizing: 'border-box', padding: 20, height: '80vh', paddingTop: 25 }}>
+
                     <Col lg={4} sm={12}>
                         <Row className="justify-content-center">
                             <Col md={8}>
@@ -175,17 +158,7 @@ function NewAssets() {
                     </Col>
 
                     <Col lg={8} sm={12}>
-                        {alertVisible && error && (
-                            <Alert
-                                variant="danger"
-                                style={{
-                                    opacity: fadeOut ? 0 : 1,
-                                    transition: 'opacity 1s ease-out',
-                                }}
-                            >
-                                {error}
-                            </Alert>
-                        )}
+                        {error && <Alert variant="danger">{error}</Alert>}
                         {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
                         <Row className='justify-content-center p-3' style={{ borderRadius: 20, boxShadow: '2px 2px 4px #E1E4E4' }}>
                             <Col md={12}>
@@ -202,6 +175,7 @@ function NewAssets() {
                                         />
                                         {!productName && <small className="text-danger">Please enter a product name.</small>}
                                     </Form.Group>
+
 
                                     <Row className='mt-1'>
                                         <Col lg={6} sm={12}>
@@ -240,7 +214,7 @@ function NewAssets() {
                                                 <p className='m-0'>Wattage</p>
                                                 <Form.Control
                                                     type="text"
-                                                    placeholder="Enter wattage (e.g., 10W)"
+                                                    placeholder="Enter wattage (e.g., 60W)"
                                                     value={wattage}
                                                     onChange={(e) => setWattage(e.target.value)}
                                                 />
@@ -252,7 +226,7 @@ function NewAssets() {
                                                 <p className='m-0'>Voltage</p>
                                                 <Form.Control
                                                     type="text"
-                                                    placeholder="Enter voltage (e.g., 230V)"
+                                                    placeholder="Enter voltage (e.g., 220V)"
                                                     value={voltage}
                                                     onChange={(e) => setVoltage(e.target.value)}
                                                 />
@@ -261,68 +235,66 @@ function NewAssets() {
 
                                         <Col lg={6} sm={12}>
                                             <Form.Group controlId="quantity" className="mt-3">
-                                                <p className='m-0'>Quantity</p>
+                                                <p className='m-0'>Quantity<span className="text-danger">*</span></p>
                                                 <Form.Control
                                                     type="number"
-                                                    min={1}
                                                     value={quantity}
+                                                    min={1}
+                                                    placeholder="Enter quantity (e.g., 10)"
                                                     onChange={(e) => setQuantity(Number(e.target.value))}
+                                                    required
                                                 />
+                                                {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
                                             </Form.Group>
                                         </Col>
 
                                         <Col lg={6} sm={12}>
                                             <Form.Group controlId="price" className="mt-3">
-                                                <p className='m-0'>Price</p>
+                                                <p className='m-0'>Price<span className="text-danger">*</span></p>
                                                 <Form.Control
                                                     type="number"
-                                                    min={0}
+                                                    placeholder="Enter price (e.g., 100.00)"
                                                     value={price}
-                                                    onChange={(e) => setPrice(Number(e.target.value))}
+                                                    onChange={(e) => setPrice(e.target.value)}
+                                                    required
+                                                    step="0.01"
+                                                    style={{ appearance: 'textfield' }}
                                                 />
+                                                {!price && <small className="text-danger">Please enter a price.</small>}
                                             </Form.Group>
-                                        </Col>
-
-                                        <Col lg={12} sm={12} className="mt-3">
-                                            <Form.Group controlId="category">
-                                                <p className='m-0'>Category <span className="text-danger">*</span></p>
-                                                <Dropdown>
-                                                    <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-                                                        {category || 'Select Category'}
-                                                    </Dropdown.Toggle>
-                                                    <Dropdown.Menu>
-                                                        {categories.map((category, index) => (
-                                                            <Dropdown.Item key={index} onClick={() => setCategory(category)}>
-                                                                {category}
-                                                            </Dropdown.Item>
-                                                        ))}
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
-                                                <Button variant="link" onClick={handleAddNewCategoryClick}>
-                                                    + Add New Category
-                                                </Button>
-                                                {isAddingNewCategory && (
-                                                    <div className="mt-2">
-                                                        <Form.Control
-                                                            type="text"
-                                                            placeholder="Enter new category"
-                                                            value={newCategory}
-                                                            onChange={(e) => setNewCategory(e.target.value)}
-                                                        />
-                                                        <Button variant="success" className="mt-2" onClick={handleSaveNewCategory}>Save Category</Button>
-                                                    </div>
-                                                )}
-                                                {!category && <small className="text-danger">Please select a category.</small>}
-                                            </Form.Group>
-                                        </Col>
-
-                                        <Col lg={12} sm={12} className="mt-3">
-                                            <Button variant="primary" onClick={handleDone}>
-                                                Add Product
-                                            </Button>
                                         </Col>
                                     </Row>
+
                                 </div>
+
+                                <Col md={12}>
+                                    <Form.Group controlId="category" className="mt-3">
+                                        <p className='m-0'>Category<span className="text-danger">*</span></p>
+                                        <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
+                                            <option value="">Select Category</option>
+                                            {categories.map((cat, index) => (
+                                                <option key={index} value={cat}>{cat}</option>
+                                            ))}
+                                        </Form.Control>
+                                        {!category && <small className="text-danger mx-2">Please select a category.</small>}
+                                        <Button variant="link" onClick={handleAddNewCategoryClick} className='m-0 p-0'>Add New Category</Button>
+                                    </Form.Group>
+
+                                    {isAddingNewCategory && (
+                                        <Form.Group controlId="newCategory" className="mt-3">
+                                            <p className='m-0'>New Category</p>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Enter new category (e.g., Electronics)"
+                                                value={newCategory}
+                                                onChange={(e) => setNewCategory(e.target.value)}
+                                            />
+                                            <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
+                                        </Form.Group>
+                                    )}
+
+                                    <Button variant="success" className="my-3 px-5" onClick={handleDone}>Done</Button>
+                                </Col>
                             </Col>
                         </Row>
                     </Col>
