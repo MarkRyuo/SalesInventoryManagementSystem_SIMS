@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { addNewProduct, addCategory, getCategories } from '../../../services/ProductService';
-import { IoMdArrowBack } from "react-icons/io";
+import { FaBoxOpen } from "react-icons/fa"; 
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
 
 
@@ -111,16 +111,16 @@ function NewAssets() {
 
     const [backBtn] = useState([
         {
-            btnIcon: 'SIMS',
+            btnIcon: <FaBoxOpen size={30} />,
             id: 1
         }
     ]);
 
     return (
-        <Container fluid>
+        <Container fluid className='m-0 p-0'>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
-                <Row style={{ boxSizing: 'border-box', padding: 20, height: '100vh', paddingTop: 50 }}>
+                <Row style={{ boxSizing: 'border-box', padding: 20, height: '80vh', paddingTop: 50 }}>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
 
