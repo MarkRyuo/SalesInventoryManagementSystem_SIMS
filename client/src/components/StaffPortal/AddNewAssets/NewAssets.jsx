@@ -123,8 +123,6 @@ function NewAssets() {
                 <Row style={{ boxSizing: 'border-box', padding: 20, height: '80vh', paddingTop: 25 }}>
 
                     <Col lg={4} sm={12}>
-                        {error && <Alert variant="danger">{error}</Alert>}
-                        {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
                         <Row className="justify-content-center">
                             <Col md={8}>
                                 <Form>
@@ -160,6 +158,8 @@ function NewAssets() {
                     </Col>
 
                     <Col lg={8} sm={12}>
+                        {error && <Alert variant="danger">{error}</Alert>}
+                        {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
                         <Row className='justify-content-center p-3' style={{ borderRadius: 20, boxShadow: '2px 2px 4px #E1E4E4' }}>
                             <Col md={12}>
                                 <div className="mb-3">
