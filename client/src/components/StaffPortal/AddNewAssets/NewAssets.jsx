@@ -277,7 +277,7 @@ function NewAssets() {
                                             ))}
                                         </Form.Control>
                                         {!category && <small className="text-danger mx-2">Please select a category.</small>}
-                                        <Button variant="link" onClick={handleAddNewCategoryClick} className='m-0 p-0'>Add New Category</Button>
+                                        <Button variant="link" onClick={handleAddNewCategoryClick} className='m-0 p-0'>+ Add New Category</Button>
                                     </Form.Group>
 
                                     {isAddingNewCategory && (
