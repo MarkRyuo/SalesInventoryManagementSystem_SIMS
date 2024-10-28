@@ -17,8 +17,8 @@ function CardProduct({ cardProduct }) {
                         borderLeft: '2px solid #92E3B8' 
                     }}>
                     <span>{cardProducts.productIcon}</span>
-                    <p className="fs-5 m-0">{cardProducts.productName}</p>
-                    <p>{cardProducts.productValue}</p>
+                    <p className="fs-6 m-0">{cardProducts.productName}</p>
+                    <p className="fs-6 m-0">{cardProducts.productValue}</p>
                 </div>
             ))}
         </>
