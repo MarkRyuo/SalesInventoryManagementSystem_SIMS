@@ -110,6 +110,7 @@ function NewAssets() {
             <Row style={{border: '1px solid red', boxSizing: 'border-box', padding: 20}}>
                 {error && <Alert variant="danger">{error}</Alert>}
                 {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
+                
                 <Col lg={12}>
                     <Row className="justify-content-center">
                         <Col md={8}>
