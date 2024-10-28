@@ -106,7 +106,7 @@ function NewAssets() {
     };
 
     return (
-        <Container className="mt-4">
+        <Container fluid>
             <Row className="justify-content-center">
                 <Col md={8}>
                     <Card className="p-4 shadow">
