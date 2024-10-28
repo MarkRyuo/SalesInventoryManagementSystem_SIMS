@@ -108,45 +108,47 @@ function NewAssets() {
     return (
         <Container fluid style={{}}>
             <Row style={{border: '1px solid red'}}>
-                <Row className="justify-content-center">
-                    <Col md={8}>
-                        <Card className="p-4 shadow">
-                            {error && <Alert variant="danger">{error}</Alert>}
-                            {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
-                            <Form>
-                                <div className="mb-3">
-                                    <Form.Group controlId="barcode">
-                                        <Form.Label>Barcode</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            value={barcode}
-                                            readOnly
-                                        />
-                                    </Form.Group>
-                                    <Form.Group controlId="sku">
-                                        <Form.Label>SKU</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            value={generateSKU(productName, size, color, wattage, voltage)}
-                                            readOnly
-                                        />
-                                    </Form.Group>
-                                    <Form.Group controlId="dateAdded">
-                                        <Form.Label>Date Added</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            value={dateAdded}
-                                            readOnly
-                                        />
-                                    </Form.Group>
-                                </div>
-                            </Form>
-                        </Card>
-                    </Col>
-                </Row>
+                <Col>
+                    <Row className="justify-content-center">
+                        <Col md={8}>
+                            <Card className="p-4 shadow">
+                                {error && <Alert variant="danger">{error}</Alert>}
+                                {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
+                                <Form>
+                                    <div className="mb-3">
+                                        <Form.Group controlId="barcode">
+                                            <Form.Label>Barcode</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                value={barcode}
+                                                readOnly
+                                            />
+                                        </Form.Group>
+                                        <Form.Group controlId="sku">
+                                            <Form.Label>SKU</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                value={generateSKU(productName, size, color, wattage, voltage)}
+                                                readOnly
+                                            />
+                                        </Form.Group>
+                                        <Form.Group controlId="dateAdded">
+                                            <Form.Label>Date Added</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                value={dateAdded}
+                                                readOnly
+                                            />
+                                        </Form.Group>
+                                    </div>
+                                </Form>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Col>
 
-                <Row>
-                    <Col>
+                <Row className='justify-content-center'>
+                    <Col md={8}>
                         <div className="mb-3">
                             <p className='fs-4'>Product Details</p>
                             <Form.Group controlId="productName">
@@ -211,8 +213,8 @@ function NewAssets() {
                     </Col>
                 </Row>
 
-                <Row>
-                    <Col>
+                <Row className='justify-content-center'>
+                    <Col md={8}>
                         <Form.Group controlId="quantity" className="mt-3">
                             <Form.Label>Quantity<span className="text-danger">*</span></Form.Label>
                             <Form.Control
