@@ -19,6 +19,7 @@ function CardProduct({ cardProduct }) {
                     <p className="fs-6 m-0">{cardProducts.productName}</p>
                     <p className="fs-6 m-0">SKU: {cardProducts.productValue}</p>
                     <p className="fs-6 m-0">Quantity: {cardProducts.Quantity}</p> {/* Display quantity here */}
+                    <p className="">Price: {cardProducts.price}</p>
                 </div>
             ))}
         </>
