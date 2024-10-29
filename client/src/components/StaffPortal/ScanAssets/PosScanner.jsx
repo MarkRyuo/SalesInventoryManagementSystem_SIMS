@@ -18,10 +18,10 @@ function PosScanner() {
     return (
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' style={{box}}>
+            <Container fluid='lg' style={{boxSizing: "border-box"}}>
                 <Row style={{boxSizing: "border-box"}}>
                     <Col style={{boxSizing: "border-box"}}>
-                    
+                        {/* Camera logic Code */}
                     </Col>
                 </Row>
             </Container>
