@@ -116,11 +116,11 @@ const router = createBrowserRouter([
   //? Staff Comps 
   {
     path: "NewAssetsScanner",
-    element: <NewAssetsScanner /> , //* Scanner of AddNewAssets
+    element: <NewAssetsScanner /> , //* Add to Inventory: Scanner of AddNewAssets
   },
   {
     path: "NewAssets",
-    element: <NewAssets />, //* Add Product: Add New Assets Products After Scan
+    element: <NewAssets />, //* Add to Inventory: Add New Assets Products After Scan
   },
   {
     path: "ProductSuccess",
