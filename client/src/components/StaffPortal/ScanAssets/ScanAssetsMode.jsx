@@ -4,8 +4,8 @@ import { Container } from "react-bootstrap";
 function ScanAssetsMode() {
     return (
         <Container fluid>
-            <Container>
-                
+            <Container fluid='md'>
+
             </Container>
             
         </Container>
