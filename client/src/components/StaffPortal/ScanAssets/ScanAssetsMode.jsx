@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 //* Inputs
 function ScanAssetsMode() {
     return (
-        <Container fluid>
+        <Container fluid className="">
             <Container fluid='md'>
 
             </Container>
