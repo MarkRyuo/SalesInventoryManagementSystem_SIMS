@@ -27,6 +27,7 @@ import StaffAccountMode from './components/StaffPortal/StaffAccount/StaffAccount
 import ProductSuccess from './components/StaffPortal/AddNewAssets/ProductSuccess.jsx';
 import PosScanner from './components/StaffPortal/ScanAssets/PosScanner.jsx';
 import ReceiptMode from './components/StaffPortal/ScanAssets/ReceiptMode.jsx';
+import ScanAssetsMode from './components/StaffPortal/ScanAssets/ScanAssetsMode.jsx';
 
 const router = createBrowserRouter([
   {
@@ -124,15 +125,19 @@ const router = createBrowserRouter([
   },
   {
     path: "ProductSuccess",
-    element: <ProductSuccess /> , //* Add Product: Add New Assets Success
+    element: <ProductSuccess /> , //* Add to Inventory: Add New Assets Success
   },
   {
     path: "PosScanner",
-    element: <PosScanner /> , //* POS: Scanner Camera 
+    element: <PosScanner /> , //* POS: 1st, Scanner Camera 
+  },
+  {
+    path: "ScanAssetsMode",
+    element: <ScanAssetsMode /> , //* POS: 2st, Current Order 
   },
   {
     path: "ReceiptMode",
-    element: <ReceiptMode /> , //* POS: Product Receipt
+    element: <ReceiptMode /> , //* POS: Product Receipt View 
   },
   
 
