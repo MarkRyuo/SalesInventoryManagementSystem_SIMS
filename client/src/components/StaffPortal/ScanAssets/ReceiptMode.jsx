@@ -4,8 +4,9 @@ function ReceiptMode() {
     return (
         <>
             <h1>ReceiptMode</h1>
+            {/* View Receipt via pdf file then can download */}
         </>
     )
 }
 
-export default ReceiptMode
+export default ReceiptMode ;

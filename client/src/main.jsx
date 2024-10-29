@@ -25,6 +25,9 @@ import ResetRendering from './components/LogIn/ResetRendering.jsx';
 import ProfileMode from './components/Account/ProfileMode.jsx';
 import StaffAccountMode from './components/StaffPortal/StaffAccount/StaffAccountMode.jsx';
 import ProductSuccess from './components/StaffPortal/AddNewAssets/ProductSuccess.jsx';
+import PosScanner from './components/StaffPortal/ScanAssets/PosScanner.jsx';
+import ReceiptMode from './components/StaffPortal/ScanAssets/ReceiptMode.jsx';
+import ScanAssetsMode from './components/StaffPortal/ScanAssets/ScanAssetsMode.jsx';
 
 const router = createBrowserRouter([
   {
@@ -114,16 +117,28 @@ const router = createBrowserRouter([
   //? Staff Comps 
   {
     path: "NewAssetsScanner",
-    element: <NewAssetsScanner /> , //* Scanner of AddNewAssets
+    element: <NewAssetsScanner /> , //* Add to Inventory: Scanner of AddNewAssets
   },
-
   {
     path: "NewAssets",
-    element: <NewAssets />, //* Add New Assets Products After Scan
+    element: <NewAssets />, //* Add to Inventory: Add New Assets Products After Scan
   },
   {
     path: "ProductSuccess",
-    element: <ProductSuccess /> , //* Add New Assets Success
+    element: <ProductSuccess /> , //* Add to Inventory: Add New Assets Success
+  },
+  
+  {
+    path: "PosScanner",
+    element: <PosScanner /> , //* POS: 1st, Scanner Camera 
+  },
+  {
+    path: "ScanAssetsMode",
+    element: <ScanAssetsMode /> , //* POS: 2st, Current Order 
+  },
+  {
+    path: "ReceiptMode",
+    element: <ReceiptMode /> , //* POS: Product Receipt View 
   },
   
 
