@@ -12,6 +12,7 @@ function ScanAssetsMode() {
             </Navbar>
             <Container fluid='md'>
                 {/* Logic Product scanned */}
+                {/* list of products scanned */}
             </Container>
         </Container>
     )
