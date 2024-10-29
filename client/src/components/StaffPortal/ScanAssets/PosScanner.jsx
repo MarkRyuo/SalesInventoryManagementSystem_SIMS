@@ -22,6 +22,7 @@ function PosScanner() {
                 <Row style={{boxSizing: "border-box"}}>
                     <Col style={{boxSizing: "border-box"}}>
                         {/* Camera logic Code */}
+                        {/* Add Button if scan items is done this is Pos */}
                     </Col>
                 </Row>
             </Container>
