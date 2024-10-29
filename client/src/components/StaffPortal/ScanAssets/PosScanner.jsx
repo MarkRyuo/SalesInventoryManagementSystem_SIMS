@@ -2,7 +2,7 @@ import { Container, Row, Col } from "react-bootstrap"
 import StaffNavBar from "../StaffNavbar/StaffNavBar";
 import { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
-
+//* Use zxing/library 
 
 //* Scanner Code 
 function PosScanner() {
