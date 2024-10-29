@@ -26,6 +26,7 @@ import ProfileMode from './components/Account/ProfileMode.jsx';
 import StaffAccountMode from './components/StaffPortal/StaffAccount/StaffAccountMode.jsx';
 import ProductSuccess from './components/StaffPortal/AddNewAssets/ProductSuccess.jsx';
 import PosScanner from './components/StaffPortal/ScanAssets/PosScanner.jsx';
+import ReceiptMode from './components/StaffPortal/ScanAssets/ReceiptMode.jsx';
 
 const router = createBrowserRouter([
   {
@@ -129,6 +130,10 @@ const router = createBrowserRouter([
   {
     path: "PosScanner",
     element: <PosScanner /> , //* POS Camera 
+  },
+  {
+    path: "ReceiptMode",
+    element: <ReceiptMode /> , //* POS Camera 
   },
   
 
