@@ -9,7 +9,10 @@
 
 ## Changelog
 
-### v6.3.2 (Latest)
+### v6.3.2-Beta 
+- POS Backend 
+
+### v6.3.2
 - Scan Assets (POS)
 
 ### v6.3.1
