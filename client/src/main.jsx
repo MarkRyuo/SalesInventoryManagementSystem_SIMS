@@ -127,6 +127,7 @@ const router = createBrowserRouter([
     path: "ProductSuccess",
     element: <ProductSuccess /> , //* Add to Inventory: Add New Assets Success
   },
+  
   {
     path: "PosScanner",
     element: <PosScanner /> , //* POS: 1st, Scanner Camera 
