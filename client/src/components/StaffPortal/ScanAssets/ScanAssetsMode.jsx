@@ -6,7 +6,8 @@ function ScanAssetsMode() {
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-body-tertiary">
                 <Container>
-                    <Navbar.Brand>Current Order</Navbar.Brand>
+                    <p className="fs-4 m-0">Current Order</p>
+                    {/* Button direct scan if customer add another product to cashier */}
                 </Container>
             </Navbar>
             <Container fluid='md'>
