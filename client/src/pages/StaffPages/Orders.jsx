@@ -1,11 +1,12 @@
-import React from 'react'
+import { Container } from "react-bootstrap"
+
 
 function Orders() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <Container>
+
+        </Container>
+    )
 }
 
 export default Orders
