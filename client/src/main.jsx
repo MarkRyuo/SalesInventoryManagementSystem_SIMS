@@ -129,11 +129,11 @@ const router = createBrowserRouter([
   },
   {
     path: "PosScanner",
-    element: <PosScanner /> , //* POS Camera 
+    element: <PosScanner /> , //* POS: Scannner Camera 
   },
   {
     path: "ReceiptMode",
-    element: <ReceiptMode /> , //* POS Camera 
+    element: <ReceiptMode /> , //* POS: Product Receipt
   },
   
 
