@@ -6,7 +6,7 @@ function ScanAssetsMode() {
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-body-tertiary">
                 <Container>
-                    <Navbar.Brand>Brand text</Navbar.Brand>
+                    <Navbar.Brand>Current Order</Navbar.Brand>
                 </Container>
             </Navbar>
             <Container fluid='md'>
