@@ -10,7 +10,7 @@ function PosScanner() {
     const [backBtn] = useState([
         {
             btnIcon: <IoMdArrowBack size={20} />,
-            path: "/SDashboard",
+            path: "/ScanAssets",
             id: 1
         }
     ]);
