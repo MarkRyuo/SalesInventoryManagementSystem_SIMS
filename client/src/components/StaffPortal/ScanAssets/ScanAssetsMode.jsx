@@ -1,10 +1,14 @@
+import { Container } from "react-bootstrap";
 
 //* Inputs
 function ScanAssetsMode() {
     return (
-        <>
-            <h1>Inputs</h1>
-        </>
+        <Container fluid>
+            <Container>
+                
+            </Container>
+            
+        </Container>
     )
 }
 
