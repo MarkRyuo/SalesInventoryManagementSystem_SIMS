@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 import StaffNavBar from "../StaffNavbar/StaffNavBar";
 import { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
@@ -21,7 +21,7 @@ function PosScanner() {
             <Container fluid='lg'>
                 <Row>
                     <Col>
-                        
+
                     </Col>
                 </Row>
             </Container>
