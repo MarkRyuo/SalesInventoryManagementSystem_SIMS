@@ -5,6 +5,7 @@ function NavbarCurrentOrder() {
         <Container fluid>
             <div>
                 <p className="fs-4">Current Order</p>
+                {/* Button direct scan if customer add another product to cashier */}
             </div>
         </Container>
     )
