@@ -18,8 +18,10 @@ function PosScanner() {
     return (
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='md' className="mt-4 p-0">
-
+            <Container fluid='lg'>
+                <Row>
+                    
+                </Row>
             </Container>
             
         </Container>
