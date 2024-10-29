@@ -9,7 +9,10 @@
 
 ## Changelog
 
-### v6.3.1 (Latest)
+### v6.3.2 (Latest)
+- Scan Assets (POS)
+
+### v6.3.1
 - Search Products
 - Update Images
 - Update Camera Design
