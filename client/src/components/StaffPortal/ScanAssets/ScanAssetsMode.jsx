@@ -13,7 +13,6 @@ function ScanAssetsMode() {
             <Container fluid='md'>
                 {/* Logic Product scanned */}
             </Container>
-            
         </Container>
     )
 }
