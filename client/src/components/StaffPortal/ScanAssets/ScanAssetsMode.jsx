@@ -11,7 +11,7 @@ function ScanAssetsMode() {
                 </Container>
             </Navbar>
             <Container fluid='md'>
-                {/* Logic inputs */}
+                {/* Logic Product scanned */}
             </Container>
             
         </Container>
