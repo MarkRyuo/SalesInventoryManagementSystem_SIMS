@@ -125,11 +125,11 @@ const router = createBrowserRouter([
   },
   {
     path: "ProductSuccess",
-    element: <ProductSuccess /> , //* Add New Assets Success
+    element: <ProductSuccess /> , //* Add Product: Add New Assets Success
   },
   {
     path: "PosScanner",
-    element: <PosScanner /> , //* POS: Scannner Camera 
+    element: <PosScanner /> , //* POS: Scanner Camera 
   },
   {
     path: "ReceiptMode",
