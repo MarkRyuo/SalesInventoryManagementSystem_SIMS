@@ -23,6 +23,7 @@ function PosScanner() {
                     <Col style={{boxSizing: "border-box"}}>
                         {/* Camera logic Code */}
                         {/* Add Button if scan items is done this is Pos */}
+                        {/* if done then direct to ScanAssetsMode or the Current Orders  */}
                     </Col>
                 </Row>
             </Container>
