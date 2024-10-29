@@ -1,11 +1,12 @@
+import { Container } from "react-bootstrap"
 
 
 //* Scanner Code 
 function PosScanner() {
     return (
-        <>
-            <h1>POS SCANNER</h1>
-        </>
+        <Container>
+            
+        </Container>
     )
 }
 
