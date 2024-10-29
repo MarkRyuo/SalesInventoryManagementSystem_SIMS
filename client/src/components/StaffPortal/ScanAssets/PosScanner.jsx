@@ -5,6 +5,10 @@ import { Container } from "react-bootstrap"
 function PosScanner() {
     return (
         <Container fluid>
+            <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
+            <Container fluid='lg'>
+
+            </Container>
             
         </Container>
     )
