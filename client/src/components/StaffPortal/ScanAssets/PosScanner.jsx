@@ -19,8 +19,9 @@ function PosScanner() {
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
-                <Row>
+                <Row style={{boxSizing: "border-box"}}>
                     <Col>
+                    
 
                     </Col>
                 </Row>
