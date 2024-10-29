@@ -7,4 +7,4 @@ function NavbarCurrentOrder() {
     )
 }
 
-export default NavbarCurrentOrder
+export default NavbarCurrentOrder ;
