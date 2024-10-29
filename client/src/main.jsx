@@ -118,10 +118,9 @@ const router = createBrowserRouter([
     path: "NewAssetsScanner",
     element: <NewAssetsScanner /> , //* Scanner of AddNewAssets
   },
-
   {
     path: "NewAssets",
-    element: <NewAssets />, //* Add New Assets Products After Scan
+    element: <NewAssets />, //* Add Product: Add New Assets Products After Scan
   },
   {
     path: "ProductSuccess",
