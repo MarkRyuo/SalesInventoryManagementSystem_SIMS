@@ -63,7 +63,7 @@ function PosScanner() {
                         {scannedResult && (
                             <p>Scanned Result: {scannedResult}</p>
                         )}
-                        <Button style={{width: 200}} variant="primary" size="lg">Checkout</Button>
+                        <Button variant="primary" size="lg" width={200}>Checkout</Button>
                     </Col>
                 </Row>
             </Container>
