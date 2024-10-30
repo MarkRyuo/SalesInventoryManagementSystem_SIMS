@@ -14,24 +14,23 @@ function PosScanner() {
     const [scannedItems, setScannedItems] = useState(location.state?.scannedItems || []);
     const [errorMessages, setErrorMessages] = useState([]);
     const [message, setMessage] = useState("");
-    const [isLoading, setIsLoading] = useState(false); // Initialize loading state
+    const [isLoading, setIsLoading] = useState(false);
     const [cameraLoading, setCameraLoading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
-    const [scanning, setScanning] = useState(false); // State to manage scanning
+    const [scanning, setScanning] = useState(false);
     const videoRef = useRef(null);
     const scannedRef = useRef(new Set());
 
     const handleScan = useCallback(async (scannedText) => {
         if (isLoading || scanning || scannedRef.current.has(scannedText)) return;
 
-        setScanning(true); // Set scanning to true
+        setScanning(true);
         scannedRef.current.add(scannedText);
         setErrorMessages([]);
         setMessage("");
 
-        setIsLoading(true); // Set loading to true while fetching
-
         try {
+            setIsLoading(true); // Start loading
             const product = await fetchProductByBarcode(scannedText);
             if (product) {
                 const existingIndex = scannedItems.findIndex(item => item.barcode === scannedText);
@@ -49,9 +48,9 @@ function PosScanner() {
                 }
 
                 setMessage(`Successfully scanned ${product.productName}.`);
-                setFadeOut(false); // Set to false for fade in
+                setFadeOut(false);
                 setTimeout(() => {
-                    setFadeOut(true); // Set to true after a longer delay for fade out
+                    setFadeOut(true);
                 }, 4000); // Show for 4 seconds
             }
         } catch (error) {
@@ -72,10 +71,10 @@ function PosScanner() {
             if (videoInputDevices.length > 0) {
                 const selectedDeviceId = videoInputDevices[0].deviceId;
                 codeReader.decodeFromVideoDevice(selectedDeviceId, videoRef.current, (result, error) => {
-                    if (result && !scanning) { // Ensure not scanning
+                    if (result && !scanning) {
                         handleScan(result.getText());
                     }
-                    if (error && !isLoading && !scanning) { // Handle errors appropriately
+                    if (error && !isLoading && !scanning) {
                         console.error("Scanning error: ", error);
                     }
                 });
@@ -90,7 +89,7 @@ function PosScanner() {
         return () => {
             codeReader.reset();
         };
-    }, [handleScan, isLoading, scanning]); // Added scanning to dependencies
+    }, [handleScan, isLoading, scanning]);
 
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });
