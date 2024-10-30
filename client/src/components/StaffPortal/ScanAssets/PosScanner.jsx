@@ -47,7 +47,7 @@ function PosScanner() {
         <Container fluid className="m-0 p-0">
             <StaffNavBar backBtn={backBtn.filter((Backbtn) => Backbtn.id === 1)} />
             <Container fluid="lg" style={{ boxSizing: "border-box", border: '1px solid blue', height: '90vh', padding: 15}}>
-                <Row style={{ boxSizing: "border-box", border: '1px solid green', height: '100%'}} className="text-center gap-0">
+                <Row style={{ boxSizing: "border-box", border: '1px solid green', height: '100%'}}>
                     <Col lg={12} style={{ boxSizing: "border-box", border: '1px solid red', height: '65vh', width: '100%'}}>
                         <video ref={videoRef} style={{ width: "100%", height: "100%", maxWidth: 800}} />
                         {scannedResult && (
