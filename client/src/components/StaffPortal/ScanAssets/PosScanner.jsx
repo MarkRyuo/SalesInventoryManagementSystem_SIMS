@@ -14,25 +14,22 @@ function PosScanner() {
     const [scannedItems, setScannedItems] = useState(location.state?.scannedItems || []);
     const [errorMessages, setErrorMessages] = useState([]);
     const [message, setMessage] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // Initialize loading state
     const [cameraLoading, setCameraLoading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
-    const [videoFade, setVideoFade] = useState(true); // Declare video fade state
-    const [guideFade, setGuideFade] = useState(true); // Declare guide overlay fade state
+    const [scanning, setScanning] = useState(false); // State to manage scanning
     const videoRef = useRef(null);
     const scannedRef = useRef(new Set());
 
     const handleScan = useCallback(async (scannedText) => {
-        if (isLoading || scannedRef.current.has(scannedText)) return;
+        if (isLoading || scanning || scannedRef.current.has(scannedText)) return;
 
-        setIsLoading(true);
+        setScanning(true); // Set scanning to true
         scannedRef.current.add(scannedText);
         setErrorMessages([]);
         setMessage("");
 
-        // Fade in guide and video
-        setGuideFade(true);
-        setVideoFade(true);
+        setIsLoading(true); // Set loading to true while fetching
 
         try {
             const product = await fetchProductByBarcode(scannedText);
@@ -54,19 +51,20 @@ function PosScanner() {
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false); // Set to false for fade in
                 setTimeout(() => {
-                    setFadeOut(true); // Set to true after a delay for fade out
+                    setFadeOut(true); // Set to true after a longer delay for fade out
                 }, 4000); // Show for 4 seconds
-
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
-            setIsLoading(false);
+            setIsLoading(false); // Reset loading state
+            // Allow scanning again after a delay
+            setTimeout(() => {
+                scannedRef.current.delete(scannedText); // Remove scanned text from Set
+                setScanning(false); // Reset scanning state
+            }, 2000); // 2 seconds delay
         }
-
-        // Fade out guide after scanning
-        setGuideFade(false);
-    }, [scannedItems, isLoading]);
+    }, [scannedItems, isLoading, scanning]);
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
@@ -74,8 +72,10 @@ function PosScanner() {
             if (videoInputDevices.length > 0) {
                 const selectedDeviceId = videoInputDevices[0].deviceId;
                 codeReader.decodeFromVideoDevice(selectedDeviceId, videoRef.current, (result, error) => {
-                    if (result) handleScan(result.getText());
-                    if (error && !isLoading) {
+                    if (result && !scanning) { // Ensure not scanning
+                        handleScan(result.getText());
+                    }
+                    if (error && !isLoading && !scanning) { // Handle errors appropriately
                         console.error("Scanning error: ", error);
                     }
                 });
@@ -90,7 +90,7 @@ function PosScanner() {
         return () => {
             codeReader.reset();
         };
-    }, [handleScan, isLoading]);
+    }, [handleScan, isLoading, scanning]); // Added scanning to dependencies
 
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });
@@ -125,20 +125,16 @@ function PosScanner() {
                                     height: '50%',
                                     border: '1px dashed rgba(255, 255, 255, 0.8)',
                                     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                                    pointerEvents: 'none',
-                                    opacity: guideFade ? 1 : 0,
-                                    transition: 'opacity 1s ease-in-out',
                                 }} />
 
                                 <video
                                     ref={videoRef}
                                     style={{
                                         width: '100%',
-                                        height: 'auto',
-                                        maxHeight: '80vh',  // Limits height to fit within the viewport
+                                        maxHeight: '80vh',
                                         display: cameraLoading ? 'none' : 'block',
-                                        opacity: videoFade ? 1 : 0,
-                                        transition: 'opacity 1s ease-in-out'
+                                        opacity: cameraLoading ? 0 : 1,
+                                        transition: 'opacity 1s ease-in-out',
                                     }}
                                 />
                                 <div style={{ position: 'absolute', bottom: '10%', left: '50%', transform: 'translateX(-50%)', color: 'white' }}>
