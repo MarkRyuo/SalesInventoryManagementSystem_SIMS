@@ -22,17 +22,6 @@ function PosScanner() {
                 <Row style={{boxSizing: "border-box"}}>
                     <Col style={{boxSizing: "border-box"}}>
                         {/* Camera logic Code */}
-                        {/* Add Button if scan items is done this is Pos */}
-                        {/* 
-                            Start
-                            Scan the Products 
-                            if the product is scanned then 
-                                put the item in ScanAssetsMode or the product orders
-                            else 
-                                product is not in the inventory
-                            
-                         */}
-                        {/* if done then direct to ScanAssetsMode(Current Orders) */}
                     </Col>
                 </Row>
             </Container>
@@ -41,4 +30,4 @@ function PosScanner() {
     )
 }
 
-export default PosScanner
+export default PosScanner ;
