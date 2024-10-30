@@ -5,13 +5,12 @@ import { useState } from 'react';
 function ScanAssetsMode() {
     const location = useLocation();
     const navigate = useNavigate();
-    const currentOrders = location.state?.currentOrders || []; // Get current orders from location state
+    const currentOrders = location.state?.currentOrders || [];
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
 
     // Function to handle finalizing the order
     const handleFinalizeClick = async () => {
-        // Implement your order finalization logic here
         try {
             // Placeholder for actual order finalization logic
             // await finalizeOrder(currentOrders);
@@ -22,6 +21,11 @@ function ScanAssetsMode() {
             setError("Error finalizing the order. Please try again.");
             setSuccessMessage(null);
         }
+    };
+
+    const handleRemoveItem = (index) => {
+        const updatedOrders = currentOrders.filter((_, i) => i !== index);
+        setCurrentOrders(updatedOrders);
     };
 
     return (
@@ -35,7 +39,6 @@ function ScanAssetsMode() {
                         <Card.Body>
                             {error && <Alert variant="danger">{error}</Alert>}
                             {successMessage && <Alert variant="success">{successMessage}</Alert>}
-
                             <ListGroup>
                                 {currentOrders.length === 0 ? (
                                     <ListGroup.Item>No items in the current orders.</ListGroup.Item>
@@ -60,7 +63,7 @@ function ScanAssetsMode() {
                             <Button
                                 variant="primary"
                                 onClick={handleFinalizeClick}
-                                disabled={currentOrders.length === 0} // Disable button if there are no orders
+                                disabled={currentOrders.length === 0}
                             >
                                 Finalize Order
                             </Button>
