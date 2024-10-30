@@ -49,7 +49,7 @@ function PosScanner() {
             <Container fluid="lg" style={{ boxSizing: "border-box", border: '1px solid blue', height: '90vh'}}>
                 <Row style={{ boxSizing: "border-box", border: '1px solid green', height: '100%'}}>
                     <Col lg={12} style={{ boxSizing: "border-box", border: '1px solid red', height: '65vh', width: '100%', display: "flex", flexDirection: "column", alignItems: "center"}}>
-                        <video ref={videoRef} style={{ width: "100%", height: "100%", maxWidth: 800}} />
+                        <video ref={videoRef} style={{ width: "100%", height: "100%", maxWidth: 800}} className="p-0 m-0" />
                         {scannedResult && (
                             <p>Scanned Result: {scannedResult}</p>
                         )}
