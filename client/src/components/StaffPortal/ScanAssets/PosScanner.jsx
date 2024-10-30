@@ -80,7 +80,8 @@ function PosScanner() {
                 setErrorMessages(['No camera found.']);
             }
         }).catch((error) => {
-            setErrorMessages(['Error accessing video devices.', error.message]);        });
+            setErrorMessages(['Error accessing video devices.', error.message]);
+        });
 
         return () => {
             codeReader.reset();
