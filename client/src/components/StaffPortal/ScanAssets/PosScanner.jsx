@@ -3,16 +3,17 @@ import StaffNavBar from "../StaffNavbar/StaffNavBar";
 import { useState, useEffect, useRef } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { BrowserMultiFormatReader } from "@zxing/library";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
 
 function PosScanner() {
+    const location = useLocation();
     const [backBtn] = useState([{ btnIcon: <IoMdArrowBack size={20} />, path: "/ScanAsset", id: 1 }]);
-    const [scannedItems, setScannedItems] = useState([]); // List to hold scanned items
-    const [errorMessages, setErrorMessages] = useState([]); // To hold error messages
-    const [isLoading, setIsLoading] = useState(false); // Loading state
+    const [scannedItems, setScannedItems] = useState(location.state?.scannedItems || []); // Initialize with existing items if provided
+    const [errorMessages, setErrorMessages] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const videoRef = useRef(null);
-    const navigate = useNavigate(); // Hook to programmatically navigate
+    const navigate = useNavigate();
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
@@ -21,28 +22,25 @@ function PosScanner() {
                 codeReader.decodeFromVideoDevice(videoInputDevices[0].deviceId, videoRef.current, async (result, error) => {
                     if (result && !isLoading) {
                         const scannedText = result.getText();
-                        setIsLoading(true); // Set loading state
+                        setIsLoading(true);
 
                         try {
-                            const product = await fetchProductByBarcode(scannedText); // Fetch product by barcode
-
+                            const product = await fetchProductByBarcode(scannedText);
                             if (product) {
                                 const existingIndex = scannedItems.findIndex(item => item.barcode === scannedText);
 
                                 if (existingIndex !== -1) {
-                                    // Item exists, increase quantity
-                                    await updateProductQuantity(scannedText, -1); // Decrease quantity by 1
+                                    await updateProductQuantity(scannedText, -1);
                                     setScannedItems(prevItems => {
                                         const updatedItems = [...prevItems];
                                         updatedItems[existingIndex].quantity += 1;
                                         return updatedItems;
                                     });
                                 } else {
-                                    // Item is new, add to scanned items
-                                    await updateProductQuantity(scannedText, -1); // Decrease quantity by 1
+                                    await updateProductQuantity(scannedText, -1);
                                     setScannedItems(prevItems => [...prevItems, { ...product, quantity: 1 }]);
                                 }
-                                setErrorMessages([]); // Clear any previous error messages
+                                setErrorMessages([]);
                             } else {
                                 setErrorMessages(prev => [...prev, `Product with barcode ${scannedText} not found in inventory.`]);
                             }
@@ -51,22 +49,22 @@ function PosScanner() {
                         }
 
                         setTimeout(() => {
-                            setIsLoading(false); // Reset loading state
+                            setIsLoading(false);
                         }, 2000);
                     }
                     if (error) {
-                        console.error(error); // Log errors for debugging
+                        console.error(error);
                     }
                 });
             } else {
-                setErrorMessages(['No camera found.']); // Handle no camera case
+                setErrorMessages(['No camera found.']);
             }
         }).catch((err) => console.error("Error listing video devices", err));
 
         return () => {
-            codeReader.reset(); // Stop the scanner when component unmounts
+            codeReader.reset();
         };
-    }, [scannedItems, isLoading]); // Add scannedItems and isLoading as dependencies
+    }, [scannedItems, isLoading]);
 
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });

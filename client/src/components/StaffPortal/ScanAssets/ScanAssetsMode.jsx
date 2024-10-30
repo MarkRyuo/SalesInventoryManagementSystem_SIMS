@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function ScanAssetsMode() {
     const location = useLocation();
-    const navigate = useNavigate(); // Hook for navigation
+    const navigate = useNavigate();
     const scannedItems = location.state?.scannedItems || []; // Get scanned items from state
 
     // Group items by product name and sum their quantities and totals
@@ -12,21 +12,18 @@ function ScanAssetsMode() {
         const existingItem = acc.find(i => i.productName === item.productName);
 
         if (existingItem) {
-            // If the item already exists, increase quantity and total price
             existingItem.quantity += item.quantity;
             existingItem.total += isNaN(price) ? 0 : price * item.quantity;
         } else {
-            // If it's a new item, add it to the array
             acc.push({
                 ...item,
-                total: isNaN(price) ? 0 : price * item.quantity // Initialize total price
+                total: isNaN(price) ? 0 : price * item.quantity
             });
         }
 
         return acc;
     }, []);
 
-    // Calculate total price of all grouped items
     const totalPrice = groupedItems.reduce((total, item) => total + item.total, 0);
 
     return (
@@ -37,7 +34,6 @@ function ScanAssetsMode() {
                 </Container>
             </Navbar>
             <Container fluid='md' className="mt-3">
-                {/* List of products scanned */}
                 {groupedItems.length > 0 ? (
                     <>
                         <Table striped bordered hover responsive>
@@ -51,7 +47,7 @@ function ScanAssetsMode() {
                             </thead>
                             <tbody>
                                 {groupedItems.map((item, index) => {
-                                    const price = Number(item.price); // Convert price to a number
+                                    const price = Number(item.price);
                                     return (
                                         <tr key={index}>
                                             <td>{item.productName}</td>
@@ -75,7 +71,7 @@ function ScanAssetsMode() {
                                 <Button
                                     variant="outline-primary"
                                     className="ms-2"
-                                    onClick={() => navigate('/PosScanner')} // Adjust the path to your scanning component
+                                    onClick={() => navigate('/PosScanner', { state: { scannedItems } })} // Preserve current items
                                 >
                                     Scan Again
                                 </Button>
