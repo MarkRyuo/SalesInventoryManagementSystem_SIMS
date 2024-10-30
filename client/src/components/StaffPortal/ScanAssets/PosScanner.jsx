@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import StaffNavBar from "../StaffNavbar/StaffNavBar";
 import { useState, useEffect, useRef } from "react";
 import { IoMdArrowBack } from "react-icons/io";
@@ -44,15 +44,18 @@ function PosScanner() {
     }, []);
 
     return (
-        <Container fluid>
+        <Container fluid className="m-0 p-0">
             <StaffNavBar backBtn={backBtn.filter((Backbtn) => Backbtn.id === 1)} />
-            <Container fluid="lg" style={{ boxSizing: "border-box", border: '1px solid blue', height: '80vh', padding: 15 }}>
-                <Row style={{ boxSizing: "border-box", border: '1px solid green', height: 'auto', padding: 15}}>
-                    <Col style={{ boxSizing: "border-box", border: '1px solid red' }}>
-                        <video ref={videoRef} style={{ width: "100%", height: "auto" }} />
+            <Container fluid="lg" style={{ boxSizing: "border-box", border: '1px solid blue', height: '90vh', padding: 15}}>
+                <Row style={{ boxSizing: "border-box", border: '1px solid green', height: '100%'}} className="text-center">
+                    <Col lg={12} style={{ boxSizing: "border-box", border: '1px solid red', height: '65vh', width: '100%'}}>
+                        <video ref={videoRef} style={{ width: "100%", height: "100%", maxWidth: 800}} />
                         {scannedResult && (
                             <p>Scanned Result: {scannedResult}</p>
                         )}
+                    </Col>
+                    <Col lg={12} style={{width: '100%'}}>
+                        <Button style={{}}>CLick Me</Button>
                     </Col>
                 </Row>
             </Container>
