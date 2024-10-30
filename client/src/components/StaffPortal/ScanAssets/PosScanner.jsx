@@ -4,7 +4,6 @@ import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
 
 
-
 function PosScanner() {
 
     const [backBtn] = useState([
