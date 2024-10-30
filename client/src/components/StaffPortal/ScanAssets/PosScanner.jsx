@@ -46,22 +46,23 @@ function PosScanner() {
     return (
         <Container fluid className="m-0 p-0">
             <StaffNavBar backBtn={backBtn.filter((Backbtn) => Backbtn.id === 1)} />
-            <Container fluid="lg" style={{ boxSizing: "border-box", border: '1px solid blue', height: '90vh'}}>
+            <Container fluid="lg" style={{ boxSizing: "border-box", border: '1px solid blue', height: '90vh', width: '100%', minWidth: 380}}>
                 <Row style={{ boxSizing: "border-box", border: '1px solid green', height: '100%'}}>
                     <Col lg={12} style={{ 
                         boxSizing: "border-box", 
                         border: '1px solid red', 
-                        height: '65vh', 
+                        height: '70vh', 
                         width: '100%', 
                         display: "flex", 
                         flexDirection: "column", 
-                        alignItems: "center"
-                        }}>
+                        alignItems: "center",
+                        padding: 0
+                    }}>
                         <video ref={videoRef} style={{ width: "100%", height: "100%", maxWidth: 800}}/>
                         {scannedResult && (
                             <p>Scanned Result: {scannedResult}</p>
                         )}
-                        <Button style={{}}>Checkout</Button>
+                        <Button style={{width: 200}} variant="primary" size="lg">Checkout</Button>
                     </Col>
                 </Row>
             </Container>
