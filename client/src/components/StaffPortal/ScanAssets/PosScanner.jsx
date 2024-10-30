@@ -12,7 +12,6 @@ function PosScanner() {
     const [scannedItems, setScannedItems] = useState(location.state?.scannedItems || []);
     const [errorMessages, setErrorMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [fadeClass, setFadeClass] = useState('');
     const videoRef = useRef(null);
     const navigate = useNavigate();
     const scannedRef = useRef(new Set());
@@ -20,8 +19,11 @@ function PosScanner() {
     const [fadeOut, setFadeOut] = useState(false);
 
     const handleScan = useCallback(async (scannedText) => {
+        if (isLoading) {
+            return; // Skip if already loading
+        }
+
         setIsLoading(true);
-        setFadeClass('fade-in');
 
         // Check for duplicates
         if (scannedRef.current.has(scannedText)) {
@@ -36,17 +38,17 @@ function PosScanner() {
                 const existingIndex = scannedItems.findIndex(item => item.barcode === scannedText);
 
                 if (existingIndex !== -1) {
-                    await updateProductQuantity(scannedText, -1);
+                    // Only update quantity if the product exists
                     setScannedItems(prevItems => {
                         const updatedItems = [...prevItems];
                         updatedItems[existingIndex].quantity += 1;
                         return updatedItems;
                     });
                 } else {
-                    await updateProductQuantity(scannedText, -1);
                     setScannedItems(prevItems => [...prevItems, { ...product, quantity: 1 }]);
                 }
 
+                await updateProductQuantity(scannedText, -1); // Update quantity in the inventory
                 setMessage(`Scanned ${product.productName}: Quantity updated!`);
                 setErrorMessages([]);
             } else {
@@ -54,26 +56,25 @@ function PosScanner() {
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
-        }
-
-        // Reset the loading state and fade effects
-        setTimeout(() => {
+        } finally {
             setIsLoading(false);
-            setFadeClass('fade-out');
-            scannedRef.current.delete(scannedText);
+
+            // Start the fade-out effect for the message
             setFadeOut(true);
             setTimeout(() => {
                 setFadeOut(false);
                 setMessage('');
-            }, 1000);
-        }, 2000);
-    }, [scannedItems]);
+                scannedRef.current.delete(scannedText); // Clear scanned reference
+            }, 1000); // Duration for fade-out effect
+        }
+    }, [scannedItems, isLoading]);
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
         codeReader.listVideoInputDevices().then((videoInputDevices) => {
             if (videoInputDevices.length > 0) {
-                codeReader.decodeFromVideoDevice(videoInputDevices[0].deviceId, videoRef.current, (result, error) => {
+                const selectedDeviceId = videoInputDevices[0].deviceId;
+                codeReader.decodeFromVideoDevice(selectedDeviceId, videoRef.current, (result, error) => {
                     if (result && !isLoading) {
                         handleScan(result.getText());
                     }
@@ -118,7 +119,7 @@ function PosScanner() {
                         ) : (
                             <>
                                 {scannedItems.length > 0 && (
-                                    <ul className={fadeClass}>
+                                    <ul>
                                         {scannedItems.map((item, index) => (
                                             <li key={index}>{item.productName} - Quantity: {item.quantity}</li>
                                         ))}
@@ -139,7 +140,7 @@ function PosScanner() {
                             </>
                         )}
                         <Button style={{ width: 200 }} variant="primary" size="lg" onClick={handleCheckout} disabled={isLoading}>
-                            Checkout
+                            Done
                         </Button>
                     </Col>
                 </Row>
