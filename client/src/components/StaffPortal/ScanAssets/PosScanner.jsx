@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { Container, Row, Col, Alert, Card, Spinner, Button } from 'react-bootstrap';
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
 
 function PosScanner() {
     const [error, setError] = useState(null);
@@ -10,6 +11,7 @@ function PosScanner() {
     const [guideFade, setGuideFade] = useState(true);
     const [videoFade, setVideoFade] = useState(true);
     const videoRef = useRef(null); // Reference for video element
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const [backBtn] = useState([
         {
@@ -18,6 +20,15 @@ function PosScanner() {
             id: 1
         }
     ]);
+
+    // Function to handle Done button click
+    const handleDoneClick = () => {
+        // Add any finalization logic here
+        // Example: set isProcessing to false, navigate to another page, etc.
+        setIsProcessing(false);
+        // Navigate to another route, for example, the scan asset page
+        navigate("/ScanAssetsMode");
+    };
 
     return (
         <Container fluid>
@@ -74,7 +85,14 @@ function PosScanner() {
                                         transition: 'opacity 1s ease-in-out'
                                     }}
                                 />
-                                <Button variant='primary' style={{width: 200}} size='lg'>Done</Button>
+                                <Button
+                                    variant='primary'
+                                    style={{ width: 200 }}
+                                    size='lg'
+                                    onClick={handleDoneClick} // Connect the button click
+                                >
+                                    Done
+                                </Button>
                             </div>
                         </Card>
                     </Col>
