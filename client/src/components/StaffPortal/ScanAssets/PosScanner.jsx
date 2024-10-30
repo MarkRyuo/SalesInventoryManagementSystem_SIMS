@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Button, Spinner, Alert } from "react-bootstrap";
 import StaffNavBar from "../StaffNavbar/StaffNavBar";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { IoMdArrowBack } from "react-icons/io";
@@ -16,10 +16,18 @@ function PosScanner() {
     const videoRef = useRef(null);
     const navigate = useNavigate();
     const scannedRef = useRef(new Set());
+    const [message, setMessage] = useState('');
+    const [fadeOut, setFadeOut] = useState(false);
 
     const handleScan = useCallback(async (scannedText) => {
         setIsLoading(true);
         setFadeClass('fade-in');
+
+        // Check for duplicates
+        if (scannedRef.current.has(scannedText)) {
+            setIsLoading(false);
+            return; // Skip if this barcode has already been scanned
+        }
         scannedRef.current.add(scannedText);
 
         try {
@@ -38,6 +46,8 @@ function PosScanner() {
                     await updateProductQuantity(scannedText, -1);
                     setScannedItems(prevItems => [...prevItems, { ...product, quantity: 1 }]);
                 }
+
+                setMessage(`Scanned ${product.productName}: Quantity updated!`);
                 setErrorMessages([]);
             } else {
                 setErrorMessages(prev => [...prev, `Product with barcode ${scannedText} not found in inventory.`]);
@@ -46,10 +56,16 @@ function PosScanner() {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         }
 
+        // Reset the loading state and fade effects
         setTimeout(() => {
             setIsLoading(false);
             setFadeClass('fade-out');
             scannedRef.current.delete(scannedText);
+            setFadeOut(true);
+            setTimeout(() => {
+                setFadeOut(false);
+                setMessage('');
+            }, 1000);
         }, 2000);
     }, [scannedItems]);
 
@@ -58,7 +74,7 @@ function PosScanner() {
         codeReader.listVideoInputDevices().then((videoInputDevices) => {
             if (videoInputDevices.length > 0) {
                 codeReader.decodeFromVideoDevice(videoInputDevices[0].deviceId, videoRef.current, (result, error) => {
-                    if (result && !isLoading && !scannedRef.current.has(result.getText())) {
+                    if (result && !isLoading) {
                         handleScan(result.getText());
                     }
                     if (error) {
@@ -114,6 +130,11 @@ function PosScanner() {
                                             <p key={index}>{msg}</p>
                                         ))}
                                     </div>
+                                )}
+                                {message && (
+                                    <Alert variant="success" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
+                                        {message}
+                                    </Alert>
                                 )}
                             </>
                         )}
