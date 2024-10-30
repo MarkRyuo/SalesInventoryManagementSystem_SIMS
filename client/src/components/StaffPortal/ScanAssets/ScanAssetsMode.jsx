@@ -7,4 +7,4 @@ function ScanAssetsMode() {
     )
 }
 
-export default ScanAssetsMode
+export default ScanAssetsMode;
