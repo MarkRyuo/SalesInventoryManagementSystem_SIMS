@@ -2,12 +2,14 @@ import { Container, Row, Col, Button, Spinner, Card, Alert } from "react-bootstr
 import StaffNavBar from "../StaffNavbar/StaffNavBar";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { IoMdArrowBack } from "react-icons/io";
-import { BrowserMultiFormatReader } from "@zxing/library";
+import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
 
 function PosScanner() {
     const location = useLocation();
+    const navigate = useNavigate();
+
     const [backBtn] = useState([{ btnIcon: <IoMdArrowBack size={20} />, path: "/ScanAsset", id: 1 }]);
     const [scannedItems, setScannedItems] = useState(location.state?.scannedItems || []);
     const [errorMessages, setErrorMessages] = useState([]);
@@ -15,9 +17,9 @@ function PosScanner() {
     const [isLoading, setIsLoading] = useState(false);
     const [fadeOut, setFadeOut] = useState(false);
     const videoRef = useRef(null);
-    const navigate = useNavigate();
     const scannedRef = useRef(new Set()); // Set to track scanned barcodes
 
+    // Define handleScan function
     const handleScan = useCallback(async (scannedText) => {
         if (isLoading || scannedRef.current.has(scannedText)) {
             return; // Skip if already loading or already scanned
@@ -47,7 +49,7 @@ function PosScanner() {
                 }
 
                 await updateProductQuantity(scannedText, -1); // Update inventory quantity by decrementing 1
-                setMessage(`Successfully scanned ${product.name}.`);
+                setMessage(`Successfully scanned ${product.productName}.`);
                 setErrorMessages([]);
                 setFadeOut(true);
             } else {
@@ -62,7 +64,7 @@ function PosScanner() {
                 setFadeOut(false); // Reset fadeOut after 3 seconds
             }, 3000); // Adjust the delay as necessary
         }
-    }, [scannedItems, isLoading]);
+    }, [scannedItems, isLoading]); // Added isLoading as a dependency
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
@@ -73,22 +75,32 @@ function PosScanner() {
                     if (result) {
                         handleScan(result.getText());
                     }
-                    if (error) {
-                        console.error(error);
+                    if (error && !isLoading) {
+                        if (error instanceof NotFoundException) {
+                            console.warn("Scanning error: Barcode not found. Please adjust the barcode or improve lighting.");
+                            setErrorMessages(prev => [...prev, 'Barcode not found. Please try again.']);
+                        } else {
+                            console.error("Scanning error: ", error); // Log other errors
+                        }
                     }
                 });
             } else {
                 setErrorMessages(['No camera found.']);
             }
-        }).catch((err) => console.error("Error listing video devices", err));
+        }).catch((err) => {
+            console.error("Error listing video devices", err);
+            setErrorMessages(['Error accessing video devices.']);
+        });
 
         return () => {
             codeReader.reset();
         };
-    }, [handleScan]);
+    }, [handleScan, isLoading]); // Include handleScan as a dependency
 
     const handleCheckout = () => {
-        navigate('/ScanAssetsMode', { state: { scannedItems } });
+        if (scannedItems.length > 0) {
+            navigate('/ScanAssetsMode', { state: { scannedItems } });
+        }
     };
 
     return (
@@ -146,6 +158,9 @@ function PosScanner() {
                                         transition: 'opacity 1s ease-in-out'
                                     }}
                                 />
+                                <div style={{ position: 'absolute', bottom: '10%', left: '50%', transform: 'translateX(-50%)', color: 'white' }}>
+                                    <p>Please position the barcode within the dashed area and ensure good lighting.</p>
+                                </div>
                             </div>
                         </Card>
                     </Col>
