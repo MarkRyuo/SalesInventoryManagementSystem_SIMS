@@ -2,9 +2,9 @@ import { Container, Row, Col, Button, Spinner, Card, Alert } from "react-bootstr
 import StaffNavBar from "../StaffNavbar/StaffNavBar";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { IoMdArrowBack } from "react-icons/io";
-import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
+import { BrowserMultiFormatReader } from "@zxing/library";
 import { useNavigate, useLocation } from "react-router-dom";
-import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
+import { fetchProductByBarcode } from '../../../services/ProductService';
 
 function PosScanner() {
     const location = useLocation();
@@ -24,12 +24,13 @@ function PosScanner() {
 
         setIsLoading(true);
         scannedRef.current.add(scannedText);
+        setErrorMessages([]);
+        setMessage("");
 
         try {
             const product = await fetchProductByBarcode(scannedText);
             if (product) {
                 const existingIndex = scannedItems.findIndex(item => item.barcode === scannedText);
-
                 if (existingIndex !== -1) {
                     setScannedItems(prevItems => {
                         const updatedItems = [...prevItems];
@@ -43,12 +44,8 @@ function PosScanner() {
                     ]);
                 }
 
-                await updateProductQuantity(scannedText, -1);
                 setMessage(`Successfully scanned ${product.productName}.`);
-                setErrorMessages([]);
                 setFadeOut(true);
-            } else {
-                setErrorMessages(prev => [...prev, `Product with barcode ${scannedText} not found in inventory.`]);
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
@@ -69,11 +66,7 @@ function PosScanner() {
                 codeReader.decodeFromVideoDevice(selectedDeviceId, videoRef.current, (result, error) => {
                     if (result) handleScan(result.getText());
                     if (error && !isLoading) {
-                        if (error instanceof NotFoundException) {
-                            setErrorMessages(prev => [...prev, 'Barcode not found. Please try again.']);
-                        } else {
-                            console.error("Scanning error: ", error);
-                        }
+                        console.error("Scanning error: ", error);
                     }
                 });
             } else {
@@ -89,9 +82,7 @@ function PosScanner() {
     }, [handleScan, isLoading]);
 
     const handleCheckout = () => {
-        if (scannedItems.length > 0) {
-            navigate('/ScanAssetsMode', { state: { scannedItems } });
-        }
+        navigate('/ScanAssetsMode', { state: { scannedItems } });
     };
 
     return (
