@@ -7,4 +7,4 @@ function PosScanner() {
     )
 }
 
-export default PosScanner
+export default PosScanner ;
