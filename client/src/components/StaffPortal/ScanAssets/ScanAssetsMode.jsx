@@ -30,6 +30,15 @@ function ScanAssetsMode() {
         navigate('/PosScanner', { state: { scannedItems: [] } }); // Clear cart and go back to scanner
     };
 
+    const handleScanAgain = () => {
+        // Add logic to prevent duplicate items
+        const uniqueItems = [...new Set(scannedItems.map(item => item.productName))].map(name => {
+            return scannedItems.find(item => item.productName === name);
+        });
+
+        navigate('/PosScanner', { state: { scannedItems: uniqueItems } }); // Go back to scanner with unique items
+    };
+
     return (
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-body-tertiary">
@@ -75,7 +84,7 @@ function ScanAssetsMode() {
                                 <Button
                                     variant="outline-primary"
                                     className="ms-2"
-                                    onClick={() => navigate('/PosScanner', { state: { scannedItems } })} // Preserve current items
+                                    onClick={handleScanAgain} // Use updated handleScanAgain
                                 >
                                     Scan Again
                                 </Button>
