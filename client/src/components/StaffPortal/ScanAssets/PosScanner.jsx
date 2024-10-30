@@ -14,15 +14,17 @@ function PosScanner() {
     const [isLoading, setIsLoading] = useState(false);
     const videoRef = useRef(null);
     const navigate = useNavigate();
+    const scannedRef = useRef(new Set()); // Keeps track of recent scans to prevent double-counting
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
         codeReader.listVideoInputDevices().then((videoInputDevices) => {
             if (videoInputDevices.length > 0) {
                 codeReader.decodeFromVideoDevice(videoInputDevices[0].deviceId, videoRef.current, async (result, error) => {
-                    if (result && !isLoading) {
+                    if (result && !isLoading && !scannedRef.current.has(result.getText())) {
                         const scannedText = result.getText();
                         setIsLoading(true);
+                        scannedRef.current.add(scannedText); // Add to recent scans set to prevent double-count
 
                         try {
                             const product = await fetchProductByBarcode(scannedText);
@@ -50,6 +52,7 @@ function PosScanner() {
 
                         setTimeout(() => {
                             setIsLoading(false);
+                            scannedRef.current.delete(scannedText); // Allow rescan after delay
                         }, 2000);
                     }
                     if (error) {
