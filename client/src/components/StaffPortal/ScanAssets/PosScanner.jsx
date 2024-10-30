@@ -7,14 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
 
 function PosScanner() {
-    const [backBtn] = useState([
-        {
-            btnIcon: <IoMdArrowBack size={20} />,
-            path: "/ScanAsset",
-            id: 1
-        }
-    ]);
-
+    const [backBtn] = useState([{ btnIcon: <IoMdArrowBack size={20} />, path: "/ScanAsset", id: 1 }]);
     const [scannedItems, setScannedItems] = useState([]); // List to hold scanned items
     const [errorMessages, setErrorMessages] = useState([]); // To hold error messages
     const [isLoading, setIsLoading] = useState(false); // Loading state
@@ -23,55 +16,52 @@ function PosScanner() {
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
-        codeReader
-            .listVideoInputDevices()
-            .then((videoInputDevices) => {
-                // Select the first camera on the device
-                codeReader.decodeFromVideoDevice(
-                    videoInputDevices[0].deviceId,
-                    videoRef.current,
-                    async (result, error) => {
-                        if (result && !isLoading) {
-                            const scannedText = result.getText();
+        codeReader.listVideoInputDevices().then((videoInputDevices) => {
+            if (videoInputDevices.length > 0) {
+                codeReader.decodeFromVideoDevice(videoInputDevices[0].deviceId, videoRef.current, async (result, error) => {
+                    if (result && !isLoading) {
+                        const scannedText = result.getText();
+                        setIsLoading(true); // Set loading state
+
+                        try {
                             const product = await fetchProductByBarcode(scannedText); // Fetch product by barcode
 
-                            setIsLoading(true); // Set loading state
-
                             if (product) {
-                                // Check if product already scanned
-                                const existingItem = scannedItems.find(item => item.barcode === scannedText);
-                                if (existingItem) {
-                                    // If product already scanned, decrease quantity again
+                                const existingIndex = scannedItems.findIndex(item => item.barcode === scannedText);
+
+                                if (existingIndex !== -1) {
+                                    // Item exists, increase quantity
                                     await updateProductQuantity(scannedText, -1); // Decrease quantity by 1
-                                    setScannedItems(prevItems =>
-                                        prevItems.map(item =>
-                                            item.barcode === scannedText ? { ...item, quantity: item.quantity + 1 } : item
-                                        )
-                                    );
+                                    setScannedItems(prevItems => {
+                                        const updatedItems = [...prevItems];
+                                        updatedItems[existingIndex].quantity += 1;
+                                        return updatedItems;
+                                    });
                                 } else {
-                                    // If product is newly scanned, add to scanned items
+                                    // Item is new, add to scanned items
                                     await updateProductQuantity(scannedText, -1); // Decrease quantity by 1
                                     setScannedItems(prevItems => [...prevItems, { ...product, quantity: 1 }]);
                                 }
                                 setErrorMessages([]); // Clear any previous error messages
                             } else {
-                                setErrorMessages(prev => [...prev, `Product with barcode ${scannedText} not found in inventory.`]); // Set error message
+                                setErrorMessages(prev => [...prev, `Product with barcode ${scannedText} not found in inventory.`]);
                             }
-
-                            codeReader.reset(); // Stops scanning after each successful scan
-
-                            // Delay for 2 seconds before allowing another scan
-                            setTimeout(() => {
-                                setIsLoading(false); // Reset loading state
-                            }, 2000);
+                        } catch (error) {
+                            setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
                         }
-                        if (error) {
-                            console.error(error); // Log errors for debugging
-                        }
+
+                        setTimeout(() => {
+                            setIsLoading(false); // Reset loading state
+                        }, 2000);
                     }
-                );
-            })
-            .catch((err) => console.error("Error listing video devices", err));
+                    if (error) {
+                        console.error(error); // Log errors for debugging
+                    }
+                });
+            } else {
+                setErrorMessages(['No camera found.']); // Handle no camera case
+            }
+        }).catch((err) => console.error("Error listing video devices", err));
 
         return () => {
             codeReader.reset(); // Stop the scanner when component unmounts
@@ -79,7 +69,6 @@ function PosScanner() {
     }, [scannedItems, isLoading]); // Add scannedItems and isLoading as dependencies
 
     const handleCheckout = () => {
-        // Navigate to the ScanAssetsMode component and pass scanned items
         navigate('/ScanAssetsMode', { state: { scannedItems } });
     };
 
