@@ -1,10 +1,15 @@
-import { useState } from 'react';
-import { Container, Row, Col, Alert, Card, Spinner } from 'react-bootstrap';
+import { useState, useRef } from 'react';
+import { Container, Row, Col, Alert, Card, Spinner, Button } from 'react-bootstrap';
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
 
-
 function PosScanner() {
+    const [error, setError] = useState(null);
+    const [message, setMessage] = useState(null);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [guideFade, setGuideFade] = useState(true);
+    const [videoFade, setVideoFade] = useState(true);
+    const videoRef = useRef(null); // Reference for video element
 
     const [backBtn] = useState([
         {
@@ -13,6 +18,7 @@ function PosScanner() {
             id: 1
         }
     ]);
+
     return (
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
@@ -24,7 +30,7 @@ function PosScanner() {
                                 {error && (
                                     <Alert variant="danger"
                                         style={{
-                                            opacity: fadeOut ? 0 : 1,
+                                            opacity: guideFade ? 1 : 0,
                                             transition: 'opacity 1s ease-in-out',
                                         }}>
                                         Error: {error}
@@ -33,7 +39,7 @@ function PosScanner() {
                                 {message && (
                                     <Alert variant="success"
                                         style={{
-                                            opacity: fadeOut ? 0 : 1,
+                                            opacity: guideFade ? 1 : 0,
                                             transition: 'opacity 1s ease-in-out',
                                         }}>
                                         {message}
@@ -68,14 +74,14 @@ function PosScanner() {
                                         transition: 'opacity 1s ease-in-out'
                                     }}
                                 />
+                                <Button variant='primary' style={{width: 200}} size='lg'>Done</Button>
                             </div>
                         </Card>
                     </Col>
                 </Row>
             </Container>
-
         </Container>
-    )
+    );
 }
 
 export default PosScanner;
