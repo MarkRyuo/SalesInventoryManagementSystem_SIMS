@@ -143,7 +143,7 @@ const router = createBrowserRouter([
   },
   {
     path: "PosSuccess",
-    element: <PosSuccess /> , //* POS: Product Receipt View 
+    element: <PosSuccess /> , //* POS: Product Success View 
   },
   
 
