@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button, Spinner, Alert } from "react-bootstrap";
+import { Container, Row, Col, Button, Spinner, Card, Alert } from "react-bootstrap";
 import StaffNavBar from "../StaffNavbar/StaffNavBar";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { IoMdArrowBack } from "react-icons/io";
@@ -11,26 +11,20 @@ function PosScanner() {
     const [backBtn] = useState([{ btnIcon: <IoMdArrowBack size={20} />, path: "/ScanAsset", id: 1 }]);
     const [scannedItems, setScannedItems] = useState(location.state?.scannedItems || []);
     const [errorMessages, setErrorMessages] = useState([]);
+    const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [fadeOut, setFadeOut] = useState(false);
     const videoRef = useRef(null);
     const navigate = useNavigate();
-    const scannedRef = useRef(new Set());
-    const [message, setMessage] = useState('');
-    const [fadeOut, setFadeOut] = useState(false);
+    const scannedRef = useRef(new Set()); // Set to track scanned barcodes
 
     const handleScan = useCallback(async (scannedText) => {
-        if (isLoading) {
-            return; // Skip if already loading
+        if (isLoading || scannedRef.current.has(scannedText)) {
+            return; // Skip if already loading or already scanned
         }
 
         setIsLoading(true);
-
-        // Check for duplicates
-        if (scannedRef.current.has(scannedText)) {
-            setIsLoading(false);
-            return; // Skip if this barcode has already been scanned
-        }
-        scannedRef.current.add(scannedText);
+        scannedRef.current.add(scannedText); // Mark the barcode as scanned
 
         try {
             const product = await fetchProductByBarcode(scannedText);
@@ -38,34 +32,29 @@ function PosScanner() {
                 const existingIndex = scannedItems.findIndex(item => item.barcode === scannedText);
 
                 if (existingIndex !== -1) {
-                    // Only update quantity if the product exists
+                    // Update quantity if product already exists
                     setScannedItems(prevItems => {
                         const updatedItems = [...prevItems];
                         updatedItems[existingIndex].quantity += 1;
                         return updatedItems;
                     });
                 } else {
+                    // Add new product to scanned items
                     setScannedItems(prevItems => [...prevItems, { ...product, quantity: 1 }]);
                 }
 
-                await updateProductQuantity(scannedText, -1); // Update quantity in the inventory
-                setMessage(`Scanned ${product.productName}: Quantity updated!`);
+                await updateProductQuantity(scannedText, -1); // Update inventory quantity
+                setMessage(`Successfully scanned ${product.name}.`);
                 setErrorMessages([]);
+                setFadeOut(true);
             } else {
                 setErrorMessages(prev => [...prev, `Product with barcode ${scannedText} not found in inventory.`]);
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
-            setIsLoading(false);
-
-            // Start the fade-out effect for the message
-            setFadeOut(true);
-            setTimeout(() => {
-                setFadeOut(false);
-                setMessage('');
-                scannedRef.current.delete(scannedText); // Clear scanned reference
-            }, 1000); // Duration for fade-out effect
+            setIsLoading(false); // Always set loading to false
+            setTimeout(() => setFadeOut(false), 3000); // Reset fadeOut after 3 seconds
         }
     }, [scannedItems, isLoading]);
 
@@ -75,7 +64,7 @@ function PosScanner() {
             if (videoInputDevices.length > 0) {
                 const selectedDeviceId = videoInputDevices[0].deviceId;
                 codeReader.decodeFromVideoDevice(selectedDeviceId, videoRef.current, (result, error) => {
-                    if (result && !isLoading) {
+                    if (result) {
                         handleScan(result.getText());
                     }
                     if (error) {
@@ -90,57 +79,79 @@ function PosScanner() {
         return () => {
             codeReader.reset();
         };
-    }, [handleScan, isLoading]);
+    }, [handleScan]);
 
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });
     };
 
     return (
-        <Container fluid className="m-0 p-0">
-            <StaffNavBar backBtn={backBtn.filter((Backbtn) => Backbtn.id === 1)} />
-            <Container fluid="lg" style={{ boxSizing: "border-box", height: '90vh', width: '100%', minWidth: 380 }}>
-                <Row style={{ boxSizing: "border-box", height: '100%' }}>
-                    <Col lg={12} style={{
-                        boxSizing: "border-box",
-                        height: '80vh',
-                        width: '100%',
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        padding: 0,
-                        gap: 30
-                    }}>
-                        <video ref={videoRef} style={{ width: "100%", height: "80%", maxWidth: 800 }} />
-                        {isLoading ? (
-                            <Spinner animation="border" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </Spinner>
-                        ) : (
-                            <>
-                                {scannedItems.length > 0 && (
-                                    <ul>
-                                        {scannedItems.map((item, index) => (
-                                            <li key={index}>{item.productName} - Quantity: {item.quantity}</li>
-                                        ))}
-                                    </ul>
-                                )}
+        <Container fluid>
+            <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
+            <Container fluid='lg' style={{ width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
+                <Row className="justify-content-center" style={{ height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
+                    <Col md={8} className='p-0 mt-3' style={{ display: 'flex', justifyContent: 'center' }}> {/* Child */}
+                        <Card style={{ height: '100%', display: 'flex', justifyContent: 'center', width: '100%' }}>
+                            <div className="text-center position-relative">
                                 {errorMessages.length > 0 && (
-                                    <div style={{ color: 'red' }}>
-                                        {errorMessages.map((msg, index) => (
-                                            <p key={index}>{msg}</p>
-                                        ))}
-                                    </div>
+                                    <Alert variant="danger"
+                                        style={{
+                                            opacity: fadeOut ? 0 : 1,
+                                            transition: 'opacity 1s ease-in-out',
+                                        }}>
+                                        {errorMessages[errorMessages.length - 1]}
+                                    </Alert>
                                 )}
                                 {message && (
-                                    <Alert variant="success" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
+                                    <Alert variant="success"
+                                        style={{
+                                            opacity: fadeOut ? 0 : 1,
+                                            transition: 'opacity 1s ease-in-out',
+                                        }}>
                                         {message}
                                     </Alert>
                                 )}
-                            </>
-                        )}
-                        <Button style={{ width: 200 }} variant="primary" size="lg" onClick={handleCheckout} disabled={isLoading}>
-                            Done
+                                {isLoading && <Spinner animation="border" />}
+
+                                <div
+                                    style={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        left: '50%',
+                                        transform: 'translate(-50%, -50%)',
+                                        width: '70%',
+                                        height: '50%',
+                                        border: '1px dashed rgba(255, 255, 255, 0.8)',
+                                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                                        pointerEvents: 'none',
+                                        opacity: 1, // Always show the guide
+                                        transition: 'opacity 1s ease-in-out',
+                                    }}
+                                />
+
+                                <video
+                                    ref={videoRef}
+                                    style={{
+                                        width: '100%',
+                                        height: 'auto',
+                                        maxHeight: '80vh',  // Limits height to fit within the viewport
+                                        display: isLoading ? 'none' : 'block',
+                                        opacity: 1, // Always show the video
+                                        transition: 'opacity 1s ease-in-out'
+                                    }}
+                                />
+                            </div>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row className="justify-content-center mt-3">
+                    <Col md={8} className="text-center">
+                        <Button
+                            variant="primary"
+                            onClick={handleCheckout}
+                            disabled={scannedItems.length === 0} // Disable if no items scanned
+                        >
+                            Proceed to Checkout
                         </Button>
                     </Col>
                 </Row>
