@@ -55,8 +55,6 @@ function PosScanner() {
                         )}
                         <Button style={{}}>Checkout</Button>
                     </Col>
-                    <Col lg={12} style={{width: '100%', height: 'auto'}}>
-                    </Col>
                 </Row>
             </Container>
         </Container>
