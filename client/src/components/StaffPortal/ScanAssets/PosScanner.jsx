@@ -1,95 +1,134 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Container, Row, Col, Alert, Card, Spinner, Button } from 'react-bootstrap';
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
+import { useNavigate } from 'react-router-dom';
+import { fetchProductByBarcode } from '../../../services/ProductService';
+import { BrowserMultiFormatReader } from '@zxing/library';
 
 function PosScanner() {
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
-    const [guideFade, setGuideFade] = useState(true);
-    const [videoFade, setVideoFade] = useState(true);
-    const videoRef = useRef(null); // Reference for video element
-    const navigate = useNavigate(); // Initialize useNavigate
+    const [currentOrders, setCurrentOrders] = useState([]);
+    const videoRef = useRef(null);
+    const navigate = useNavigate();
+    const codeReader = new BrowserMultiFormatReader();
 
-    const [backBtn] = useState([
-        {
-            btnIcon: <IoMdArrowBack size={20} />,
-            path: "/ScanAsset",
-            id: 1
+    useEffect(() => {
+        const startScanner = async () => {
+            try {
+                // Ensure the video element is available
+                if (!videoRef.current) {
+                    setError("Video reference is not available.");
+                    return;
+                }
+
+                // Get the video stream from the user's camera
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoRef.current.srcObject = stream;
+                videoRef.current.setAttribute("playsinline", true); // For inline video playback
+                videoRef.current.play();
+
+                // Start scanning barcodes
+                scanBarcode();
+            } catch (err) {
+                console.error("Error accessing the camera: ", err);
+                setError("Error accessing the camera. Please check permissions.");
+            }
+        };
+
+        startScanner();
+
+        return () => {
+            // Cleanup function to stop the video stream on unmount
+            if (videoRef.current && videoRef.current.srcObject) {
+                const tracks = videoRef.current.srcObject.getTracks();
+                tracks.forEach(track => track.stop());
+                videoRef.current.srcObject = null; // Clean up the video reference
+            }
+        };
+    }, []);
+
+    const scanBarcode = async () => {
+        try {
+            while (true) {
+                const result = await codeReader.decodeOnceFromVideoDevice(null, videoRef.current);
+                if (result && result.text) {
+                    handleScan(result.text); // Call handleScan with the scanned barcode
+                }
+            }
+        } catch (err) {
+            console.error("Scanning error: ", err); // Log the scanning error
         }
-    ]);
+    };
 
-    // Function to handle Done button click
+    const handleScan = async (barcode) => {
+        setIsProcessing(true);
+        setMessage(null);
+        setError(null);
+
+        try {
+            const product = await fetchProductByBarcode(barcode);
+            if (product) {
+                const existingProduct = currentOrders.find(item => item.barcode === barcode);
+                if (existingProduct) {
+                    // Update quantity for existing product
+                    setCurrentOrders(prev =>
+                        prev.map(item =>
+                            item.barcode === barcode
+                                ? { ...item, quantity: item.quantity + 1 }
+                                : item
+                        )
+                    );
+                } else {
+                    // Add new product to the current orders
+                    setCurrentOrders(prev => [
+                        ...prev,
+                        { ...product, quantity: 1 }
+                    ]);
+                }
+                setMessage(`Added ${product.productName} to current orders.`);
+            } else {
+                setError("Product not found in inventory.");
+            }
+        } catch (err) {
+            setError("An error occurred while fetching the product.");
+            console.error("Fetch error: ", err); // Log the fetch error
+        } finally {
+            setIsProcessing(false);
+        }
+    };
+
     const handleDoneClick = () => {
-        // Add any finalization logic here
-        // Example: set isProcessing to false, navigate to another page, etc.
-        setIsProcessing(false);
-        // Navigate to another route, for example, the scan asset page
-        navigate("/ScanAssetsMode");
+        navigate("/ScanAssetsMode", { state: { currentOrders } });
     };
 
     return (
         <Container fluid>
-            <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' style={{ width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
-                <Row className="justify-content-center" style={{ height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
-                    <Col md={8} className='p-0 mt-3' style={{ display: 'flex', justifyContent: 'center' }}> {/* Child */}
+            <StaffNavBar backBtn={[{ btnIcon: <IoMdArrowBack size={20} />, path: "/ScanAsset" }]} />
+            <Container fluid='lg' style={{ width: '100%', height: '80vh', boxSizing: 'border-box' }}>
+                <Row className="justify-content-center" style={{ height: '100%', boxSizing: 'border-box' }}>
+                    <Col md={8} className='p-0 mt-3' style={{ display: 'flex', justifyContent: 'center' }}>
                         <Card style={{ height: '100%', display: 'flex', justifyContent: 'center', width: '100%' }}>
                             <div className="text-center position-relative">
-                                {error && (
-                                    <Alert variant="danger"
-                                        style={{
-                                            opacity: guideFade ? 1 : 0,
-                                            transition: 'opacity 1s ease-in-out',
-                                        }}>
-                                        Error: {error}
-                                    </Alert>
-                                )}
-                                {message && (
-                                    <Alert variant="success"
-                                        style={{
-                                            opacity: guideFade ? 1 : 0,
-                                            transition: 'opacity 1s ease-in-out',
-                                        }}>
-                                        {message}
-                                    </Alert>
-                                )}
+                                {error && <Alert variant="danger">{error}</Alert>}
+                                {message && <Alert variant="success">{message}</Alert>}
                                 {isProcessing && <Spinner animation="border" />}
-
-                                <div
-                                    style={{
-                                        position: 'absolute',
-                                        top: '50%',
-                                        left: '50%',
-                                        transform: 'translate(-50%, -50%)',
-                                        width: '70%',
-                                        height: '50%',
-                                        border: '1px dashed rgba(255, 255, 255, 0.8)',
-                                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                                        pointerEvents: 'none',
-                                        opacity: guideFade ? 1 : 0,
-                                        transition: 'opacity 1s ease-in-out',
-                                    }}
-                                />
-
                                 <video
                                     ref={videoRef}
                                     style={{
                                         width: '100%',
                                         height: 'auto',
-                                        maxHeight: '80vh',  // Limits height to fit within the viewport
-                                        display: isProcessing ? 'none' : 'block',
-                                        opacity: videoFade ? 1 : 0,
-                                        transition: 'opacity 1s ease-in-out'
+                                        maxHeight: '80vh',
                                     }}
                                 />
                                 <Button
                                     variant='primary'
-                                    style={{ width: 200 }}
+                                    style={{ width: 200, marginTop: '1rem' }}
                                     size='lg'
-                                    onClick={handleDoneClick} // Connect the button click
+                                    onClick={handleDoneClick}
+                                    disabled={isProcessing} // Disable button while processing
                                 >
                                     Done
                                 </Button>
