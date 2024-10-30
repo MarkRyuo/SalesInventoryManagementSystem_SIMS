@@ -13,7 +13,7 @@ function PosScanner() {
             id: 1
         }
     ]);
-
+    
     const [scannedItems, setScannedItems] = useState([]); // List to hold scanned items
     const videoRef = useRef(null);
     const navigate = useNavigate(); // Hook to programmatically navigate
