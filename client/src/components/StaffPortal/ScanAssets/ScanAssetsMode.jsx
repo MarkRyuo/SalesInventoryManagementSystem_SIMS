@@ -16,7 +16,7 @@ function Checkout() {
         try {
             await Promise.all(updatePromises); // Wait for all updates to complete
             // Optionally, you could navigate to a confirmation page or show a success message
-            navigate('/Confirmation'); // Example: navigate to a confirmation page
+            navigate('/PosSuccess'); // Example: navigate to a confirmation page
         } catch (error) {
             console.error("Error updating product quantities:", error);
             // Optionally, show an error message to the user
