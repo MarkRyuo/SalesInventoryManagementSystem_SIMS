@@ -48,14 +48,14 @@ function PosScanner() {
             <StaffNavBar backBtn={backBtn.filter((Backbtn) => Backbtn.id === 1)} />
             <Container fluid="lg" style={{ boxSizing: "border-box", border: '1px solid blue', height: '90vh', padding: 15}}>
                 <Row style={{ boxSizing: "border-box", border: '1px solid green', height: '100%'}}>
-                    <Col lg={12} style={{ boxSizing: "border-box", border: '1px solid red', height: '65vh', width: '100%'}}>
+                    <Col lg={12} style={{ boxSizing: "border-box", border: '1px solid red', height: '65vh', width: '100%', display: "flex", flexDirection: "column", alignItems: "center"}}>
                         <video ref={videoRef} style={{ width: "100%", height: "100%", maxWidth: 800}} />
                         {scannedResult && (
                             <p>Scanned Result: {scannedResult}</p>
                         )}
+                        <Button style={{}}>Checkout</Button>
                     </Col>
                     <Col lg={12} style={{width: '100%', height: 'auto'}}>
-                        <Button style={{}}>Checkout</Button>
                     </Col>
                 </Row>
             </Container>
