@@ -15,6 +15,7 @@ function PosScanner() {
     const [errorMessages, setErrorMessages] = useState([]);
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [cameraLoading, setCameraLoading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
     const videoRef = useRef(null);
     const scannedRef = useRef(new Set());
@@ -45,16 +46,15 @@ function PosScanner() {
                 }
 
                 setMessage(`Successfully scanned ${product.productName}.`);
-                setFadeOut(true);
+                setFadeOut(false); // Set to false for fade in
+                setTimeout(() => {
+                    setFadeOut(true); // Set to true after a longer delay for fade out
+                }, 4000); // Show for 4 seconds
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
             setIsLoading(false);
-            setTimeout(() => {
-                scannedRef.current.delete(scannedText);
-                setFadeOut(false);
-            }, 3000);
         }
     }, [scannedItems, isLoading]);
 
@@ -69,6 +69,7 @@ function PosScanner() {
                         console.error("Scanning error: ", error);
                     }
                 });
+                setCameraLoading(false);
             } else {
                 setErrorMessages(['No camera found.']);
             }
@@ -116,7 +117,16 @@ function PosScanner() {
                                     backgroundColor: 'rgba(0, 0, 0, 0.2)',
                                 }} />
 
-                                <video ref={videoRef} style={{ width: '100%', maxHeight: '80vh', display: isLoading ? 'none' : 'block' }} />
+                                <video
+                                    ref={videoRef}
+                                    style={{
+                                        width: '100%',
+                                        maxHeight: '80vh',
+                                        display: cameraLoading ? 'none' : 'block',
+                                        opacity: cameraLoading ? 0 : 1,
+                                        transition: 'opacity 1s ease-in-out',
+                                    }}
+                                />
                                 <div style={{ position: 'absolute', bottom: '10%', left: '50%', transform: 'translateX(-50%)', color: 'white' }}>
                                     <p>Please position the barcode within the dashed area and ensure good lighting.</p>
                                 </div>
@@ -137,3 +147,4 @@ function PosScanner() {
 }
 
 export default PosScanner;
+    
