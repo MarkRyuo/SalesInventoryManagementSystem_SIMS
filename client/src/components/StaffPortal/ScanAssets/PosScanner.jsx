@@ -55,7 +55,8 @@ function PosScanner() {
                         width: '100%', 
                         display: "flex", 
                         flexDirection: "column", 
-                        alignItems: "center"}}>
+                        alignItems: "center"
+                        }}>
                         <video ref={videoRef} style={{ width: "100%", height: "100%", maxWidth: 800}}/>
                         {scannedResult && (
                             <p>Scanned Result: {scannedResult}</p>
