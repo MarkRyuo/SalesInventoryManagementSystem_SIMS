@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { BrowserMultiFormatReader } from '@zxing/library';
+import { Container, Row, Col, Card, Alert, ListGroup } from 'react-bootstrap';
 
 function PosScanner() {
     const videoRef = useRef(null);
@@ -40,20 +41,32 @@ function PosScanner() {
     }, []);
 
     return (
-        <div>
-            <h1>POS Scanner</h1>
-            <video ref={videoRef} style={{ width: '300px', height: 'auto' }} autoPlay />
-            {loading && <p>Loading...</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <div>
-                <h2>Scanned Items</h2>
-                <ul>
-                    {scannedItems.map((item, index) => (
-                        <li key={index}>{item}</li>
-                    ))}
-                </ul>
-            </div>
-        </div>
+        <Container className="mt-4">
+            <h1 className="text-center mb-4">POS Scanner</h1>
+            <Row className="justify-content-center">
+                <Col md={6}>
+                    <Card>
+                        <Card.Body>
+                            <video ref={videoRef} style={{ width: '100%', height: 'auto' }} autoPlay />
+                            {loading && <Alert variant="info">Loading...</Alert>}
+                            {error && <Alert variant="danger">{error}</Alert>}
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+            <Row className="mt-4">
+                <Col md={6} className="offset-md-3">
+                    <Card>
+                        <Card.Header>Scanned Items</Card.Header>
+                        <ListGroup variant="flush">
+                            {scannedItems.map((item, index) => (
+                                <ListGroup.Item key={index}>{item}</ListGroup.Item>
+                            ))}
+                        </ListGroup>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
