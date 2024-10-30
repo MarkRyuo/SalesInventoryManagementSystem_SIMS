@@ -1,5 +1,7 @@
 import { getDatabase, ref, set, get, update, remove } from 'firebase/database';
 
+// Comment Only (This code is a module for managing products and categories in a Sales Inventory Management System using Firebase Realtime Database. It provides various functions to handle product data, including adding, updating, fetching, and deleting products, as well as managing categories. )
+
 // Function to add a new product
 export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, category, dateAdded }) => {
     const db = getDatabase();
