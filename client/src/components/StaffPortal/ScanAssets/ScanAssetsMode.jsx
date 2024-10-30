@@ -26,6 +26,10 @@ function ScanAssetsMode() {
 
     const totalPrice = groupedItems.reduce((total, item) => total + item.total, 0);
 
+    const handleClearCart = () => {
+        navigate('/PosScanner', { state: { scannedItems: [] } }); // Clear cart and go back to scanner
+    };
+
     return (
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-body-tertiary">
@@ -67,7 +71,7 @@ function ScanAssetsMode() {
                         <Row className="mt-3">
                             <Col className="text-end">
                                 <Button variant="primary" className="me-2">Checkout</Button>
-                                <Button variant="secondary">Clear Cart</Button>
+                                <Button variant="secondary" onClick={handleClearCart}>Clear Cart</Button>
                                 <Button
                                     variant="outline-primary"
                                     className="ms-2"

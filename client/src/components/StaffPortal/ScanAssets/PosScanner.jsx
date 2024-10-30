@@ -35,15 +35,18 @@ function PosScanner() {
                     // Update quantity if product already exists
                     setScannedItems(prevItems => {
                         const updatedItems = [...prevItems];
-                        updatedItems[existingIndex].quantity += 1;
+                        updatedItems[existingIndex].quantity += 1; // Increment quantity
                         return updatedItems;
                     });
                 } else {
                     // Add new product to scanned items
-                    setScannedItems(prevItems => [...prevItems, { ...product, quantity: 1 }]);
+                    setScannedItems(prevItems => [
+                        ...prevItems,
+                        { ...product, quantity: 1 } // Initialize quantity to 1 for new product
+                    ]);
                 }
 
-                await updateProductQuantity(scannedText, -1); // Update inventory quantity
+                await updateProductQuantity(scannedText, -1); // Update inventory quantity by decrementing 1
                 setMessage(`Successfully scanned ${product.name}.`);
                 setErrorMessages([]);
                 setFadeOut(true);
@@ -54,7 +57,10 @@ function PosScanner() {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
             setIsLoading(false); // Always set loading to false
-            setTimeout(() => setFadeOut(false), 3000); // Reset fadeOut after 3 seconds
+            setTimeout(() => {
+                scannedRef.current.delete(scannedText); // Remove the barcode from scannedRef after processing
+                setFadeOut(false); // Reset fadeOut after 3 seconds
+            }, 3000); // Adjust the delay as necessary
         }
     }, [scannedItems, isLoading]);
 
@@ -88,9 +94,9 @@ function PosScanner() {
     return (
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' style={{ width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
-                <Row className="justify-content-center" style={{ height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
-                    <Col md={8} className='p-0 mt-3' style={{ display: 'flex', justifyContent: 'center' }}> {/* Child */}
+            <Container fluid='lg' style={{ width: '100%', height: '80vh', boxSizing: 'border-box' }}>
+                <Row className="justify-content-center" style={{ height: '100%', boxSizing: 'border-box' }}>
+                    <Col md={8} className='p-0 mt-3' style={{ display: 'flex', justifyContent: 'center' }}>
                         <Card style={{ height: '100%', display: 'flex', justifyContent: 'center', width: '100%' }}>
                             <div className="text-center position-relative">
                                 {errorMessages.length > 0 && (
@@ -124,7 +130,7 @@ function PosScanner() {
                                         border: '1px dashed rgba(255, 255, 255, 0.8)',
                                         backgroundColor: 'rgba(0, 0, 0, 0.2)',
                                         pointerEvents: 'none',
-                                        opacity: 1, // Always show the guide
+                                        opacity: 1,
                                         transition: 'opacity 1s ease-in-out',
                                     }}
                                 />
@@ -134,9 +140,9 @@ function PosScanner() {
                                     style={{
                                         width: '100%',
                                         height: 'auto',
-                                        maxHeight: '80vh',  // Limits height to fit within the viewport
+                                        maxHeight: '80vh',
                                         display: isLoading ? 'none' : 'block',
-                                        opacity: 1, // Always show the video
+                                        opacity: 1,
                                         transition: 'opacity 1s ease-in-out'
                                     }}
                                 />
