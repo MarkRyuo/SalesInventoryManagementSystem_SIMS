@@ -1,10 +1,10 @@
 
 function PosScanner() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <>
+
+        </>
+    )
 }
 
-export default PosScanner
+export default PosScanner ;
