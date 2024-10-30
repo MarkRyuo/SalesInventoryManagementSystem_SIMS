@@ -17,6 +17,8 @@ function PosScanner() {
     const [isLoading, setIsLoading] = useState(false);
     const [cameraLoading, setCameraLoading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
+    const [videoFade, setVideoFade] = useState(true); // Declare video fade state
+    const [guideFade, setGuideFade] = useState(true); // Declare guide overlay fade state
     const videoRef = useRef(null);
     const scannedRef = useRef(new Set());
 
@@ -27,6 +29,10 @@ function PosScanner() {
         scannedRef.current.add(scannedText);
         setErrorMessages([]);
         setMessage("");
+
+        // Fade in guide and video
+        setGuideFade(true);
+        setVideoFade(true);
 
         try {
             const product = await fetchProductByBarcode(scannedText);
@@ -48,14 +54,18 @@ function PosScanner() {
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false); // Set to false for fade in
                 setTimeout(() => {
-                    setFadeOut(true); // Set to true after a longer delay for fade out
+                    setFadeOut(true); // Set to true after a delay for fade out
                 }, 4000); // Show for 4 seconds
+
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
             setIsLoading(false);
         }
+
+        // Fade out guide after scanning
+        setGuideFade(false);
     }, [scannedItems, isLoading]);
 
     useEffect(() => {
@@ -115,16 +125,20 @@ function PosScanner() {
                                     height: '50%',
                                     border: '1px dashed rgba(255, 255, 255, 0.8)',
                                     backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                                    pointerEvents: 'none',
+                                    opacity: guideFade ? 1 : 0,
+                                    transition: 'opacity 1s ease-in-out',
                                 }} />
 
                                 <video
                                     ref={videoRef}
                                     style={{
                                         width: '100%',
-                                        maxHeight: '80vh',
+                                        height: 'auto',
+                                        maxHeight: '80vh',  // Limits height to fit within the viewport
                                         display: cameraLoading ? 'none' : 'block',
-                                        opacity: cameraLoading ? 0 : 1,
-                                        transition: 'opacity 1s ease-in-out',
+                                        opacity: videoFade ? 1 : 0,
+                                        transition: 'opacity 1s ease-in-out'
                                     }}
                                 />
                                 <div style={{ position: 'absolute', bottom: '10%', left: '50%', transform: 'translateX(-50%)', color: 'white' }}>
@@ -147,4 +161,3 @@ function PosScanner() {
 }
 
 export default PosScanner;
-    
