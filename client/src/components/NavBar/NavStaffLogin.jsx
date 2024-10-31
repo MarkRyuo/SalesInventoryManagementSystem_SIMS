@@ -1,7 +1,6 @@
 import { BsBox } from "react-icons/bs";
 import { Row, Col, Container, Navbar, Dropdown } from 'react-bootstrap';
 import Navbars from '../NavBar/Navbar.module.css';
-import { Link } from 'react-router-dom';
 
 
 function NavStaffLogin() {
@@ -16,7 +15,6 @@ function NavStaffLogin() {
                                 <Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand>
                             </Col>
                         </Row>
-
                     </Container>
                 </Navbar>
             </Container>
