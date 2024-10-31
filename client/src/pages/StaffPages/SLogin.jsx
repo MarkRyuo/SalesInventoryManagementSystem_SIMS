@@ -17,7 +17,7 @@ export const SLogin = () => {
             <Container fluid='lg' className='d-flex justify-content-center text-center'>
                 <Row className={LoginStyle.containerRow}> {/* fix sm-screen 412 px */}
                     <Col lg={12}> <RiBox3Fill size={80} /> </Col>
-                    <Col lg={12}> <p className='my-3' style={{fontSize: '1.4rem'}}>Sales Inventory Management System</p></Col>
+                    <Col lg={12}> <p className='my-3'>Sales Inventory Management System</p></Col>
                     <Col lg={12}> <SLoginCard /> </Col>
                 </Row>
 
