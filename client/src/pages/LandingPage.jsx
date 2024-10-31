@@ -14,7 +14,7 @@ function LandingPage() {
                 </Container>
             </Navbar>
         </Container>
-    )
+    )   
 }
 
 export default LandingPage
