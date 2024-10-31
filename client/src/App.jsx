@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
+import './App.css' ;
 
 // * Imported Pages
-import Login from '../src/pages/LoginPage'
+import Login from '../src/pages/LoginPage' ;
 
 
 
