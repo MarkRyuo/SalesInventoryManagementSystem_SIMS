@@ -18,7 +18,7 @@ function NavBars() {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#">Admin Portal</Dropdown.Item>
+                            <Dropdown.Item href="/LoginPage">Admin Portal</Dropdown.Item>
                             <Dropdown.Item href="#">Staff Portal</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
