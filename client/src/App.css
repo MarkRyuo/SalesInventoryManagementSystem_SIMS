@@ -7,13 +7,11 @@
 }
 
 :root {
-    --textColor : #130e01 ;
-    --backgroudColor: #fafafa ;
-    --primaryColor: #06f977 ;
-    --secondaryColor: #AAC9FF ;
-    --accentColor: #2707c9 ;
-
-    
+    --textColor : rgb(19, 14, 1) ;
+    --backgroudColor: rgb(250,250,250) ;
+    --primaryColor: rgb(6,249,119,100%) ;
+    --secondaryColor: rgb(168, 200, 255, 100%);
+    --accentColor: rgb(40, 7, 202, 100%);
 }
 
 
