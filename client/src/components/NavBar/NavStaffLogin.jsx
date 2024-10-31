@@ -1,5 +1,5 @@
 import { BsBox } from "react-icons/bs";
-import { Row, Col, Container, Navbar, Dropdown } from 'react-bootstrap';
+import { Row, Col, Container, Navbar} from 'react-bootstrap';
 import Navbars from '../NavBar/Navbar.module.css';
 
 
@@ -12,7 +12,7 @@ function NavStaffLogin() {
                         <Row>
                             <Col> <BsBox size={40} /> </Col>
                             <Col style={{ paddingTop: 4 }}>
-                                <Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand>
+                                <Navbar.Brand className="">Staff Portal</Navbar.Brand>
                             </Col>
                         </Row>
                     </Container>
