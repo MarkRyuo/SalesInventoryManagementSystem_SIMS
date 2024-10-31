@@ -19,7 +19,7 @@ export const NavLogin = () => {
 
                     <Dropdown>
                         <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-5">
-                            Option
+                            User Type
                         </Dropdown.Toggle>
 
                         {/* Dropdown function */}
