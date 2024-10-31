@@ -11,18 +11,18 @@ function NavBars() {
                         <Nav.Link href="#">About us</Nav.Link>
                         <Nav.Link href="#">Contacts</Nav.Link>
                     </Nav>
+
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            User Type
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#">Admin Portal</Dropdown.Item>
+                            <Dropdown.Item href="#">Staff Portal</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Container>
-
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        User Type
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="#">Admin Portal</Dropdown.Item>
-                        <Dropdown.Item href="#">Staff Portal</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
             </Navbar>
         </>
     )
