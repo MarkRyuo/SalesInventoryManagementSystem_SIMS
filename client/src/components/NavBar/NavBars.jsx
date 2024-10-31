@@ -3,7 +3,7 @@ import { Container, Nav, Navbar, Dropdown } from "react-bootstrap"
 function NavBars() {
     return (
         <>
-            <Navbar bg="dark" data-bs-theme="light">
+            <Navbar bg="light" data-bs-theme="light">
                 <Container>
                     <Navbar.Brand href="#home">SIMS</Navbar.Brand>
                     <Nav className="me-auto">
