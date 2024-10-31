@@ -15,13 +15,13 @@ function NavBars() {
 
                 <Dropdown>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Dropdown Button
+                        User Type
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#">Action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                        <Dropdown.Item href="#"></Dropdown.Item>
+                        <Dropdown.Item href="#">Another action</Dropdown.Item>
+                        <Dropdown.Item href="#">Something else</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </Navbar>
