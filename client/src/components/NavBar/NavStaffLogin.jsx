@@ -17,18 +17,6 @@ function NavStaffLogin() {
                             </Col>
                         </Row>
 
-                        <Dropdown>
-                            <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-3">
-                                Option
-                            </Dropdown.Toggle>
-
-                            {/* Dropdown function */}
-                            <Dropdown.Menu style={{ width: 100 }}>
-                                <Dropdown.Item as={Link} to='DeveloperPage' >Developer</Dropdown.Item>
-                                <Dropdown.Item as={Link} to='/AboutPage' >About</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-
                     </Container>
                 </Navbar>
             </Container>
