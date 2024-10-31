@@ -21,7 +21,6 @@ function NavBars() {
                     <Dropdown.Menu>
                         <Dropdown.Item href="#">Admin Portal</Dropdown.Item>
                         <Dropdown.Item href="#">Staff Portal</Dropdown.Item>
-                        <Dropdown.Item href="#">Something else</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </Navbar>
