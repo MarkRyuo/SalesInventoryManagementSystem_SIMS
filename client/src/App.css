@@ -6,6 +6,13 @@
     font-family: "Poppins", sans-serif; /** Default Font*/
 }
 
+:root {
+    --textColor : #130e01 ;
+    --backgroudColor: #fafafa ;
+    --primaryColor: #06f977 ;
+}
+
+
 
 .Nav-brand {
     font-family: "Poppins", sans-serif;
