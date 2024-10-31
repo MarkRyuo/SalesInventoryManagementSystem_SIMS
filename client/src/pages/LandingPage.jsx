@@ -3,7 +3,7 @@ import NavBars from "../components/NavBar/NavBars"
 
 function LandingPage() {
     return (
-        <Container fluid>
+        <Container fluid className="m-0 p-0">
             <NavBars />
         </Container>
     )   
