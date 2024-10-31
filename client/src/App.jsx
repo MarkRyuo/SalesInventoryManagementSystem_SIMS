@@ -3,6 +3,7 @@ import './App.css' ;
 
 // * Imported Pages
 import Login from '../src/pages/LoginPage' ;
+import LandingPage from './pages/LandingPage';
 
 
 
@@ -10,7 +11,7 @@ function App() {
 
   return (
     <>
-      <Login />
+      <LandingPage />
     </>
   )
 }
