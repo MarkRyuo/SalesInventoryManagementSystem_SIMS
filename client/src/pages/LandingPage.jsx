@@ -1,8 +1,10 @@
 import { Container, Nav, Navbar } from "react-bootstrap"
+import NavBars from "../components/NavBar/NavBars"
 
 function LandingPage() {
     return (
         <Container fluid>
+            <NavBars />
             <Navbar bg="dark" data-bs-theme="dark">
                 <Container>
                     <Navbar.Brand href="#home">SIMS</Navbar.Brand>
