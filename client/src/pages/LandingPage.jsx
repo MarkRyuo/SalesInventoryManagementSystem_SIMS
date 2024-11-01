@@ -9,7 +9,7 @@ function LandingPage() {
                 <main>
                     <div style={{display: "flex"}}> {/* Main Component */}
                         <div className=""> {/* Child */}
-
+                            <p>REYES ELECTRONICS</p>
                         </div>
                         <div className="">
 
