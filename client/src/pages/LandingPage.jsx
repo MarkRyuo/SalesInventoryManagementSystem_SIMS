@@ -11,8 +11,8 @@ function LandingPage() {
                         <div className="">
 
                         </div>
-                        <div>
-                            
+                        <div className="">
+
                         </div>
                     </div>
                 </main>
