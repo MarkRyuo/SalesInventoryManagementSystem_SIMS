@@ -14,7 +14,6 @@ function NavBars() {
                             <NavDropdown title="User Type" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Admin Portal</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Staff Portal</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Staff Portal</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action/3.4">
                                     Separated link
