@@ -5,10 +5,10 @@ function LandingPage() {
     return (
         <Container fluid className="m-0 p-0">
             <NavBars />
-            <Container fluid='lg'>
-                <div style={{border: '1px solid'}}>
+            <Container fluid style={{ border: '1px solid', height: '90vh' }}>
+                <main>
 
-                </div>
+                </main>
             </Container>
         </Container>
     )   
