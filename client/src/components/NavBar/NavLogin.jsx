@@ -1,5 +1,5 @@
 import { BsBox } from "react-icons/bs";
-import { Row, Col, Container, Navbar, Dropdown } from 'react-bootstrap';
+import { Row, Col, Container, Navbar} from 'react-bootstrap';
 import Navbars from './Navbar.module.css';
 import { Link } from 'react-router-dom';
 
@@ -11,24 +11,11 @@ export const NavLogin = () => {
             <Navbar>
                 <Container>
                     <Row>
-                        <Col> <BsBox size={40} className="d-none d-md-block"/> </Col>
+                        <Col> <Link to={"/"} style={{ color: "rgb(19, 14, 1)" }}><BsBox size={40} className="d-none d-md-block" /></Link> </Col>
                         <Col className="pt-1 m-0 p-0">
-                            <Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand>
+                            <Link to={"/"} style={{ color: "rgb(19, 14, 1)", textDecoration: "none" }}><Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand></Link>
                         </Col>
                     </Row>
-
-                    <Dropdown>
-                        <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-5">
-                            Option
-                        </Dropdown.Toggle>
-
-                        {/* Dropdown function */}
-                        <Dropdown.Menu className="p-1">
-                            <Dropdown.Item as={Link} to='/SLogin' >Staff Portal</Dropdown.Item> {/* Staff Account*/}
-                            <Dropdown.Item as={Link} to='DeveloperPage' >Developer</Dropdown.Item>
-                            <Dropdown.Item as={Link} to='/AboutPage' >About</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
 
                 </Container>
             </Navbar>

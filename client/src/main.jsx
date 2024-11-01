@@ -29,11 +29,16 @@ import PosScanner from './components/StaffPortal/ScanAssets/PosScanner.jsx';
 import ReceiptMode from './components/StaffPortal/ScanAssets/ReceiptMode.jsx';
 import ScanAssetsMode from './components/StaffPortal/ScanAssets/ScanAssetsMode.jsx';
 import PosSuccess from './components/StaffPortal/ScanAssets/PosSuccess.jsx';
+import LoginPage from './pages/LoginPage.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />, //* Root This is Login in DashBoard
+  },
+  {
+    path: "LoginPage",
+    element: <LoginPage /> , //* Root This is Login in DashBoard
   },
   {
     path: "DashboardPage",
