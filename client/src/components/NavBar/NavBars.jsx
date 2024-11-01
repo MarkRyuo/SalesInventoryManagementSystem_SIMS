@@ -2,7 +2,6 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
 
 function NavBars() {
     return (
-        <>
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
                     <Navbar.Brand href="#home">REYES ELECTRONICS</Navbar.Brand>
