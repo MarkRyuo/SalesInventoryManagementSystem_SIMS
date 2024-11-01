@@ -7,7 +7,7 @@ function LandingPage() {
             <NavBars />
             <Container fluid style={{ border: '1px solid', height: '90vh'}}>
                 <main>
-
+                    <div></div>
                 </main>
             </Container>
         </Container>
