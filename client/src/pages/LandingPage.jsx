@@ -8,7 +8,7 @@ function LandingPage() {
             <Container fluid style={{ border: '1px solid', height: '90vh'}}>
                 <main>
                     <div style={{display: "flex"}}> {/* Main Component */}
-                        <div className="">
+                        <div className=""> {/* Children */}
 
                         </div>
                         <div className="">
