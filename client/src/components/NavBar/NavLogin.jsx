@@ -11,9 +11,9 @@ export const NavLogin = () => {
             <Navbar>
                 <Container>
                     <Row>
-                        <Col> <Link to={"/"}><BsBox size={40} className="d-none d-md-block" /></Link> </Col>
+                        <Col> <Link to={"/"} style={{ color: "rgb(19, 14, 1)" }}><BsBox size={40} className="d-none d-md-block" /></Link> </Col>
                         <Col className="pt-1 m-0 p-0">
-                            <Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand>
+                            <Link to={"/"} style={{ color: "rgb(19, 14, 1)", textDecoration: "none" }}><Navbar.Brand className="Nav-brand">SIMS</Navbar.Brand></Link>
                         </Col>
                     </Row>
 
