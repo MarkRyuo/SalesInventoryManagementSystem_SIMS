@@ -13,7 +13,7 @@ function LandingPage() {
                             <p className="fs-5">lorem</p>
                         </div>
                         <div className="">
-
+                            <img />
                         </div>
                     </div>
                 </main>
