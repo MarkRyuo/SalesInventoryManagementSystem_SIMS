@@ -8,8 +8,8 @@ function NavBars() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#link">About us</Nav.Link>
+                            <Nav.Link href="#">Home</Nav.Link>
+                            <Nav.Link href="#">About us</Nav.Link>
                             <NavDropdown title="User Type" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="LoginPage">Admin Portal</NavDropdown.Item>
                                 <NavDropdown.Item href="SLogin">Staff Portal</NavDropdown.Item>
