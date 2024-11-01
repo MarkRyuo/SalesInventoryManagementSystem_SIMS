@@ -22,7 +22,6 @@ function NavBars() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </>
     )
 }
 
