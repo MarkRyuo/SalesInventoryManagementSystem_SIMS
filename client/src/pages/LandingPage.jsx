@@ -6,7 +6,7 @@ function LandingPage() {
         <Container fluid className="m-0 p-0">
             <NavBars />
             <Container fluid='lg'>
-
+                <div></div>
             </Container>
         </Container>
     )   
