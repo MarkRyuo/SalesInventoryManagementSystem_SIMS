@@ -15,7 +15,7 @@ function NavBars() {
                                 <NavDropdown.Item href="LoginPage">Admin Portal</NavDropdown.Item>
                                 <NavDropdown.Item href="SLogin">Staff Portal</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">
+                                <NavDropdown.Item href="">
                                     Developer
                                 </NavDropdown.Item>
                             </NavDropdown>
