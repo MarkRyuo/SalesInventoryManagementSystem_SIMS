@@ -17,19 +17,6 @@ export const NavLogin = () => {
                         </Col>
                     </Row>
 
-                    <Dropdown>
-                        <Dropdown.Toggle variant="light" id="dropdown-split-basic" className="me-5">
-                            User Type
-                        </Dropdown.Toggle>
-
-                        {/* Dropdown function */}
-                        <Dropdown.Menu className="p-1">
-                            <Dropdown.Item as={Link} to='/SLogin' >Staff Portal</Dropdown.Item> {/* Staff Account*/}
-                            <Dropdown.Item as={Link} to='DeveloperPage' >Developer</Dropdown.Item>
-                            <Dropdown.Item as={Link} to='/AboutPage' >About</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-
                 </Container>
             </Navbar>
         </Container>
