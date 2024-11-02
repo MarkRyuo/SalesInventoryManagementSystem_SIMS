@@ -2,5 +2,10 @@
 
 .heroSection {
     display: flex;
+    div {
+        p {
+            color: red;
+        }
+    }
     
 }

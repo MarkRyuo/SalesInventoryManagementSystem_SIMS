@@ -1,3 +1,6 @@
 .heroSection {
   display: flex;
+}
+.heroSection div p {
+  color: red;
 }/*# sourceMappingURL=LandingPage.module.css.map */
