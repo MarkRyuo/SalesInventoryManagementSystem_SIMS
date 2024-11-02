@@ -150,6 +150,10 @@
     ```bash
     npm install @zxing/library
     ```
+6. **Install SASS** 
+    ```bash
+    npm install sass
+    ```
 
 ### How to Run the Project
 
