@@ -1,5 +1,4 @@
 import { Card } from "react-bootstrap"
-import { useState } from "react"
 
 function LandingPageCard({cards}) {
 
