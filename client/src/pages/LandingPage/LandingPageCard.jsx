@@ -14,7 +14,7 @@ function LandingPageCard() {
                 <Card key={cards.cardId} style={{ width: '18rem' }}>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
+                        <Card.Title>{cards.cardTitle}</Card.Title>
                         <Card.Text>{cards.cardText}</Card.Text>
                         <Button variant="primary">Go somewhere</Button>
                     </Card.Body>
