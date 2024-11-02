@@ -1,11 +1,7 @@
-import { Card, Button } from "react-bootstrap"
+import { Card } from "react-bootstrap"
 import { useState } from "react"
 
-function LandingPageCard() {
-
-    const [card] = useState([
-        {icon: '', cardTitle: '', cardText: '', cardId: 1 }
-    ])
+function LandingPageCard({cards}) {
 
 
     return (

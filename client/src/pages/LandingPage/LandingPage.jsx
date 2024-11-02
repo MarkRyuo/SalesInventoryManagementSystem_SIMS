@@ -2,8 +2,14 @@ import { Container, Button} from "react-bootstrap"
 import NavBars from "../../components/NavBar/NavBars"
 import LandingPagecss from './LandingPage.module.scss'
 import { CiGlobe } from "react-icons/ci";
+import { useState } from "react";
 
 function LandingPage() {
+
+    const [card] = useState([
+        { icon: '', cardTitle: '', cardText: '', cardId: 1 }
+    ])
+
     return (
         <Container fluid className="m-0 p-0">
             <NavBars />
