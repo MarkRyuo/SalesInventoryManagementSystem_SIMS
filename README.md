@@ -149,6 +149,10 @@
     ```bash
     npm install @zxing/library
     ```
+6. **Install zxing scanner** 
+    ```bash
+    npm install sass
+    ```
 
 ### How to Run the Project
 
