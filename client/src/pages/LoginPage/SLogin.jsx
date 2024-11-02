@@ -20,7 +20,6 @@ export const SLogin = () => {
                     <Col lg={12}> <p className='my-3'>Sales Inventory Management System</p></Col>
                     <Col lg={12}> <SLoginCard /> </Col>
                 </Row>
-
             </Container>
 
         </>
