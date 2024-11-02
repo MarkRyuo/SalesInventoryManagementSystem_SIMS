@@ -13,7 +13,7 @@ function LandingPage() {
         { 
             icon: <MdOutlineInventory size={50}/>, 
             cardTitle: 'Inventory Tracking', 
-            cardText: 'Text', 
+            cardText: 'Keep real-time tabs on stock levels and prevent shortages.', 
             cardId: 1 
         }
     ])
@@ -36,25 +36,25 @@ function LandingPage() {
                         </div>
                     </div>
 
-                    <div className={LandingPagecss.featureContainer}>
+                    <Container className={LandingPagecss.featureContainer}>
                         <Row className={LandingPagecss.rowFeature}>
-                            <Col lg={4}>
+                            <Col lg={3}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                             </Col>
 
-                            <Col lg={4}>
+                            <Col lg={3}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                             </Col>
 
-                            <Col lg={4}>
+                            <Col lg={3}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                             </Col>
 
-                            <Col lg={4}>
+                            <Col lg={3}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                             </Col>
                         </Row>
-                    </div>
+                    </Container>
 
                 </main>
             </Container>
