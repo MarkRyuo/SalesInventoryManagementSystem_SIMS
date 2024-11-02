@@ -9,7 +9,7 @@ export const SLogin = () => {
 
 
     return (
-        <>
+        <section>
             <Container fluid className='mb-5 p-0'> <NavStaffLogin /> </Container> {/** 100% width */}
 
             <Container fluid className={LoginStyle.containerSpace}></Container> {/* Space */}
@@ -22,7 +22,7 @@ export const SLogin = () => {
                 </Row>
             </Container>
 
-        </>
+        </section>
     )
 }
 

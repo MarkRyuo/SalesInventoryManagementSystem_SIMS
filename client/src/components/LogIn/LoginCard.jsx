@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Alert, FloatingLabel, Button, Form, Spinner } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import LoginUser from '../../services/LoginUser'; // Import the LoginUser function
-import LoginCardcss from './SCSS/LoginCard.module.scss'
+// import LoginCardcss from './SCSS/LoginCard.module.scss'
 
 export const LoginCard = () => {
     const navigate = useNavigate();
@@ -86,14 +86,13 @@ export const LoginCard = () => {
             )}
 
             {/* Username */}
-            <FloatingLabel controlId="floatingInput" label="Username" className="mb-4">
+            <FloatingLabel controlId="floatingInput" label="Username" className="mb-4" >
                 <Form.Control
                     type="text"
                     placeholder='Username'
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     disabled={loading} // Disable input while loading
-                    className={LoginCardcss.userName}
                 />
             </FloatingLabel>
 
