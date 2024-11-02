@@ -3,7 +3,7 @@ import './App.scss' ;
 
 // * Imported Pages
 // import Login from '../src/pages/LoginPage' ;
-import LandingPage from './pages/LandingPage';
+import LandingPage from './pages/LandingPage/LandingPage';
 
 
 
