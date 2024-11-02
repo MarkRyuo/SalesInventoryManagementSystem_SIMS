@@ -4,7 +4,7 @@ import { useState } from "react"
 function LandingPageCard() {
 
     const [card] = useState([
-        {icon: '', cardTitle: '', cardText: '', cardButton: '', cardId: 1 }
+        {icon: '', cardTitle: '', cardText: '', cardId: 1 }
     ])
 
 
