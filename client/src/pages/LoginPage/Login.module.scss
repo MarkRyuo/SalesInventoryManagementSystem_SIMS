@@ -1,0 +1,43 @@
+
+:root {
+    --btnGoogle: #2f9c4b ;
+}
+
+
+.containerSpace {
+    width: 100%;
+    height: 95px;
+}
+
+section {
+    height: 100vh;
+    background: linear-gradient(to top, #dfe9f3 0%, white 100%);
+}
+
+
+.containerRow {
+    width: 100%;
+    max-width: 450px;
+    min-width: 350px;
+
+    .col2 {
+        p {
+            font-size: 1.6rem;
+        }
+
+        @media (max-width: 650px) {
+            p {
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+}
+
+.btnLogin {
+    width: 70%;
+}
+
+
+// * SLogin 
+

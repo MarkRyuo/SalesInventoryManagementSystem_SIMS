@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import './index.css'
+import './index.scss'
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 //? Pages Import
 import DashboardPage from '../src/pages/DashboardPage' ;
@@ -10,7 +10,7 @@ import ReportPage from './pages/ReportPage.jsx' ;
 import StaffAccount from './pages/StaffAccount.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import MyProfile from './pages/MyProfile.jsx';
-import SLogin from './pages/StaffPages/SLogin.jsx';
+import SLogin from './pages/LoginPage/SLogin.jsx' ;
 import SDashboard from './pages/StaffPages/SDashboard.jsx';
 import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
 import AddNewAssets from './pages/StaffPages/AddNewAssets.jsx';
@@ -29,7 +29,7 @@ import PosScanner from './components/StaffPortal/ScanAssets/PosScanner.jsx';
 import ReceiptMode from './components/StaffPortal/ScanAssets/ReceiptMode.jsx';
 import ScanAssetsMode from './components/StaffPortal/ScanAssets/ScanAssetsMode.jsx';
 import PosSuccess from './components/StaffPortal/ScanAssets/PosSuccess.jsx';
-import LoginPage from './pages/LoginPage.jsx'
+import LoginPage from './pages/LoginPage/LoginPage.jsx'
 
 const router = createBrowserRouter([
   {

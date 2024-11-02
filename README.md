@@ -9,6 +9,10 @@
 
 ## Changelog
 
+### v7.1 (Latest)
+- Update UI
+- Add Sass(scss)
+
 ### v6.3.2-Beta 
 - POS Backend 
 
@@ -145,6 +149,11 @@
     ```bash
     npm install @zxing/library
     ```
+7. **Install Sass(scss)** 
+    ```bash
+    npm add -D sass-embedded
+    ```
+
 
 ### How to Run the Project
 
