@@ -14,7 +14,7 @@ function LandingPage() {
                             <p className="fs-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                         </div>
                         <div className={LandingPagecss.heroImage}>
-                            <img src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" /> 
+                            <img className="d-none d-md-block" src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" /> 
                         </div>
                     </div>
                 </main>

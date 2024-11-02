@@ -6,21 +6,26 @@
     justify-content: center;
     gap: 30px;
     margin-top: 30px;
+    height: auto;
 
     div.heroText {
         border: 1px solid;
         padding: 20px;
         width: 500px;
+        height: auto;
         align-content: center ;
         p:first-child {
             font-size: 2rem;
         }
+        @media (min-width: 500px){
+            width: 100%;
+        }
     }
     div.heroImage {
         width: 500px;
-        border: 1px solid red;
         img {
             width: 100%;
         }
     }
 }
+
