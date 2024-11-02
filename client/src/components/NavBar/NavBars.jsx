@@ -2,7 +2,7 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
 
 function NavBars() {
     return (
-        <Navbar expand="lg" className="bg-body-tertiary" style={{ height: 'auto', padding: 16, position: "sticky", top: 0, boxShadow: '2px 2px 4px rgb(168, 200, 255, 20%)'}}>
+        <Navbar expand="lg" className="bg-body-tertiary" style={{ height: 'auto', padding: 16, position: "sticky", top: 0, boxShadow: '2px 2px 4px rgb(168, 200, 255, 20%)', zIndex: 1000}}>
                 <Container>
                     <Navbar.Brand href="#home">REYES ELECTRONICS</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
