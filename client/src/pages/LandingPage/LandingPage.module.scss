@@ -3,8 +3,9 @@
 .heroSection {
     display: flex;
     div {
-        .heroTitle {
+        p:first-child {
             color: red;
+            font-size: 2rem;
         }
     }
     

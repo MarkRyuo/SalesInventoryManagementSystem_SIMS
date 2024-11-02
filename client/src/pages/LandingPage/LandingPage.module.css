@@ -1,6 +1,7 @@
 .heroSection {
   display: flex;
 }
-.heroSection div .heroTitle {
+.heroSection div p:first-child {
   color: red;
+  font-size: 2rem;
 }/*# sourceMappingURL=LandingPage.module.css.map */

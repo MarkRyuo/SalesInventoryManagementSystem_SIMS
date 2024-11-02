@@ -10,7 +10,7 @@ function LandingPage() {
                 <main>
                     <div className={LandingPagecss.heroSection}> {/* Main Component */}
                         <div className=""> {/* Child */}
-                            <p className="fs-4">REYES ELECTRONICS</p>
+                            <p>REYES ELECTRONICS</p>
                             <p className="fs-5">lorem</p>
                         </div>
                         <div className="">
