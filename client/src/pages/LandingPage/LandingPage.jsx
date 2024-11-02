@@ -41,6 +41,18 @@ function LandingPage() {
                             <Col lg={4}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                             </Col>
+
+                            <Col lg={4}>
+                                <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
+                            </Col>
+
+                            <Col lg={4}>
+                                <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
+                            </Col>
+
+                            <Col lg={4}>
+                                <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
+                            </Col>
                         </Row>
                     </div>
 
