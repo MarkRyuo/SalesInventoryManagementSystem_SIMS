@@ -46,7 +46,7 @@ function LandingPage() {
                             <div className={LandingPagecss.heroText}> {/* Child */}
                                 <p>Power Your Life with <span>REYES ELECTRONICS</span></p>
                                 <p className="fs-5">Elevate Your Experience with Top-Tier Electronic Products.</p>
-                                <Button variant="outline-primary" size='lg'><span><CiGlobe /></span> Explore</Button>                         
+                                <Button variant="outline-primary" size='lg' href="#features"><span><CiGlobe /></span> Explore</Button>                         
                             </div>
                             <div className={LandingPagecss.heroImage}>
                                 <img src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" />
@@ -55,7 +55,7 @@ function LandingPage() {
                     </div>
 
                     <div className={LandingPagecss.featureContainer}>
-                        <h1 className="text-center mb-5">Features</h1>
+                        <h1 className="text-center mb-5" id="features">Features</h1>
                         <Row className={LandingPagecss.rowFeature}>
                             <Col lg={3}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
