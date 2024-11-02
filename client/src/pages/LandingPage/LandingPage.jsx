@@ -21,7 +21,19 @@ function LandingPage() {
             cardTitle: 'Sales Analytics',
             cardText: 'Gain insights into top-performing products and trends.',
             cardId: 2
-        }
+        },
+        {
+            icon: <MdOutlineInventory size={50} />,
+            cardTitle: 'POS Integration',
+            cardText: 'Easily integrate with your POS for seamless sales tracking.',
+            cardId: 3
+        },
+        {
+            icon: <MdOutlineInventory size={50} />,
+            cardTitle: 'Low Stock Alerts',
+            cardText: 'Get instant alerts when stock levels drop below your set threshold.',
+            cardId: 4
+        },
     ])
 
     return (
@@ -53,11 +65,11 @@ function LandingPage() {
                             </Col>
 
                             <Col lg={3}>
-                                <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
+                                <LandingPageCard card={card.filter(cards => cards.cardId === 3)} />
                             </Col>
 
                             <Col lg={3}>
-                                <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
+                                <LandingPageCard card={card.filter(cards => cards.cardId === 4)} />
                             </Col>
                         </Row>
                     </div>
