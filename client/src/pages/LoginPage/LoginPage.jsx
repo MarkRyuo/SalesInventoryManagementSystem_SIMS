@@ -8,7 +8,7 @@ export const LoginPage = () => {
 
 
     return (
-        <>
+        <section>
             <Container fluid className='mb-5 p-0'> <NavLogin/> </Container> {/** 100% width */}
 
             <Container fluid className={LoginStyle.containerSpace}></Container> {/* Space */}
@@ -27,7 +27,7 @@ export const LoginPage = () => {
                 </Row>
             </Container>
 
-        </>
+        </section>
     )
 }
 
