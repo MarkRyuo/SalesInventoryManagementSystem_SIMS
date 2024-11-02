@@ -152,7 +152,7 @@
     ```
 6. **Install SASS** 
     ```bash
-    npm install sass
+    npm i sass
     ```
 
 ### How to Run the Project
