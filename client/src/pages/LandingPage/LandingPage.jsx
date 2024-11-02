@@ -9,7 +9,7 @@ function LandingPage() {
             <Container fluid style={{ border: '1px solid', height: '90vh'}}>
                 <main>
                     <div className={LandingPagecss.heroSection}> {/* Main Component */}
-                        <div className=""> {/* Child */}
+                        <div className={LandingPagecss.heroText}> {/* Child */}
                             <p className="fs-4">REYES ELECTRONICS</p>
                             <p className="fs-5">lorem</p>
                         </div>
