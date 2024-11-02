@@ -1,0 +1,20 @@
+.heroSection {
+    display: flex;
+
+    .heroText {
+        p:first-child {
+            color: red;
+            font-size: 2rem;
+        }
+    }
+
+    .heroImage {
+        width: 300px;
+
+        /* Fix img */
+        img {
+            width: 100%;
+        }
+    }
+
+}
