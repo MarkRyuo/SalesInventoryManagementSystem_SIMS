@@ -2,7 +2,6 @@ import { Card } from "react-bootstrap"
 
 function LandingPageCard({cards}) {
 
-
     return (
         <>
             {card.map((cards) => (
