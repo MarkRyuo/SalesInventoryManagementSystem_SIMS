@@ -12,6 +12,7 @@ export const LoginPage = () => {
             <Container fluid className='mb-5 p-0'> <NavLogin/> </Container> {/** 100% width */}
 
             <Container fluid className={LoginStyle.containerSpace}></Container> {/* Space */}
+            
             <Container fluid='lg' className='d-flex justify-content-center text-center'>
                 <Row className={LoginStyle.containerRow}> {/* fix sm-screen 412 px */}
                     <Col lg={12}> 
