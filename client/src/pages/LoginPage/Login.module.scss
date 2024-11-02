@@ -15,9 +15,14 @@
     max-width: 450px;
     min-width: 350px;
 
-    div.col2 {
+    .col2 {
         p {
             font-size: 1.5rem;
+        }
+        @media (max-width: 500px) {
+            .col2{
+
+            }
         }
     }
 
