@@ -9,7 +9,7 @@
 .heroSection {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 50px;
     height: 50vh;
     box-sizing: border-box;
     padding-top: 8vh;
@@ -70,5 +70,9 @@
         // border: 1px solid;
         width: 100%;
         height: auto ;
+
+        @media (max-width: 1000px) {
+            gap: 10px;
+        }
     }
 }
