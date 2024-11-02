@@ -4,10 +4,12 @@ import LandingPagecss from './LandingPage.module.scss'
 import { CiGlobe } from "react-icons/ci";
 import { useState } from "react";
 
+import { MdOutlineInventory } from "react-icons/md";
+
 function LandingPage() {
 
     const [card] = useState([
-        { icon: '', cardTitle: '', cardText: '', cardId: 1 }
+        { icon: <MdOutlineInventory />, cardTitle: 'Inventory Tracking', cardText: 'Text', cardId: 1 }
     ])
 
     return (
