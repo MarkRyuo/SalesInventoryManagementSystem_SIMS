@@ -55,6 +55,7 @@ function LandingPage() {
                     </div>
 
                     <div className={LandingPagecss.featureContainer}>
+                        <h1 className="text-center mb-5">Features</h1>
                         <Row className={LandingPagecss.rowFeature}>
                             <Col lg={3}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
@@ -64,7 +65,7 @@ function LandingPage() {
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 2)} />
                             </Col>
 
-                            <Col lg={3}>
+                            <Col lg={3} >
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 3)} />
                             </Col>
 
