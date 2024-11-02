@@ -1,6 +1,7 @@
-import { Container} from "react-bootstrap"
+import { Container, Button} from "react-bootstrap"
 import NavBars from "../../components/NavBar/NavBars"
 import LandingPagecss from './LandingPage.module.scss'
+import { CiGlobe } from "react-icons/ci";
 
 function LandingPage() {
     return (
@@ -13,6 +14,7 @@ function LandingPage() {
                             <div className={LandingPagecss.heroText}> {/* Child */}
                                 <p>Power Your Life with <span>REYES ELECTRONICS</span></p>
                                 <p className="fs-5">Elevate Your Experience with Top-Tier Electronics.</p>
+                                <Button variant="outline-primary" size='lg'><span><CiGlobe /></span> Explore</Button>                         
                             </div>
                             <div className={LandingPagecss.heroImage}>
                                 <img src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" />
