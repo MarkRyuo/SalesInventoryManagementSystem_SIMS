@@ -1,5 +1,5 @@
 import { Container} from "react-bootstrap"
-import NavBars from "../components/NavBar/NavBars"
+import NavBars from "../../components/NavBar/NavBars"
 
 function LandingPage() {
     return (
