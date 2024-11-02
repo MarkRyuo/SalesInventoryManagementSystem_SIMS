@@ -9,6 +9,8 @@
 
 ## Changelog
 
+### v7.0 (Latest)
+
 ### v6.3.2-Beta 
 - POS Backend 
 
