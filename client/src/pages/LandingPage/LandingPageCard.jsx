@@ -16,7 +16,6 @@ function LandingPageCard() {
                     <Card.Body>
                         <Card.Title>{cards.cardTitle}</Card.Title>
                         <Card.Text>{cards.cardText}</Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
                     </Card.Body>
                 </Card> 
             ))}
