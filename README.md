@@ -9,6 +9,11 @@
 
 ## Changelog
 
+### v6.3.5-beta (latest)
+- Update UI
+- Add SASS(scss)
+
+
 ### v6.3.2-Beta 
 - POS Backend 
 
