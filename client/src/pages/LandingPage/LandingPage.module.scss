@@ -56,3 +56,14 @@
 
 
 //! End of Hero Section 
+
+
+.featureContainer {
+    width: 100vw;
+    height: 50vh;
+    border: 1px solid;
+
+    .rowFeature {
+        border: 1px solid;
+    }
+}

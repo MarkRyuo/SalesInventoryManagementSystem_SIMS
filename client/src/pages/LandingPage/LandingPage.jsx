@@ -31,8 +31,8 @@ function LandingPage() {
                         </div>
                     </div>
 
-                    <div className="">
-                        <Row>
+                    <div className={LandingPage.featureContainer}>
+                        <Row className={LandingPage.rowFeature}>
                             <Col>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                             </Col>
