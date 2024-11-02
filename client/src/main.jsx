@@ -10,7 +10,7 @@ import ReportPage from './pages/ReportPage.jsx' ;
 import StaffAccount from './pages/StaffAccount.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import MyProfile from './pages/MyProfile.jsx';
-import SLogin from './pages/StaffPages/SLogin.jsx';
+import SLogin from './pages/StaffPages/StaffLoginPage/SLogin.jsx';
 import SDashboard from './pages/StaffPages/SDashboard.jsx';
 import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
 import AddNewAssets from './pages/StaffPages/AddNewAssets.jsx';
