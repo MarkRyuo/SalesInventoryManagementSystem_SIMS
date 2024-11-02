@@ -19,7 +19,7 @@ export const LoginPage = () => {
                         <RiBox3Fill size={80} /> 
                     </Col>
                     <Col lg={12} className={LoginStyle.col2}> 
-                        <p className='mb-3'>Sales Inventory Management System</p> \
+                        <p className='mb-3'>Sales Inventory Management System</p> 
                     </Col>
                     <Col lg={12}>
                         <LoginCard /> 
