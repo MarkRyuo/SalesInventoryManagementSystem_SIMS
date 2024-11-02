@@ -1,7 +1,7 @@
 import { Row, Col, Container } from 'react-bootstrap';
 import { RiBox3Fill } from "react-icons/ri";
 // import { FcGoogle } from "react-icons/fc";
-import LoginStyle from ''
+import LoginStyle from './Login.module.scss'
 import SLoginCard from '../../components/LogIn/SLoginCard';
 import NavStaffLogin from '../../components/NavBar/NavStaffLogin';
 
