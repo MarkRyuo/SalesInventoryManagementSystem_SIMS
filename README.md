@@ -149,7 +149,7 @@
     ```bash
     npm install @zxing/library
     ```
-6. **Install zxing scanner** 
+6. **Install SASS** 
     ```bash
     npm install sass
     ```
