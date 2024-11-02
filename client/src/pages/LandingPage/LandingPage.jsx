@@ -15,6 +15,12 @@ function LandingPage() {
             cardTitle: 'Inventory Tracking', 
             cardText: 'Keep real-time tabs on stock levels and prevent shortages.', 
             cardId: 1 
+        },
+        {
+            icon: <MdOutlineInventory size={50} />,
+            cardTitle: 'Sales Analytics',
+            cardText: 'Gain insights into top-performing products and trends.',
+            cardId: 2
         }
     ])
 
@@ -43,7 +49,7 @@ function LandingPage() {
                             </Col>
 
                             <Col lg={3}>
-                                <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
+                                <LandingPageCard card={card.filter(cards => cards.cardId === 2)} />
                             </Col>
 
                             <Col lg={3}>

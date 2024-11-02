@@ -6,13 +6,13 @@ function LandingPageCard({card}) {
     return (
         <>
             {card.map((cards) => (
-                <Card key={cards.cardId} style={{ width: '100%', height: '100%', padding: 30}}>
+                <div key={cards.cardId} style={{ width: '100%', height: '100%', padding: 50, background: 'rgb(6, 249, 119, 15%)', borderRadius: 15}}>
                     <spam className='text-center'>{cards.icon}</spam>
                     <Card.Body>
                         <Card.Title>{cards.cardTitle}</Card.Title>
                         <Card.Text>{cards.cardText}</Card.Text>
                     </Card.Body>
-                </Card> 
+                </div> 
             ))}
         </>
     )
