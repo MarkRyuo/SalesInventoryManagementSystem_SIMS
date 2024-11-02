@@ -40,7 +40,7 @@ function LandingPage() {
         <Container fluid className="m-0 p-0">
             <NavBars />
             <Container fluid className="m-0 p-0">
-                <main>
+                <main className={LandingPagecss.main}>
                     <div className={LandingPagecss.heroContainer}>
                         <div className={LandingPagecss.heroSection}> {/* Main Component */}
                             <div className={LandingPagecss.heroText}> {/* Child */}
