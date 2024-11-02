@@ -149,6 +149,10 @@
     ```bash
     npm install @zxing/library
     ```
+6. **Install Scss** 
+    ```bash
+    npm install @zxing/library
+    ```
 
 ### How to Run the Project
 
