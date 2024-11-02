@@ -17,6 +17,11 @@ function LandingPage() {
                             <img src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" /> 
                         </div>
                     </div>
+
+                    <div>
+                        
+                    </div>
+
                 </main>
             </Container>
         </Container>
