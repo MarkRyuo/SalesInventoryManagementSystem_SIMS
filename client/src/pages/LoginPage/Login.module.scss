@@ -9,10 +9,18 @@
     height: 95px;
 }
 
+
 .containerRow {
     width: 100%;
     max-width: 450px;
     min-width: 350px;
+
+    .col2 {
+        p {
+            font-size: 2rem;
+        }
+    }
+
 }
 
 .btnLogin {

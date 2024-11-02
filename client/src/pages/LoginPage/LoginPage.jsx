@@ -12,14 +12,14 @@ export const LoginPage = () => {
             <Container fluid className='mb-5 p-0'> <NavLogin/> </Container> {/** 100% width */}
 
             <Container fluid className={LoginStyle.containerSpace}></Container> {/* Space */}
-            
+
             <Container fluid='lg' className='d-flex justify-content-center text-center'>
                 <Row className={LoginStyle.containerRow}> {/* fix sm-screen 412 px */}
                     <Col lg={12}> 
                         <RiBox3Fill size={80} /> 
                     </Col>
-                    <Col lg={12}> 
-                        <p className='lead fs-5 mb-3'>Sales Inventory Management System</p> \
+                    <Col lg={12} className={LoginStyle.col2}> 
+                        <p className='mb-3'>Sales Inventory Management System</p> \
                     </Col>
                     <Col lg={12}>
                         <LoginCard /> 
