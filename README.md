@@ -11,6 +11,7 @@
 
 ### v6.3.3-Beta (Latest)
 - Update UI
+- SCSS
 
 ### v6.3.2-Beta 
 - POS Backend 
