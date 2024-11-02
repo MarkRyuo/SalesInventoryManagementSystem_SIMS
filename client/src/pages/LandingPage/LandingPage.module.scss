@@ -14,11 +14,11 @@
         width: 500px;
         height: auto;
         align-content: center ;
-        font-family: "Poppins", sans-serif;
-        font-weight: 600;
-        
+
         p:first-child {
-            font-size: 2rem;
+            font-size: 2.5rem;
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
         }
         p span:first-child {
             color: rgb(6, 249, 119, 100%);
@@ -26,7 +26,7 @@
         @media (max-width: 500px){
             width: 100%;
             p:first-child {
-                font-size: 1.7rem;
+                font-size: 2rem;
             }
         }
     }
