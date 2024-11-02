@@ -34,7 +34,7 @@ function LandingPage() {
                     <div className="">
                         <Row>
                             <Col>
-                                <LandingPageCard {card.filter(cards => cards.cardId === 1)} />
+                                <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                             </Col>
                         </Row>
                     </div>
