@@ -1,4 +1,4 @@
-import { Container, Button} from "react-bootstrap"
+import { Container, Button, Row, Col} from "react-bootstrap"
 import NavBars from "../../components/NavBar/NavBars"
 import LandingPagecss from './LandingPage.module.scss'
 import { CiGlobe } from "react-icons/ci";
@@ -29,9 +29,11 @@ function LandingPage() {
                     </div>
 
                     <div className="">
-                        <div>
-                            
-                        </div>
+                        <Row>
+                            <Col>
+                                
+                            </Col>
+                        </Row>
                     </div>
 
                 </main>
