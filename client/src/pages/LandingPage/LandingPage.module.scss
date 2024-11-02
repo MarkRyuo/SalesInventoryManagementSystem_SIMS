@@ -2,5 +2,10 @@
 
 
 .heroSection {
-    
+    display: flex;
+    .heroText {
+        p:first-child {
+            color: red;
+        }
+    }
 }

@@ -1,5 +1,5 @@
 import { Container} from "react-bootstrap"
-import NavBars from "../components/NavBar/NavBars"
+import NavBars from "../../components/NavBar/NavBars"
 import LandingPagecss from './LandingPage.module.scss'
 
 function LandingPage() {
@@ -14,7 +14,7 @@ function LandingPage() {
                             <p className="fs-5">lorem</p>
                         </div>
                         <div className="">
-                            <img href='' /> 
+                            <img src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" /> 
                         </div>
                     </div>
                 </main>
