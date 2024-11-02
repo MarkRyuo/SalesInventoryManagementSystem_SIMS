@@ -4,4 +4,10 @@
 .heroSection .heroText p:first-child {
   color: red;
   font-size: 2rem;
+}
+.heroSection .heroImage {
+  width: 300px; /* Fix im */
+}
+.heroSection .heroImage img {
+  width: 100%;
 }/*# sourceMappingURL=LandingPage.module.css.map */
