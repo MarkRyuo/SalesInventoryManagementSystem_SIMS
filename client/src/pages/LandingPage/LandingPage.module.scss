@@ -3,14 +3,20 @@
 
 .heroSection {
     display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+
     div.heroText {
+        border: 1px solid;
         p:first-child {
             color: red;
             font-size: 2rem;
         }
     }
-    div.heroText {
-        width: 400px;
+    div.heroImage {
+        width: 500px;
+        border: 1px solid red;
         img {
             width: 100%;
         }
