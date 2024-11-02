@@ -1,6 +1,6 @@
 import { Row, Col, Container } from 'react-bootstrap';
-import { NavLogin } from '../components/NavBar/NavLogin';
-import { LoginCard } from '../components/LogIn/LoginCard';
+import { NavLogin } from '../../components/NavBar/NavLogin';
+import { LoginCard } from '../../components/LogIn/LoginCard';
 import { RiBox3Fill } from "react-icons/ri";
 import LoginStyle from './Css/Login.module.css' ;
 
