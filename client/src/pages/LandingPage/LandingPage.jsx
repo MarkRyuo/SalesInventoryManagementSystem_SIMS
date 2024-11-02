@@ -13,7 +13,7 @@ function LandingPage() {
                         <div className={LandingPagecss.heroSection}> {/* Main Component */}
                             <div className={LandingPagecss.heroText}> {/* Child */}
                                 <p>Power Your Life with <span>REYES ELECTRONICS</span></p>
-                                <p className="fs-5">Elevate Your Experience with Top-Tier Electronics.</p>
+                                <p className="fs-5">Elevate Your Experience with Top-Tier Electronic Products.</p>
                                 <Button variant="outline-primary" size='lg'><span><CiGlobe /></span> Explore</Button>                         
                             </div>
                             <div className={LandingPagecss.heroImage}>
@@ -23,7 +23,7 @@ function LandingPage() {
                     </div>
 
                     <div className="">
-
+                        
                     </div>
 
                 </main>
