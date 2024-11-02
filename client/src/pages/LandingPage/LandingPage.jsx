@@ -10,7 +10,12 @@ import { MdOutlineInventory } from "react-icons/md";
 function LandingPage() {
 
     const [card] = useState([
-        { icon: <MdOutlineInventory size={50}/>, cardTitle: 'Inventory Tracking', cardText: 'Text', cardId: 1 }
+        { 
+            icon: <MdOutlineInventory size={50}/>, 
+            cardTitle: 'Inventory Tracking', 
+            cardText: 'Text', 
+            cardId: 1 
+        }
     ])
 
     return (
