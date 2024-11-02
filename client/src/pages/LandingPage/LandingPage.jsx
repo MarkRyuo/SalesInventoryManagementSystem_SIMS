@@ -6,15 +6,15 @@ function LandingPage() {
     return (
         <Container fluid className="m-0 p-0">
             <NavBars />
-            <Container fluid style={{ border: '1px solid', height: '90vh'}}>
+            <Container fluid style={{height: '90vh'}}>
                 <main>
                     <div className={LandingPagecss.heroSection}> {/* Main Component */}
                         <div className={LandingPagecss.heroText}> {/* Child */}
-                            <p>REYES ELECTRONICS</p>
+                            <p>REYES <span>ELECTRONICS</span></p>
                             <p className="fs-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                         </div>
                         <div className={LandingPagecss.heroImage}>
-                            <img className="d-none d-md-block" src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" /> 
+                            <img src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" /> 
                         </div>
                     </div>
                 </main>

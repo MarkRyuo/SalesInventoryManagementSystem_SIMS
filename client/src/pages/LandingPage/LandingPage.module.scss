@@ -5,11 +5,11 @@
     display: flex;
     justify-content: center;
     gap: 30px;
-    margin-top: 30px;
-    height: auto;
+    margin-top: 80px;
+    height: 50vh;
 
     div.heroText {
-        border: 1px solid;
+        // border: 1px solid;
         padding: 20px;
         width: 500px;
         height: auto;
@@ -19,6 +19,9 @@
         }
         @media (max-width: 500px){
             width: 100%;
+            p:first-child {
+                font-size: 1.7rem;
+            }
         }
     }
     div.heroImage {
@@ -27,8 +30,8 @@
             width: 100%;
         }
         
-        @media (max-width: 500px) {
-            width: 100%;
+        @media (max-width: 700px) {
+            display: none;
         }
     }
 }
