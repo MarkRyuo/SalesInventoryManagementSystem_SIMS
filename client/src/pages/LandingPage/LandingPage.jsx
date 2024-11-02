@@ -1,5 +1,6 @@
 import { Container, Button, Row, Col} from "react-bootstrap"
 import NavBars from "../../components/NavBar/NavBars"
+import LandingPageCard from './LandingPageCard'
 import LandingPagecss from './LandingPage.module.scss'
 import { CiGlobe } from "react-icons/ci";
 import { useState } from "react";
@@ -33,7 +34,7 @@ function LandingPage() {
                     <div className="">
                         <Row>
                             <Col>
-                                {card.filter(cards => cards.cardId === 1)}
+                                <LandingPageCard {card.filter(cards => cards.cardId === 1)} />
                             </Col>
                         </Row>
                     </div>
