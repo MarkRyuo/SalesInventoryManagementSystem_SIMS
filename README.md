@@ -149,6 +149,12 @@
     ```bash
     npm install @zxing/library
     ```
+7. **Install Sass(scss)** 
+    ```bash
+    npm install @zxing/library
+    ```
+
+    npm add -D sass-embedded
 
 ### How to Run the Project
 
