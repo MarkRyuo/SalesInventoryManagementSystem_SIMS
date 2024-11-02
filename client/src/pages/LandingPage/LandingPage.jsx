@@ -10,16 +10,16 @@ function LandingPage() {
                 <main>
                     <div className={LandingPagecss.heroSection}> {/* Main Component */}
                         <div className={LandingPagecss.heroText}> {/* Child */}
-                            <p>REYES <span>ELECTRONICS</span></p>
-                            <p className="fs-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                            <p>Power Your Life with <span>REYES ELECTRONICS</span></p>
+                            <p className="fs-5">Elevate Your Experience with Top-Tier Electronics</p>
                         </div>
                         <div className={LandingPagecss.heroImage}>
                             <img src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" /> 
                         </div>
                     </div>
 
-                    <div>
-                        
+                    <div className="">
+
                     </div>
 
                 </main>
