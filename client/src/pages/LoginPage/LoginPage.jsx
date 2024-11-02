@@ -21,9 +21,9 @@ export const LoginPage = () => {
                         <p className='lead fs-5 mb-3'>Sales Inventory Management System</p> \
                     </Col>
                     <Col lg={12}>
-                        <LoginCard /> </Col>
+                        <LoginCard /> 
+                    </Col>
                 </Row>
-
             </Container>
 
         </>
