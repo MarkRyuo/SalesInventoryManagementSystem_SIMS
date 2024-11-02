@@ -36,7 +36,7 @@ function LandingPage() {
                         </div>
                     </div>
 
-                    <Container className={LandingPagecss.featureContainer}>
+                    <div className={LandingPagecss.featureContainer}>
                         <Row className={LandingPagecss.rowFeature}>
                             <Col lg={3}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
@@ -54,7 +54,7 @@ function LandingPage() {
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                             </Col>
                         </Row>
-                    </Container>
+                    </div>
 
                 </main>
             </Container>

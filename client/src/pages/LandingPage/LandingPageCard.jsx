@@ -6,7 +6,7 @@ function LandingPageCard({card}) {
     return (
         <>
             {card.map((cards) => (
-                <Card key={cards.cardId} style={{ width: '100%'}}>
+                <Card key={cards.cardId} style={{ width: '100%', height: '100%', padding: 30}}>
                     <spam className='text-center'>{cards.icon}</spam>
                     <Card.Body>
                         <Card.Title>{cards.cardTitle}</Card.Title>
