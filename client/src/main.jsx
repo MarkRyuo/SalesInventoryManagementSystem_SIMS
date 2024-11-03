@@ -26,7 +26,6 @@ import ProfileMode from './components/Account/ProfileMode.jsx';
 import StaffAccountMode from './components/StaffPortal/StaffAccount/StaffAccountMode.jsx';
 import ProductSuccess from './components/StaffPortal/AddNewAssets/ProductSuccess.jsx';
 import PosScanner from './components/StaffPortal/ScanAssets/PosScanner.jsx';
-import ReceiptMode from './components/StaffPortal/ScanAssets/ReceiptMode.jsx';
 import ScanAssetsMode from './components/StaffPortal/ScanAssets/ScanAssetsMode.jsx';
 import PosSuccess from './components/StaffPortal/ScanAssets/PosSuccess.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx'
@@ -142,10 +141,6 @@ const router = createBrowserRouter([
   {
     path: "ScanAssetsMode",
     element: <ScanAssetsMode /> , //* POS: 2st, Current Order 
-  },
-  {
-    path: "ReceiptMode",
-    element: <ReceiptMode /> , //* POS: Product Receipt View 
   },
   {
     path: "PosSuccess",

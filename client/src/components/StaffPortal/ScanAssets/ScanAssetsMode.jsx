@@ -39,6 +39,7 @@ function Checkout() {
         alert('Order saved successfully!');
     };
 
+
     return (
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-light shadow-sm">
