@@ -34,7 +34,7 @@ function Checkout() {
         // Store the order in local storage (or you could use a database)
         const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
         orderHistory.push(orderDetails);
-        localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+        localStorage.setItem('TransactionHistory', JSON.stringify(orderHistory));
 
         alert('Order saved successfully!');
     };
