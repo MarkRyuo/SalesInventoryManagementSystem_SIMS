@@ -9,7 +9,10 @@
 
 ## Changelog
 
-### v7.1 (Latest)
+### v7.1.1-beta (Latest)
+- POS Update
+
+### v7.1
 - Update UI
 - Add Sass(scss)
 
