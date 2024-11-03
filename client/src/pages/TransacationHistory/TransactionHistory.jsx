@@ -116,7 +116,7 @@ function TransactionHistory() {
             </Container>
 
             {/* Modal for viewing order details */}
-            <Modal show={showModal} onHide={handleCloseModal}>
+            <Modal show={showModal} onHide={handleCloseModal}>  
                 <Modal.Header closeButton>
                     <Modal.Title>Order Details</Modal.Title>
                 </Modal.Header>
