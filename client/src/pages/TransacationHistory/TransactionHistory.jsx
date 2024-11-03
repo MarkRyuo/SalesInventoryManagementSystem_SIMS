@@ -1,14 +1,23 @@
 import { Container, Navbar, Row, Col, Table, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import jsPDF from 'jspdf';
+import { getDatabase, ref, onValue, remove } from 'firebase/database';
 
 function TransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
+    const db = getDatabase();
 
     useEffect(() => {
-        const storedHistory = JSON.parse(localStorage.getItem('TransactionHistory')) || [];
-        setOrderHistory(storedHistory);
-    }, []);
+        const historyRef = ref(db, 'TransactionHistory/');
+        onValue(historyRef, (snapshot) => {
+            const data = snapshot.val() || {};
+            const formattedHistory = Object.entries(data).map(([key, value]) => ({
+                ...value,
+                id: key
+            }));
+            setOrderHistory(formattedHistory);
+        });
+    }, [db]);
 
     const handleDownloadOrder = (order) => {
         const doc = new jsPDF();
@@ -46,10 +55,9 @@ function TransactionHistory() {
         doc.save('order.pdf');
     };
 
-    const handleDeleteOrder = (index) => {
-        const updatedHistory = orderHistory.filter((_, i) => i !== index);
-        setOrderHistory(updatedHistory);
-        localStorage.setItem('TransactionHistory', JSON.stringify(updatedHistory));
+    const handleDeleteOrder = (id) => {
+        const orderRef = ref(db, `TransactionHistory/${id}`);
+        remove(orderRef);
     };
 
     return (
@@ -73,13 +81,13 @@ function TransactionHistory() {
                             </thead>
                             <tbody>
                                 {orderHistory.length > 0 ? (
-                                    orderHistory.map((order, index) => (
-                                        <tr key={index}>
+                                    orderHistory.map((order) => (
+                                        <tr key={order.id}>
                                             <td>{order.date}</td>
-                                            <td>₱{order.total.toFixed(2)}</td> {/* Updated to peso sign */}
+                                            <td>₱{order.total.toFixed(2)}</td>
                                             <td>
                                                 <Button variant="primary" onClick={() => handleDownloadOrder(order)}>Download</Button>
-                                                <Button variant="danger" className="ms-2" onClick={() => handleDeleteOrder(index)}>Delete</Button>
+                                                <Button variant="danger" className="ms-2" onClick={() => handleDeleteOrder(order.id)}>Delete</Button>
                                             </td>
                                         </tr>
                                     ))
