@@ -10,21 +10,7 @@ function Checkout() {
     const [errorMessage, setErrorMessage] = useState("");
     const currentDate = new Date().toLocaleString(); // Get current date and time
 
-    const handleFinalizeCheckout = async () => {
-        const updatePromises = scannedItems.map(item => {
-            return updateProductQuantity(item.barcode, -item.quantity);
-        });
-
-        try {
-            await Promise.all(updatePromises); // Wait for all updates to complete
-            navigate('/PosSuccess'); // Navigate to a confirmation page
-        } catch (error) {
-            console.error("Error updating product quantities:", error);
-            setErrorMessage("Failed to finalize checkout. Please try again.");
-        }
-    };
-
-    const handleSaveOrder = () => {
+    const handleCheckout = async () => {
         const orderDetails = {
             date: currentDate,
             items: scannedItems,
@@ -36,9 +22,19 @@ function Checkout() {
         orderHistory.push(orderDetails);
         localStorage.setItem('TransactionHistory', JSON.stringify(orderHistory));
 
-        alert('Order saved successfully!');
-    };
+        const updatePromises = scannedItems.map(item => {
+            return updateProductQuantity(item.barcode, -item.quantity);
+        });
 
+        try {
+            await Promise.all(updatePromises); // Wait for all updates to complete
+            alert('Order saved successfully!'); // Alert after saving order
+            navigate('/PosSuccess'); // Navigate to a confirmation page
+        } catch (error) {
+            console.error("Error updating product quantities:", error);
+            setErrorMessage("Failed to finalize checkout. Please try again.");
+        }
+    };
 
     return (
         <Container fluid className="m-0 p-0">
@@ -90,8 +86,7 @@ function Checkout() {
                 {scannedItems.length > 0 && (
                     <Row className="mt-3">
                         <Col className="text-end">
-                            <Button variant="success" onClick={handleFinalizeCheckout}>Finalize Checkout</Button>
-                            <Button variant="secondary" className="ms-2" onClick={handleSaveOrder}>Save Order</Button>
+                            <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
                         </Col>
                     </Row>
                 )}
