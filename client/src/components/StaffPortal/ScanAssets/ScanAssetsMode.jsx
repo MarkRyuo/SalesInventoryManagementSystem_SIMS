@@ -39,10 +39,6 @@ function Checkout() {
         alert('Order saved successfully!');
     };
 
-    const handleViewTransactionHistory = () => {
-        navigate('/TransactionHistory'); // Adjust this path based on your routing setup
-    };
-
     return (
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-light shadow-sm">
