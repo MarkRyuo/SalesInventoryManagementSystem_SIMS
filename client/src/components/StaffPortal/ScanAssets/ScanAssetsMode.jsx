@@ -2,13 +2,14 @@ import { Container, Navbar, Row, Col, Button, Table, Alert } from "react-bootstr
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateProductQuantity } from '../../../services/ProductService';
 import { useState } from 'react';
+import { getDatabase, ref, set } from 'firebase/database';
 
 function Checkout() {
     const location = useLocation();
     const navigate = useNavigate();
     const scannedItems = location.state?.scannedItems || [];
     const [errorMessage, setErrorMessage] = useState("");
-    const currentDate = new Date().toLocaleString(); // Get current date and time
+    const currentDate = new Date().toLocaleString();
 
     const handleCheckout = async () => {
         const orderDetails = {
@@ -17,19 +18,19 @@ function Checkout() {
             total: scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
         };
 
-        // Store the order in local storage (or you could use a database)
-        const orderHistory = JSON.parse(localStorage.getItem('TransactionHistory')) || [];
-        orderHistory.push(orderDetails);
-        localStorage.setItem('TransactionHistory', JSON.stringify(orderHistory));
+        // Store the order in Firebase database
+        const db = getDatabase();
+        const newOrderRef = ref(db, 'TransactionHistory/' + Date.now());
+        await set(newOrderRef, orderDetails);
 
         const updatePromises = scannedItems.map(item => {
             return updateProductQuantity(item.barcode, -item.quantity);
         });
 
         try {
-            await Promise.all(updatePromises); // Wait for all updates to complete
-            alert('Order saved successfully!'); // Alert after saving order
-            navigate('/PosSuccess'); // Navigate to a confirmation page
+            await Promise.all(updatePromises);
+            alert('Order saved successfully!');
+            navigate('/PosSuccess');
         } catch (error) {
             console.error("Error updating product quantities:", error);
             setErrorMessage("Failed to finalize checkout. Please try again.");

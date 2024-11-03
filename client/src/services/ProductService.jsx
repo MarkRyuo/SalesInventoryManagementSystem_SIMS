@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove } from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
 
 // Function to add a new product
 export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, category, dateAdded }) => {
@@ -201,5 +201,33 @@ export const updatePreserveQuantityHistoryForExistingProducts = async () => {
         console.log('Successfully updated preserveQuantityHistory for all products.');
     } catch (error) {
         throw new Error(`Error updating preserveQuantityHistory: ${error.message}`);
+    }
+};
+
+// Function to save an order to Firebase
+export const saveOrderToFirebase = async (orderDetails) => {
+    const db = getDatabase();
+    const newOrderRef = ref(db, 'orders/' + Date.now()); // Using timestamp as a unique ID
+    try {
+        await set(newOrderRef, orderDetails);
+    } catch (error) {
+        throw new Error(`Error saving order: ${error.message}`);
+    }
+};
+
+// Function to fetch order history from Firebase
+export const fetchOrderHistoryFromFirebase = async () => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'orders');
+
+    try {
+        const snapshot = await get(ordersRef);
+        if (snapshot.exists()) {
+            return Object.values(snapshot.val()); // Assuming orders are stored as objects
+        } else {
+            return [];
+        }
+    } catch (error) {
+        throw new Error(`Error fetching order history: ${error.message}`);
     }
 };
