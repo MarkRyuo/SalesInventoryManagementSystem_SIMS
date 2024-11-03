@@ -5,6 +5,11 @@ import StaffNavBar from "../../components/StaffPortal/StaffNavbar/StaffNavBar";
 import { MdQrCodeScanner } from "react-icons/md";
 import { Link } from "react-router-dom";
 
+// Function to format prices in Philippine pesos
+const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(amount);
+};
+
 function AddNewAssets() {
     const [backBtn] = useState([
         {
@@ -13,6 +18,9 @@ function AddNewAssets() {
             id: 1
         }
     ]);
+
+    // Example product for demonstration (should be fetched from your product state)
+    const product = { price: 1000 }; // Example product
 
     return (
         <Container fluid className="p-0">
@@ -30,10 +38,11 @@ function AddNewAssets() {
                             marginBottom: 20
                         }}
                     >
-                        <p className="fs-4 m-0 fw-semibold" style={{ color: '#616161'}}>Scan QR Code & Barcode</p>
+                        <p className="fs-4 m-0 fw-semibold" style={{ color: '#616161' }}>Scan QR Code & Barcode</p>
                         <p className="mt-3" style={{ marginTop: 10, fontSize: 15 }}>
                             Scan new products to add them to the inventory. Click the Scan button below to start scanning using the QR/Barcode scanner.
                         </p>
+                        <p>Price: {formatCurrency(product.price)}</p> {/* Display price */}
                     </div>
                     <div
                         style={{
