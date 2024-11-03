@@ -17,15 +17,13 @@ function PosScanner() {
     const [isLoading, setIsLoading] = useState(false);
     const [cameraLoading, setCameraLoading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
-    const [scanning, setScanning] = useState(false);
     const videoRef = useRef(null);
-    const scannedRef = useRef(new Set());
+    const scanningInProgress = useRef(false); // Flag to manage scanning state
 
     const handleScan = useCallback(async (scannedText) => {
-        if (isLoading || scanning || scannedRef.current.has(scannedText)) return;
+        if (isLoading || scanningInProgress.current) return; // Prevent scanning if loading or already scanning
 
-        setScanning(true);
-        scannedRef.current.add(scannedText);
+        scanningInProgress.current = true; // Set scanning in progress
         setErrorMessages([]);
         setMessage("");
 
@@ -33,19 +31,22 @@ function PosScanner() {
             setIsLoading(true); // Start loading
             const product = await fetchProductByBarcode(scannedText);
             if (product) {
-                const existingIndex = scannedItems.findIndex(item => item.barcode === scannedText);
-                if (existingIndex !== -1) {
-                    setScannedItems(prevItems => {
+                // Find if the product already exists in the scanned items
+                setScannedItems(prevItems => {
+                    const existingIndex = prevItems.findIndex(item => item.barcode === scannedText);
+                    if (existingIndex !== -1) {
+                        // Product already scanned, increment quantity
                         const updatedItems = [...prevItems];
-                        updatedItems[existingIndex].quantity += 1;
-                        return updatedItems;
-                    });
-                } else {
-                    setScannedItems(prevItems => [
-                        ...prevItems,
-                        { ...product, quantity: 1 }
-                    ]);
-                }
+                        updatedItems[existingIndex].quantity += 1; // Increment quantity
+                        return updatedItems; // Return updated list
+                    } else {
+                        // New product scanned, add it to the list
+                        return [
+                            ...prevItems,
+                            { ...product, quantity: 1 } // New product with quantity 1
+                        ];
+                    }
+                });
 
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
@@ -57,13 +58,13 @@ function PosScanner() {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
             setIsLoading(false); // Reset loading state
+
             // Allow scanning again after a delay
             setTimeout(() => {
-                scannedRef.current.delete(scannedText); // Remove scanned text from Set
-                setScanning(false); // Reset scanning state
+                scanningInProgress.current = false; // Reset scanning state
             }, 2000); // 2 seconds delay
         }
-    }, [scannedItems, isLoading, scanning]);
+    }, [isLoading]);
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
@@ -71,10 +72,10 @@ function PosScanner() {
             if (videoInputDevices.length > 0) {
                 const selectedDeviceId = videoInputDevices[0].deviceId;
                 codeReader.decodeFromVideoDevice(selectedDeviceId, videoRef.current, (result, error) => {
-                    if (result && !scanning) {
+                    if (result) {
                         handleScan(result.getText());
                     }
-                    if (error && !isLoading && !scanning) {
+                    if (error && !isLoading) {
                         console.error("Scanning error: ", error);
                     }
                 });
@@ -89,7 +90,7 @@ function PosScanner() {
         return () => {
             codeReader.reset();
         };
-    }, [handleScan, isLoading, scanning]);
+    }, [handleScan, isLoading]);
 
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });
