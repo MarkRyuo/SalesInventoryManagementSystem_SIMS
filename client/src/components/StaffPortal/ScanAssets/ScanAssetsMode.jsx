@@ -39,6 +39,10 @@ function Checkout() {
         alert('Order saved successfully!');
     };
 
+    const handleViewTransactionHistory = () => {
+        navigate('/TransactionHistory'); // Adjust this path based on your routing setup
+    };
+
     return (
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-light shadow-sm">
@@ -91,6 +95,7 @@ function Checkout() {
                         <Col className="text-end">
                             <Button variant="success" onClick={handleFinalizeCheckout}>Finalize Checkout</Button>
                             <Button variant="secondary" className="ms-2" onClick={handleSaveOrder}>Save Order</Button>
+                            <Button variant="info" className="ms-2" onClick={handleViewTransactionHistory}>View Transaction History</Button>
                         </Col>
                     </Row>
                 )}
