@@ -12,11 +12,37 @@ function TransactionHistory() {
 
     const handleDownloadOrder = (order) => {
         const doc = new jsPDF();
-        doc.text(`Order Date: ${order.date}`, 10, 10);
-        doc.text(`Total Amount: $${order.total.toFixed(2)}`, 10, 20);
+
+        // Title
+        doc.setFontSize(20);
+        doc.text('Receipt', 105, 10, { align: 'center' });
+
+        // Order details
+        doc.setFontSize(12);
+        doc.text(`Order Date: ${order.date}`, 10, 30);
+        doc.text(`Total Amount: $${order.total.toFixed(2)}`, 10, 40);
+
+        // Adding a line
+        doc.line(10, 45, 200, 45); // horizontal line
+
+        // Table header
+        doc.setFontSize(14);
+        doc.text('Product Name', 10, 50);
+        doc.text('Quantity', 90, 50);
+        doc.text('Total', 160, 50);
+
+        // Adding another line for header separation
+        doc.line(10, 52, 200, 52); // horizontal line
+
+        // Adding items to the receipt
         order.items.forEach((item, index) => {
-            doc.text(`${item.productName} - Quantity: ${item.quantity} - Total: $${(item.price * item.quantity).toFixed(2)}`, 10, 30 + (index * 10));
+            const yPosition = 60 + (index * 10);
+            doc.text(item.productName, 10, yPosition);
+            doc.text(item.quantity.toString(), 90, yPosition);
+            doc.text(`$${(item.price * item.quantity).toFixed(2)}`, 160, yPosition);
         });
+
+        // Save the PDF
         doc.save('order.pdf');
     };
 
