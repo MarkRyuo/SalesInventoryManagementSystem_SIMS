@@ -40,7 +40,7 @@ export const NavDashboard = () => {
                 window.alert("You have successfully logged out.");
 
                 // Redirect after showing the alert
-                window.location.href = "/"; //? Redirect the user to the login page or home page
+                window.location.href = "/LoginPage"; //? Redirect the user to the login page or home page
             }, 2000); //? Simulate a 2-second loading time (can adjust as needed)
         }
     };
