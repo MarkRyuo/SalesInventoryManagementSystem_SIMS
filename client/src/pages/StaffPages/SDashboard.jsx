@@ -19,9 +19,9 @@ function SDashboard() {
     const [productsToday, setProductsToday] = useState([]);
 
     const [buttons] = useState([
-        { btnName: "AddNewAssets", btnIcon: <TiDocumentAdd size={60} />, path: "/AddNewAssets", id: 1 },
-        { btnName: "ScanAssets", btnIcon: <BiScan size={60} />, path: "/ScanAsset", id: 2 },
-        { btnName: "SearchAssets", btnIcon: <MdOutlineManageSearch size={60} />, path: "/SearchAssets", id: 3 },
+        { btnName: "Add New Product", btnIcon: <TiDocumentAdd size={60} />, path: "/AddNewAssets", id: 1 },
+        { btnName: "Point of Sale", btnIcon: <BiScan size={60} />, path: "/ScanAsset", id: 2 },
+        { btnName: "Search Products", btnIcon: <MdOutlineManageSearch size={60} />, path: "/SearchAssets", id: 3 },
     ]);
 
     useEffect(() => {
