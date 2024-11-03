@@ -1,5 +1,5 @@
 import { Container, Button, Row, Col} from "react-bootstrap"
-import NavBars from "../../components/NavBar/NavBars"
+import NavBars from "./NavBars"
 import LandingPageCard from './LandingPageCard'
 import LandingPagecss from './LandingPage.module.scss'
 import { CiGlobe } from "react-icons/ci";
@@ -46,10 +46,10 @@ function LandingPage() {
                             <div className={LandingPagecss.heroText}> {/* Child */}
                                 <p>Power Your Life with <span>REYES ELECTRONICS</span></p>
                                 <p className="fs-5 mb-3">Elevate Your Experience with Top-Tier Electronic Products.</p>
-                                <Button variant="outline-primary" size='lg' href="#features"><span><CiGlobe /></span> Explore</Button>                         
+                                <Button variant='success' size='lg' href="#features" id="btn"><span><CiGlobe /></span> Explore</Button>                         
                             </div>
                             <div className={LandingPagecss.heroImage}>
-                                <img src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" />
+                                <img src="../../../public/E-commerce.png" />
                             </div>
                         </div>
                     </div>
