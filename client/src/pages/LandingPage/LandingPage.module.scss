@@ -49,7 +49,9 @@
         }
     }
     div.heroImage {
-        width: 500px;
+        box-sizing: border-box;
+        width: 750px;
+        // border: 1px solid;
         img {
             width: 100%;
             margin: 0px 20px;

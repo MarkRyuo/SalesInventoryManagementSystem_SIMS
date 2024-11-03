@@ -49,7 +49,7 @@ function LandingPage() {
                                 <Button variant="outline-primary" size='lg' href="#features"><span><CiGlobe /></span> Explore</Button>                         
                             </div>
                             <div className={LandingPagecss.heroImage}>
-                                <img src="https://i.pinimg.com/564x/65/fb/13/65fb134226967c5b155c5c0dad18f689.jpg" />
+                                <img src="../../../public/E-commerce.png" />
                             </div>
                         </div>
                     </div>
