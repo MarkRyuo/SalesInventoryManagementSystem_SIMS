@@ -20,7 +20,7 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
             deductedQuantityHistory: [], // Initialize deducted quantity history as an empty array
             preserveQuantityHistory: true, // Track preservation setting
             sku: sku,
-            price: price,
+            price: price, // Keep price as is for storage
             category: category,
             dateAdded: today, // Set date added (only date)
             lastUpdated: today, // Set last updated date (only date)
@@ -142,7 +142,12 @@ export const getAllProducts = async () => {
         if (!snapshot.exists()) {
             return [];
         }
-        return snapshot.val();
+        // Format prices with peso sign (₱) before returning
+        const products = snapshot.val();
+        for (const key in products) {
+            products[key].price = `₱${products[key].price.toFixed(2)}`;
+        }
+        return products;
     } catch (error) {
         throw new Error(`Error retrieving products: ${error.message}`);
     }

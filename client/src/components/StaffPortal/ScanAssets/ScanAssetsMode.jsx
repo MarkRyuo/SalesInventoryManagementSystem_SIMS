@@ -64,8 +64,8 @@ function Checkout() {
                                         <tr key={item.productId}>
                                             <td>{item.productName}</td>
                                             <td>{item.quantity}</td>
-                                            <td>${Number(item.price).toFixed(2)}</td>
-                                            <td>${(item.price * item.quantity).toFixed(2)}</td>
+                                            <td>₱{Number(item.price).toFixed(2)}</td>
+                                            <td>₱{(item.price * item.quantity).toFixed(2)}</td>
                                         </tr>
                                     ))
                                 ) : (
@@ -76,7 +76,7 @@ function Checkout() {
                                 {scannedItems.length > 0 && (
                                     <tr>
                                         <td colSpan="3" className="text-end"><strong>Grand Total:</strong></td>
-                                        <td>${(scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2)}</td>
+                                        <td>₱{(scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2)}</td>
                                     </tr>
                                 )}
                             </tbody>

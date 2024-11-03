@@ -20,7 +20,7 @@ function TransactionHistory() {
         // Order details
         doc.setFontSize(12);
         doc.text(`Order Date: ${order.date}`, 10, 30);
-        doc.text(`Total Amount: $${order.total.toFixed(2)}`, 10, 40);
+        doc.text(`Total Amount: ₱${order.total.toFixed(2)}`, 10, 40); // Updated to peso sign
 
         // Adding a line
         doc.line(10, 45, 200, 45); // horizontal line
@@ -39,7 +39,7 @@ function TransactionHistory() {
             const yPosition = 60 + (index * 10);
             doc.text(item.productName, 10, yPosition);
             doc.text(item.quantity.toString(), 90, yPosition);
-            doc.text(`$${(item.price * item.quantity).toFixed(2)}`, 160, yPosition);
+            doc.text(`₱${(item.price * item.quantity).toFixed(2)}`, 160, yPosition); // Updated to peso sign
         });
 
         // Save the PDF
@@ -76,7 +76,7 @@ function TransactionHistory() {
                                     orderHistory.map((order, index) => (
                                         <tr key={index}>
                                             <td>{order.date}</td>
-                                            <td>${order.total.toFixed(2)}</td>
+                                            <td>₱{order.total.toFixed(2)}</td> {/* Updated to peso sign */}
                                             <td>
                                                 <Button variant="primary" onClick={() => handleDownloadOrder(order)}>Download</Button>
                                                 <Button variant="danger" className="ms-2" onClick={() => handleDeleteOrder(index)}>Delete</Button>
