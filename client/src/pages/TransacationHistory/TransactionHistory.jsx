@@ -1,11 +1,9 @@
 import { Container, Navbar, Row, Col, Table, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import jsPDF from 'jspdf';
-import { useNavigate } from 'react-router-dom';
 
 function TransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const storedHistory = JSON.parse(localStorage.getItem('TransactionHistory')) || [];
@@ -48,10 +46,6 @@ function TransactionHistory() {
         doc.save('order.pdf');
     };
 
-    const handleEditOrder = (order) => {
-        navigate('/checkout', { state: { scannedItems: order.items } }); // Adjust path based on your routing setup
-    };
-
     return (
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-light shadow-sm">
@@ -79,7 +73,6 @@ function TransactionHistory() {
                                             <td>${order.total.toFixed(2)}</td>
                                             <td>
                                                 <Button variant="primary" onClick={() => handleDownloadOrder(order)}>Download</Button>
-                                                <Button variant="warning" className="ms-2" onClick={() => handleEditOrder(order)}>Edit</Button>
                                             </td>
                                         </tr>
                                     ))
