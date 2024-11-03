@@ -24,7 +24,7 @@ function NavbarStaffDashboard() {
     const [buttons] = useState([
         { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-6", path: "/SDashboard" },
         { icon: <AiOutlineProduct />, btnName: "Account", id: "b-7", path: "/StaffAccountMode" },
-        { icon: <TbReportAnalytics />, btnName: "Text3", id: "b-8", path: "/TransactionHistory" },
+        { icon: <TbReportAnalytics />, btnName: "TransactionHistory", id: "b-8", path: "/TransactionHistory" },
         { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/AccountPage" },
         { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" }
     ]);
@@ -71,6 +71,7 @@ function NavbarStaffDashboard() {
                         <div className={Navbars.buttonsList}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-8")} />
                             {/* Additional buttons can be added here if needed */}
                         </div>
                         <div style={{ height: "150px" }}>
