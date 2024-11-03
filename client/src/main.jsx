@@ -153,7 +153,7 @@ const router = createBrowserRouter([
   },
   {
     path: "TransactionHistory",
-    element: <TransactionHistory /> , //* POS: Product Success View 
+    element: <TransactionHistory /> , //* POS: Transaction History View 
   },
   
 
