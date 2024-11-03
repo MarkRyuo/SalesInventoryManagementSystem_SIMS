@@ -95,7 +95,6 @@ function Checkout() {
                         <Col className="text-end">
                             <Button variant="success" onClick={handleFinalizeCheckout}>Finalize Checkout</Button>
                             <Button variant="secondary" className="ms-2" onClick={handleSaveOrder}>Save Order</Button>
-                            <Button variant="info" className="ms-2" onClick={handleViewTransactionHistory}>View Transaction History</Button>
                         </Col>
                     </Row>
                 )}
