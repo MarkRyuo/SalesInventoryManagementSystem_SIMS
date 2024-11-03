@@ -10,6 +10,7 @@
 ## Changelog
 
 ### v7.1.2 (Latest)
+- Deployment 
 
 ### v7.1.1-beta
 - POS Update
