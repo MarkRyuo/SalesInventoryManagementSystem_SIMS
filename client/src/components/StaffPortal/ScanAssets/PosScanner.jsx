@@ -53,6 +53,13 @@ function PosScanner() {
                 setTimeout(() => {
                     setFadeOut(true);
                 }, 4000); // Show for 4 seconds
+            } else {
+                // If no product found, set an error message
+                setErrorMessages(prev => [...prev, `No product found for barcode: ${scannedText}`]);
+                setFadeOut(false);
+                setTimeout(() => {
+                    setFadeOut(true);
+                }, 4000); // Show for 4 seconds
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
