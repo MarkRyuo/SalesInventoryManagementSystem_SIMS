@@ -1,8 +1,6 @@
 import { getDatabase, ref, set, get, update, remove } from 'firebase/database';
 
-// Comment Only (This code is a module for managing products and categories in a Sales Inventory Management System using Firebase Realtime Database. It provides various functions to handle product data, including adding, updating, fetching, and deleting products, as well as managing categories. )
-
-//* Function to add a new product
+// Function to add a new product
 export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, category, dateAdded }) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
@@ -16,7 +14,7 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
             wattage: wattage,
             voltage: voltage,
             quantity: quantity, // Store current quantity
-            quantityHistory: [`${dateAdded.split('T')[0]}: ${quantity}`], // Store date and initial quantity as a single string
+            quantityHistory: [{ date: dateAdded.split('T')[0], quantity: quantity }], // Store initial quantity with date
             sku: sku,
             price: price,
             category: category,
@@ -28,7 +26,7 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
     }
 };
 
-// Function to update the product quantity (with fix applied)
+// Function to update the product quantity with history tracking
 export const updateProductQuantity = async (barcode, additionalQuantity) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
@@ -47,22 +45,12 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         const newQuantityHistory = [...(productData.quantityHistory || [])];
         const today = new Date().toISOString().split('T')[0];
 
-        // Check if today's entry exists in the history
-        const existingEntryIndex = newQuantityHistory.findIndex(entry => entry.startsWith(today));
-
-        if (existingEntryIndex > -1) {
-            // If today's entry exists, only update it with today's added quantity
-            const [, previousQuantity] = newQuantityHistory[existingEntryIndex].split(': '); // Destructuring only previousQuantity
-            const updatedHistoryQuantity = parseInt(previousQuantity) + additionalQuantity;
-            newQuantityHistory[existingEntryIndex] = `${today}: ${updatedHistoryQuantity}`;
-        } else {
-            // Otherwise, add a new entry with today's added quantity
-            newQuantityHistory.push(`${today}: ${additionalQuantity}`);
-        }
+        // Add a new entry for today's quantity change
+        newQuantityHistory.push({ date: today, quantity: additionalQuantity });
 
         await update(productRef, {
             quantity: updatedQuantity, // Update total quantity
-            quantityHistory: newQuantityHistory, // Update quantity history
+            quantityHistory: newQuantityHistory, // Update quantity history with separate date and quantity
             lastUpdated: today, // Update last updated date (only date)
         });
 
