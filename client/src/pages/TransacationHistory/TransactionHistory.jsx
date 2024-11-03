@@ -1,13 +1,15 @@
 import { Container, Navbar, Row, Col, Table, Button, Modal } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
+import QRious from 'qrious';
 
 function TransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const db = getDatabase();
+    const qrRef = useRef(null); // Ref for the QR code canvas
 
     useEffect(() => {
         const historyRef = ref(db, 'TransactionHistory/');
@@ -21,7 +23,16 @@ function TransactionHistory() {
         });
     }, [db]);
 
-    const handleDownloadOrder = (order) => {
+    useEffect(() => {
+        if (selectedOrder && qrRef.current) {
+            new QRious({
+                element: qrRef.current,
+                value: `http://localhost:5173/order/${selectedOrder.id}` // URL or value to encode
+            });
+        }
+    }, [selectedOrder]); // Run when selectedOrder changes
+
+    const handleDownloadOrder = async (order) => {
         const doc = new jsPDF();
 
         // Title
@@ -31,10 +42,10 @@ function TransactionHistory() {
         // Order details
         doc.setFontSize(12);
         doc.text(`Order Date: ${order.date}`, 10, 30);
-        doc.text(`Total Amount: ₱${order.total.toFixed(2)}`, 10, 40); // Updated to peso sign
+        doc.text(`Total Amount: ₱${order.total.toFixed(2)}`, 10, 40);
 
         // Adding a line
-        doc.line(10, 45, 200, 45); // horizontal line
+        doc.line(10, 45, 200, 45);
 
         // Table header
         doc.setFontSize(14);
@@ -43,15 +54,25 @@ function TransactionHistory() {
         doc.text('Total', 160, 50);
 
         // Adding another line for header separation
-        doc.line(10, 52, 200, 52); // horizontal line
+        doc.line(10, 52, 200, 52);
 
         // Adding items to the receipt
         order.items.forEach((item, index) => {
             const yPosition = 60 + (index * 10);
             doc.text(item.productName, 10, yPosition);
             doc.text(item.quantity.toString(), 90, yPosition);
-            doc.text(`₱${(item.price * item.quantity).toFixed(2)}`, 160, yPosition); // Updated to peso sign
+            doc.text(`₱${(item.price * item.quantity).toFixed(2)}`, 160, yPosition);
         });
+
+        // QR Code handling
+        const qrCanvas = qrRef.current;
+        if (qrCanvas) {
+            // Convert QR code canvas to data URL
+            const qrDataUrl = qrCanvas.toDataURL("image/png");
+
+            // Add QR code image to the PDF
+            doc.addImage(qrDataUrl, 'PNG', 10, 70 + (order.items.length * 10), 50, 50); // Adjust position and size as needed
+        }
 
         // Save the PDF
         doc.save('order.pdf');
@@ -116,7 +137,7 @@ function TransactionHistory() {
             </Container>
 
             {/* Modal for viewing order details */}
-            <Modal show={showModal} onHide={handleCloseModal}>  
+            <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Order Details</Modal.Title>
                 </Modal.Header>
@@ -133,6 +154,9 @@ function TransactionHistory() {
                                     </li>
                                 ))}
                             </ul>
+                            {/* QR Code for the selected order */}
+                            <h6>Download Receipt QR Code:</h6>
+                            <canvas ref={qrRef} />
                         </>
                     )}
                 </Modal.Body>
