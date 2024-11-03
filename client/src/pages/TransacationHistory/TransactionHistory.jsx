@@ -1,24 +1,30 @@
 import { Container, Navbar, Row, Col, Table, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import jsPDF from 'jspdf';
 
 function TransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
 
     useEffect(() => {
-        const storedHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+        const storedHistory = JSON.parse(localStorage.getItem('TransactionHistory')) || [];
         setOrderHistory(storedHistory);
     }, []);
 
     const handleDownloadOrder = (order) => {
-        // Implement PDF download functionality here
-        console.log("Download order:", order);
+        const doc = new jsPDF();
+        doc.text(`Order Date: ${order.date}`, 10, 10);
+        doc.text(`Total Amount: $${order.total.toFixed(2)}`, 10, 20);
+        order.items.forEach((item, index) => {
+            doc.text(`${item.productName} - Quantity: ${item.quantity} - Total: $${(item.price * item.quantity).toFixed(2)}`, 10, 30 + (index * 10));
+        });
+        doc.save('order.pdf');
     };
 
     return (
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-light shadow-sm">
                 <Container>
-                    <Navbar.Brand className="fs-4">Order History</Navbar.Brand>
+                    <Navbar.Brand className="fs-4">Transaction History</Navbar.Brand>
                 </Container>
             </Navbar>
             <Container fluid='lg' className="mt-3">
