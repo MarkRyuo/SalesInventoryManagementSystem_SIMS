@@ -92,12 +92,12 @@
 //? Navbar 
 
 
-.Navabar {
+.Navbar {
     height: auto;
     padding: 16px;
     position: sticky;
     top: 0;
     box-shadow: 2px 2px 4px rgb(168, 200, 255, 20%);
     z-index: 1000;
-    
+    background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(255, 255, 255) 90%);
 }
