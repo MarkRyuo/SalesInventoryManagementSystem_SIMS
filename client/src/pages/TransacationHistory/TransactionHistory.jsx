@@ -1,7 +1,7 @@
 import { Container, Navbar, Row, Col, Table, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import jsPDF from 'jspdf';
-import QRCode from 'qrcode.react'; // Install this
+import { QRCode } from 'qrcode.react'; // Corrected import
 
 function TransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
