@@ -1,4 +1,5 @@
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
+import LandingPagecss from './LandingPage.module.scss'
 
 function NavBars() {
     return (
