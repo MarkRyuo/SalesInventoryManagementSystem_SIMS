@@ -1,57 +1,93 @@
-import { Container, Navbar, Row, Col, Button } from "react-bootstrap";
+import { Container, Navbar, Row, Col, Button, Table, Alert } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateProductQuantity } from '../../../services/ProductService';
+import { useState } from 'react';
+import { getDatabase, ref, set } from 'firebase/database';
 
 function Checkout() {
     const location = useLocation();
     const navigate = useNavigate();
     const scannedItems = location.state?.scannedItems || [];
+    const [errorMessage, setErrorMessage] = useState("");
+    const currentDate = new Date().toLocaleString();
 
-    const handleFinalizeCheckout = async () => {
-        // Deduct quantities from the inventory
+    const handleCheckout = async () => {
+        const orderDetails = {
+            date: currentDate,
+            items: scannedItems,
+            total: scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
+        };
+
+        // Store the order in Firebase database
+        const db = getDatabase();
+        const newOrderRef = ref(db, 'TransactionHistory/' + Date.now());
+        await set(newOrderRef, orderDetails);
+
         const updatePromises = scannedItems.map(item => {
             return updateProductQuantity(item.barcode, -item.quantity);
         });
 
         try {
-            await Promise.all(updatePromises); // Wait for all updates to complete
-            // Optionally, you could navigate to a confirmation page or show a success message
-            navigate('/PosSuccess'); // Example: navigate to a confirmation page
+            await Promise.all(updatePromises);
+            alert('Order saved successfully!');
+            navigate('/PosSuccess');
         } catch (error) {
             console.error("Error updating product quantities:", error);
-            // Optionally, show an error message to the user
+            setErrorMessage("Failed to finalize checkout. Please try again.");
         }
     };
 
     return (
         <Container fluid className="m-0 p-0">
-            <Navbar className="bg-body-tertiary">
+            <Navbar className="bg-light shadow-sm">
                 <Container>
-                    <p className="fs-4 m-0">Checkout</p>
+                    <Navbar.Brand className="fs-4">Checkout</Navbar.Brand>
                 </Container>
             </Navbar>
-            <Container fluid='md' className="mt-3">
+            <Container fluid='lg' className="mt-3">
+                {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
                 <Row>
                     <Col>
                         <h4>Your Order</h4>
-                        {scannedItems.length > 0 ? (
-                            scannedItems.map(item => (
-                                <Row key={item.productId}>
-                                    <Col>{item.productName}</Col>
-                                    <Col>{item.quantity}</Col>
-                                    <Col>${Number(item.price).toFixed(2)}</Col>
-                                    <Col>${(item.price * item.quantity).toFixed(2)}</Col>
-                                </Row>
-                            ))
-                        ) : (
-                            <h4>No items in the cart</h4>
-                        )}
+                        <p>Date: {currentDate}</p>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {scannedItems.length > 0 ? (
+                                    scannedItems.map(item => (
+                                        <tr key={item.productId}>
+                                            <td>{item.productName}</td>
+                                            <td>{item.quantity}</td>
+                                            <td>₱{Number(item.price).toFixed(2)}</td>
+                                            <td>₱{(item.price * item.quantity).toFixed(2)}</td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="4" className="text-center">No items in the cart</td>
+                                    </tr>
+                                )}
+                                {scannedItems.length > 0 && (
+                                    <tr>
+                                        <td colSpan="3" className="text-end"><strong>Grand Total:</strong></td>
+                                        <td>₱{(scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2)}</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </Table>
                     </Col>
                 </Row>
                 {scannedItems.length > 0 && (
                     <Row className="mt-3">
                         <Col className="text-end">
-                            <Button variant="success" onClick={handleFinalizeCheckout}>Finalize Checkout</Button>
+                            <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
                         </Col>
                     </Row>
                 )}
