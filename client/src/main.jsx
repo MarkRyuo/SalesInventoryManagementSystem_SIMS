@@ -30,6 +30,7 @@ import ReceiptMode from './components/StaffPortal/ScanAssets/ReceiptMode.jsx';
 import ScanAssetsMode from './components/StaffPortal/ScanAssets/ScanAssetsMode.jsx';
 import PosSuccess from './components/StaffPortal/ScanAssets/PosSuccess.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx'
+import TransactionHistory from './pages/TransacationHistory/TransactionHistory.jsx';
 
 const router = createBrowserRouter([
   {
@@ -149,6 +150,10 @@ const router = createBrowserRouter([
   {
     path: "PosSuccess",
     element: <PosSuccess /> , //* POS: Product Success View 
+  },
+  {
+    path: "TransactionHistory",
+    element: <TransactionHistory /> , //* POS: Product Success View 
   },
   
 
