@@ -46,6 +46,12 @@ function TransactionHistory() {
         doc.save('order.pdf');
     };
 
+    const handleDeleteOrder = (index) => {
+        const updatedHistory = orderHistory.filter((_, i) => i !== index);
+        setOrderHistory(updatedHistory);
+        localStorage.setItem('TransactionHistory', JSON.stringify(updatedHistory));
+    };
+
     return (
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-light shadow-sm">
@@ -73,6 +79,7 @@ function TransactionHistory() {
                                             <td>${order.total.toFixed(2)}</td>
                                             <td>
                                                 <Button variant="primary" onClick={() => handleDownloadOrder(order)}>Download</Button>
+                                                <Button variant="danger" className="ms-2" onClick={() => handleDeleteOrder(index)}>Delete</Button>
                                             </td>
                                         </tr>
                                     ))
