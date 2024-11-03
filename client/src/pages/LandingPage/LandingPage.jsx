@@ -1,5 +1,5 @@
 import { Container, Button, Row, Col} from "react-bootstrap"
-import NavBars from "../../components/NavBar/NavBars"
+import NavBars from "./NavBars"
 import LandingPageCard from './LandingPageCard'
 import LandingPagecss from './LandingPage.module.scss'
 import { CiGlobe } from "react-icons/ci";
