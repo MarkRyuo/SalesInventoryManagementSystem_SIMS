@@ -1,6 +1,7 @@
 import { Container, Navbar, Row, Col, Table, Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import jsPDF from 'jspdf';
+import QRCode from 'qrcode.react'; // Install this
 
 function TransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
@@ -63,6 +64,7 @@ function TransactionHistory() {
                                     <th>Date</th>
                                     <th>Total Amount</th>
                                     <th>Actions</th>
+                                    <th>QR Code</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,11 +76,14 @@ function TransactionHistory() {
                                             <td>
                                                 <Button variant="primary" onClick={() => handleDownloadOrder(order)}>Download</Button>
                                             </td>
+                                            <td>
+                                                <QRCode value={JSON.stringify(order)} size={64} /> {/* Encode the order details as JSON */}
+                                            </td>
                                         </tr>
                                     ))
                                 ) : (
                                     <tr>
-                                        <td colSpan="3" className="text-center">No saved orders</td>
+                                        <td colSpan="4" className="text-center">No saved orders</td>
                                     </tr>
                                 )}
                             </tbody>
