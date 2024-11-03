@@ -8,6 +8,7 @@ function Checkout() {
     const navigate = useNavigate();
     const scannedItems = location.state?.scannedItems || [];
     const [errorMessage, setErrorMessage] = useState("");
+    const currentDate = new Date().toLocaleString(); // Get current date and time
 
     const handleFinalizeCheckout = async () => {
         // Deduct quantities from the inventory
@@ -36,34 +37,39 @@ function Checkout() {
                 <Row>
                     <Col>
                         <h4>Your Order</h4>
-                        {scannedItems.length > 0 ? (
-                            <Table striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>Product Name</th>
-                                        <th>Quantity</th>
-                                        <th>Unit Price</th>
-                                        <th>Total Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {scannedItems.map(item => (
+                        <p>Date: {currentDate}</p>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Total Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {scannedItems.length > 0 ? (
+                                    scannedItems.map(item => (
                                         <tr key={item.productId}>
                                             <td>{item.productName}</td>
                                             <td>{item.quantity}</td>
                                             <td>${Number(item.price).toFixed(2)}</td>
                                             <td>${(item.price * item.quantity).toFixed(2)}</td>
                                         </tr>
-                                    ))}
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="4" className="text-center">No items in the cart</td>
+                                    </tr>
+                                )}
+                                {scannedItems.length > 0 && (
                                     <tr>
                                         <td colSpan="3" className="text-end"><strong>Grand Total:</strong></td>
                                         <td>${(scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2)}</td>
                                     </tr>
-                                </tbody>
-                            </Table>
-                        ) : (
-                            <h4>No items in the cart</h4>
-                        )}
+                                )}
+                            </tbody>
+                        </Table>
                     </Col>
                 </Row>
                 {scannedItems.length > 0 && (
