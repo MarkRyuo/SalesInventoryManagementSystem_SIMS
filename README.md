@@ -9,7 +9,9 @@
 
 ## Changelog
 
-### v7.1.1-beta (Latest)
+### v7.1.2 (Latest)
+
+### v7.1.1-beta
 - POS Update
 
 ### v7.1
