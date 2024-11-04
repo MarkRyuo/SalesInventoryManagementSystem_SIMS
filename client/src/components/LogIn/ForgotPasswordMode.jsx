@@ -74,74 +74,76 @@ function ForgotPasswordMode() {
     }, [success]);
 
     return (
-        <Container fluid='lg' className={ResetModecss.containerMode}>
-            <div className={ResetModecss.containerContent}>
-                <div>
-                    <Button variant="link" onClick={() => navigate('/')} size='lg' className='p-0'>
-                        <FaArrowLeft size={25} /> 
-                    </Button>
-                </div>
-                <div>
-                    <span><GoShieldLock size={35} /></span>
-                    <p className="fs-4">Forgot Password</p>
-                </div>
-                <p>Forgot your password? Don’t worry! Just enter your username, and we’ll guide you through the recovery process.</p>
-                <div>
-                    {/* Display error message if verification fails */}
-                    {error && (
-                        <Alert
-                            variant="danger"
-                            show={showError}
-                            onClose={() => setShowError(false)}
-                            dismissible
-                            style={{
-                                opacity: showError ? 1 : 0,
-                                transition: 'opacity 0.5s ease-in',
-                                position: 'relative'
-                            }}
-                        >
-                            <Alert.Heading>Error!</Alert.Heading>
-                            <p>{error}</p>
-                        </Alert>
-                    )}
-
-                    {/* Display success message if verification succeeds */}
-                    {success && (
-                        <Alert
-                            variant="success"
-                            style={{
-                                opacity: success ? 1 : 0,
-                                transition: 'opacity 0.5s ease-in',
-                                position: 'relative'
-                            }}
-                        >
-                            <Alert.Heading>Success!</Alert.Heading>
-                            <p>{success}</p>
-                        </Alert>
-                    )}
-
-                    <FloatingLabel controlId="floatingUsername" label="Username" className="mb-3">
-                        <Form.Control
-                            type="text"
-                            placeholder="Username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </FloatingLabel>
-                    <div className="d-flex justify-content-center mb-3">
-                        <Button variant="primary" size='lg' onClick={handleVerification} disabled={loading}>
-                            {loading ? (
-                                <>
-                                    <Spinner animation="border" size="sm" role="status" aria-hidden="true" /> Verifying...
-                                </>
-                            ) : (
-                                'Verify Username'
-                            )}
+        <div className={ResetModecss.mainContainer}>
+            <Container fluid='lg' className={ResetModecss.containerMode}>
+                <div className={ResetModecss.containerContent}>
+                    <div>
+                        <Button variant="link" onClick={() => navigate('/')} size='lg' className='p-0'>
+                            <FaArrowLeft size={25} /> 
                         </Button>
                     </div>
+                    <div>
+                        <span><GoShieldLock size={35} /></span>
+                        <p className="fs-4">Forgot Password</p>
+                    </div>
+                    <p>Forgot your password? Don’t worry! Just enter your username, and we’ll guide you through the recovery process.</p>
+                    <div>
+                        {/* Display error message if verification fails */}
+                        {error && (
+                            <Alert
+                                variant="danger"
+                                show={showError}
+                                onClose={() => setShowError(false)}
+                                dismissible
+                                style={{
+                                    opacity: showError ? 1 : 0,
+                                    transition: 'opacity 0.5s ease-in',
+                                    position: 'relative'
+                                }}
+                            >
+                                <Alert.Heading>Error!</Alert.Heading>
+                                <p>{error}</p>
+                            </Alert>
+                        )}
+
+                        {/* Display success message if verification succeeds */}
+                        {success && (
+                            <Alert
+                                variant="success"
+                                style={{
+                                    opacity: success ? 1 : 0,
+                                    transition: 'opacity 0.5s ease-in',
+                                    position: 'relative'
+                                }}
+                            >
+                                <Alert.Heading>Success!</Alert.Heading>
+                                <p>{success}</p>
+                            </Alert>
+                        )}
+
+                        <FloatingLabel controlId="floatingUsername" label="Username" className="mb-3">
+                            <Form.Control
+                                type="text"
+                                placeholder="Username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                        </FloatingLabel>
+                        <div className="d-flex justify-content-center mb-3">
+                            <Button variant="primary" size='lg' onClick={handleVerification} disabled={loading}>
+                                {loading ? (
+                                    <>
+                                        <Spinner animation="border" size="sm" role="status" aria-hidden="true" /> Verifying...
+                                    </>
+                                ) : (
+                                    'Verify Username'
+                                )}
+                            </Button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </div>
     );
 }
 
