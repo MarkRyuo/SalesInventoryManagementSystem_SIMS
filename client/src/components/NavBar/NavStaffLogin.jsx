@@ -11,7 +11,7 @@ function NavStaffLogin() {
                 <Navbar>
                     <Container>
                         <Row>
-                            <Col className="p-0 d-block d-md-block"> 
+                            <Col className="p-0 d-none d-md-block"> 
                                 <Link to={"/"} style={{ color: "rgb(19, 14, 1)" }}>
                                     <BsBox size={40} />
                                 </Link> 
