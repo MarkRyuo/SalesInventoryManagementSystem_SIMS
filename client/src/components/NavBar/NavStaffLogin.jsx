@@ -1,6 +1,7 @@
 import { BsBox } from "react-icons/bs";
 import { Row, Col, Container, Navbar} from 'react-bootstrap';
 import Navbars from '../NavBar/Navbar.module.css';
+import { Link } from "react-router-dom";
 
 
 function NavStaffLogin() {
@@ -10,9 +11,9 @@ function NavStaffLogin() {
                 <Navbar>
                     <Container>
                         <Row>
-                            <Col> <BsBox size={40} /> </Col>
+                            <Col> <Link to={"/"}><BsBox size={40} /></Link> </Col>
                             <Col style={{ paddingTop: 4 }}>
-                                <Navbar.Brand className="">Staff Portal</Navbar.Brand>
+                                <Link to={"/"}><Navbar.Brand className="">Staff Portal</Navbar.Brand></Link>
                             </Col>
                         </Row>
                     </Container>
