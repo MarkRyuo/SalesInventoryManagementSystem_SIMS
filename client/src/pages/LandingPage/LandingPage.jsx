@@ -41,7 +41,7 @@ function LandingPage() {
             <NavBars />
             <Container fluid className="m-0 p-0">
                 <main className={LandingPagecss.main}>
-                    <div className={LandingPagecss.heroContainer}>
+                    <div className={LandingPagecss.heroContainer} id="home">
                         <div className={LandingPagecss.heroSection}> {/* Main Component */}
                             <div className={LandingPagecss.heroText}> {/* Child */}
                                 <p>Power Your Life with <span>REYES ELECTRONICS</span></p>

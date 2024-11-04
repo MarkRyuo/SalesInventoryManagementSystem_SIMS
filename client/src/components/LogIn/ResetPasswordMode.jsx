@@ -116,51 +116,53 @@ function ResetPasswordMode() {
     }
 
     return (
-        <Container fluid='lg' className={ResetModecss.containerMode}>
-            <div className={ResetModecss.containerContent}>
-                <div>
-                    <span><FaUnlock size={20} /></span>
-                    <p className="fs-4">Reset Password</p>
-                    <p>Please enter your new password below.</p>
-                </div>
-                <div>
-                    {show && (
-                        <Alert
-                            variant={error ? 'danger' : 'success'}
-                            onClose={() => setShow(false)}
-                            dismissible={!!error}
-                            style={{
-                                opacity: alertOpacity,
-                                transition: 'opacity 0.5s ease-in',
-                                position: 'relative'
-                            }}
-                        >
-                            <Alert.Heading>{error ? 'Error!' : 'Success!'}</Alert.Heading>
-                            <p>{error || success}</p>
-                            {!error && <hr />}
-                        </Alert>
-                    )}
+        <div className={ResetModecss.mainContainer}>
+            <Container fluid='lg' className={ResetModecss.containerMode}>
+                <div className={ResetModecss.containerContent}>
+                    <div>
+                        <span><FaUnlock size={20} /></span>
+                        <p className="fs-4">Reset Password</p>
+                        <p>Please enter your new password below.</p>
+                    </div>
+                    <div>
+                        {show && (
+                            <Alert
+                                variant={error ? 'danger' : 'success'}
+                                onClose={() => setShow(false)}
+                                dismissible={!!error}
+                                style={{
+                                    opacity: alertOpacity,
+                                    transition: 'opacity 0.5s ease-in',
+                                    position: 'relative'
+                                }}
+                            >
+                                <Alert.Heading>{error ? 'Error!' : 'Success!'}</Alert.Heading>
+                                <p>{error || success}</p>
+                                {!error && <hr />}
+                            </Alert>
+                        )}
 
-                    <FloatingLabel controlId="floatingNewPassword" label="New Password" className="mb-3">
-                        <Form.Control
-                            type="password"
-                            placeholder="New Password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                        />
-                    </FloatingLabel>
-                    <div className="mb-3">
-                        <h6>Password Requirements:</h6>
-                        {passwordRequirements()}
-                    </div>
-                    <div className="d-flex justify-content-center m">
-                        <Button variant="primary" onClick={handlePasswordReset} size='lg'>
-                            Reset Password
-                        </Button>
+                        <FloatingLabel controlId="floatingNewPassword" label="New Password" className="mb-3">
+                            <Form.Control
+                                type="password"
+                                placeholder="New Password"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                            />
+                        </FloatingLabel>
+                        <div className="mb-3">
+                            <h6>Password Requirements:</h6>
+                            {passwordRequirements()}
+                        </div>
+                        <div className="d-flex justify-content-center m">
+                            <Button variant="primary" onClick={handlePasswordReset} size='lg'>
+                                Reset Password
+                            </Button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </div>
     );
 }
 
