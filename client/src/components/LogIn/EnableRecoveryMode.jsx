@@ -94,70 +94,72 @@ function EnableRecoveryMode() {
     }, [success]);
 
     return (
-        <Container fluid='lg' className={ResetModecss.containerMode}>
-            <div className={ResetModecss.containerContent}>
-                <div>
-                    <span><FaLock size={30} /></span>
-                    <p className="fs-4">Enable Recovery Mode</p>
-                    <p>To continue the password recovery process, please answer the security questions below. Make sure to enter the answers you previously set up. You need to answer at least two questions correctly to proceed.</p>
-                </div>
-                <div>
-                    {/* Display error message if verification fails */}
-                    {error && (
-                        <Alert
-                            variant="danger"
-                            show={showError}
-                            onClose={() => setShowError(false)}
-                            dismissible
-                            style={{
-                                opacity: showError ? 1 : 0,
-                                transition: 'opacity 0.5s ease-in',
-                                position: 'relative'
-                            }}
-                        >
-                            <Alert.Heading>Error!</Alert.Heading>
-                            <p>{error}</p>
-                        </Alert>
-                    )}
+        <div className={ResetModecss.mainContainer}>
+            <Container fluid='lg' className={ResetModecss.containerMode}>
+                <div className={ResetModecss.containerContent}>
+                    <div>
+                        <span><FaLock size={30} /></span>
+                        <p className="fs-4">Enable Recovery Mode</p>
+                        <p>To continue the password recovery process, please answer the security questions below. Make sure to enter the answers you previously set up. You need to answer at least two questions correctly to proceed.</p>
+                    </div>
+                    <div>
+                        {/* Display error message if verification fails */}
+                        {error && (
+                            <Alert
+                                variant="danger"
+                                show={showError}
+                                onClose={() => setShowError(false)}
+                                dismissible
+                                style={{
+                                    opacity: showError ? 1 : 0,
+                                    transition: 'opacity 0.5s ease-in',
+                                    position: 'relative'
+                                }}
+                            >
+                                <Alert.Heading>Error!</Alert.Heading>
+                                <p>{error}</p>
+                            </Alert>
+                        )}
 
-                    {/* Display success message if verification succeeds */}
-                    {success && (
-                        <Alert
-                            variant="success"
-                            style={{
-                                opacity: success ? 1 : 0,
-                                transition: 'opacity 0.5s ease-in',
-                                position: 'relative'
-                            }}
-                        >
-                            <Alert.Heading>Success!</Alert.Heading>
-                            <p>{success}</p>
-                        </Alert>
-                    )}
+                        {/* Display success message if verification succeeds */}
+                        {success && (
+                            <Alert
+                                variant="success"
+                                style={{
+                                    opacity: success ? 1 : 0,
+                                    transition: 'opacity 0.5s ease-in',
+                                    position: 'relative'
+                                }}
+                            >
+                                <Alert.Heading>Success!</Alert.Heading>
+                                <p>{success}</p>
+                            </Alert>
+                        )}
 
-                    {customQuestions.map((question, index) => (
-                        <FloatingLabel key={index} controlId={`floatingAnswer${index}`} label={question} className="mb-3" style={{width: '100%', minWidth: '400px'}}>
-                            <Form.Control
-                                type="text"
-                                placeholder="Answer"
-                                onChange={(e) => handleAnswerChange(question, e.target.value)}
-                            />
-                        </FloatingLabel>
-                    ))}
-                    <div className="d-flex justify-content-center mb-3">
-                        <Button variant="primary" onClick={checkAnswers} disabled={loading} size='lg'>
-                            {loading ? (
-                                <>
-                                    <Spinner animation="border" size="sm" role="status" aria-hidden="true" /> Verifying...
-                                </>
-                            ) : (
-                                'Verify Answers'
-                            )}
-                        </Button>
+                        {customQuestions.map((question, index) => (
+                            <FloatingLabel key={index} controlId={`floatingAnswer${index}`} label={question} className="mb-3" style={{width: '100%', minWidth: '400px'}}>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Answer"
+                                    onChange={(e) => handleAnswerChange(question, e.target.value)}
+                                />
+                            </FloatingLabel>
+                        ))}
+                        <div className="d-flex justify-content-center mb-3">
+                            <Button variant="primary" onClick={checkAnswers} disabled={loading} size='lg'>
+                                {loading ? (
+                                    <>
+                                        <Spinner animation="border" size="sm" role="status" aria-hidden="true" /> Verifying...
+                                    </>
+                                ) : (
+                                    'Verify Answers'
+                                )}
+                            </Button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </div>
     );
 }
 
