@@ -49,7 +49,7 @@ function LandingPage() {
                                 <Button variant='success' size='lg' href="#features" id="btn"><span><CiGlobe /></span> Explore</Button>                         
                             </div>
                             <div className={LandingPagecss.heroImage}>
-                                <img src="../../../public/E-commerce.png" />
+                                <img src="/E-commerce.png" />
                             </div>
                         </div>
                     </div>
