@@ -1,4 +1,4 @@
-import { Container, Navbar, Row, Col, Button, Table, Alert } from "react-bootstrap";
+import { Container, Navbar, Row, Col, Button, Table, Alert, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateProductQuantity } from '../../../services/ProductService';
 import { useState } from 'react';
@@ -10,22 +10,43 @@ function Checkout() {
     const scannedItems = location.state?.scannedItems || [];
     const [errorMessage, setErrorMessage] = useState("");
     const currentDate = new Date().toLocaleString();
+    const [customerName, setCustomerName] = useState("John Doe");  // Editable customer name
+
+    const taxRate = 0.12;  // 12% tax rate
+    const discount = 100;  // Fixed discount of 100
+
+    // Calculations
+    const subtotal = scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const tax = subtotal * taxRate;
+    const total = subtotal + tax - discount;
 
     const handleCheckout = async () => {
+        if (!customerName.trim()) {
+            setErrorMessage("Customer name is required.");
+            return;
+        }
+
+        const zeroQuantityItem = scannedItems.find(item => item.quantity <= 0);
+        if (zeroQuantityItem) {
+            setErrorMessage(`Cannot proceed to checkout. ${zeroQuantityItem.productName} has a quantity of zero.`);
+            return;
+        }
+
         const orderDetails = {
             date: currentDate,
+            customerName,
             items: scannedItems,
-            total: scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
+            subtotal,
+            tax,
+            discount,
+            total
         };
 
-        // Store the order in Firebase database
         const db = getDatabase();
         const newOrderRef = ref(db, 'TransactionHistory/' + Date.now());
         await set(newOrderRef, orderDetails);
 
-        const updatePromises = scannedItems.map(item => {
-            return updateProductQuantity(item.barcode, -item.quantity);
-        });
+        const updatePromises = scannedItems.map(item => updateProductQuantity(item.barcode, -item.quantity));
 
         try {
             await Promise.all(updatePromises);
@@ -50,20 +71,35 @@ function Checkout() {
                     <Col>
                         <h4>Your Order</h4>
                         <p>Date: {currentDate}</p>
-                        <Table striped bordered hover>
+                        <Form.Group controlId="customerName">
+                            <Form.Label>Sold To:</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter customer name"
+                                value={customerName}
+                                onChange={(e) => setCustomerName(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Table striped bordered hover className="mt-3">
                             <thead>
                                 <tr>
-                                    <th>Product Name</th>
+                                    <th>Description (Product Name, Size, Color, Voltage, Watt)</th>
                                     <th>Quantity</th>
                                     <th>Unit Price</th>
-                                    <th>Total Price</th>
+                                    <th>Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {scannedItems.length > 0 ? (
                                     scannedItems.map(item => (
                                         <tr key={item.productId}>
-                                            <td>{item.productName}</td>
+                                            <td>
+                                                {item.productName}
+                                                {item.size && `, Size: ${item.size}`}
+                                                {item.color && `, Color: ${item.color}`}
+                                                {item.voltage && `, Voltage: ${item.voltage}`}
+                                                {item.watt && `, Watt: ${item.watt}`}
+                                            </td>
                                             <td>{item.quantity}</td>
                                             <td>₱{Number(item.price).toFixed(2)}</td>
                                             <td>₱{(item.price * item.quantity).toFixed(2)}</td>
@@ -75,10 +111,24 @@ function Checkout() {
                                     </tr>
                                 )}
                                 {scannedItems.length > 0 && (
-                                    <tr>
-                                        <td colSpan="3" className="text-end"><strong>Grand Total:</strong></td>
-                                        <td>₱{(scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2)}</td>
-                                    </tr>
+                                    <>
+                                        <tr>
+                                            <td colSpan="3" className="text-end"><strong>Subtotal:</strong></td>
+                                            <td>₱{subtotal.toFixed(2)}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colSpan="3" className="text-end"><strong>Tax (12%):</strong></td>
+                                            <td>₱{tax.toFixed(2)}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colSpan="3" className="text-end"><strong>Discount:</strong></td>
+                                            <td>-₱{discount.toFixed(2)}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colSpan="3" className="text-end"><strong>Total:</strong></td>
+                                            <td>₱{total.toFixed(2)}</td>
+                                        </tr>
+                                    </>
                                 )}
                             </tbody>
                         </Table>
