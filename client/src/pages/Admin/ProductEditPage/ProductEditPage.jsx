@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Table, Dropdown } from 'react-bootstrap';
-import { getAllProducts, updateProduct } from './firebaseFunctions'; // Assume this is where Firebase functions are located
+import { getAllProducts, updateProduct } from '../../../services/firebase'; // Assume this is where Firebase functions are located
 
 const ProductEditPage = () => {
     const [products, setProducts] = useState([]);
