@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getAllProducts } from '../../../services/ProductService'; // Update with actual path to your functions file
+import { Container, Row, Col, ListGroup, Card, Spinner } from 'react-bootstrap';
 
 function ProductEditor() {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // Fetch products on mount
     useEffect(() => {
@@ -12,6 +14,8 @@ function ProductEditor() {
                 setProducts(productsList);
             } catch (error) {
                 console.error('Error fetching products:', error.message);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -19,20 +23,37 @@ function ProductEditor() {
     }, []);
 
     return (
-        <div>
-            <h1>Product List</h1>
-            {products.length > 0 ? (
-                <ul>
-                    {products.map((product) => (
-                        <li key={product.barcode}>
-                            <strong>{product.productName}</strong> - SKU: {product.sku} - Price: ${product.price} - Quantity: {product.quantity}
-                        </li>
-                    ))}
-                </ul>
+        <Container className="mt-4">
+            <h1 className="text-center mb-4">Product List</h1>
+            {loading ? (
+                <div className="text-center">
+                    <Spinner animation="border" variant="primary" />
+                </div>
+            ) : products.length > 0 ? (
+                <Row>
+                    <Col md={{ span: 8, offset: 2 }}>
+                        <ListGroup>
+                            {products.map((product) => (
+                                <ListGroup.Item key={product.barcode} className="d-flex align-items-center">
+                                    <Card className="w-100">
+                                        <Card.Body>
+                                            <Card.Title>{product.productName}</Card.Title>
+                                            <Card.Text>
+                                                <strong>SKU:</strong> {product.sku} <br />
+                                                <strong>Price:</strong> ${product.price} <br />
+                                                <strong>Quantity:</strong> {product.quantity}
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </ListGroup.Item>
+                            ))}
+                        </ListGroup>
+                    </Col>
+                </Row>
             ) : (
-                <p>No products found.</p>
+                <p className="text-center">No products found.</p>
             )}
-        </div>
+        </Container>
     );
 }
 
