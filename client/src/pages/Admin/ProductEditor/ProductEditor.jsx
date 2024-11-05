@@ -77,7 +77,7 @@ function ProductEditor() {
                                         <Card.Body>
                                             <Card.Title>{product.productName}</Card.Title>
                                             <Card.Text>
-                                                <div><strong>Price:</strong> ${product.price}</div>
+                                                <div><strong>Price:</strong> ₱{product.price}</div>
                                                 <div><strong>SKU:</strong> {product.sku}</div>
                                                 <div><strong>Barcode:</strong> {product.barcode}</div>
                                             </Card.Text>
@@ -139,6 +139,7 @@ function ProductEditor() {
                                             value={editProduct[key]}
                                             onChange={(e) => handleModalInputChange(key, e.target.value)}
                                             style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
+                                            placeholder={key === 'price' ? "Enter price" : "Enter quantity"} // Adding a placeholder
                                         />
                                     ) : (
                                         <Form.Control
