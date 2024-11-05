@@ -53,8 +53,6 @@ function ProductEditor() {
     // List of fields to include in the modal
     const includedFields = [
         'productName',
-        'sku',
-        'barcode',
         'price',
         'category',
         'quantity',  // Added field for quantity
@@ -113,27 +111,28 @@ function ProductEditor() {
             {/* Product Details and Edit Modal */}
             <Modal show={showModal} onHide={closeModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{editProduct ? editProduct.productName : 'Edit Product'}</Modal.Title>
+                    <Modal.Title>
+                        {editProduct ? editProduct.productName : 'Edit Product'}
+                        {editProduct && (
+                            <>
+                                <div><strong>SKU:</strong> {editProduct.sku}</div>
+                                <div><strong>Barcode:</strong> {editProduct.barcode}</div>
+                            </>
+                        )}
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {editProduct && (
                         <Form>
+                            {/* Render the editable fields */}
                             {includedFields.map((key) => (
                                 <Form.Group controlId={`form${key}`} key={key}>
                                     <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}</Form.Label>
-                                    {key === 'sku' || key === 'barcode' ? (
-                                        <Form.Control
-                                            type="text"
-                                            value={editProduct[key]}
-                                            readOnly // Make the SKU and Barcode fields read-only
-                                        />
-                                    ) : (
-                                        <Form.Control
-                                            type={typeof editProduct[key] === 'number' ? 'number' : 'text'}
-                                            value={editProduct[key]}
-                                            onChange={(e) => handleModalInputChange(key, e.target.value)}
-                                        />
-                                    )}
+                                    <Form.Control
+                                        type={typeof editProduct[key] === 'number' ? 'number' : 'text'}
+                                        value={editProduct[key]}
+                                        onChange={(e) => handleModalInputChange(key, e.target.value)}
+                                    />
                                 </Form.Group>
                             ))}
                         </Form>
