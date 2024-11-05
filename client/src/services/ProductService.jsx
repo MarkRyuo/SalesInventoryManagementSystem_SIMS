@@ -246,3 +246,5 @@ export const fetchOrderHistoryFromFirebase = async () => {
         throw new Error(`Error fetching order history: ${error.message}`);
     }
 };
+
+
