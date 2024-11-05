@@ -31,7 +31,7 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx'
 
 //! Done 
 import StaffTransactionHistory from './pages/Staff/StaffTransactionHistory.jsx';
-import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/AdminTransactionHistory.jsx';
+import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
