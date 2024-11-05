@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove } from 'firebase/database';
 
 // Function to add a new product
 export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, category, dateAdded }) => {
@@ -44,6 +44,11 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         const productData = productSnapshot.val();
         const currentQuantity = productData.quantity || 0;
         const updatedQuantity = currentQuantity + additionalQuantity;
+
+        // Check if the updated quantity would be zero or negative
+        if (updatedQuantity < 0) {
+            throw new Error(`Insufficient quantity. Current quantity is ${currentQuantity}. Cannot reduce by ${Math.abs(additionalQuantity)}.`);
+        }
 
         // Get today's date
         const today = new Date().toISOString().split('T')[0];
@@ -112,6 +117,7 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
     }
 };
 
+
 // Function to fetch a product by barcode
 export const fetchProductByBarcode = async (barcode) => {
     const db = getDatabase();
@@ -140,18 +146,27 @@ export const getAllProducts = async () => {
     try {
         const snapshot = await get(productsRef);
         if (!snapshot.exists()) {
-            return [];
+            console.log("No products found.");
+            return []; // Return an empty array if no products are found
         }
-        // Format prices with peso sign (₱) before returning
+
         const products = snapshot.val();
-        for (const key in products) {
-            products[key].price = `₱${products[key].price.toFixed(2)}`;
-        }
-        return products;
+
+        // Ensure price remains numeric and convert product data into an array
+        const formattedProducts = Object.keys(products).map(key => {
+            const product = products[key];
+            product.price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
+            return product;
+        });
+
+        console.log("Retrieved products:", formattedProducts);
+        return formattedProducts;
     } catch (error) {
+        console.error("Error retrieving products:", error);
         throw new Error(`Error retrieving products: ${error.message}`);
     }
 };
+
 
 // Function to add a new category
 export const addCategory = async (category) => {
