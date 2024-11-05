@@ -50,6 +50,20 @@ function ProductEditor() {
         closeModal();
     };
 
+    // List of fields to include in the modal
+    const includedFields = [
+        'productName',
+        'sku',
+        'barcode',
+        'price',
+        'category',
+        'quantity',  // Added field for quantity
+        'color',     // Added field for color
+        'size',      // Added field for size
+        'watt',      // Added field for watt
+        'voltage'    // Added field for voltage
+    ];
+
     return (
         <Container className="mt-4">
             <h1 className="text-center mb-4">Product List</h1>
@@ -104,21 +118,24 @@ function ProductEditor() {
                 <Modal.Body>
                     {editProduct && (
                         <Form>
-                            {Object.entries(editProduct).map(([key, value]) => {
-                                // Don't show the barcode field in the form (since it might be used as an identifier)
-                                if (key === 'barcode') return null;
-
-                                return (
-                                    <Form.Group controlId={`form${key}`} key={key}>
-                                        <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1)}</Form.Label>
+                            {includedFields.map((key) => (
+                                <Form.Group controlId={`form${key}`} key={key}>
+                                    <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}</Form.Label>
+                                    {key === 'sku' || key === 'barcode' ? (
                                         <Form.Control
-                                            type={typeof value === 'number' ? 'number' : 'text'}
-                                            value={value}
+                                            type="text"
+                                            value={editProduct[key]}
+                                            readOnly // Make the SKU and Barcode fields read-only
+                                        />
+                                    ) : (
+                                        <Form.Control
+                                            type={typeof editProduct[key] === 'number' ? 'number' : 'text'}
+                                            value={editProduct[key]}
                                             onChange={(e) => handleModalInputChange(key, e.target.value)}
                                         />
-                                    </Form.Group>
-                                );
-                            })}
+                                    )}
+                                </Form.Group>
+                            ))}
                         </Form>
                     )}
                 </Modal.Body>
