@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getAllProducts } from '../../../services/ProductService'; // Update with actual path to your functions file
-import { Container, Row, Col, ListGroup, Card, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, ListGroup, Card, Spinner, Button, Form } from 'react-bootstrap';
 
 function ProductEditor() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [editMode, setEditMode] = useState({}); // Tracks edit mode status for each product
 
     // Fetch products on mount
     useEffect(() => {
@@ -21,6 +22,27 @@ function ProductEditor() {
 
         fetchProducts();
     }, []);
+
+    // Toggle edit mode for a product by barcode
+    const toggleEditMode = (barcode) => {
+        setEditMode((prev) => ({ ...prev, [barcode]: !prev[barcode] }));
+    };
+
+    // Handle input change for editable fields
+    const handleInputChange = (barcode, key, value) => {
+        setProducts((prev) =>
+            prev.map((product) =>
+                product.barcode === barcode ? { ...product, [key]: value } : product
+            )
+        );
+    };
+
+    // Example save function placeholder
+    const saveChanges = (barcode) => {
+        // Here you would call an update function to save the changes to Firebase
+        console.log('Saving changes for product:', products.find((p) => p.barcode === barcode));
+        toggleEditMode(barcode);
+    };
 
     return (
         <Container className="mt-4">
@@ -40,11 +62,41 @@ function ProductEditor() {
                                             <Card.Title>{product.productName}</Card.Title>
                                             <Card.Text>
                                                 {Object.entries(product).map(([key, value]) => (
-                                                    <div key={key}>
-                                                        <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {JSON.stringify(value)}
+                                                    <div key={key} className="mb-2">
+                                                        <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+                                                        {editMode[product.barcode] ? (
+                                                            <Form.Control
+                                                                type="text"
+                                                                value={value}
+                                                                onChange={(e) =>
+                                                                    handleInputChange(product.barcode, key, e.target.value)
+                                                                }
+                                                            />
+                                                        ) : (
+                                                            <span>{JSON.stringify(value)}</span>
+                                                        )}
                                                     </div>
                                                 ))}
                                             </Card.Text>
+                                            <Button
+                                                variant={editMode[product.barcode] ? "success" : "primary"}
+                                                onClick={() =>
+                                                    editMode[product.barcode]
+                                                        ? saveChanges(product.barcode)
+                                                        : toggleEditMode(product.barcode)
+                                                }
+                                            >
+                                                {editMode[product.barcode] ? "Save" : "Edit"}
+                                            </Button>
+                                            {editMode[product.barcode] && (
+                                                <Button
+                                                    variant="secondary"
+                                                    className="ms-2"
+                                                    onClick={() => toggleEditMode(product.barcode)}
+                                                >
+                                                    Cancel
+                                                </Button>
+                                            )}
                                         </Card.Body>
                                     </Card>
                                 </ListGroup.Item>
