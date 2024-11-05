@@ -77,7 +77,7 @@ function SearchAssetsMode() {
     return (
         <div className={SDashboardCss.searchContainer}>
             <Row className={SDashboardCss.searchHeader}>
-                <Col lg={12} style={{display: "flex", justifyContent: "flex-end"}}>
+                <Col lg={12} style={{ display: "flex", justifyContent: "flex-end" }}>
                     <Form className="p-2">
                         <Form.Control
                             type="search"
@@ -89,7 +89,7 @@ function SearchAssetsMode() {
                         />
                     </Form>
                 </Col>
-                <div style={{display: "flex", gap: 10, padding: 10}}>
+                <div style={{ display: "flex", gap: 10, padding: 10 }}>
                     <Dropdown>
                         <Dropdown.Toggle variant="success" id="filter-dropdown">
                             {filterOption}
@@ -145,7 +145,7 @@ function SearchAssetsMode() {
                                     <Card.Title>
                                         <div className="d-inline-flex gap-3">
                                             <p className="fs-4 m-0 p-0">{product.productName}</p>
-                                            <p style={{ color: statusColor}} className="p-0 m-0">
+                                            <p style={{ color: statusColor }} className="p-0 m-0">
                                                 <span style={{ color: statusColor }}>•</span>{stockStatus} {/* Display stock status */}
                                             </p>
                                         </div>

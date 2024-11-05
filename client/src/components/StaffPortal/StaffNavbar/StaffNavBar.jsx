@@ -1,29 +1,43 @@
 /* eslint-disable react/prop-types */
-import {Button, Container, Navbar} from 'react-bootstrap' ;
+import { Button, Container, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-function StaffNavBar({backBtn}) {
+function StaffNavBar({ backBtn }) {
 
     return (
-        <>
-            <Navbar 
-                className="bg-body-tertiary m-0" 
-                style={{ boxShadow: "1px 1px 4px #E1E4E4 "}}>
-                <Container>
-                    <Navbar.Brand>
-                        {backBtn.map((Backbtn) => (
-                            <Button 
-                                as={Link} 
-                                key={Backbtn.id} 
+        <Container fluid className='m-0 p-0'>
+            <Navbar
+                className="bg-body-tertiary m-0"
+                style={{
+                    boxShadow: "1px 1px 4px #E1E4E4 ",
+                }}>
+                {backBtn.map((Backbtn) => (
+                    <Container key={Backbtn.id}>
+                        <Navbar.Brand style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            width: '100%'
+                        }}>
+                            <Button
+                                as={Link}
                                 to={Backbtn.path}
                                 variant='light'
                             >
                                 {Backbtn.btnIcon}
                             </Button>
-                        ))}
-                    </Navbar.Brand>
-                </Container>
+
+                            <Button
+                                as={Link}
+                                to={Backbtn.pathTransaction}
+                                variant='light'
+                                className='fs-5'
+                            >
+                                {Backbtn.Title}
+                            </Button>
+                        </Navbar.Brand>
+                    </Container>
+                ))}
             </Navbar>
-        </>
+        </Container>
     )
 }
 

@@ -4,13 +4,12 @@ import App from './App.jsx'
 import './index.scss'
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 //? Pages Import
-import DashboardPage from '../src/pages/DashboardPage' ;
-import ProductPage from './pages/ProductPage.jsx' ;
-import ReportPage from './pages/ReportPage.jsx' ;
+import DashboardPage from '../src/pages/DashboardPage';
+import ProductPage from './pages/ProductPage.jsx';
+import ReportPage from './pages/ReportPage.jsx';
 import StaffAccount from './pages/StaffAccount.jsx'
-import AboutPage from './pages/AboutPage.jsx'
 import MyProfile from './pages/MyProfile.jsx';
-import SLogin from './pages/LoginPage/SLogin.jsx' ;
+import SLogin from './pages/LoginPage/SLogin.jsx';
 import SDashboard from './pages/StaffPages/SDashboard.jsx';
 import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
 import AddNewAssets from './pages/StaffPages/AddNewAssets.jsx';
@@ -29,47 +28,50 @@ import PosScanner from './components/StaffPortal/ScanAssets/PosScanner.jsx';
 import ScanAssetsMode from './components/StaffPortal/ScanAssets/ScanAssetsMode.jsx';
 import PosSuccess from './components/StaffPortal/ScanAssets/PosSuccess.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx'
-import TransactionHistory from './pages/TransacationHistory/TransactionHistory.jsx';
+
+//! Done 
+import StaffTransactionHistory from './pages/Staff/StaffTransactionHistory/StaffTransactionHistory.jsx';
+import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/AdminTransactionHistory.jsx';
 
 const router = createBrowserRouter([
-  {
+  { //? ROOT
     path: "/",
     element: <App />, //* Root This is Login in DashBoard
   },
-  {
+  { //? LoginPage Admin
     path: "LoginPage",
-    element: <LoginPage /> , //* Root This is Login in DashBoard
+    element: <LoginPage />, //* Root This is Login in DashBoard
   },
-  {
+  { //? DashboardPage Admin
     path: "DashboardPage",
-    element: <DashboardPage /> ,
+    element: <DashboardPage />,
   },
-  {
+  { //? ProductPage Admin
     path: "ProductPage",
-    element: <ProductPage /> ,
+    element: <ProductPage />,
   },
-  {
+  { //? ReportPage Admin
     path: "ReportPage",
-    element: <ReportPage /> ,
+    element: <ReportPage />,
   },
-  {
+  { //? Creating for Admin StaffAccount
     path: "StaffAccount",
-    element: <StaffAccount /> ,
+    element: <StaffAccount />,
   },
-  {
+  { //? MyProfilePage for Admin
     path: "MyProfile",
     element: <MyProfile />,
   },
-  {
-    path: "AboutPage",
-    element: <AboutPage /> ,
-  },
-  {
+  { //? Editing Profile for Admin
     path: "ProfileMode",
-    element: <ProfileMode /> ,
+    element: <ProfileMode />,
+  },
+  { //? Transaction History for Admin
+    path: "AdminTransactionHistory",
+    element: <AdminTransactionHistory />,
   },
 
-  //? Forgot Password
+  //! Forgot Password
   {
     path: "ForgotPasswordMode",
     element: <ForgotPasswordMode />,
@@ -80,36 +82,35 @@ const router = createBrowserRouter([
   },
   {
     path: "ResetPasswordMode",
-    element: <ResetPasswordMode /> ,
+    element: <ResetPasswordMode />,
   },
   {
     path: "ResetRendering",
-    element: <ResetRendering /> ,
+    element: <ResetRendering />,
   },
 
-  //? Staff Portal
+  //! Staff Portal
   {
-  path: "SLogin",
-    element: <SLogin /> , //* Staff Login Page
+    path: "SLogin",
+    element: <SLogin />, //* Staff Login Page
   },
   {
     path: "SDashboard",
-    element: <SDashboard /> , //* Staff Dashboard Page
+    element: <SDashboard />, //* Staff Dashboard Page
   },
   {
     path: "SStaffAccount",
-    element: <SStaffAccount /> , //* Staff Account Page
+    element: <SStaffAccount />, //* Staff Account Page
   },
   {
     path: "StaffAccountMode",
     element: <StaffAccountMode />, //* Staff Account Page
   },
 
-  
   //? Staff Buttons in Dashboard
   {
     path: "AddNewAssets",
-    element: <AddNewAssets /> ,
+    element: <AddNewAssets />,
   },
   {
     path: "ScanAsset",
@@ -117,13 +118,13 @@ const router = createBrowserRouter([
   },
   {
     path: "SearchAssets",
-    element: <SearchAsset /> ,
+    element: <SearchAsset />,
   },
-  
+
   //? Staff Comps 
   {
     path: "NewAssetsScanner",
-    element: <NewAssetsScanner /> , //* Add to Inventory: Scanner of AddNewAssets
+    element: <NewAssetsScanner />, //* Add to Inventory: Scanner of AddNewAssets
   },
   {
     path: "NewAssets",
@@ -131,26 +132,25 @@ const router = createBrowserRouter([
   },
   {
     path: "ProductSuccess",
-    element: <ProductSuccess /> , //* Add to Inventory: Add New Assets Success
+    element: <ProductSuccess />, //* Add to Inventory: Add New Assets Success
   },
-  
+
   {
     path: "PosScanner",
-    element: <PosScanner /> , //* POS: 1st, Scanner Camera 
+    element: <PosScanner />, //* POS: 1st, Scanner Camera 
   },
   {
     path: "ScanAssetsMode",
-    element: <ScanAssetsMode /> , //* POS: 2st, Current Order 
+    element: <ScanAssetsMode />, //* POS: 2st, Current Order 
   },
   {
     path: "PosSuccess",
-    element: <PosSuccess /> , //* POS: Product Success View 
+    element: <PosSuccess />, //* POS: Product Success View 
   },
   {
-    path: "TransactionHistory",
-    element: <TransactionHistory /> , //* POS: Transaction History View 
+    path: "StaffTransactionHistory",
+    element: <StaffTransactionHistory />, //* POS: Transaction History View 
   },
-  
 
 ]);
 
