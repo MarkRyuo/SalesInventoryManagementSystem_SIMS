@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import QRious from 'qrious';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 function AdminTransactionHistory() {
@@ -19,7 +19,15 @@ function AdminTransactionHistory() {
             const data = snapshot.val() || {};
             const formattedHistory = Object.entries(data).map(([key, value]) => ({
                 ...value,
-                id: key
+                id: key,
+                subtotal: parseFloat(value.subtotal) || 0,
+                tax: parseFloat(value.tax) || 0,
+                discount: parseFloat(value.discount) || 0,
+                total: parseFloat(value.total) || 0,
+                items: value.items.map(item => ({
+                    ...item,
+                    price: parseFloat(item.price) || 0 // Convert price to number
+                }))
             }));
             setOrderHistory(formattedHistory);
         });
@@ -29,10 +37,10 @@ function AdminTransactionHistory() {
         if (selectedOrder && qrRef.current) {
             new QRious({
                 element: qrRef.current,
-                value: `http://localhost:5173/order/${selectedOrder.id}` // URL or value to encode
+                value: `http://localhost:5173/order/${selectedOrder.id}` // Adjust this URL based on your routing
             });
         }
-    }, [selectedOrder]); // Run when selectedOrder changes
+    }, [selectedOrder]); // Re-generate QR code when selectedOrder changes
 
     const handleDownloadOrder = async (order) => {
         const doc = new jsPDF();
@@ -44,40 +52,44 @@ function AdminTransactionHistory() {
         // Order details
         doc.setFontSize(12);
         doc.text(`Order Date: ${order.date}`, 10, 30);
-        doc.text(`Total Amount: ₱${order.total.toFixed(2)}`, 10, 40);
+        doc.text(`Sold To: ${order.customerName}`, 10, 40);
+        doc.text(`Subtotal: ₱${order.subtotal.toFixed(2)}`, 10, 50);
+        doc.text(`Tax (12%): ₱${order.tax.toFixed(2)}`, 10, 60);
+        doc.text(`Discount: -₱${order.discount.toFixed(2)}`, 10, 70);
+        doc.text(`Total Amount: ₱${order.total.toFixed(2)}`, 10, 80);
 
         // Adding a line
-        doc.line(10, 45, 200, 45);
+        doc.line(10, 85, 200, 85);
 
         // Table header
         doc.setFontSize(14);
-        doc.text('Product Name', 10, 50);
-        doc.text('Quantity', 90, 50);
-        doc.text('Total', 160, 50);
-
-        // Adding another line for header separation
-        doc.line(10, 52, 200, 52);
+        doc.text('Product Description', 10, 90);
+        doc.text('Quantity', 140, 90);
+        doc.text('Unit Price', 160, 90);
+        doc.text('Amount', 180, 90);
+        doc.line(10, 92, 200, 92);
 
         // Adding items to the receipt
         order.items.forEach((item, index) => {
-            const yPosition = 60 + (index * 10);
-            doc.text(item.productName, 10, yPosition);
-            doc.text(item.quantity.toString(), 90, yPosition);
-            doc.text(`₱${(item.price * item.quantity).toFixed(2)}`, 160, yPosition);
+            const yPosition = 100 + (index * 10);
+            const description = `${item.productName}, Size: ${item.size || 'N/A'}, Color: ${item.color || 'N/A'}, Voltage: ${item.voltage || 'N/A'}, Watt: ${item.watt || 'N/A'}`;
+            doc.text(description, 10, yPosition);
+            doc.text(item.quantity.toString(), 140, yPosition);
+            const price = parseFloat(item.price);
+            const amount = price * item.quantity;
+            doc.text(`₱${!isNaN(price) ? price.toFixed(2) : '0.00'}`, 160, yPosition);
+            doc.text(`₱${!isNaN(amount) ? amount.toFixed(2) : '0.00'}`, 180, yPosition);
         });
 
         // QR Code handling
         const qrCanvas = qrRef.current;
         if (qrCanvas) {
-            // Convert QR code canvas to data URL
             const qrDataUrl = qrCanvas.toDataURL("image/png");
-
-            // Add QR code image to the PDF
-            doc.addImage(qrDataUrl, 'PNG', 10, 70 + (order.items.length * 10), 50, 50); // Adjust position and size as needed
+            doc.addImage(qrDataUrl, 'PNG', 10, 110 + (order.items.length * 10), 50, 50); // Adjust position and size as needed
         }
 
         // Save the PDF
-        doc.save('order.pdf');
+        doc.save(`Order_${order.id}.pdf`);
     };
 
     const handleDeleteOrder = (id) => {
@@ -97,19 +109,14 @@ function AdminTransactionHistory() {
 
     return (
         <Container fluid className="m-0 p-0">
-
             <div className="bg-light shadow-sm" style={{ padding: 15, boxSizing: "border-box" }}>
                 <Container style={{ display: "flex" }}>
-                    <Button as={Link} to="/DashboardPage" variant="light">
+                    <Button as={Link} to="/SDashboard" variant="light">
                         <IoMdArrowRoundBack size={20} />
                     </Button>
-
-                    <div className="fs-5 pt-1 ps-4">
-                        Transaction History
-                    </div>
+                    <div className="fs-5 pt-1 ps-4">Transaction History</div>
                 </Container>
             </div>
-
             <Container fluid='lg' className="mt-3">
                 <Row>
                     <Col>
@@ -155,25 +162,30 @@ function AdminTransactionHistory() {
                     {selectedOrder && (
                         <>
                             <h5>Order Date: {selectedOrder.date}</h5>
+                            <h6>Sold To: {selectedOrder.customerName}</h6>
+                            <h6>Subtotal: ₱{selectedOrder.subtotal.toFixed(2)}</h6>
+                            <h6>Tax (12%): ₱{selectedOrder.tax.toFixed(2)}</h6>
+                            <h6>Discount: -₱{selectedOrder.discount.toFixed(2)}</h6>
                             <h6>Total Amount: ₱{selectedOrder.total.toFixed(2)}</h6>
                             <h6>Items:</h6>
                             <ul>
-                                {selectedOrder.items.map((item, index) => (
-                                    <li key={index}>
-                                        {item.productName} - Quantity: {item.quantity}, Total: ₱{(item.price * item.quantity).toFixed(2)}
-                                    </li>
-                                ))}
+                                {selectedOrder.items.map((item, index) => {
+                                    const price = parseFloat(item.price);
+                                    const total = price * item.quantity;
+                                    return (
+                                        <li key={index}>
+                                            {item.productName}, Size: {item.size || 'N/A'}, Color: {item.color || 'N/A'}, Voltage: {item.voltage || 'N/A'}, Watt: {item.watt || 'N/A'} - Quantity: {item.quantity}, Unit Price: ₱{!isNaN(price) ? price.toFixed(2) : 'N/A'}, Total: ₱{!isNaN(total) ? total.toFixed(2) : 'N/A'}
+                                        </li>
+                                    );
+                                })}
                             </ul>
-                            {/* QR Code for the selected order */}
                             <h6>Download Receipt QR Code:</h6>
                             <canvas ref={qrRef} />
                         </>
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModal}>
-                        Close
-                    </Button>
+                    <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
                 </Modal.Footer>
             </Modal>
         </Container>
