@@ -107,8 +107,8 @@ function ProductEditor() {
                         {editProduct ? editProduct.productName : 'Edit Product'}
                         {editProduct && (
                             <>
-                                <p>SKU: {editProduct.sku}</p>
-                                <p>Barcode: {editProduct.barcode}</p>
+                                <p className='fs-5 m-0 p-0'>SKU: {editProduct.sku}</p>
+                                <p className='fs-5'>Barcode: {editProduct.barcode}</p>
                             </>
                         )}
                     </Modal.Title>
