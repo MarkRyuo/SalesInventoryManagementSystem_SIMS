@@ -1,10 +1,12 @@
-import { Container, Navbar, Row, Col, Table, Button, Modal } from "react-bootstrap";
+import { Container, Row, Col, Table, Button, Modal } from "react-bootstrap";
 import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import QRious from 'qrious';
+import { Link } from 'react-router-dom';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
-function TransactionHistory() {
+function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
@@ -95,11 +97,19 @@ function TransactionHistory() {
 
     return (
         <Container fluid className="m-0 p-0">
-            <Navbar className="bg-light shadow-sm">
-                <Container>
-                    <Navbar.Brand className="fs-4">Transaction History</Navbar.Brand>
+
+            <div className="bg-light shadow-sm" style={{ padding: 15, boxSizing: "border-box" }}>
+                <Container style={{ display: "flex" }}>
+                    <Button as={Link} to="/DashboardPage" variant="light">
+                        <IoMdArrowRoundBack size={20} />
+                    </Button>
+
+                    <div className="fs-5 pt-1 ps-4">
+                        Transaction History
+                    </div>
                 </Container>
-            </Navbar>
+            </div>
+
             <Container fluid='lg' className="mt-3">
                 <Row>
                     <Col>
@@ -170,4 +180,4 @@ function TransactionHistory() {
     );
 }
 
-export default TransactionHistory;
+export default AdminTransactionHistory;
