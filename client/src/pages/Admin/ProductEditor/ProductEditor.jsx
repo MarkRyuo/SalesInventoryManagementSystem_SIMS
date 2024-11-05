@@ -2,9 +2,9 @@
 function ProductEditor() {
     return (
         <>
-            
+
         </>
     )
 }
 
-export default ProductEditor
+export default ProductEditor ;
