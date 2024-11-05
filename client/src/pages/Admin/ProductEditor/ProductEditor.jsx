@@ -6,6 +6,7 @@ function ProductEditor() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [editMode, setEditMode] = useState({}); // Tracks edit mode status for each product
+    const [showDetails, setShowDetails] = useState({}); // Tracks show details status for each product
 
     // Fetch products on mount
     useEffect(() => {
@@ -26,6 +27,11 @@ function ProductEditor() {
     // Toggle edit mode for a product by barcode
     const toggleEditMode = (barcode) => {
         setEditMode((prev) => ({ ...prev, [barcode]: !prev[barcode] }));
+    };
+
+    // Toggle show details for a product by barcode
+    const toggleShowDetails = (barcode) => {
+        setShowDetails((prev) => ({ ...prev, [barcode]: !prev[barcode] }));
     };
 
     // Handle input change for editable fields
@@ -61,41 +67,67 @@ function ProductEditor() {
                                         <Card.Body>
                                             <Card.Title>{product.productName}</Card.Title>
                                             <Card.Text>
-                                                {Object.entries(product).map(([key, value]) => (
-                                                    <div key={key} className="mb-2">
-                                                        <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-                                                        {editMode[product.barcode] ? (
-                                                            <Form.Control
-                                                                type="text"
-                                                                value={value}
-                                                                onChange={(e) =>
-                                                                    handleInputChange(product.barcode, key, e.target.value)
-                                                                }
-                                                            />
-                                                        ) : (
-                                                            <span>{JSON.stringify(value)}</span>
-                                                        )}
-                                                    </div>
-                                                ))}
+                                                <div>
+                                                    <strong>Price:</strong> ${product.price}
+                                                </div>
+                                                <div>
+                                                    <strong>SKU:</strong> {product.sku}
+                                                </div>
                                             </Card.Text>
+
+                                            {showDetails[product.barcode] && (
+                                                <Card.Text className="mt-3">
+                                                    {Object.entries(product).map(([key, value]) => (
+                                                        key !== 'productName' && key !== 'price' && key !== 'sku' && (
+                                                            <div key={key} className="mb-2">
+                                                                <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+                                                                {editMode[product.barcode] ? (
+                                                                    <Form.Control
+                                                                        type="text"
+                                                                        value={value}
+                                                                        onChange={(e) =>
+                                                                            handleInputChange(product.barcode, key, e.target.value)
+                                                                        }
+                                                                    />
+                                                                ) : (
+                                                                    <span>{JSON.stringify(value)}</span>
+                                                                )}
+                                                            </div>
+                                                        )
+                                                    ))}
+                                                </Card.Text>
+                                            )}
+
                                             <Button
-                                                variant={editMode[product.barcode] ? "success" : "primary"}
-                                                onClick={() =>
-                                                    editMode[product.barcode]
-                                                        ? saveChanges(product.barcode)
-                                                        : toggleEditMode(product.barcode)
-                                                }
+                                                variant={showDetails[product.barcode] ? "secondary" : "info"}
+                                                onClick={() => toggleShowDetails(product.barcode)}
+                                                className="me-2"
                                             >
-                                                {editMode[product.barcode] ? "Save" : "Edit"}
+                                                {showDetails[product.barcode] ? "Hide Details" : "Show Details"}
                                             </Button>
-                                            {editMode[product.barcode] && (
-                                                <Button
-                                                    variant="secondary"
-                                                    className="ms-2"
-                                                    onClick={() => toggleEditMode(product.barcode)}
-                                                >
-                                                    Cancel
-                                                </Button>
+
+                                            {showDetails[product.barcode] && (
+                                                <>
+                                                    <Button
+                                                        variant={editMode[product.barcode] ? "success" : "primary"}
+                                                        onClick={() =>
+                                                            editMode[product.barcode]
+                                                                ? saveChanges(product.barcode)
+                                                                : toggleEditMode(product.barcode)
+                                                        }
+                                                        className="me-2"
+                                                    >
+                                                        {editMode[product.barcode] ? "Save" : "Edit"}
+                                                    </Button>
+                                                    {editMode[product.barcode] && (
+                                                        <Button
+                                                            variant="secondary"
+                                                            onClick={() => toggleEditMode(product.barcode)}
+                                                        >
+                                                            Cancel
+                                                        </Button>
+                                                    )}
+                                                </>
                                             )}
                                         </Card.Body>
                                     </Card>
