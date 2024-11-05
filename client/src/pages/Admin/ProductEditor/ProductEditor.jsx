@@ -77,24 +77,26 @@ function ProductEditor() {
 
                                             {showDetails[product.barcode] && (
                                                 <Card.Text className="mt-3">
-                                                    {Object.entries(product).map(([key, value]) => (
-                                                        key !== 'productName' && key !== 'price' && key !== 'sku' && (
-                                                            <div key={key} className="mb-2">
-                                                                <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-                                                                {editMode[product.barcode] ? (
-                                                                    <Form.Control
-                                                                        type="text"
-                                                                        value={value}
-                                                                        onChange={(e) =>
-                                                                            handleInputChange(product.barcode, key, e.target.value)
-                                                                        }
-                                                                    />
-                                                                ) : (
-                                                                    <span>{JSON.stringify(value)}</span>
-                                                                )}
-                                                            </div>
-                                                        )
-                                                    ))}
+                                                    <Row>
+                                                        {Object.entries(product).map(([key, value]) => (
+                                                            key !== 'productName' && key !== 'price' && key !== 'sku' && (
+                                                                <Col xs={6} md={4} lg={3} key={key} className="mb-2">
+                                                                    <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+                                                                    {editMode[product.barcode] ? (
+                                                                        <Form.Control
+                                                                            type="text"
+                                                                            value={value}
+                                                                            onChange={(e) =>
+                                                                                handleInputChange(product.barcode, key, e.target.value)
+                                                                            }
+                                                                        />
+                                                                    ) : (
+                                                                        <span>{JSON.stringify(value)}</span>
+                                                                    )}
+                                                                </Col>
+                                                            )
+                                                        ))}
+                                                    </Row>
                                                 </Card.Text>
                                             )}
 
