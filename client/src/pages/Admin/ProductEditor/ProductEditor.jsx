@@ -39,9 +39,11 @@ function ProductEditor() {
                                         <Card.Body>
                                             <Card.Title>{product.productName}</Card.Title>
                                             <Card.Text>
-                                                <strong>SKU:</strong> {product.sku} <br />
-                                                <strong>Price:</strong> ${product.price} <br />
-                                                <strong>Quantity:</strong> {product.quantity}
+                                                {Object.entries(product).map(([key, value]) => (
+                                                    <div key={key}>
+                                                        <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {JSON.stringify(value)}
+                                                    </div>
+                                                ))}
                                             </Card.Text>
                                         </Card.Body>
                                     </Card>
