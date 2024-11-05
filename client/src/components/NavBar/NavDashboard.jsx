@@ -78,6 +78,7 @@ export const NavDashboard = () => {
                             <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-5")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
                             <AccountDropdown />
                         </div>
                         <div style={{ height: "150px" }}>
