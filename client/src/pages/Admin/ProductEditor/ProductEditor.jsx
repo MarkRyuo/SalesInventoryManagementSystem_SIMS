@@ -54,7 +54,7 @@ function ProductEditor() {
         'price',
         'category',
         'quantity',
-        'color',
+        'color',  // This will now be a regular text input
         'size',
         'watt',
         'voltage',
@@ -120,22 +120,22 @@ function ProductEditor() {
                             {includedFields.map((key) => (
                                 <Form.Group controlId={`form${key}`} key={key}>
                                     <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}</Form.Label>
-                                    {key === 'category' || key === 'color' ? (
+                                    {key === 'category' ? (
                                         <Form.Control
                                             as="select"
                                             value={editProduct[key]}
                                             onChange={(e) => handleModalInputChange(key, e.target.value)}
                                         >
                                             <option value="">Select {key}</option>
-                                            {(key === 'category' ? categories : ['Red', 'Green', 'Blue']).map((option) => (
-                                                <option key={option} value={option}>
-                                                    {option}
+                                            {categories.map((category) => (
+                                                <option key={category} value={category}>
+                                                    {category}
                                                 </option>
                                             ))}
                                         </Form.Control>
                                     ) : (
                                         <Form.Control
-                                            type={typeof editProduct[key] === 'number' ? 'number' : 'text'}
+                                            type={key === 'color' ? 'text' : (typeof editProduct[key] === 'number' ? 'number' : 'text')}
                                             value={editProduct[key]}
                                             onChange={(e) => handleModalInputChange(key, e.target.value)}
                                         />
