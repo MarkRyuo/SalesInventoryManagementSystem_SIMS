@@ -32,6 +32,7 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx'
 //! Done 
 import StaffTransactionHistory from './pages/Staff/StaffTransactionHistory/StaffTransactionHistory.jsx';
 import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/AdminTransactionHistory.jsx';
+import ProductEditor from './pages/Admin/ProductEditor/ProductEditor.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -70,6 +71,11 @@ const router = createBrowserRouter([
     path: "AdminTransactionHistory",
     element: <AdminTransactionHistory />,
   },
+  { //? Product Editor for Admin
+    path: "ProductEditor",
+    element: <ProductEditor /> ,
+  },
+
 
   //! Forgot Password
   {
