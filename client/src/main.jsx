@@ -71,10 +71,6 @@ const router = createBrowserRouter([
     path: "AdminTransactionHistory",
     element: <AdminTransactionHistory />,
   },
-  { //? Product Edit Page for Admin
-    path: "ProductEditPage",
-    element: <ProductEditPage /> ,
-  },
 
   //! Forgot Password
   {
