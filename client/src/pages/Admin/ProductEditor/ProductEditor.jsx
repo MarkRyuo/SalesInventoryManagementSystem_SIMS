@@ -133,6 +133,13 @@ function ProductEditor() {
                                                 </option>
                                             ))}
                                         </Form.Control>
+                                    ) : key === 'price' || key === 'quantity' ? (
+                                        <Form.Control
+                                            type="number"
+                                            value={editProduct[key]}
+                                            onChange={(e) => handleModalInputChange(key, e.target.value)}
+                                            style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
+                                        />
                                     ) : (
                                         <Form.Control
                                             type={key === 'color' ? 'text' : (typeof editProduct[key] === 'number' ? 'number' : 'text')}
