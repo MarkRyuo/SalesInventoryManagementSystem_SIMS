@@ -1,7 +1,8 @@
 import { getDatabase, ref, set, get, update, remove } from 'firebase/database';
 
 // Function to add a new product
-export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, category, dateAdded }) => {
+// Function to add a new product
+export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, tax, category, dateAdded }) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
 
@@ -14,21 +15,24 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
             color: color,
             wattage: wattage,
             voltage: voltage,
-            quantity: quantity, // Store current quantity
-            quantityHistory: [{ date: today, quantity: quantity }], // Store initial quantity with date in array
-            addedQuantityHistory: [{ date: today, quantity: quantity }], // Track quantities added over time
-            deductedQuantityHistory: [], // Initialize deducted quantity history as an empty array
-            preserveQuantityHistory: true, // Track preservation setting
+            quantity: quantity,
+            quantityHistory: [{ date: today, quantity: quantity }],
+            addedQuantityHistory: [{ date: today, quantity: quantity }],
+            deductedQuantityHistory: [],
+            preserveQuantityHistory: true,
             sku: sku,
-            price: price, // Keep price as is for storage
+            price: price,
+            tax: tax, // Store tax as percentage
             category: category,
-            dateAdded: today, // Set date added (only date)
-            lastUpdated: today, // Set last updated date (only date)
+            dateAdded: today,
+            lastUpdated: today,
         });
+
     } catch (error) {
         throw new Error(`Error adding product: ${error.message}`);
     }
 };
+
 
 // Function to update the product quantity with separate tracking for additions and deductions
 export const updateProductQuantity = async (barcode, additionalQuantity) => {
@@ -152,12 +156,14 @@ export const getAllProducts = async () => {
 
         const products = snapshot.val();
 
-        // Ensure price remains numeric and convert product data into an array
+        // Ensure price and tax remain numeric and convert product data into an array
         const formattedProducts = Object.keys(products).map(key => {
             const product = products[key];
             product.price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
+            product.tax = typeof product.tax === 'number' ? product.tax : parseFloat(product.tax) || 0; // Ensure tax is treated as percentage
             return product;
         });
+
 
         console.log("Retrieved products:", formattedProducts);
         return formattedProducts;
@@ -166,6 +172,7 @@ export const getAllProducts = async () => {
         throw new Error(`Error retrieving products: ${error.message}`);
     }
 };
+
 
 
 // Function to add a new category
@@ -244,5 +251,19 @@ export const fetchOrderHistoryFromFirebase = async () => {
         }
     } catch (error) {
         throw new Error(`Error fetching order history: ${error.message}`);
+    }
+};
+
+
+// Function to update the product in Firebase
+export const updateProductInDatabase = async (updatedProduct) => {
+    const db = getDatabase();
+    const productRef = ref(db, 'products/' + updatedProduct.barcode);
+
+    try {
+        await update(productRef, updatedProduct);
+        console.log('Product updated successfully');
+    } catch (error) {
+        console.error('Error updating product in database:', error.message);
     }
 };

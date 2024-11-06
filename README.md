@@ -11,6 +11,7 @@
 
 ### v7.1.2 (Latest)
 - Deployment 
+- Stable Version 11/06/2024 9:05pm
 
 ### v7.1.1-beta
 - POS Update
