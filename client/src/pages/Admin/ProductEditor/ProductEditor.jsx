@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
 import { getAllProducts, getCategories } from '../../../services/ProductService'; // Add getCategories import
 import { Container, Row, Col, ListGroup, Card, Spinner, Button, Form, Modal } from 'react-bootstrap';
+import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
 
 function ProductEditor() {
     const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState([]); // State for categories
+    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [editProduct, setEditProduct] = useState(null);
 
-    // Fetch products and categories on mount
     useEffect(() => {
         const fetchProductsAndCategories = async () => {
             try {
                 const productsList = await getAllProducts();
-                const categoriesList = await getCategories(); // Fetch categories
+                const categoriesList = await getCategories();
                 setProducts(productsList);
-                setCategories(categoriesList); // Set categories
+                setCategories(categoriesList);
             } catch (error) {
                 console.error('Error fetching data:', error.message);
             } finally {
@@ -41,22 +41,33 @@ function ProductEditor() {
         setEditProduct((prev) => ({ ...prev, [key]: value }));
     };
 
-    const saveChanges = () => {
-        console.log('Saving changes for product:', editProduct);
-        setProducts((prev) =>
-            prev.map((product) => (product.barcode === editProduct.barcode ? editProduct : product))
-        );
-        closeModal();
+    const saveChanges = async () => {
+        try {
+            console.log('Saving changes for product:', editProduct);
+
+            // Update the product in the state
+            setProducts((prev) =>
+                prev.map((product) => (product.barcode === editProduct.barcode ? editProduct : product))
+            );
+
+            // Call the service function to save the updated product in Firebase
+            await updateProductInDatabase(editProduct);
+
+            closeModal();
+        } catch (error) {
+            console.error('Error saving changes:', error.message);
+        }
     };
 
     const includedFields = [
         'productName',
         'price',
+        'tax', // Add tax to the fields
         'category',
         'quantity',
-        'color',  // This will now be a regular text input
+        'color',
         'size',
-        'watt',
+        'wattage',
         'voltage',
     ];
 
@@ -77,16 +88,12 @@ function ProductEditor() {
                                         <Card.Body>
                                             <Card.Title>{product.productName}</Card.Title>
                                             <Card.Text>
-                                                <div><strong>Price:</strong> ₱{product.price}</div>
+                                                <div><strong>Price:</strong> ₱{product.price.toFixed(2)}</div>
+                                                <div><strong>Tax:</strong> ₱{product.tax.toFixed(2)}</div>
                                                 <div><strong>SKU:</strong> {product.sku}</div>
                                                 <div><strong>Barcode:</strong> {product.barcode}</div>
                                             </Card.Text>
-
-                                            <Button
-                                                variant="info"
-                                                onClick={() => openModal(product)}
-                                                className="me-2"
-                                            >
+                                            <Button variant="info" onClick={() => openModal(product)} className="me-2">
                                                 Show Details / Edit
                                             </Button>
                                         </Card.Body>
@@ -116,7 +123,6 @@ function ProductEditor() {
                 <Modal.Body>
                     {editProduct && (
                         <Form>
-                            {/* Render the editable fields */}
                             {includedFields.map((key) => (
                                 <Form.Group controlId={`form${key}`} key={key}>
                                     <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}</Form.Label>
@@ -133,13 +139,13 @@ function ProductEditor() {
                                                 </option>
                                             ))}
                                         </Form.Control>
-                                    ) : key === 'price' || key === 'quantity' ? (
+                                    ) : key === 'price' || key === 'quantity' || key === 'tax' ? (
                                         <Form.Control
                                             type="number"
                                             value={editProduct[key]}
-                                            onChange={(e) => handleModalInputChange(key, e.target.value)}
+                                            onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
                                             style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
-                                            placeholder={key === 'price' ? "Enter price" : "Enter quantity"} // Adding a placeholder
+                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax" : "Enter quantity"} // Adding a placeholder
                                         />
                                     ) : (
                                         <Form.Control
