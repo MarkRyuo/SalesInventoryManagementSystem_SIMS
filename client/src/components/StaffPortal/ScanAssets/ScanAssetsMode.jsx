@@ -12,13 +12,18 @@ function Checkout() {
     const currentDate = new Date().toLocaleString();
     const [customerName, setCustomerName] = useState("John Doe");  // Editable customer name
 
-    const taxRate = 0.12;  // 12% tax rate
     const discount = 100;  // Fixed discount of 100
 
     // Calculations
     const subtotal = scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const tax = subtotal * taxRate;
-    const total = subtotal + tax - discount;
+
+    // Calculate tax based on each product's tax property
+    const totalTax = scannedItems.reduce((acc, item) => {
+        const itemTax = (item.price * item.quantity * (typeof item.tax === 'number' ? (item.tax / 100) : 0)); 
+        return acc + itemTax;
+    }, 0);
+
+    const total = subtotal + totalTax - discount;
 
     const handleCheckout = async () => {
         if (!customerName.trim()) {
@@ -37,7 +42,7 @@ function Checkout() {
             customerName,
             items: scannedItems,
             subtotal,
-            tax,
+            tax: totalTax,
             discount,
             total
         };
@@ -86,51 +91,62 @@ function Checkout() {
                                     <th>Description (Product Name, Size, Color, Voltage, Watt)</th>
                                     <th>Quantity</th>
                                     <th>Unit Price</th>
+                                    <th>Tax Rate</th>
                                     <th>Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {scannedItems.length > 0 ? (
-                                    scannedItems.map(item => (
-                                        <tr key={item.productId}>
-                                            <td>
-                                                {item.productName}
-                                                {item.size && `, Size: ${item.size}`}
-                                                {item.color && `, Color: ${item.color}`}
-                                                {item.voltage && `, Voltage: ${item.voltage}`}
-                                                {item.watt && `, Watt: ${item.watt}`}
-                                            </td>
-                                            <td>{item.quantity}</td>
-                                            <td>₱{Number(item.price).toFixed(2)}</td>
-                                            <td>₱{(item.price * item.quantity).toFixed(2)}</td>
-                                        </tr>
-                                    ))
+                                    scannedItems.map(item => {
+                                        const itemTotal = item.price * item.quantity;
+                                        // Apply the new formula with a fallback for undefined tax rate
+                                        const itemTax = (item.price * item.quantity * (item.tax || 0)) / 100; // Default to 0 if item.tax is undefined
+                                        const itemAmountWithTax = itemTotal + itemTax;
+
+                                        return (
+                                            <tr key={item.productId}>
+                                                <td>
+                                                    {item.productName}
+                                                    {item.size && `, Size: ${item.size}`}
+                                                    {item.color && `, Color: ${item.color}`}
+                                                    {item.voltage && `, Voltage: ${item.voltage}`}
+                                                    {item.watt && `, Watt: ${item.watt}`}
+                                                </td>
+                                                <td>{item.quantity}</td>
+                                                <td>₱{Number(item.price).toFixed(2)}</td>
+                                                <td>{(item.tax || 0).toFixed(2)}%</td> {/* Show 0% if no tax is defined */}
+                                                <td>₱{itemAmountWithTax.toFixed(2)}</td>
+                                            </tr>
+                                        );
+                                    })
                                 ) : (
                                     <tr>
-                                        <td colSpan="4" className="text-center">No items in the cart</td>
+                                        <td colSpan="5" className="text-center">No items in the cart</td>
                                     </tr>
                                 )}
                                 {scannedItems.length > 0 && (
                                     <>
                                         <tr>
-                                            <td colSpan="3" className="text-end"><strong>Subtotal:</strong></td>
+                                            <td colSpan="4" className="text-end"><strong>Subtotal:</strong></td>
                                             <td>₱{subtotal.toFixed(2)}</td>
                                         </tr>
                                         <tr>
-                                            <td colSpan="3" className="text-end"><strong>Tax (12%):</strong></td>
-                                            <td>₱{tax.toFixed(2)}</td>
+                                            <td colSpan="4" className="text-end"><strong>Total Tax:</strong></td>
+                                            <td>₱{totalTax.toFixed(2)}</td>
                                         </tr>
                                         <tr>
-                                            <td colSpan="3" className="text-end"><strong>Discount:</strong></td>
+                                            <td colSpan="4" className="text-end"><strong>Discount:</strong></td>
                                             <td>-₱{discount.toFixed(2)}</td>
                                         </tr>
                                         <tr>
-                                            <td colSpan="3" className="text-end"><strong>Total:</strong></td>
+                                            <td colSpan="4" className="text-end"><strong>Total:</strong></td>
                                             <td>₱{total.toFixed(2)}</td>
                                         </tr>
                                     </>
                                 )}
                             </tbody>
+
+
                         </Table>
                     </Col>
                 </Row>

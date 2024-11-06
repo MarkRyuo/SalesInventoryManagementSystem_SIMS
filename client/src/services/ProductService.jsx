@@ -22,11 +22,12 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
             preserveQuantityHistory: true,
             sku: sku,
             price: price,
-            tax: tax, // Add tax to the product
+            tax: tax, // Store tax as percentage
             category: category,
             dateAdded: today,
             lastUpdated: today,
         });
+
     } catch (error) {
         throw new Error(`Error adding product: ${error.message}`);
     }
@@ -159,9 +160,10 @@ export const getAllProducts = async () => {
         const formattedProducts = Object.keys(products).map(key => {
             const product = products[key];
             product.price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
-            product.tax = typeof product.tax === 'number' ? product.tax : parseFloat(product.tax) || 0; // Set default if undefined
+            product.tax = typeof product.tax === 'number' ? product.tax : parseFloat(product.tax) || 0; // Ensure tax is treated as percentage
             return product;
         });
+
 
         console.log("Retrieved products:", formattedProducts);
         return formattedProducts;

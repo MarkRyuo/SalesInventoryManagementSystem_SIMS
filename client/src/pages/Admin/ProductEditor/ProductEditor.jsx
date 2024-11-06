@@ -89,7 +89,7 @@ function ProductEditor() {
                                             <Card.Title>{product.productName}</Card.Title>
                                             <Card.Text>
                                                 <div><strong>Price:</strong> ₱{product.price.toFixed(2)}</div>
-                                                <div><strong>Tax:</strong> ₱{product.tax.toFixed(2)}</div>
+                                                <div><strong>Tax:</strong> {product.tax}%</div>
                                                 <div><strong>SKU:</strong> {product.sku}</div>
                                                 <div><strong>Barcode:</strong> {product.barcode}</div>
                                             </Card.Text>
@@ -140,13 +140,14 @@ function ProductEditor() {
                                             ))}
                                         </Form.Control>
                                     ) : key === 'price' || key === 'quantity' || key === 'tax' ? (
-                                        <Form.Control
-                                            type="number"
-                                            value={editProduct[key]}
-                                            onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
-                                            style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
-                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax" : "Enter quantity"} // Adding a placeholder
-                                        />
+                                            <Form.Control
+                                                type="number"
+                                                value={editProduct[key]}
+                                                onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
+                                                style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
+                                                placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (percentage)" : "Enter quantity"} // Updated placeholder for tax
+                                            />
+
                                     ) : (
                                         <Form.Control
                                             type={key === 'color' ? 'text' : (typeof editProduct[key] === 'number' ? 'number' : 'text')}
