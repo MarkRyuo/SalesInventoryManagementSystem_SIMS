@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAllProducts, getCategories } from '../../../services/ProductService'; // Add getCategories import
 import { Container, Row, Col, ListGroup, Card, Spinner, Button, Form, Modal } from 'react-bootstrap';
 import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
+import ProductNavbar from './ProductNavbar';
 
 function ProductEditor() {
     const [products, setProducts] = useState([]);
@@ -73,7 +74,7 @@ function ProductEditor() {
 
     return (
         <Container className="mt-4">
-            <h1 className="text-center mb-4">Product List</h1>
+            <ProductNavbar />
             {loading ? (
                 <div className="text-center">
                     <Spinner animation="border" variant="primary" />
