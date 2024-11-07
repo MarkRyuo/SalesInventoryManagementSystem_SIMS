@@ -48,7 +48,7 @@ export const NavDashboard = () => {
     };
 
     return (
-        <Container fluid style={{ margin: "0px", padding: "0px" }}>
+        <>
             <Navbar className={Navbars.navDashboard}>
                 <Container>
                     <Navbar.Brand>
@@ -96,6 +96,6 @@ export const NavDashboard = () => {
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>
-        </Container>
+        </>
     );
 };
