@@ -1,9 +1,10 @@
+import { Container } from "react-bootstrap";
 
 function ProductMain() {
     return (
-        <div>
+        <Container fluid className="m-0 p-0">
 
-        </div>
+        </Container>
     )
 }
 
