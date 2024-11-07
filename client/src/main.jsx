@@ -90,7 +90,7 @@ const router = createBrowserRouter([
     path: "EnableRecoveryMode",
     element: <EnableRecoveryMode />,
   },
-  {
+  { //? ResetPasswordMode for Admin
     path: "ResetPasswordMode",
     element: <ResetPasswordMode />,
   },
