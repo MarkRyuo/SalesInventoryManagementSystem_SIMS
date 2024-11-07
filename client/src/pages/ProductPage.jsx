@@ -1,32 +1,50 @@
+import { useState } from 'react';
+import { Nav } from 'react-bootstrap';
 import { MainLayout } from "../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
-import Product from '../components/Charts/ProductChart/Product'
+import Product from '../components/Charts/ProductChart/Product';
 import { Container } from "react-bootstrap";
-import ProductNavbarTabs from "./Admin/ProductEditor/ProductNavbarTabs";
 import ProductEditor from "./Admin/ProductEditor/ProductEditor";
 
-//* Product Page
+// eslint-disable-next-line react/prop-types
+function ProductNavbarTabs({ setActiveTab }) {
+    return (
+        <Nav justify variant="tabs" defaultActiveKey="/Product" className="mt-4" onSelect={setActiveTab}>
+            <Nav.Item>
+                <Nav.Link eventKey="/Product"><AiFillProduct />Product</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link eventKey="/ProductEditor">Product Edit</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link eventKey="#">Link</Nav.Link>
+            </Nav.Item>
+        </Nav>
+    );
+}
 
 export const ProductPage = () => {
+    const [activeTab, setActiveTab] = useState('/Product');
 
     return (
         <MainLayout>
             <Container className="ProductMain">
-                <ProductNavbarTabs />
+                <ProductNavbarTabs setActiveTab={setActiveTab} />
                 <div className="ProductContent">
-                    <div className="ProductEditor">
-                    </div>
-                    <div className="ProductEditor">
-                        <ProductEditor />
-                    </div>
+                    {activeTab === '/Product' && (
+                        <div className="Product">
+                            <Product />
+                        </div>
+                    )}
+                    {activeTab === '/ProductEditor' && (
+                        <div className="ProductEditor">
+                            <ProductEditor />
+                        </div>
+                    )}
                 </div>
             </Container>
-            <p className="fs-3 ms-3"><span><AiFillProduct /></span>Product</p> {/*  */}
-            <div>
-                <Product />
-            </div>
         </MainLayout>
-    )
-}
+    );
+};
 
 export default ProductPage;
