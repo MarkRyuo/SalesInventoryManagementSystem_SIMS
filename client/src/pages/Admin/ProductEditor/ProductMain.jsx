@@ -1,5 +1,6 @@
 import { Container, Navbar } from "react-bootstrap";
 import ProductNavbarTabs from "./ProductNavbarTabs";
+import ProductEditor from "./ProductEditor";
 
 function ProductMain() {
     return (
@@ -13,7 +14,7 @@ function ProductMain() {
             <div className="ProductMain">
                 <ProductNavbarTabs />
                 <div className="ProductContent">
-
+                    <ProductEditor />
                 </div>
             </div>
         </Container>
