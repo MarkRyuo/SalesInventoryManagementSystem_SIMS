@@ -6,10 +6,10 @@ export const MainLayout = ({children}) => {
 
     return (
         <Container fluid style={{ margin: "0px", padding: "0px" }}>
-                <NavDashboard />
-                <Container fluid='lg' className='p-0'>
-                    {children}
-                </Container>
+            <NavDashboard />
+            <Container fluid='lg' className='p-0'>
+                {children}
+            </Container>
         </Container>
     )
 }
