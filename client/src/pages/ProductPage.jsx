@@ -45,7 +45,7 @@ export const ProductPage = () => {
                     )}
                     {activeTab === '#' && (
                         <div className="Unknown">
-                            <h1>Loading</h1>
+                            <h1 className='mt-4'>Loading</h1>
                         </div>
                     )}
                 </div>
