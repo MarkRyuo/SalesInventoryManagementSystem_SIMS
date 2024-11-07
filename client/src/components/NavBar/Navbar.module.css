@@ -20,7 +20,6 @@
 /* *NavDashboard.jsx */
 
 .navDashboard {
-    padding: 10px;
     margin-bottom: 30px;
     border-bottom: 1px solid var(--navBorder);
     /* border: 1px solid red; */

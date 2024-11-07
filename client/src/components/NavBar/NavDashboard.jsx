@@ -48,8 +48,8 @@ export const NavDashboard = () => {
     };
 
     return (
-        <>
-            <Navbar className={Navbars.navDashboard}>
+        <main className={Navbars.navDashboard}>
+            <Navbar>
                 <Container>
                     <Navbar.Brand>
                         <Button variant="light" className={Navbars.btnOffcanvas} onClick={handleShow}>
@@ -96,6 +96,6 @@ export const NavDashboard = () => {
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>
-        </>
+        </main>
     );
 };
