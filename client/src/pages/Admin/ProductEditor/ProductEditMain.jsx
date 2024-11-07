@@ -2,7 +2,7 @@ import { Container, Navbar } from "react-bootstrap";
 import ProductNavbarTabs from "./ProductNavbarTabs";
 import ProductEditor from "./ProductEditor";
 
-function ProductMain() {
+function ProductEditMain() {
     return (
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-body-tertiary">
@@ -23,4 +23,4 @@ function ProductMain() {
     )
 }
 
-export default ProductMain ;
+export default ProductEditMain ;
