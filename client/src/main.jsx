@@ -76,7 +76,7 @@ const router = createBrowserRouter([
     path: "ProductEditor",
     element: <ProductEditor /> ,
   },
-  { //? Product Editor for Admin
+  { //? Product for Admin
     path: "Product",
     element: <Product /> ,
   },
