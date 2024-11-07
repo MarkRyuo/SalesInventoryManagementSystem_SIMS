@@ -17,6 +17,8 @@ function ProductEditMain() {
                 <ProductNavbarTabs />
                 <div className="ProductContent">
                     <div className="ProductEditor">
+                    </div>
+                    <div className="ProductEditor">
                         <ProductEditor />
                     </div>
                 </div>
