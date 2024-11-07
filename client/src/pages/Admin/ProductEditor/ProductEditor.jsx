@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAllProducts, getCategories } from '../../../services/ProductService'; // Add getCategories import
 import { Container, Row, Col, ListGroup, Card, Spinner, Button, Form, Modal } from 'react-bootstrap';
 import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
-import ProductNavbar from './ProductNavbar';
+import ProductNavbar from './ProductNavbarTabs';
 
 function ProductEditor() {
     const [products, setProducts] = useState([]);

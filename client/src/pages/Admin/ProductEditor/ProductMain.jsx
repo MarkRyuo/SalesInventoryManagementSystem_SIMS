@@ -8,6 +8,10 @@ function ProductMain() {
                     <Navbar.Brand href="#home">Brand link</Navbar.Brand>
                 </Container>
             </Navbar>
+
+            <div className="ProductMain">
+            
+            </div>
         </Container>
     )
 }

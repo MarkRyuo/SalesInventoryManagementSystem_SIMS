@@ -1,6 +1,6 @@
 import {Nav} from 'react-bootstrap'
 
-function ProductNavbar() {
+function ProductNavbarTabs() {
     return (
         <Nav justify variant="tabs" defaultActiveKey="/home">
             <Nav.Item>
@@ -16,4 +16,4 @@ function ProductNavbar() {
     )
 }
 
-export default ProductNavbar ;
+export default ProductNavbarTabs ;
