@@ -82,11 +82,11 @@ const router = createBrowserRouter([
   },
 
   //! Forgot Password
-  {
+  { //? Forgot Password Mode for Admin
     path: "ForgotPasswordMode",
     element: <ForgotPasswordMode />,
   },
-  {
+  { //? Enable Recovery Mode for Admin
     path: "EnableRecoveryMode",
     element: <EnableRecoveryMode />,
   },
