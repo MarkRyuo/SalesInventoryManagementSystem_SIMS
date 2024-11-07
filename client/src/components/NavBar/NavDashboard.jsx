@@ -1,6 +1,6 @@
 import { Container, Navbar, Button, Offcanvas, Image } from 'react-bootstrap';
 import { useState } from 'react';
-import Navbars from './Navbar.module.css';
+import Navbars from './Navbar.module.scss';
 import { Buttons } from './Buttons';
 import AccountDropdown from './AccountDropdown';
 
