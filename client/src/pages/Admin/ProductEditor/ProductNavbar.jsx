@@ -1,9 +1,9 @@
 
 function ProductNavbar() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
