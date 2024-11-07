@@ -14,7 +14,9 @@ function ProductMain() {
             <div className="ProductMain">
                 <ProductNavbarTabs />
                 <div className="ProductContent">
-                    <ProductEditor />
+                    <div className="ProductEditor">
+                        <ProductEditor />
+                    </div>
                 </div>
             </div>
         </Container>
