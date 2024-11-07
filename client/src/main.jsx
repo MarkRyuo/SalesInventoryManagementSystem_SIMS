@@ -82,7 +82,7 @@ const router = createBrowserRouter([
   },
 
   //! Forgot Password
-  { //? Forgot PasswordMode for Admin
+  { //? ForgotPasswordMode for Admin
     path: "ForgotPasswordMode",
     element: <ForgotPasswordMode />,
   },
@@ -94,7 +94,7 @@ const router = createBrowserRouter([
     path: "ResetPasswordMode",
     element: <ResetPasswordMode />,
   },
-  {
+  { //? ResetRendering for Admin
     path: "ResetRendering",
     element: <ResetRendering />,
   },
