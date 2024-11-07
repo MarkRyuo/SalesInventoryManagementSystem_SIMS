@@ -1,4 +1,4 @@
-import { Row, Col, Image } from 'react-bootstrap';
+import { Row, Col, Image, Container } from 'react-bootstrap';
 import { MainLayout } from '../../../layout/MainLayout';
 import DashboardCss from './Dashboard.module.scss';
 import { useEffect, useState } from 'react';
@@ -97,7 +97,7 @@ export const DashboardPage = () => {
                 </div>
 
                 {!isLoading && (
-                    <>
+                    <Container>
                         <Row className={DashboardCss.rowContainer}>
                             <Col>
                                 <Chart1 />
@@ -119,7 +119,7 @@ export const DashboardPage = () => {
                                 <ChartLg2 />
                             </Col>
                         </Row>
-                    </>
+                    </Container>
                 )}
             </div>
         </MainLayout>
