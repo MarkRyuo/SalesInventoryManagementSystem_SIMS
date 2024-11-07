@@ -19,7 +19,7 @@ function ProductNavbarTabs({ setActiveTab }) {
                 <Nav.Link eventKey="/ProductEditor"><FaRegEdit size={20} />Product Edit</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link eventKey="#">Link</Nav.Link>
+                <Nav.Link eventKey="#">Unknown</Nav.Link>
             </Nav.Item>
         </Nav>
     );
