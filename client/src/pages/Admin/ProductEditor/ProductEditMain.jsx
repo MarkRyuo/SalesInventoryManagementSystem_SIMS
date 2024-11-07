@@ -9,7 +9,7 @@ function ProductEditMain() {
         <Container fluid className="m-0 p-0">
             <Navbar className="bg-body-tertiary">
                 <Container>
-                    <Button as={Link} variant="light"><IoMdArrowRoundBack /></Button>
+                    <Button as={Link} variant="light" to={"/DashboardPage"}><IoMdArrowRoundBack /></Button>
                 </Container>
             </Navbar>
 
