@@ -2,7 +2,7 @@ import {Nav} from 'react-bootstrap'
 
 function ProductNavbarTabs() {
     return (
-        <Nav justify variant="tabs" defaultActiveKey="/ProductEditor">
+        <Nav justify variant="tabs" defaultActiveKey="/ProductEditor" className='mt-4'>
             <Nav.Item>
                 <Nav.Link href="#">Edit Product</Nav.Link>
             </Nav.Item>
