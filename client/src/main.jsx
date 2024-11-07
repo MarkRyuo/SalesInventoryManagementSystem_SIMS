@@ -40,6 +40,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />, //* Root This is Login in DashBoard
   },
+  //! Admin Pages
   { //? LoginPage Admin
     path: "LoginPage",
     element: <LoginPage />, //* Root This is Login in DashBoard
