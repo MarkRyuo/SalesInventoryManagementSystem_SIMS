@@ -98,11 +98,11 @@ export const DashboardPage = () => {
 
                 {!isLoading && (
                     <>
-                        <div className={DashboardCss.rowContainer}>
+                        <Row className={DashboardCss.rowContainer}>
                             <Chart1 />
                             <Chart2 />
                             <Chart3 />
-                        </div>
+                        </Row>
 
                         <Row className={DashboardCss.rowContainerLg}>
                             <Col className={DashboardCss.colContainerLg} sm={12} lg={6}>

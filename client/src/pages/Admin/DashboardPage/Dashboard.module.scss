@@ -4,16 +4,13 @@
 /* !(Warning): This is for ChartSm */
 
 .rowContainer {
-    /* border: 1px solid red; */
+    border: 1px solid red;
     width: 100%;
     height: auto;
     padding: 10px;
     margin: 12px 0;
     gap: 10px;
     display: flex;
-    overflow-x: scroll;
-    flex-wrap: nowrap;
-    justify-content: space-between;
     padding: 10px;
 }
 
