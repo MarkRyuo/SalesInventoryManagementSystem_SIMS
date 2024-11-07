@@ -12,6 +12,9 @@ function ProductMain() {
 
             <div className="ProductMain">
                 <ProductNavbarTabs />
+                <div className="ProductContent">
+
+                </div>
             </div>
         </Container>
     )
