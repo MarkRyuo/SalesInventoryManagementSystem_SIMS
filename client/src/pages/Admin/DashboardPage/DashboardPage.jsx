@@ -1,6 +1,6 @@
 import { Row, Col, Image } from 'react-bootstrap';
 import { MainLayout } from '../../../layout/MainLayout';
-import DashboardCss from './DashboardPage';
+import DashboardCss from './Dashboard.module.scss';
 import { useEffect, useState } from 'react';
 import { db } from '../../../services/firebase';
 import { doc, getDoc } from 'firebase/firestore';
