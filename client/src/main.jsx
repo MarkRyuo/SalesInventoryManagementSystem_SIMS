@@ -81,7 +81,6 @@ const router = createBrowserRouter([
     element: <Product /> ,
   },
 
-
   //! Forgot Password
   {
     path: "ForgotPasswordMode",
