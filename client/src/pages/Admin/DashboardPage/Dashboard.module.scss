@@ -9,9 +9,12 @@
     height: auto;
     padding: 10px;
     margin: 12px 0;
-    gap: 10px;
     display: flex;
     padding: 10px;
+
+    @media (max-width: 1000px) {
+        gap: 15px;
+    }
 }
 
 
