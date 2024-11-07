@@ -12,6 +12,7 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { FaHistory } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
 
 export const NavDashboard = () => {
     const [show, setShow] = useState(false);
@@ -27,7 +28,7 @@ export const NavDashboard = () => {
         { icon: <TbReportAnalytics />, btnName: "Report", id: "b-3", path: "/ReportPage" },
         { icon: <VscAccount />, btnName: "Account", id: "b-4", path: "/AccountPage" },
         { icon: <FaHistory />, btnName: "Transaction History", id: "b-5", path: "/AdminTransactionHistory" },
-        { icon: <VscAccount />, btnName: "ProductEditor", id: "b-6", path: "/ProductEditMain" },
+        { icon: <FaRegEdit />, btnName: "Product Editor", id: "b-6", path: "/ProductEditMain" },
     ]);
 
     //* Handle logout with confirmation and loading state
