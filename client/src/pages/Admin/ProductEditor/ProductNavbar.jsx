@@ -1,4 +1,4 @@
-import {Nav, Navbar, Container, NavDropdown} from 'react-bootstrap'
+import {Nav, Navbar, Container} from 'react-bootstrap'
 
 function ProductNavbar() {
     return (
@@ -8,19 +8,8 @@ function ProductNavbar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#">Dashboard</Nav.Link>
-                        <Nav.Link href="#">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                        <Nav.Link href="/DashboardPage">Dashboard</Nav.Link>
+                        <Nav.Link href="#">Product Edit</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
