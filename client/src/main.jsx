@@ -4,7 +4,6 @@ import App from './App.jsx'
 import './index.scss'
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 //? Pages Import
-import DashboardPage from '../src/pages/DashboardPage';
 import ProductPage from './pages/ProductPage.jsx';
 import ReportPage from './pages/ReportPage.jsx';
 import StaffAccount from './pages/StaffAccount.jsx'
@@ -34,6 +33,7 @@ import StaffTransactionHistory from './pages/Staff/StaffTransactionHistory/Staff
 import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/AdminTransactionHistory.jsx';
 import ProductEditor from './pages/Admin/ProductEditor/ProductEditor.jsx';
 import Product from './components/Charts/ProductChart/Product.jsx' ;
+import DashboardPage from '../src/pages/Admin/DashboardPage/DashboardPage.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
