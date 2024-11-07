@@ -43,6 +43,11 @@ export const ProductPage = () => {
                             <ProductEditor />
                         </div>
                     )}
+                    {activeTab === '#' && (
+                        <div className="Unknown">
+                            <h1>Loading</h1>
+                        </div>
+                    )}
                 </div>
             </Container>
         </MainLayout>
