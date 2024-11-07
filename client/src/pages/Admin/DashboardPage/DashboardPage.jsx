@@ -99,9 +99,16 @@ export const DashboardPage = () => {
                 {!isLoading && (
                     <>
                         <Row className={DashboardCss.rowContainer}>
-                            <Chart1 />
-                            <Chart2 />
-                            <Chart3 />
+                            <Col>
+                                <Chart1 />
+                            </Col>
+                            <Col>
+                                <Chart2 />
+                            </Col>
+                            <Col>
+                                <Chart3 />
+                            </Col>
+
                         </Row>
 
                         <Row className={DashboardCss.rowContainerLg}>
