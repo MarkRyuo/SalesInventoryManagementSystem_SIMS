@@ -9,9 +9,9 @@ import ProductEditor from "./Admin/ProductEditor/ProductEditor";
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
     return (
-        <Nav justify variant="tabs" defaultActiveKey="/Product" className="mt-4" onSelect={setActiveTab}>
+        <Nav justify variant="tabs" defaultActiveKey="/Product" className="mt-3" onSelect={setActiveTab}>
             <Nav.Item>
-                <Nav.Link eventKey="/Product"><AiFillProduct />Product</Nav.Link>
+                <Nav.Link eventKey="/Product"><AiFillProduct size={20}/>Product</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link eventKey="/ProductEditor">Product Edit</Nav.Link>

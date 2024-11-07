@@ -33,7 +33,6 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx'
 import StaffTransactionHistory from './pages/Staff/StaffTransactionHistory/StaffTransactionHistory.jsx';
 import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/AdminTransactionHistory.jsx';
 import ProductEditor from './pages/Admin/ProductEditor/ProductEditor.jsx';
-import ProductEditMain from './pages/Admin/ProductEditor/ProductEditMain.jsx';
 import Product from './components/Charts/ProductChart/Product.jsx' ;
 
 const router = createBrowserRouter([
@@ -76,10 +75,6 @@ const router = createBrowserRouter([
   { //? Product Editor for Admin
     path: "ProductEditor",
     element: <ProductEditor /> ,
-  },
-  { //? Product Editor for Admin
-    path: "ProductEditMain",
-    element: <ProductEditMain /> ,
   },
   { //? Product Editor for Admin
     path: "Product",
