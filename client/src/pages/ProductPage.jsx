@@ -5,6 +5,8 @@ import { AiFillProduct } from "react-icons/ai";
 import Product from '../components/Charts/ProductChart/Product';
 import { Container } from "react-bootstrap";
 import ProductEditor from "./Admin/ProductEditor/ProductEditor";
+import { FaRegEdit } from "react-icons/fa";
+
 
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
@@ -14,7 +16,7 @@ function ProductNavbarTabs({ setActiveTab }) {
                 <Nav.Link eventKey="/Product"><AiFillProduct size={20}/>Product</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link eventKey="/ProductEditor">Product Edit</Nav.Link>
+                <Nav.Link eventKey="/ProductEditor"><FaRegEdit size={20} />Product Edit</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link eventKey="#">Link</Nav.Link>
