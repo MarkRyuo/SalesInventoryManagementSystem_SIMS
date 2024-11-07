@@ -9,9 +9,6 @@
 
 ## Changelog
 
-### v7.1.3 (Latest)
-- Repair 
-
 ### v7.1.2
 - Deployment 
 - Stable Version 11/06/2024 9:05pm
