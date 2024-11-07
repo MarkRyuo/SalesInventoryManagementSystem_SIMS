@@ -79,6 +79,12 @@
         border: 1px solid;
         width: 100%;
         height: auto ;
+        padding: 10px;
+
+            .colFeature {
+                border: 1px solid;
+                display: flex;
+            }
 
         @media (max-width: 1000px) {
             gap: 10px;

@@ -60,6 +60,9 @@ function LandingPage() {
                             <Col className={LandingPagecss.colFeature}>
                                 <div>
                                     <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
+                                    <p>
+                                        text here
+                                    </p>
                                 </div>
                             </Col>
                         </Row>
