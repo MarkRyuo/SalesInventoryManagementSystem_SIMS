@@ -84,6 +84,10 @@
             .colFeature {
                 border: 1px solid;
                 display: flex;
+                
+                .colFeature:first-child {
+                    width: 300px;
+                }
             }
 
         @media (max-width: 1000px) {
