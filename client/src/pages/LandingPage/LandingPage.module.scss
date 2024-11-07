@@ -73,22 +73,11 @@
     box-sizing: border-box;
     height: 50vh;
     padding-top: 40px;
-    border: 1px solid;
 
     .rowFeature {
-        border: 1px solid;
         width: 100%;
         height: auto ;
-        padding: 10px;
-
-            .colFeature {
-                border: 1px solid;
-                display: flex;
-                
-                .colFeature:first-child {
-                    width: 500px;
-                }
-            }
+        padding: 20px;
 
         @media (max-width: 1000px) {
             gap: 10px;
