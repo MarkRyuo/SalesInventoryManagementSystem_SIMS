@@ -24,8 +24,10 @@
     border-bottom: 1px solid var(--navBorder);
     /* border: 1px solid red; */
     background-color: #ffff;
+    padding: 5px;
     position: sticky;
     top: 0;
+    z-index: 1000;
 }
 
 .btnOffcanvas {
