@@ -73,7 +73,7 @@ function ProductEditor() {
     ];
 
     return (
-        <Container className="mt-4">
+        <Container>
             <ProductNavbar />
             {loading ? (
                 <div className="text-center">
