@@ -11,9 +11,10 @@
         border: 1px solid;
         height: 70vh;
         overflow: auto;
+        gap: 5px;
 
         @media (max-width: 700px) {
-            border: 1px solid red;
+            // border: 1px solid red;
             width: 100%;
         }
     }
@@ -28,7 +29,7 @@
 .cardBody {
     display: flex;
     flex-direction: column;
-    border: 1px solid;
+    // border: 1px solid;
 
     .cardTitle {
         font-size: 1.5rem;
@@ -36,7 +37,7 @@
 
     .cardText {
         display: flex;
-        border: 1px solid;
+        // border: 1px solid;
         justify-content: space-between;
 
         div {

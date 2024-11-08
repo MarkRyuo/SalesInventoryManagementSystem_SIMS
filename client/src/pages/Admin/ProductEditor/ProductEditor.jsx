@@ -84,7 +84,7 @@ function ProductEditor() {
                     <div>
                         <ListGroup className={ProductEditorscss.listGroupItem}>
                             {products.map((product) => (
-                                <ListGroup.Item key={product.barcode} className="d-flex align-items-center">
+                                <ListGroup.Item key={product.barcode} className="d-flex align-items-center p-0">
                                     <Card className="w-100">
                                         <Card.Body className={ProductEditorscss.cardBody}>
                                             <Card.Title className={ProductEditorscss.cardTitle}>{product.productName}</Card.Title>
