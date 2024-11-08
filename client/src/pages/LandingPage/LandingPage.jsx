@@ -51,7 +51,10 @@ function LandingPage() {
                                     size='lg' 
                                     href="#features" 
                                     id="btn" 
-                                    style={{border: '1px solid'}}>
+                                    style={{
+                                        border: '1px solid',
+                                    
+                                    }}>
                                     <span><CiGlobe /></span> Explore
                                 </Button>                         
                             </div>
