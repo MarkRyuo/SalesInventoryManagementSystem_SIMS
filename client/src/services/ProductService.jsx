@@ -7,11 +7,7 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
     const productRef = ref(db, 'products/' + barcode);
 
     try {
-        // Ensure date is properly formatted to YYYY-MM-DD
-        const today = dateAdded ? new Date(dateAdded).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]; // Default to today's date if dateAdded is not provided
-
-        console.log('Date Added:', today); // Log the date for debugging purposes
-
+        const today = dateAdded.split('T')[0];
         await set(productRef, {
             barcode: barcode,
             productName: productName,
@@ -28,17 +24,14 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
             price: price,
             tax: tax, // Store tax as percentage
             category: category,
-            dateAdded: today, // Set dateAdded to today's date
-            lastUpdated: today, // Set lastUpdated to today's date
+            dateAdded: today,
+            lastUpdated: today,
         });
 
     } catch (error) {
-        console.error("Error adding product:", error);
         throw new Error(`Error adding product: ${error.message}`);
     }
 };
-
-
 
 
 // Function to update the product quantity with separate tracking for additions and deductions
@@ -56,60 +49,77 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         const currentQuantity = productData.quantity || 0;
         const updatedQuantity = currentQuantity + additionalQuantity;
 
+        // Check if the updated quantity would be zero or negative
         if (updatedQuantity < 0) {
             throw new Error(`Insufficient quantity. Current quantity is ${currentQuantity}. Cannot reduce by ${Math.abs(additionalQuantity)}.`);
         }
 
-        const today = new Date().toISOString().split('T')[0]; // Always use current date for lastUpdated
+        // Get today's date
+        const today = new Date().toISOString().split('T')[0];
 
-        console.log('Updating product. Last Updated:', today); // Log for debugging
-
+        // Check if preserveQuantityHistory is enabled
         const preserveQuantityHistory = productData.preserveQuantityHistory || false;
-        const newQuantityHistory = preserveQuantityHistory ? [...(productData.quantityHistory || [])] : [];
 
+        // Update quantity history: Keep the history unchanged
+        const newQuantityHistory = preserveQuantityHistory
+            ? [...(productData.quantityHistory || [])]
+            : [];
+
+        // Update today's quantity in the history
         const quantityEntry = newQuantityHistory.find(entry => entry.date === today);
         if (quantityEntry) {
-            quantityEntry.quantity = updatedQuantity;
+            // Update the existing entry with the new total quantity
+            quantityEntry.quantity = updatedQuantity; // This keeps the quantity for today updated
         } else {
+            // If no entry exists, add a new entry for today's quantity
             newQuantityHistory.push({ date: today, quantity: updatedQuantity });
         }
 
+        // Update added quantity history
         const newAddedQuantityHistory = [...(productData.addedQuantityHistory || [])];
         if (additionalQuantity > 0) {
             const addedEntry = newAddedQuantityHistory.find(entry => entry.date === today);
             if (addedEntry) {
-                addedEntry.quantity += additionalQuantity;
+                // If an entry for today exists, increment the added quantity
+                addedEntry.quantity += additionalQuantity; // Add to the total added quantity
             } else {
-                newAddedQuantityHistory.push({ date: today, quantity: additionalQuantity });
+                // If no entry exists, add a new entry
+                newAddedQuantityHistory.push({
+                    date: today,
+                    quantity: additionalQuantity,
+                });
             }
         }
 
+        // Update deducted quantity history
         const newDeductedQuantityHistory = [...(productData.deductedQuantityHistory || [])];
         if (additionalQuantity < 0) {
             const deductedEntry = newDeductedQuantityHistory.find(entry => entry.date === today);
             if (deductedEntry) {
-                deductedEntry.quantity -= additionalQuantity;
+                // If an entry for today exists, increment the deducted quantity
+                deductedEntry.quantity -= additionalQuantity; // Since additionalQuantity is negative, this effectively adds to the deducted quantity
             } else {
-                newDeductedQuantityHistory.push({ date: today, quantity: -additionalQuantity });
+                // If no entry exists, add a new entry
+                newDeductedQuantityHistory.push({
+                    date: today,
+                    quantity: -additionalQuantity,
+                });
             }
         }
 
         await update(productRef, {
-            quantity: updatedQuantity,
-            quantityHistory: newQuantityHistory,
-            addedQuantityHistory: newAddedQuantityHistory,
-            deductedQuantityHistory: newDeductedQuantityHistory,
-            lastUpdated: today, // Ensure lastUpdated is updated
+            quantity: updatedQuantity, // Update total quantity
+            quantityHistory: newQuantityHistory, // Update quantity history
+            addedQuantityHistory: newAddedQuantityHistory, // Update added quantity history
+            deductedQuantityHistory: newDeductedQuantityHistory, // Update deducted quantity history as an array
+            lastUpdated: today, // Update last updated date (only date)
         });
 
-        return updatedQuantity;
-
+        return updatedQuantity; // Return the updated quantity
     } catch (error) {
-        console.error("Error updating product quantity:", error);
         throw new Error(`Error updating quantity: ${error.message}`);
     }
 };
-
 
 
 // Function to fetch a product by barcode
