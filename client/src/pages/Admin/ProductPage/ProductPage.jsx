@@ -17,14 +17,20 @@ function ProductNavbarTabs({ setActiveTab }) {
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/Product">
                     <AiFillProduct size={20}/>
-                    Product
+                    <p className='m-0 p-0'>Product</p>
                 </Nav.Link>
             </Nav.Item>
-            <Nav.Item>
-                <Nav.Link eventKey="/ProductEditor"><FaRegEdit size={20} />Product Edit</Nav.Link>
+            <Nav.Item className={ProductPagescss.mainTabs}>
+                <Nav.Link eventKey="/ProductEditor">
+                    <FaRegEdit size={20} />
+                    <p className='m-0 p-0'>Product Edit</p>
+                </Nav.Link>
             </Nav.Item>
-            <Nav.Item>
-                <Nav.Link eventKey="#">Unknown</Nav.Link>
+            <Nav.Item className={ProductPagescss.mainTabs}>
+                <Nav.Link eventKey="#">
+                    <FaRegEdit size={20} />
+                    <p className='m-0 p-0'>Unknown</p>
+                </Nav.Link>
             </Nav.Item>
         </Nav>
     );
