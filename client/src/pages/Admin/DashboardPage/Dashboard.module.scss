@@ -65,5 +65,12 @@
 }
 
 .credentialDashboard {
-    
+    border: 1px solid;
+    display: flex;
+
+    img {
+        width: 100%;
+        max-width: 100px;
+        height: 100px;
+    }
 }

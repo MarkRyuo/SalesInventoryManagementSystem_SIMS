@@ -83,7 +83,6 @@ export const DashboardPage = () => {
                             <Image
                                 src="/ReyesElectronicsLogo.png"
                                 roundedCircle
-                                style={{ width: '100%', maxWidth: '100px', height: '100px' }}
                             />
                             <div>
                                 <p className='fs-4 m-0'>
