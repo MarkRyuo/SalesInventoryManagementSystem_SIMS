@@ -1,14 +1,14 @@
 
 
 .mainTabs {
-    div {
+    a {
         p {
             font-size: 1rem; 
         }
         
         @media (max-width: 700px) {
             p {
-                font-size: 4rem;
+                font-size: 0.8rem;
             }
         }
         
