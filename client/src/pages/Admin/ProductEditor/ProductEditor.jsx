@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAllProducts, getCategories } from '../../../services/ProductService'; // Add getCategories import
 import { Container, Row, Col, ListGroup, Card, Spinner, Button, Form, Modal } from 'react-bootstrap';
 import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
+import ProductEditorscss from './ProductEditor.module.scss' ;   
 
 function ProductEditor() {
     const [products, setProducts] = useState([]);
@@ -86,7 +87,7 @@ function ProductEditor() {
                                     <Card className="w-100">
                                         <Card.Body>
                                             <Card.Title>{product.productName}</Card.Title>
-                                            <Card.Text>
+                                            <Card.Text className={ProductEditorscss.cardText}>
                                                 <div><strong>Price:</strong> ₱{product.price.toFixed(2)}</div>
                                                 <div><strong>Tax:</strong> {product.tax}%</div>
                                                 <div><strong>SKU:</strong> {product.sku}</div>
