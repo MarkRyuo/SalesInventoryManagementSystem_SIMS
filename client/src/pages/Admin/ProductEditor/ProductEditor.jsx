@@ -85,7 +85,7 @@ function ProductEditor() {
                             {products.map((product) => (
                                 <ListGroup.Item key={product.barcode} className="d-flex align-items-center">
                                     <Card className="w-100">
-                                        <Card.Body>
+                                        <Card.Body className={ProductEditorscss.cardBody}>
                                             <Card.Title>{product.productName}</Card.Title>
                                             <Card.Text className={ProductEditorscss.cardText}>
                                                 <div><strong>Price:</strong> ₱{product.price.toFixed(2)}</div>
