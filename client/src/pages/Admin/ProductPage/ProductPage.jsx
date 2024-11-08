@@ -7,7 +7,7 @@ import { Container } from "react-bootstrap";
 import ProductEditor from "../ProductEditor/ProductEditor";
 import { FaRegEdit } from "react-icons/fa";
 
-import ProductPagescss from './ProductPage.module.scss'
+import ProductPagescss from './ProductPage.module.scss' ;
 
 
 // eslint-disable-next-line react/prop-types
