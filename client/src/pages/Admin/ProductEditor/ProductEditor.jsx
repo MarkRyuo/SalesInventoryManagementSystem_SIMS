@@ -3,6 +3,7 @@ import { getAllProducts, getCategories } from '../../../services/ProductService'
 import { Container, Row, Col, ListGroup, Card, Spinner, Button, Form, Modal } from 'react-bootstrap';
 import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
 import ProductEditorscss from './ProductEditor.module.scss' ;   
+import { LuFileEdit } from "react-icons/lu";
 
 function ProductEditor() {
     const [products, setProducts] = useState([]);
@@ -95,8 +96,8 @@ function ProductEditor() {
                                                     <p className='m-0 p-0'>Barcode: <span>{product.barcode}</span></p>
                                                 </div>
                                                 <div>
-                                                    <Button variant="info" onClick={() => openModal(product)} className="me-2">
-                                                        Show Details / Edit
+                                                    <Button variant="primary" onClick={() => openModal(product)} className="me-2">
+                                                        <LuFileEdit size={20}/> 
                                                     </Button>
                                                 </div>
                                             </Card.Text>

@@ -17,6 +17,11 @@
         display: flex;
         border: 1px solid;
         justify-content: space-between;
+
+        div:last-child {
+            display: inline-flex;
+            align-items: center;
+        }
     }
 
 }//! End of cardBody
