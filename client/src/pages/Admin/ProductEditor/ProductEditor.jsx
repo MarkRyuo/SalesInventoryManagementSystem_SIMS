@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { getAllProducts, getCategories } from '../../../services/ProductService'; // Add getCategories import
-import { Container, ListGroup, Card, Spinner, Button, Form, Modal } from 'react-bootstrap';
+import { Container, ListGroup, Card, Spinner, Button, Form, Modal, Row, Col } from 'react-bootstrap';
 import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
-import ProductEditorscss from './ProductEditor.module.scss' ;   
+import ProductEditorscss from './ProductEditor.module.scss';
 import { LuFileEdit } from "react-icons/lu";
 
 function ProductEditor() {
@@ -97,7 +97,7 @@ function ProductEditor() {
                                                 </div>
                                                 <div>
                                                     <Button variant="primary" onClick={() => openModal(product)} className="me-2">
-                                                        <LuFileEdit size={20}/> 
+                                                        <LuFileEdit size={20} />
                                                     </Button>
                                                 </div>
                                             </Card.Text>
@@ -113,63 +113,88 @@ function ProductEditor() {
             )}
 
             {/* Product Details and Edit Modal */}
-            <Modal show={showModal} onHide={closeModal}>
+            <Modal
+                show={showModal}
+                onHide={closeModal}
+                centered
+                backdrop="static" // Makes the backdrop static, optional
+                size="lg" // Larger modal size for better form display
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>
                         {editProduct ? editProduct.productName : 'Edit Product'}
                         {editProduct && (
                             <>
-                                <p className='fs-5 m-0 p-0'>SKU: {editProduct.sku}</p>
-                                <p className='fs-5'>Barcode: {editProduct.barcode}</p>
+                                <p className='fs-6 m-0 p-0'>SKU: {editProduct.sku}</p>
+                                <p className='fs-6'>Barcode: {editProduct.barcode}</p>
                             </>
                         )}
                     </Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>
                     {editProduct && (
                         <Form>
-                            {includedFields.map((key) => (
-                                <Form.Group controlId={`form${key}`} key={key}>
-                                    <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}</Form.Label>
-                                    {key === 'category' ? (
-                                        <Form.Control
-                                            as="select"
-                                            value={editProduct[key]}
-                                            onChange={(e) => handleModalInputChange(key, e.target.value)}
-                                        >
-                                            <option value="">Select {key}</option>
-                                            {categories.map((category) => (
-                                                <option key={category} value={category}>
-                                                    {category}
-                                                </option>
-                                            ))}
-                                        </Form.Control>
-                                    ) : key === 'price' || key === 'quantity' || key === 'tax' ? (
-                                            <Form.Control
-                                                type="number"
-                                                value={editProduct[key]}
-                                                onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
-                                                style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
-                                                placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (percentage)" : "Enter quantity"} // Updated placeholder for tax
-                                            />
+                            <Container>
+                                <Row>
+                                    {/* Loop through included fields with a better layout */}
+                                    {includedFields.map((key) => (
+                                        <Col xs={12} md={6} key={key} className="mb-3">
+                                            <Form.Group controlId={`form${key}`}>
+                                                <Form.Label>
+                                                    {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
+                                                </Form.Label>
 
-                                    ) : (
-                                        <Form.Control
-                                            type={key === 'color' ? 'text' : (typeof editProduct[key] === 'number' ? 'number' : 'text')}
-                                            value={editProduct[key]}
-                                            onChange={(e) => handleModalInputChange(key, e.target.value)}
-                                        />
-                                    )}
-                                </Form.Group>
-                            ))}
+                                                {/* Dropdown for category */}
+                                                {key === 'category' ? (
+                                                    <Form.Control
+                                                        as="select"
+                                                        value={editProduct[key]}
+                                                        onChange={(e) => handleModalInputChange(key, e.target.value)}
+                                                    >
+                                                        <option value="">Select {key}</option>
+                                                        {categories.map((category) => (
+                                                            <option key={category} value={category}>
+                                                                {category}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Control>
+                                                ) :
+
+                                                    /* Number input for price, quantity, and tax */
+                                                    key === 'price' || key === 'quantity' || key === 'tax' ? (
+                                                        <Form.Control
+                                                            type="number"
+                                                            value={editProduct[key]}
+                                                            onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
+                                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (%)" : "Enter quantity"}
+                                                            style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
+                                                        />
+                                                    ) :
+
+                                                        /* Text input for other fields */
+                                                        (
+                                                            <Form.Control
+                                                                type={key === 'color' ? 'text' : (typeof editProduct[key] === 'number' ? 'number' : 'text')}
+                                                                value={editProduct[key]}
+                                                                onChange={(e) => handleModalInputChange(key, e.target.value)}
+                                                            />
+                                                        )}
+                                            </Form.Group>
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </Container>
                         </Form>
                     )}
                 </Modal.Body>
+
                 <Modal.Footer>
                     <Button variant="secondary" onClick={closeModal}>Cancel</Button>
                     <Button variant="primary" onClick={saveChanges}>Save Changes</Button>
                 </Modal.Footer>
             </Modal>
+
         </Container>
     );
 }
