@@ -50,7 +50,8 @@ function LandingPage() {
                                     variant='' 
                                     size='lg' 
                                     href="#features" 
-                                    id="btn" 
+                                    id="btn"
+                                    className={LandingPagecss.Btn} 
                                     style={{
                                         border: '1px solid',
                                     
