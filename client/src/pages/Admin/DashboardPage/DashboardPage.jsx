@@ -85,7 +85,7 @@ export const DashboardPage = () => {
                                 roundedCircle
                             />
                             <div>
-                                <p className='fs-4 m-0'>
+                                <p className='m-0'>
                                     <span className='fw-semibold'>Hello,</span> <span>{getSalutation(adminGender)}</span> {adminName || 'Admin'}
                                 </p>
                                 <p className='m-0'>REYES ELECTRONICS.</p>
