@@ -45,7 +45,16 @@
             color: transparent;
         }
 
+        .Btn {
+            // border: 1px solid;
+            color: #202020;
+            background: radial-gradient(1023px at 3.1% 6.9%, rgb(255, 255, 255) 0%, rgb(205, 40, 83) 74.9%);
+        }
         
+        .Btn:hover {
+            background: radial-gradient(circle at 10% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
+            color: #ffffff;
+        }
         
         @media (max-width: 500px){
             width: 100%;
@@ -59,6 +68,9 @@
         width: 750px;
         // border: 1px solid;
         img {
+            border-right: 1px solid;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
             width: 100%;
             margin: 0px 20px;
         }

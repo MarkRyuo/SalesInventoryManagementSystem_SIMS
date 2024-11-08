@@ -51,11 +51,7 @@ function LandingPage() {
                                     size='lg' 
                                     href="#features" 
                                     id="btn"
-                                    className={LandingPagecss.Btn} 
-                                    style={{
-                                        border: '1px solid',
-                                    
-                                    }}>
+                                    className={LandingPagecss.Btn}>
                                     <span><CiGlobe /></span> Explore
                                 </Button>                         
                             </div>
