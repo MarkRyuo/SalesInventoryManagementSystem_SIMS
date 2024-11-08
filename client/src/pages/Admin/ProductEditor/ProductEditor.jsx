@@ -82,7 +82,7 @@ function ProductEditor() {
             ) : products.length > 0 ? (
                 <Row className={ProductEditorscss.rowProduct}>
                     <Col md={{ span: 8, offset: 2 }}>
-                        <ListGroup>
+                        <ListGroup className={ProductEditorscss.listGroupItem}>
                             {products.map((product) => (
                                 <ListGroup.Item key={product.barcode} className="d-flex align-items-center">
                                     <Card className="w-100">
