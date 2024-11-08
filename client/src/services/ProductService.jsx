@@ -1,13 +1,17 @@
 import { getDatabase, ref, set, get, update, remove } from 'firebase/database';
 
 // Function to add a new product
-// Function to add a new product
-export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, tax, category, dateAdded }) => {
+export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, tax, category}) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
 
     try {
-        const today = dateAdded.split('T')[0];
+        // Adjust for Philippine Time (UTC +8)
+        const today = new Date();
+        const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
+        const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
+        const formattedToday = localTime.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+
         await set(productRef, {
             barcode: barcode,
             productName: productName,
@@ -16,22 +20,23 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
             wattage: wattage,
             voltage: voltage,
             quantity: quantity,
-            quantityHistory: [{ date: today, quantity: quantity }],
-            addedQuantityHistory: [{ date: today, quantity: quantity }],
+            quantityHistory: [{ date: formattedToday, quantity: quantity }],
+            addedQuantityHistory: [{ date: formattedToday, quantity: quantity }],
             deductedQuantityHistory: [],
             preserveQuantityHistory: true,
             sku: sku,
             price: price,
             tax: tax, // Store tax as percentage
             category: category,
-            dateAdded: today,
-            lastUpdated: today,
+            dateAdded: formattedToday,
+            lastUpdated: formattedToday,
         });
 
     } catch (error) {
         throw new Error(`Error adding product: ${error.message}`);
     }
 };
+
 
 
 // Function to update the product quantity with separate tracking for additions and deductions
@@ -54,8 +59,11 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
             throw new Error(`Insufficient quantity. Current quantity is ${currentQuantity}. Cannot reduce by ${Math.abs(additionalQuantity)}.`);
         }
 
-        // Get today's date
-        const today = new Date().toISOString().split('T')[0];
+        // Adjust for Philippine Time (UTC +8)
+        const today = new Date();
+        const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
+        const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
+        const formattedToday = localTime.toISOString().split('T')[0]; // Format as YYYY-MM-DD
 
         // Check if preserveQuantityHistory is enabled
         const preserveQuantityHistory = productData.preserveQuantityHistory || false;
@@ -66,26 +74,26 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
             : [];
 
         // Update today's quantity in the history
-        const quantityEntry = newQuantityHistory.find(entry => entry.date === today);
+        const quantityEntry = newQuantityHistory.find(entry => entry.date === formattedToday);
         if (quantityEntry) {
             // Update the existing entry with the new total quantity
             quantityEntry.quantity = updatedQuantity; // This keeps the quantity for today updated
         } else {
             // If no entry exists, add a new entry for today's quantity
-            newQuantityHistory.push({ date: today, quantity: updatedQuantity });
+            newQuantityHistory.push({ date: formattedToday, quantity: updatedQuantity });
         }
 
         // Update added quantity history
         const newAddedQuantityHistory = [...(productData.addedQuantityHistory || [])];
         if (additionalQuantity > 0) {
-            const addedEntry = newAddedQuantityHistory.find(entry => entry.date === today);
+            const addedEntry = newAddedQuantityHistory.find(entry => entry.date === formattedToday);
             if (addedEntry) {
                 // If an entry for today exists, increment the added quantity
                 addedEntry.quantity += additionalQuantity; // Add to the total added quantity
             } else {
                 // If no entry exists, add a new entry
                 newAddedQuantityHistory.push({
-                    date: today,
+                    date: formattedToday,
                     quantity: additionalQuantity,
                 });
             }
@@ -94,14 +102,14 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         // Update deducted quantity history
         const newDeductedQuantityHistory = [...(productData.deductedQuantityHistory || [])];
         if (additionalQuantity < 0) {
-            const deductedEntry = newDeductedQuantityHistory.find(entry => entry.date === today);
+            const deductedEntry = newDeductedQuantityHistory.find(entry => entry.date === formattedToday);
             if (deductedEntry) {
                 // If an entry for today exists, increment the deducted quantity
                 deductedEntry.quantity -= additionalQuantity; // Since additionalQuantity is negative, this effectively adds to the deducted quantity
             } else {
                 // If no entry exists, add a new entry
                 newDeductedQuantityHistory.push({
-                    date: today,
+                    date: formattedToday,
                     quantity: -additionalQuantity,
                 });
             }
@@ -112,7 +120,7 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
             quantityHistory: newQuantityHistory, // Update quantity history
             addedQuantityHistory: newAddedQuantityHistory, // Update added quantity history
             deductedQuantityHistory: newDeductedQuantityHistory, // Update deducted quantity history as an array
-            lastUpdated: today, // Update last updated date (only date)
+            lastUpdated: formattedToday, // Update last updated date (only date)
         });
 
         return updatedQuantity; // Return the updated quantity
@@ -120,6 +128,7 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         throw new Error(`Error updating quantity: ${error.message}`);
     }
 };
+
 
 
 // Function to fetch a product by barcode
