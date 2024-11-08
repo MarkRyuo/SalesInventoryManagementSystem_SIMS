@@ -79,7 +79,7 @@ export const DashboardPage = () => {
                             <p>Loading admin Dashboard</p>
                         </div>
                     ) : (
-                        <>
+                        <div className={DashboardCss.credentialDashboard}>
                             <Image
                                 src="/ReyesElectronicsLogo.png"
                                 roundedCircle
@@ -92,7 +92,7 @@ export const DashboardPage = () => {
                                 <p className='m-0'>REYES ELECTRONICS.</p>
                                 <p className='m-0'>{currentDate}</p>
                             </div>
-                        </>
+                        </div>
                     )}
                 </div>
 
