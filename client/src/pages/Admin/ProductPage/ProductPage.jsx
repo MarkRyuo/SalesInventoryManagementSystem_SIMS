@@ -14,7 +14,7 @@ import ProductPagescss from './ProductPage.module.scss' ;
 function ProductNavbarTabs({ setActiveTab }) {
     return (
         <Nav justify variant="tabs" defaultActiveKey="/Product" className="mt-3" onSelect={setActiveTab}>
-            <Nav.Item>
+            <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/Product">
                     <AiFillProduct size={20}/>
                     Product
