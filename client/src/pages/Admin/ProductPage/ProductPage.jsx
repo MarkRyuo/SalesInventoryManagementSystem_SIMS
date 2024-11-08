@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { MainLayout } from "../layout/MainLayout";
+import { MainLayout } from "../../../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
-import Product from '../components/Charts/ProductChart/Product';
+import Product from '../../../components/Charts/ProductChart/Product';
 import { Container } from "react-bootstrap";
-import ProductEditor from "./Admin/ProductEditor/ProductEditor";
+import ProductEditor from "../ProductEditor/ProductEditor";
 import { FaRegEdit } from "react-icons/fa";
 
 
