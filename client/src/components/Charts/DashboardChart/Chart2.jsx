@@ -1,4 +1,4 @@
-import Chartcss from './Charts.module.css';
+import Chartcss from './Charts.module.scss';
 import { FaReact } from "react-icons/fa";
 
 //* Chart2 Small
