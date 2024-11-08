@@ -88,10 +88,10 @@ function ProductEditor() {
                                         <Card.Body className={ProductEditorscss.cardBody}>
                                             <Card.Title className={ProductEditorscss.cardTitle}>{product.productName}</Card.Title>
                                             <Card.Text className={ProductEditorscss.cardText}>
-                                                <p className='m-0 p-0'>Price: ₱{product.price.toFixed(2)}</p>
-                                                <p className='m-0 p-0'>Tax:{product.tax}%</p>
-                                                <p className='m-0 p-0'>SKU:{product.sku}</p>
-                                                <p className='m-0 p-0'>Barcode: {product.barcode}</p>
+                                                <p className='m-0 p-0'>Price: <span>₱{product.price.toFixed(2)}</span></p>
+                                                <p className='m-0 p-0'>Tax: <span>{product.tax}%</span></p>
+                                                <p className='m-0 p-0'>SKU: <span>{product.sku}</span></p>
+                                                <p className='m-0 p-0'>Barcode: <span>{product.barcode}</span></p>
                                             </Card.Text>
                                             <Button variant="info" onClick={() => openModal(product)} className="me-2">
                                                 Show Details / Edit
