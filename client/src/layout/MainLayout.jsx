@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { NavDashboard } from "../components/NavBar/NavDashboard"
 import { Container } from "react-bootstrap"
+import MainLayoutscss from './MainLayout.module.scss'
 
 export const MainLayout = ({children}) => {
 
