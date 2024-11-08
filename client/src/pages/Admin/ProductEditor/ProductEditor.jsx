@@ -88,8 +88,8 @@ function ProductEditor() {
                                         <Card.Body className={ProductEditorscss.cardBody}>
                                             <Card.Title className={ProductEditorscss.cardTitle}>{product.productName}</Card.Title>
                                             <Card.Text className={ProductEditorscss.cardText}>
-                                                <p>Price: ₱{product.price.toFixed(2)}</p>
-                                                <p>Tax:{product.tax}%</p>
+                                                <p className='m-0 p-0'>Price: ₱{product.price.toFixed(2)}</p>
+                                                <p className='m-0 p-0'>Tax:{product.tax}%</p>
                                                 <p>SKU:{product.sku}</p>
                                                 <p>Barcode: {product.barcode}</p>
                                             </Card.Text>
