@@ -1,7 +1,7 @@
 
 
 :root {
-    --navBorder: #E1E4E4 ;
+    --navBorder: #d6d6d6 ;
     --hoverbuttons: rgb(146, 227, 184, 40%) ;
 }
 
@@ -9,7 +9,8 @@
 
 .navLogin {
     min-width: 412px;
-    background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(255, 255, 255) 90%);    margin: 0;
+    background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(255, 255, 255) 50%);    
+    margin: 0;
     padding: 0px 10px ;
     height: 80px;
     align-content: center;
@@ -17,14 +18,18 @@
 
 
 
-/* *NavDashboard.jsx */
+/* *NavDashboard.jsx & StaffNavDashboard */
 
 .navDashboard {
-    padding: 10px;
     margin-bottom: 30px;
     border-bottom: 1px solid var(--navBorder);
     /* border: 1px solid red; */
     background-color: #ffff;
+    padding: 5px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
 }
 
 .btnOffcanvas {

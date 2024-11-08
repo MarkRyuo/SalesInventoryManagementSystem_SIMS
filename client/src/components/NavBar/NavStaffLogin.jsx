@@ -1,6 +1,6 @@
 import { BsBox } from "react-icons/bs";
 import { Row, Col, Container, Navbar} from 'react-bootstrap';
-import Navbars from '../NavBar/Navbar.module.css';
+import Navbars from './Navbar.module.scss';
 import { Link } from "react-router-dom";
 
 

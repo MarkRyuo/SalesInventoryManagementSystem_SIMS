@@ -1,16 +1,16 @@
-import { Row, Col, Image } from 'react-bootstrap';
-import { MainLayout } from '../layout/MainLayout';
-import DashboardCss from './Css/Dashboard.module.css';
+import { Row, Col, Image, Container } from 'react-bootstrap';
+import { MainLayout } from '../../../layout/MainLayout';
+import DashboardCss from './Dashboard.module.scss';
 import { useEffect, useState } from 'react';
-import { db } from '../services/firebase';
+import { db } from '../../../services/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
 //? Charts
-import Chart1 from '../components/Charts/DashboardChart/Chart1';
-import Chart2 from '../components/Charts/DashboardChart/Chart2';
-import Chart3 from '../components/Charts/DashboardChart/Chart3';
-import ChartLg1 from '../components/Charts/DashboardChart/ChartLg1';
-import ChartLg2 from '../components/Charts/DashboardChart/ChartLg2';
+import Chart1 from '../../../components/Charts/DashboardChart/Chart1';
+import Chart2 from '../../../components/Charts/DashboardChart/Chart2';
+import Chart3 from '../../../components/Charts/DashboardChart/Chart3';
+import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
+import ChartLg2 from '../../../components/Charts/DashboardChart/ChartLg2';
 
 export const DashboardPage = () => {
     const [adminName, setAdminName] = useState('');
@@ -79,29 +79,35 @@ export const DashboardPage = () => {
                             <p>Loading admin Dashboard</p>
                         </div>
                     ) : (
-                        <>
+                        <div className={DashboardCss.credentialDashboard}>
                             <Image
                                 src="/ReyesElectronicsLogo.png"
                                 roundedCircle
-                                style={{ width: '100%', maxWidth: '100px', height: '100px' }}
                             />
                             <div>
-                                <p className='fs-4 m-0'>
+                                <p className='m-0'>
                                     <span className='fw-semibold'>Hello,</span> <span>{getSalutation(adminGender)}</span> {adminName || 'Admin'}
                                 </p>
                                 <p className='m-0'>REYES ELECTRONICS.</p>
                                 <p className='m-0'>{currentDate}</p>
                             </div>
-                        </>
+                        </div>
                     )}
                 </div>
 
                 {!isLoading && (
-                    <>
+                    <Container>
                         <div className={DashboardCss.rowContainer}>
-                            <Chart1 />
-                            <Chart2 />
-                            <Chart3 />
+                            <div>
+                                <Chart1 />
+                            </div>
+                            <div>
+                                <Chart2 />
+                            </div>
+                            <div>
+                                <Chart3 />
+                            </div>
+
                         </div>
 
                         <Row className={DashboardCss.rowContainerLg}>
@@ -112,7 +118,7 @@ export const DashboardPage = () => {
                                 <ChartLg2 />
                             </Col>
                         </Row>
-                    </>
+                    </Container>
                 )}
             </div>
         </MainLayout>

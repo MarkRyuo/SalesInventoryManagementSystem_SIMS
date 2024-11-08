@@ -1,4 +1,4 @@
-import Chartcss from './Charts.module.css';
+import Chartcss from './Charts.module.scss';
 
 
 function ChartLg1() {

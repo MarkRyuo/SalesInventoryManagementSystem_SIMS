@@ -4,8 +4,6 @@ import App from './App.jsx'
 import './index.scss'
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 //? Pages Import
-import DashboardPage from '../src/pages/DashboardPage';
-import ProductPage from './pages/ProductPage.jsx';
 import ReportPage from './pages/ReportPage.jsx';
 import StaffAccount from './pages/StaffAccount.jsx'
 import MyProfile from './pages/MyProfile.jsx';
@@ -30,15 +28,19 @@ import PosSuccess from './components/StaffPortal/ScanAssets/PosSuccess.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx'
 
 //! Done 
+import ProductPage from './pages/Admin/ProductPage/ProductPage.jsx';
 import StaffTransactionHistory from './pages/Staff/StaffTransactionHistory/StaffTransactionHistory.jsx';
 import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/AdminTransactionHistory.jsx';
 import ProductEditor from './pages/Admin/ProductEditor/ProductEditor.jsx';
+import Product from './components/Charts/ProductChart/Product.jsx' ;
+import DashboardPage from '../src/pages/Admin/DashboardPage/DashboardPage.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
     path: "/",
     element: <App />, //* Root This is Login in DashBoard
   },
+  //! Admin Pages
   { //? LoginPage Admin
     path: "LoginPage",
     element: <LoginPage />, //* Root This is Login in DashBoard
@@ -75,22 +77,25 @@ const router = createBrowserRouter([
     path: "ProductEditor",
     element: <ProductEditor /> ,
   },
-
+  { //? Product for Admin
+    path: "Product",
+    element: <Product /> ,
+  },
 
   //! Forgot Password
-  {
+  { //? ForgotPasswordMode for Admin
     path: "ForgotPasswordMode",
     element: <ForgotPasswordMode />,
   },
-  {
+  { //? EnableRecoveryMode for Admin
     path: "EnableRecoveryMode",
     element: <EnableRecoveryMode />,
   },
-  {
+  { //? ResetPasswordMode for Admin
     path: "ResetPasswordMode",
     element: <ResetPasswordMode />,
   },
-  {
+  { //? ResetRendering for Admin
     path: "ResetRendering",
     element: <ResetRendering />,
   },

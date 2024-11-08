@@ -1,5 +1,5 @@
 import { Row, Col, Form, Dropdown, DropdownButton, Spinner } from "react-bootstrap";
-import Productcss from './Product.module.css';
+import Productcss from './Product.module.scss';
 import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService";
 
@@ -119,14 +119,16 @@ function ProductChart() {
                                         <div key={product.barcode} className={Productcss.productCard}>
                                             <div>
                                                 <div className="d-flex">
-                                                    <p className="fs-4 m-0 p-0">{product.productName}</p>
-                                                    <p style={{ color: color, fontSize: '0.9rem' }} className="p-2">
-                                                        <span style={{ color: color }}>•</span> {text}
+                                                    <p className="m-0 pb-2">{product.productName}</p>
+                                                    <p style={{ color: color, fontSize: '0.9rem' }} className="pt-2 m-0">
+                                                        <span style={{ color: color }} className="p-0">•</span> {text}
                                                     </p>
                                                 </div>
-                                                <p className="fs-6 m-0 p-0">SKU: {product.sku}</p>
-                                                <p className="fs-6 m-0 p-0">Quantity: {product.quantity}</p>
-                                                <p>Category: {product.category}</p>
+                                                <div className={Productcss.lastChild}>
+                                                    <p className="m-0 p-0">SKU: {product.sku}</p>
+                                                    <p className="m-0 p-0">Quantity: {product.quantity}</p>
+                                                    <p>Category: {product.category}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     );

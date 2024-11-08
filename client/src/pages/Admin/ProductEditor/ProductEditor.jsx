@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getAllProducts, getCategories } from '../../../services/ProductService'; // Add getCategories import
-import { Container, Row, Col, ListGroup, Card, Spinner, Button, Form, Modal } from 'react-bootstrap';
+import { Container, ListGroup, Card, Spinner, Button, Form, Modal } from 'react-bootstrap';
 import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
+import ProductEditorscss from './ProductEditor.module.scss' ;   
+import { LuFileEdit } from "react-icons/lu";
 
 function ProductEditor() {
     const [products, setProducts] = useState([]);
@@ -72,37 +74,40 @@ function ProductEditor() {
     ];
 
     return (
-        <Container className="mt-4">
-            <h1 className="text-center mb-4">Product List</h1>
+        <Container className='m-0 p-0'>
             {loading ? (
                 <div className="text-center">
                     <Spinner animation="border" variant="primary" />
                 </div>
             ) : products.length > 0 ? (
-                <Row>
-                    <Col md={{ span: 8, offset: 2 }}>
-                        <ListGroup>
+                <div className={ProductEditorscss.rowProduct}>
+                    <div>
+                        <ListGroup className={ProductEditorscss.listGroupItem}>
                             {products.map((product) => (
-                                <ListGroup.Item key={product.barcode} className="d-flex align-items-center">
+                                <ListGroup.Item key={product.barcode} className="d-flex align-items-center p-0">
                                     <Card className="w-100">
-                                        <Card.Body>
-                                            <Card.Title>{product.productName}</Card.Title>
-                                            <Card.Text>
-                                                <div><strong>Price:</strong> ₱{product.price.toFixed(2)}</div>
-                                                <div><strong>Tax:</strong> {product.tax}%</div>
-                                                <div><strong>SKU:</strong> {product.sku}</div>
-                                                <div><strong>Barcode:</strong> {product.barcode}</div>
+                                        <Card.Body className={ProductEditorscss.cardBody}>
+                                            <Card.Title className={ProductEditorscss.cardTitle}>{product.productName}</Card.Title>
+                                            <Card.Text className={ProductEditorscss.cardText}>
+                                                <div>
+                                                    <p className='m-0 p-0'>Price: <span>₱{product.price.toFixed(2)}</span></p>
+                                                    <p className='m-0 p-0'>Tax: <span>{product.tax}%</span></p>
+                                                    <p className='m-0 p-0'>SKU: <span>{product.sku}</span></p>
+                                                    <p className='m-0 p-0'>Barcode: <span>{product.barcode}</span></p>
+                                                </div>
+                                                <div>
+                                                    <Button variant="primary" onClick={() => openModal(product)} className="me-2">
+                                                        <LuFileEdit size={20}/> 
+                                                    </Button>
+                                                </div>
                                             </Card.Text>
-                                            <Button variant="info" onClick={() => openModal(product)} className="me-2">
-                                                Show Details / Edit
-                                            </Button>
                                         </Card.Body>
                                     </Card>
                                 </ListGroup.Item>
                             ))}
                         </ListGroup>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             ) : (
                 <p className="text-center">No products found.</p>
             )}

@@ -51,26 +51,27 @@ function SDashboard() {
                 const products = await getAllProducts(); // Fetch all products
                 const today = new Date().toISOString().split('T')[0]; // Get today's date in yyyy-mm-dd format
 
-                // Filter products that are either added today or have an updated quantity today
-                const productsToday = Object.values(products).filter(product =>
-                    product.dateAdded === today ||
-                    (product.quantityHistory && product.quantityHistory.some(entry => entry.startsWith(today)))
-                );
+                // Check each product's dateAdded and quantityHistory
+                const productsToday = products.filter(product => {
+                    console.log("Checking product:", product.productName, product.dateAdded, product.quantityHistory);
+                    return (
+                        product.dateAdded === today ||
+                        (product.quantityHistory && product.quantityHistory.some(entry => entry.date === today))
+                    );
+                });
 
-                // Map the filtered products to include the correct quantity based on today's date
                 const mappedProductsToday = productsToday.map(product => {
-                    let quantity = product.quantity; // Default to current quantity
+                    let quantity = product.quantity;
 
-                    // Check if today's entry exists in the quantity history
-                    const todayEntry = product.quantityHistory?.find(entry => entry.startsWith(today));
+                    // Locate today's quantity entry in quantity history
+                    const todayEntry = product.quantityHistory?.find(entry => entry.date === today);
                     if (todayEntry) {
-                        const [, updatedQuantity] = todayEntry.split(': '); // Get updated quantity from history
-                        quantity = updatedQuantity; // Update quantity to today's quantity from history
+                        quantity = todayEntry.quantity;
                     }
 
                     return {
                         ...product,
-                        quantity, // Set the correct quantity
+                        quantity,
                     };
                 });
 
@@ -79,6 +80,7 @@ function SDashboard() {
                 console.error("Error fetching products:", error);
             }
         };
+
 
         // Fetch staff details and products on component mount
         fetchStaffDetails();
