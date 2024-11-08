@@ -3,15 +3,25 @@
     box-sizing: border-box;
 }
 
-.listGroupItem {
-    border: 1px solid;
-    height: 70vh;
-    overflow: auto;
+.rowProduct {
+    border: 1px solid red;
+    padding: 50px;
+
+        .listGroupItem {
+        border: 1px solid;
+        height: 70vh;
+        overflow: auto;
+
+        @media (max-width: 700px) {
+            border: 1px solid red;
+            width: 100%;
+        }
+    }
 
     @media (max-width: 700px) {
-        border: 1px solid red;
-        width: 100%;
-    }
+            padding: 0;
+        }
+
 }
 
 
