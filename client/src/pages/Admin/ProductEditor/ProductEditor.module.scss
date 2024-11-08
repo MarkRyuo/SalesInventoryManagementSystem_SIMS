@@ -21,6 +21,7 @@
 
     @media (max-width: 700px) {
             padding: 0;
+            min-width: 370px;
         }
 
 }
@@ -37,7 +38,6 @@
 
     .cardText {
         display: flex;
-        // border: 1px solid;
         justify-content: space-between;
 
         div {
@@ -49,6 +49,20 @@
         div:last-child {
             display: inline-flex;
             align-items: center;
+        }
+
+        @media (max-width: 700px) {
+            div {
+                p {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    } //! End of cardText
+
+    @media (max-width: 700px) {
+        .cardTitle {
+            font-size: 1.3rem ;
         }
     }
 
