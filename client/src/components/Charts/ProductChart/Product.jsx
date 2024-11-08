@@ -1,5 +1,5 @@
 import { Row, Col, Form, Dropdown, DropdownButton, Spinner } from "react-bootstrap";
-import Productcss from './Product.module.css';
+import Productcss from './Product.module.scss';
 import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService";
 
