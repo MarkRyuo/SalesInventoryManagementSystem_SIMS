@@ -136,10 +136,10 @@ function ProductEditor() {
                     {editProduct && (
                         <Form>
                             <Container>
-                                <Row>
+                                <Row style={{height: '45vh', overflow: 'auto'}}>
                                     {/* Loop through included fields with a better layout */}
                                     {includedFields.map((key) => (
-                                        <Col xs={12} md={6} key={key} className="mb-3">
+                                        <Col xs={12} md={6} key={key} className="mb-3" >
                                             <Form.Group controlId={`form${key}`}>
                                                 <Form.Label>
                                                     {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
