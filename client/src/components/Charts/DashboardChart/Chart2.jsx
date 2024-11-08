@@ -7,10 +7,10 @@ function Chart2() {
         <div className={Chartcss.containerChart2}>
             <div className={Chartcss.containerText}>
                 <FaReact size={25} />
-                <p className='fs-5 m-0'>Text Here</p>
+                <p>Text Here</p>
             </div>
             <div className={Chartcss.contentChart}>
-                <p className="fs-4">000000</p>
+                <p>000000</p>
                 <p>From the running month</p>
             </div>
         </div>
