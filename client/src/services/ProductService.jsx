@@ -55,7 +55,7 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         }
 
         // Get today's date
-        const today = new Date().toISOString().split('T')[0];
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
 
         // Check if preserveQuantityHistory is enabled
         const preserveQuantityHistory = productData.preserveQuantityHistory || false;
