@@ -11,8 +11,11 @@
     margin: 12px 0;
     display: flex;
     padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1100px) {
         gap: 15px;
     }
 }
@@ -62,7 +65,7 @@
 }
 
 .credentialDashboard {
-    border: 1px solid;
+    // border: 1px solid;
     display: flex;
     padding: 10px;
 

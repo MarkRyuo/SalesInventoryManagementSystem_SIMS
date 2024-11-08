@@ -97,18 +97,18 @@ export const DashboardPage = () => {
 
                 {!isLoading && (
                     <Container>
-                        <Row className={DashboardCss.rowContainer}>
-                            <Col>
+                        <div className={DashboardCss.rowContainer}>
+                            <div>
                                 <Chart1 />
-                            </Col>
-                            <Col>
+                            </div>
+                            <div>
                                 <Chart2 />
-                            </Col>
-                            <Col>
+                            </div>
+                            <div>
                                 <Chart3 />
-                            </Col>
+                            </div>
 
-                        </Row>
+                        </div>
 
                         <Row className={DashboardCss.rowContainerLg}>
                             <Col className={DashboardCss.colContainerLg} sm={12} lg={6}>
