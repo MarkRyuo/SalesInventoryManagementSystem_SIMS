@@ -15,7 +15,10 @@ function ProductNavbarTabs({ setActiveTab }) {
     return (
         <Nav justify variant="tabs" defaultActiveKey="/Product" className="mt-3" onSelect={setActiveTab}>
             <Nav.Item>
-                <Nav.Link eventKey="/Product"><AiFillProduct size={20}/>Product</Nav.Link>
+                <Nav.Link eventKey="/Product">
+                    <AiFillProduct size={20}/>
+                    Product
+                </Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link eventKey="/ProductEditor"><FaRegEdit size={20} />Product Edit</Nav.Link>
@@ -32,7 +35,7 @@ export const ProductPage = () => {
 
     return (
         <MainLayout>
-            <Container className="ProductMain">
+            <Container className={ProductPagescss.ProductMain}>
                 <ProductNavbarTabs setActiveTab={setActiveTab} />
                 <div className="ProductContent">
                     {activeTab === '/Product' && (
