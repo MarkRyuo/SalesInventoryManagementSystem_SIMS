@@ -51,8 +51,18 @@
         }
 
         @media (max-width: 700px) {
-            
+            div {
+                p {
+                    font-size: 0.9rem;
+                }
+            }
         }
     } //! End of cardText
+
+    @media (max-width: 700px) {
+        .cardTitle {
+            font-size: 1.3rem ;
+        }
+    }
 
 }//! End of cardBody
