@@ -74,7 +74,7 @@ function ProductEditor() {
     ];
 
     return (
-        <Container>
+        <Container className='m-0 p-0'>
             {loading ? (
                 <div className="text-center">
                     <Spinner animation="border" variant="primary" />
