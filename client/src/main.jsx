@@ -4,7 +4,6 @@ import App from './App.jsx'
 import './index.scss'
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 //? Pages Import
-import ProductPage from './pages/Admin/ProductPage/ProductPage.jsx';
 import ReportPage from './pages/ReportPage.jsx';
 import StaffAccount from './pages/StaffAccount.jsx'
 import MyProfile from './pages/MyProfile.jsx';
@@ -29,6 +28,7 @@ import PosSuccess from './components/StaffPortal/ScanAssets/PosSuccess.jsx';
 import LoginPage from './pages/LoginPage/LoginPage.jsx'
 
 //! Done 
+import ProductPage from './pages/Admin/ProductPage/ProductPage.jsx';
 import StaffTransactionHistory from './pages/Staff/StaffTransactionHistory/StaffTransactionHistory.jsx';
 import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/AdminTransactionHistory.jsx';
 import ProductEditor from './pages/Admin/ProductEditor/ProductEditor.jsx';
