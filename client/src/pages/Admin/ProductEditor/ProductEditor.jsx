@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getAllProducts, getCategories } from '../../../services/ProductService'; // Add getCategories import
-import { Container, Row, Col, ListGroup, Card, Spinner, Button, Form, Modal } from 'react-bootstrap';
+import { Container, ListGroup, Card, Spinner, Button, Form, Modal } from 'react-bootstrap';
 import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
 import ProductEditorscss from './ProductEditor.module.scss' ;   
 import { LuFileEdit } from "react-icons/lu";
@@ -80,8 +80,8 @@ function ProductEditor() {
                     <Spinner animation="border" variant="primary" />
                 </div>
             ) : products.length > 0 ? (
-                <Row className={ProductEditorscss.rowProduct}>
-                    <Col md={{ span: 8, offset: 2 }}>
+                <div className={ProductEditorscss.rowProduct}>
+                    <div>
                         <ListGroup className={ProductEditorscss.listGroupItem}>
                             {products.map((product) => (
                                 <ListGroup.Item key={product.barcode} className="d-flex align-items-center">
@@ -106,8 +106,8 @@ function ProductEditor() {
                                 </ListGroup.Item>
                             ))}
                         </ListGroup>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             ) : (
                 <p className="text-center">No products found.</p>
             )}
