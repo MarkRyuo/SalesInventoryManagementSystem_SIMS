@@ -1,7 +1,7 @@
 
 
 :root {
-    --navBorder: #e7e7e7 ;
+    --navBorder: #d6d6d6 ;
     --hoverbuttons: rgb(146, 227, 184, 40%) ;
 }
 
@@ -28,9 +28,10 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(255, 255, 255) 90%);
+    background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+}
 
-    .btnOffcanvas {
+.btnOffcanvas {
     margin-right: 15px;
 }
 

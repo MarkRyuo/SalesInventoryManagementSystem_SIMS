@@ -52,7 +52,7 @@ export const NavDashboard = () => {
             <Navbar>
                 <Container>
                     <Navbar.Brand>
-                        <Button variant="light" className={Navbars.btnOffcanvas} onClick={handleShow}>
+                        <Button variant='light' className={Navbars.btnOffcanvas} onClick={handleShow}>
                             <GiHamburgerMenu size={20} />
                         </Button>
                         SIMS
