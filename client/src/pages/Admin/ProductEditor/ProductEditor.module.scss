@@ -10,7 +10,13 @@
     border: 1px solid;
 
     .cardTitle {
-
+        font-size: 1.5rem;
     } //! End of cardTitle
+
+    .cardText {
+        display: flex;
+        border: 1px solid;
+        justify-content: space-between;
+    }
 
 }//! End of cardBody

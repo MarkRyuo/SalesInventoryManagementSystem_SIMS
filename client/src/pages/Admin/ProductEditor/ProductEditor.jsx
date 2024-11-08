@@ -79,7 +79,7 @@ function ProductEditor() {
                     <Spinner animation="border" variant="primary" />
                 </div>
             ) : products.length > 0 ? (
-                <Row>
+                <Row className={ProductEditorscss.rowProduct}>
                     <Col md={{ span: 8, offset: 2 }}>
                         <ListGroup>
                             {products.map((product) => (
@@ -94,9 +94,11 @@ function ProductEditor() {
                                                     <p className='m-0 p-0'>SKU: <span>{product.sku}</span></p>
                                                     <p className='m-0 p-0'>Barcode: <span>{product.barcode}</span></p>
                                                 </div>
-                                                <Button variant="info" onClick={() => openModal(product)} className="me-2">
-                                                    Show Details / Edit
-                                                </Button>
+                                                <div>
+                                                    <Button variant="info" onClick={() => openModal(product)} className="me-2">
+                                                        Show Details / Edit
+                                                    </Button>
+                                                </div>
                                             </Card.Text>
                                         </Card.Body>
                                     </Card>
