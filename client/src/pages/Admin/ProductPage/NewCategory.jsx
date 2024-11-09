@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Modal, ListGroup, Spinner, Alert } from "react-bootstrap";
-import { addCategory, getCategories, deleteCategory, updateCategory } from '../../../services/ProductService'; // Import the Firebase functions
+import { addCategory, getCategories, deleteCategory, updateCategory } from '../../../services/ProductService';
 
 function NewCategory() {
     const [showModal, setShowModal] = useState(false);
@@ -49,9 +49,9 @@ function NewCategory() {
         if (editingCategory) {
             try {
                 setLoading(true); // Start loading
-                await updateCategory(editingCategory, categoryName); // Update category in Firebase
+                await updateCategory(editingCategory.id, { name: categoryName }); // Update category in Firebase
                 setCategories(prevCategories => prevCategories.map(
-                    cat => cat === editingCategory ? categoryName : cat
+                    cat => cat.id === editingCategory.id ? { ...cat, name: categoryName } : cat
                 ));
                 setSuccess(true); // Set success message
                 setLoading(false); // End loading
@@ -67,7 +67,9 @@ function NewCategory() {
             try {
                 setLoading(true); // Start loading
                 await addCategory(categoryName); // Add category to Firebase
-                setCategories(prevCategories => [...prevCategories, categoryName]); // Update state with new category
+                setCategories(prevCategories => [
+                    ...prevCategories, { id: Date.now(), name: categoryName }
+                ]); // Update state with new category (assuming Firebase returns an id)
                 setSuccess(true); // Set success message
                 setLoading(false); // End loading
                 setCategoryName(""); // Reset the input field
@@ -82,8 +84,8 @@ function NewCategory() {
     const handleDelete = async (category) => {
         // Delete category
         try {
-            await deleteCategory(category); // Delete from Firebase
-            setCategories(prevCategories => prevCategories.filter(cat => cat !== category)); // Update state
+            await deleteCategory(category.id); // Delete from Firebase (ensure category has an id)
+            setCategories(prevCategories => prevCategories.filter(cat => cat.id !== category.id)); // Update state
         } catch (error) {
             console.error("Error deleting category:", error);
             setError("Failed to delete category.");
@@ -93,7 +95,7 @@ function NewCategory() {
     const handleEdit = (category) => {
         // Set category to be edited
         setEditingCategory(category);
-        setCategoryName(category); // Set category name in the input
+        setCategoryName(category.name); // Set category name in the input
         setShowModal(true); // Open modal to edit
     };
 
@@ -139,9 +141,9 @@ function NewCategory() {
                                 <p>No categories added yet.</p>
                             ) : (
                                 <ListGroup>
-                                    {categories.map((category, index) => (
-                                        <ListGroup.Item key={index}>
-                                            <strong>{category}</strong>
+                                    {categories.map((category) => (
+                                        <ListGroup.Item key={category.id}>
+                                            <strong>{category.name}</strong>
                                             <Button variant="warning" size="sm" className="ml-2" onClick={() => handleEdit(category)}>
                                                 Edit
                                             </Button>

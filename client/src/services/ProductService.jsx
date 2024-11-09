@@ -185,17 +185,19 @@ export const getAllProducts = async () => {
 
 
 // Function to add a new category
-export const addCategory = async (category) => {
+export const addCategory = async (categoryName) => {
     const db = getDatabase();
-    const categoryRef = ref(db, 'categories/' + category); // Save category by name
+    const categoryRef = ref(db, 'categories/' + categoryName); // Save category by name
 
     try {
-        await set(categoryRef, { name: category }); // Store category
+        await set(categoryRef, { name: categoryName }); // Store category
     } catch (error) {
         throw new Error(`Error adding category: ${error.message}`);
     }
 };
 
+
+// Function to retrieve all categories
 // Function to retrieve all categories
 export const getCategories = async () => {
     const db = getDatabase();
@@ -203,11 +205,18 @@ export const getCategories = async () => {
 
     try {
         const snapshot = await get(categoriesRef);
-        return snapshot.exists() ? Object.keys(snapshot.val()) : []; // Return an array of category names
+        const categoriesData = snapshot.exists() ? snapshot.val() : {};
+
+        // Convert the categories object to an array of category names and ids
+        return Object.keys(categoriesData).map(key => ({
+            id: key,
+            name: categoriesData[key].name
+        }));
     } catch (error) {
         throw new Error(`Error retrieving categories: ${error.message}`);
     }
 };
+
 
 // Function to update existing products to include preserveQuantityHistory
 export const updatePreserveQuantityHistoryForExistingProducts = async () => {
