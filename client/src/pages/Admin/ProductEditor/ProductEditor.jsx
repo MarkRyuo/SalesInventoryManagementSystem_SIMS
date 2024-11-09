@@ -80,9 +80,20 @@ function ProductEditor() {
     ];
 
     // Sort products, prioritize products without tax
+    // Sort products, prioritize products with unset tax and stockNumberLevel
     const sortedProducts = products.sort((a, b) => {
-        return (a.tax === 0 ? -1 : 1) - (b.tax === 0 ? -1 : 1);
+        // Check if tax or stockNumberLevel is unset (0 for tax, empty for stockNumberLevel)
+        const aIsUnset = a.tax === 0 || !a.stockNumberLevel;
+        const bIsUnset = b.tax === 0 || !b.stockNumberLevel;
+
+        // Products with unset fields should appear first
+        if (aIsUnset && !bIsUnset) return -1;
+        if (!aIsUnset && bIsUnset) return 1;
+
+        // If both have unset fields or both are set, keep their original order
+        return 0;
     });
+
 
     return (
         <Container className='m-0 p-0'>
@@ -102,11 +113,20 @@ function ProductEditor() {
                                             <Card.Text className={ProductEditorscss.cardText}>
                                                 <div>
                                                     <p className='m-0 p-0'>Price: <span>₱{product.price.toFixed(2)}</span></p>
-                                                    <p className='m-0 p-0'>Tax: <span style={{ color: product.tax === 0 ? 'red' : 'inherit' }}>
-                                                        {product.tax === 0 ? 'Not Set' : `${product.tax}%`}
-                                                    </span></p>
+                                                    <p className='m-0 p-0'>
+                                                        Tax:
+                                                        <span style={{ color: product.tax === 0 ? 'red' : 'inherit' }}>
+                                                            {product.tax === 0 ? 'Not Set' : `${product.tax}%`}
+                                                        </span>
+                                                    </p>
                                                     <p className='m-0 p-0'>SKU: <span>{product.sku}</span></p>
                                                     <p className='m-0 p-0'>Barcode: <span>{product.barcode}</span></p>
+                                                    <p className='m-0 p-0'>
+                                                        Stock Number Level:
+                                                        <span style={{ color: !product.stockNumberLevel ? 'red' : 'inherit' }}>
+                                                            {product.stockNumberLevel || 'Not Set'}
+                                                        </span>
+                                                    </p>
                                                 </div>
                                                 <div>
                                                     <Button variant="primary" onClick={() => openModal(product)} className="me-2">
@@ -114,6 +134,7 @@ function ProductEditor() {
                                                     </Button>
                                                 </div>
                                             </Card.Text>
+
                                         </Card.Body>
                                     </Card>
                                 </ListGroup.Item>
