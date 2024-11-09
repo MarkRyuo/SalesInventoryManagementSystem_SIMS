@@ -76,6 +76,7 @@ function ProductEditor() {
         'size',
         'wattage',
         'voltage',
+        'stockNumberLevel'  // Added stockNumberLevel to the included fields
     ];
 
     // Sort products, prioritize products without tax
@@ -151,12 +152,11 @@ function ProductEditor() {
                                 <Row style={{ height: '45vh', overflow: 'auto' }}>
                                     {/* Loop through included fields with a better layout */}
                                     {includedFields.map((key) => (
-                                        <Col xs={12} md={6} key={key} className="mb-3" >
+                                        <Col xs={12} md={6} key={key} className="mb-3">
                                             <Form.Group controlId={`form${key}`}>
                                                 <Form.Label>
                                                     {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
                                                 </Form.Label>
-
                                                 {/* Dropdown for category */}
                                                 {key === 'category' ? (
                                                     <Form.Control
@@ -173,18 +173,16 @@ function ProductEditor() {
                                                     </Form.Control>
 
                                                 ) :
-
-                                                    /* Number input for price, quantity, and tax */
-                                                    key === 'price' || key === 'quantity' || key === 'tax' ? (
+                                                    /* Number input for price, quantity, tax, and stockNumberLevel */
+                                                    key === 'price' || key === 'quantity' || key === 'tax' || key === 'stockNumberLevel' ? (
                                                         <Form.Control
                                                             type="number"
                                                             value={editProduct[key]}
                                                             onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
-                                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (%)" : "Enter quantity"}
+                                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (%)" : key === 'stockNumberLevel' ? "Enter stock threshold" : "Enter quantity"}
                                                             style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
                                                         />
                                                     ) :
-
                                                         /* Text input for other fields */
                                                         (
                                                             <Form.Control
