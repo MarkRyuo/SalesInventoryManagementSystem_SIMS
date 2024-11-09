@@ -28,9 +28,9 @@ function ProductNavbarTabs({ setActiveTab }) {
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
-                <Nav.Link eventKey="#">
+                <Nav.Link eventKey="/AdminTransactionHistory">
                     <FaLayerGroup size={20}/>
-                    <p className='m-0 p-0'>Product Groups</p>
+                    <p className='m-0 p-0'>Transaction History</p>
                 </Nav.Link>
             </Nav.Item>
         </Nav>
