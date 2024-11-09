@@ -7,6 +7,7 @@ import { Container } from "react-bootstrap";
 import ProductEditor from "../ProductEditor/ProductEditor";
 import { FaRegEdit } from "react-icons/fa";
 import { FaLayerGroup } from "react-icons/fa6";
+import AdminTransactionHistory from '../AdminTransactionHistory/AdminTransactionHistory'
 
 import ProductPagescss from './ProductPage.module.scss' ;
 
@@ -57,7 +58,7 @@ export const ProductPage = () => {
                     )}
                     {activeTab === '#' && (
                         <div className="Unknown">
-                            <h1 className='mt-4'>Loading</h1>
+                            <AdminTransactionHistory />
                         </div>
                     )}
                 </div>
