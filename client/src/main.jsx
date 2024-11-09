@@ -35,8 +35,6 @@ import ProductEditor from './pages/Admin/ProductEditor/ProductEditor.jsx';
 import Product from './components/Charts/ProductChart/Product.jsx' ;
 import DashboardPage from '../src/pages/Admin/DashboardPage/DashboardPage.jsx';
 
-import Teststock from './pages/Admin/ProductEditor/Teststock.jsx' ;
-
 const router = createBrowserRouter([
   { //? ROOT
     path: "/",
