@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAllProducts, updateProductStockLevel } from './firebaseFunctions';
+import { getAllProducts, updateProductStockLevel } from '../../../services/ProductService';
 
 const StockManagementPage = () => {
     const [products, setProducts] = useState([]);

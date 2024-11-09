@@ -311,4 +311,37 @@ export const updateCategory = async (categoryName, newCategoryData) => {
     }
 };
 
+// Function to update the stock level based on quantity
+export const updateProductStockLevel = async (barcode) => {
+    const db = getDatabase();
+    const productRef = ref(db, 'products/' + barcode);
+
+    try {
+        const productSnapshot = await get(productRef);
+        if (!productSnapshot.exists()) {
+            throw new Error('Product not found');
+        }
+
+        const productData = productSnapshot.val();
+        const quantity = productData.quantity || 0;
+
+        let stockLevel = 'Low Stock'; // Default label is 'Low Stock'
+
+        if (quantity > 10) {
+            stockLevel = 'High Stock';
+        } else if (quantity > 0) {
+            stockLevel = 'In Stock';
+        }
+
+        // Update the stockLevel in the database
+        await update(productRef, {
+            stockLevel: stockLevel,
+            lastUpdated: new Date().toISOString(),
+        });
+
+        console.log(`Stock level for product ${barcode} updated to ${stockLevel}`);
+    } catch (error) {
+        throw new Error(`Error updating stock level: ${error.message}`);
+    }
+};
 
