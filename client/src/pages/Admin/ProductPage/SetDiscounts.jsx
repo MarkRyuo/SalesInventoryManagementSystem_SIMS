@@ -1,9 +1,9 @@
 
 function SetDiscounts() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
