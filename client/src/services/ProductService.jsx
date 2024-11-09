@@ -301,3 +301,5 @@ export const updateCategory = async (categoryName, newCategoryData) => {
         throw new Error(`Error updating category: ${error.message}`);
     }
 };
+
+
