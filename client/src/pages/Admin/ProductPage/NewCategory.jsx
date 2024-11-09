@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Form, Modal, ListGroup } from "react-bootstrap";
 
 function NewCategory() {
     const [showModal, setShowModal] = useState(false);
     const [categoryName, setCategoryName] = useState("");
     const [description, setDescription] = useState("");
     const [error, setError] = useState("");
+    const [categories, setCategories] = useState([]); // To store added categories
 
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => {
@@ -22,10 +23,11 @@ function NewCategory() {
         }
         setError("");
 
-        // Passing the new category data to parent component or to wherever you want to save
-        console.log("New Category Added:", { name: categoryName, description });
+        // Add the new category to the list
+        const newCategory = { name: categoryName, description };
+        setCategories([...categories, newCategory]);
 
-        // Close the modal and reset the form fields
+        // Clear form and close modal
         handleCloseModal();
     };
 
@@ -56,21 +58,32 @@ function NewCategory() {
                                 {error}
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group controlId="categoryDescription" className="mt-3">
-                            <Form.Label>Description (Optional)</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                rows={3}
-                                placeholder="Enter category description"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                            />
-                        </Form.Group>
+
+                        {/* Category List inside the modal */}
+                        <div className="mt-4">
+                            <h5>Existing Categories</h5>
+                            {categories.length === 0 ? (
+                                <p>No categories added yet.</p>
+                            ) : (
+                                <ListGroup>
+                                    {categories.map((category, index) => (
+                                        <ListGroup.Item key={index}>
+                                            <strong>{category.name}</strong>
+                                            {category.description && (
+                                                <p className="mb-0 text-muted">
+                                                    {category.description}
+                                                </p>
+                                            )}
+                                        </ListGroup.Item>
+                                    ))}
+                                </ListGroup>
+                            )}
+                        </div>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>
-                        Cancel
+                        Close
                     </Button>
                     <Button variant="primary" onClick={handleSubmit}>
                         Add Category
