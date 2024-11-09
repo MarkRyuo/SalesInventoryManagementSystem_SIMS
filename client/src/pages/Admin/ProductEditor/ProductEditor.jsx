@@ -43,6 +43,11 @@ function ProductEditor() {
         setEditProduct((prev) => ({ ...prev, [key]: value }));
     };
 
+    const handleTaxChange = (checked) => {
+        // Update tax to 0 if unchecked, or restore its value if checked
+        setEditProduct((prev) => ({ ...prev, tax: checked ? prev.tax : 0 }));
+    };
+
     const saveChanges = async () => {
         try {
             console.log('Saving changes for product:', editProduct);
@@ -71,7 +76,24 @@ function ProductEditor() {
         'size',
         'wattage',
         'voltage',
+        'stockNumberLevel'  // Added stockNumberLevel to the included fields
     ];
+
+    // Sort products, prioritize products without tax
+    // Sort products, prioritize products with unset tax and stockNumberLevel
+    const sortedProducts = products.sort((a, b) => {
+        // Check if tax or stockNumberLevel is unset (0 for tax, empty for stockNumberLevel)
+        const aIsUnset = a.tax === 0 || !a.stockNumberLevel;
+        const bIsUnset = b.tax === 0 || !b.stockNumberLevel;
+
+        // Products with unset fields should appear first
+        if (aIsUnset && !bIsUnset) return -1;
+        if (!aIsUnset && bIsUnset) return 1;
+
+        // If both have unset fields or both are set, keep their original order
+        return 0;
+    });
+
 
     return (
         <Container className='m-0 p-0'>
@@ -79,11 +101,11 @@ function ProductEditor() {
                 <div className="text-center">
                     <Spinner animation="border" variant="primary" />
                 </div>
-            ) : products.length > 0 ? (
+            ) : sortedProducts.length > 0 ? (
                 <div className={ProductEditorscss.rowProduct}>
                     <div>
                         <ListGroup className={ProductEditorscss.listGroupItem}>
-                            {products.map((product) => (
+                            {sortedProducts.map((product) => (
                                 <ListGroup.Item key={product.barcode} className="d-flex align-items-center p-0">
                                     <Card className="w-100">
                                         <Card.Body className={ProductEditorscss.cardBody}>
@@ -91,9 +113,20 @@ function ProductEditor() {
                                             <Card.Text className={ProductEditorscss.cardText}>
                                                 <div>
                                                     <p className='m-0 p-0'>Price: <span>₱{product.price.toFixed(2)}</span></p>
-                                                    <p className='m-0 p-0'>Tax: <span>{product.tax}%</span></p>
+                                                    <p className='m-0 p-0'>
+                                                        Tax:
+                                                        <span style={{ color: product.tax === 0 ? 'red' : 'inherit' }}>
+                                                            {product.tax === 0 ? 'Not Set' : `${product.tax}%`}
+                                                        </span>
+                                                    </p>
                                                     <p className='m-0 p-0'>SKU: <span>{product.sku}</span></p>
                                                     <p className='m-0 p-0'>Barcode: <span>{product.barcode}</span></p>
+                                                    <p className='m-0 p-0'>
+                                                        Stock Number Level:
+                                                        <span style={{ color: !product.stockNumberLevel ? 'red' : 'inherit' }}>
+                                                            {product.stockNumberLevel || 'Not Set'}
+                                                        </span>
+                                                    </p>
                                                 </div>
                                                 <div>
                                                     <Button variant="primary" onClick={() => openModal(product)} className="me-2">
@@ -101,6 +134,7 @@ function ProductEditor() {
                                                     </Button>
                                                 </div>
                                             </Card.Text>
+
                                         </Card.Body>
                                     </Card>
                                 </ListGroup.Item>
@@ -136,15 +170,14 @@ function ProductEditor() {
                     {editProduct && (
                         <Form>
                             <Container>
-                                <Row style={{height: '45vh', overflow: 'auto'}}>
+                                <Row style={{ height: '45vh', overflow: 'auto' }}>
                                     {/* Loop through included fields with a better layout */}
                                     {includedFields.map((key) => (
-                                        <Col xs={12} md={6} key={key} className="mb-3" >
+                                        <Col xs={12} md={6} key={key} className="mb-3">
                                             <Form.Group controlId={`form${key}`}>
                                                 <Form.Label>
                                                     {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
                                                 </Form.Label>
-
                                                 {/* Dropdown for category */}
                                                 {key === 'category' ? (
                                                     <Form.Control
@@ -154,24 +187,23 @@ function ProductEditor() {
                                                     >
                                                         <option value="">Select {key}</option>
                                                         {categories.map((category) => (
-                                                            <option key={category} value={category}>
-                                                                {category}
+                                                            <option key={category.id} value={category.id}>
+                                                                {category.name}
                                                             </option>
                                                         ))}
                                                     </Form.Control>
-                                                ) :
 
-                                                    /* Number input for price, quantity, and tax */
-                                                    key === 'price' || key === 'quantity' || key === 'tax' ? (
+                                                ) :
+                                                    /* Number input for price, quantity, tax, and stockNumberLevel */
+                                                    key === 'price' || key === 'quantity' || key === 'tax' || key === 'stockNumberLevel' ? (
                                                         <Form.Control
                                                             type="number"
                                                             value={editProduct[key]}
                                                             onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
-                                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (%)" : "Enter quantity"}
+                                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (%)" : key === 'stockNumberLevel' ? "Enter stock threshold" : "Enter quantity"}
                                                             style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
                                                         />
                                                     ) :
-
                                                         /* Text input for other fields */
                                                         (
                                                             <Form.Control
@@ -183,6 +215,16 @@ function ProductEditor() {
                                             </Form.Group>
                                         </Col>
                                     ))}
+                                    <Col xs={12} md={6} className="mb-3">
+                                        <Form.Group controlId="formTax">
+                                            <Form.Check
+                                                type="checkbox"
+                                                label="Tax Applied"
+                                                checked={editProduct.tax !== 0}
+                                                onChange={(e) => handleTaxChange(e.target.checked)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
                                 </Row>
                             </Container>
                         </Form>
@@ -194,7 +236,6 @@ function ProductEditor() {
                     <Button variant="primary" onClick={saveChanges}>Save Changes</Button>
                 </Modal.Footer>
             </Modal>
-
         </Container>
     );
 }

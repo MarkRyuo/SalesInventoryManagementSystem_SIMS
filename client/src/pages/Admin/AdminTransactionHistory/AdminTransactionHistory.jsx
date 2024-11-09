@@ -1,17 +1,16 @@
-import { Container, Row, Col, Table, Button, Modal } from "react-bootstrap";
+import { Container, Table, Button, Modal } from "react-bootstrap";
 import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import QRious from 'qrious';
-import { Link } from "react-router-dom";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { FaEye, FaDownload, FaTrash } from "react-icons/fa"; // Importing icons
 
 function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const db = getDatabase();
-    const qrRef = useRef(null); // Ref for the QR code canvas
+    const qrRef = useRef(null);
 
     useEffect(() => {
         const historyRef = ref(db, 'TransactionHistory/');
@@ -26,7 +25,7 @@ function AdminTransactionHistory() {
                 total: parseFloat(value.total) || 0,
                 items: value.items.map(item => ({
                     ...item,
-                    price: parseFloat(item.price) || 0 // Convert price to number
+                    price: parseFloat(item.price) || 0
                 }))
             }));
             setOrderHistory(formattedHistory);
@@ -37,19 +36,15 @@ function AdminTransactionHistory() {
         if (selectedOrder && qrRef.current) {
             new QRious({
                 element: qrRef.current,
-                value: `http://localhost:5173/order/${selectedOrder.id}` // Adjust this URL based on your routing
+                value: `http://localhost:5173/order/${selectedOrder.id}`
             });
         }
-    }, [selectedOrder]); // Re-generate QR code when selectedOrder changes
+    }, [selectedOrder]);
 
     const handleDownloadOrder = async (order) => {
         const doc = new jsPDF();
-
-        // Title
         doc.setFontSize(20);
         doc.text('Receipt', 105, 10, { align: 'center' });
-
-        // Order details
         doc.setFontSize(12);
         doc.text(`Order Date: ${order.date}`, 10, 30);
         doc.text(`Sold To: ${order.customerName}`, 10, 40);
@@ -58,37 +53,12 @@ function AdminTransactionHistory() {
         doc.text(`Discount: -₱${order.discount.toFixed(2)}`, 10, 70);
         doc.text(`Total Amount: ₱${order.total.toFixed(2)}`, 10, 80);
 
-        // Adding a line
-        doc.line(10, 85, 200, 85);
-
-        // Table header
-        doc.setFontSize(14);
-        doc.text('Product Description', 10, 90);
-        doc.text('Quantity', 140, 90);
-        doc.text('Unit Price', 160, 90);
-        doc.text('Amount', 180, 90);
-        doc.line(10, 92, 200, 92);
-
-        // Adding items to the receipt
-        order.items.forEach((item, index) => {
-            const yPosition = 100 + (index * 10);
-            const description = `${item.productName}, Size: ${item.size || 'N/A'}, Color: ${item.color || 'N/A'}, Voltage: ${item.voltage || 'N/A'}, Watt: ${item.watt || 'N/A'}`;
-            doc.text(description, 10, yPosition);
-            doc.text(item.quantity.toString(), 140, yPosition);
-            const price = parseFloat(item.price);
-            const amount = price * item.quantity;
-            doc.text(`₱${!isNaN(price) ? price.toFixed(2) : '0.00'}`, 160, yPosition);
-            doc.text(`₱${!isNaN(amount) ? amount.toFixed(2) : '0.00'}`, 180, yPosition);
-        });
-
-        // QR Code handling
         const qrCanvas = qrRef.current;
         if (qrCanvas) {
             const qrDataUrl = qrCanvas.toDataURL("image/png");
-            doc.addImage(qrDataUrl, 'PNG', 10, 110 + (order.items.length * 10), 50, 50); // Adjust position and size as needed
+            doc.addImage(qrDataUrl, 'PNG', 10, 90, 50, 50);
         }
 
-        // Save the PDF
         doc.save(`Order_${order.id}.pdf`);
     };
 
@@ -109,85 +79,146 @@ function AdminTransactionHistory() {
 
     return (
         <Container fluid className="m-0 p-0">
-            <div className="bg-light shadow-sm" style={{ padding: 15, boxSizing: "border-box" }}>
-                <Container style={{ display: "flex" }}>
-                    <Button as={Link} to="/DashboardPage" variant="light">
-                        <IoMdArrowRoundBack size={20} />
-                    </Button>
-                    <div className="fs-5 pt-1 ps-4">Transaction History</div>
-                </Container>
-            </div>
-            <Container fluid='lg' className="mt-3">
-                <Row>
-                    <Col>
-                        <h4>Your Saved Orders</h4>
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Total Amount</th>
-                                    <th>Actions</th>
+            <Container fluid="lg" className="mt-3">
+                <h4>Your Saved Orders</h4>
+
+                {/* Order Table */}
+                <Table striped bordered hover responsive>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Order Date</th>
+                            <th>Customer Name</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {orderHistory.length > 0 ? (
+                            orderHistory.map((order) => (
+                                <tr key={order.id}>
+                                    <td>{order.id}</td>
+                                    <td>{order.date}</td>
+                                    <td>{order.customerName}</td>
+                                    <td>₱{order.total.toFixed(2)}</td>
+                                    <td>
+                                        <Button
+                                            variant="outline-info"
+                                            size="sm"
+                                            className="me-2"
+                                            onClick={() => handleShowModal(order)}
+                                        >
+                                            <FaEye />
+                                        </Button>
+                                        <Button
+                                            variant="outline-primary"
+                                            size="sm"
+                                            className="me-2"
+                                            onClick={() => handleDownloadOrder(order)}
+                                        >
+                                            <FaDownload />
+                                        </Button>
+                                        <Button
+                                            variant="outline-danger"
+                                            size="sm"
+                                            onClick={() => handleDeleteOrder(order.id)}
+                                        >
+                                            <FaTrash />
+                                        </Button>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {orderHistory.length > 0 ? (
-                                    orderHistory.map((order) => (
-                                        <tr key={order.id}>
-                                            <td>{order.date}</td>
-                                            <td>₱{order.total.toFixed(2)}</td>
-                                            <td>
-                                                <Button variant="info" onClick={() => handleShowModal(order)}>View</Button>
-                                                <Button variant="primary" onClick={() => handleDownloadOrder(order)}>Download</Button>
-                                                <Button variant="danger" className="ms-2" onClick={() => handleDeleteOrder(order.id)}>Delete</Button>
-                                            </td>
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan="3" className="text-center">No saved orders</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </Table>
-                    </Col>
-                </Row>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="5" className="text-center">No saved orders</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </Table>
             </Container>
 
-            {/* Modal for viewing order details */}
-            <Modal show={showModal} onHide={handleCloseModal}>
+            {/* Updated Modal for viewing order details */}
+            <Modal
+                show={showModal}
+                onHide={handleCloseModal}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>Order Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {selectedOrder && (
-                        <>
-                            <h5>Order Date: {selectedOrder.date}</h5>
-                            <h6>Sold To: {selectedOrder.customerName}</h6>
-                            <h6>Subtotal: ₱{selectedOrder.subtotal.toFixed(2)}</h6>
-                            <h6>Tax (12%): ₱{selectedOrder.tax.toFixed(2)}</h6>
-                            <h6>Discount: -₱{selectedOrder.discount.toFixed(2)}</h6>
-                            <h6>Total Amount: ₱{selectedOrder.total.toFixed(2)}</h6>
-                            <h6>Items:</h6>
-                            <ul>
-                                {selectedOrder.items.map((item, index) => {
-                                    const price = parseFloat(item.price);
-                                    const total = price * item.quantity;
-                                    return (
-                                        <li key={index}>
-                                            {item.productName}, Size: {item.size || 'N/A'}, Color: {item.color || 'N/A'}, Voltage: {item.voltage || 'N/A'}, Watt: {item.watt || 'N/A'} - Quantity: {item.quantity}, Unit Price: ₱{!isNaN(price) ? price.toFixed(2) : 'N/A'}, Total: ₱{!isNaN(total) ? total.toFixed(2) : 'N/A'}
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                            <h6>Download Receipt QR Code:</h6>
-                            <canvas ref={qrRef} />
-                        </>
+                        <Container>
+                            <h5 className="mb-3">Order Summary</h5>
+                            <Table borderless>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Order Date:</strong></td>
+                                        <td>{selectedOrder.date}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Customer Name:</strong></td>
+                                        <td>{selectedOrder.customerName}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Subtotal:</strong></td>
+                                        <td>₱{selectedOrder.subtotal.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tax (12%):</strong></td>
+                                        <td>₱{selectedOrder.tax.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Discount:</strong></td>
+                                        <td>-₱{selectedOrder.discount.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total Amount:</strong></td>
+                                        <td><strong>₱{selectedOrder.total.toFixed(2)}</strong></td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+
+                            <h5 className="mt-4">Items</h5>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {selectedOrder.items.map((item, index) => {
+                                        const price = parseFloat(item.price);
+                                        const total = price * item.quantity;
+                                        return (
+                                            <tr key={index}>
+                                                <td>{item.productName}</td>
+                                                <td>{item.quantity}</td>
+                                                <td>₱{price.toFixed(2)}</td>
+                                                <td>₱{total.toFixed(2)}</td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </Table>
+
+                            <h5 className="mt-4">Download Receipt QR Code</h5>
+                            <div className="d-flex justify-content-center">
+                                <canvas ref={qrRef} style={{ maxWidth: "100%", height: "auto" }} />
+                            </div>
+                        </Container>
                     )}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
                 </Modal.Footer>
             </Modal>
+
         </Container>
     );
 }

@@ -2,6 +2,7 @@ import { Row, Col, Form, Dropdown, DropdownButton, Spinner } from "react-bootstr
 import Productcss from './Product.module.scss';
 import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService";
+import SetCategory from "../../../pages/Admin/ProductPage/SetCategory";
 
 function ProductChart() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -63,6 +64,17 @@ function ProductChart() {
     return (
         <>
             <Row className="my-4">
+                <div style={{ border: '1px solid' }}>
+                    <div>
+                        <SetCategory />
+                    </div>
+                    <div>
+                        {/* Create Barcode */}
+                    </div>
+                    <div>
+                        {/* Discount */}
+                    </div>
+                </div>
                 <Col lg={12}>
                     <Form inline className="d-flex justify-content-end m-3">
                         <Col lg={3}>
@@ -86,7 +98,9 @@ function ProductChart() {
                         >
                             <Dropdown.Item eventKey="All Category">All Category</Dropdown.Item>
                             {categories.map((category, index) => (
-                                <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
+                                <Dropdown.Item eventKey={category.id} key={index}>
+                                    {category.name}
+                                </Dropdown.Item>
                             ))}
                         </DropdownButton>
                     </div>
