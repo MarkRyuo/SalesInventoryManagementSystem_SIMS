@@ -10,7 +10,6 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { TbReportAnalytics } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import { FaHistory } from "react-icons/fa";
 import { MdOutlineInventory2 } from "react-icons/md";
 
 export const NavDashboard = () => {
@@ -26,7 +25,6 @@ export const NavDashboard = () => {
         { icon: <MdOutlineInventory2 />, btnName: "Inventory", id: "b-2", path: "/ProductPage" },
         { icon: <TbReportAnalytics />, btnName: "Report", id: "b-3", path: "/ReportPage" },
         { icon: <VscAccount />, btnName: "Account", id: "b-4", path: "/AccountPage" },
-        { icon: <FaHistory />, btnName: "Transaction History", id: "b-5", path: "/AdminTransactionHistory" },
     ]);
 
     //* Handle logout with confirmation and loading state
@@ -76,7 +74,6 @@ export const NavDashboard = () => {
                             <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-5")} />
                             <AccountDropdown />
                         </div>
                         <div style={{ height: "150px" }}>
