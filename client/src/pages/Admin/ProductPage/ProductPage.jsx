@@ -30,7 +30,7 @@ function ProductNavbarTabs({ setActiveTab }) {
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="#">
                     <FaLayerGroup size={20}/>
-                    <p className='m-0 p-0'>Products Group</p>
+                    <p className='m-0 p-0'>Product Groups</p>
                 </Nav.Link>
             </Nav.Item>
         </Nav>
