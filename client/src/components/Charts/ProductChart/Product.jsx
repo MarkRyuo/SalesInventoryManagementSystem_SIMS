@@ -88,7 +88,9 @@ function ProductChart() {
                         >
                             <Dropdown.Item eventKey="All Category">All Category</Dropdown.Item>
                             {categories.map((category, index) => (
-                                <Dropdown.Item eventKey={category} key={index}>{category}</Dropdown.Item>
+                                <Dropdown.Item eventKey={category.id} key={index}>
+                                    {category.name}
+                                </Dropdown.Item>
                             ))}
                         </DropdownButton>
                     </div>
