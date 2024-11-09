@@ -137,41 +137,88 @@ function AdminTransactionHistory() {
                 </Table>
             </Container>
 
-            {/* Modal for viewing order details */}
-            <Modal show={showModal} onHide={handleCloseModal}>
+            {/* Updated Modal for viewing order details */}
+            <Modal
+                show={showModal}
+                onHide={handleCloseModal}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>Order Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {selectedOrder && (
-                        <>
-                            <h5>Order Date: {selectedOrder.date}</h5>
-                            <h6>Sold To: {selectedOrder.customerName}</h6>
-                            <h6>Subtotal: ₱{selectedOrder.subtotal.toFixed(2)}</h6>
-                            <h6>Tax (12%): ₱{selectedOrder.tax.toFixed(2)}</h6>
-                            <h6>Discount: -₱{selectedOrder.discount.toFixed(2)}</h6>
-                            <h6>Total Amount: ₱{selectedOrder.total.toFixed(2)}</h6>
-                            <h6>Items:</h6>
-                            <ul>
-                                {selectedOrder.items.map((item, index) => {
-                                    const price = parseFloat(item.price);
-                                    const total = price * item.quantity;
-                                    return (
-                                        <li key={index}>
-                                            {item.productName} - Qty: {item.quantity}, Unit Price: ₱{price.toFixed(2)}, Total: ₱{total.toFixed(2)}
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                            <h6>Download Receipt QR Code:</h6>
-                            <canvas ref={qrRef} />
-                        </>
+                        <Container>
+                            <h5 className="mb-3">Order Summary</h5>
+                            <Table borderless>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Order Date:</strong></td>
+                                        <td>{selectedOrder.date}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Customer Name:</strong></td>
+                                        <td>{selectedOrder.customerName}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Subtotal:</strong></td>
+                                        <td>₱{selectedOrder.subtotal.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tax (12%):</strong></td>
+                                        <td>₱{selectedOrder.tax.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Discount:</strong></td>
+                                        <td>-₱{selectedOrder.discount.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total Amount:</strong></td>
+                                        <td><strong>₱{selectedOrder.total.toFixed(2)}</strong></td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+
+                            <h5 className="mt-4">Items</h5>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {selectedOrder.items.map((item, index) => {
+                                        const price = parseFloat(item.price);
+                                        const total = price * item.quantity;
+                                        return (
+                                            <tr key={index}>
+                                                <td>{item.productName}</td>
+                                                <td>{item.quantity}</td>
+                                                <td>₱{price.toFixed(2)}</td>
+                                                <td>₱{total.toFixed(2)}</td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </Table>
+
+                            <h5 className="mt-4">Download Receipt QR Code</h5>
+                            <div className="d-flex justify-content-center">
+                                <canvas ref={qrRef} style={{ maxWidth: "100%", height: "auto" }} />
+                            </div>
+                        </Container>
                     )}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
                 </Modal.Footer>
             </Modal>
+
         </Container>
     );
 }
