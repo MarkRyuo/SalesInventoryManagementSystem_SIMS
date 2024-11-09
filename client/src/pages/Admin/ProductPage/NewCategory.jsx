@@ -167,7 +167,7 @@ function NewCategory() {
                         Close
                     </Button>
                     <Button variant="primary" onClick={handleSubmit} disabled={loading}>
-                        {loading ? 'Processing...' : (editingCategory ? 'Update Category' : 'Add Category')}
+                        {loading ? 'Processing...' : (editingCategory ? 'Save Changes' : 'Add Category')}
                     </Button>
                 </Modal.Footer>
             </Modal>
