@@ -64,7 +64,11 @@ function ProductChart() {
     return (
         <>
             <Row className="my-4">
-                <NewCategory />
+                <Row style={{ border: '1px solid' }}>
+                    <Col>
+                        <NewCategory />
+                    </Col>
+                </Row>
                 <Col lg={12}>
                     <Form inline className="d-flex justify-content-end m-3">
                         <Col lg={3}>
