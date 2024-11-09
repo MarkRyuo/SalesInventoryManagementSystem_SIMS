@@ -3,8 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import QRious from 'qrious';
-import { Link } from "react-router-dom";
-import { IoMdArrowRoundBack } from "react-icons/io";
 
 function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
