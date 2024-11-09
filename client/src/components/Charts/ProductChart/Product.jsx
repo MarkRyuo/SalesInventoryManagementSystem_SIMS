@@ -72,7 +72,7 @@ function ProductChart() {
                         {/* Create Barcode */}
                     </div>
                     <div>
-                        
+                        {/* Discount */}
                     </div>
                 </div>
                 <Col lg={12}>
