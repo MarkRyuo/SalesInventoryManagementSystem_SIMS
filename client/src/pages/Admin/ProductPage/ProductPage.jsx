@@ -56,7 +56,7 @@ export const ProductPage = () => {
                             <ProductEditor />
                         </div>
                     )}
-                    {activeTab === '#' && (
+                    {activeTab === '/AdminTransactionHistory' && (
                         <div className="Unknown">
                             <AdminTransactionHistory />
                         </div>

@@ -109,14 +109,6 @@ function AdminTransactionHistory() {
 
     return (
         <Container fluid className="m-0 p-0">
-            <div className="bg-light shadow-sm" style={{ padding: 15, boxSizing: "border-box" }}>
-                <Container style={{ display: "flex" }}>
-                    <Button as={Link} to="/DashboardPage" variant="light">
-                        <IoMdArrowRoundBack size={20} />
-                    </Button>
-                    <div className="fs-5 pt-1 ps-4">Transaction History</div>
-                </Container>
-            </div>
             <Container fluid='lg' className="mt-3">
                 <Row>
                     <Col>
