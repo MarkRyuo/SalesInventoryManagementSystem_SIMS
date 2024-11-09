@@ -6,6 +6,7 @@ import Product from '../../../components/Charts/ProductChart/Product';
 import { Container } from "react-bootstrap";
 import ProductEditor from "../ProductEditor/ProductEditor";
 import { FaRegEdit } from "react-icons/fa";
+import { FaLayerGroup } from "react-icons/fa6";
 
 import ProductPagescss from './ProductPage.module.scss' ;
 
@@ -28,7 +29,7 @@ function ProductNavbarTabs({ setActiveTab }) {
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="#">
-                    <FaRegEdit size={20} />
+                    <FaLayerGroup size={20}/>
                     <p className='m-0 p-0'>Products Group</p>
                 </Nav.Link>
             </Nav.Item>
