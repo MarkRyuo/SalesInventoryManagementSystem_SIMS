@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-function CategoryManager() {
+function NewCategory() {
     const [showModal, setShowModal] = useState(false);
     const [categoryName, setCategoryName] = useState("");
     const [description, setDescription] = useState("");
@@ -81,4 +81,4 @@ function CategoryManager() {
     );
 }
 
-export default CategoryManager;
+export default NewCategory;
