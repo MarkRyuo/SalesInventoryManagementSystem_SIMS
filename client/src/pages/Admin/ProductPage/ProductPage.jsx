@@ -14,7 +14,7 @@ import ProductPagescss from './ProductPage.module.scss' ;
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
     return (
-        <Nav justify variant="tabs" defaultActiveKey="/Product" className="mt-3" onSelect={setActiveTab}>
+        <Nav justify variant="tabs" defaultActiveKey="/Product" className="" onSelect={setActiveTab}>
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/Product">
                     <AiFillProduct size={20}/>
