@@ -83,10 +83,6 @@ const router = createBrowserRouter([
     path: "Product",
     element: <Product /> ,
   },
-  { //? Product for Admin
-    path: "Teststock",
-    element: <Teststock /> ,
-  },
 
   //! Forgot Password
   { //? ForgotPasswordMode for Admin
