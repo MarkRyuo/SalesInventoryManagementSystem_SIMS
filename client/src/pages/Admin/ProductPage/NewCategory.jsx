@@ -1,31 +1,43 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
-function NewCategory({ show, handleClose, handleAddCategory }) {
-        const [categoryName, setCategoryName] = useState("");
-        const [description, setDescription] = useState("");
-        const [error, setError] = useState("");
+function CategoryManager() {
+    const [showModal, setShowModal] = useState(false);
+    const [categoryName, setCategoryName] = useState("");
+    const [description, setDescription] = useState("");
+    const [error, setError] = useState("");
+
+    const handleShowModal = () => setShowModal(true);
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setCategoryName(""); // Reset the fields
+        setDescription(""); // Reset the fields
+    };
 
     const handleSubmit = () => {
-    // Basic validation
-    if (!categoryName.trim()) {
+        // Basic validation
+        if (!categoryName.trim()) {
             setError("Category name is required.");
-        return;
-    }
+            return;
+        }
         setError("");
 
-        // Passing the new category data to parent component
-        handleAddCategory({name: categoryName, description });
+        // Passing the new category data to parent component or to wherever you want to save
+        console.log("New Category Added:", { name: categoryName, description });
 
-        // Reset form fields
-        setCategoryName("");
-        setDescription("");
-        handleClose();
+        // Close the modal and reset the form fields
+        handleCloseModal();
     };
+
     return (
-        <div>
-            <Modal show={show} onHide={handleClose} centered>
+        <div className="text-center mt-3">
+            {/* Button to show the modal */}
+            <Button variant="success" onClick={handleShowModal}>
+                Add New Category
+            </Button>
+
+            {/* Modal for adding a new category */}
+            <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Add New Category</Modal.Title>
                 </Modal.Header>
@@ -57,7 +69,7 @@ function NewCategory({ show, handleClose, handleAddCategory }) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={handleCloseModal}>
                         Cancel
                     </Button>
                     <Button variant="primary" onClick={handleSubmit}>
@@ -66,7 +78,7 @@ function NewCategory({ show, handleClose, handleAddCategory }) {
                 </Modal.Footer>
             </Modal>
         </div>
-    )
+    );
 }
 
-export default NewCategory ;
+export default CategoryManager;

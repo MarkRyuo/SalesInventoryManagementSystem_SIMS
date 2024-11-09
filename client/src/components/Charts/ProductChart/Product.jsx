@@ -2,6 +2,7 @@ import { Row, Col, Form, Dropdown, DropdownButton, Spinner } from "react-bootstr
 import Productcss from './Product.module.scss';
 import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService";
+import NewCategory from "../../../pages/Admin/ProductPage/NewCategory";
 
 function ProductChart() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -63,6 +64,7 @@ function ProductChart() {
     return (
         <>
             <Row className="my-4">
+                <NewCategory />
                 <Col lg={12}>
                     <Form inline className="d-flex justify-content-end m-3">
                         <Col lg={3}>
