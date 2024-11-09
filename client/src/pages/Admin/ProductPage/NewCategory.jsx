@@ -7,4 +7,4 @@ function NewCategory() {
     )
 }
 
-export default NewCategory
+export default NewCategory ;
