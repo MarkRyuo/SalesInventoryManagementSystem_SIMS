@@ -23,13 +23,13 @@ function ProductNavbarTabs({ setActiveTab }) {
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/ProductEditor">
                     <FaRegEdit size={20} />
-                    <p className='m-0 p-0'>Product Edit</p>
+                    <p className='m-0 p-0'>Product Tax</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="#">
                     <FaRegEdit size={20} />
-                    <p className='m-0 p-0'>Unknown</p>
+                    <p className='m-0 p-0'>Product Groups</p>
                 </Nav.Link>
             </Nav.Item>
         </Nav>
