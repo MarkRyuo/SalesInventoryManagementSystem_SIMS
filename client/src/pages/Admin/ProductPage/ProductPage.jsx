@@ -18,7 +18,7 @@ function ProductNavbarTabs({ setActiveTab }) {
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/Product">
                     <AiFillProduct size={20}/>
-                    <p className='m-0 p-0'>Product</p>
+                    <p className='m-0 p-0'>Products</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
