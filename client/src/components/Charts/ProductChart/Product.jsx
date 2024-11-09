@@ -2,7 +2,7 @@ import { Row, Col, Form, Dropdown, DropdownButton, Spinner } from "react-bootstr
 import Productcss from './Product.module.scss';
 import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService";
-import NewCategory from "../../../pages/Admin/ProductPage/NewCategory";
+import SetCategory from "../../../pages/Admin/ProductPage/SetCategory";
 
 function ProductChart() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -66,7 +66,7 @@ function ProductChart() {
             <Row className="my-4">
                 <div style={{ border: '1px solid' }}>
                     <div>
-                        <NewCategory />
+                        <SetCategory />
                     </div>
                     <div>
                         {/* Create Barcode */}

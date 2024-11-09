@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Form, Modal, ListGroup, Spinner, Alert } from "react-bootstrap";
 import { addCategory, getCategories, deleteCategory, updateCategory } from '../../../services/ProductService';
 
-function NewCategory() {
+function SetCategory() {
     const [showModal, setShowModal] = useState(false);
     const [categoryName, setCategoryName] = useState("");
     const [error, setError] = useState("");
@@ -177,4 +177,4 @@ function NewCategory() {
     );
 }
 
-export default NewCategory;
+export default SetCategory;
