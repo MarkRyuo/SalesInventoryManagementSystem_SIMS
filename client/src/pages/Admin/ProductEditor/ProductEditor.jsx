@@ -166,11 +166,12 @@ function ProductEditor() {
                                                     >
                                                         <option value="">Select {key}</option>
                                                         {categories.map((category) => (
-                                                            <option key={category} value={category}>
-                                                                {category}
+                                                            <option key={category.id} value={category.id}>
+                                                                {category.name}
                                                             </option>
                                                         ))}
                                                     </Form.Control>
+
                                                 ) :
 
                                                     /* Number input for price, quantity, and tax */
