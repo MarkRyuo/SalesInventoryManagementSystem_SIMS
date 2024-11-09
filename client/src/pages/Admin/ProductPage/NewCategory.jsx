@@ -103,7 +103,7 @@ function NewCategory() {
         <div className="text-center mt-3">
             {/* Button to show the modal */}
             <Button variant="success" onClick={handleShowModal}>
-                Add New Category
+                Set Category
             </Button>
 
             {/* Modal for adding or editing a category */}
