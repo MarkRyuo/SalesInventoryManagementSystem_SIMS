@@ -43,6 +43,11 @@ function ProductEditor() {
         setEditProduct((prev) => ({ ...prev, [key]: value }));
     };
 
+    const handleTaxChange = (checked) => {
+        // Update tax to 0 if unchecked, or restore its value if checked
+        setEditProduct((prev) => ({ ...prev, tax: checked ? prev.tax : 0 }));
+    };
+
     const saveChanges = async () => {
         try {
             console.log('Saving changes for product:', editProduct);
@@ -73,17 +78,22 @@ function ProductEditor() {
         'voltage',
     ];
 
+    // Sort products, prioritize products without tax
+    const sortedProducts = products.sort((a, b) => {
+        return (a.tax === 0 ? -1 : 1) - (b.tax === 0 ? -1 : 1);
+    });
+
     return (
         <Container className='m-0 p-0'>
             {loading ? (
                 <div className="text-center">
                     <Spinner animation="border" variant="primary" />
                 </div>
-            ) : products.length > 0 ? (
+            ) : sortedProducts.length > 0 ? (
                 <div className={ProductEditorscss.rowProduct}>
                     <div>
                         <ListGroup className={ProductEditorscss.listGroupItem}>
-                            {products.map((product) => (
+                            {sortedProducts.map((product) => (
                                 <ListGroup.Item key={product.barcode} className="d-flex align-items-center p-0">
                                     <Card className="w-100">
                                         <Card.Body className={ProductEditorscss.cardBody}>
@@ -91,7 +101,9 @@ function ProductEditor() {
                                             <Card.Text className={ProductEditorscss.cardText}>
                                                 <div>
                                                     <p className='m-0 p-0'>Price: <span>₱{product.price.toFixed(2)}</span></p>
-                                                    <p className='m-0 p-0'>Tax: <span>{product.tax}%</span></p>
+                                                    <p className='m-0 p-0'>Tax: <span style={{ color: product.tax === 0 ? 'red' : 'inherit' }}>
+                                                        {product.tax === 0 ? 'Not Set' : `${product.tax}%`}
+                                                    </span></p>
                                                     <p className='m-0 p-0'>SKU: <span>{product.sku}</span></p>
                                                     <p className='m-0 p-0'>Barcode: <span>{product.barcode}</span></p>
                                                 </div>
@@ -136,7 +148,7 @@ function ProductEditor() {
                     {editProduct && (
                         <Form>
                             <Container>
-                                <Row style={{height: '45vh', overflow: 'auto'}}>
+                                <Row style={{ height: '45vh', overflow: 'auto' }}>
                                     {/* Loop through included fields with a better layout */}
                                     {includedFields.map((key) => (
                                         <Col xs={12} md={6} key={key} className="mb-3" >
@@ -183,6 +195,16 @@ function ProductEditor() {
                                             </Form.Group>
                                         </Col>
                                     ))}
+                                    <Col xs={12} md={6} className="mb-3">
+                                        <Form.Group controlId="formTax">
+                                            <Form.Check
+                                                type="checkbox"
+                                                label="Tax Applied"
+                                                checked={editProduct.tax !== 0}
+                                                onChange={(e) => handleTaxChange(e.target.checked)}
+                                            />
+                                        </Form.Group>
+                                    </Col>
                                 </Row>
                             </Container>
                         </Form>
@@ -194,7 +216,6 @@ function ProductEditor() {
                     <Button variant="primary" onClick={saveChanges}>Save Changes</Button>
                 </Modal.Footer>
             </Modal>
-
         </Container>
     );
 }
