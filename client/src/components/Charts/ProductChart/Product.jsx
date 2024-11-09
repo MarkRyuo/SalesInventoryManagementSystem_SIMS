@@ -69,6 +69,9 @@ function ProductChart() {
                         <NewCategory />
                     </div>
                     <div>
+                        {/* Create Barcode */}
+                    </div>
+                    <div>
                         
                     </div>
                 </div>
