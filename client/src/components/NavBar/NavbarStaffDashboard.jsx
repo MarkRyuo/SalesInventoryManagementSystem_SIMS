@@ -48,7 +48,7 @@ function NavbarStaffDashboard() {
             <Navbar className={Navbars.navDashboard}>
                 <Container>
                     <Navbar.Brand>
-                        <Button variant="light" className={Navbars.btnOffcanvas} onClick={handleShow}>
+                        <Button variant="" className={Navbars.btnOffcanvas} onClick={handleShow}>
                             <GiHamburgerMenu size={20} />
                         </Button>
                         <span className='fs-5 fw-bold'>SIMS</span> Staff Portal
