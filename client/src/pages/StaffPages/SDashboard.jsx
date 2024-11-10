@@ -6,7 +6,7 @@ import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons
 import { TiDocumentAdd } from "react-icons/ti";
 import { BiScan } from "react-icons/bi";
 import { MdOutlineManageSearch } from "react-icons/md";
-import { getAllProducts } from "../../services/ProductService"; // Import your product service
+import { getAllProducts} from "../../services/ProductService"; // Import your product service
 import CardProduct from "../../components/StaffPortal/Cards/CardProduct";
 import { LiaProductHunt } from 'react-icons/lia'; // Ensure this is correctly imported
 import { db } from "../../services/firebase";
@@ -49,22 +49,34 @@ function SDashboard() {
         const fetchProductsAddedOrUpdatedToday = async () => {
             try {
                 const products = await getAllProducts(); // Fetch all products
-                const today = new Date().toISOString().split('T')[0]; // Get today's date in yyyy-mm-dd format
+                const today = new Date();
+                const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
+                const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
+                const formattedToday = localTime.toISOString().split('T')[0];
 
-                // Check each product's dateAdded and quantityHistory
+                console.log("Formatted Today:", formattedToday);
+
+                // Filter products based on `dateAdded` or `quantityHistory`
                 const productsToday = products.filter(product => {
-                    console.log("Checking product:", product.productName, product.dateAdded, product.quantityHistory);
-                    return (
-                        product.dateAdded === today ||
-                        (product.quantityHistory && product.quantityHistory.some(entry => entry.date === today))
-                    );
+                    const dateAdded = product.dateAdded && String(product.dateAdded).split('T')[0];
+                    const isAddedToday = dateAdded === formattedToday;
+
+                    const isUpdatedToday = product.quantityHistory?.some(entry => {
+                        const entryDate = String(entry.date).split('T')[0]; // Ensure consistent format
+                        return entryDate === formattedToday;
+                    });
+
+                    return isAddedToday || isUpdatedToday;
                 });
 
                 const mappedProductsToday = productsToday.map(product => {
                     let quantity = product.quantity;
 
                     // Locate today's quantity entry in quantity history
-                    const todayEntry = product.quantityHistory?.find(entry => entry.date === today);
+                    const todayEntry = product.quantityHistory?.find(entry => {
+                        const entryDate = String(entry.date).split('T')[0];
+                        return entryDate === formattedToday;
+                    });
                     if (todayEntry) {
                         quantity = todayEntry.quantity;
                     }
@@ -80,6 +92,7 @@ function SDashboard() {
                 console.error("Error fetching products:", error);
             }
         };
+
 
 
         // Fetch staff details and products on component mount
