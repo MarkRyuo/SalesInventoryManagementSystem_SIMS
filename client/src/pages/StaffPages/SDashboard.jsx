@@ -48,26 +48,22 @@ function SDashboard() {
         // Fetch products added today and existing products with updated quantity
         const fetchProductsAddedOrUpdatedToday = async () => {
             try {
-                const products = await getAllProducts();
-                const today = new Date().toISOString().split('T')[0];
+                const products = await getAllProducts(); // Fetch all products
+                const today = new Date().toISOString().split('T')[0]; // Get today's date in yyyy-mm-dd format
 
-                // Filter products added today or updated today
+                // Check each product's dateAdded and quantityHistory
                 const productsToday = products.filter(product => {
-                    // Check if dateAdded matches today
-                    const isAddedToday = product.dateAdded === today;
-
-                    // Check if any entry in quantityHistory has today's date
-                    const isUpdatedToday = product.quantityHistory?.some(entry => entry.date === today);
-
-                    return isAddedToday || isUpdatedToday;
+                    console.log("Checking product:", product.productName, product.dateAdded, product.quantityHistory);
+                    return (
+                        product.dateAdded === today ||
+                        (product.quantityHistory && product.quantityHistory.some(entry => entry.date === today))
+                    );
                 });
 
-                // Map products to include the latest quantity
                 const mappedProductsToday = productsToday.map(product => {
-                    // Default to current quantity
                     let quantity = product.quantity;
 
-                    // Update quantity if today's entry exists in history
+                    // Locate today's quantity entry in quantity history
                     const todayEntry = product.quantityHistory?.find(entry => entry.date === today);
                     if (todayEntry) {
                         quantity = todayEntry.quantity;
@@ -79,13 +75,11 @@ function SDashboard() {
                     };
                 });
 
-                console.log("Products added or updated today:", mappedProductsToday); // Debug log
                 setProductsToday(mappedProductsToday);
             } catch (error) {
                 console.error("Error fetching products:", error);
             }
         };
-
 
 
         // Fetch staff details and products on component mount
