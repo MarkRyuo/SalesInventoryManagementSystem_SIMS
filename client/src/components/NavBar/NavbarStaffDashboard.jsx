@@ -16,6 +16,7 @@ function NavbarStaffDashboard() {
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
@@ -30,15 +31,21 @@ function NavbarStaffDashboard() {
         { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" }
     ]);
 
-    // Handle logout with confirmation modal
+    // Handle logout process
     const handleLogout = () => {
         setLoading(true); // Start the loading state
         setTimeout(() => {
             localStorage.removeItem('staffId'); // Clear the stored staffId from localStorage
             setLoading(false); // End the loading state
-            window.alert("You have successfully logged out."); // Show a success alert
-            navigate("/SLogin"); // Redirect the user to the login page
+            setShowLogoutModal(false); // Close the confirmation modal
+            setShowSuccessModal(true); // Show the success modal
         }, 2000); // Simulate a delay (e.g., 2 seconds)
+    };
+
+    // Redirect to login after showing success modal
+    const handleSuccessModalClose = () => {
+        setShowSuccessModal(false);
+        navigate("/SLogin"); // Redirect the user to the login page
     };
 
     // Modal control functions
@@ -118,6 +125,21 @@ function NavbarStaffDashboard() {
                     </Button>
                     <Button variant="danger" onClick={handleLogout} disabled={loading}>
                         {loading ? "Logging Out..." : "Confirm Logout"}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Success Logout Modal */}
+            <Modal show={showSuccessModal} onHide={handleSuccessModalClose} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Logout Successful</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>You have successfully logged out.</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleSuccessModalClose}>
+                        OK
                     </Button>
                 </Modal.Footer>
             </Modal>
