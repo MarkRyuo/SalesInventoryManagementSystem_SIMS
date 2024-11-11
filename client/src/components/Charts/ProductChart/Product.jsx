@@ -55,6 +55,8 @@ function ProductChart() {
                     matchesStock = true; // Quantity <= lowStockThreshold for "Low Stock"
                 } else if (selectedStock === "High Stock" && product.quantity > instockthreshold) {
                     matchesStock = true; // Quantity > threshold for "High Stock"
+                } else if (selectedStock === "Out of Stock" && product.quantity === 0) {
+                    matchesStock = true; // Quantity === 0 for "Out of Stock"
                 } else if (selectedStock === "Threshold not set" && !product.instockthreshold) {
                     matchesStock = true; // Show products with no instockthreshold
                 }
@@ -141,6 +143,7 @@ function ProductChart() {
                             <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="High Stock">High Stock</Dropdown.Item>
+                            <Dropdown.Item eventKey="Out of Stock">Out of Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="Threshold not set">Threshold not set</Dropdown.Item>
                         </DropdownButton>
                     </div>
