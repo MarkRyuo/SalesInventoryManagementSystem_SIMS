@@ -11,18 +11,22 @@ function Checkout() {
     const [errorMessage, setErrorMessage] = useState("");
     const currentDate = new Date().toLocaleString();
     const [customerName, setCustomerName] = useState("John Doe");  // Editable customer name
+    const [availableDiscounts, setAvailableDiscounts] = useState([]);
+    const [selectedDiscount, setSelectedDiscount] = useState(0);
 
-    const discount = 100;  // Fixed discount of 100
-
+    // Updated Calculations
+    const discount = selectedDiscount; // Gumamit ng selected discount value
+    
+    
     // Calculations
     const subtotal = scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
+    
     // Calculate tax based on each product's tax property
     const totalTax = scannedItems.reduce((acc, item) => {
         const itemTax = (item.price * item.quantity * (typeof item.tax === 'number' ? (item.tax / 100) : 0)); 
         return acc + itemTax;
     }, 0);
-
+    
     const total = subtotal + totalTax - discount;
 
     const handleCheckout = async () => {
@@ -62,6 +66,19 @@ function Checkout() {
             setErrorMessage("Failed to finalize checkout. Please try again.");
         }
     };
+
+    useEffect(() => {
+        const loadDiscounts = async () => {
+            try {
+                const discounts = await fetchAllDiscounts();
+                setAvailableDiscounts(discounts);
+            } catch (error) {
+                console.error("Error fetching discounts:", error);
+            }
+        };
+
+        loadDiscounts();
+    }, []);
 
     return (
         <Container fluid className="m-0 p-0">
