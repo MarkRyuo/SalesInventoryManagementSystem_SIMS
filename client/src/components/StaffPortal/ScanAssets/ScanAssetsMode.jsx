@@ -154,21 +154,28 @@ function Checkout() {
                                         </tr>
                                         <tr>
                                             <td colSpan="4" className="text-end">
-                                                <strong>Discount ({discount ? `${discount.toFixed(2)}` : '0.00'}):</strong>
-                                                <Form.Select
-                                                    size="sm"
-                                                    className="form-select-sm w-auto" // Bootstrap classes for small size and auto width
-                                                    value={selectedDiscount}
-                                                    onChange={(e) => setSelectedDiscount(parseFloat(e.target.value))} // Parse as float for calculation
-                                                >
-                                                    <option value={0}>No Discount</option>
-                                                    {availableDiscounts.map((discount) => (
-                                                        <option key={discount.id} value={discount.value}>
-                                                            {discount.name} - ₱{discount.value.toFixed(2)}
-                                                        </option>
-                                                    ))}
-                                                </Form.Select>
+                                                <div className="d-flex justify-content-end align-items-center">
+                                                    <strong>Discount ({discount ? `${discount.toFixed(2)}` : '0.00'}):</strong>
+                                                    <Form.Group className="mb-0 d-flex align-items-center">
+                                                        <Form.Select
+                                                            size="sm"
+                                                            className="form-select-sm"
+                                                            value={selectedDiscount}
+                                                            onChange={(e) => setSelectedDiscount(parseFloat(e.target.value))}
+                                                            style={{ maxWidth: '150px' }} // Limit width if needed
+                                                        >
+                                                            <option value={0}>No Discount</option>
+                                                            {availableDiscounts.map((discount) => (
+                                                                <option key={discount.id} value={discount.value}>
+                                                                    {discount.name} - ₱{discount.value.toFixed(2)}
+                                                                </option>
+                                                            ))}
+                                                        </Form.Select>
+                                                    </Form.Group>
+                                                </div>
                                             </td>
+
+
                                             <td>-₱{discount.toFixed(2)}</td>
                                         </tr>
 
