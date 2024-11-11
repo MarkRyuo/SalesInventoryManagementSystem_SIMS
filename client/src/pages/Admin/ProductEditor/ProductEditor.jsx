@@ -69,14 +69,16 @@ function ProductEditor() {
     const includedFields = [
         'productName',
         'price',
-        'tax', // Add tax to the fields
+        'tax',
         'category',
         'quantity',
         'color',
         'size',
         'wattage',
         'voltage',
-        'stockNumberLevel'  // Added stockNumberLevel to the included fields
+        'inStockLevel',    
+        'lowStockLevel',  
+        'outOfStockLevel' 
     ];
 
     // Sort products, prioritize products without tax
