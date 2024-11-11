@@ -73,6 +73,7 @@ function ProductChart() {
                     </div>
                     <div>
                         {/* Discount */}
+                        <Set
                     </div>
                 </div>
                 <Col lg={12}>
