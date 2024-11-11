@@ -25,7 +25,7 @@ function SetDiscounts() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShowModal}>
+            <Button variant="success" onClick={handleShowModal}>
                 Set Discount
             </Button>
 
