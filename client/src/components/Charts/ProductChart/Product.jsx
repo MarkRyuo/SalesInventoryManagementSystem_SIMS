@@ -3,6 +3,7 @@ import Productcss from './Product.module.scss';
 import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService";
 import SetCategory from "../../../pages/Admin/ProductPage/SetCategory";
+import SetDiscounts from "../../../pages/Admin/ProductPage/SetDiscounts";
 
 function ProductChart() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -73,7 +74,7 @@ function ProductChart() {
                     </div>
                     <div>
                         {/* Discount */}
-                        <Set
+                        <SetDiscounts />
                     </div>
                 </div>
                 <Col lg={12}>
