@@ -38,12 +38,13 @@ function ProductChart() {
             const lowercasedSearchTerm = searchTerm.toLowerCase();
 
             const filtered = products.filter(product => {
+                // Matching product name with search term
                 const matchesSearchTerm = product.productName.toLowerCase().includes(lowercasedSearchTerm);
                 const matchesCategory = selectedCategory === "All Category" || product.category === selectedCategory;
 
                 // Calculate low stock and high stock based on instockthreshold
                 const instockthreshold = product.instockthreshold || 0;  // Default to 0 if instockthreshold is not set
-                const lowStockThreshold = instockthreshold / 4; // Low stock is 1/4th of the threshold
+                const lowStockThreshold = instockthreshold > 0 ? instockthreshold / 4 : 0; // Low stock is 1/4th of the threshold
 
                 // Determine stock status
                 let matchesStock = false;
@@ -57,7 +58,7 @@ function ProductChart() {
                     matchesStock = true; // Quantity > threshold for "High Stock"
                 } else if (selectedStock === "Out of Stock" && product.quantity === 0) {
                     matchesStock = true; // Quantity === 0 for "Out of Stock"
-                } else if (selectedStock === "Threshold not set" && !product.instockthreshold) {
+                } else if (selectedStock === "Threshold not set" && instockthreshold === 0) {
                     matchesStock = true; // Show products with no instockthreshold
                 }
 
@@ -69,6 +70,9 @@ function ProductChart() {
 
         filterProducts();
     }, [searchTerm, selectedCategory, selectedStock, products]);
+
+
+
 
     const getStockStatus = (quantity, instockthreshold) => {
         // If instockthreshold is not set, display a default message
