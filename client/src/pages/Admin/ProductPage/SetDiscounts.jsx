@@ -4,7 +4,6 @@ import { Button, Form, Modal, InputGroup } from "react-bootstrap";
 function SetDiscounts() {
     const [showModal, setShowModal] = useState(false);
     const [discountName, setDiscountName] = useState("");
-    const [discountType, setDiscountType] = useState("percentage"); // Default to percentage
     const [discountValue, setDiscountValue] = useState("");
 
     const handleShowModal = () => setShowModal(true);
@@ -12,7 +11,6 @@ function SetDiscounts() {
         setShowModal(false);
         // Reset fields on close
         setDiscountName("");
-        setDiscountType("percentage");
         setDiscountValue("");
     };
 
@@ -20,8 +18,7 @@ function SetDiscounts() {
         // Add validation and submit logic here
         console.log({
             discountName,
-            discountType,
-            discountValue
+            discountValue: `${discountValue}%` // Format as a percentage
         });
         handleCloseModal();
     };
@@ -29,13 +26,13 @@ function SetDiscounts() {
     return (
         <>
             <Button variant="primary" onClick={handleShowModal}>
-                Create New Discount
+                Create Percentage Discount
             </Button>
 
-            {/* Modal for Creating Discount */}
+            {/* Modal for Creating Percentage Discount */}
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Discount</Modal.Title>
+                    <Modal.Title>Set Discount</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -49,31 +46,17 @@ function SetDiscounts() {
                             />
                         </Form.Group>
 
-                        <Form.Group controlId="discountType" className="mt-3">
-                            <Form.Label>Discount Type</Form.Label>
-                            <Form.Select
-                                value={discountType}
-                                onChange={(e) => setDiscountType(e.target.value)}
-                            >
-                                <option value="percentage">Percentage (%)</option>
-                                <option value="fixed">Fixed Amount</option>
-                            </Form.Select>
-                        </Form.Group>
-
                         <Form.Group controlId="discountValue" className="mt-3">
-                            <Form.Label>Discount Value</Form.Label>
+                            <Form.Label>Discount Percentage</Form.Label>
                             <InputGroup>
-                                {discountType === "percentage" && (
-                                    <InputGroup.Text>%</InputGroup.Text>
-                                )}
-                                {discountType === "fixed" && (
-                                    <InputGroup.Text>₱</InputGroup.Text>
-                                )}
+                                <InputGroup.Text>%</InputGroup.Text>
                                 <Form.Control
                                     type="number"
-                                    placeholder="Enter value"
+                                    placeholder="Enter percentage (1 - 100)"
                                     value={discountValue}
                                     onChange={(e) => setDiscountValue(e.target.value)}
+                                    min={1}
+                                    max={100}
                                 />
                             </InputGroup>
                         </Form.Group>
@@ -86,7 +69,7 @@ function SetDiscounts() {
                     <Button
                         variant="success"
                         onClick={handleCreateDiscount}
-                        disabled={!discountName || !discountValue}
+                        disabled={!discountName || !discountValue || discountValue <= 0 || discountValue > 100}
                     >
                         Create Discount
                     </Button>
