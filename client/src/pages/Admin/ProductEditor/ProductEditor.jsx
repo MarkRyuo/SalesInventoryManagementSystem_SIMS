@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getAllProducts, getCategories } from '../../../services/ProductService';
+import { getAllProducts, getCategories } from '../../../services/ProductService'; // Add getCategories import
 import { Container, ListGroup, Card, Spinner, Button, Form, Modal, Row, Col } from 'react-bootstrap';
-import { updateProductInDatabase } from '../../../services/ProductService';
+import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
 import ProductEditorscss from './ProductEditor.module.scss';
 import { LuFileEdit } from "react-icons/lu";
 
@@ -50,11 +50,9 @@ function ProductEditor() {
     const saveChanges = async () => {
         try {
             console.log('Saving changes for product:', editProduct);
-
             setProducts((prev) =>
                 prev.map((product) => (product.barcode === editProduct.barcode ? editProduct : product))
             );
-
             await updateProductInDatabase(editProduct);
             closeModal();
         } catch (error) {
@@ -72,14 +70,12 @@ function ProductEditor() {
         'size',
         'wattage',
         'voltage',
-        'stockNumberLevel',  // Existing stock number field
-        'lowStockLevel',     // New low stock level field
-        'outOfStockLevel'    // New out of stock level field
+        'instockthreshold', // Changed to instockthreshold instead of stockNumberLevel
     ];
 
     const sortedProducts = products.sort((a, b) => {
-        const aIsUnset = a.tax === 0 || !a.stockNumberLevel;
-        const bIsUnset = b.tax === 0 || !b.stockNumberLevel;
+        const aIsUnset = a.tax === 0 || !a.instockthreshold;
+        const bIsUnset = b.tax === 0 || !b.instockthreshold;
         if (aIsUnset && !bIsUnset) return -1;
         if (!aIsUnset && bIsUnset) return 1;
         return 0;
@@ -112,21 +108,9 @@ function ProductEditor() {
                                                     <p className='m-0 p-0'>SKU: <span>{product.sku}</span></p>
                                                     <p className='m-0 p-0'>Barcode: <span>{product.barcode}</span></p>
                                                     <p className='m-0 p-0'>
-                                                        Stock Number Level:
-                                                        <span style={{ color: !product.stockNumberLevel ? 'red' : 'inherit' }}>
-                                                            {product.stockNumberLevel || 'Not Set'}
-                                                        </span>
-                                                    </p>
-                                                    <p className='m-0 p-0'>
-                                                        Low Stock Level:
-                                                        <span style={{ color: !product.lowStockLevel ? 'red' : 'inherit' }}>
-                                                            {product.lowStockLevel || 'Not Set'}
-                                                        </span>
-                                                    </p>
-                                                    <p className='m-0 p-0'>
-                                                        Out of Stock Level:
-                                                        <span style={{ color: !product.outOfStockLevel ? 'red' : 'inherit' }}>
-                                                            {product.outOfStockLevel || 'Not Set'}
+                                                        Stock Threshold:
+                                                        <span style={{ color: !product.instockthreshold ? 'red' : 'inherit' }}>
+                                                            {product.instockthreshold ? product.instockthreshold : 'Not Set'}
                                                         </span>
                                                     </p>
                                                 </div>
@@ -136,6 +120,7 @@ function ProductEditor() {
                                                     </Button>
                                                 </div>
                                             </Card.Text>
+
                                         </Card.Body>
                                     </Card>
                                 </ListGroup.Item>
@@ -192,20 +177,26 @@ function ProductEditor() {
                                                         ))}
                                                     </Form.Control>
                                                 ) :
-                                                    /* Number input for price, quantity, tax, and stockNumberLevel */
-                                                    key === 'price' || key === 'quantity' || key === 'tax' || key === 'stockNumberLevel' || key === 'lowStockLevel' || key === 'outOfStockLevel' ? (
+                                                    key === 'instockthreshold' ? (
                                                         <Form.Control
                                                             type="number"
                                                             value={editProduct[key]}
                                                             onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
-                                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (%)" : key === 'stockNumberLevel' ? "Enter stock threshold" : key === 'lowStockLevel' ? "Enter low stock threshold" : key === 'outOfStockLevel' ? "Enter out of stock threshold" : "Enter quantity"}
+                                                            placeholder="Enter stock threshold"
                                                             style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
                                                         />
                                                     ) :
-                                                        /* Text input for other fields */
-                                                        (
+                                                        key === 'stockNumberLevel' ? (
                                                             <Form.Control
-                                                                type={key === 'color' ? 'text' : (typeof editProduct[key] === 'number' ? 'number' : 'text')}
+                                                                type="number"
+                                                                value={editProduct[key]}
+                                                                onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
+                                                                placeholder="Enter current stock level"
+                                                                style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
+                                                            />
+                                                        ) : (
+                                                            <Form.Control
+                                                                type="text"
                                                                 value={editProduct[key]}
                                                                 onChange={(e) => handleModalInputChange(key, e.target.value)}
                                                             />

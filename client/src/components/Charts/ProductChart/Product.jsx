@@ -36,29 +36,53 @@ function ProductChart() {
     useEffect(() => {
         const filterProducts = () => {
             const lowercasedSearchTerm = searchTerm.toLowerCase();
+
             const filtered = products.filter(product => {
                 const matchesSearchTerm = product.productName.toLowerCase().includes(lowercasedSearchTerm);
                 const matchesCategory = selectedCategory === "All Category" || product.category === selectedCategory;
-                const matchesStock = (selectedStock === "All Stock" ||
-                    (selectedStock === "In Stock" && product.quantity > 10) ||
-                    (selectedStock === "Low Stock" && product.quantity > 0 && product.quantity <= 10) ||
-                    (selectedStock === "High Stock" && product.quantity === 0));
+
+                // Calculate low stock and high stock based on instockthreshold
+                const instockthreshold = product.instockthreshold || 0;  // Default to 0 if instockthreshold is not set
+                const lowStockThreshold = instockthreshold / 4; // Low stock is 1/4th of the threshold
+
+                // Determine stock status
+                let matchesStock = false;
+                if (selectedStock === "All Stock") {
+                    matchesStock = true; // No stock filter, show everything
+                } else if (selectedStock === "In Stock" && product.quantity >= instockthreshold) {
+                    matchesStock = true; // Quantity >= threshold for "In Stock"
+                } else if (selectedStock === "Low Stock" && product.quantity > 0 && product.quantity <= lowStockThreshold) {
+                    matchesStock = true; // Quantity <= lowStockThreshold for "Low Stock"
+                } else if (selectedStock === "High Stock" && product.quantity > instockthreshold) {
+                    matchesStock = true; // Quantity > threshold for "High Stock"
+                } else if (selectedStock === "Threshold not set" && !product.instockthreshold) {
+                    matchesStock = true; // Show products with no instockthreshold
+                }
 
                 return matchesSearchTerm && matchesCategory && matchesStock;
             });
+
             setFilteredProducts(filtered);
         };
 
         filterProducts();
     }, [searchTerm, selectedCategory, selectedStock, products]);
 
-    const getStockStatus = (quantity) => {
-        if (quantity > 10) {
+    const getStockStatus = (quantity, instockthreshold) => {
+        // If instockthreshold is not set, display a default message
+        if (!instockthreshold) {
+            return { text: "Threshold not set", color: "gray" };
+        }
+
+        const lowStockThreshold = instockthreshold / 4;  // 1/4th of instockthreshold
+        if (quantity >= instockthreshold) {
             return { text: "In Stock", color: "green" };
-        } else if (quantity > 0) {
+        } else if (quantity > 0 && quantity >= lowStockThreshold) {
             return { text: "Low Stock", color: "orange" };
-        } else {
+        } else if (quantity === 0) {
             return { text: "Out of Stock", color: "red" };
+        } else {
+            return { text: "Out of Stock", color: "red" };  // Handling edge cases
         }
     };
 
@@ -117,6 +141,7 @@ function ProductChart() {
                             <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
                             <Dropdown.Item eventKey="High Stock">High Stock</Dropdown.Item>
+                            <Dropdown.Item eventKey="Threshold not set">Threshold not set</Dropdown.Item>
                         </DropdownButton>
                     </div>
                 </div>
@@ -130,7 +155,7 @@ function ProductChart() {
                         ) : (
                             filteredProducts.length > 0 ? (
                                 filteredProducts.map(product => {
-                                    const { text, color } = getStockStatus(product.quantity);
+                                    const { text, color } = getStockStatus(product.quantity, product.instockthreshold);  // Pass instockthreshold here
                                     return (
                                         <div key={product.barcode} className={Productcss.productCard}>
                                             <div>
