@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { updateProductQuantity, fetchAllDiscounts} from '../../../services/ProductService';
 import { useState } from 'react';
 import { getDatabase, ref, set } from 'firebase/database';
+import { useEffect } from "react";
 
 function Checkout() {
     const location = useLocation();
