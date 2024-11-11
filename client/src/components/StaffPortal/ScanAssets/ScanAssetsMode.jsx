@@ -1,6 +1,6 @@
 import { Container, Navbar, Row, Col, Button, Table, Alert, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updateProductQuantity } from '../../../services/ProductService';
+import { updateProductQuantity, fetchAllDiscounts} from '../../../services/ProductService';
 import { useState } from 'react';
 import { getDatabase, ref, set } from 'firebase/database';
 
