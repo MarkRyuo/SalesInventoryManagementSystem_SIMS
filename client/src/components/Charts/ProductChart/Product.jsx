@@ -36,40 +36,32 @@ function ProductChart() {
     useEffect(() => {
         const filterProducts = () => {
             const lowercasedSearchTerm = searchTerm.toLowerCase();
-
+    
             const filtered = products.filter(product => {
                 // Matching product name with search term
                 const matchesSearchTerm = product.productName.toLowerCase().includes(lowercasedSearchTerm);
                 const matchesCategory = selectedCategory === "All Category" || product.category === selectedCategory;
-
-                // Calculate low stock and high stock based on instockthreshold
-                const instockthreshold = product.instockthreshold || 0;  // Default to 0 if instockthreshold is not set
-                const lowStockThreshold = instockthreshold > 0 ? instockthreshold / 4 : 0; // Low stock is 1/4th of the threshold
-
-                // Determine stock status
+    
+                // Use getStockStatus to determine the stock status of the product
+                const stockStatus = getStockStatus(product.quantity, product.instockthreshold).text;
+    
+                // Determine if the product matches the selected stock filter
                 let matchesStock = false;
                 if (selectedStock === "All Stock") {
-                    matchesStock = true; // No stock filter, show everything
-                } else if (selectedStock === "In Stock" && product.quantity >= instockthreshold) {
-                    matchesStock = true; // Quantity >= threshold for "In Stock"
-                } else if (selectedStock === "Low Stock" && product.quantity > 0 && product.quantity <= lowStockThreshold) {
-                    matchesStock = true; // Quantity <= lowStockThreshold for "Low Stock"
-                } else if (selectedStock === "High Stock" && product.quantity > instockthreshold) {
-                    matchesStock = true; // Quantity > threshold for "High Stock"
-                } else if (selectedStock === "Out of Stock" && product.quantity === 0) {
-                    matchesStock = true; // Quantity === 0 for "Out of Stock"
-                } else if (selectedStock === "Threshold not set" && instockthreshold === 0) {
-                    matchesStock = true; // Show products with no instockthreshold
+                    matchesStock = true;
+                } else if (selectedStock === stockStatus) {
+                    matchesStock = true;
                 }
-
+    
                 return matchesSearchTerm && matchesCategory && matchesStock;
             });
-
+    
             setFilteredProducts(filtered);
         };
-
+    
         filterProducts();
     }, [searchTerm, selectedCategory, selectedStock, products]);
+    
 
 
 
