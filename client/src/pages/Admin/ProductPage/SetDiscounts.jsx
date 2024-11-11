@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Form, Modal, InputGroup } from "react-bootstrap";
+import { addNewDiscount } from "../../../services/ProductService"; // Import the new function
 
 function SetDiscounts() {
     const [showModal, setShowModal] = useState(false);
@@ -9,18 +10,28 @@ function SetDiscounts() {
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => {
         setShowModal(false);
-        // Reset fields on close
         setDiscountName("");
         setDiscountValue("");
     };
 
-    const handleCreateDiscount = () => {
-        // Add validation and submit logic here
-        console.log({
-            discountName,
-            discountValue: `${discountValue}%` // Format as a percentage
-        });
-        handleCloseModal();
+    // Function to handle creating and saving a discount
+    const handleCreateDiscount = async () => {
+        if (!discountName || discountValue <= 0 || discountValue > 100) {
+            alert("Please enter valid discount details");
+            return;
+        }
+
+        try {
+            await addNewDiscount({
+                discountName,
+                discountValue: parseFloat(discountValue), // Ensure numeric value
+            });
+
+            console.log("Discount created successfully");
+            handleCloseModal();
+        } catch (error) {
+            alert(`Error creating discount: ${error.message}`);
+        }
     };
 
     return (
@@ -29,7 +40,6 @@ function SetDiscounts() {
                 Set Discount
             </Button>
 
-            {/* Modal for Creating Percentage Discount */}
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Create Percentage Discount</Modal.Title>
