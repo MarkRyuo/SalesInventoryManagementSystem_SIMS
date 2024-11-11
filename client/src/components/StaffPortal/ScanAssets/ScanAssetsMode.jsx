@@ -154,10 +154,13 @@ function Checkout() {
                                         </tr>
                                         <tr>
                                             <td colSpan="4" className="text-end">
-                                            <strong>Discount ({discount ? `${discount.toFixed(2)}` : '0.00'}):</strong>
-                                            <Form.Group controlId="discountSelect" className="mt-3">
-                                                <Form.Label>Select Discount:</Form.Label>
+                                                <strong>Discount ({discount ? `${discount.toFixed(2)}` : '0.00'}):</strong>
+                                            
+                                            </td>
+                                            <td>-₱{discount.toFixed(2)}
                                                 <Form.Select
+                                                    size="sm"
+                                                    className="form-select-sm w-auto" // Bootstrap classes for small size and auto width
                                                     value={selectedDiscount}
                                                     onChange={(e) => setSelectedDiscount(parseFloat(e.target.value))} // Parse as float for calculation
                                                 >
@@ -168,10 +171,7 @@ function Checkout() {
                                                         </option>
                                                     ))}
                                                 </Form.Select>
-                                            </Form.Group>
-                                            
                                             </td>
-                                            <td>-₱{discount.toFixed(2)}</td>
                                         </tr>
 
                                         <tr>
