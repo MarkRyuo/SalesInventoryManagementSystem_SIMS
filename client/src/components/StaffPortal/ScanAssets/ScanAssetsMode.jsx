@@ -1,8 +1,9 @@
 import { Container, Navbar, Row, Col, Button, Table, Alert, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updateProductQuantity } from '../../../services/ProductService';
+import { updateProductQuantity, fetchAllDiscounts} from '../../../services/ProductService';
 import { useState } from 'react';
 import { getDatabase, ref, set } from 'firebase/database';
+import { useEffect } from "react";
 
 function Checkout() {
     const location = useLocation();
@@ -10,19 +11,23 @@ function Checkout() {
     const scannedItems = location.state?.scannedItems || [];
     const [errorMessage, setErrorMessage] = useState("");
     const currentDate = new Date().toLocaleString();
-    const [customerName, setCustomerName] = useState("John Doe");  // Editable customer name
+    const [customerName, setCustomerName] = useState("Enter the customer name (Optional)");  // Editable customer name
+    const [availableDiscounts, setAvailableDiscounts] = useState([]);
+    const [selectedDiscount, setSelectedDiscount] = useState(0);
 
-    const discount = 100;  // Fixed discount of 100
-
+    // Updated Calculations
+    const discount = selectedDiscount; // Gumamit ng selected discount value
+    
+    
     // Calculations
     const subtotal = scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
+    
     // Calculate tax based on each product's tax property
     const totalTax = scannedItems.reduce((acc, item) => {
         const itemTax = (item.price * item.quantity * (typeof item.tax === 'number' ? (item.tax / 100) : 0)); 
         return acc + itemTax;
     }, 0);
-
+    
     const total = subtotal + totalTax - discount;
 
     const handleCheckout = async () => {
@@ -62,6 +67,19 @@ function Checkout() {
             setErrorMessage("Failed to finalize checkout. Please try again.");
         }
     };
+
+    useEffect(() => {
+        const loadDiscounts = async () => {
+            try {
+                const discounts = await fetchAllDiscounts();
+                setAvailableDiscounts(discounts);
+            } catch (error) {
+                console.error("Error fetching discounts:", error);
+            }
+        };
+
+        loadDiscounts();
+    }, []);
 
     return (
         <Container fluid className="m-0 p-0">
@@ -135,9 +153,32 @@ function Checkout() {
                                             <td>₱{totalTax.toFixed(2)}</td>
                                         </tr>
                                         <tr>
-                                            <td colSpan="4" className="text-end"><strong>Discount:</strong></td>
+                                            <td colSpan="4" className="text-end">
+                                                <div className="d-flex justify-content-end align-items-center">
+                                                    <strong>Discount ({discount ? `${discount.toFixed(2)}` : '0.00'}):</strong>
+                                                    <Form.Group className="mb-0 d-flex align-items-center">
+                                                        <Form.Select
+                                                            size="sm"
+                                                            className="form-select-sm"
+                                                            value={selectedDiscount}
+                                                            onChange={(e) => setSelectedDiscount(parseFloat(e.target.value))}
+                                                            style={{ maxWidth: '150px' }} // Limit width if needed
+                                                        >
+                                                            <option value={0}>No Discount</option>
+                                                            {availableDiscounts.map((discount) => (
+                                                                <option key={discount.id} value={discount.value}>
+                                                                    {discount.name} - ₱{discount.value.toFixed(2)}
+                                                                </option>
+                                                            ))}
+                                                        </Form.Select>
+                                                    </Form.Group>
+                                                </div>
+                                            </td>
+
+
                                             <td>-₱{discount.toFixed(2)}</td>
                                         </tr>
+
                                         <tr>
                                             <td colSpan="4" className="text-end"><strong>Total:</strong></td>
                                             <td>₱{total.toFixed(2)}</td>
@@ -145,6 +186,7 @@ function Checkout() {
                                     </>
                                 )}
                             </tbody>
+
 
 
                         </Table>

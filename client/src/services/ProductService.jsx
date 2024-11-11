@@ -311,3 +311,33 @@ export const updateCategory = async (categoryName, newCategoryData) => {
     }
 };
 
+export const addNewDiscount = async ({ discountName, discountValue }) => {
+    const db = getDatabase();
+    const discountId = Date.now(); // Gamitin ang timestamp bilang unique ID
+    const discountRef = ref(db, `discounts/${discountId}`);
+
+    try {
+        await set(discountRef, {
+            id: discountId,
+            name: discountName,
+            value: discountValue,
+            createdAt: new Date().toISOString(),
+        });
+        console.log("Discount added successfully");
+    } catch (error) {
+        throw new Error(`Error adding discount: ${error.message}`);
+    }
+};
+
+// Function to fetch all discounts
+export const fetchAllDiscounts = async () => {
+    const db = getDatabase();
+    const discountsRef = ref(db, "discounts");
+
+    try {
+        const snapshot = await get(discountsRef);
+        return snapshot.exists() ? Object.values(snapshot.val()) : [];
+    } catch (error) {
+        throw new Error(`Error fetching discounts: ${error.message}`);
+    }
+};

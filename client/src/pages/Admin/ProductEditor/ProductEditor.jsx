@@ -44,22 +44,16 @@ function ProductEditor() {
     };
 
     const handleTaxChange = (checked) => {
-        // Update tax to 0 if unchecked, or restore its value if checked
         setEditProduct((prev) => ({ ...prev, tax: checked ? prev.tax : 0 }));
     };
 
     const saveChanges = async () => {
         try {
             console.log('Saving changes for product:', editProduct);
-
-            // Update the product in the state
             setProducts((prev) =>
                 prev.map((product) => (product.barcode === editProduct.barcode ? editProduct : product))
             );
-
-            // Call the service function to save the updated product in Firebase
             await updateProductInDatabase(editProduct);
-
             closeModal();
         } catch (error) {
             console.error('Error saving changes:', error.message);
@@ -69,31 +63,23 @@ function ProductEditor() {
     const includedFields = [
         'productName',
         'price',
-        'tax', // Add tax to the fields
+        'tax',
         'category',
         'quantity',
         'color',
         'size',
         'wattage',
         'voltage',
-        'stockNumberLevel'  // Added stockNumberLevel to the included fields
+        'instockthreshold', // Changed to instockthreshold instead of stockNumberLevel
     ];
 
-    // Sort products, prioritize products without tax
-    // Sort products, prioritize products with unset tax and stockNumberLevel
     const sortedProducts = products.sort((a, b) => {
-        // Check if tax or stockNumberLevel is unset (0 for tax, empty for stockNumberLevel)
-        const aIsUnset = a.tax === 0 || !a.stockNumberLevel;
-        const bIsUnset = b.tax === 0 || !b.stockNumberLevel;
-
-        // Products with unset fields should appear first
+        const aIsUnset = a.tax === 0 || !a.instockthreshold;
+        const bIsUnset = b.tax === 0 || !b.instockthreshold;
         if (aIsUnset && !bIsUnset) return -1;
         if (!aIsUnset && bIsUnset) return 1;
-
-        // If both have unset fields or both are set, keep their original order
         return 0;
     });
-
 
     return (
         <Container className='m-0 p-0'>
@@ -122,9 +108,9 @@ function ProductEditor() {
                                                     <p className='m-0 p-0'>SKU: <span>{product.sku}</span></p>
                                                     <p className='m-0 p-0'>Barcode: <span>{product.barcode}</span></p>
                                                     <p className='m-0 p-0'>
-                                                        Stock Number Level:
-                                                        <span style={{ color: !product.stockNumberLevel ? 'red' : 'inherit' }}>
-                                                            {product.stockNumberLevel || 'Not Set'}
+                                                        Stock Threshold:
+                                                        <span style={{ color: !product.instockthreshold ? 'red' : 'inherit' }}>
+                                                            {product.instockthreshold ? product.instockthreshold : 'Not Set'}
                                                         </span>
                                                     </p>
                                                 </div>
@@ -171,14 +157,12 @@ function ProductEditor() {
                         <Form>
                             <Container>
                                 <Row style={{ height: '45vh', overflow: 'auto' }}>
-                                    {/* Loop through included fields with a better layout */}
                                     {includedFields.map((key) => (
                                         <Col xs={12} md={6} key={key} className="mb-3">
                                             <Form.Group controlId={`form${key}`}>
                                                 <Form.Label>
                                                     {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
                                                 </Form.Label>
-                                                {/* Dropdown for category */}
                                                 {key === 'category' ? (
                                                     <Form.Control
                                                         as="select"
@@ -192,22 +176,27 @@ function ProductEditor() {
                                                             </option>
                                                         ))}
                                                     </Form.Control>
-
                                                 ) :
-                                                    /* Number input for price, quantity, tax, and stockNumberLevel */
-                                                    key === 'price' || key === 'quantity' || key === 'tax' || key === 'stockNumberLevel' ? (
+                                                    key === 'instockthreshold' ? (
                                                         <Form.Control
                                                             type="number"
                                                             value={editProduct[key]}
                                                             onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
-                                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (%)" : key === 'stockNumberLevel' ? "Enter stock threshold" : "Enter quantity"}
+                                                            placeholder="Enter stock threshold"
                                                             style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
                                                         />
                                                     ) :
-                                                        /* Text input for other fields */
-                                                        (
+                                                        key === 'stockNumberLevel' ? (
                                                             <Form.Control
-                                                                type={key === 'color' ? 'text' : (typeof editProduct[key] === 'number' ? 'number' : 'text')}
+                                                                type="number"
+                                                                value={editProduct[key]}
+                                                                onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
+                                                                placeholder="Enter current stock level"
+                                                                style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
+                                                            />
+                                                        ) : (
+                                                            <Form.Control
+                                                                type="text"
                                                                 value={editProduct[key]}
                                                                 onChange={(e) => handleModalInputChange(key, e.target.value)}
                                                             />
