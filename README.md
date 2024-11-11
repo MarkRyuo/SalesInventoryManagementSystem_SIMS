@@ -10,7 +10,7 @@
 ## Changelog
 
 ### v7.1.5 (Latest)
-- 
+- Product Page Discount 
 
 ### v7.1.4-beta
 - Add functionality in System
