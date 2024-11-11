@@ -1,9 +1,9 @@
 
 function SetTax() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
