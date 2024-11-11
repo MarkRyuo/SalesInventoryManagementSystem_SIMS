@@ -81,16 +81,31 @@ function ProductChart() {
         }
 
         const lowStockThreshold = instockthreshold / 4;  // 1/4th of instockthreshold
+
+        // Check for High Stock first (greater than instockthreshold)
+        if (quantity > instockthreshold) {
+            return { text: "High Stock", color: "blue" };
+        }
+
+        // Check for In Stock (equal to or greater than the instockthreshold)
         if (quantity >= instockthreshold) {
             return { text: "In Stock", color: "green" };
-        } else if (quantity > 0 && quantity >= lowStockThreshold) {
-            return { text: "Low Stock", color: "orange" };
-        } else if (quantity === 0) {
-            return { text: "Out of Stock", color: "red" };
-        } else {
-            return { text: "Out of Stock", color: "red" };  // Handling edge cases
         }
+
+        // Check for Low Stock (greater than 0 but less than or equal to 1/4 of instockthreshold)
+        if (quantity > 0 && quantity <= lowStockThreshold) {
+            return { text: "Low Stock", color: "orange" };
+        }
+
+        // Check for Out of Stock (quantity is 0)
+        if (quantity === 0) {
+            return { text: "Out of Stock", color: "red" };
+        }
+
+        // Default fallback for edge cases (should not be reached)
+        return { text: "Out of Stock", color: "red" };
     };
+
 
     return (
         <>
