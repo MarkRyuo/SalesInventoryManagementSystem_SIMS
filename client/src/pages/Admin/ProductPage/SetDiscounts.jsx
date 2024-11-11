@@ -26,13 +26,13 @@ function SetDiscounts() {
     return (
         <>
             <Button variant="primary" onClick={handleShowModal}>
-                Create Percentage Discount
+                Set Discount
             </Button>
 
             {/* Modal for Creating Percentage Discount */}
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Set Discount</Modal.Title>
+                    <Modal.Title>Create Percentage Discount</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
