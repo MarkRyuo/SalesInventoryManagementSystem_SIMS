@@ -135,9 +135,10 @@ function Checkout() {
                                             <td>₱{totalTax.toFixed(2)}</td>
                                         </tr>
                                         <tr>
-                                            <td colSpan="4" className="text-end"><strong>Discount:</strong></td>
+                                            <td colSpan="4" className="text-end"><strong>Discount ({discount ? `${discount.toFixed(2)}` : '0.00'}):</strong></td>
                                             <td>-₱{discount.toFixed(2)}</td>
                                         </tr>
+
                                         <tr>
                                             <td colSpan="4" className="text-end"><strong>Total:</strong></td>
                                             <td>₱{total.toFixed(2)}</td>
