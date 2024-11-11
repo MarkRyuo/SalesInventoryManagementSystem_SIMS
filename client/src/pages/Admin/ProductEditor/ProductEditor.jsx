@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getAllProducts, getCategories } from '../../../services/ProductService'; // Add getCategories import
+import { getAllProducts, getCategories } from '../../../services/ProductService';
 import { Container, ListGroup, Card, Spinner, Button, Form, Modal, Row, Col } from 'react-bootstrap';
-import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
+import { updateProductInDatabase } from '../../../services/ProductService';
 import ProductEditorscss from './ProductEditor.module.scss';
 import { LuFileEdit } from "react-icons/lu";
 
@@ -44,7 +44,6 @@ function ProductEditor() {
     };
 
     const handleTaxChange = (checked) => {
-        // Update tax to 0 if unchecked, or restore its value if checked
         setEditProduct((prev) => ({ ...prev, tax: checked ? prev.tax : 0 }));
     };
 
@@ -52,14 +51,11 @@ function ProductEditor() {
         try {
             console.log('Saving changes for product:', editProduct);
 
-            // Update the product in the state
             setProducts((prev) =>
                 prev.map((product) => (product.barcode === editProduct.barcode ? editProduct : product))
             );
 
-            // Call the service function to save the updated product in Firebase
             await updateProductInDatabase(editProduct);
-
             closeModal();
         } catch (error) {
             console.error('Error saving changes:', error.message);
@@ -76,26 +72,18 @@ function ProductEditor() {
         'size',
         'wattage',
         'voltage',
-        'inStockLevel',    
-        'lowStockLevel',  
-        'outOfStockLevel' 
+        'stockNumberLevel',  // Existing stock number field
+        'lowStockLevel',     // New low stock level field
+        'outOfStockLevel'    // New out of stock level field
     ];
 
-    // Sort products, prioritize products without tax
-    // Sort products, prioritize products with unset tax and stockNumberLevel
     const sortedProducts = products.sort((a, b) => {
-        // Check if tax or stockNumberLevel is unset (0 for tax, empty for stockNumberLevel)
         const aIsUnset = a.tax === 0 || !a.stockNumberLevel;
         const bIsUnset = b.tax === 0 || !b.stockNumberLevel;
-
-        // Products with unset fields should appear first
         if (aIsUnset && !bIsUnset) return -1;
         if (!aIsUnset && bIsUnset) return 1;
-
-        // If both have unset fields or both are set, keep their original order
         return 0;
     });
-
 
     return (
         <Container className='m-0 p-0'>
@@ -129,6 +117,18 @@ function ProductEditor() {
                                                             {product.stockNumberLevel || 'Not Set'}
                                                         </span>
                                                     </p>
+                                                    <p className='m-0 p-0'>
+                                                        Low Stock Level:
+                                                        <span style={{ color: !product.lowStockLevel ? 'red' : 'inherit' }}>
+                                                            {product.lowStockLevel || 'Not Set'}
+                                                        </span>
+                                                    </p>
+                                                    <p className='m-0 p-0'>
+                                                        Out of Stock Level:
+                                                        <span style={{ color: !product.outOfStockLevel ? 'red' : 'inherit' }}>
+                                                            {product.outOfStockLevel || 'Not Set'}
+                                                        </span>
+                                                    </p>
                                                 </div>
                                                 <div>
                                                     <Button variant="primary" onClick={() => openModal(product)} className="me-2">
@@ -136,7 +136,6 @@ function ProductEditor() {
                                                     </Button>
                                                 </div>
                                             </Card.Text>
-
                                         </Card.Body>
                                     </Card>
                                 </ListGroup.Item>
@@ -173,14 +172,12 @@ function ProductEditor() {
                         <Form>
                             <Container>
                                 <Row style={{ height: '45vh', overflow: 'auto' }}>
-                                    {/* Loop through included fields with a better layout */}
                                     {includedFields.map((key) => (
                                         <Col xs={12} md={6} key={key} className="mb-3">
                                             <Form.Group controlId={`form${key}`}>
                                                 <Form.Label>
                                                     {key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}
                                                 </Form.Label>
-                                                {/* Dropdown for category */}
                                                 {key === 'category' ? (
                                                     <Form.Control
                                                         as="select"
@@ -194,15 +191,14 @@ function ProductEditor() {
                                                             </option>
                                                         ))}
                                                     </Form.Control>
-
                                                 ) :
                                                     /* Number input for price, quantity, tax, and stockNumberLevel */
-                                                    key === 'price' || key === 'quantity' || key === 'tax' || key === 'stockNumberLevel' ? (
+                                                    key === 'price' || key === 'quantity' || key === 'tax' || key === 'stockNumberLevel' || key === 'lowStockLevel' || key === 'outOfStockLevel' ? (
                                                         <Form.Control
                                                             type="number"
                                                             value={editProduct[key]}
                                                             onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
-                                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (%)" : key === 'stockNumberLevel' ? "Enter stock threshold" : "Enter quantity"}
+                                                            placeholder={key === 'price' ? "Enter price" : key === 'tax' ? "Enter tax (%)" : key === 'stockNumberLevel' ? "Enter stock threshold" : key === 'lowStockLevel' ? "Enter low stock threshold" : key === 'outOfStockLevel' ? "Enter out of stock threshold" : "Enter quantity"}
                                                             style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
                                                         />
                                                     ) :
