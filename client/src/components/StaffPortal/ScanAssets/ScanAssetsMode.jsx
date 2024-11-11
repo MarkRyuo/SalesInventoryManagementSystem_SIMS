@@ -155,9 +155,6 @@ function Checkout() {
                                         <tr>
                                             <td colSpan="4" className="text-end">
                                                 <strong>Discount ({discount ? `${discount.toFixed(2)}` : '0.00'}):</strong>
-                                            
-                                            </td>
-                                            <td>-₱{discount.toFixed(2)}
                                                 <Form.Select
                                                     size="sm"
                                                     className="form-select-sm w-auto" // Bootstrap classes for small size and auto width
@@ -172,6 +169,7 @@ function Checkout() {
                                                     ))}
                                                 </Form.Select>
                                             </td>
+                                            <td>-₱{discount.toFixed(2)}</td>
                                         </tr>
 
                                         <tr>
