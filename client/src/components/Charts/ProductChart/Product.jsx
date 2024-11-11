@@ -79,9 +79,9 @@ function ProductChart() {
         if (!instockthreshold) {
             return { text: "Threshold not set", color: "gray" };
         }
-
-        const lowStockThreshold = instockthreshold / 4;  // 1/4th of instockthreshold
-
+    
+        const lowStockThreshold = instockthreshold / 4; // 1/4th of instockthreshold
+    
         // Check for Out of Stock (quantity is 0)
         if (quantity === 0) {
             return { text: "Out of Stock", color: "red" };
@@ -90,21 +90,16 @@ function ProductChart() {
         if (quantity > 0 && quantity <= lowStockThreshold) {
             return { text: "Low Stock", color: "orange" };
         }
-        // Check for High Stock first (greater than instockthreshold)
+        // Check for High Stock (greater than instockthreshold)
         if (quantity > instockthreshold) {
             return { text: "High Stock", color: "blue" };
         }
-        // Check for In Stock (equal to or greater than the instockthreshold)
-        if (quantity >= instockthreshold || quantity <= instockthreshold) {
+        // Check for In Stock (greater than lowStockThreshold but less than or equal to instockthreshold)
+        if (quantity > lowStockThreshold && quantity <= instockthreshold) {
             return { text: "In Stock", color: "green" };
         }
-
-
-
-
-        // Default fallback for edge cases (should not be reached)
-        return { text: "Out of Stock", color: "red" };
     };
+    
 
 
     return (
