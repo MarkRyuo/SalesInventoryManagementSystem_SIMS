@@ -153,7 +153,24 @@ function Checkout() {
                                             <td>₱{totalTax.toFixed(2)}</td>
                                         </tr>
                                         <tr>
-                                            <td colSpan="4" className="text-end"><strong>Discount ({discount ? `${discount.toFixed(2)}` : '0.00'}):</strong></td>
+                                            <td colSpan="4" className="text-end">
+                                            <strong>Discount ({discount ? `${discount.toFixed(2)}` : '0.00'}):</strong>
+                                            <Form.Group controlId="discountSelect" className="mt-3">
+                                                <Form.Label>Select Discount:</Form.Label>
+                                                <Form.Select
+                                                    value={selectedDiscount}
+                                                    onChange={(e) => setSelectedDiscount(parseFloat(e.target.value))} // Parse as float for calculation
+                                                >
+                                                    <option value={0}>No Discount</option>
+                                                    {availableDiscounts.map((discount) => (
+                                                        <option key={discount.id} value={discount.value}>
+                                                            {discount.name} - ₱{discount.value.toFixed(2)}
+                                                        </option>
+                                                    ))}
+                                                </Form.Select>
+                                            </Form.Group>
+                                            
+                                            </td>
                                             <td>-₱{discount.toFixed(2)}</td>
                                         </tr>
 
