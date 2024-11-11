@@ -166,6 +166,7 @@ function Checkout() {
                             </tbody>
 
 
+
                         </Table>
                     </Col>
                 </Row>
