@@ -67,6 +67,11 @@ export const ProductPage = () => {
                             <AdminTransactionHistory />
                         </div>
                     )}
+                    {activeTab === '/AdminTransactionHistory' && (
+                        <div className="Unknown">
+                            <AdminTransactionHistory />
+                        </div>
+                    )}
                 </div>
             </Container>
         </MainLayout>
