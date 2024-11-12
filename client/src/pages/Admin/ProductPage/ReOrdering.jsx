@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { fetchReorderingProducts, fetchSavedOrders } from "../../../services/ProductService";  // Ensure you import fetchSavedOrders correctly
+import { fetchReorderingProducts } from "../../../services/ProductService"; 
 import { Table, Spinner, Button, Badge, Container, Modal } from "react-bootstrap";
 import { jsPDF } from "jspdf";
 import { saveOrderToFirebase } from "../../../services/ProductService";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
-    const [savedOrders, setSavedOrders] = useState([]); // State to hold saved orders
     const [loading, setLoading] = useState(true);
     const [showProductModal, setShowProductModal] = useState(false);
     const [showReorderModal, setShowReorderModal] = useState(false);
@@ -24,23 +23,9 @@ function ReOrdering() {
         }
     };
 
-    // Fetch saved orders from Firebase using the service function
     useEffect(() => {
-        // Initially load data
         setLoading(true);
         fetchData().then(() => setLoading(false));
-
-        // Fetch saved orders from Firebase
-        const getSavedOrders = async () => {
-            try {
-                const orders = await fetchSavedOrders();  // Using the imported function
-                setSavedOrders(orders); // Store the fetched orders
-            } catch (error) {
-                console.error("Error fetching saved orders:", error);
-            }
-        };
-
-        getSavedOrders();
 
         // Retrieve reorder list from localStorage on mount
         const savedReorderList = JSON.parse(localStorage.getItem('reorderList'));
@@ -49,7 +34,7 @@ function ReOrdering() {
             const reorderedProductBarcodes = new Set(savedReorderList.map(item => item.barcode));
             setReorderedProducts(reorderedProductBarcodes);
         }
-    }, []); // Run once when the component mounts
+    }, []);
 
     // Open Product Modal
     const handleViewProduct = (product) => {
@@ -61,14 +46,12 @@ function ReOrdering() {
     const handleReorderProduct = (product) => {
         setReorderList((prevList) => {
             const updatedList = [...prevList, product];
-            localStorage.setItem('reorderList', JSON.stringify(updatedList)); // Save to localStorage
+            localStorage.setItem('reorderList', JSON.stringify(updatedList));
             return updatedList;
         });
 
-        // Mark product as reordered
         setReorderedProducts((prevSet) => new Set(prevSet).add(product.barcode));
 
-        // Remove the product from the reorderingProducts list
         setReorderingProducts((prevProducts) =>
             prevProducts.filter((item) => item.barcode !== product.barcode)
         );
@@ -108,18 +91,24 @@ function ReOrdering() {
                 date: new Date().toISOString(),
             }));
 
-            // Save the order details to Firebase
             await saveOrderToFirebase({ orderDetails });
 
             alert("Order saved successfully to Firebase!");
 
-            // Fetch the updated saved orders after saving
-            const orders = await fetchSavedOrders();  // Re-fetch saved orders to update the list
-            setSavedOrders(orders);
+            const reorderedProductBarcodes = new Set(orderDetails.map(product => product.barcode));
+            setReorderedProducts((prevSet) => {
+                const updatedSet = new Set(prevSet);
+                orderDetails.forEach((product) => updatedSet.add(product.barcode));
+                return updatedSet;
+            });
 
-            // Clear reorder list after saving
+            setReorderingProducts((prevProducts) => 
+                prevProducts.filter(product => !reorderedProductBarcodes.has(product.barcode))
+            );
+
             setReorderList([]);
-            localStorage.removeItem('reorderList'); // Clear from localStorage
+            localStorage.removeItem('reorderList');
+
         } catch (error) {
             console.error("Error saving order to Firebase:", error);
             alert("Error saving order!");
@@ -188,58 +177,6 @@ function ReOrdering() {
                     <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
                         View Reordered Products
                     </Button>
-
-                    {/* Pending Orders Section */}
-                    <h4 className="my-4">Pending Orders</h4>
-                    {reorderList.length > 0 ? (
-                        <Table bordered hover>
-                            <thead className="table-primary">
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>SKU</th>
-                                    <th>Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {reorderList.map((product) => (
-                                    <tr key={product.barcode}>
-                                        <td>{product.productName}</td>
-                                        <td>{product.sku}</td>
-                                        <td>{product.quantity}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                    ) : (
-                        <p>No pending orders.</p>
-                    )}
-
-                    {/* Saved Orders Section */}
-                    <h4 className="my-4">Saved Orders</h4>
-                    {savedOrders.length > 0 ? (
-                        <Table bordered hover>
-                            <thead className="table-primary">
-                                <tr>
-                                    <th>Order Date</th>
-                                    <th>Product Name</th>
-                                    <th>SKU</th>
-                                    <th>Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {savedOrders.map((order, index) => (
-                                    <tr key={index}>
-                                        <td>{new Date(order.date).toLocaleDateString()}</td>
-                                        <td>{order.productName}</td>
-                                        <td>{order.sku}</td>
-                                        <td>{order.quantity}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                    ) : (
-                        <p>No saved orders.</p>
-                    )}
                 </>
             )}
 
