@@ -34,6 +34,7 @@ import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/Admin
 import ProductEditor from './pages/Admin/ProductEditor/ProductEditor.jsx';
 import Product from './components/Charts/ProductChart/Product.jsx' ;
 import DashboardPage from '../src/pages/Admin/DashboardPage/DashboardPage.jsx';
+import ReOrdering from './pages/Admin/ProductPage/ReOrdering.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
   { //? Product for Admin
     path: "Product",
     element: <Product /> ,
+  },
+  { //? Product for Admin
+    path: "ReOrdering",
+    element: <ReOrdering /> ,
   },
 
   //! Forgot Password
