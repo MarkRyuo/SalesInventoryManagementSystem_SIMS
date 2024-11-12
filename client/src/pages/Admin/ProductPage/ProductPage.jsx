@@ -10,6 +10,7 @@ import AdminTransactionHistory from '../AdminTransactionHistory/AdminTransaction
 import { FaHistory } from "react-icons/fa";
 
 import ProductPagescss from './ProductPage.module.scss' ;
+import ReOrdering from './ReOrdering';
 
 
 // eslint-disable-next-line react/prop-types
@@ -67,9 +68,9 @@ export const ProductPage = () => {
                             <AdminTransactionHistory />
                         </div>
                     )}
-                    {activeTab === '/AdminTransactionHistory' && (
+                    {activeTab === '/ReOrdering' && (
                         <div className="Unknown">
-                            <AdminTransactionHistory />
+                            <ReOrdering />
                         </div>
                     )}
                 </div>
