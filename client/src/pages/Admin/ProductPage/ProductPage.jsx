@@ -34,6 +34,12 @@ function ProductNavbarTabs({ setActiveTab }) {
                     <p className='m-0 p-0'>Transaction History</p>
                 </Nav.Link>
             </Nav.Item>
+            <Nav.Item className={ProductPagescss.mainTabs}>
+                <Nav.Link eventKey="/AdminTransactionHistory">
+                    <FaHistory size={20} />
+                    <p className='m-0 p-0'>Re Ordering</p>
+                </Nav.Link>
+            </Nav.Item>
         </Nav>
     );
 }
