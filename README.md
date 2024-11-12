@@ -10,7 +10,7 @@
 ## Changelog
 
 ### v7.2.1-beta (Latest)
-- 
+- Add Tax (Dropdown) 
 
 ### v7.2.0 (Latest)
 - Add Generated Qr code 
