@@ -246,6 +246,7 @@ export const updatePreserveQuantityHistoryForExistingProducts = async () => {
 
 //! End of PreserveQuantityHistoryForExistingProducts
 
+//* Start of Order
 // Function to save an order to Firebase
 export const saveOrderToFirebase = async (orderDetails) => {
     const db = getDatabase();
