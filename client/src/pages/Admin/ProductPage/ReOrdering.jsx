@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchReorderingProducts} from "../../../services/ProductService";
+import { fetchReorderingProducts } from "../../../services/ProductService";
 import { Table, Spinner, Button, Badge, Container, Modal } from "react-bootstrap";
 import { jsPDF } from "jspdf";
+import { saveOrderToFirebase } from "../../../services/ProductService"; // Make sure to import this
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
@@ -75,6 +76,26 @@ function ReOrdering() {
         doc.save("Reorder_List.pdf");
     };
 
+    // Save the reorder list to Firebase
+    const handleSaveOrderToFirebase = async () => {
+        try {
+            const orderDetails = reorderList.map((product) => ({
+                barcode: product.barcode,
+                productName: product.productName,
+                sku: product.sku,
+                quantity: product.quantity,
+                date: new Date().toISOString(),
+            }));
+
+            await saveOrderToFirebase({ orderDetails });
+            alert("Order saved successfully to Firebase!");
+            setReorderList([]); // Clear reorder list after saving
+        } catch (error) {
+            console.error("Error saving order to Firebase:", error);
+            alert("Error saving order!");
+        }
+    };
+
     return (
         <Container>
             <h4 className="my-4">Reordering Dashboard</h4>
@@ -98,7 +119,7 @@ function ReOrdering() {
                                 {reorderingProducts.map((product) => {
                                     const isOutOfStock = product.quantity === 0;
                                     const isLowStock = product.quantity > 0 && product.quantity <= product.instockthreshold / 4;
-                                    
+
                                     const statusBadge = isOutOfStock ? (
                                         <Badge bg="danger">Out of Stock</Badge>
                                     ) : (
@@ -202,6 +223,9 @@ function ReOrdering() {
                     </Button>
                     <Button variant="primary" onClick={handleDownloadPDF}>
                         Download PDF
+                    </Button>
+                    <Button variant="success" onClick={handleSaveOrderToFirebase}>
+                        Save Order
                     </Button>
                 </Modal.Footer>
             </Modal>
