@@ -348,16 +348,18 @@ export const fetchReorderingProducts = async () => {
     const products = await getAllProducts();
 
     // Filter products that are either Low Stock or Out of Stock
-    const reorderingProducts = products.filter(product => {
-        const instockThreshold = product.instockthreshold || 0;
+    const reorderingProducts = products.filter((product) => {
+        const instockThreshold = product.instockthreshold ?? 0;
         const lowStockThreshold = instockThreshold / 4;
-        const quantity = product.quantity || 0;
+        const quantity = product.quantity ?? 0;
 
-        return quantity === 0 || quantity <= lowStockThreshold;
+        // Only consider products with valid thresholds and quantities
+        return quantity === 0 || (quantity > 0 && quantity <= lowStockThreshold);
     });
 
     return reorderingProducts;
 };
+
 
 // Function to fetch saved orders from Firebase
 export const fetchSavedOrders = async () => {
@@ -367,15 +369,14 @@ export const fetchSavedOrders = async () => {
     try {
         const snapshot = await get(ordersRef);
         if (snapshot.exists()) {
-            console.log('Fetched orders:', snapshot.val());
-            // Assuming the orders data is not structured as an array, but as an object with keys
-            return Object.keys(snapshot.val()).map((key) => {
-                const order = snapshot.val()[key];
-                return {
-                    ...order,
-                    id: key, // You can include the Firebase key as the order ID
-                };
-            });
+            const ordersData = snapshot.val();
+            console.log('Fetched orders:', ordersData);
+
+            // Convert orders from object to array with order ID included
+            return Object.entries(ordersData).map(([key, order]) => ({
+                ...order,
+                id: key, // Include the Firebase key as the order ID
+            }));
         } else {
             console.log('No saved orders found.');
             return []; // Return an empty array if no orders exist
@@ -385,5 +386,6 @@ export const fetchSavedOrders = async () => {
         throw new Error(`Error fetching saved orders: ${error.message}`);
     }
 };
+
 
 
