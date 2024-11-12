@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchReorderingProducts, saveOrderToFirebase } from "../../../services/ProductService";
 import { Table, Spinner, Button, Badge, Container, Modal } from "react-bootstrap";
+import SavedOrderDetails from "./SavedOrderDetails";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
@@ -116,6 +117,7 @@ function ReOrdering() {
     return (
         <Container>
             <h4 className="my-4">Reordering Dashboard</h4>
+            <SavedOrderDetails />
             {loading ? (
                 <Spinner animation="border" variant="primary" />
             ) : (
