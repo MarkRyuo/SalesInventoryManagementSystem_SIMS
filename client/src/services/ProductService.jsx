@@ -217,6 +217,7 @@ export const getCategories = async () => {
 //! End of Category
 
 //* Start of PreserveQuantityHistoryForExistingProducts
+
 //? Function to update existing products to include preserveQuantityHistory
 export const updatePreserveQuantityHistoryForExistingProducts = async () => {
     const db = getDatabase();
@@ -242,6 +243,8 @@ export const updatePreserveQuantityHistoryForExistingProducts = async () => {
         throw new Error(`Error updating preserveQuantityHistory: ${error.message}`);
     }
 };
+
+//! End of PreserveQuantityHistoryForExistingProducts
 
 // Function to save an order to Firebase
 export const saveOrderToFirebase = async (orderDetails) => {
