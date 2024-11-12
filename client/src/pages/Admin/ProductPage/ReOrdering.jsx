@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { fetchReorderingProducts } from "../../../services/ProductService";
-import { Table, Spinner, Button, Badge, Container } from "react-bootstrap";
+import { Table, Spinner, Button, Badge, Container, Modal, Form } from "react-bootstrap";
+import { jsPDF } from "jspdf";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [orderList, setOrderList] = useState([]);
 
-    // Interval time para sa live update (in milliseconds)
     const POLL_INTERVAL = 10000; // Every 10 seconds
 
-    // Function to fetch low stock and out of stock products
     const fetchData = async () => {
         try {
             const products = await fetchReorderingProducts();
@@ -23,12 +24,36 @@ function ReOrdering() {
         setLoading(true);
         fetchData().then(() => setLoading(false));
 
-        // Setup polling interval
         const intervalId = setInterval(fetchData, POLL_INTERVAL);
-
-        // Cleanup interval on component unmount
         return () => clearInterval(intervalId);
     }, []);
+
+    // Open Modal and add product to the order list
+    const handleReorder = (product) => {
+        setOrderList((prevList) => {
+            if (!prevList.find((item) => item.barcode === product.barcode)) {
+                return [...prevList, product];
+            }
+            return prevList;
+        });
+        setShowModal(true);
+    };
+
+    // Close Modal
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setOrderList([]);
+    };
+
+    // Download Order List as PDF
+    const handleDownloadPDF = () => {
+        const doc = new jsPDF();
+        doc.text("Reorder List", 10, 10);
+        orderList.forEach((product, index) => {
+            doc.text(`${index + 1}. ${product.productName} - Quantity: ${product.quantity}`, 10, 20 + index * 10);
+        });
+        doc.save("Reorder_List.pdf");
+    };
 
     return (
         <Container>
@@ -63,7 +88,6 @@ function ReOrdering() {
                                             isLowStock && <Badge bg="warning">Low Stock</Badge>
                                         );
 
-                                        // Only display products that are low stock or out of stock
                                         if (!isOutOfStock && !isLowStock) return null;
 
                                         return (
@@ -74,7 +98,11 @@ function ReOrdering() {
                                                 <td>{product.quantity}</td>
                                                 <td>{statusBadge}</td>
                                                 <td>
-                                                    <Button variant="outline-success" size="sm">
+                                                    <Button
+                                                        variant="outline-success"
+                                                        size="sm"
+                                                        onClick={() => handleReorder(product)}
+                                                    >
                                                         Reorder
                                                     </Button>
                                                 </td>
@@ -89,6 +117,45 @@ function ReOrdering() {
                     )}
                 </div>
             )}
+
+            {/* Reorder Modal */}
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Reorder Products</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {orderList.length > 0 ? (
+                        <Table bordered>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>SKU</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orderList.map((product) => (
+                                    <tr key={product.barcode}>
+                                        <td>{product.productName}</td>
+                                        <td>{product.sku}</td>
+                                        <td>{product.quantity}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    ) : (
+                        <p>No products added to reorder list.</p>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleDownloadPDF}>
+                        Download PDF
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 }
