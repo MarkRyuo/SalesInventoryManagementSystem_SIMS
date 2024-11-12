@@ -1,7 +1,9 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Spinner, Alert, Table } from "react-bootstrap";
 import { fetchSavedOrders } from "../../../services/ProductService";
+import jsPDF from "jspdf";
+import { FaFileAlt, FaDownload } from 'react-icons/fa'; // Using react-icons
+import { FaFileAlt } from "react-icons/fa";
 
 function SavedOrderDetails() {
     const [savedOrders, setSavedOrders] = useState([]);
@@ -40,6 +42,25 @@ function SavedOrderDetails() {
             ...prevState,
             [orderId]: !prevState[orderId],
         }));
+    };
+
+    // Generate PDF for the order
+    const downloadPDF = (order) => {
+        const doc = new jsPDF();
+        doc.text(`Order ID: ${order.id}`, 10, 10);
+        doc.text(`Order Date: ${new Date(order.date).toLocaleDateString()}`, 10, 20);
+
+        let y = 30; // Starting Y position for products
+
+        order.products.forEach((product, index) => {
+            doc.text(`Product ${index + 1}:`, 10, y);
+            doc.text(`Name: ${product.productName || "No Name"}`, 20, y + 10);
+            doc.text(`SKU: ${product.sku || "N/A"}`, 20, y + 20);
+            doc.text(`Quantity: ${product.quantity || "0"}`, 20, y + 30);
+            y += 40; // Adjust space between products
+        });
+
+        doc.save(`${order.id}_order.pdf`);
     };
 
     return (
@@ -89,8 +110,17 @@ function SavedOrderDetails() {
                                                             variant="link"
                                                             onClick={() => toggleShowMore(order.id)}
                                                             aria-expanded={expandedOrders[order.id]}
+                                                            className="p-0"
                                                         >
-                                                            {expandedOrders[order.id] ? "Show Less" : "Show More"}
+                                                            {expandedOrders[order.id] ? "Hide" : "Show"}{" "}
+                                                            <FaFileAlt size={16}/>
+                                                        </Button>
+                                                        <Button
+                                                            variant="success"
+                                                            onClick={() => downloadPDF(order)}
+                                                            className="ml-2 p-0"
+                                                        >
+                                                            <Download size={16} />
                                                         </Button>
                                                     </td>
                                                 </tr>
@@ -99,33 +129,28 @@ function SavedOrderDetails() {
                                                         <td colSpan="4">
                                                             <div style={{ maxHeight: "200px", overflowY: "auto" }}>
                                                                 <strong>Products:</strong>
-                                                                {order.products && order.products.length > 0 ? (
-                                                                    <Table bordered hover responsive size="sm">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>Product Name</th>
-                                                                                <th>SKU</th>
-                                                                                <th>Quantity</th>
+                                                                <Table bordered hover responsive size="sm">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Product Name</th>
+                                                                            <th>SKU</th>
+                                                                            <th>Quantity</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {order.products.map((product, pIndex) => (
+                                                                            <tr key={pIndex}>
+                                                                                <td>{product.productName || "No Name"}</td>
+                                                                                <td>{product.sku || "N/A"}</td>
+                                                                                <td>{product.quantity || "0"}</td>
                                                                             </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            {order.products.map((product, pIndex) => (
-                                                                                <tr key={pIndex}>
-                                                                                    <td>{product.productName || "No Name"}</td>
-                                                                                    <td>{product.sku || "N/A"}</td>
-                                                                                    <td>{product.quantity || "0"}</td>
-                                                                                </tr>
-                                                                            ))}
-                                                                        </tbody>
-                                                                    </Table>
-                                                                ) : (
-                                                                    <p>No products found for this order.</p>
-                                                                )}
+                                                                        ))}
+                                                                    </tbody>
+                                                                </Table>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                 )}
-
                                             </React.Fragment>
                                         ))}
                                     </tbody>
