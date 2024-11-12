@@ -3,7 +3,7 @@ import { Modal, Button, Spinner, Alert, Table } from "react-bootstrap";
 import { fetchSavedOrders } from "../../../services/ProductService";
 import jsPDF from "jspdf";
 import { FaFileAlt } from "react-icons/fa";
-import { FaFilePdf } from "react-icons/fa";
+import { LuDownload } from "react-icons/lu";
 
 function SavedOrderDetails() {
     const [savedOrders, setSavedOrders] = useState([]);
@@ -113,14 +113,13 @@ function SavedOrderDetails() {
                                                             className="p-0"
                                                         >
                                                             {expandedOrders[order.id] ? "Hide" : "Show"}{" "}
-                                                            <FaFileAlt size={16}/>
                                                         </Button>
                                                         <Button
                                                             variant="success"
                                                             onClick={() => downloadPDF(order)}
                                                             className="ml-2 p-0"
                                                         >
-                                                            <FaFilePdf size={16}/>
+                                                            <LuDownload size={20}/>
                                                         </Button>
                                                     </td>
                                                 </tr>
