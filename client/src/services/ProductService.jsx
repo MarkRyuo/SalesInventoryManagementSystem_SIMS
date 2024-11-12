@@ -214,7 +214,6 @@ export const getCategories = async () => {
         throw new Error(`Error retrieving categories: ${error.message}`);
     }
 };
-
 //! End of Category
 // Function to update existing products to include preserveQuantityHistory
 export const updatePreserveQuantityHistoryForExistingProducts = async () => {
