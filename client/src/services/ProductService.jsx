@@ -184,7 +184,7 @@ export const getAllProducts = async () => {
 
 //* Start Category  
 
-// Function to add a new category
+//? Function to add a new category
 export const addCategory = async (categoryName) => {
     const db = getDatabase();
     const categoryRef = ref(db, 'categories/' + categoryName); // Save category by name
