@@ -341,3 +341,66 @@ export const fetchAllDiscounts = async () => {
         throw new Error(`Error fetching discounts: ${error.message}`);
     }
 };
+
+
+// Function to fetch low stock or out of stock products for reordering
+export const fetchReorderingProducts = async () => {
+    const products = await getAllProducts();
+
+    // Filter products that are either Low Stock or Out of Stock
+    const reorderingProducts = products.filter((product) => {
+        const instockThreshold = product.instockthreshold ?? 0;
+        const lowStockThreshold = instockThreshold / 4;
+        const quantity = product.quantity ?? 0;
+
+        // Only consider products with valid thresholds and quantities
+        return quantity === 0 || (quantity > 0 && quantity <= lowStockThreshold);
+    });
+
+    return reorderingProducts;
+};
+
+
+// Function to fetch saved orders from Firebase
+export const fetchSavedOrders = async () => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'orders'); // Reference to the orders node in Firebase
+
+    try {
+        const snapshot = await get(ordersRef);
+        if (snapshot.exists()) {
+            const ordersData = snapshot.val();
+            console.log('Fetched orders:', ordersData);
+
+            // Convert orders from object to array with order ID included
+            return Object.entries(ordersData).map(([key, order]) => ({
+                ...order,
+                id: key, // Include the Firebase key as the order ID
+            }));
+        } else {
+            console.log('No saved orders found.');
+            return []; // Return an empty array if no orders exist
+        }
+    } catch (error) {
+        console.error('Error fetching saved orders:', error);
+        throw new Error(`Error fetching saved orders: ${error.message}`);
+    }
+};
+
+// Function to delete a saved order by order ID
+export const deleteSavedOrder = async (orderId) => {
+    const db = getDatabase();
+    const orderRef = ref(db, 'orders/' + orderId); // Reference to the specific order by ID
+
+    try {
+        // Remove the order from Firebase
+        await remove(orderRef);
+        console.log(`Order with ID ${orderId} deleted successfully`);
+    } catch (error) {
+        console.error('Error deleting order:', error);
+        throw new Error(`Error deleting order: ${error.message}`);
+    }
+};
+
+
+

@@ -9,7 +9,11 @@
 
 ## Changelog
 
-### v7.1.5 (Latest)
+### v7.2.0 (Latest)
+- Add Generated Qr code 
+- Add Page Auto Ordering 
+
+### v7.1.5
 - Product Page Discount 
 
 ### v7.1.4-beta
@@ -170,6 +174,11 @@
     ```bash
     npm add -D sass-embedded
     ```
+8. **Install axios** 
+    ```bash
+    npm install axios
+    ```
+
 
 
 ### How to Run the Project

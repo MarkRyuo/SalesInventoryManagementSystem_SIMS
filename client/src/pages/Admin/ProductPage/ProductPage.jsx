@@ -8,8 +8,10 @@ import ProductEditor from "../ProductEditor/ProductEditor";
 import { FaRegEdit } from "react-icons/fa";
 import AdminTransactionHistory from '../AdminTransactionHistory/AdminTransactionHistory'
 import { FaHistory } from "react-icons/fa";
+import { PiHandArrowUpBold } from "react-icons/pi";
 
 import ProductPagescss from './ProductPage.module.scss' ;
+import ReOrdering from './ReOrdering';
 
 
 // eslint-disable-next-line react/prop-types
@@ -25,13 +27,19 @@ function ProductNavbarTabs({ setActiveTab }) {
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/ProductEditor">
                     <FaRegEdit size={20} />
-                    <p className='m-0 p-0'>Set Tax</p>
+                    <p className='m-0 p-0'>Product Config</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/AdminTransactionHistory">
                     <FaHistory size={20}/>
                     <p className='m-0 p-0'>Transaction History</p>
+                </Nav.Link>
+            </Nav.Item>
+            <Nav.Item className={ProductPagescss.mainTabs}>
+                <Nav.Link eventKey="/ReOrdering">
+                    <PiHandArrowUpBold size={20} />
+                    <p className='m-0 p-0'>Re Ordering</p>
                 </Nav.Link>
             </Nav.Item>
         </Nav>
@@ -59,6 +67,11 @@ export const ProductPage = () => {
                     {activeTab === '/AdminTransactionHistory' && (
                         <div className="Unknown">
                             <AdminTransactionHistory />
+                        </div>
+                    )}
+                    {activeTab === '/ReOrdering' && (
+                        <div className="Unknown">
+                            <ReOrdering />
                         </div>
                     )}
                 </div>
