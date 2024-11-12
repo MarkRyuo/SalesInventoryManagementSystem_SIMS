@@ -1,32 +1,35 @@
 import { useEffect, useState } from "react";
-import { Modal, Button, Table, Spinner } from "react-bootstrap";
-import { fetchSavedOrders } from "../../../services/OrderService"; // assuming fetchSavedOrders is a service function
+import { Modal, Button, Spinner, Alert, Card, Row, Col } from "react-bootstrap";
+import { fetchSavedOrders } from "../../../services/ProductService"; // Assuming fetchSavedOrders is a service function
 
 function SavedOrderDetails() {
     const [savedOrders, setSavedOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null); // New state for error handling
     const [showModal, setShowModal] = useState(false);
 
-    // Function to fetch saved order details
+    // Fetch saved order details
     const fetchOrders = async () => {
         try {
-            const orders = await fetchSavedOrders();  // Fetch saved orders from Firebase
+            const orders = await fetchSavedOrders();  // Fetch saved orders from Firebase or API
             setSavedOrders(orders);
         } catch (error) {
+            setError("Error fetching saved orders.");  // Set error message if fetch fails
             console.error("Error fetching saved orders:", error);
         } finally {
-            setLoading(false);
+            setLoading(false); // Stop loading spinner when done
         }
     };
 
     useEffect(() => {
         if (showModal) {
             setLoading(true);
+            setError(null); // Reset error on modal open
             fetchOrders();
         }
     }, [showModal]);
 
-    // Handle closing the modal
+    // Handle modal close
     const handleCloseModal = () => setShowModal(false);
 
     return (
@@ -36,42 +39,42 @@ function SavedOrderDetails() {
             </Button>
 
             {/* Saved Orders Modal */}
-            <Modal show={showModal} onHide={handleCloseModal}>
+            <Modal show={showModal} onHide={handleCloseModal} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>Saved Order Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {loading ? (
-                        <Spinner animation="border" variant="primary" />
+                        <div className="text-center">
+                            <Spinner animation="border" variant="primary" />
+                            <p>Loading...</p>
+                        </div>
+                    ) : error ? (
+                        <Alert variant="danger">{error}</Alert> // Show error message
                     ) : (
-                        <Table bordered hover responsive>
-                            <thead className="table-primary">
-                                <tr>
-                                    <th>Order Date</th>
-                                    <th>Product Name</th>
-                                    <th>SKU</th>
-                                    <th>Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {savedOrders.length > 0 ? (
-                                    savedOrders.map((order, index) => (
-                                        <tr key={index}>
-                                            <td>{new Date(order.date).toLocaleDateString()}</td>
-                                            <td>{order.productName}</td>
-                                            <td>{order.sku}</td>
-                                            <td>{order.quantity}</td>
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan="4" className="text-center">
-                                            No saved orders found.
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </Table>
+                        <Row>
+                                    {savedOrders.length > 0 ? (
+                                        savedOrders.map((order, index) => (
+                                            <Col key={index} xs={12} md={6} lg={4} className="mb-3">
+                                                <Card border="primary">
+                                                    <Card.Body>
+                                                        <Card.Title>{order.productName || 'No Name'}</Card.Title>
+                                                        <Card.Subtitle className="mb-2 text-muted">SKU: {order.sku || 'N/A'}</Card.Subtitle>
+                                                        <Card.Text>
+                                                            <strong>Order Date:</strong> {new Date(order.date).toLocaleDateString()}
+                                                        </Card.Text>
+                                                        <Card.Text>
+                                                            <strong>Quantity:</strong> {order.quantity || '0'}
+                                                        </Card.Text>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                        ))
+                                    ) : (
+                                        <p>No saved orders found.</p>
+                                    )}
+
+                        </Row>
                     )}
                 </Modal.Body>
                 <Modal.Footer>

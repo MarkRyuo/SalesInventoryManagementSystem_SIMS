@@ -367,11 +367,23 @@ export const fetchSavedOrders = async () => {
     try {
         const snapshot = await get(ordersRef);
         if (snapshot.exists()) {
-            return Object.values(snapshot.val()); // Return all the orders as an array
+            console.log('Fetched orders:', snapshot.val());
+            // Assuming the orders data is not structured as an array, but as an object with keys
+            return Object.keys(snapshot.val()).map((key) => {
+                const order = snapshot.val()[key];
+                return {
+                    ...order,
+                    id: key, // You can include the Firebase key as the order ID
+                };
+            });
         } else {
+            console.log('No saved orders found.');
             return []; // Return an empty array if no orders exist
         }
     } catch (error) {
+        console.error('Error fetching saved orders:', error);
         throw new Error(`Error fetching saved orders: ${error.message}`);
     }
 };
+
+
