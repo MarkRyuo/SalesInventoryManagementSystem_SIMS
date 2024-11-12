@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchReorderingProducts } from "../../../services/ProductService";
+import { fetchReorderingProducts, saveReorderList } from "../../../services/ProductService";
 import { Table, Spinner, Button, Badge, Container, Modal } from "react-bootstrap";
 import { jsPDF } from "jspdf";
 
@@ -35,7 +35,8 @@ function ReOrdering() {
     };
 
     // Add product to the reorder list and track reordered products
-    const handleReorderProduct = (product) => {
+    const handleReorderProduct = async (product) => {
+        // Add product to the reorder list
         setReorderList((prevList) => {
             if (!prevList.find((item) => item.barcode === product.barcode)) {
                 return [...prevList, product];
@@ -50,6 +51,14 @@ function ReOrdering() {
         setReorderingProducts((prevProducts) =>
             prevProducts.filter((item) => item.barcode !== product.barcode)
         );
+
+        // Try to save the updated reorder list to the database
+        try {
+            await saveReorderList(reorderList);
+            console.log("Reorder list saved successfully!");
+        } catch (error) {
+            console.error("Error saving reorder list:", error);
+        }
 
         setShowProductModal(false);
     };

@@ -1,5 +1,4 @@
 import { getDatabase, ref, set, get, update, remove } from 'firebase/database';
-
 // Function to add a new product
 export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, tax, category}) => {
     const db = getDatabase();
