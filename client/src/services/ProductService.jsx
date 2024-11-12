@@ -215,6 +215,7 @@ export const getCategories = async () => {
     }
 };
 
+//! End of Category
 // Function to update existing products to include preserveQuantityHistory
 export const updatePreserveQuantityHistoryForExistingProducts = async () => {
     const db = getDatabase();
