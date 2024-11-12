@@ -174,6 +174,11 @@
     ```bash
     npm add -D sass-embedded
     ```
+8. **Install Sass(scss)** 
+    ```bash
+    npm install axios
+    ```
+
 
 
 ### How to Run the Project
