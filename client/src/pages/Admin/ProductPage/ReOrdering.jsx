@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchReorderingProducts } from "../../../services/ProductService";
 import { Table, Spinner, Button, Badge, Container, Modal } from "react-bootstrap";
 import { jsPDF } from "jspdf";
-import { saveOrderToFirebase } from "../../../services/ProductService"; // Make sure to import this
+import { saveOrderToFirebase } from "../../../services/ProductService";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
@@ -89,7 +89,9 @@ function ReOrdering() {
 
             await saveOrderToFirebase({ orderDetails });
             alert("Order saved successfully to Firebase!");
-            setReorderList([]); // Clear reorder list after saving
+
+            // Clear reorder list after saving
+            setReorderList([]);
         } catch (error) {
             console.error("Error saving order to Firebase:", error);
             alert("Error saving order!");
@@ -159,8 +161,33 @@ function ReOrdering() {
                         <p className="text-muted">No products need reordering.</p>
                     )}
                     <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
-                        View Reorder List
+                        View Reordered Products
                     </Button>
+
+                    {/* Pending Orders Section */}
+                    <h4 className="my-4">Pending Orders</h4>
+                    {reorderList.length > 0 ? (
+                        <Table bordered hover>
+                            <thead className="table-primary">
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>SKU</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {reorderList.map((product) => (
+                                    <tr key={product.barcode}>
+                                        <td>{product.productName}</td>
+                                        <td>{product.sku}</td>
+                                        <td>{product.quantity}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    ) : (
+                        <p>No pending orders.</p>
+                    )}
                 </>
             )}
 
