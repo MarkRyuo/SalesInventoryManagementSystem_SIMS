@@ -9,6 +9,9 @@
 
 ## Changelog
 
+### v7.2.1-beta (Latest)
+- 
+
 ### v7.2.0 (Latest)
 - Add Generated Qr code 
 - Add Page Auto Ordering 
