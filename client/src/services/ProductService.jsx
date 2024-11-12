@@ -402,71 +402,38 @@ export const deleteSavedOrder = async (orderId) => {
     }
 };
 
-// Function to set a global tax rate
-export const setGlobalTaxRate = async (taxRate) => {
+export const addNewTax = async ({ taxName, taxValue }) => {
     const db = getDatabase();
-    const taxRef = ref(db, 'globalTaxRate/'); // Reference to global tax rate
+    const taxId = Date.now(); // Use timestamp as unique ID
+    const taxRef = ref(db, `taxes/${taxId}`);
 
     try {
-        await set(taxRef, taxRate); // Save global tax rate
-        console.log("Global tax rate set:", taxRate);
+        await set(taxRef, {
+            id: taxId,
+            name: taxName,
+            value: taxValue,
+            createdAt: new Date().toISOString(),
+        });
+        console.log("Tax added successfully");
     } catch (error) {
-        throw new Error(`Error setting global tax rate: ${error.message}`);
+        throw new Error(`Error adding tax: ${error.message}`);
     }
 };
 
-// Function to retrieve the global tax rate
-export const getGlobalTaxRate = async () => {
+// You can also create other functions to fetch taxes, similar to how you fetch discounts
+export const fetchAllTaxes = async () => {
     const db = getDatabase();
-    const taxRef = ref(db, 'globalTaxRate'); // Reference to global tax rate
+    const taxesRef = ref(db, "taxes");
 
     try {
-        const snapshot = await get(taxRef);
-        return snapshot.exists() ? snapshot.val() : 0; // Return default 0 if not set
+        const snapshot = await get(taxesRef);
+        return snapshot.exists() ? Object.values(snapshot.val()) : [];
     } catch (error) {
-        throw new Error(`Error retrieving global tax rate: ${error.message}`);
+        throw new Error(`Error fetching taxes: ${error.message}`);
     }
 };
 
-// Function to fetch all tax rates (create and fetch tax rate collection)
-export const fetchGlobalTaxRates = async () => {
-    const db = getDatabase();
-    const taxRef = ref(db, 'taxRates'); // Reference to 'taxRates' collection
 
-    try {
-        const snapshot = await get(taxRef);
-        if (snapshot.exists()) {
-            return snapshot.val(); // Return the tax rates collection
-        } else {
-            return []; // No tax rates found
-        }
-    } catch (error) {
-        throw new Error(`Error fetching tax rates: ${error.message}`);
-    }
-};
 
-export const addTaxRate = async (taxRateName, taxRate) => {
-    const db = getDatabase();
-    const taxRef = ref(db, 'taxRates/' + taxRateName); // Use taxRateName as the key
 
-    try {
-        await set(taxRef, { rate: taxRate }); // Save tax rate under the given name
-        console.log("Tax rate added:", taxRateName, taxRate);
-    } catch (error) {
-        throw new Error(`Error adding tax rate: ${error.message}`);
-    }
-};
-
-// Function to delete a specific tax rate from the collection
-export const deleteTaxRate = async (taxRate) => {
-    const db = getDatabase();
-    const taxRateRef = ref(db, `taxRates/${taxRate}`); // Reference to the specific tax rate document
-
-    try {
-        await remove(taxRateRef); // Remove the tax rate from Firebase
-        console.log(`Tax rate ${taxRate} deleted`);
-    } catch (error) {
-        throw new Error("Error deleting tax rate: " + error.message);
-    }
-};
 

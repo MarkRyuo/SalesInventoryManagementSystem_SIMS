@@ -1,109 +1,87 @@
-import { useState, useEffect } from "react";
-import { Modal, Button, Form, ListGroup } from "react-bootstrap";
-import { setGlobalTaxRate, fetchGlobalTaxRates, deleteTaxRate } from "../../../services/ProductService"; // Assuming these functions are in the ProductService
+import { useState } from "react";
+import { Button, Form, Modal, InputGroup } from "react-bootstrap";
+import { addNewTax } from "../../../services/ProductService"; // Import your tax service function
 
 function SetTax() {
     const [showModal, setShowModal] = useState(false);
-    const [taxRate, setTaxRate] = useState("");
-    const [taxRates, setTaxRates] = useState([]); // To hold the list of tax rates
+    const [taxName, setTaxName] = useState("");
+    const [taxValue, setTaxValue] = useState("");
 
-    // Toggle the modal visibility
     const handleShowModal = () => setShowModal(true);
-    const handleCloseModal = () => setShowModal(false);
-
-    // Handle tax rate change
-    const handleTaxChange = (e) => setTaxRate(e.target.value);
-
-    // Handle form submission to set global tax rate
-    const handleSubmit = async () => {
-        try {
-            await setGlobalTaxRate(taxRate); // Save global tax rate to Firebase
-            console.log("Global tax rate set to:", taxRate);
-            fetchTaxRates(); // Refresh the list of tax rates after setting the new one
-            handleCloseModal(); // Close modal after setting the tax
-        } catch (error) {
-            console.error("Error setting global tax rate:", error.message);
-        }
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setTaxName("");
+        setTaxValue("");
     };
 
-    // Fetch all global tax rates from Firebase
-    const fetchTaxRates = async () => {
+    // Function to handle creating and saving a tax
+    const handleCreateTax = async () => {
+        if (!taxName || taxValue <= 0 || taxValue > 100) {
+            alert("Please enter valid tax details");
+            return;
+        }
+
         try {
-            const rates = await fetchGlobalTaxRates(); // Fetch tax rates from your service
-            setTaxRates(rates); // Update state with the fetched tax rates
+            await addNewTax({
+                taxName,
+                taxValue: parseFloat(taxValue), // Ensure numeric value
+            });
+
+            console.log("Tax created successfully");
+            handleCloseModal();
         } catch (error) {
-            console.error("Error fetching tax rates:", error.message);
+            alert(`Error creating tax: ${error.message}`);
         }
     };
-
-    // Delete a tax rate
-    const handleDeleteTaxRate = async (id) => {
-        try {
-            await deleteTaxRate(id); // Delete the tax rate by its ID
-            fetchTaxRates(); // Refresh the list after deletion
-            console.log("Tax rate deleted:", id);
-        } catch (error) {
-            console.error("Error deleting tax rate:", error.message);
-        }
-    };
-
-    // Fetch the tax rates when the component mounts
-    useEffect(() => {
-        fetchTaxRates();
-    }, []);
 
     return (
         <>
             <Button variant="primary" onClick={handleShowModal}>
-                Set Tax Rate
+                Set Tax
             </Button>
 
-            {/* Modal for setting tax */}
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Set Tax Rate</Modal.Title>
+                    <Modal.Title>Create Tax Percentage</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group controlId="formTaxRate">
-                            <Form.Label>Tax Rate (%)</Form.Label>
+                        <Form.Group controlId="taxName">
+                            <Form.Label>Tax Name</Form.Label>
                             <Form.Control
-                                type="number"
-                                value={taxRate}
-                                onChange={handleTaxChange}
-                                placeholder="Enter tax rate"
-                                min="0"
-                                max="100"
+                                type="text"
+                                placeholder="Enter tax name"
+                                value={taxName}
+                                onChange={(e) => setTaxName(e.target.value)}
                             />
                         </Form.Group>
+
+                        <Form.Group controlId="taxValue" className="mt-3">
+                            <Form.Label>Tax Percentage</Form.Label>
+                            <InputGroup>
+                                <InputGroup.Text>%</InputGroup.Text>
+                                <Form.Control
+                                    type="number"
+                                    placeholder="Enter percentage (1 - 100)"
+                                    value={taxValue}
+                                    onChange={(e) => setTaxValue(e.target.value)}
+                                    min={1}
+                                    max={100}
+                                />
+                            </InputGroup>
+                        </Form.Group>
                     </Form>
-                    <h5>Tax Rates Set:</h5>
-                    {/* Display list of previously set tax rates */}
-                    <ListGroup>
-                        {taxRates.length === 0 ? (
-                            <ListGroup.Item>No tax rates set yet.</ListGroup.Item>
-                        ) : (
-                            taxRates.map((rate) => (
-                                <ListGroup.Item key={rate.id}>
-                                    {rate.rate}%
-                                    <Button
-                                        variant="danger"
-                                        size="sm"
-                                        className="float-end"
-                                        onClick={() => handleDeleteTaxRate(rate.id)}>
-                                        Delete
-                                    </Button>
-                                </ListGroup.Item>
-                            ))
-                        )}
-                    </ListGroup>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>
-                        Close
+                        Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleSubmit}>
-                        Set Tax
+                    <Button
+                        variant="primary"
+                        onClick={handleCreateTax}
+                        disabled={!taxName || !taxValue || taxValue <= 0 || taxValue > 100}
+                    >
+                        Create Tax
                     </Button>
                 </Modal.Footer>
             </Modal>
