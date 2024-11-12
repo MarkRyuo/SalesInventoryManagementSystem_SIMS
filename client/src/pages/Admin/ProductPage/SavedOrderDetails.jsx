@@ -1,36 +1,45 @@
 import { useEffect, useState } from "react";
-import { Modal, Button, Spinner, Alert, Card, Row, Col } from "react-bootstrap";
-import { fetchSavedOrders } from "../../../services/ProductService"; // Assuming fetchSavedOrders is a service function
+import { Modal, Button, Spinner, Alert, Card } from "react-bootstrap";
+import { fetchSavedOrders } from "../../../services/ProductService";
 
 function SavedOrderDetails() {
     const [savedOrders, setSavedOrders] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null); // New state for error handling
+    const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [expandedOrders, setExpandedOrders] = useState({}); // Track expanded state of each order
 
     // Fetch saved order details
     const fetchOrders = async () => {
         try {
-            const orders = await fetchSavedOrders();  // Fetch saved orders from Firebase or API
+            const orders = await fetchSavedOrders();
             setSavedOrders(orders);
         } catch (error) {
-            setError("Error fetching saved orders.");  // Set error message if fetch fails
+            setError("Error fetching saved orders.");
             console.error("Error fetching saved orders:", error);
         } finally {
-            setLoading(false); // Stop loading spinner when done
+            setLoading(false);
         }
     };
 
     useEffect(() => {
         if (showModal) {
             setLoading(true);
-            setError(null); // Reset error on modal open
+            setError(null);
             fetchOrders();
         }
     }, [showModal]);
 
     // Handle modal close
     const handleCloseModal = () => setShowModal(false);
+
+    // Toggle product list visibility
+    const toggleShowMore = (orderId) => {
+        setExpandedOrders((prevState) => ({
+            ...prevState,
+            [orderId]: !prevState[orderId],
+        }));
+    };
 
     return (
         <>
@@ -50,49 +59,66 @@ function SavedOrderDetails() {
                             <p>Loading...</p>
                         </div>
                     ) : error ? (
-                        <Alert variant="danger">{error}</Alert> // Show error message
+                        <Alert variant="danger">{error}</Alert>
                     ) : (
-                        <Row>
-                                    {savedOrders.length > 0 ? (
-                                        savedOrders.map((order, index) => (
-                                            <Col key={index} xs={12} md={6} lg={4} className="mb-3">
-                                                <Card border="primary">
-                                                    <Card.Body>
-                                                        <Card.Title>Order ID: {order.id || 'No ID'}</Card.Title>
-                                                        <Card.Subtitle className="mb-2 text-muted">
-                                                            <strong>Order Date:</strong> {new Date(order.date).toLocaleDateString()}
-                                                        </Card.Subtitle>
-                                                        <Card.Text>
-                                                            <strong>Total Quantity:</strong> {order.totalQuantity || '0'}
-                                                        </Card.Text>
+                        <div className="horizontal-scroll-container">
+                            {savedOrders.length > 0 ? (
+                                <div style={{ display: "flex", gap: "15px", overflowX: "auto", padding: "10px" }}>
+                                    {savedOrders.map((order, index) => (
+                                        <Card
+                                            key={index}
+                                            border="primary"
+                                            style={{
+                                                minWidth: "300px",
+                                                flex: "0 0 auto",
+                                                marginBottom: "15px",
+                                            }}
+                                        >
+                                            <Card.Body>
+                                                <Card.Title>Order ID: {order.id || "No ID"}</Card.Title>
+                                                <Card.Subtitle className="mb-2 text-muted">
+                                                    <strong>Order Date:</strong> {new Date(order.date).toLocaleDateString()}
+                                                </Card.Subtitle>
+                                                <Card.Text>
+                                                    <strong>Total Quantity:</strong> {order.totalQuantity || "0"}
+                                                </Card.Text>
+                                                <Button
+                                                    variant="link"
+                                                    onClick={() => toggleShowMore(order.id)}
+                                                    aria-expanded={expandedOrders[order.id]}
+                                                >
+                                                    {expandedOrders[order.id] ? "Show Less" : "Show More"}
+                                                </Button>
 
-                                                        {/* Display list of products inside this order */}
+                                                {/* Product List (Toggled by "Show More" button) */}
+                                                {expandedOrders[order.id] && (
+                                                    <div style={{ maxHeight: "200px", overflowY: "auto" }}>
                                                         <strong>Products:</strong>
                                                         {order.products && order.products.length > 0 ? (
                                                             <ul className="list-unstyled">
                                                                 {order.products.map((product, pIndex) => (
                                                                     <li key={pIndex}>
-                                                                        <strong>Product Name:</strong> {product.productName || 'No Name'}
+                                                                        <strong>Product Name:</strong> {product.productName || "No Name"}
                                                                         <br />
-                                                                        <strong>SKU:</strong> {product.sku || 'N/A'}
+                                                                        <strong>SKU:</strong> {product.sku || "N/A"}
                                                                         <br />
-                                                                        <strong>Quantity:</strong> {product.quantity || '0'}
+                                                                        <strong>Quantity:</strong> {product.quantity || "0"}
                                                                     </li>
                                                                 ))}
                                                             </ul>
                                                         ) : (
                                                             <p>No products found in this order.</p>
                                                         )}
-                                                    </Card.Body>
-                                                </Card>
-                                            </Col>
-                                        ))
-                                    ) : (
-                                        <p>No saved orders found.</p>
-                                    )}
-
-
-                        </Row>
+                                                    </div>
+                                                )}
+                                            </Card.Body>
+                                        </Card>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p>No saved orders found.</p>
+                            )}
+                        </div>
                     )}
                 </Modal.Body>
                 <Modal.Footer>
