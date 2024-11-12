@@ -58,14 +58,31 @@ function SavedOrderDetails() {
                                             <Col key={index} xs={12} md={6} lg={4} className="mb-3">
                                                 <Card border="primary">
                                                     <Card.Body>
-                                                        <Card.Title>{order.productName || 'No Name'}</Card.Title>
-                                                        <Card.Subtitle className="mb-2 text-muted">SKU: {order.sku || 'N/A'}</Card.Subtitle>
-                                                        <Card.Text>
+                                                        <Card.Title>Order ID: {order.id || 'No ID'}</Card.Title>
+                                                        <Card.Subtitle className="mb-2 text-muted">
                                                             <strong>Order Date:</strong> {new Date(order.date).toLocaleDateString()}
-                                                        </Card.Text>
+                                                        </Card.Subtitle>
                                                         <Card.Text>
-                                                            <strong>Quantity:</strong> {order.quantity || '0'}
+                                                            <strong>Total Quantity:</strong> {order.totalQuantity || '0'}
                                                         </Card.Text>
+
+                                                        {/* Display list of products inside this order */}
+                                                        <strong>Products:</strong>
+                                                        {order.products && order.products.length > 0 ? (
+                                                            <ul className="list-unstyled">
+                                                                {order.products.map((product, pIndex) => (
+                                                                    <li key={pIndex}>
+                                                                        <strong>Product Name:</strong> {product.productName || 'No Name'}
+                                                                        <br />
+                                                                        <strong>SKU:</strong> {product.sku || 'N/A'}
+                                                                        <br />
+                                                                        <strong>Quantity:</strong> {product.quantity || '0'}
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        ) : (
+                                                            <p>No products found in this order.</p>
+                                                        )}
                                                     </Card.Body>
                                                 </Card>
                                             </Col>
@@ -73,6 +90,7 @@ function SavedOrderDetails() {
                                     ) : (
                                         <p>No saved orders found.</p>
                                     )}
+
 
                         </Row>
                     )}

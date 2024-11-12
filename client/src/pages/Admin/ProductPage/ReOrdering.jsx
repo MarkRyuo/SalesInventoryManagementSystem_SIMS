@@ -66,15 +66,26 @@ function ReOrdering() {
 
     const handleSaveOrderToFirebase = async () => {
         try {
+            // Create a unique order ID (can be timestamp-based or generated)
+            const orderId = `order-${Date.now()}`;
+            const orderDate = new Date().toISOString();
+
             const orderDetails = reorderList.map((product) => ({
                 barcode: product.barcode,
                 productName: product.productName,
                 sku: product.sku,
                 quantity: product.quantity,
-                date: new Date().toISOString(),
             }));
 
-            await saveOrderToFirebase({ orderDetails });
+            // Include order metadata with orderDetails
+            const orderData = {
+                id: orderId,
+                date: orderDate,
+                products: orderDetails,
+            };
+
+            // Save the entire order data to Firebase
+            await saveOrderToFirebase(orderData);
 
             alert("Order saved successfully to Firebase!");
 
@@ -104,6 +115,7 @@ function ReOrdering() {
     };
 
 
+
     // Filter out reordered products from the list
     const filteredReorderingProducts = reorderingProducts.filter((product) => !reorderedProducts.has(product.barcode));
 
@@ -124,50 +136,50 @@ function ReOrdering() {
                 <>
                     {filteredReorderingProducts.length > 0 ? (
                         <Table responsive bordered hover className="mt-3">
-                            <thead className="table-primary">
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>SKU</th>
-                                    <th>Category</th>
-                                    <th>Quantity</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filteredReorderingProducts.map((product) => {
-                                    const isOutOfStock = product.quantity === 0;
-                                    const isLowStock = product.quantity > 0 && product.quantity <= product.instockthreshold / 4;
+                                <thead className="table-primary">
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>SKU</th>
+                                        <th>Quantity</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
 
-                                    const statusBadge = isOutOfStock ? (
-                                        <Badge bg="danger">Out of Stock</Badge>
-                                    ) : (
-                                        isLowStock && <Badge bg="warning">Low Stock</Badge>
-                                    );
+                                <tbody>
+                                    {filteredReorderingProducts.map((product) => {
+                                        const isOutOfStock = product.quantity === 0;
+                                        const isLowStock = product.quantity > 0 && product.quantity <= product.instockthreshold / 4;
 
-                                    // Skip products that don't need reordering
-                                    if (!isOutOfStock && !isLowStock) return null;
+                                        const statusBadge = isOutOfStock ? (
+                                            <Badge bg="danger">Out of Stock</Badge>
+                                        ) : (
+                                            isLowStock && <Badge bg="warning">Low Stock</Badge>
+                                        );
 
-                                    return (
-                                        <tr key={product.barcode}>
-                                            <td>{product.productName}</td>
-                                            <td>{product.sku}</td>
-                                            <td>{product.category}</td>
-                                            <td>{product.quantity}</td>
-                                            <td>{statusBadge}</td>
-                                            <td>
-                                                <Button
-                                                    variant="success"
-                                                    size="sm"
-                                                    onClick={() => handleViewProduct(product)}
-                                                >
-                                                    Reorder
-                                                </Button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
+                                        // Skip products that don't need reordering
+                                        if (!isOutOfStock && !isLowStock) return null;
+
+                                        return (
+                                            <tr key={product.barcode}>
+                                                <td>{product.productName}</td>
+                                                <td>{product.sku}</td>
+                                                <td>{product.quantity}</td>
+                                                <td>{statusBadge}</td>
+                                                <td>
+                                                    <Button
+                                                        variant="success"
+                                                        size="sm"
+                                                        onClick={() => handleViewProduct(product)}
+                                                    >
+                                                        Reorder
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+
                         </Table>
                     ) : (
                         <p className="text-muted">No products need reordering.</p>
