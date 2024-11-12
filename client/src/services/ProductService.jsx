@@ -359,3 +359,19 @@ export const fetchReorderingProducts = async () => {
     return reorderingProducts;
 };
 
+// Function to fetch saved orders from Firebase
+export const fetchSavedOrders = async () => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'orders'); // Reference to the orders node in Firebase
+
+    try {
+        const snapshot = await get(ordersRef);
+        if (snapshot.exists()) {
+            return Object.values(snapshot.val()); // Return all the orders as an array
+        } else {
+            return []; // Return an empty array if no orders exist
+        }
+    } catch (error) {
+        throw new Error(`Error fetching saved orders: ${error.message}`);
+    }
+};

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchReorderingProducts } from "../../../services/ProductService";
+import { fetchReorderingProducts, fetchSavedOrders } from "../../../services/ProductService";  // Ensure you import fetchSavedOrders correctly
 import { Table, Spinner, Button, Badge, Container, Modal } from "react-bootstrap";
 import { jsPDF } from "jspdf";
 import { saveOrderToFirebase } from "../../../services/ProductService";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
+    const [savedOrders, setSavedOrders] = useState([]); // State to hold saved orders
     const [loading, setLoading] = useState(true);
     const [showProductModal, setShowProductModal] = useState(false);
     const [showReorderModal, setShowReorderModal] = useState(false);
@@ -23,10 +24,23 @@ function ReOrdering() {
         }
     };
 
+    // Fetch saved orders from Firebase using the service function
     useEffect(() => {
         // Initially load data
         setLoading(true);
         fetchData().then(() => setLoading(false));
+
+        // Fetch saved orders from Firebase
+        const getSavedOrders = async () => {
+            try {
+                const orders = await fetchSavedOrders();  // Using the imported function
+                setSavedOrders(orders); // Store the fetched orders
+            } catch (error) {
+                console.error("Error fetching saved orders:", error);
+            }
+        };
+
+        getSavedOrders();
 
         // Retrieve reorder list from localStorage on mount
         const savedReorderList = JSON.parse(localStorage.getItem('reorderList'));
@@ -45,6 +59,16 @@ function ReOrdering() {
 
     // Add product to the reorder list and track reordered products
     const handleReorderProduct = (product) => {
+        if (!product || !product.productName || !product.sku || product.quantity <= 0) {
+            alert('Invalid product details!');
+            return;
+        }
+
+        if (reorderList.some(item => item.barcode === product.barcode)) {
+            alert('Product is already in the reorder list!');
+            return;
+        }
+
         setReorderList((prevList) => {
             const updatedList = [...prevList, product];
             localStorage.setItem('reorderList', JSON.stringify(updatedList)); // Save to localStorage
@@ -64,6 +88,10 @@ function ReOrdering() {
 
     // Open Reorder List Modal
     const handleOpenReorderModal = () => {
+        if (reorderList.length === 0) {
+            alert('No products in the reorder list!');
+            return;
+        }
         setShowReorderModal(true);
     };
 
@@ -75,6 +103,11 @@ function ReOrdering() {
 
     // Download Order List as PDF
     const handleDownloadPDF = () => {
+        if (reorderList.length === 0) {
+            alert('No products in the reorder list to download!');
+            return;
+        }
+
         const doc = new jsPDF();
         doc.text("Reorder List", 10, 10);
         reorderList.forEach((product, index) => {
@@ -85,6 +118,11 @@ function ReOrdering() {
 
     // Save the reorder list to Firebase
     const handleSaveOrderToFirebase = async () => {
+        if (reorderList.length === 0) {
+            alert('No products in the reorder list to save!');
+            return;
+        }
+
         try {
             const orderDetails = reorderList.map((product) => ({
                 barcode: product.barcode,
@@ -98,6 +136,10 @@ function ReOrdering() {
             await saveOrderToFirebase({ orderDetails });
 
             alert("Order saved successfully to Firebase!");
+
+            // Fetch the updated saved orders after saving
+            const orders = await fetchSavedOrders();  // Re-fetch saved orders to update the list
+            setSavedOrders(orders);
 
             // Clear reorder list after saving
             setReorderList([]);
@@ -195,70 +237,103 @@ function ReOrdering() {
                     ) : (
                         <p>No pending orders.</p>
                     )}
-                </>
-            )}
 
-            {/* Product Details Modal */}
-            <Modal show={showProductModal} onHide={handleCloseModals}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Product Details</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {selectedProduct && (
-                        <div>
-                            <p><strong>Name:</strong> {selectedProduct.productName}</p>
-                            <p><strong>SKU:</strong> {selectedProduct.sku}</p>
-                            <p><strong>Quantity:</strong> {selectedProduct.quantity}</p>
-                        </div>
-                    )}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModals}>
-                        Close
-                    </Button>
-                    <Button variant="success" onClick={() => handleReorderProduct(selectedProduct)}>
-                        Add to Reorder List
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-            {/* Reorder List Modal */}
-            <Modal show={showReorderModal} onHide={handleCloseModals}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Reorder List</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {reorderList.length > 0 ? (
-                        <Table bordered>
-                            <thead>
+                    {/* Saved Orders Section */}
+                    <h4 className="my-4">Saved Orders</h4>
+                    {savedOrders.length > 0 ? (
+                        <Table bordered hover>
+                            <thead className="table-primary">
                                 <tr>
+                                    <th>Order Date</th>
                                     <th>Product Name</th>
                                     <th>SKU</th>
                                     <th>Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {reorderList.map((product) => (
-                                    <tr key={product.barcode}>
-                                        <td>{product.productName}</td>
-                                        <td>{product.sku}</td>
-                                        <td>{product.quantity}</td>
+                                {savedOrders.map((order, index) => (
+                                    <tr key={index}>
+                                        <td>{new Date(order.date).toLocaleDateString()}</td>
+                                        <td>{order.productName}</td>
+                                        <td>{order.sku}</td>
+                                        <td>{order.quantity}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </Table>
                     ) : (
-                        <p>No products added to reorder list.</p>
+                        <p>No saved orders.</p>
                     )}
+
+                    <div className="d-flex justify-content-between mt-3">
+                        <Button variant="primary" onClick={handleDownloadPDF}>
+                            Download PDF
+                        </Button>
+                        <Button variant="success" onClick={handleSaveOrderToFirebase}>
+                            Save Order
+                        </Button>
+                    </div>
+                </>
+            )}
+
+            {/* Modals */}
+            <Modal show={showProductModal} onHide={handleCloseModals}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{selectedProduct?.productName}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>SKU: {selectedProduct?.sku}</p>
+                    <p>Category: {selectedProduct?.category}</p>
+                    <p>Quantity Available: {selectedProduct?.quantity}</p>
+                    <p>Stock Threshold: {selectedProduct?.instockthreshold}</p>
+                    <p>Price: {selectedProduct?.price}</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModals}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleDownloadPDF}>
-                        Download PDF
+                    <Button
+                        variant="success"
+                        onClick={() => handleReorderProduct(selectedProduct)}
+                    >
+                        Add to Reorder List
                     </Button>
-                    <Button variant="success" onClick={handleSaveOrderToFirebase}>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Reorder Modal */}
+            <Modal show={showReorderModal} onHide={handleCloseModals}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Reorder List</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Table bordered>
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>SKU</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {reorderList.map((product) => (
+                                <tr key={product.barcode}>
+                                    <td>{product.productName}</td>
+                                    <td>{product.sku}</td>
+                                    <td>{product.quantity}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModals}>
+                        Close
+                    </Button>
+                    <Button
+                        variant="success"
+                        onClick={handleSaveOrderToFirebase}
+                    >
                         Save Order
                     </Button>
                 </Modal.Footer>
