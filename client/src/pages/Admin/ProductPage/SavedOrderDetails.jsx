@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Modal, Button, Spinner, Alert, Table } from "react-bootstrap";
 import { fetchSavedOrders } from "../../../services/ProductService";
 import jsPDF from "jspdf";
-import { FaFileAlt, FaDownload } from 'react-icons/fa'; // Using react-icons
 import { FaFileAlt } from "react-icons/fa";
+import { FaFilePdf } from "react-icons/fa";
 
 function SavedOrderDetails() {
     const [savedOrders, setSavedOrders] = useState([]);
@@ -120,7 +120,7 @@ function SavedOrderDetails() {
                                                             onClick={() => downloadPDF(order)}
                                                             className="ml-2 p-0"
                                                         >
-                                                            <Download size={16} />
+                                                            <FaFilePdf size={16}/>
                                                         </Button>
                                                     </td>
                                                 </tr>
