@@ -214,6 +214,30 @@ export const getCategories = async () => {
         throw new Error(`Error retrieving categories: ${error.message}`);
     }
 };
+    // Function to delete a category
+    export const deleteCategory = async (categoryName) => {
+        const db = getDatabase();
+        const categoryRef = ref(db, 'categories/' + categoryName);
+
+        try {
+            await remove(categoryRef);
+            console.log(`Category ${categoryName} deleted successfully`);
+        } catch (error) {
+            throw new Error(`Error deleting category: ${error.message}`);
+        }
+};
+
+    export const updateCategory = async (categoryName, newCategoryData) => {
+        const db = getDatabase();
+        const categoryRef = ref(db, 'categories/' + categoryName);
+
+        try {
+            await update(categoryRef, newCategoryData);
+            console.log(`Category ${categoryName} updated successfully`);
+        } catch (error) {
+            throw new Error(`Error updating category: ${error.message}`);
+        }
+};
 //! End of Category
 
 //* Start of PreserveQuantityHistoryForExistingProducts
@@ -289,30 +313,6 @@ export const updateProductInDatabase = async (updatedProduct) => {
     }
 };
 
-// Function to delete a category
-export const deleteCategory = async (categoryName) => {
-    const db = getDatabase();
-    const categoryRef = ref(db, 'categories/' + categoryName);
-
-    try {
-        await remove(categoryRef);
-        console.log(`Category ${categoryName} deleted successfully`);
-    } catch (error) {
-        throw new Error(`Error deleting category: ${error.message}`);
-    }
-};
-
-export const updateCategory = async (categoryName, newCategoryData) => {
-    const db = getDatabase();
-    const categoryRef = ref(db, 'categories/' + categoryName);
-
-    try {
-        await update(categoryRef, newCategoryData);
-        console.log(`Category ${categoryName} updated successfully`);
-    } catch (error) {
-        throw new Error(`Error updating category: ${error.message}`);
-    }
-};
 
 export const addNewDiscount = async ({ discountName, discountValue }) => {
     const db = getDatabase();
