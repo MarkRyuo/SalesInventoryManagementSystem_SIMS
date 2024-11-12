@@ -341,3 +341,20 @@ export const fetchAllDiscounts = async () => {
         throw new Error(`Error fetching discounts: ${error.message}`);
     }
 };
+
+
+// Function to fetch low stock or out of stock products for reordering
+export const fetchReorderingProducts = async () => {
+    const products = await getAllProducts();
+
+    // Filter products that are either Low Stock or Out of Stock
+    const reorderingProducts = products.filter(product => {
+        const instockThreshold = product.instockthreshold || 0;
+        const lowStockThreshold = instockThreshold / 4;
+        const quantity = product.quantity || 0;
+
+        return quantity === 0 || quantity <= lowStockThreshold;
+    });
+
+    return reorderingProducts;
+};

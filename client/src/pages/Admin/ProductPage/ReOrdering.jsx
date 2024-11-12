@@ -1,25 +1,33 @@
 import { useEffect, useState } from "react";
 import { fetchReorderingProducts } from "../../../services/ProductService";
-import { Table, Spinner, Button, Row, Col, Badge, Container } from "react-bootstrap";
+import { Table, Spinner, Button, Badge, Container } from "react-bootstrap";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const products = await fetchReorderingProducts();
-                setReorderingProducts(products);
-            } catch (error) {
-                console.error("Error fetching reordering products:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+    // Interval time para sa live update (in milliseconds)
+    const POLL_INTERVAL = 10000; // Every 10 seconds
 
-        fetchData();
+    // Function to fetch low stock and out of stock products
+    const fetchData = async () => {
+        try {
+            const products = await fetchReorderingProducts();
+            setReorderingProducts(products);
+        } catch (error) {
+            console.error("Error fetching reordering products:", error);
+        }
+    };
+
+    useEffect(() => {
+        setLoading(true);
+        fetchData().then(() => setLoading(false));
+
+        // Setup polling interval
+        const intervalId = setInterval(fetchData, POLL_INTERVAL);
+
+        // Cleanup interval on component unmount
+        return () => clearInterval(intervalId);
     }, []);
 
     return (
@@ -45,11 +53,18 @@ function ReOrdering() {
                                 <tbody>
                                     {reorderingProducts.map((product) => {
                                         const isOutOfStock = product.quantity === 0;
+                                        const isLowStock =
+                                            product.quantity > 0 &&
+                                            product.quantity <= product.instockthreshold / 4;
+
                                         const statusBadge = isOutOfStock ? (
                                             <Badge bg="danger">Out of Stock</Badge>
                                         ) : (
-                                            <Badge bg="warning">Low Stock</Badge>
+                                            isLowStock && <Badge bg="warning">Low Stock</Badge>
                                         );
+
+                                        // Only display products that are low stock or out of stock
+                                        if (!isOutOfStock && !isLowStock) return null;
 
                                         return (
                                             <tr key={product.barcode}>
