@@ -198,9 +198,7 @@ export const addCategory = async (categoryName) => {
     }
 };
 
-
-// Function to retrieve all categories
-// Function to retrieve all categories
+//? Function to retrieve all categories
 export const getCategories = async () => {
     const db = getDatabase();
     const categoriesRef = ref(db, 'categories');
