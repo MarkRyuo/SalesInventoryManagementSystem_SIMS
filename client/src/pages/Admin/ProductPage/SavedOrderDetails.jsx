@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Modal, Button, Spinner, Alert, Table } from "react-bootstrap";
 import { fetchSavedOrders } from "../../../services/ProductService";
 import jsPDF from "jspdf";
-import { FaFileAlt } from "react-icons/fa";
 import { LuDownload } from "react-icons/lu";
 
 function SavedOrderDetails() {
@@ -112,7 +111,7 @@ function SavedOrderDetails() {
                                                             aria-expanded={expandedOrders[order.id]}
                                                             className="p-0"
                                                         >
-                                                            {expandedOrders[order.id] ? "Hide" : "Show"}{" "}
+                                                            {expandedOrders[order.id] ? "Hide" : "Show More"}{" "}
                                                         </Button>
                                                         <Button
                                                             variant="light"
