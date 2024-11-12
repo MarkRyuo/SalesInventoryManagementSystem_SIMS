@@ -107,7 +107,7 @@ function SavedOrderDetails() {
                                                     </td>
                                                     <td>
                                                         <Button
-                                                            variant="link"
+                                                            variant="light"
                                                             onClick={() => toggleShowMore(order.id)}
                                                             aria-expanded={expandedOrders[order.id]}
                                                             className="p-0"
@@ -115,7 +115,7 @@ function SavedOrderDetails() {
                                                             {expandedOrders[order.id] ? "Hide" : "Show"}{" "}
                                                         </Button>
                                                         <Button
-                                                            variant="success"
+                                                            variant="light"
                                                             onClick={() => downloadPDF(order)}
                                                             className="ml-2 p-0"
                                                         >
