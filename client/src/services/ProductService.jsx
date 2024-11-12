@@ -129,8 +129,6 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
     }
 };
 
-
-
 // Function to fetch a product by barcode
 export const fetchProductByBarcode = async (barcode) => {
     const db = getDatabase();
