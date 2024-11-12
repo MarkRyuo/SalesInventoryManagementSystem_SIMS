@@ -122,10 +122,12 @@ function ReOrdering() {
 
     return (
         <Container>
-            <h4 className="my-4">Reordering Dashboard</h4>
+            <h4 className="my-4 text-center">Reordering Dashboard</h4>
             <SavedOrderDetails />
             {loading ? (
-                <Spinner animation="border" variant="primary" />
+                <div className="d-flex justify-content-center">
+                    <Spinner animation="border" variant="primary" />
+                </div>
             ) : (
                 <>
                     {filteredReorderingProducts.length > 0 ? (
@@ -174,7 +176,7 @@ function ReOrdering() {
                             </tbody>
                         </Table>
                     ) : (
-                        <p className="text-muted">No products need reordering.</p>
+                        <p className="text-muted text-center">No products need reordering.</p>
                     )}
                     <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
                         View Reordered Products
@@ -183,7 +185,7 @@ function ReOrdering() {
             )}
 
             {/* Product Details Modal */}
-            <Modal show={showProductModal} onHide={handleCloseModals}>
+            <Modal show={showProductModal} onHide={handleCloseModals} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Product Details</Modal.Title>
                 </Modal.Header>
@@ -197,9 +199,7 @@ function ReOrdering() {
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModals}>
-                        Close
-                    </Button>
+                    <Button variant="secondary" onClick={handleCloseModals}>Close</Button>
                     <Button variant="success" onClick={() => handleReorderProduct(selectedProduct)}>
                         Add to Reorder List
                     </Button>
@@ -207,7 +207,7 @@ function ReOrdering() {
             </Modal>
 
             {/* Reorder List Modal */}
-            <Modal show={showReorderModal} onHide={handleCloseModals}>
+            <Modal show={showReorderModal} onHide={handleCloseModals} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Reorder List</Modal.Title>
                 </Modal.Header>
@@ -228,23 +228,29 @@ function ReOrdering() {
                                         <td>{product.sku}</td>
                                         <td>
                                             <input
-                                                type="number"
+                                                type="text"
                                                 min="0"
                                                 value={product.quantity || 0}
                                                 onChange={(e) => {
-                                                    const newQuantity = parseInt(e.target.value, 10);
-                                                    // Update the reorder list with new quantity
+                                                    const newQuantity = e.target.value;
+                                                    const validQuantity = isNaN(newQuantity) || newQuantity === '' ? 0 : parseInt(newQuantity, 10);
+
                                                     setReorderList((prevList) => {
                                                         const updatedList = [...prevList];
                                                         updatedList[index] = {
                                                             ...updatedList[index],
-                                                            quantity: isNaN(newQuantity) ? 0 : newQuantity,
+                                                            quantity: validQuantity,
                                                         };
                                                         localStorage.setItem("reorderList", JSON.stringify(updatedList));
                                                         return updatedList;
                                                     });
                                                 }}
-                                                style={{ width: "80px" }}
+                                                style={{
+                                                    width: "80px",
+                                                    appearance: "none",
+                                                    MozAppearance: "textfield",
+                                                    WebkitAppearance: "none",
+                                                }}
                                             />
                                         </td>
                                     </tr>
@@ -256,12 +262,8 @@ function ReOrdering() {
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModals}>
-                        Close
-                    </Button>
-                    <Button variant="success" onClick={handleSaveOrderToFirebase}>
-                        Save Order
-                    </Button>
+                    <Button variant="secondary" onClick={handleCloseModals}>Close</Button>
+                    <Button variant="success" onClick={handleSaveOrderToFirebase}>Save Order</Button>
                 </Modal.Footer>
             </Modal>
         </Container>
