@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { fetchReorderingProducts } from "../../../services/ProductService"; 
+import { fetchReorderingProducts, saveOrderToFirebase } from "../../../services/ProductService";
 import { Table, Spinner, Button, Badge, Container, Modal } from "react-bootstrap";
-import { jsPDF } from "jspdf";
-import { saveOrderToFirebase } from "../../../services/ProductService";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
@@ -28,10 +26,10 @@ function ReOrdering() {
         fetchData().then(() => setLoading(false));
 
         // Retrieve reorder list from localStorage on mount
-        const savedReorderList = JSON.parse(localStorage.getItem('reorderList'));
+        const savedReorderList = JSON.parse(localStorage.getItem("reorderList"));
         if (savedReorderList) {
             setReorderList(savedReorderList);
-            const reorderedProductBarcodes = new Set(savedReorderList.map(item => item.barcode));
+            const reorderedProductBarcodes = new Set(savedReorderList.map((item) => item.barcode));
             setReorderedProducts(reorderedProductBarcodes);
         }
     }, []);
@@ -44,9 +42,15 @@ function ReOrdering() {
 
     // Add product to the reorder list and track reordered products
     const handleReorderProduct = (product) => {
+        // Check if the product already exists in the reorder list to avoid duplicates
+        if (reorderList.find(item => item.barcode === product.barcode)) {
+            return; // If already exists, do nothing
+        }
+
+        // Add product to reorder list
         setReorderList((prevList) => {
             const updatedList = [...prevList, product];
-            localStorage.setItem('reorderList', JSON.stringify(updatedList));
+            localStorage.setItem("reorderList", JSON.stringify(updatedList));
             return updatedList;
         });
 
@@ -59,28 +63,6 @@ function ReOrdering() {
         setShowProductModal(false);
     };
 
-    // Open Reorder List Modal
-    const handleOpenReorderModal = () => {
-        setShowReorderModal(true);
-    };
-
-    // Close Modals
-    const handleCloseModals = () => {
-        setShowProductModal(false);
-        setShowReorderModal(false);
-    };
-
-    // Download Order List as PDF
-    const handleDownloadPDF = () => {
-        const doc = new jsPDF();
-        doc.text("Reorder List", 10, 10);
-        reorderList.forEach((product, index) => {
-            doc.text(`${index + 1}. ${product.productName} - SKU: ${product.sku} - Quantity: ${product.quantity}`, 10, 20 + index * 10);
-        });
-        doc.save("Reorder_List.pdf");
-    };
-
-    // Save the reorder list to Firebase
     const handleSaveOrderToFirebase = async () => {
         try {
             const orderDetails = reorderList.map((product) => ({
@@ -95,28 +77,41 @@ function ReOrdering() {
 
             alert("Order saved successfully to Firebase!");
 
-            const reorderedProductBarcodes = new Set(orderDetails.map(product => product.barcode));
+            // Update reordered products state after saving
+            const reorderedProductBarcodes = new Set(orderDetails.map((product) => product.barcode));
             setReorderedProducts((prevSet) => {
                 const updatedSet = new Set(prevSet);
                 orderDetails.forEach((product) => updatedSet.add(product.barcode));
                 return updatedSet;
             });
 
-            setReorderingProducts((prevProducts) => 
-                prevProducts.filter(product => !reorderedProductBarcodes.has(product.barcode))
+            // Remove reordered products from reordering list
+            setReorderingProducts((prevProducts) =>
+                prevProducts.filter((product) => !reorderedProductBarcodes.has(product.barcode))
             );
 
+            // Clear reorder list and localStorage
             setReorderList([]);
-            localStorage.removeItem('reorderList');
+            localStorage.removeItem("reorderList");
 
+            // Hide the reorder modal after saving
+            setShowReorderModal(false);
         } catch (error) {
             console.error("Error saving order to Firebase:", error);
             alert("Error saving order!");
         }
     };
 
+
     // Filter out reordered products from the list
-    const filteredReorderingProducts = reorderingProducts.filter(product => !reorderedProducts.has(product.barcode));
+    const filteredReorderingProducts = reorderingProducts.filter((product) => !reorderedProducts.has(product.barcode));
+
+    // Handle modal open and close
+    const handleOpenReorderModal = () => setShowReorderModal(true);
+    const handleCloseModals = () => {
+        setShowProductModal(false);
+        setShowReorderModal(false);
+    };
 
     return (
         <Container>
@@ -148,6 +143,7 @@ function ReOrdering() {
                                         isLowStock && <Badge bg="warning">Low Stock</Badge>
                                     );
 
+                                    // Skip products that don't need reordering
                                     if (!isOutOfStock && !isLowStock) return null;
 
                                     return (
@@ -236,9 +232,6 @@ function ReOrdering() {
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModals}>
                         Close
-                    </Button>
-                    <Button variant="primary" onClick={handleDownloadPDF}>
-                        Download PDF
                     </Button>
                     <Button variant="success" onClick={handleSaveOrderToFirebase}>
                         Save Order
