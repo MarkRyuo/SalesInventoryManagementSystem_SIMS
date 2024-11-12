@@ -180,7 +180,7 @@ export const getAllProducts = async () => {
     }
 };
 
-//! End of Products
+//! End of Product
 
 //* Start Category  
 
