@@ -27,7 +27,15 @@ function ReOrdering() {
         // Initially load data
         setLoading(true);
         fetchData().then(() => setLoading(false));
-    }, []);
+
+        // Retrieve reorder list from localStorage on mount
+        const savedReorderList = JSON.parse(localStorage.getItem('reorderList'));
+        if (savedReorderList) {
+            setReorderList(savedReorderList);
+            const reorderedProductBarcodes = new Set(savedReorderList.map(item => item.barcode));
+            setReorderedProducts(reorderedProductBarcodes);
+        }
+    }, []); // Run once when the component mounts
 
     // Open Product Modal
     const handleViewProduct = (product) => {
@@ -38,10 +46,9 @@ function ReOrdering() {
     // Add product to the reorder list and track reordered products
     const handleReorderProduct = (product) => {
         setReorderList((prevList) => {
-            if (!prevList.find((item) => item.barcode === product.barcode)) {
-                return [...prevList, product];
-            }
-            return prevList;
+            const updatedList = [...prevList, product];
+            localStorage.setItem('reorderList', JSON.stringify(updatedList)); // Save to localStorage
+            return updatedList;
         });
 
         // Mark product as reordered
@@ -87,16 +94,22 @@ function ReOrdering() {
                 date: new Date().toISOString(),
             }));
 
+            // Save the order details to Firebase
             await saveOrderToFirebase({ orderDetails });
+
             alert("Order saved successfully to Firebase!");
 
             // Clear reorder list after saving
             setReorderList([]);
+            localStorage.removeItem('reorderList'); // Clear from localStorage
         } catch (error) {
             console.error("Error saving order to Firebase:", error);
             alert("Error saving order!");
         }
     };
+
+    // Filter out reordered products from the list
+    const filteredReorderingProducts = reorderingProducts.filter(product => !reorderedProducts.has(product.barcode));
 
     return (
         <Container>
@@ -105,7 +118,7 @@ function ReOrdering() {
                 <Spinner animation="border" variant="primary" />
             ) : (
                 <>
-                    {reorderingProducts.length > 0 ? (
+                    {filteredReorderingProducts.length > 0 ? (
                         <Table responsive bordered hover className="mt-3">
                             <thead className="table-primary">
                                 <tr>
@@ -118,7 +131,7 @@ function ReOrdering() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {reorderingProducts.map((product) => {
+                                {filteredReorderingProducts.map((product) => {
                                     const isOutOfStock = product.quantity === 0;
                                     const isLowStock = product.quantity > 0 && product.quantity <= product.instockthreshold / 4;
 
@@ -130,8 +143,6 @@ function ReOrdering() {
 
                                     if (!isOutOfStock && !isLowStock) return null;
 
-                                    const isReordered = reorderedProducts.has(product.barcode);
-
                                     return (
                                         <tr key={product.barcode}>
                                             <td>{product.productName}</td>
@@ -140,17 +151,13 @@ function ReOrdering() {
                                             <td>{product.quantity}</td>
                                             <td>{statusBadge}</td>
                                             <td>
-                                                {!isReordered ? (
-                                                    <Button
-                                                        variant="success"
-                                                        size="sm"
-                                                        onClick={() => handleViewProduct(product)}
-                                                    >
-                                                        Reorder
-                                                    </Button>
-                                                ) : (
-                                                    <Badge bg="secondary">Reordered</Badge>
-                                                )}
+                                                <Button
+                                                    variant="success"
+                                                    size="sm"
+                                                    onClick={() => handleViewProduct(product)}
+                                                >
+                                                    Reorder
+                                                </Button>
                                             </td>
                                         </tr>
                                     );
