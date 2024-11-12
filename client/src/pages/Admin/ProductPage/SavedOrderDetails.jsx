@@ -7,4 +7,4 @@ function SavedOrderDetails() {
     )
 }
 
-export default SavedOrderDetails
+export default SavedOrderDetails ;
