@@ -12,8 +12,7 @@ function ReOrdering() {
     const [reorderList, setReorderList] = useState([]);
     const [reorderedProducts, setReorderedProducts] = useState(new Set());
 
-    const POLL_INTERVAL = 10000; // Every 10 seconds
-
+    // Fetch data when needed
     const fetchData = async () => {
         try {
             const products = await fetchReorderingProducts();
@@ -24,11 +23,9 @@ function ReOrdering() {
     };
 
     useEffect(() => {
+        // Initially load data
         setLoading(true);
         fetchData().then(() => setLoading(false));
-
-        const intervalId = setInterval(fetchData, POLL_INTERVAL);
-        return () => clearInterval(intervalId);
     }, []);
 
     // Open Product Modal
