@@ -8,4 +8,4 @@ function ReOrdering() {
     )
 }
 
-export default ReOrdering
+export default ReOrdering ;
