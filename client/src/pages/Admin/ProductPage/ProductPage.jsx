@@ -8,6 +8,7 @@ import ProductEditor from "../ProductEditor/ProductEditor";
 import { FaRegEdit } from "react-icons/fa";
 import AdminTransactionHistory from '../AdminTransactionHistory/AdminTransactionHistory'
 import { FaHistory } from "react-icons/fa";
+import { PiHandArrowUpBold } from "react-icons/pi";
 
 import ProductPagescss from './ProductPage.module.scss' ;
 import ReOrdering from './ReOrdering';
@@ -37,7 +38,7 @@ function ProductNavbarTabs({ setActiveTab }) {
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/ReOrdering">
-                    <FaHistory size={20} />
+                    <PiHandArrowUpBold size={20} />
                     <p className='m-0 p-0'>Re Ordering</p>
                 </Nav.Link>
             </Nav.Item>
