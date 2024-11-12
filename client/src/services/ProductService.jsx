@@ -182,7 +182,7 @@ export const getAllProducts = async () => {
     }
 };
 
-
+//! End of Products
 
 // Function to add a new category
 export const addCategory = async (categoryName) => {
