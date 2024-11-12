@@ -214,8 +214,8 @@ export const getCategories = async () => {
         throw new Error(`Error retrieving categories: ${error.message}`);
     }
 };
-    // Function to delete a category
-    export const deleteCategory = async (categoryName) => {
+//? Function to delete a category
+export const deleteCategory = async (categoryName) => {
         const db = getDatabase();
         const categoryRef = ref(db, 'categories/' + categoryName);
 
@@ -227,7 +227,7 @@ export const getCategories = async () => {
         }
 };
 
-    export const updateCategory = async (categoryName, newCategoryData) => {
+export const updateCategory = async (categoryName, newCategoryData) => {
         const db = getDatabase();
         const categoryRef = ref(db, 'categories/' + categoryName);
 
@@ -299,7 +299,6 @@ export const fetchOrderHistoryFromFirebase = async () => {
     }
 };
 
-
 // Function to update the product in Firebase
 export const updateProductInDatabase = async (updatedProduct) => {
     const db = getDatabase();
@@ -313,6 +312,7 @@ export const updateProductInDatabase = async (updatedProduct) => {
     }
 };
 
+//! End of Order
 
 export const addNewDiscount = async ({ discountName, discountValue }) => {
     const db = getDatabase();
