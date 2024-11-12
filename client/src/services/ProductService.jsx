@@ -387,5 +387,20 @@ export const fetchSavedOrders = async () => {
     }
 };
 
+// Function to delete a saved order by order ID
+export const deleteSavedOrder = async (orderId) => {
+    const db = getDatabase();
+    const orderRef = ref(db, 'orders/' + orderId); // Reference to the specific order by ID
+
+    try {
+        // Remove the order from Firebase
+        await remove(orderRef);
+        console.log(`Order with ID ${orderId} deleted successfully`);
+    } catch (error) {
+        console.error('Error deleting order:', error);
+        throw new Error(`Error deleting order: ${error.message}`);
+    }
+};
+
 
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Button, Spinner, Alert, Table } from "react-bootstrap";
-import { fetchSavedOrders } from "../../../services/ProductService";
+import { fetchSavedOrders, deleteSavedOrder } from "../../../services/ProductService"; // Assuming you have a delete function in the service
 import jsPDF from "jspdf";
 import { LuDownload } from "react-icons/lu";
 
@@ -62,6 +62,18 @@ function SavedOrderDetails() {
         doc.save(`${order.id}_order.pdf`);
     };
 
+    // Delete an order
+    const handleDeleteOrder = async (orderId) => {
+        try {
+            await deleteSavedOrder(orderId); // Assuming you have a delete function in your service
+            setSavedOrders((prevOrders) => prevOrders.filter(order => order.id !== orderId));
+            alert('Order deleted successfully!');
+        } catch (error) {
+            setError("Error deleting order.");
+            alert('Failed to delete order: ' + error.message);
+        }
+    };
+
     return (
         <>
             <Button variant="primary" onClick={() => setShowModal(true)}>
@@ -118,7 +130,14 @@ function SavedOrderDetails() {
                                                             onClick={() => downloadPDF(order)}
                                                             className="ml-2 p-0"
                                                         >
-                                                            <LuDownload size={20}/>
+                                                            <LuDownload size={20} />
+                                                        </Button>
+                                                        <Button
+                                                            variant="danger"
+                                                            onClick={() => handleDeleteOrder(order.id)}
+                                                            className="ml-2 p-0"
+                                                        >
+                                                            Delete
                                                         </Button>
                                                     </td>
                                                 </tr>
