@@ -13,7 +13,17 @@ function SavedOrderDetails() {
     const fetchOrders = async () => {
         try {
             const orders = await fetchSavedOrders();
-            setSavedOrders(orders);
+
+            // Set all product quantities to 0
+            const updatedOrders = orders.map((order) => ({
+                ...order,
+                products: order.products.map((product) => ({
+                    ...product,
+                    quantity: 0, // Initialize quantity to 0
+                })),
+            }));
+
+            setSavedOrders(updatedOrders);
         } catch (error) {
             setError("Error fetching saved orders.");
             console.error("Error fetching saved orders:", error);
@@ -79,9 +89,6 @@ function SavedOrderDetails() {
                                                 <Card.Subtitle className="mb-2 text-muted">
                                                     <strong>Order Date:</strong> {new Date(order.date).toLocaleDateString()}
                                                 </Card.Subtitle>
-                                                <Card.Text>
-                                                    <strong>Total Quantity:</strong> {order.totalQuantity || "0"}
-                                                </Card.Text>
                                                 <Button
                                                     variant="link"
                                                     onClick={() => toggleShowMore(order.id)}
@@ -102,7 +109,7 @@ function SavedOrderDetails() {
                                                                         <br />
                                                                         <strong>SKU:</strong> {product.sku || "N/A"}
                                                                         <br />
-                                                                        <strong>Quantity:</strong> {product.quantity || "0"}
+                                                                        <strong>Quantity:</strong> {product.quantity}
                                                                     </li>
                                                                 ))}
                                                             </ul>
