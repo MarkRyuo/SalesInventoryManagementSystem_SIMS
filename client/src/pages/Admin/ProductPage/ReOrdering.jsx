@@ -66,7 +66,6 @@ function ReOrdering() {
 
     const handleSaveOrderToFirebase = async () => {
         try {
-            // Create a unique order ID (can be timestamp-based or generated)
             const orderId = `order-${Date.now()}`;
             const orderDate = new Date().toISOString();
 
@@ -74,19 +73,16 @@ function ReOrdering() {
                 barcode: product.barcode,
                 productName: product.productName,
                 sku: product.sku,
-                quantity: product.quantity,
+                quantity: product.quantity, // Save the updated quantity
             }));
 
-            // Include order metadata with orderDetails
             const orderData = {
                 id: orderId,
                 date: orderDate,
                 products: orderDetails,
             };
 
-            // Save the entire order data to Firebase
             await saveOrderToFirebase(orderData);
-
             alert("Order saved successfully to Firebase!");
 
             // Update reordered products state after saving
@@ -114,8 +110,6 @@ function ReOrdering() {
         }
     };
 
-
-
     // Filter out reordered products from the list
     const filteredReorderingProducts = reorderingProducts.filter((product) => !reorderedProducts.has(product.barcode));
 
@@ -136,50 +130,48 @@ function ReOrdering() {
                 <>
                     {filteredReorderingProducts.length > 0 ? (
                         <Table responsive bordered hover className="mt-3">
-                                <thead className="table-primary">
-                                    <tr>
-                                        <th>Product Name</th>
-                                        <th>SKU</th>
-                                        <th>Quantity</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
+                            <thead className="table-primary">
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>SKU</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filteredReorderingProducts.map((product) => {
+                                    const isOutOfStock = product.quantity === 0;
+                                    const isLowStock = product.quantity > 0 && product.quantity <= product.instockthreshold / 4;
 
-                                <tbody>
-                                    {filteredReorderingProducts.map((product) => {
-                                        const isOutOfStock = product.quantity === 0;
-                                        const isLowStock = product.quantity > 0 && product.quantity <= product.instockthreshold / 4;
+                                    const statusBadge = isOutOfStock ? (
+                                        <Badge bg="danger">Out of Stock</Badge>
+                                    ) : (
+                                        isLowStock && <Badge bg="warning">Low Stock</Badge>
+                                    );
 
-                                        const statusBadge = isOutOfStock ? (
-                                            <Badge bg="danger">Out of Stock</Badge>
-                                        ) : (
-                                            isLowStock && <Badge bg="warning">Low Stock</Badge>
-                                        );
+                                    // Skip products that don't need reordering
+                                    if (!isOutOfStock && !isLowStock) return null;
 
-                                        // Skip products that don't need reordering
-                                        if (!isOutOfStock && !isLowStock) return null;
-
-                                        return (
-                                            <tr key={product.barcode}>
-                                                <td>{product.productName}</td>
-                                                <td>{product.sku}</td>
-                                                <td>{product.quantity}</td>
-                                                <td>{statusBadge}</td>
-                                                <td>
-                                                    <Button
-                                                        variant="success"
-                                                        size="sm"
-                                                        onClick={() => handleViewProduct(product)}
-                                                    >
-                                                        Reorder
-                                                    </Button>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-
+                                    return (
+                                        <tr key={product.barcode}>
+                                            <td>{product.productName}</td>
+                                            <td>{product.sku}</td>
+                                            <td>{product.quantity}</td>
+                                            <td>{statusBadge}</td>
+                                            <td>
+                                                <Button
+                                                    variant="success"
+                                                    size="sm"
+                                                    onClick={() => handleViewProduct(product)}
+                                                >
+                                                    Reorder
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
                         </Table>
                     ) : (
                         <p className="text-muted">No products need reordering.</p>
@@ -230,11 +222,31 @@ function ReOrdering() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {reorderList.map((product) => (
+                                {reorderList.map((product, index) => (
                                     <tr key={product.barcode}>
                                         <td>{product.productName}</td>
                                         <td>{product.sku}</td>
-                                        <td>{product.quantity}</td>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                value={product.quantity || 0}
+                                                onChange={(e) => {
+                                                    const newQuantity = parseInt(e.target.value, 10);
+                                                    // Update the reorder list with new quantity
+                                                    setReorderList((prevList) => {
+                                                        const updatedList = [...prevList];
+                                                        updatedList[index] = {
+                                                            ...updatedList[index],
+                                                            quantity: isNaN(newQuantity) ? 0 : newQuantity,
+                                                        };
+                                                        localStorage.setItem("reorderList", JSON.stringify(updatedList));
+                                                        return updatedList;
+                                                    });
+                                                }}
+                                                style={{ width: "80px" }}
+                                            />
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

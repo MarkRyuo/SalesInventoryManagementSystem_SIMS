@@ -1,5 +1,6 @@
+import React from "react";
 import { useEffect, useState } from "react";
-import { Modal, Button, Spinner, Alert, Card } from "react-bootstrap";
+import { Modal, Button, Spinner, Alert, Table } from "react-bootstrap";
 import { fetchSavedOrders } from "../../../services/ProductService";
 
 function SavedOrderDetails() {
@@ -13,17 +14,7 @@ function SavedOrderDetails() {
     const fetchOrders = async () => {
         try {
             const orders = await fetchSavedOrders();
-
-            // Set all product quantities to 0
-            const updatedOrders = orders.map((order) => ({
-                ...order,
-                products: order.products.map((product) => ({
-                    ...product,
-                    quantity: 0, // Initialize quantity to 0
-                })),
-            }));
-
-            setSavedOrders(updatedOrders);
+            setSavedOrders(orders);
         } catch (error) {
             setError("Error fetching saved orders.");
             console.error("Error fetching saved orders:", error);
@@ -71,57 +62,74 @@ function SavedOrderDetails() {
                     ) : error ? (
                         <Alert variant="danger">{error}</Alert>
                     ) : (
-                        <div className="horizontal-scroll-container">
+                        <div>
                             {savedOrders.length > 0 ? (
-                                <div style={{ display: "flex", gap: "15px", overflowX: "auto", padding: "10px" }}>
-                                    {savedOrders.map((order, index) => (
-                                        <Card
-                                            key={index}
-                                            border="primary"
-                                            style={{
-                                                minWidth: "300px",
-                                                flex: "0 0 auto",
-                                                marginBottom: "15px",
-                                            }}
-                                        >
-                                            <Card.Body>
-                                                <Card.Title>Order ID: {order.id || "No ID"}</Card.Title>
-                                                <Card.Subtitle className="mb-2 text-muted">
-                                                    <strong>Order Date:</strong> {new Date(order.date).toLocaleDateString()}
-                                                </Card.Subtitle>
-                                                <Button
-                                                    variant="link"
-                                                    onClick={() => toggleShowMore(order.id)}
-                                                    aria-expanded={expandedOrders[order.id]}
-                                                >
-                                                    {expandedOrders[order.id] ? "Show Less" : "Show More"}
-                                                </Button>
-
-                                                {/* Product List (Toggled by "Show More" button) */}
+                                <Table bordered hover responsive>
+                                    <thead className="table-primary">
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Order Date</th>
+                                            <th>Products</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {savedOrders.map((order, index) => (
+                                            <React.Fragment key={index}>
+                                                <tr>
+                                                    <td>{order.id || "No ID"}</td>
+                                                    <td>{new Date(order.date).toLocaleDateString()}</td>
+                                                    <td>
+                                                        {order.products && order.products.length > 0
+                                                            ? `${order.products.length} Product(s)`
+                                                            : "No products"}
+                                                    </td>
+                                                    <td>
+                                                        <Button
+                                                            variant="link"
+                                                            onClick={() => toggleShowMore(order.id)}
+                                                            aria-expanded={expandedOrders[order.id]}
+                                                        >
+                                                            {expandedOrders[order.id] ? "Show Less" : "Show More"}
+                                                        </Button>
+                                                    </td>
+                                                </tr>
                                                 {expandedOrders[order.id] && (
-                                                    <div style={{ maxHeight: "200px", overflowY: "auto" }}>
-                                                        <strong>Products:</strong>
-                                                        {order.products && order.products.length > 0 ? (
-                                                            <ul className="list-unstyled">
-                                                                {order.products.map((product, pIndex) => (
-                                                                    <li key={pIndex}>
-                                                                        <strong>Product Name:</strong> {product.productName || "No Name"}
-                                                                        <br />
-                                                                        <strong>SKU:</strong> {product.sku || "N/A"}
-                                                                        <br />
-                                                                        <strong>Quantity:</strong> {product.quantity}
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        ) : (
-                                                            <p>No products found in this order.</p>
-                                                        )}
-                                                    </div>
+                                                    <tr>
+                                                        <td colSpan="4">
+                                                            <div style={{ maxHeight: "200px", overflowY: "auto" }}>
+                                                                <strong>Products:</strong>
+                                                                {order.products && order.products.length > 0 ? (
+                                                                    <Table bordered hover responsive size="sm">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Product Name</th>
+                                                                                <th>SKU</th>
+                                                                                <th>Quantity</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            {order.products.map((product, pIndex) => (
+                                                                                <tr key={pIndex}>
+                                                                                    <td>{product.productName || "No Name"}</td>
+                                                                                    <td>{product.sku || "N/A"}</td>
+                                                                                    <td>{product.quantity || "0"}</td>
+                                                                                </tr>
+                                                                            ))}
+                                                                        </tbody>
+                                                                    </Table>
+                                                                ) : (
+                                                                    <p>No products found for this order.</p>
+                                                                )}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                 )}
-                                            </Card.Body>
-                                        </Card>
-                                    ))}
-                                </div>
+
+                                            </React.Fragment>
+                                        ))}
+                                    </tbody>
+                                </Table>
                             ) : (
                                 <p>No saved orders found.</p>
                             )}
