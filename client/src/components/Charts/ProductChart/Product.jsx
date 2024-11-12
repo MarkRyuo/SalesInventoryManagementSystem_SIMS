@@ -105,6 +105,9 @@ function ProductChart() {
                         {/* Create Barcode */}
                     </div>
                     <div>
+                        {/* Create Tax */}
+                    </div>
+                    <div>
                         {/* Discount */}
                         <SetDiscounts />
                     </div>
