@@ -48,6 +48,12 @@ function ReOrdering() {
 
         // Mark product as reordered
         setReorderedProducts((prevSet) => new Set(prevSet).add(product.barcode));
+
+        // Remove the product from the reorderingProducts list
+        setReorderingProducts((prevProducts) =>
+            prevProducts.filter((item) => item.barcode !== product.barcode)
+        );
+
         setShowProductModal(false);
     };
 
