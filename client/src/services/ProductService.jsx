@@ -3,7 +3,7 @@ import { getDatabase, ref, set, get, update, remove, child} from 'firebase/datab
 
 //* Start of Product
 // Function to add a new product
-export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, tax, category}) => {
+export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, category}) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
 
@@ -28,7 +28,7 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
             preserveQuantityHistory: true,
             sku: sku,
             price: price,
-            tax: tax, // Store tax as percentage
+            // tax: tax, // Store tax as percentage
             category: category,
             dateAdded: formattedToday,
             lastUpdated: formattedToday,
