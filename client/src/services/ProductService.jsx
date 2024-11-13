@@ -435,6 +435,8 @@ export const fetchAllTaxes = async () => {
     }
 };
 
+//! End of AddNewTax
+
 
 
 
