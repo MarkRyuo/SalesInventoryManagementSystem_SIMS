@@ -1,6 +1,7 @@
 import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
 import { doc, setDoc} from 'firebase/firestore'; // For Firestore
 import { firestore } from './firebase'; // Assuming you're importing firestore from your Firebase config
+import { getStorage, ref as storageRef, uploadString, getDownloadURL } from 'firebase/storage';
 
 
 //* Start of Product
@@ -487,10 +488,29 @@ export const saveProductToDatabase = async (productData) => {
 
 // Save QR code data to Firestore
 export const saveQRCodeToFirestore = async (barcodeValue, qrCodeBase64) => {
-    const qrCodeRef = doc(firestore, 'qr_codes', barcodeValue); // Use barcode as the document ID
-    await setDoc(qrCodeRef, { qrCode: qrCodeBase64 });
-};
+    try {
+        // Get the Firebase Storage reference
+        const storage = getStorage();
 
+        // Create a reference for the QR code image using the barcode as the file name
+        const qrCodeImageRef = storageRef(storage, `qr_codes/${barcodeValue}.png`);
+
+        // Upload the Base64 string to Firebase Storage
+        const uploadResult = await uploadString(qrCodeImageRef, qrCodeBase64, 'base64', { contentType: 'image/png' });
+
+        // Get the download URL of the uploaded image
+        const qrCodeUrl = await getDownloadURL(uploadResult.ref);
+
+        // Save the download URL in Firestore
+        const qrCodeRef = doc(firestore, 'qr_codes', barcodeValue); // Use barcode as the document ID
+        await setDoc(qrCodeRef, { qrCodeUrl });
+
+        console.log("QR Code uploaded to Storage and URL saved to Firestore:", qrCodeUrl);
+    } catch (error) {
+        console.error("Error saving QR Code to Firestore:", error);
+        throw new Error(error.message);
+    }
+};
 
 
 
