@@ -1,10 +1,10 @@
-import AddQrCode from './AddQrcode'
+import AddQrcode from './AddQrcode'
 
 function SetQrcode() {
 
     return (
         <>
-            <AddQrCode />
+            <AddQrcode />
         </>
     );
 }
