@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Modal } from 'react-bootstrap';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation,} from 'react-router-dom';
 import QRCode from 'react-qr-code';
 import { getCategories, saveProductToDatabase, saveQRCodeToFirestore } from '../../../services/ProductService'; // assuming you have a function to save QRCode to Firestore
 
 // eslint-disable-next-line react/prop-types
 function AddQrcode({ showModal, handleCloseModal }) {
     const location = useLocation();
-    const navigate = useNavigate();
+
     const barcode = location.state?.barcode || '';
 
     const [productName, setProductName] = useState('');
