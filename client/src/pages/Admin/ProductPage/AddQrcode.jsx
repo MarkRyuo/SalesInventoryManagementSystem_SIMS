@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Modal } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import QRCode from 'react-qr-code'; // Import react-qr-code
@@ -24,6 +24,8 @@ function AddQrcode({ showModal, handleCloseModal }) {
     const [qrcodeData, setQrcodeData] = useState('');
     const [barcodeValue, setBarcode] = useState(barcode);
     const [isQRCodeGenerated, setIsQRCodeGenerated] = useState(false);
+
+    const qrcodeRef = useRef(null); // Ref for QR code canvas
 
     const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
@@ -75,6 +77,17 @@ function AddQrcode({ showModal, handleCloseModal }) {
         setError('');
     };
 
+    // Convert QR Code to Base64
+    const getQRCodeImageBase64 = () => {
+        if (qrcodeRef.current) {
+            const canvas = qrcodeRef.current.querySelector('canvas');
+            if (canvas) {
+                return canvas.toDataURL(); // This will give you the image as a Base64 string
+            }
+        }
+        return '';
+    };
+
     // Save Product Data Handler
     const handleSave = async () => {
         if (!productName || !category || !quantity || price <= 0) {
@@ -85,6 +98,9 @@ function AddQrcode({ showModal, handleCloseModal }) {
         try {
             setError('');
             setIsLoading(true);
+
+            // Get the Base64 representation of the QR code image
+            const qrCodeBase64 = getQRCodeImageBase64();
 
             const productData = {
                 barcode: barcodeValue,
@@ -97,11 +113,15 @@ function AddQrcode({ showModal, handleCloseModal }) {
                 sku: generateSKU(productName, size, color, wattage, voltage),
                 price,
                 category,
-                qrcodeData,
+                qrcodeData: qrCodeBase64, // Save QR code image as Base64 string
             };
 
             console.log("Product data saved with QR code:", productData);
-            navigate('/DashboardPage');
+
+            // You can now save productData to your database, for example:
+            // await saveProductToDatabase(productData);
+
+            navigate('/DashboardPage'); // Navigate to Dashboard after saving
             handleCloseModal();  // Close modal after saving
         } catch (error) {
             setError(`Error saving product: ${error.message}`);
@@ -182,7 +202,11 @@ function AddQrcode({ showModal, handleCloseModal }) {
                             </Form.Group>
 
                             <Button variant="primary" onClick={handleGenerateQRCode} block>Generate QR Code</Button>
-                            {isQRCodeGenerated && <QRCode value={qrcodeData} size={150} className="mt-4" />}
+                            {isQRCodeGenerated && (
+                                <div ref={qrcodeRef}>
+                                    <QRCode value={qrcodeData} size={150} className="mt-4" />
+                                </div>
+                            )}
                             <Button variant="success" onClick={handleSave} block className="mt-3">Save Product</Button>
                         </Col>
                     </Row>
