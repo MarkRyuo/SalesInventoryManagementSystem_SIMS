@@ -470,15 +470,16 @@ export const saveQrcodeToDatabase = async (barcode, qrcodeBase64) => {
 export const addQrcodeToDatabase = async (barcode, qrcodeBase64) => {
     try {
         const db = getDatabase();
-        const qrCodeRef = ref(db, `qrcodes/${barcode}`); // Store the QR code data under its barcode
+        const qrCodeRef = ref(db, `qrcodes/${barcode}`); // Save QR code under a separate `qrcodes` node
         await set(qrCodeRef, {
             qrcodeBase64,
             createdAt: Date.now(),
         });
-        console.log('QR Code data Add successfully.');
+
+        console.log('QR Code added to the database successfully.');
     } catch (error) {
-        console.error('Error Adding QR Code data:', error);
-        throw new Error('Failed to Add QR Code data.');
+        console.error('Error adding QR Code:', error);
+        throw new Error('Failed to add QR Code.');
     }
 };
 
