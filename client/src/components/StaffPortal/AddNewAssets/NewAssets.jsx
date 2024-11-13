@@ -2,9 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { addNewProduct, addCategory, getCategories } from '../../../services/ProductService';
-import { FaBoxOpen } from "react-icons/fa"; 
+import { FaBoxOpen } from "react-icons/fa";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
-
 
 
 function NewAssets() {
@@ -176,7 +175,6 @@ function NewAssets() {
                                         {!productName && <small className="text-danger">Please enter a product name.</small>}
                                     </Form.Group>
 
-
                                     <Row className='mt-1'>
                                         <Col lg={6} sm={12}>
                                             <Form.Group controlId="size" className="">
@@ -253,48 +251,57 @@ function NewAssets() {
                                                 <p className='m-0'>Price<span className="text-danger">*</span></p>
                                                 <Form.Control
                                                     type="number"
-                                                    placeholder="Enter price (e.g., 100.00)"
                                                     value={price}
+                                                    min={0}
+                                                    placeholder="Enter price"
                                                     onChange={(e) => setPrice(e.target.value)}
                                                     required
-                                                    step="0.01"
-                                                    style={{ appearance: 'textfield' }}
                                                 />
-                                                {!price && <small className="text-danger">Please enter a price.</small>}
                                             </Form.Group>
                                         </Col>
+
+                                        <Col lg={6} sm={12}>
+                                            <Form.Group controlId="category" className="mt-3">
+                                                <p className='m-0'>Category<span className="text-danger">*</span></p>
+                                                <Dropdown onSelect={handleCategoryChange}>
+                                                    <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
+                                                        {category || 'Select Category'}
+                                                    </Dropdown.Toggle>
+
+                                                    <Dropdown.Menu>
+                                                        {categories.map((category) => (
+                                                            <Dropdown.Item key={category} eventKey={category}>
+                                                                {category}
+                                                            </Dropdown.Item>
+                                                        ))}
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                                <Button variant="link" onClick={handleAddNewCategoryClick} className="p-0">Add New Category</Button>
+                                            </Form.Group>
+                                        </Col>
+
+                                        {isAddingNewCategory && (
+                                            <Col lg={12}>
+                                                <Form.Group controlId="newCategory">
+                                                    <p className='m-0'>New Category</p>
+                                                    <Form.Control
+                                                        type="text"
+                                                        value={newCategory}
+                                                        onChange={(e) => setNewCategory(e.target.value)}
+                                                    />
+                                                    <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
+                                                </Form.Group>
+                                            </Col>
+                                        )}
                                     </Row>
-
+                                    <Button
+                                        variant="success"
+                                        className="w-100 mt-3"
+                                        onClick={handleDone}
+                                    >
+                                        {isLoading ? 'Saving...' : 'Save Product'}
+                                    </Button>
                                 </div>
-
-                                <Col md={12}>
-                                    <Form.Group controlId="category" className="mt-3">
-                                        <p className='m-0'>Category<span className="text-danger">*</span></p>
-                                        <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
-                                            <option value="">Select Category</option>
-                                            {categories.map((cat, index) => (
-                                                <option key={index} value={cat}>{cat}</option>
-                                            ))}
-                                        </Form.Control>
-                                        {!category && <small className="text-danger mx-2">Please select a category.</small>}
-                                        <Button variant="link" onClick={handleAddNewCategoryClick} className='m-0 p-0'>+ Add New Category</Button>
-                                    </Form.Group>
-
-                                    {isAddingNewCategory && (
-                                        <Form.Group controlId="newCategory" className="mt-3">
-                                            <p className='m-0'>New Category</p>
-                                            <Form.Control
-                                                type="text"
-                                                placeholder="Enter new category (e.g., Electronics)"
-                                                value={newCategory}
-                                                onChange={(e) => setNewCategory(e.target.value)}
-                                            />
-                                            <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
-                                        </Form.Group>
-                                    )}
-
-                                    <Button variant="success" className="my-3 px-5" onClick={handleDone}>Done</Button>
-                                </Col>
                             </Col>
                         </Row>
                     </Col>
