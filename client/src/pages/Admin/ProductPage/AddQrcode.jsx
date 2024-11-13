@@ -5,7 +5,7 @@ import QRCode from 'react-qr-code'; // Import react-qr-code
 import { getCategories } from '../../../services/ProductService';
 
 // eslint-disable-next-line react/prop-types
-function SetQrcodeModal({ showModal, handleCloseModal }) {
+function AddQrcode({ showModal, handleCloseModal }) {
     const location = useLocation();
     const navigate = useNavigate();
     const barcode = location.state?.barcode || '';
@@ -192,4 +192,4 @@ function SetQrcodeModal({ showModal, handleCloseModal }) {
     );
 }
 
-export default SetQrcodeModal;
+export default AddQrcode;
