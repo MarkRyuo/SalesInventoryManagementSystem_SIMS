@@ -451,55 +451,20 @@ export const fetchAllTaxes = async () => {
 //! End of AddNewTax
 
 // Function to save product details to Realtime Database
-export const saveProductToDatabase = async (productData, qrCodeBase64) => {
+export const saveQrcodeToDatabase = async (barcode, qrcodeBase64) => {
     try {
         const db = getDatabase();
-        const productId = Date.now(); // Unique product ID using timestamp
-        const productRef = ref(db, `products/${productId}`);
-
-        // Save product data to database
-        await set(productRef, {
-            ...productData,
-            qrCodeData: qrCodeBase64,
-            createdAt: new Date().toISOString(),
+        const qrCodeRef = ref(db, `qrcodes/${barcode}`);
+        await set(qrCodeRef, {
+            qrcodeBase64,
+            createdAt: Date.now(),
         });
-
-        console.log("Product saved to Realtime Database:", productData);
+        console.log('QR Code data saved successfully.');
     } catch (error) {
-        console.error("Error saving product to Realtime Database:", error);
-        throw new Error(error.message);
+        console.error('Error saving QR Code data:', error);
+        throw new Error('Failed to save QR Code data.');
     }
-};
-
-// Function to fetch products from Realtime Database
-
-export const fetchProductsWithQRCodes = async () => {
-    try {
-        const db = getDatabase();
-        const dbRef = ref(db);
-        const snapshot = await get(child(dbRef, `products`));
-
-        if (snapshot.exists()) {
-            const products = snapshot.val();
-
-            // Convert the products object to an array and filter those with `qrCodeData`
-            const productList = Object.keys(products)
-                .map((key) => ({
-                    id: key,
-                    ...products[key],
-                }))
-                .filter((product) => product.qrCodeData && product.qrCodeData !== ''); // Filter only products with QR code data
-
-            return productList;
-        } else {
-            console.log("No products found in database.");
-            return [];
-        }
-    } catch (error) {
-        console.error("Error fetching products from Realtime Database:", error);
-        throw new Error(error.message);
-    }
-};
+}
 
 
 
