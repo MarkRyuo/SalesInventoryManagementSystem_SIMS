@@ -1,7 +1,6 @@
 import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
-import { doc, setDoc} from 'firebase/firestore'; // For Firestore
+import { doc, setDoc, getDoc} from 'firebase/firestore'; // For Firestore
 import { firestore } from './firebase'; // Assuming you're importing firestore from your Firebase config
-import { getStorage, ref as storageRef, uploadString, getDownloadURL } from 'firebase/storage';
 
 
 //* Start of Product
@@ -454,26 +453,17 @@ export const fetchAllTaxes = async () => {
 //! End of AddNewTax
 
 // Function to save product details to Realtime Database
-export const saveProductToDatabase = async (productData) => {
+export const saveProductToDatabase = async (productData, qrCodeBase64) => {
     try {
-        // Get a reference to the Realtime Database
         const db = getDatabase();
+        const productId = Date.now(); // Unique product ID using timestamp
+        const productRef = ref(db, `products/${productId}`);
 
-        // Create a reference for the product based on the product's barcode
-        const productRef = ref(db, `products/${productData.barcode}`);
-
-        // Set the product data in the database
+        // Save product data to database
         await set(productRef, {
-            productName: productData.productName,
-            sku: productData.sku,
-            price: productData.price,
-            category: productData.category,
-            quantity: productData.quantity,
-            size: productData.size,
-            color: productData.color,
-            wattage: productData.wattage,
-            voltage: productData.voltage,
-            barcode: productData.barcode,
+            ...productData,
+            qrCodeData: qrCodeBase64,
+            createdAt: new Date().toISOString(),
         });
 
         console.log("Product saved to Realtime Database:", productData);
@@ -483,34 +473,7 @@ export const saveProductToDatabase = async (productData) => {
     }
 };
 
-// Function to save QR Code image to Firestore
 
-
-// Save QR code data to Firestore
-export const saveQRCodeToFirestore = async (barcodeValue, qrCodeBase64) => {
-    try {
-        // Get the Firebase Storage reference
-        const storage = getStorage();
-
-        // Create a reference for the QR code image using the barcode as the file name
-        const qrCodeImageRef = storageRef(storage, `qr_codes/${barcodeValue}.png`);
-
-        // Upload the Base64 string to Firebase Storage
-        const uploadResult = await uploadString(qrCodeImageRef, qrCodeBase64, 'base64', { contentType: 'image/png' });
-
-        // Get the download URL of the uploaded image
-        const qrCodeUrl = await getDownloadURL(uploadResult.ref);
-
-        // Save the download URL in Firestore
-        const qrCodeRef = doc(firestore, 'qr_codes', barcodeValue); // Use barcode as the document ID
-        await setDoc(qrCodeRef, { qrCodeUrl });
-
-        console.log("QR Code uploaded to Storage and URL saved to Firestore:", qrCodeUrl);
-    } catch (error) {
-        console.error("Error saving QR Code to Firestore:", error);
-        throw new Error(error.message);
-    }
-};
 
 
 

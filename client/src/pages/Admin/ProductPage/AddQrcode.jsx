@@ -1,13 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+/* eslint-disable react/prop-types */
+import { useState, useEffect} from 'react';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Modal } from 'react-bootstrap';
-import { useLocation} from 'react-router-dom';
-import QRCode from 'react-qr-code';
-import { getCategories, saveProductToDatabase, saveQRCodeToFirestore } from '../../../services/ProductService'; // assuming you have a function to save QRCode to Firestore
+import { useLocation } from 'react-router-dom';
+import QRious from 'qrious';
+import { getCategories, saveProductToDatabase } from '../../../services/ProductService';
 
-// eslint-disable-next-line react/prop-types
 function AddQrcode({ showModal, handleCloseModal }) {
     const location = useLocation();
-
     const barcode = location.state?.barcode || '';
 
     const [productName, setProductName] = useState('');
@@ -25,9 +24,9 @@ function AddQrcode({ showModal, handleCloseModal }) {
     const [barcodeValue, setBarcode] = useState(barcode);
     const [isQRCodeGenerated, setIsQRCodeGenerated] = useState(false);
 
-    const qrcodeRef = useRef(null); // Ref for QR code canvas
-
     const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+
+    // Ref for QR Code component
 
     // SKU Generation Function
     const generateSKU = (productName, size, color, wattage, voltage) => {
@@ -40,7 +39,7 @@ function AddQrcode({ showModal, handleCloseModal }) {
         return `${productCode}-${sizeCode}-${colorCode}-${wattageCode}-${voltageCode}-${uniqueID}`;
     };
 
-    // Barcode Generation Function (different from SKU logic)
+    // Barcode Generation Function
     const generateBarcode = () => {
         return `BAR-${Date.now()}`;
     };
@@ -58,7 +57,7 @@ function AddQrcode({ showModal, handleCloseModal }) {
         fetchCategories();
     }, []);
 
-    // QR Code Generation Handler
+    // Handle QR Code generation using Qrious
     const handleGenerateQRCode = () => {
         if (!productName || !quantity || !price || !category) {
             setError('Please fill in all required fields.');
@@ -71,22 +70,27 @@ function AddQrcode({ showModal, handleCloseModal }) {
             return;
         }
 
-        setQrcodeData(generatedData);
-        setBarcode(generateBarcode()); // Set barcode with different logic
-        setIsQRCodeGenerated(true);
-        setError('');
+        try {
+            // Initialize Qrious instance
+            const qr = new QRious({
+                value: generatedData,
+                size: 200,
+                level: 'H', // High error correction level
+            });
+
+            // Set QR Code as Base64
+            const qrCodeBase64 = qr.toDataURL();
+            setQrcodeData(qrCodeBase64); // Set the generated QR code Base64 data
+            setBarcode(generateBarcode());
+            setIsQRCodeGenerated(true);
+            setError('');
+        } catch (error) {
+            setError('Failed to generate QR Code with Qrious.');
+            console.error(error);
+        }
     };
 
-    // Convert QR Code to Base64
-    const getQRCodeImageBase64 = () => {
-        if (qrcodeRef.current) {
-            const canvas = qrcodeRef.current.querySelector('canvas');
-            if (canvas) {
-                return canvas.toDataURL(); // This will give you the image as a Base64 string
-            }
-        }
-        return '';
-    };
+
 
     // Save Product Data Handler
     const handleSave = async () => {
@@ -99,32 +103,30 @@ function AddQrcode({ showModal, handleCloseModal }) {
             setError('');
             setIsLoading(true);
 
-            // Get the Base64 representation of the QR code image
-            const qrCodeBase64 = getQRCodeImageBase64();
+            const sku = generateSKU(productName, size, color, wattage, voltage);
+            const barcode = generateBarcode();
 
-            // Save the product details to Firestore
+            if (!qrcodeData) {
+                setError('QR Code data is missing.');
+                return;
+            }
+
             const productData = {
-                barcode: barcodeValue,
+                barcode,
                 productName,
                 size,
                 color,
                 wattage,
                 voltage,
                 quantity,
-                sku: generateSKU(productName, size, color, wattage, voltage),
+                sku,
                 price,
                 category,
             };
 
-            console.log("Product data ready to be saved:", productData);
+            // Save product data along with QR Code to the database
+            await saveProductToDatabase(productData, qrcodeData);
 
-            // Save the product to the database
-            await saveProductToDatabase(productData);
-
-            // Save the QR code to Firestore
-            await saveQRCodeToFirestore(barcodeValue, qrCodeBase64);
-
-            // Close modal after saving
             handleCloseModal();
         } catch (error) {
             setError(`Error saving product: ${error.message}`);
@@ -132,6 +134,7 @@ function AddQrcode({ showModal, handleCloseModal }) {
             setIsLoading(false);
         }
     };
+
 
 
     return (
@@ -213,16 +216,21 @@ function AddQrcode({ showModal, handleCloseModal }) {
 
                             {isQRCodeGenerated && (
                                 <div className="mt-3">
-                                    <QRCode value={qrcodeData} size={200} />
-                                    <div ref={qrcodeRef} style={{ display: 'none' }}>
-                                        <QRCode value={qrcodeData} size={200} />
-                                    </div>
+                                    <img src={qrcodeData} alt="QR Code" style={{ width: '200px', height: '200px' }} />
                                 </div>
                             )}
 
-                            <Button variant="success" onClick={handleSave} className="mt-3">
+
+
+                            <Button
+                                variant="success"
+                                onClick={handleSave}
+                                className="mt-3"
+                                disabled={!isQRCodeGenerated} // Disable Save until QR code is generated
+                            >
                                 Save Product
                             </Button>
+
                         </Col>
                     </Row>
                 </Container>
