@@ -455,9 +455,13 @@ export const fetchAllTaxes = async () => {
 // Function to save product details to Realtime Database
 export const saveProductToDatabase = async (productData) => {
     try {
-        const dbRef = ref(getDatabase());
-        const productRef = ref(dbRef, `products/${productData.barcode}`);
+        // Get a reference to the Realtime Database
+        const db = getDatabase();
 
+        // Create a reference for the product based on the product's barcode
+        const productRef = ref(db, `products/${productData.barcode}`);
+
+        // Set the product data in the database
         await set(productRef, {
             productName: productData.productName,
             sku: productData.sku,
