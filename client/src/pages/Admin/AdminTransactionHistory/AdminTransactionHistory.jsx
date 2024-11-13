@@ -8,6 +8,7 @@ import { FaEye, FaDownload, FaTrash } from "react-icons/fa"; // Importing icons
 function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false); // State for delete confirmation modal
     const [selectedOrder, setSelectedOrder] = useState(null);
     const db = getDatabase();
     const qrRef = useRef(null);
@@ -65,6 +66,7 @@ function AdminTransactionHistory() {
     const handleDeleteOrder = (id) => {
         const orderRef = ref(db, `TransactionHistory/${id}`);
         remove(orderRef);
+        setShowDeleteModal(false); // Close the delete confirmation modal after deleting
     };
 
     const handleShowModal = (order) => {
@@ -75,6 +77,23 @@ function AdminTransactionHistory() {
     const handleCloseModal = () => {
         setShowModal(false);
         setSelectedOrder(null);
+    };
+
+    // Show the delete confirmation modal
+    const handleShowDeleteModal = (order) => {
+        setSelectedOrder(order);
+        setShowDeleteModal(true);
+    };
+
+    // Close the delete confirmation modal without deleting
+    const handleCloseDeleteModal = () => {
+        setShowDeleteModal(false);
+        setSelectedOrder(null);
+    };
+
+    // Get a list of product names for the warning message
+    const getProductNames = (order) => {
+        return order.items.map(item => item.productName).join(", ");
     };
 
     return (
@@ -121,7 +140,7 @@ function AdminTransactionHistory() {
                                         <Button
                                             variant="outline-danger"
                                             size="sm"
-                                            onClick={() => handleDeleteOrder(order.id)}
+                                            onClick={() => handleShowDeleteModal(order)}
                                         >
                                             <FaTrash />
                                         </Button>
@@ -216,6 +235,28 @@ function AdminTransactionHistory() {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Delete Confirmation Modal */}
+            <Modal
+                show={showDeleteModal}
+                onHide={handleCloseDeleteModal}
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete Order</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p className="text-danger">
+                        Warning: Deleting the following products is permanent and cannot be undone:
+                    </p>
+                    <p><strong>{selectedOrder ? getProductNames(selectedOrder) : ''}</strong></p>
+                    <p>Are you sure you want to delete this order?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseDeleteModal}>Cancel</Button>
+                    <Button variant="danger" onClick={() => handleDeleteOrder(selectedOrder.id)}>Delete</Button>
                 </Modal.Footer>
             </Modal>
 
