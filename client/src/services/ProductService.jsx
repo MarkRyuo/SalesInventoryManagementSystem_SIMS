@@ -406,6 +406,8 @@ export const deleteSavedOrder = async (orderId) => {
         throw new Error(`Error deleting order: ${error.message}`);
     }
 };
+//! End of Reordering
+
 
 //* Start AddNewTax 
 export const addNewTax = async ({ taxName, taxValue }) => {
