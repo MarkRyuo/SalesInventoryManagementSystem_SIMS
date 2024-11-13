@@ -10,6 +10,7 @@
 ## Changelog
 
 ### v7.2.2-beta (Latest)
+- Set QrCode arrange
 
 ### v7.2.1-beta
 - Add Tax (Dropdown) 
