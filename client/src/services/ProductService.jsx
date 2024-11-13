@@ -479,19 +479,12 @@ export const saveProductToDatabase = async (productData) => {
 };
 
 // Function to save QR Code image to Firestore
-export const saveQRCodeToFirestore = async (barcode, qrCodeBase64) => {
-    try {
-        const firestoreRef = doc(firestore, 'qrCodes', barcode); // This will create the 'qrCodes' collection if it doesn't exist
 
-        await setDoc(firestoreRef, {
-            qrCodeBase64: qrCodeBase64, // Store the Base64 representation of the QR code
-        });
 
-        console.log("QR Code saved to Firestore with Barcode:", barcode);
-    } catch (error) {
-        console.error("Error saving QR Code to Firestore:", error);
-        throw new Error(error.message);
-    }
+// Save QR code data to Firestore
+export const saveQRCodeToFirestore = async (barcodeValue, qrCodeBase64) => {
+    const qrCodeRef = doc(firestore, 'qr_codes', barcodeValue); // Use barcode as the document ID
+    await setDoc(qrCodeRef, { qrCode: qrCodeBase64 });
 };
 
 

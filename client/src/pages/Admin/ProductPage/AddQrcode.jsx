@@ -102,7 +102,7 @@ function AddQrcode({ showModal, handleCloseModal }) {
             // Get the Base64 representation of the QR code image
             const qrCodeBase64 = getQRCodeImageBase64();
 
-            // Save the product details to Realtime Database
+            // Save the product details to Firestore
             const productData = {
                 barcode: barcodeValue,
                 productName,
@@ -118,20 +118,21 @@ function AddQrcode({ showModal, handleCloseModal }) {
 
             console.log("Product data ready to be saved:", productData);
 
-            // Call the service to save the product to the Realtime Database
+            // Save the product to the database
             await saveProductToDatabase(productData);
 
-            // Save the QR code image to Firestore, using barcodeValue or sku as the document ID
+            // Save the QR code to Firestore
             await saveQRCodeToFirestore(barcodeValue, qrCodeBase64);
 
-            // Navigate to Dashboard after saving
-            handleCloseModal();  // Close modal after saving
+            // Close modal after saving
+            handleCloseModal();
         } catch (error) {
             setError(`Error saving product: ${error.message}`);
         } finally {
             setIsLoading(false);
         }
     };
+
 
     return (
         <Modal show={showModal} onHide={handleCloseModal} size="lg">
