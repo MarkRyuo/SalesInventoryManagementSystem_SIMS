@@ -1,4 +1,7 @@
 import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
+import { doc, setDoc} from 'firebase/firestore'; // For Firestore
+import { firestore } from './firebase'; // Assuming you're importing firestore from your Firebase config
+
 
 //* Start of Product
 // Function to add a new product
@@ -449,6 +452,47 @@ export const fetchAllTaxes = async () => {
 
 //! End of AddNewTax
 
+// Function to save product details to Realtime Database
+export const saveProductToDatabase = async (productData) => {
+    try {
+        const dbRef = ref(getDatabase());
+        const productRef = ref(dbRef, `products/${productData.barcode}`);
+
+        await set(productRef, {
+            productName: productData.productName,
+            sku: productData.sku,
+            price: productData.price,
+            category: productData.category,
+            quantity: productData.quantity,
+            size: productData.size,
+            color: productData.color,
+            wattage: productData.wattage,
+            voltage: productData.voltage,
+            barcode: productData.barcode,
+        });
+
+        console.log("Product saved to Realtime Database:", productData);
+    } catch (error) {
+        console.error("Error saving product to Realtime Database:", error);
+        throw new Error(error.message);
+    }
+};
+
+// Function to save QR Code image to Firestore
+export const saveQRCodeToFirestore = async (barcode, qrCodeBase64) => {
+    try {
+        const firestoreRef = doc(firestore, 'qrCodes', barcode); // This will create the 'qrCodes' collection if it doesn't exist
+
+        await setDoc(firestoreRef, {
+            qrCodeBase64: qrCodeBase64, // Store the Base64 representation of the QR code
+        });
+
+        console.log("QR Code saved to Firestore with Barcode:", barcode);
+    } catch (error) {
+        console.error("Error saving QR Code to Firestore:", error);
+        throw new Error(error.message);
+    }
+};
 
 
 

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Modal } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
-import QRCode from 'react-qr-code'; // Import react-qr-code
-import { getCategories } from '../../../services/ProductService';
+import QRCode from 'react-qr-code';
+import { getCategories, saveProductToDatabase, saveQRCodeToFirestore } from '../../../services/ProductService'; // assuming you have a function to save QRCode to Firestore
 
 // eslint-disable-next-line react/prop-types
 function AddQrcode({ showModal, handleCloseModal }) {
@@ -102,6 +102,7 @@ function AddQrcode({ showModal, handleCloseModal }) {
             // Get the Base64 representation of the QR code image
             const qrCodeBase64 = getQRCodeImageBase64();
 
+            // Save the product details to Realtime Database
             const productData = {
                 barcode: barcodeValue,
                 productName,
@@ -113,15 +114,17 @@ function AddQrcode({ showModal, handleCloseModal }) {
                 sku: generateSKU(productName, size, color, wattage, voltage),
                 price,
                 category,
-                qrcodeData: qrCodeBase64, // Save QR code image as Base64 string
             };
 
-            console.log("Product data saved with QR code:", productData);
+            console.log("Product data ready to be saved:", productData);
 
-            // You can now save productData to your database, for example:
-            // await saveProductToDatabase(productData);
+            // Call the service to save the product to the Realtime Database
+            await saveProductToDatabase(productData);
 
-            navigate('/DashboardPage'); // Navigate to Dashboard after saving
+            // Save the QR code image to Firestore, using barcodeValue or sku as the document ID
+            await saveQRCodeToFirestore(barcodeValue, qrCodeBase64);
+
+            // Navigate to Dashboard after saving
             handleCloseModal();  // Close modal after saving
         } catch (error) {
             setError(`Error saving product: ${error.message}`);
@@ -190,24 +193,35 @@ function AddQrcode({ showModal, handleCloseModal }) {
 
                             <Form.Group controlId="price">
                                 <Form.Label>Price <span className="text-danger">*</span></Form.Label>
-                                <Form.Control type="number" value={price} min={0.01} step="0.01" onChange={(e) => setPrice(e.target.value)} required />
+                                <Form.Control type="number" value={price} min={0} onChange={(e) => setPrice(Number(e.target.value))} required />
                             </Form.Group>
 
                             <Form.Group controlId="category">
                                 <Form.Label>Category <span className="text-danger">*</span></Form.Label>
                                 <Form.Control as="select" value={category} onChange={(e) => setCategory(e.target.value)} required>
                                     <option value="">Select Category</option>
-                                    {categories.map((cat) => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
+                                    {categories.map((category, index) => (
+                                        <option key={index} value={category.name}>{category.name}</option>
+                                    ))}
                                 </Form.Control>
                             </Form.Group>
 
-                            <Button variant="primary" onClick={handleGenerateQRCode} block>Generate QR Code</Button>
+                            <Button variant="primary" onClick={handleGenerateQRCode} className="mt-3">
+                                Generate QR Code
+                            </Button>
+
                             {isQRCodeGenerated && (
-                                <div ref={qrcodeRef}>
-                                    <QRCode value={qrcodeData} size={150} className="mt-4" />
+                                <div className="mt-3">
+                                    <QRCode value={qrcodeData} size={200} />
+                                    <div ref={qrcodeRef} style={{ display: 'none' }}>
+                                        <QRCode value={qrcodeData} size={200} />
+                                    </div>
                                 </div>
                             )}
-                            <Button variant="success" onClick={handleSave} block className="mt-3">Save Product</Button>
+
+                            <Button variant="success" onClick={handleSave} className="mt-3">
+                                Save Product
+                            </Button>
                         </Col>
                     </Row>
                 </Container>
