@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove, child} from 'firebase/database';
 
 
 //* Start of Product
@@ -470,6 +470,33 @@ export const saveProductToDatabase = async (productData, qrCodeBase64) => {
         throw new Error(error.message);
     }
 };
+
+// Function to fetch products from Realtime Database
+export const fetchProductsWithQRCodes = async () => {
+    try {
+        const db = getDatabase();
+        const dbRef = ref(db);
+        const snapshot = await get(child(dbRef, `products`));
+
+        if (snapshot.exists()) {
+            const products = snapshot.val();
+            // Convert the products object to an array and filter those with QR codes
+            const productList = Object.keys(products).map((key) => ({
+                id: key,
+                ...products[key],
+            }));
+
+            return productList;
+        } else {
+            console.log("No products found in database.");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error fetching products from Realtime Database:", error);
+        throw new Error(error.message);
+    }
+};
+
 
 
 
