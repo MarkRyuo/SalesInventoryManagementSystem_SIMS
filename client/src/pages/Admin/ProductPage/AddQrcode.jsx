@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Modal } from 'react-bootstrap';
-import { useLocation,} from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
 import QRCode from 'react-qr-code';
 import { getCategories, saveProductToDatabase, saveQRCodeToFirestore } from '../../../services/ProductService'; // assuming you have a function to save QRCode to Firestore
 
