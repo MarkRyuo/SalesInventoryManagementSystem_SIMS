@@ -408,7 +408,6 @@ export const deleteSavedOrder = async (orderId) => {
 };
 //! End of Reordering
 
-
 //* Start AddNewTax 
 export const addNewTax = async ({ taxName, taxValue }) => {
     const db = getDatabase();
