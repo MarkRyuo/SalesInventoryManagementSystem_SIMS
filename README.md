@@ -181,7 +181,10 @@
     ```bash
     npm install axios
     ```
-
+9. **Install axios** 
+    ```bash
+    pm install qrcode.react
+    ```
 
 
 ### How to Run the Project
