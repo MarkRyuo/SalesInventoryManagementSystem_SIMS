@@ -472,6 +472,7 @@ export const saveProductToDatabase = async (productData, qrCodeBase64) => {
 };
 
 // Function to fetch products from Realtime Database
+
 export const fetchProductsWithQRCodes = async () => {
     try {
         const db = getDatabase();

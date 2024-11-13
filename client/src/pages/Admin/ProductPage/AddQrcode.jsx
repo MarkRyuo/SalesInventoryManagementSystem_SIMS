@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Modal } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import QRious from 'qrious';
@@ -25,8 +25,6 @@ function AddQrcode({ showModal, handleCloseModal }) {
     const [isQRCodeGenerated, setIsQRCodeGenerated] = useState(false);
 
     const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-
-    // Ref for QR Code component
 
     // SKU Generation Function
     const generateSKU = (productName, size, color, wattage, voltage) => {
@@ -90,8 +88,6 @@ function AddQrcode({ showModal, handleCloseModal }) {
         }
     };
 
-
-
     // Save Product Data Handler
     const handleSave = async () => {
         if (!productName || !category || !quantity || price <= 0) {
@@ -134,8 +130,6 @@ function AddQrcode({ showModal, handleCloseModal }) {
             setIsLoading(false);
         }
     };
-
-
 
     return (
         <Modal show={showModal} onHide={handleCloseModal} size="lg">
@@ -220,8 +214,6 @@ function AddQrcode({ showModal, handleCloseModal }) {
                                 </div>
                             )}
 
-
-
                             <Button
                                 variant="success"
                                 onClick={handleSave}
@@ -230,7 +222,6 @@ function AddQrcode({ showModal, handleCloseModal }) {
                             >
                                 Save Product
                             </Button>
-
                         </Col>
                     </Row>
                 </Container>
@@ -239,4 +230,4 @@ function AddQrcode({ showModal, handleCloseModal }) {
     );
 }
 
-export default AddQrcode;
+export default AddQrcode
