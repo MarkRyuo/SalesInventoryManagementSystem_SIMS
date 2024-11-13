@@ -345,7 +345,6 @@ export const fetchAllDiscounts = async () => {
     }
 };
 
-
 // Function to fetch low stock or out of stock products for reordering
 export const fetchReorderingProducts = async () => {
     const products = await getAllProducts();
@@ -362,7 +361,6 @@ export const fetchReorderingProducts = async () => {
 
     return reorderingProducts;
 };
-
 
 // Function to fetch saved orders from Firebase
 export const fetchSavedOrders = async () => {
@@ -405,6 +403,7 @@ export const deleteSavedOrder = async (orderId) => {
     }
 };
 
+//* Start AddNewTax 
 export const addNewTax = async ({ taxName, taxValue }) => {
     const db = getDatabase();
     const taxId = Date.now(); // Use timestamp as unique ID
