@@ -1,11 +1,26 @@
-import { useState } from "react";
-import { Button, Form, Modal, InputGroup } from "react-bootstrap";
-import { addNewDiscount } from "../../../services/ProductService"; // Import the new function
+import { useState, useEffect } from "react";
+import { Button, Form, Modal, InputGroup, ListGroup, Card } from "react-bootstrap";
+import { addNewDiscount, fetchAllDiscounts } from "../../../services/ProductService"; // Import the necessary function
 
 function SetDiscounts() {
     const [showModal, setShowModal] = useState(false);
     const [discountName, setDiscountName] = useState("");
     const [discountValue, setDiscountValue] = useState("");
+    const [discounts, setDiscounts] = useState([]); // State to hold the list of discounts
+
+    useEffect(() => {
+        // Fetch the discounts when the component mounts
+        const fetchDiscounts = async () => {
+            try {
+                const fetchedDiscounts = await fetchAllDiscounts(); // Fetch the discounts
+                setDiscounts(fetchedDiscounts);
+            } catch (error) {
+                console.error("Error fetching discounts:", error.message);
+            }
+        };
+
+        fetchDiscounts();
+    }, []); // Empty dependency array to run this effect once on mount
 
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => {
@@ -28,6 +43,11 @@ function SetDiscounts() {
             });
 
             console.log("Discount created successfully");
+
+            // After successfully adding a new discount, refetch the discount list
+            const fetchedDiscounts = await fetchAllDiscounts();
+            setDiscounts(fetchedDiscounts);
+
             handleCloseModal();
         } catch (error) {
             alert(`Error creating discount: ${error.message}`);
@@ -71,6 +91,29 @@ function SetDiscounts() {
                             </InputGroup>
                         </Form.Group>
                     </Form>
+
+                    {/* Display the list of added discounts */}
+                    <div className="mt-4">
+                        <h5>Existing Discounts</h5>
+                        {discounts.length > 0 ? (
+                            <ListGroup>
+                                {discounts.map((discount, index) => (
+                                    <ListGroup.Item key={index}>
+                                        <Card>
+                                            <Card.Body>
+                                                <Card.Title>{discount.name}</Card.Title>
+                                                <Card.Text>
+                                                    <strong>{discount.value}%</strong>
+                                                </Card.Text>
+                                            </Card.Body>
+                                        </Card>
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
+                        ) : (
+                            <p>No discounts available.</p>
+                        )}
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>
