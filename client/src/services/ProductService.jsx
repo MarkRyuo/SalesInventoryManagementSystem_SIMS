@@ -1,6 +1,4 @@
 import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
-import { doc, setDoc, getDoc} from 'firebase/firestore'; // For Firestore
-import { firestore } from './firebase'; // Assuming you're importing firestore from your Firebase config
 
 
 //* Start of Product
