@@ -314,6 +314,7 @@ export const updateProductInDatabase = async (updatedProduct) => {
 
 //! End of Order
 
+//* Start AddNewDiscount
 export const addNewDiscount = async ({ discountName, discountValue }) => {
     const db = getDatabase();
     const discountId = Date.now(); // Gamitin ang timestamp bilang unique ID
@@ -344,6 +345,8 @@ export const fetchAllDiscounts = async () => {
         throw new Error(`Error fetching discounts: ${error.message}`);
     }
 };
+
+//! End of AddNewDiscount
 
 // Function to fetch low stock or out of stock products for reordering
 export const fetchReorderingProducts = async () => {
