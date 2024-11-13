@@ -42,6 +42,12 @@ function ProductNavbarTabs({ setActiveTab }) {
                     <p className='m-0 p-0'>Re Ordering</p>
                 </Nav.Link>
             </Nav.Item>
+            <Nav.Item className={ProductPagescss.mainTabs}>
+                <Nav.Link eventKey="SetQrcode">
+                    <PiHandArrowUpBold size={20} />
+                    <p className='m-0 p-0'>Set Qrcode</p>
+                </Nav.Link>
+            </Nav.Item>
         </Nav>
     );
 }
