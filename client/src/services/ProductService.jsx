@@ -348,6 +348,7 @@ export const fetchAllDiscounts = async () => {
 
 //! End of AddNewDiscount
 
+//* Start ReOrdering
 // Function to fetch low stock or out of stock products for reordering
 export const fetchReorderingProducts = async () => {
     const products = await getAllProducts();
