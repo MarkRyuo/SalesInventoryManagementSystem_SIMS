@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import QRCode from 'react-qr-code'; // Import react-qr-code
 import { getCategories } from '../../../services/ProductService';
 
+// eslint-disable-next-line react/prop-types
 function SetQrcodeModal({ showModal, handleCloseModal }) {
     const location = useLocation();
     const navigate = useNavigate();
