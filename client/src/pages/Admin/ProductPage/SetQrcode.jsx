@@ -1,11 +1,10 @@
-import React from 'react'
 
 function SetQrcode() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+
+        </div>
+    )
 }
 
 export default SetQrcode
