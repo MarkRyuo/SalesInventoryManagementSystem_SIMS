@@ -38,7 +38,6 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
     }
 };
 
-
 // Function to update the product quantity with separate tracking for additions and deductions
 export const updateProductQuantity = async (barcode, additionalQuantity) => {
     const db = getDatabase();
