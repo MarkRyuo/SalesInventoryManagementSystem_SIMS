@@ -480,11 +480,14 @@ export const fetchProductsWithQRCodes = async () => {
 
         if (snapshot.exists()) {
             const products = snapshot.val();
-            // Convert the products object to an array and filter those with QR codes
-            const productList = Object.keys(products).map((key) => ({
-                id: key,
-                ...products[key],
-            }));
+
+            // Convert the products object to an array and filter those with `qrCodeData`
+            const productList = Object.keys(products)
+                .map((key) => ({
+                    id: key,
+                    ...products[key],
+                }))
+                .filter((product) => product.qrCodeData && product.qrCodeData !== ''); // Filter only products with QR code data
 
             return productList;
         } else {
@@ -496,6 +499,7 @@ export const fetchProductsWithQRCodes = async () => {
         throw new Error(error.message);
     }
 };
+
 
 
 
