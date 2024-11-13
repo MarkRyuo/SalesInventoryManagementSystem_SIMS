@@ -1,56 +1,66 @@
-/* eslint-disable react/prop-types */
-import { useState } from 'react';
-import { Container, Button, Row, Col, Alert, Spinner, Modal } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
+import { addQrcodeToDatabase } from '../../../services/ProductService';
 import QRious from 'qrious';
 import { useLocation } from 'react-router-dom';
-import { saveQrcodeToDatabase } from '../../../services/ProductService';
 
 function AddQrcode({ showModal, handleCloseModal }) {
     const location = useLocation();
-    const barcode = location.state?.barcode || '';
+    const barcodeValue = location.state?.barcode || '';  // Retrieve barcode from location state
 
-    const [qrcodeData, setQrcodeData] = useState('');
-    const [isQRCodeGenerated, setIsQRCodeGenerated] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [qrcodeData, setQrcodeData] = useState('');
+    const [isQRCodeGenerated, setIsQRCodeGenerated] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(false);  // New state to handle QR Code generation loading
 
-    // QR Code Generation
+    useEffect(() => {
+        if (!barcodeValue) {
+            setError('Barcode is missing. Please ensure the product has a barcode.');
+        } else {
+            setError(''); // Reset error if barcode is available
+        }
+    }, [barcodeValue]);
+
+    // Handle QR Code generation using QRious
     const handleGenerateQRCode = () => {
-        if (!barcode) {
-            setError('Barcode is missing.');
+        if (!barcodeValue) {
+            setError('Barcode is missing. Please ensure the product has a barcode.');
             return;
         }
-
         try {
-            // Initialize Qrious instance
+            setError('');  // Clear any previous errors
+            setIsGenerating(true);  // Set loading state for QR code generation
             const qr = new QRious({
-                value: barcode,
+                value: barcodeValue,
                 size: 200,
-                level: 'H', // High error correction level
+                level: 'H',
             });
-
-            // Set QR Code as Base64
             const qrCodeBase64 = qr.toDataURL();
-            setQrcodeData(qrCodeBase64); // Set the generated QR code Base64 data
+            setQrcodeData(qrCodeBase64);
             setIsQRCodeGenerated(true);
-            setError('');
         } catch (error) {
             setError('Failed to generate QR Code.');
             console.error(error);
+        } finally {
+            setIsGenerating(false);  // Reset loading state after QR code generation
         }
     };
 
     // Save QR Code to Database
-    const handleSave = async () => {
-        if (!qrcodeData || !barcode) {
-            setError('QR Code data or barcode is missing.');
-            return;
-        }
-
+    const handleAdd = async () => {
         try {
+            setError('');
             setIsLoading(true);
-            await saveQrcodeToDatabase(barcode, qrcodeData);
-            handleCloseModal();
+
+            if (!qrcodeData) {
+                setError('QR Code data is missing.');
+                return;
+            }
+            // Add QR Code to the product's record
+            await addQrcodeToDatabase(barcodeValue, qrcodeData);
+
+            handleCloseModal();  // Close the modal after saving
         } catch (error) {
             setError(`Error saving QR Code: ${error.message}`);
         } finally {
@@ -59,35 +69,43 @@ function AddQrcode({ showModal, handleCloseModal }) {
     };
 
     return (
-        <Modal show={showModal} onHide={handleCloseModal} size="md">
+        <Modal show={showModal} onHide={handleCloseModal} size="lg">
             <Modal.Header closeButton>
-                <Modal.Title>Generate QR Code</Modal.Title>
+                <Modal.Title>Set QR Code for Product</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Container fluid="md">
-                    <Row className="justify-content-center">
-                        <Col sm={12} className="text-center">
-                            {error && <Alert variant="danger">{error}</Alert>}
-                            {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
-
-                            <Button variant="primary" onClick={handleGenerateQRCode} className="mt-3">
-                                Generate QR Code
+                <Container>
+                    <Row>
+                        <Col lg={8} sm={12} className="d-flex flex-column align-items-center">
+                            <Button
+                                variant="primary"
+                                onClick={handleGenerateQRCode}
+                                className="mt-3"
+                                disabled={isLoading || isGenerating || !barcodeValue}
+                            >
+                                {isGenerating ? 'Generating...' : 'Generate QR Code'}
                             </Button>
 
                             {isQRCodeGenerated && (
                                 <div className="mt-3">
-                                    <img src={qrcodeData} alt="QR Code" style={{ width: '200px', height: '200px' }} />
+                                    <img
+                                        src={qrcodeData}
+                                        alt="Generated QR Code"
+                                        style={{ width: '200px', height: '200px' }}
+                                    />
                                 </div>
                             )}
 
                             <Button
                                 variant="success"
-                                onClick={handleSave}
+                                onClick={handleAdd}
                                 className="mt-3"
-                                disabled={!isQRCodeGenerated}
+                                disabled={!isQRCodeGenerated || isLoading}
                             >
-                                Save QR Code
+                                {isLoading ? 'Saving...' : 'Save QR Code'}
                             </Button>
+
+                            {error && <p className="text-danger mt-3">{error}</p>}
                         </Col>
                     </Row>
                 </Container>

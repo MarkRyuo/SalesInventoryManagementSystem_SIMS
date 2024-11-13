@@ -450,11 +450,11 @@ export const fetchAllTaxes = async () => {
 
 //! End of AddNewTax
 
-// Function to save product details to Realtime Database
+// Function to save qrcode details to Realtime Database
 export const saveQrcodeToDatabase = async (barcode, qrcodeBase64) => {
     try {
         const db = getDatabase();
-        const qrCodeRef = ref(db, `qrcodes/${barcode}`);
+        const qrCodeRef = ref(db, `qrcodes/${barcode}`); // Store the QR code data under its barcode
         await set(qrCodeRef, {
             qrcodeBase64,
             createdAt: Date.now(),
@@ -464,7 +464,45 @@ export const saveQrcodeToDatabase = async (barcode, qrcodeBase64) => {
         console.error('Error saving QR Code data:', error);
         throw new Error('Failed to save QR Code data.');
     }
-}
+};
+
+
+export const addQrcodeToDatabase = async (barcode, qrcodeBase64) => {
+    try {
+        const db = getDatabase();
+        const qrCodeRef = ref(db, `qrcodes/${barcode}`); // Store the QR code data under its barcode
+        await set(qrCodeRef, {
+            qrcodeBase64,
+            createdAt: Date.now(),
+        });
+        console.log('QR Code data Add successfully.');
+    } catch (error) {
+        console.error('Error Adding QR Code data:', error);
+        throw new Error('Failed to Add QR Code data.');
+    }
+};
+
+// Function para kunin ang QR Codes mula sa database
+export const fetchQRCodesFromDatabase = async () => {
+    try {
+        const db = getDatabase();
+        const qrCodesRef = ref(db, 'qrcodes');
+        const snapshot = await get(qrCodesRef);
+
+        if (snapshot.exists()) {
+            const qrCodesData = snapshot.val();
+            // Convert to array format
+            return Object.entries(qrCodesData).map(([barcode, data]) => ({
+                barcode,
+                qrcodeBase64: data.qrcodeBase64,
+            }));
+        }
+        return [];
+    } catch (error) {
+        console.error('Error fetching QR Codes:', error);
+        throw new Error('Failed to fetch QR Codes.');
+    }
+};
 
 
 
