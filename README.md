@@ -9,6 +9,9 @@
 
 ## Changelog
 
+### v7.2.1-beta (Latest)
+- Add Tax (Dropdown) 
+
 ### v7.2.0 (Latest)
 - Add Generated Qr code 
 - Add Page Auto Ordering 
@@ -178,7 +181,10 @@
     ```bash
     npm install axios
     ```
-
+9. **Install qrious** 
+    ```bash
+    npm install qrious
+    ```
 
 
 ### How to Run the Project

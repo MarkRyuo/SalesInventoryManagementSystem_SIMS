@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getAllProducts, getCategories } from '../../../services/ProductService'; // Add getCategories import
+import { getAllProducts, getCategories } from '../../../services/ProductService';
 import { Container, ListGroup, Card, Spinner, Button, Form, Modal, Row, Col } from 'react-bootstrap';
-import { updateProductInDatabase } from '../../../services/ProductService'; // Function to update product in Firebase
+import { updateProductInDatabase, deleteProduct } from '../../../services/ProductService';
 import ProductEditorscss from './ProductEditor.module.scss';
 import { LuFileEdit } from "react-icons/lu";
 
@@ -11,6 +11,8 @@ function ProductEditor() {
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [editProduct, setEditProduct] = useState(null);
+    const [showSaveConfirmation, setShowSaveConfirmation] = useState(false); // Confirmation for saving
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); // Confirmation for deleting
 
     useEffect(() => {
         const fetchProductsAndCategories = async () => {
@@ -43,8 +45,12 @@ function ProductEditor() {
         setEditProduct((prev) => ({ ...prev, [key]: value }));
     };
 
-    const handleTaxChange = (checked) => {
-        setEditProduct((prev) => ({ ...prev, tax: checked ? prev.tax : 0 }));
+    const confirmSaveChanges = () => {
+        setShowSaveConfirmation(true);
+    };
+
+    const confirmDeleteProduct = () => {
+        setShowDeleteConfirmation(true);
     };
 
     const saveChanges = async () => {
@@ -54,28 +60,41 @@ function ProductEditor() {
                 prev.map((product) => (product.barcode === editProduct.barcode ? editProduct : product))
             );
             await updateProductInDatabase(editProduct);
+            setShowSaveConfirmation(false);
             closeModal();
         } catch (error) {
             console.error('Error saving changes:', error.message);
         }
     };
 
+    const handleDeleteProduct = async () => {
+        try {
+            if (editProduct) {
+                await deleteProduct(editProduct.barcode);
+                setProducts((prev) => prev.filter((product) => product.barcode !== editProduct.barcode));
+                setShowDeleteConfirmation(false);
+                closeModal();
+            }
+        } catch (error) {
+            console.error('Error deleting product:', error.message);
+        }
+    };
+
     const includedFields = [
         'productName',
         'price',
-        'tax',
         'category',
         'quantity',
         'color',
         'size',
         'wattage',
         'voltage',
-        'instockthreshold', // Changed to instockthreshold instead of stockNumberLevel
+        'instockthreshold',
     ];
 
     const sortedProducts = products.sort((a, b) => {
-        const aIsUnset = a.tax === 0 || !a.instockthreshold;
-        const bIsUnset = b.tax === 0 || !b.instockthreshold;
+        const aIsUnset = !a.instockthreshold;
+        const bIsUnset = !b.instockthreshold;
         if (aIsUnset && !bIsUnset) return -1;
         if (!aIsUnset && bIsUnset) return 1;
         return 0;
@@ -99,12 +118,6 @@ function ProductEditor() {
                                             <Card.Text className={ProductEditorscss.cardText}>
                                                 <div>
                                                     <p className='m-0 p-0'>Price: <span>₱{product.price.toFixed(2)}</span></p>
-                                                    <p className='m-0 p-0'>
-                                                        Tax:
-                                                        <span style={{ color: product.tax === 0 ? 'red' : 'inherit' }}>
-                                                            {product.tax === 0 ? 'Not Set' : `${product.tax}%`}
-                                                        </span>
-                                                    </p>
                                                     <p className='m-0 p-0'>SKU: <span>{product.sku}</span></p>
                                                     <p className='m-0 p-0'>Barcode: <span>{product.barcode}</span></p>
                                                     <p className='m-0 p-0'>
@@ -120,7 +133,6 @@ function ProductEditor() {
                                                     </Button>
                                                 </div>
                                             </Card.Text>
-
                                         </Card.Body>
                                     </Card>
                                 </ListGroup.Item>
@@ -137,8 +149,8 @@ function ProductEditor() {
                 show={showModal}
                 onHide={closeModal}
                 centered
-                backdrop="static" // Makes the backdrop static, optional
-                size="lg" // Larger modal size for better form display
+                backdrop="static"
+                size="lg"
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
@@ -176,44 +188,24 @@ function ProductEditor() {
                                                             </option>
                                                         ))}
                                                     </Form.Control>
-                                                ) :
-                                                    key === 'instockthreshold' ? (
-                                                        <Form.Control
-                                                            type="number"
-                                                            value={editProduct[key]}
-                                                            onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
-                                                            placeholder="Enter stock threshold"
-                                                            style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
-                                                        />
-                                                    ) :
-                                                        key === 'stockNumberLevel' ? (
-                                                            <Form.Control
-                                                                type="number"
-                                                                value={editProduct[key]}
-                                                                onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
-                                                                placeholder="Enter current stock level"
-                                                                style={{ appearance: 'none', MozAppearance: 'textfield' }} // Removes spinner
-                                                            />
-                                                        ) : (
-                                                            <Form.Control
-                                                                type="text"
-                                                                value={editProduct[key]}
-                                                                onChange={(e) => handleModalInputChange(key, e.target.value)}
-                                                            />
-                                                        )}
+                                                ) : key === 'instockthreshold' ? (
+                                                    <Form.Control
+                                                        type="number"
+                                                        value={editProduct[key]}
+                                                        onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
+                                                        placeholder="Enter stock threshold"
+                                                        style={{ appearance: 'none', MozAppearance: 'textfield' }}
+                                                    />
+                                                ) : (
+                                                    <Form.Control
+                                                        type="text"
+                                                        value={editProduct[key]}
+                                                        onChange={(e) => handleModalInputChange(key, e.target.value)}
+                                                    />
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     ))}
-                                    <Col xs={12} md={6} className="mb-3">
-                                        <Form.Group controlId="formTax">
-                                            <Form.Check
-                                                type="checkbox"
-                                                label="Tax Applied"
-                                                checked={editProduct.tax !== 0}
-                                                onChange={(e) => handleTaxChange(e.target.checked)}
-                                            />
-                                        </Form.Group>
-                                    </Col>
                                 </Row>
                             </Container>
                         </Form>
@@ -222,7 +214,44 @@ function ProductEditor() {
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={closeModal}>Cancel</Button>
-                    <Button variant="primary" onClick={saveChanges}>Save Changes</Button>
+                    <Button variant="danger" onClick={confirmDeleteProduct}>Delete</Button>
+                    <Button variant="primary" onClick={confirmSaveChanges}>Save Changes</Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Save Confirmation Modal */}
+            <Modal
+                show={showSaveConfirmation}
+                onHide={() => setShowSaveConfirmation(false)}
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Save</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to save the changes to this product?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowSaveConfirmation(false)}>Cancel</Button>
+                    <Button variant="primary" onClick={saveChanges}>Yes, Save</Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Delete Confirmation Modal */}
+            <Modal
+                show={showDeleteConfirmation}
+                onHide={() => setShowDeleteConfirmation(false)}
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Deletion</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete this product?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDeleteConfirmation(false)}>Cancel</Button>
+                    <Button variant="danger" onClick={handleDeleteProduct}>Yes, Delete</Button>
                 </Modal.Footer>
             </Modal>
         </Container>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService";
 import SetCategory from "../../../pages/Admin/ProductPage/SetCategory";
 import SetDiscounts from "../../../pages/Admin/ProductPage/SetDiscounts";
+import SetTax from "../../../pages/Admin/ProductPage/SetTax";
 
 function ProductChart() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -103,6 +104,9 @@ function ProductChart() {
                     </div>
                     <div>
                         {/* Create Barcode */}
+                    </div>
+                    <div>
+                        <SetTax />
                     </div>
                     <div>
                         {/* Discount */}

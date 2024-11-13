@@ -12,6 +12,7 @@ import { PiHandArrowUpBold } from "react-icons/pi";
 
 import ProductPagescss from './ProductPage.module.scss' ;
 import ReOrdering from './ReOrdering';
+import SetQrcode from './SetQrcode';
 
 
 // eslint-disable-next-line react/prop-types
@@ -40,6 +41,12 @@ function ProductNavbarTabs({ setActiveTab }) {
                 <Nav.Link eventKey="/ReOrdering">
                     <PiHandArrowUpBold size={20} />
                     <p className='m-0 p-0'>Re Ordering</p>
+                </Nav.Link>
+            </Nav.Item>
+            <Nav.Item className={ProductPagescss.mainTabs}>
+                <Nav.Link eventKey="/SetQrcode">
+                    <PiHandArrowUpBold size={20} />
+                    <p className='m-0 p-0'>Set Qrcode</p>
                 </Nav.Link>
             </Nav.Item>
         </Nav>
@@ -72,6 +79,11 @@ export const ProductPage = () => {
                     {activeTab === '/ReOrdering' && (
                         <div className="Unknown">
                             <ReOrdering />
+                        </div>
+                    )}
+                    {activeTab === '/SetQrcode' && (
+                        <div className="Unknown">
+                            <SetQrcode />
                         </div>
                     )}
                 </div>

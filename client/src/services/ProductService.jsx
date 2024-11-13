@@ -1,7 +1,9 @@
-import { getDatabase, ref, set, get, update, remove } from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove, child} from 'firebase/database';
 
+
+//* Start of Product
 // Function to add a new product
-export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, tax, category}) => {
+export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, category}) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
 
@@ -26,7 +28,7 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
             preserveQuantityHistory: true,
             sku: sku,
             price: price,
-            tax: tax, // Store tax as percentage
+            // tax: tax, // Store tax as percentage
             category: category,
             dateAdded: formattedToday,
             lastUpdated: formattedToday,
@@ -36,8 +38,6 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
         throw new Error(`Error adding product: ${error.message}`);
     }
 };
-
-
 
 // Function to update the product quantity with separate tracking for additions and deductions
 export const updateProductQuantity = async (barcode, additionalQuantity) => {
@@ -129,8 +129,6 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
     }
 };
 
-
-
 // Function to fetch a product by barcode
 export const fetchProductByBarcode = async (barcode) => {
     const db = getDatabase();
@@ -182,9 +180,11 @@ export const getAllProducts = async () => {
     }
 };
 
+//! End of Product
 
+//* Start Category  
 
-// Function to add a new category
+//? Function to add a new category
 export const addCategory = async (categoryName) => {
     const db = getDatabase();
     const categoryRef = ref(db, 'categories/' + categoryName); // Save category by name
@@ -196,9 +196,7 @@ export const addCategory = async (categoryName) => {
     }
 };
 
-
-// Function to retrieve all categories
-// Function to retrieve all categories
+//? Function to retrieve all categories
 export const getCategories = async () => {
     const db = getDatabase();
     const categoriesRef = ref(db, 'categories');
@@ -216,9 +214,35 @@ export const getCategories = async () => {
         throw new Error(`Error retrieving categories: ${error.message}`);
     }
 };
+//? Function to delete a category
+export const deleteCategory = async (categoryName) => {
+        const db = getDatabase();
+        const categoryRef = ref(db, 'categories/' + categoryName);
 
+        try {
+            await remove(categoryRef);
+            console.log(`Category ${categoryName} deleted successfully`);
+        } catch (error) {
+            throw new Error(`Error deleting category: ${error.message}`);
+        }
+};
 
-// Function to update existing products to include preserveQuantityHistory
+export const updateCategory = async (categoryName, newCategoryData) => {
+        const db = getDatabase();
+        const categoryRef = ref(db, 'categories/' + categoryName);
+
+        try {
+            await update(categoryRef, newCategoryData);
+            console.log(`Category ${categoryName} updated successfully`);
+        } catch (error) {
+            throw new Error(`Error updating category: ${error.message}`);
+        }
+};
+//! End of Category
+
+//* Start of PreserveQuantityHistoryForExistingProducts
+
+//? Function to update existing products to include preserveQuantityHistory
 export const updatePreserveQuantityHistoryForExistingProducts = async () => {
     const db = getDatabase();
     const productsRef = ref(db, 'products');
@@ -244,6 +268,9 @@ export const updatePreserveQuantityHistoryForExistingProducts = async () => {
     }
 };
 
+//! End of PreserveQuantityHistoryForExistingProducts
+
+//* Start of Order
 // Function to save an order to Firebase
 export const saveOrderToFirebase = async (orderDetails) => {
     const db = getDatabase();
@@ -272,7 +299,6 @@ export const fetchOrderHistoryFromFirebase = async () => {
     }
 };
 
-
 // Function to update the product in Firebase
 export const updateProductInDatabase = async (updatedProduct) => {
     const db = getDatabase();
@@ -286,31 +312,9 @@ export const updateProductInDatabase = async (updatedProduct) => {
     }
 };
 
-// Function to delete a category
-export const deleteCategory = async (categoryName) => {
-    const db = getDatabase();
-    const categoryRef = ref(db, 'categories/' + categoryName);
+//! End of Order
 
-    try {
-        await remove(categoryRef);
-        console.log(`Category ${categoryName} deleted successfully`);
-    } catch (error) {
-        throw new Error(`Error deleting category: ${error.message}`);
-    }
-};
-
-export const updateCategory = async (categoryName, newCategoryData) => {
-    const db = getDatabase();
-    const categoryRef = ref(db, 'categories/' + categoryName);
-
-    try {
-        await update(categoryRef, newCategoryData);
-        console.log(`Category ${categoryName} updated successfully`);
-    } catch (error) {
-        throw new Error(`Error updating category: ${error.message}`);
-    }
-};
-
+//* Start AddNewDiscount
 export const addNewDiscount = async ({ discountName, discountValue }) => {
     const db = getDatabase();
     const discountId = Date.now(); // Gamitin ang timestamp bilang unique ID
@@ -342,7 +346,9 @@ export const fetchAllDiscounts = async () => {
     }
 };
 
+//! End of AddNewDiscount
 
+//* Start ReOrdering
 // Function to fetch low stock or out of stock products for reordering
 export const fetchReorderingProducts = async () => {
     const products = await getAllProducts();
@@ -359,7 +365,6 @@ export const fetchReorderingProducts = async () => {
 
     return reorderingProducts;
 };
-
 
 // Function to fetch saved orders from Firebase
 export const fetchSavedOrders = async () => {
@@ -401,6 +406,104 @@ export const deleteSavedOrder = async (orderId) => {
         throw new Error(`Error deleting order: ${error.message}`);
     }
 };
+//! End of Reordering
+
+//* Start AddNewTax 
+export const addNewTax = async ({ taxName, taxValue }) => {
+    const db = getDatabase();
+    const taxId = Date.now(); // Use timestamp as unique ID
+    const taxRef = ref(db, `taxes/${taxId}`);
+
+    try {
+        await set(taxRef, {
+            id: taxId,
+            name: taxName,
+            value: taxValue,
+            createdAt: new Date().toISOString(),
+        });
+        console.log("Tax added successfully");
+    } catch (error) {
+        throw new Error(`Error adding tax: ${error.message}`);
+    }
+};
+
+// You can also create other functions to fetch taxes, similar to how you fetch discounts
+export const fetchAllTaxes = async () => {
+    const db = getDatabase();
+    const taxesRef = ref(db, "taxes");
+
+    try {
+        const snapshot = await get(taxesRef);
+        if (snapshot.exists()) {
+            console.log("Fetched Taxes:", snapshot.val());
+            return Object.values(snapshot.val());
+        } else {
+            console.log("No taxes found");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error fetching taxes:", error);
+        throw new Error(`Error fetching taxes: ${error.message}`);
+    }
+};
+
+
+//! End of AddNewTax
+
+// Function to save product details to Realtime Database
+export const saveProductToDatabase = async (productData, qrCodeBase64) => {
+    try {
+        const db = getDatabase();
+        const productId = Date.now(); // Unique product ID using timestamp
+        const productRef = ref(db, `products/${productId}`);
+
+        // Save product data to database
+        await set(productRef, {
+            ...productData,
+            qrCodeData: qrCodeBase64,
+            createdAt: new Date().toISOString(),
+        });
+
+        console.log("Product saved to Realtime Database:", productData);
+    } catch (error) {
+        console.error("Error saving product to Realtime Database:", error);
+        throw new Error(error.message);
+    }
+};
+
+// Function to fetch products from Realtime Database
+
+export const fetchProductsWithQRCodes = async () => {
+    try {
+        const db = getDatabase();
+        const dbRef = ref(db);
+        const snapshot = await get(child(dbRef, `products`));
+
+        if (snapshot.exists()) {
+            const products = snapshot.val();
+
+            // Convert the products object to an array and filter those with `qrCodeData`
+            const productList = Object.keys(products)
+                .map((key) => ({
+                    id: key,
+                    ...products[key],
+                }))
+                .filter((product) => product.qrCodeData && product.qrCodeData !== ''); // Filter only products with QR code data
+
+            return productList;
+        } else {
+            console.log("No products found in database.");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error fetching products from Realtime Database:", error);
+        throw new Error(error.message);
+    }
+};
+
+
+
+
 
 
 
