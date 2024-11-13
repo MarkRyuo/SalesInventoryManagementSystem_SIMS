@@ -11,6 +11,8 @@ function ProductEditor() {
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [editProduct, setEditProduct] = useState(null);
+    const [showSaveConfirmation, setShowSaveConfirmation] = useState(false); // Confirmation for saving
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); // Confirmation for deleting
 
     useEffect(() => {
         const fetchProductsAndCategories = async () => {
@@ -43,6 +45,14 @@ function ProductEditor() {
         setEditProduct((prev) => ({ ...prev, [key]: value }));
     };
 
+    const confirmSaveChanges = () => {
+        setShowSaveConfirmation(true);
+    };
+
+    const confirmDeleteProduct = () => {
+        setShowDeleteConfirmation(true);
+    };
+
     const saveChanges = async () => {
         try {
             console.log('Saving changes for product:', editProduct);
@@ -50,6 +60,7 @@ function ProductEditor() {
                 prev.map((product) => (product.barcode === editProduct.barcode ? editProduct : product))
             );
             await updateProductInDatabase(editProduct);
+            setShowSaveConfirmation(false);
             closeModal();
         } catch (error) {
             console.error('Error saving changes:', error.message);
@@ -61,6 +72,7 @@ function ProductEditor() {
             if (editProduct) {
                 await deleteProduct(editProduct.barcode);
                 setProducts((prev) => prev.filter((product) => product.barcode !== editProduct.barcode));
+                setShowDeleteConfirmation(false);
                 closeModal();
             }
         } catch (error) {
@@ -202,8 +214,44 @@ function ProductEditor() {
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={closeModal}>Cancel</Button>
-                    <Button variant="danger" onClick={handleDeleteProduct}>Delete</Button>
-                    <Button variant="primary" onClick={saveChanges}>Save Changes</Button>
+                    <Button variant="danger" onClick={confirmDeleteProduct}>Delete</Button>
+                    <Button variant="primary" onClick={confirmSaveChanges}>Save Changes</Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Save Confirmation Modal */}
+            <Modal
+                show={showSaveConfirmation}
+                onHide={() => setShowSaveConfirmation(false)}
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Save</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to save the changes to this product?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowSaveConfirmation(false)}>Cancel</Button>
+                    <Button variant="primary" onClick={saveChanges}>Yes, Save</Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Delete Confirmation Modal */}
+            <Modal
+                show={showDeleteConfirmation}
+                onHide={() => setShowDeleteConfirmation(false)}
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Deletion</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete this product?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDeleteConfirmation(false)}>Cancel</Button>
+                    <Button variant="danger" onClick={handleDeleteProduct}>Yes, Delete</Button>
                 </Modal.Footer>
             </Modal>
         </Container>
