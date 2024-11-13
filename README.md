@@ -181,9 +181,9 @@
     ```bash
     npm install axios
     ```
-9. **Install axios** 
+9. **Install qrious** 
     ```bash
-    pm install qrcode.react
+    npm install qrious
     ```
 
 
