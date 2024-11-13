@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Form, Button, Row, Col, Alert, Spinner } from 'react-bootstrap';
-import QRious from 'qrious';
 import { useLocation, useNavigate } from 'react-router-dom';
+import QRCode from 'react-qr-code'; // Import react-qr-code
 import { getCategories } from '../../../services/ProductService';
 
 function SetQrcode() {
@@ -24,20 +24,25 @@ function SetQrcode() {
     const [barcodeValue, setBarcode] = useState(barcode);
     const [isQRCodeGenerated, setIsQRCodeGenerated] = useState(false);
 
-    const qrcodeCanvasRef = useRef(null);
-
     const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
+    // SKU Generation Function
     const generateSKU = (productName, size, color, wattage, voltage) => {
         const productCode = productName.slice(0, 3).toUpperCase().replace(/\s+/g, '');
         const sizeCode = size ? size.toUpperCase() : '';
         const colorCode = color ? color.toUpperCase() : '';
-        const wattageCode = wattage ? wattage + 'W' : '';
-        const voltageCode = voltage ? voltage + 'V' : '';
+        const wattageCode = wattage ? `${wattage}W` : '';
+        const voltageCode = voltage ? `${voltage}V` : '';
         const uniqueID = Date.now().toString().slice(-4);
         return `${productCode}-${sizeCode}-${colorCode}-${wattageCode}-${voltageCode}-${uniqueID}`;
     };
 
+    // Barcode Generation Function (different from SKU logic)
+    const generateBarcode = () => {
+        return `BAR-${Date.now()}`;
+    };
+
+    // Fetch Categories
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -47,41 +52,40 @@ function SetQrcode() {
                 setError(`Error fetching categories: ${error.message}`);
             }
         };
-
         fetchCategories();
     }, []);
 
-    useEffect(() => {
-        if (isQRCodeGenerated && productName && size && color && quantity && price && category) {
-            const generatedData = generateSKU(productName, size, color, wattage, voltage);
-            setQrcodeData(generatedData);
-            setBarcode(generatedData);
-
-            if (qrcodeCanvasRef.current) {
-                console.log("Rendering QR code...");
-                const qr = new QRious({
-                    element: qrcodeCanvasRef.current,
-                    value: generatedData,
-                    size: 150,
-                });
-                qr.refresh();  // Force the QRious object to refresh the canvas
-            } else {
-                console.error("Canvas reference is null");
-            }
-        }
-    }, [isQRCodeGenerated, productName, size, color, wattage, voltage, quantity, price, category]);
-
-
-
-    const handleSave = async () => {
-        if (!productName || !size || !color || !category || !quantity || !price) {
+    // QR Code Generation Handler
+    const handleGenerateQRCode = () => {
+        if (!productName || !quantity || !price || !category) {
             setError('Please fill in all required fields.');
             return;
         }
 
+        const generatedData = generateSKU(productName, size, color, wattage, voltage);
+        if (!generatedData) {
+            setError('Failed to generate QR code data.');
+            return;
+        }
+
+        setQrcodeData(generatedData);
+        setBarcode(generateBarcode()); // Set barcode with different logic
+        setIsQRCodeGenerated(true);
+        setError('');
+    };
+
+    // Save Product Data Handler
+    const handleSave = async () => {
+        if (!productName || !category || !quantity || price <= 0) {
+            setError('Please fill in all required fields and ensure the price is greater than 0.');
+            return;
+        }
+
         try {
+            setError('');
             setIsLoading(true);
-            console.log("Product data saved with QR code:", {
+
+            const productData = {
                 barcode: barcodeValue,
                 productName,
                 size,
@@ -92,18 +96,16 @@ function SetQrcode() {
                 sku: generateSKU(productName, size, color, wattage, voltage),
                 price,
                 category,
-                qrcodeData
-            });
-            navigate('/ProductSuccess');
+                qrcodeData,
+            };
+
+            console.log("Product data saved with QR code:", productData);
+            navigate('/DashboardPage');
         } catch (error) {
-            setError(error.message);
+            setError(`Error saving product: ${error.message}`);
         } finally {
             setIsLoading(false);
         }
-    };
-
-    const handleGenerateQRCode = () => {
-        setIsQRCodeGenerated(true); // Trigger QR code generation
     };
 
     return (
@@ -111,171 +113,71 @@ function SetQrcode() {
             <Container fluid='lg'>
                 <Row style={{ boxSizing: 'border-box', padding: 20, height: '80vh', paddingTop: 25 }}>
                     <Col lg={4} sm={12}>
-                        <Row className="justify-content-center">
-                            <Col md={8}>
-                                <Form>
-                                    <div className="mb-3">
-                                        <Form.Group controlId="barcode">
-                                            <Form.Label>Barcode</Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                value={barcodeValue}
-                                                readOnly
-                                            />
-                                        </Form.Group>
-                                        <Form.Group controlId="sku">
-                                            <Form.Label>SKU</Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                value={generateSKU(productName, size, color, wattage, voltage)}
-                                                readOnly
-                                            />
-                                        </Form.Group>
-                                    </div>
-                                </Form>
-                            </Col>
-                        </Row>
+                        <Form>
+                            <Form.Group controlId="barcode">
+                                <Form.Label>Barcode</Form.Label>
+                                <Form.Control type="text" value={barcodeValue} readOnly />
+                            </Form.Group>
+                            <Form.Group controlId="sku">
+                                <Form.Label>SKU</Form.Label>
+                                <Form.Control type="text" value={generateSKU(productName, size, color, wattage, voltage)} readOnly />
+                            </Form.Group>
+                        </Form>
                     </Col>
 
                     <Col lg={8} sm={12}>
                         {error && <Alert variant="danger">{error}</Alert>}
                         {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
-                        <Row className='justify-content-center p-3' style={{ borderRadius: 20, boxShadow: '2px 2px 4px #E1E4E4' }}>
-                            <Col md={12}>
-                                <p style={{ fontSize: '1.6rem' }}>Product Details</p>
-                                <Form.Group controlId="productName">
-                                    <p className='m-0'>Product Name <span className="text-danger">*</span></p>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter product name (e.g., LED Bulb)"
-                                        value={productName}
-                                        onChange={(e) => setProductName(e.target.value)}
-                                        required
-                                    />
-                                    {!productName && <small className="text-danger">Please enter a product name.</small>}
-                                </Form.Group>
 
-                                <Row className='mt-1'>
-                                    <Col lg={6} sm={12}>
-                                        <Form.Group controlId="size">
-                                            <p className='m-1'>Product Size <sup>(Optional)</sup> </p>
-                                            <Form.Control
-                                                as="select"
-                                                value={size}
-                                                onChange={(e) => setSize(e.target.value)}
-                                            >
-                                                <option value="">Select Size</option>
-                                                {sizes.map((size) => (
-                                                    <option key={size} value={size}>{size}</option>
-                                                ))}
-                                            </Form.Control>
-                                        </Form.Group>
-                                    </Col>
+                        <Form.Group controlId="productName">
+                            <Form.Label>Product Name <span className="text-danger">*</span></Form.Label>
+                            <Form.Control type="text" placeholder="Enter product name" value={productName} onChange={(e) => setProductName(e.target.value)} required />
+                        </Form.Group>
 
-                                    <Col lg={6} sm={12}>
-                                        <Form.Group controlId="color">
-                                            <p className='m-0 mt-2'>Product Color <sup>(Optional)</sup></p>
-                                            <Form.Control
-                                                type="text"
-                                                placeholder="Enter color (e.g., Red)"
-                                                value={color}
-                                                onChange={(e) => setColor(e.target.value)}
-                                            />
-                                        </Form.Group>
-                                    </Col>
+                        <Form.Group controlId="size">
+                            <Form.Label>Product Size (Optional)</Form.Label>
+                            <Form.Control as="select" value={size} onChange={(e) => setSize(e.target.value)}>
+                                <option value="">Select Size</option>
+                                {sizes.map((size) => <option key={size} value={size}>{size}</option>)}
+                            </Form.Control>
+                        </Form.Group>
 
-                                    <Col lg={6} sm={12}>
-                                        <Form.Group controlId="wattage" className="mt-3">
-                                            <p className='m-0'>Wattage</p>
-                                            <Form.Control
-                                                type="text"
-                                                placeholder="Enter wattage (e.g., 60W)"
-                                                value={wattage}
-                                                onChange={(e) => setWattage(e.target.value)}
-                                            />
-                                        </Form.Group>
-                                    </Col>
+                        <Form.Group controlId="color">
+                            <Form.Label>Product Color (Optional)</Form.Label>
+                            <Form.Control type="text" placeholder="Enter color" value={color} onChange={(e) => setColor(e.target.value)} />
+                        </Form.Group>
 
-                                    <Col lg={6} sm={12}>
-                                        <Form.Group controlId="voltage" className="mt-3">
-                                            <p className='m-0'>Voltage</p>
-                                            <Form.Control
-                                                type="text"
-                                                placeholder="Enter voltage (e.g., 220V)"
-                                                value={voltage}
-                                                onChange={(e) => setVoltage(e.target.value)}
-                                            />
-                                        </Form.Group>
-                                    </Col>
+                        <Form.Group controlId="wattage">
+                            <Form.Label>Wattage</Form.Label>
+                            <Form.Control type="text" placeholder="Enter wattage (e.g., 60W)" value={wattage} onChange={(e) => setWattage(e.target.value)} />
+                        </Form.Group>
 
-                                    <Col lg={6} sm={12}>
-                                        <Form.Group controlId="quantity" className="mt-3">
-                                            <p className='m-0'>Quantity<span className="text-danger">*</span></p>
-                                            <Form.Control
-                                                type="number"
-                                                value={quantity}
-                                                min={1}
-                                                placeholder="Enter quantity (e.g., 10)"
-                                                onChange={(e) => setQuantity(Number(e.target.value))}
-                                                required
-                                            />
-                                            {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
-                                        </Form.Group>
-                                    </Col>
+                        <Form.Group controlId="voltage">
+                            <Form.Label>Voltage</Form.Label>
+                            <Form.Control type="text" placeholder="Enter voltage (e.g., 220V)" value={voltage} onChange={(e) => setVoltage(e.target.value)} />
+                        </Form.Group>
 
-                                    <Col lg={6} sm={12}>
-                                        <Form.Group controlId="price" className="mt-3">
-                                            <p className='m-0'>Price<span className="text-danger">*</span></p>
-                                            <Form.Control
-                                                type="number"
-                                                placeholder="Enter price (e.g., 100.00)"
-                                                value={price}
-                                                onChange={(e) => setPrice(e.target.value)}
-                                                required
-                                                step="0.01"
-                                            />
-                                            {price <= 0 && <small className="text-danger">Please enter a valid price.</small>}
-                                        </Form.Group>
-                                    </Col>
+                        <Form.Group controlId="quantity">
+                            <Form.Label>Quantity <span className="text-danger">*</span></Form.Label>
+                            <Form.Control type="number" value={quantity} min={1} onChange={(e) => setQuantity(Number(e.target.value))} required />
+                        </Form.Group>
 
-                                    <Col lg={6} sm={12}>
-                                        <Form.Group controlId="category" className="mt-3">
-                                            <p className='m-0'>Category<span className="text-danger">*</span></p>
-                                            <Form.Control
-                                                as="select"
-                                                value={category}
-                                                onChange={(e) => setCategory(e.target.value)}
-                                                required
-                                            >
-                                                <option value="">Select Category</option>
-                                                {categories.map((cat) => (
-                                                    <option key={cat.id} value={cat.id}>{cat.name}</option>
-                                                ))}
-                                            </Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
+                        <Form.Group controlId="price">
+                            <Form.Label>Price <span className="text-danger">*</span></Form.Label>
+                            <Form.Control type="number" value={price} min={0.01} step="0.01" onChange={(e) => setPrice(e.target.value)} required />
+                        </Form.Group>
 
-                                <div className='mt-4'>
-                                    <Button variant="primary" onClick={handleGenerateQRCode} block>
-                                        Generate QR Code
-                                    </Button>
-                                    {isQRCodeGenerated && (
-                                        <canvas ref={qrcodeCanvasRef}></canvas>
-                                    )}
-                                </div>
+                        <Form.Group controlId="category">
+                            <Form.Label>Category <span className="text-danger">*</span></Form.Label>
+                            <Form.Control as="select" value={category} onChange={(e) => setCategory(e.target.value)} required>
+                                <option value="">Select Category</option>
+                                {categories.map((cat) => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
+                            </Form.Control>
+                        </Form.Group>
 
-                                <Button
-                                    variant="success"
-                                    onClick={handleSave}
-                                    block
-                                    disabled={isLoading || !productName || !size || !color || !category || !quantity || !price}
-                                    className="mt-3"
-                                >
-                                    {isLoading ? 'Saving...' : 'Save Product'}
-                                </Button>
-                            </Col>
-                        </Row>
+                        <Button variant="primary" onClick={handleGenerateQRCode} block>Generate QR Code</Button>
+                        {isQRCodeGenerated && <QRCode value={qrcodeData} size={150} className="mt-4" />}
+                        <Button variant="success" onClick={handleSave} block className="mt-3">Save Product</Button>
                     </Col>
                 </Row>
             </Container>
