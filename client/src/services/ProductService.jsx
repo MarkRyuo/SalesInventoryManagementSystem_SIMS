@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove, child} from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
 
 
 //* Start of Product
