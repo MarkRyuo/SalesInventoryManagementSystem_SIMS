@@ -433,11 +433,19 @@ export const fetchAllTaxes = async () => {
 
     try {
         const snapshot = await get(taxesRef);
-        return snapshot.exists() ? Object.values(snapshot.val()) : [];
+        if (snapshot.exists()) {
+            console.log("Fetched Taxes:", snapshot.val());
+            return Object.values(snapshot.val());
+        } else {
+            console.log("No taxes found");
+            return [];
+        }
     } catch (error) {
+        console.error("Error fetching taxes:", error);
         throw new Error(`Error fetching taxes: ${error.message}`);
     }
 };
+
 
 //! End of AddNewTax
 
