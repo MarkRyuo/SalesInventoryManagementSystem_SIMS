@@ -517,11 +517,13 @@ export const fetchQrcodesFromDatabase = async () => {
 
         if (snapshot.exists()) {
             const data = snapshot.val();
-            const qrcodes = Object.keys(data).map(key => ({
+            const qrcodes = Object.keys(data).map((key) => ({
                 id: key,
-                ...data[key]
+                qrcodeBase64: data[key]?.qrcodeBase64 || '', // QR code image
+                productName: data[key]?.productName || '' // Include product name directly
             }));
-            return qrcodes; // Return an array of QR code objects
+
+            return qrcodes; // Return an array of QR code objects with product names
         } else {
             return []; // No QR codes found
         }

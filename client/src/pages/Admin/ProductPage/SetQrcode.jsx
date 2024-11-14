@@ -1,29 +1,33 @@
 import { useState, useEffect } from 'react';
 import { Button, Table, Spinner } from 'react-bootstrap';
-import AddQrcode from './AddQrcode'; // Import the modal for QR code generation
-import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService'; // Fetch QR codes and save product name
+import AddQrcode from './AddQrcode';
+import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
 
 function ViewQrCode() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [qrCodes, setQrCodes] = useState([]); // Store QR codes
-    const [productNames, setProductNames] = useState({}); // Store product names for each QR code
-    const [savedProductNames, setSavedProductNames] = useState({}); // Track saved product names
-    const [isLoading, setIsLoading] = useState(true); // Track loading state
+    const [qrCodes, setQrCodes] = useState([]);
+    const [productNames, setProductNames] = useState({});
+    const [savedProductNames, setSavedProductNames] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
 
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
-    // Fetch QR codes and products when the component mounts
+    // Fetch QR codes and product names when the component mounts
     useEffect(() => {
         const fetchQrCodesAndProducts = async () => {
             try {
                 const fetchedQrcodes = await fetchQrcodesFromDatabase(); // Fetch QR codes from DB
                 setQrCodes(fetchedQrcodes);
+
+                // Initialize product names from the fetched data
+                const initialProductNames = fetchedQrcodes.reduce((acc, qr) => {
+                    acc[qr.id] = qr.productName || ''; // Default to empty string if no name
+                    return acc;
+                }, {});
+
+                setProductNames(initialProductNames);
+                setSavedProductNames(initialProductNames); // Set saved product names
             } catch (error) {
                 console.error('Error fetching QR codes or products:', error);
             } finally {
@@ -32,9 +36,10 @@ function ViewQrCode() {
         };
 
         fetchQrCodesAndProducts();
-    }, []); // Run once when the component mounts
+    }, []);
 
-    // Handle change in product name input for each QR code
+
+    // Handle change in product name input
     const handleProductNameChange = (qrId, value) => {
         setProductNames((prevState) => ({
             ...prevState,
@@ -42,36 +47,32 @@ function ViewQrCode() {
         }));
     };
 
-    // Handle saving the product name for a QR code
+    // Save product name to the database
     const handleSaveProductName = async (qrId) => {
+        const productName = productNames[qrId];
+        if (!productName) {
+            alert('Please enter a product name.');
+            return;
+        }
+
         try {
-            const productName = productNames[qrId];
-            if (productName) {
-                // Call the service to save the product name
-                await saveProductName(qrId, productName); // Assuming this function saves the data to the backend
-                setSavedProductNames((prevState) => ({
-                    ...prevState,
-                    [qrId]: productName,
-                }));
-                alert('Product name saved successfully!');
-            } else {
-                alert('Please enter a product name.');
-            }
+            await saveProductName(qrId, productName);
+            setSavedProductNames((prevState) => ({
+                ...prevState,
+                [qrId]: productName,
+            }));
+            alert('Product name saved successfully!');
         } catch (error) {
             console.error('Error saving product name:', error);
-            alert('Error saving product name.');
+            alert('Failed to save product name.');
         }
     };
 
-    // Handle editing the product name
+    // Enable editing of the product name
     const handleEditProductName = (qrId) => {
         setProductNames((prevState) => ({
             ...prevState,
-            [qrId]: savedProductNames[qrId], // Restore the saved product name for editing
-        }));
-        setSavedProductNames((prevState) => ({
-            ...prevState,
-            [qrId]: "", // Clear the saved state to enable editing again
+            [qrId]: savedProductNames[qrId], // Set input value to saved product name
         }));
     };
 
@@ -85,28 +86,25 @@ function ViewQrCode() {
             </div>
 
             <div className="mt-4">
-                {/* Loading Spinner */}
                 {isLoading ? (
                     <div className="text-center">
                         <Spinner animation="border" variant="primary" />
                         <p>Loading QR Codes...</p>
                     </div>
                 ) : (
-                    // Table displaying QR codes
                     <Table striped bordered hover responsive>
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>ID</th>
                                 <th>QR Code</th>
-                                <th>Add Product Name</th> {/* Displaying product name */}
-                                <th>Actions</th> {/* Save/Edit button */}
+                                <th>Product Name</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* Reverse the array to show the newest QR codes first */}
                             {qrCodes.slice().reverse().map((qr, index) => {
-                                const isSaved = savedProductNames[qr.id]; // Check if the product name is saved
+                                const isSaved = Boolean(savedProductNames[qr.id]);
 
                                 return (
                                     <tr key={qr.id}>
@@ -116,7 +114,7 @@ function ViewQrCode() {
                                             <img
                                                 src={qr.qrcodeBase64}
                                                 alt="QR Code"
-                                                style={{ width: '100px', height: '100px' }} // Size for QR code
+                                                style={{ width: '100px', height: '100px' }}
                                             />
                                         </td>
                                         <td>
@@ -125,7 +123,7 @@ function ViewQrCode() {
                                                 value={productNames[qr.id] || ''}
                                                 onChange={(e) => handleProductNameChange(qr.id, e.target.value)}
                                                 placeholder="Enter product name"
-                                                disabled={isSaved} // Disable input if the product name is saved
+                                                disabled={isSaved}
                                             />
                                         </td>
                                         <td>
