@@ -85,6 +85,13 @@ function ViewQrCode() {
                 <AddQrcode show={isModalOpen} onClose={closeModal} />
             </div>
 
+            <div className="mb-4">
+                <Button variant="primary" onClick={openModal}>
+                    Print Qrcodes
+                </Button>
+                <AddQrcode show={isModalOpen} onClose={closeModal} />
+            </div>
+
             <div className="mt-4">
                 {isLoading ? (
                     <div className="text-center">
