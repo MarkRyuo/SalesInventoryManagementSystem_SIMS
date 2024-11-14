@@ -450,23 +450,6 @@ export const fetchAllTaxes = async () => {
 
 //! End of AddNewTax
 
-// Function to save qrcode details to Realtime Database
-export const saveQrcodeToDatabase = async (barcode, qrcodeBase64) => {
-    try {
-        const db = getDatabase();
-        const qrCodeRef = ref(db, `qrcodes/${barcode}`); // Store the QR code data under its barcode
-        await set(qrCodeRef, {
-            qrcodeBase64,
-            createdAt: Date.now(),
-        });
-        console.log('QR Code data saved successfully.');
-    } catch (error) {
-        console.error('Error saving QR Code data:', error);
-        throw new Error('Failed to save QR Code data.');
-    }
-};
-
-
 export const addQrcodeToDatabase = async (qrcode, qrcodeBase64) => {
     try {
         const db = getDatabase();
@@ -483,25 +466,21 @@ export const addQrcodeToDatabase = async (qrcode, qrcodeBase64) => {
     }
 };
 
-// Function para kunin ang QR Codes mula sa database
-export const fetchQRCodesFromDatabase = async () => {
+export const checkQrcodeExists = async (qrcodeBase64) => {
     try {
         const db = getDatabase();
-        const qrCodesRef = ref(db, 'qrcodes');
-        const snapshot = await get(qrCodesRef);
+        const qrcodesRef = ref(db, 'qrcodes');
+        const snapshot = await get(qrcodesRef);
 
         if (snapshot.exists()) {
-            const qrCodesData = snapshot.val();
-            // Convert to array format
-            return Object.entries(qrCodesData).map(([barcode, data]) => ({
-                barcode,
-                qrcodeBase64: data.qrcodeBase64,
-            }));
+            const qrcodes = snapshot.val();
+            // Check if the Base64 string already exists in the database
+            return Object.values(qrcodes).some(qrcode => qrcode.qrcodeBase64 === qrcodeBase64);
         }
-        return [];
+        return false;
     } catch (error) {
-        console.error('Error fetching QR Codes:', error);
-        throw new Error('Failed to fetch QR Codes.');
+        console.error('Error checking for existing QR Code:', error);
+        throw new Error('Error checking QR Code existence.');
     }
 };
 
