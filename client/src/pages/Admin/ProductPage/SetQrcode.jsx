@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Button, Table, Spinner } from 'react-bootstrap';
-import AddQrcode from './AddQrcode';
-import { fetchQrcodesFromDatabase } from '../../../services/ProductService'; // Import the function to fetch QR codes
-import { fetchProductsFromDatabase } from '../../../services/ProductService'; // Import the function to fetch products
+import AddQrcode from './AddQrcode'; // Import the modal for QR code generation
+import { fetchQrcodesFromDatabase } from '../../../services/ProductService'; // Fetch QR codes
 
 function ViewQrCode() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [qrCodes, setQrCodes] = useState([]); // Store the fetched QR codes
-    const [products, setProducts] = useState([]); // Store the fetched products
+    const [qrCodes, setQrCodes] = useState([]); // Store QR codes
+    const [productNames, setProductNames] = useState({}); // Store product names for each QR code
     const [isLoading, setIsLoading] = useState(true); // Track loading state
 
     const openModal = () => {
@@ -23,20 +22,26 @@ function ViewQrCode() {
         const fetchQrCodesAndProducts = async () => {
             try {
                 const fetchedQrcodes = await fetchQrcodesFromDatabase(); // Fetch QR codes from DB
-                const fetchedProducts = await fetchProductsFromDatabase(); // Fetch products from DB
 
-                // If the fetchedProducts is an object, convert it to an array using Object.values()
-                setQrCodes(fetchedQrcodes); // Set fetched QR codes to state
-                setProducts(Object.values(fetchedProducts)); // Convert products object to array and set it to state
+                // Set the state with fetched data
+                setQrCodes(fetchedQrcodes);
             } catch (error) {
                 console.error('Error fetching QR codes or products:', error);
             } finally {
-                setIsLoading(false); // Set loading to false once data is fetched
+                setIsLoading(false); // Set loading state to false after data fetch
             }
         };
 
         fetchQrCodesAndProducts();
-    }, []); // Empty dependency array means it will run only once when the component mounts
+    }, []); // Run once when the component mounts
+
+    // Handle change in product name input for each QR code
+    const handleProductNameChange = (qrId, value) => {
+        setProductNames((prevState) => ({
+            ...prevState,
+            [qrId]: value,
+        }));
+    };
 
     return (
         <>
@@ -48,41 +53,44 @@ function ViewQrCode() {
             </div>
 
             <div className="mt-4">
-                {/* Display Loading Spinner while fetching data */}
+                {/* Loading Spinner */}
                 {isLoading ? (
                     <div className="text-center">
                         <Spinner animation="border" variant="primary" />
                         <p>Loading QR Codes...</p>
                     </div>
                 ) : (
-                    // Display QR codes in a Table
+                    // Table displaying QR codes
                     <Table striped bordered hover responsive>
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>ID</th>
                                 <th>QR Code</th>
-                                <th>Product Name</th> {/* Display product name */}
+                                <th>Add Product Name</th> {/* Displaying product name */}
                             </tr>
                         </thead>
                         <tbody>
-                            {qrCodes.map((qr) => {
-                                // Match QR code with product
-                                const matchedProduct = products.find(
-                                    (product) => product.qrcodeId === qr.id // Assuming qrcodeId matches product QR code ID
-                                );
-
+                            {/* Reverse the array to show the newest QR codes first */}
+                            {qrCodes.slice().reverse().map((qr, index) => {
                                 return (
                                     <tr key={qr.id}>
+                                        <td>{index + 1}</td>
                                         <td>{qr.id}</td>
                                         <td>
                                             <img
                                                 src={qr.qrcodeBase64}
                                                 alt="QR Code"
-                                                style={{ width: '100px', height: '100px' }} // Adjust the size of the QR code image
+                                                style={{ width: '100px', height: '100px' }} // Size for QR code
                                             />
                                         </td>
                                         <td>
-                                            {matchedProduct ? matchedProduct.productName : 'No product found'}
+                                            <input
+                                                type="text"
+                                                value={productNames[qr.id] || ''}
+                                                onChange={(e) => handleProductNameChange(qr.id, e.target.value)}
+                                                placeholder="Enter product name"
+                                            />
                                         </td>
                                     </tr>
                                 );
