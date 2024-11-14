@@ -121,7 +121,7 @@ function ViewQrCode() {
                     Generate QR Code
                 </Button>
                 <Button variant="secondary" onClick={handleShowPrintModal} className="ml-2">
-                    View Selected QR Codes for Printing
+                    View Selected QrCodes
                 </Button>
                 <AddQrcode show={isModalOpen} onClose={closeModal} />
             </div>
@@ -165,7 +165,7 @@ function ViewQrCode() {
                                                 <span>{productName}</span>
                                             ) : (
                                                 <Button variant="link" onClick={() => handleOpenEditModal(qr.id)}>
-                                                    Edit
+                                                    Add Product Name
                                                 </Button>
                                             )}
                                         </td>
@@ -213,7 +213,7 @@ function ViewQrCode() {
                         Close
                     </Button>
                     <Button variant="primary" onClick={generatePDF}>
-                        Print Selected QR Codes as PDF
+                        Print QR Codes as PDF
                     </Button>
                 </Modal.Footer>
             </Modal>
