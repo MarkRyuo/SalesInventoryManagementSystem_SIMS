@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button, Table, Spinner } from 'react-bootstrap';
 import AddQrcode from './AddQrcode';
+import PrintQrcodesModal from './PrintQrcodeModal'; // Import the modal
 import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
 
 function ViewQrCode() {
@@ -13,33 +14,27 @@ function ViewQrCode() {
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
-    // Fetch QR codes and product names when the component mounts
     useEffect(() => {
         const fetchQrCodesAndProducts = async () => {
             try {
-                const fetchedQrcodes = await fetchQrcodesFromDatabase(); // Fetch QR codes from DB
+                const fetchedQrcodes = await fetchQrcodesFromDatabase();
                 setQrCodes(fetchedQrcodes);
-
-                // Initialize product names from the fetched data
                 const initialProductNames = fetchedQrcodes.reduce((acc, qr) => {
-                    acc[qr.id] = qr.productName || ''; // Default to empty string if no name
+                    acc[qr.id] = qr.productName || '';
                     return acc;
                 }, {});
-
                 setProductNames(initialProductNames);
-                setSavedProductNames(initialProductNames); // Set saved product names
+                setSavedProductNames(initialProductNames);
             } catch (error) {
                 console.error('Error fetching QR codes or products:', error);
             } finally {
-                setIsLoading(false); // Set loading state to false after data fetch
+                setIsLoading(false);
             }
         };
 
         fetchQrCodesAndProducts();
     }, []);
 
-
-    // Handle change in product name input
     const handleProductNameChange = (qrId, value) => {
         setProductNames((prevState) => ({
             ...prevState,
@@ -47,14 +42,12 @@ function ViewQrCode() {
         }));
     };
 
-    // Save product name to the database
     const handleSaveProductName = async (qrId) => {
         const productName = productNames[qrId];
         if (!productName) {
             alert('Please enter a product name.');
             return;
         }
-
         try {
             await saveProductName(qrId, productName);
             setSavedProductNames((prevState) => ({
@@ -68,11 +61,10 @@ function ViewQrCode() {
         }
     };
 
-    // Enable editing of the product name
     const handleEditProductName = (qrId) => {
         setProductNames((prevState) => ({
             ...prevState,
-            [qrId]: savedProductNames[qrId], // Set input value to saved product name
+            [qrId]: savedProductNames[qrId],
         }));
     };
 
@@ -85,11 +77,8 @@ function ViewQrCode() {
                 <AddQrcode show={isModalOpen} onClose={closeModal} />
             </div>
 
-            <div className="mb-4">
-                <Button variant="primary" onClick={openModal}>
-                    Print Qrcodes
-                </Button>
-                <AddQrcode show={isModalOpen} onClose={closeModal} />
+            <div>
+                <PrintQrcodesModal /> {/* Show Print QR Codes Modal */}
             </div>
 
             <div className="mt-4">
@@ -109,63 +98,49 @@ function ViewQrCode() {
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                            <tbody>
-                                {qrCodes
-                                    .slice()
-                                    .sort((a, b) => {
-                                        // Sort: QR codes without a product name come first
-                                        const hasNameA = savedProductNames[a.id] ? 1 : 0;
-                                        const hasNameB = savedProductNames[b.id] ? 1 : 0;
-                                        return hasNameA - hasNameB;
-                                    })
-                                    .map((qr, index) => {
-                                        const isSaved = Boolean(savedProductNames[qr.id]);
-                                        const productName = productNames[qr.id] || '';
+                        <tbody>
+                            {qrCodes.map((qr, index) => {
+                                const isSaved = Boolean(savedProductNames[qr.id]);
+                                const productName = productNames[qr.id] || '';
 
-                                        return (
-                                            <tr key={qr.id}>
-                                                <td>{index + 1}</td>
-                                                <td>{qr.id}</td>
-                                                <td>
-                                                    <img
-                                                        src={qr.qrcodeBase64}
-                                                        alt="QR Code"
-                                                        style={{ width: '100px', height: '100px' }}
-                                                    />
-                                                </td>
-                                                <td>
-                                                    {isSaved ? (
-                                                        <span>{productName}</span>
-                                                    ) : (
-                                                        <input
-                                                            type="text"
-                                                            value={productName}
-                                                            onChange={(e) => handleProductNameChange(qr.id, e.target.value)}
-                                                            placeholder="Enter product name"
-                                                        />
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {!isSaved ? (
-                                                        <Button
-                                                            variant="success"
-                                                            onClick={() => handleSaveProductName(qr.id)}
-                                                        >
-                                                            Save
-                                                        </Button>
-                                                    ) : (
-                                                        <Button
-                                                            variant="warning"
-                                                            onClick={() => handleEditProductName(qr.id)}
-                                                        >
-                                                            Edit
-                                                        </Button>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                            </tbody>
+                                return (
+                                    <tr key={qr.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{qr.id}</td>
+                                        <td>
+                                            <img
+                                                src={qr.qrcodeBase64}
+                                                alt="QR Code"
+                                                style={{ width: '100px', height: '100px' }}
+                                            />
+                                        </td>
+                                        <td>
+                                            {isSaved ? (
+                                                <span>{productName}</span>
+                                            ) : (
+                                                <input
+                                                    type="text"
+                                                    value={productName}
+                                                    onChange={(e) => handleProductNameChange(qr.id, e.target.value)}
+                                                    placeholder="Enter product name"
+                                                />
+                                            )}
+                                        </td>
+                                        <td>
+                                            {!isSaved ? (
+                                                <Button variant="success" onClick={() => handleSaveProductName(qr.id)}>
+                                                    Save
+                                                </Button>
+                                            ) : (
+                                                <Button variant="warning" onClick={() => handleEditProductName(qr.id)}>
+                                                    Edit
+                                                </Button>
+                                            )}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
                     </Table>
                 )}
             </div>
