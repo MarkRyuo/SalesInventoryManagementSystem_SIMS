@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Button, Table, Spinner, Modal, ListGroup } from 'react-bootstrap';
-import AddQrcode from './AddQrcode';
+import { Button, Table, Spinner, Modal, ListGroup, Form } from 'react-bootstrap';
+import AddQrcode from './AddQrcode';  // If you are still using this
 import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
 import { jsPDF } from 'jspdf';
 
@@ -10,12 +10,16 @@ function ViewQrCode() {
     const [productNames, setProductNames] = useState({});
     const [savedProductNames, setSavedProductNames] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedQrcodes, setSelectedQrcodes] = useState([]); // State to track selected QR codes for printing
-    const [showPrintModal, setShowPrintModal] = useState(false); // State to control the print modal
+    const [selectedQrcodes, setSelectedQrcodes] = useState([]);
+    const [showPrintModal, setShowPrintModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);  // State for product name input modal
+    const [currentProductName, setCurrentProductName] = useState('');  // State for the current product name to be edited
+    const [currentQrId, setCurrentQrId] = useState(null);  // State to track the QR code being edited
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
     const closePrintModal = () => setShowPrintModal(false);
+    const closeEditModal = () => setShowEditModal(false);  // Close the edit modal
 
     useEffect(() => {
         const fetchQrCodesAndProducts = async () => {
@@ -38,39 +42,13 @@ function ViewQrCode() {
         fetchQrCodesAndProducts();
     }, []);
 
-    const handleProductNameChange = (qrId, value) => {
-        setProductNames((prevState) => ({
-            ...prevState,
-            [qrId]: value,
-        }));
-    };
-
-    const handleSaveProductName = async (qrId) => {
-        const productName = productNames[qrId];
-        if (!productName) {
-            alert('Please enter a product name.');
-            return;
-        }
-        try {
-            await saveProductName(qrId, productName);
-            setSavedProductNames((prevState) => ({
-                ...prevState,
-                [qrId]: productName,
-            }));
-            alert('Product name saved successfully!');
-        } catch (error) {
-            console.error('Error saving product name:', error);
-            alert('Failed to save product name.');
-        }
-    };
-
     const handleToggleSelection = (qr) => {
         setSelectedQrcodes((prev) => {
             const isSelected = prev.some((selectedQr) => selectedQr.id === qr.id);
             if (isSelected) {
-                return prev.filter((selectedQr) => selectedQr.id !== qr.id); // Remove if already selected
+                return prev.filter((selectedQr) => selectedQr.id !== qr.id);
             } else {
-                return [...prev, qr]; // Add if not selected
+                return [...prev, qr];
             }
         });
     };
@@ -100,7 +78,41 @@ function ViewQrCode() {
         });
 
         doc.save('qr-codes.pdf');
-    }
+    };
+
+    // Sorting QR codes
+    const sortedQrCodes = [
+        ...qrCodes.filter(qr => !productNames[qr.id]),
+        ...qrCodes.filter(qr => productNames[qr.id]),
+    ];
+
+    const handleOpenEditModal = (qrId) => {
+        setCurrentQrId(qrId);
+        setCurrentProductName(productNames[qrId] || '');
+        setShowEditModal(true); // Open the edit modal
+    };
+
+    const handleSaveProductNameInModal = async () => {
+        const productName = currentProductName;
+
+        if (!productName) {
+            alert('Please enter a product name.');
+            return;
+        }
+
+        try {
+            await saveProductName(currentQrId, productName);
+            setSavedProductNames((prevState) => ({
+                ...prevState,
+                [currentQrId]: productName,
+            }));
+            setShowEditModal(false); // Close the modal after saving
+            alert('Product name saved successfully!');
+        } catch (error) {
+            console.error('Error saving product name:', error);
+            alert('Failed to save product name.');
+        }
+    };
 
     return (
         <>
@@ -132,7 +144,7 @@ function ViewQrCode() {
                             </tr>
                         </thead>
                         <tbody>
-                            {qrCodes.map((qr, index) => {
+                            {sortedQrCodes.map((qr, index) => {
                                 const isSaved = Boolean(savedProductNames[qr.id]);
                                 const productName = productNames[qr.id] || '';
                                 const isSelected = selectedQrcodes.some((selectedQr) => selectedQr.id === qr.id);
@@ -152,20 +164,12 @@ function ViewQrCode() {
                                             {isSaved ? (
                                                 <span>{productName}</span>
                                             ) : (
-                                                <input
-                                                    type="text"
-                                                    value={productNames[qr.id] || ''}  // Controlled value based on productNames
-                                                    onChange={(e) => handleProductNameChange(qr.id, e.target.value)}
-                                                    placeholder="Enter product name"
-                                                />
+                                                <Button variant="link" onClick={() => handleOpenEditModal(qr.id)}>
+                                                    Edit
+                                                </Button>
                                             )}
                                         </td>
                                         <td>
-                                            {!isSaved ? (
-                                                <Button variant="success" onClick={() => handleSaveProductName(qr.id)}>
-                                                    Save
-                                                </Button>
-                                            ) : null}
                                             <Button
                                                 variant={isSelected ? "danger" : "info"}
                                                 onClick={() => handleToggleSelection(qr)}
@@ -210,6 +214,31 @@ function ViewQrCode() {
                     </Button>
                     <Button variant="primary" onClick={generatePDF}>
                         Print Selected QR Codes as PDF
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Modal for Editing Product Name */}
+            <Modal show={showEditModal} onHide={closeEditModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Product Name</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Group>
+                        <Form.Label>Product Name</Form.Label>
+                        <Form.Control
+                            type="text"
+                            value={currentProductName}
+                            onChange={(e) => setCurrentProductName(e.target.value)}
+                        />
+                    </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={closeEditModal}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleSaveProductNameInModal}>
+                        Save
                     </Button>
                 </Modal.Footer>
             </Modal>
