@@ -467,10 +467,10 @@ export const saveQrcodeToDatabase = async (barcode, qrcodeBase64) => {
 };
 
 
-export const addQrcodeToDatabase = async (barcode, qrcodeBase64) => {
+export const addQrcodeToDatabase = async (qrcode, qrcodeBase64) => {
     try {
         const db = getDatabase();
-        const qrCodeRef = ref(db, `qrcodes/${barcode}`); // Save QR code under a separate `qrcodes` node
+        const qrCodeRef = ref(db, `qrcodes/${qrcode}`);  // Save QR code under a separate `qrcodes` node
         await set(qrCodeRef, {
             qrcodeBase64,
             createdAt: Date.now(),
