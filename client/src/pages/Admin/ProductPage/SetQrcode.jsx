@@ -12,16 +12,17 @@ function ViewQrCode() {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedQrcodes, setSelectedQrcodes] = useState([]);
     const [showPrintModal, setShowPrintModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);  // State for product name input modal
-    const [currentProductName, setCurrentProductName] = useState('');  // State for the current product name to be edited
-    const [currentQrId, setCurrentQrId] = useState(null);  // State to track the QR code being edited
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [currentProductName, setCurrentProductName] = useState('');
+    const [currentQrId, setCurrentQrId] = useState(null);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
     const closePrintModal = () => setShowPrintModal(false);
-    const closeEditModal = () => setShowEditModal(false);  // Close the edit modal
+    const closeEditModal = () => setShowEditModal(false);
 
     useEffect(() => {
+        // Function to fetch QR codes and product names
         const fetchQrCodesAndProducts = async () => {
             try {
                 const fetchedQrcodes = await fetchQrcodesFromDatabase();
@@ -40,6 +41,12 @@ function ViewQrCode() {
         };
 
         fetchQrCodesAndProducts();
+
+        // Set an interval to re-fetch data every 5 seconds
+        const intervalId = setInterval(fetchQrCodesAndProducts, 5000); // 5 seconds interval
+
+        // Cleanup interval on component unmount
+        return () => clearInterval(intervalId);
     }, []);
 
     const handleToggleSelection = (qr) => {
@@ -80,7 +87,6 @@ function ViewQrCode() {
         doc.save('qr-codes.pdf');
     };
 
-    // Sorting QR codes
     const sortedQrCodes = [
         ...qrCodes.filter(qr => !productNames[qr.id]),
         ...qrCodes.filter(qr => productNames[qr.id]),
@@ -89,7 +95,7 @@ function ViewQrCode() {
     const handleOpenEditModal = (qrId) => {
         setCurrentQrId(qrId);
         setCurrentProductName(productNames[qrId] || '');
-        setShowEditModal(true); // Open the edit modal
+        setShowEditModal(true);
     };
 
     const handleSaveProductNameInModal = async () => {
@@ -102,11 +108,16 @@ function ViewQrCode() {
 
         try {
             await saveProductName(currentQrId, productName);
-            setSavedProductNames((prevState) => ({
+            // Immediately update state without re-fetching
+            setProductNames(prevState => ({
                 ...prevState,
                 [currentQrId]: productName,
             }));
-            setShowEditModal(false); // Close the modal after saving
+            setSavedProductNames(prevState => ({
+                ...prevState,
+                [currentQrId]: productName,
+            }));
+            setShowEditModal(false);
             alert('Product name saved successfully!');
         } catch (error) {
             console.error('Error saving product name:', error);
@@ -137,7 +148,6 @@ function ViewQrCode() {
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>ID</th>
                                 <th>QR Code</th>
                                 <th>Product Name</th>
                                 <th>Actions</th>
@@ -152,7 +162,6 @@ function ViewQrCode() {
                                 return (
                                     <tr key={qr.id}>
                                         <td>{index + 1}</td>
-                                        <td>{qr.id}</td>
                                         <td>
                                             <img
                                                 src={qr.qrcodeBase64}
