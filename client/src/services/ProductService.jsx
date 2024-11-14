@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove, child} from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
 
 
 //* Start of Product
@@ -166,11 +166,19 @@ export const getAllProducts = async () => {
         // Ensure price and tax remain numeric and convert product data into an array
         const formattedProducts = Object.keys(products).map(key => {
             const product = products[key];
-            product.price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
-            product.tax = typeof product.tax === 'number' ? product.tax : parseFloat(product.tax) || 0; // Ensure tax is treated as percentage
-            return product;
-        });
 
+            // Ensure product is an object before proceeding
+            if (typeof product !== 'object' || Array.isArray(product) || !product) {
+                console.warn(`Skipping invalid product data at key: ${key}`);
+                return null; // Skip invalid entries
+            }
+
+            // Ensure price and tax are numeric
+            product.price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
+            product.tax = typeof product.tax === 'number' ? product.tax : parseFloat(product.tax) || 0;
+
+            return product;
+        }).filter(product => product !== null); // Filter out any null values
 
         console.log("Retrieved products:", formattedProducts);
         return formattedProducts;
@@ -179,6 +187,7 @@ export const getAllProducts = async () => {
         throw new Error(`Error retrieving products: ${error.message}`);
     }
 };
+
 
 //! End of Product
 
@@ -196,6 +205,7 @@ export const addCategory = async (categoryName) => {
     }
 };
 
+
 //? Function to retrieve all categories
 export const getCategories = async () => {
     const db = getDatabase();
@@ -205,7 +215,6 @@ export const getCategories = async () => {
         const snapshot = await get(categoriesRef);
         const categoriesData = snapshot.exists() ? snapshot.val() : {};
 
-        // Convert the categories object to an array of category names and ids
         return Object.keys(categoriesData).map(key => ({
             id: key,
             name: categoriesData[key].name
@@ -214,6 +223,22 @@ export const getCategories = async () => {
         throw new Error(`Error retrieving categories: ${error.message}`);
     }
 };
+
+export const getCategoriesNewAssets = async () => {
+    const db = getDatabase();
+    const categoriesRef = ref(db, 'categories');
+
+    try {
+        const snapshot = await get(categoriesRef);
+        const categoriesData = snapshot.exists() ? snapshot.val() : {};
+
+        // Return only the category names
+        return Object.keys(categoriesData).map(key => categoriesData[key].name);
+    } catch (error) {
+        throw new Error(`Error retrieving categories: ${error.message}`);
+    }
+};
+
 //? Function to delete a category
 export const deleteCategory = async (categoryName) => {
         const db = getDatabase();
@@ -450,60 +475,79 @@ export const fetchAllTaxes = async () => {
 
 //! End of AddNewTax
 
-// Function to save product details to Realtime Database
-export const saveProductToDatabase = async (productData, qrCodeBase64) => {
+export const addQrcodeToDatabase = async (qrcode, qrcodeBase64) => {
     try {
         const db = getDatabase();
-        const productId = Date.now(); // Unique product ID using timestamp
-        const productRef = ref(db, `products/${productId}`);
-
-        // Save product data to database
-        await set(productRef, {
-            ...productData,
-            qrCodeData: qrCodeBase64,
-            createdAt: new Date().toISOString(),
+        const qrCodeRef = ref(db, `qrcodes/${qrcode}`);  // Save QR code under a separate `qrcodes` node
+        await set(qrCodeRef, {
+            qrcodeBase64,
+            createdAt: Date.now(),
         });
 
-        console.log("Product saved to Realtime Database:", productData);
+        console.log('QR Code added to the database successfully.');
     } catch (error) {
-        console.error("Error saving product to Realtime Database:", error);
-        throw new Error(error.message);
+        console.error('Error adding QR Code:', error);
+        throw new Error('Failed to add QR Code.');
     }
 };
 
-// Function to fetch products from Realtime Database
-
-export const fetchProductsWithQRCodes = async () => {
+export const checkQrcodeExists = async (qrcodeBase64) => {
     try {
         const db = getDatabase();
-        const dbRef = ref(db);
-        const snapshot = await get(child(dbRef, `products`));
+        const qrcodesRef = ref(db, 'qrcodes');
+        const snapshot = await get(qrcodesRef);
 
         if (snapshot.exists()) {
-            const products = snapshot.val();
+            const qrcodes = snapshot.val();
+            // Check if the Base64 string already exists in the database
+            return Object.values(qrcodes).some(qrcode => qrcode.qrcodeBase64 === qrcodeBase64);
+        }
+        return false;
+    } catch (error) {
+        console.error('Error checking for existing QR Code:', error);
+        throw new Error('Error checking QR Code existence.');
+    }
+};
 
-            // Convert the products object to an array and filter those with `qrCodeData`
-            const productList = Object.keys(products)
-                .map((key) => ({
-                    id: key,
-                    ...products[key],
-                }))
-                .filter((product) => product.qrCodeData && product.qrCodeData !== ''); // Filter only products with QR code data
+export const fetchQrcodesFromDatabase = async () => {
+    try {
+        const db = getDatabase();
+        const qrcodesRef = ref(db, 'qrcodes'); // Reference to the qrcodes node in your database
+        const snapshot = await get(qrcodesRef);
 
-            return productList;
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            const qrcodes = Object.keys(data).map((key) => ({
+                id: key,
+                qrcodeBase64: data[key]?.qrcodeBase64 || '', // QR code image
+                productName: data[key]?.productName || '' // Include product name directly
+            }));
+
+            return qrcodes; // Return an array of QR code objects with product names
         } else {
-            console.log("No products found in database.");
-            return [];
+            return []; // No QR codes found
         }
     } catch (error) {
-        console.error("Error fetching products from Realtime Database:", error);
-        throw new Error(error.message);
+        console.error('Error fetching QR codes from the database:', error);
+        throw new Error('Failed to fetch QR codes');
     }
 };
 
 
 
+export const saveProductName = async (qrId, productName) => {
+    try {
+        // Get a reference to the Realtime Database
+        const db = getDatabase();
 
+        // Reference to the specific QR code using qrId
+        const qrRef = ref(db, 'qrcodes/' + qrId);
 
+        // Update the productName field of the specific QR code
+        await update(qrRef, { productName });
 
-
+    } catch (error) {
+        console.error('Error saving product name:', error);
+        throw new Error('Error saving product name');
+    }
+};

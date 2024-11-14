@@ -1,99 +1,264 @@
 import { useState, useEffect } from 'react';
-import AddQrcode from "./AddQrcode";
-import { Container, Table, Spinner, Alert, Image, Button } from 'react-bootstrap';
-import { fetchProductsWithQRCodes } from '../../../services/ProductService';
+import { Button, Table, Spinner, Modal, ListGroup, Form } from 'react-bootstrap';
+import AddQrcode from './AddQrcode';  // If you are still using this
+import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
+import { jsPDF } from 'jspdf';
 
-function ProductListWithQRCodes() {
-    const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState('');
+function ViewQrCode() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [qrCodes, setQrCodes] = useState([]);
+    const [productNames, setProductNames] = useState({});
+    const [savedProductNames, setSavedProductNames] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [selectedQrcodes, setSelectedQrcodes] = useState([]);
+    const [showPrintModal, setShowPrintModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [currentProductName, setCurrentProductName] = useState('');
+    const [currentQrId, setCurrentQrId] = useState(null);
 
-    // Fetch products on component mount
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+    const closePrintModal = () => setShowPrintModal(false);
+    const closeEditModal = () => setShowEditModal(false);
+
     useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true);
-            setError('');
-
+        // Function to fetch QR codes and product names
+        const fetchQrCodesAndProducts = async () => {
             try {
-                const productList = await fetchProductsWithQRCodes();
-                setProducts(productList);
-            } catch (err) {
-                setError(`Error fetching products: ${err.message}`);
+                const fetchedQrcodes = await fetchQrcodesFromDatabase();
+                setQrCodes(fetchedQrcodes);
+                const initialProductNames = fetchedQrcodes.reduce((acc, qr) => {
+                    acc[qr.id] = qr.productName || '';
+                    return acc;
+                }, {});
+                setProductNames(initialProductNames);
+                setSavedProductNames(initialProductNames);
+            } catch (error) {
+                console.error('Error fetching QR codes or products:', error);
             } finally {
                 setIsLoading(false);
             }
         };
 
-        fetchData();
+        fetchQrCodesAndProducts();
+
+        // Set an interval to re-fetch data every 5 seconds
+        const intervalId = setInterval(fetchQrCodesAndProducts, 5000); // 5 seconds interval
+
+        // Cleanup interval on component unmount
+        return () => clearInterval(intervalId);
     }, []);
 
-    const [showModal, setShowModal] = useState(false);
+    const handleToggleSelection = (qr) => {
+        setSelectedQrcodes((prev) => {
+            const isSelected = prev.some((selectedQr) => selectedQr.id === qr.id);
+            if (isSelected) {
+                return prev.filter((selectedQr) => selectedQr.id !== qr.id);
+            } else {
+                return [...prev, qr];
+            }
+        });
+    };
 
-    // Handle opening the modal
-    const handleShowModal = () => setShowModal(true);
+    const handleShowPrintModal = () => setShowPrintModal(true);
 
-    // Handle closing the modal
-    const handleCloseModal = () => setShowModal(false);
+    const generatePDF = () => {
+        const doc = new jsPDF();
+        let yOffset = 10;
+
+        selectedQrcodes.forEach((qr, index) => {
+            const img = new Image();
+            img.src = qr.qrcodeBase64;
+            doc.addImage(img, 'PNG', 10, yOffset, 30, 30);
+            yOffset += 35;
+
+            doc.text(`QR Code #${index + 1}:`, 50, yOffset);
+            yOffset += 10;
+
+            doc.text(qr.productName || 'No Product Name', 50, yOffset);
+            yOffset += 10;
+
+            if (yOffset > 270) {
+                doc.addPage();
+                yOffset = 10;
+            }
+        });
+
+        // Save the generated PDF
+        doc.save('qr-codes.pdf');
+
+        // After printing, clear the selected QR codes
+        setSelectedQrcodes([]);
+        setShowPrintModal(false); // Close the print modal
+    };
+
+
+    const sortedQrCodes = [
+        ...qrCodes.filter(qr => !productNames[qr.id]),
+        ...qrCodes.filter(qr => productNames[qr.id]),
+    ];
+
+    const handleOpenEditModal = (qrId) => {
+        setCurrentQrId(qrId);
+        setCurrentProductName(productNames[qrId] || '');
+        setShowEditModal(true);
+    };
+
+    const handleSaveProductNameInModal = async () => {
+        const productName = currentProductName;
+
+        if (!productName) {
+            alert('Please enter a product name.');
+            return;
+        }
+
+        try {
+            await saveProductName(currentQrId, productName);
+            // Immediately update state without re-fetching
+            setProductNames(prevState => ({
+                ...prevState,
+                [currentQrId]: productName,
+            }));
+            setSavedProductNames(prevState => ({
+                ...prevState,
+                [currentQrId]: productName,
+            }));
+            setShowEditModal(false);
+            alert('Product name saved successfully!');
+        } catch (error) {
+            console.error('Error saving product name:', error);
+            alert('Failed to save product name.');
+        }
+    };
 
     return (
-        <Container fluid="lg">
-            <h3>Product List with QR Codes</h3>
-            <div>
-                <Button variant="primary" onClick={handleShowModal}>
-                    Set QR Code for Product
+        <>
+            <div className="mb-4">
+                <Button variant="primary" onClick={openModal}>
+                    Generate QR Code
                 </Button>
-                <AddQrcode
-                    showModal={showModal}
-                    handleCloseModal={handleCloseModal}
-                />
+                <Button variant="secondary" onClick={handleShowPrintModal} className="ml-2">
+                    View Selected QrCodes
+                </Button>
+                <AddQrcode show={isModalOpen} onClose={closeModal} />
             </div>
 
-            {error && <Alert variant="danger">{error}</Alert>}
-            {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
-
-            {!isLoading && products.length === 0 && (
-                <Alert variant="info">No products found with QR codes.</Alert>
-            )}
-
-            {!isLoading && products.length > 0 && (
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>SKU</th>
-                            <th>Category</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>QR Code</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product) => (
-                            <tr key={product.id}>
-                                <td>{product.productName}</td>
-                                <td>{product.sku}</td>
-                                <td>{product.category}</td>
-                                <td>{product.quantity}</td>
-                                <td>{product.price}</td>
-                                <td>
-                                    {product.qrCodeData ? (
-                                        <Image
-                                            src={product.qrCodeData}
-                                            alt="QR Code"
-                                            style={{ width: '100px', height: '100px' }}
-                                            fluid
-                                        />
-                                    ) : (
-                                        'No QR Code'
-                                    )}
-                                </td>
+            <div className="mt-4">
+                {isLoading ? (
+                    <div className="text-center">
+                        <Spinner animation="border" variant="primary" />
+                        <p>Loading QR Codes...</p>
+                    </div>
+                ) : (
+                    <Table striped bordered hover responsive>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>QR Code</th>
+                                <th>Product Name</th>
+                                <th>Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </Table>
-            )}
-        </Container>
+                        </thead>
+                        <tbody>
+                            {sortedQrCodes.map((qr, index) => {
+                                const isSaved = Boolean(savedProductNames[qr.id]);
+                                const productName = productNames[qr.id] || '';
+                                const isSelected = selectedQrcodes.some((selectedQr) => selectedQr.id === qr.id);
+
+                                return (
+                                    <tr key={qr.id}>
+                                        <td>{index + 1}</td>
+                                        <td>
+                                            <img
+                                                src={qr.qrcodeBase64}
+                                                alt="QR Code"
+                                                style={{ width: '100px', height: '100px' }}
+                                            />
+                                        </td>
+                                        <td>
+                                            {isSaved ? (
+                                                <span>{productName}</span>
+                                            ) : (
+                                                <Button variant="link" onClick={() => handleOpenEditModal(qr.id)}>
+                                                    Add Product Name
+                                                </Button>
+                                            )}
+                                        </td>
+                                        <td>
+                                            <Button
+                                                variant={isSelected ? "danger" : "info"}
+                                                onClick={() => handleToggleSelection(qr)}
+                                                style={{ marginLeft: '8px' }}
+                                            >
+                                                {isSelected ? 'Remove from Print' : 'Add to Print'}
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </Table>
+                )}
+            </div>
+
+            <Modal show={showPrintModal} onHide={closePrintModal} size="lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>Selected QR Codes for Printing</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ListGroup>
+                        {selectedQrcodes.length > 0 ? (
+                            selectedQrcodes.map((qr) => (
+                                <ListGroup.Item key={qr.id}>
+                                    <img
+                                        src={qr.qrcodeBase64}
+                                        alt={`QR Code ${qr.id}`}
+                                        style={{ width: '50px', height: '50px', marginRight: '10px' }}
+                                    />
+                                    {qr.productName || 'No Product Name'}
+                                </ListGroup.Item>
+                            ))
+                        ) : (
+                            <p>No QR codes selected for printing.</p>
+                        )}
+                    </ListGroup>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={closePrintModal}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={generatePDF}>
+                        Print QR Codes as PDF
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Modal for Editing Product Name */}
+            <Modal show={showEditModal} onHide={closeEditModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Product Name</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Group>
+                        <Form.Label>Product Name</Form.Label>
+                        <Form.Control
+                            type="text"
+                            value={currentProductName}
+                            onChange={(e) => setCurrentProductName(e.target.value)}
+                        />
+                    </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={closeEditModal}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleSaveProductNameInModal}>
+                        Save
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     );
 }
 
-export default ProductListWithQRCodes;
+export default ViewQrCode;

@@ -1,9 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { addNewProduct, addCategory, getCategories } from '../../../services/ProductService';
+import { addNewProduct, addCategory, getCategoriesNewAssets } from '../../../services/ProductService';
 import { FaBoxOpen } from "react-icons/fa";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
+
+
 
 function NewAssets() {
     const location = useLocation();
@@ -35,7 +37,7 @@ function NewAssets() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const fetchedCategories = await getCategories();
+                const fetchedCategories = await getCategoriesNewAssets();
                 setCategories(fetchedCategories);
             } catch (error) {
                 setError(error.message);
@@ -55,8 +57,8 @@ function NewAssets() {
         return `${productCode}-${sizeCode}-${colorCode}-${wattageCode}-${voltageCode}-${uniqueID}`;
     };
 
-    const handleCategoryChange = (categoryId) => {
-        setCategory(categoryId);
+    const handleCategoryChange = (e) => {
+        setCategory(e.target.value);
     };
 
     const handleAddNewCategoryClick = () => {
@@ -67,10 +69,7 @@ function NewAssets() {
         if (newCategory) {
             try {
                 await addCategory(newCategory);
-                setCategories(prevCategories => [
-                    ...prevCategories,
-                    { id: newCategory, name: newCategory }
-                ]);
+                setCategories([...categories, newCategory]);
                 setCategory(newCategory);
                 setNewCategory('');
                 setIsAddingNewCategory(false);
@@ -81,8 +80,20 @@ function NewAssets() {
     };
 
     const handleDone = async () => {
-        if (!productName || !size || !color || !category || !quantity || !price) {
+        // Validate all required fields
+        if (!productName || !category || !quantity || !price) {
             setError('Please fill in all required fields.');
+            return;
+        }
+
+        // Additional validation for numeric fields
+        if (quantity < 1) {
+            setError('Quantity must be at least 1.');
+            return;
+        }
+
+        if (price <= 0) {
+            setError('Price must be greater than 0.');
             return;
         }
 
@@ -110,6 +121,7 @@ function NewAssets() {
         }
     };
 
+
     const [backBtn] = useState([
         {
             btnIcon: <FaBoxOpen size={30} />,
@@ -121,35 +133,38 @@ function NewAssets() {
         <Container fluid className='m-0 p-0'>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
-                <Row style={{ padding: 20, height: '80vh', paddingTop: 25 }}>
+                <Row style={{ boxSizing: 'border-box', padding: 20, height: '80vh', paddingTop: 25 }}>
+
                     <Col lg={4} sm={12}>
                         <Row className="justify-content-center">
                             <Col md={8}>
                                 <Form>
-                                    <Form.Group controlId="barcode">
-                                        <Form.Label>Barcode</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            value={barcode}
-                                            readOnly
-                                        />
-                                    </Form.Group>
-                                    <Form.Group controlId="sku">
-                                        <Form.Label>SKU</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            value={generateSKU(productName, size, color, wattage, voltage)}
-                                            readOnly
-                                        />
-                                    </Form.Group>
-                                    <Form.Group controlId="dateAdded">
-                                        <Form.Label>Date Added</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            value={dateAdded}
-                                            readOnly
-                                        />
-                                    </Form.Group>
+                                    <div className="mb-3">
+                                        <Form.Group controlId="barcode">
+                                            <Form.Label>Barcode</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                value={barcode}
+                                                readOnly
+                                            />
+                                        </Form.Group>
+                                        <Form.Group controlId="sku">
+                                            <Form.Label>SKU</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                value={generateSKU(productName, size, color, wattage, voltage)}
+                                                readOnly
+                                            />
+                                        </Form.Group>
+                                        <Form.Group controlId="dateAdded">
+                                            <Form.Label>Date Added</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                value={dateAdded}
+                                                readOnly
+                                            />
+                                        </Form.Group>
+                                    </div>
                                 </Form>
                             </Col>
                         </Row>
@@ -173,6 +188,7 @@ function NewAssets() {
                                         />
                                         {!productName && <small className="text-danger">Please enter a product name.</small>}
                                     </Form.Group>
+
 
                                     <Row className='mt-1'>
                                         <Col lg={6} sm={12}>
@@ -230,80 +246,68 @@ function NewAssets() {
                                             </Form.Group>
                                         </Col>
 
+                                        <Col lg={6} sm={12}>
+                                            <Form.Group controlId="quantity" className="mt-3">
+                                                <p className='m-0'>Quantity<span className="text-danger">*</span></p>
+                                                <Form.Control
+                                                    type="number"
+                                                    value={quantity}
+                                                    min={1}
+                                                    placeholder="Enter quantity (e.g., 10)"
+                                                    onChange={(e) => setQuantity(Number(e.target.value))}
+                                                    required
+                                                />
+                                                {quantity < 1 && <small className="text-danger">Please enter a quantity of at least 1.</small>}
+                                            </Form.Group>
+                                        </Col>
+
+                                        <Col lg={6} sm={12}>
+                                            <Form.Group controlId="price" className="mt-3">
+                                                <p className='m-0'>Price<span className="text-danger">*</span></p>
+                                                <Form.Control
+                                                    type="number"
+                                                    placeholder="Enter price (e.g., 100.00)"
+                                                    value={price}
+                                                    onChange={(e) => setPrice(e.target.value)}
+                                                    required
+                                                    step="0.01"
+                                                    style={{ appearance: 'textfield' }}
+                                                />
+                                                {!price && <small className="text-danger">Please enter a price.</small>}
+                                            </Form.Group>
+                                        </Col>
                                     </Row>
-                                    <Form.Group controlId="category" className="mt-4">
-                                        <p className='m-0'>Category <span className="text-danger">*</span></p>
-                                        {isAddingNewCategory ? (
-                                            <Row>
-                                                <Col sm={8}>
-                                                    <Form.Control
-                                                        type="text"
-                                                        placeholder="New Category"
-                                                        value={newCategory}
-                                                        onChange={(e) => setNewCategory(e.target.value)}
-                                                    />
-                                                </Col>
-                                                <Col sm={4}>
-                                                    <Button variant="success" onClick={handleSaveNewCategory}>Save</Button>
-                                                </Col>
-                                            </Row>
-                                        ) : (
-                                            <div>
-                                                <Dropdown>
-                                                    <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-                                                        {category ? categories.find(c => c.id === category)?.name : 'Select Category'}
-                                                    </Dropdown.Toggle>
 
-                                                    <Dropdown.Menu>
-                                                        {categories.map((cat) => (
-                                                            <Dropdown.Item key={cat.id} onClick={() => handleCategoryChange(cat.id)}>
-                                                                {cat.name}
-                                                            </Dropdown.Item>
-                                                        ))}
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
-                                                <Button variant="link" className="mt-2" onClick={handleAddNewCategoryClick}>
-                                                    Add New Category
-                                                </Button>
-                                            </div>
-                                        )}
-                                        {!category && !isAddingNewCategory && <small className="text-danger">Please select a category.</small>}
-                                    </Form.Group>
-
-
-                                    <Form.Group controlId="quantity" className="mt-4">
-                                        <p className='m-0'>Quantity <span className="text-danger">*</span></p>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Enter quantity"
-                                            value={quantity}
-                                            onChange={(e) => setQuantity(e.target.value)}
-                                        />
-                                    </Form.Group>
-
-                                    <Form.Group controlId="price" className="mt-4">
-                                        <p className='m-0'>Price <span className="text-danger">*</span></p>
-                                        <Form.Control
-                                            type="number"
-                                            placeholder="Enter price"
-                                            value={price}
-                                            onChange={(e) => setPrice(e.target.value)}
-                                        />
-                                    </Form.Group>
-
-                                    <div className="d-flex justify-content-end mt-3">
-                                        <Button variant="danger" className="m-2" onClick={() => navigate('/ProductList')}>
-                                            Cancel
-                                        </Button>
-                                        <Button
-                                            variant="primary"
-                                            onClick={handleDone}
-                                            disabled={isLoading}
-                                        >
-                                            {isLoading ? 'Saving...' : 'Save Product'}
-                                        </Button>
-                                    </div>
                                 </div>
+
+                                <Col md={12}>
+                                    <Form.Group controlId="category" className="mt-3">
+                                        <p className='m-0'>Category<span className="text-danger">*</span></p>
+                                        <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
+                                            <option value="">Select Category</option>
+                                            {categories.map((cat, index) => (
+                                                <option key={index} value={cat}>{cat}</option>  // Just use 'cat' here, which is a category name
+                                            ))}
+                                        </Form.Control>
+                                        {!category && <small className="text-danger mx-2">Please select a category.</small>}
+                                        <Button variant="link" onClick={handleAddNewCategoryClick} className='m-0 p-0'>+ Add New Category</Button>
+                                    </Form.Group>
+
+                                    {isAddingNewCategory && (
+                                        <Form.Group controlId="newCategory" className="mt-3">
+                                            <p className='m-0'>New Category</p>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Enter new category (e.g., Electronics)"
+                                                value={newCategory}
+                                                onChange={(e) => setNewCategory(e.target.value)}
+                                            />
+                                            <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
+                                        </Form.Group>
+                                    )}
+
+                                    <Button variant="success" className="my-3 px-5" onClick={handleDone}>Done</Button>
+                                </Col>
                             </Col>
                         </Row>
                     </Col>

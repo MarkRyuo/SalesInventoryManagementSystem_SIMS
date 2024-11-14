@@ -1,233 +1,94 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from 'react';
-import { Container, Form, Button, Row, Col, Alert, Spinner, Modal } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
-import QRious from 'qrious';
-import { getCategories, saveProductToDatabase } from '../../../services/ProductService';
+import { useState, useRef } from 'react';
+import QRCode from 'qrious';
+import { Modal, Button, Spinner, Alert } from 'react-bootstrap';
+import { addQrcodeToDatabase, checkQrcodeExists } from '../../../services/ProductService'; // Import the database function
 
-function AddQrcode({ showModal, handleCloseModal }) {
-    const location = useLocation();
-    const barcode = location.state?.barcode || '';
+function AddQrcode({ onClose, show }) {
+    const [isSaving, setIsSaving] = useState(false); // Track saving state
+    const [error, setError] = useState(null); // Track error state
+    const canvasRef = useRef(null);
 
-    const [productName, setProductName] = useState('');
-    const [size, setSize] = useState('');
-    const [color, setColor] = useState('');
-    const [wattage, setWattage] = useState('');
-    const [voltage, setVoltage] = useState('');
-    const [quantity, setQuantity] = useState(1);
-    const [price, setPrice] = useState('');
-    const [category, setCategory] = useState('');
-    const [categories, setCategories] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState('');
-    const [qrcodeData, setQrcodeData] = useState('');
-    const [barcodeValue, setBarcode] = useState(barcode);
-    const [isQRCodeGenerated, setIsQRCodeGenerated] = useState(false);
+    const generateQRCode = () => {
+        // Generate a fixed value QR code (for example, use a product ID or a unique identifier)
+        const qrcodeValue = `product-${Date.now()}`;  // Use timestamp or any unique value for QR code
 
-    const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-
-    // SKU Generation Function
-    const generateSKU = (productName, size, color, wattage, voltage) => {
-        const productCode = productName.slice(0, 3).toUpperCase().replace(/\s+/g, '');
-        const sizeCode = size ? size.toUpperCase() : '';
-        const colorCode = color ? color.toUpperCase() : '';
-        const wattageCode = wattage ? `${wattage}W` : '';
-        const voltageCode = voltage ? `${voltage}V` : '';
-        const uniqueID = Date.now().toString().slice(-4);
-        return `${productCode}-${sizeCode}-${colorCode}-${wattageCode}-${voltageCode}-${uniqueID}`;
+        setError(null); // Clear any previous error
+        new QRCode({
+            element: canvasRef.current,
+            value: qrcodeValue,  // Set the fixed value for the QR code
+            size: 200,  // Adjust the size as needed
+        });
     };
 
-    // Barcode Generation Function
-    const generateBarcode = () => {
-        return `BAR-${Date.now()}`;
-    };
+    const saveQRCode = async () => {
+        setIsSaving(true); // Show saving modal
+        // Get the QR code as a Base64 string from the canvas
+        const qrcodeBase64 = canvasRef.current.toDataURL(); // Converts the canvas content to Base64
 
-    // Fetch Categories
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const categories = await getCategories();
-                setCategories(categories);
-            } catch (error) {
-                setError(`Error fetching categories: ${error.message}`);
-            }
-        };
-        fetchCategories();
-    }, []);
-
-    // Handle QR Code generation using Qrious
-    const handleGenerateQRCode = () => {
-        if (!productName || !quantity || !price || !category) {
-            setError('Please fill in all required fields.');
-            return;
-        }
-
-        const generatedData = generateSKU(productName, size, color, wattage, voltage);
-        if (!generatedData) {
-            setError('Failed to generate QR code data.');
-            return;
-        }
+        // Generate a unique identifier for the QR code
+        const qrcodeId = `qr-${Date.now()}`;  // Use the timestamp as a unique ID for this QR code
 
         try {
-            // Initialize Qrious instance
-            const qr = new QRious({
-                value: generatedData,
-                size: 200,
-                level: 'H', // High error correction level
-            });
-
-            // Set QR Code as Base64
-            const qrCodeBase64 = qr.toDataURL();
-            setQrcodeData(qrCodeBase64); // Set the generated QR code Base64 data
-            setBarcode(generateBarcode());
-            setIsQRCodeGenerated(true);
-            setError('');
-        } catch (error) {
-            setError('Failed to generate QR Code with Qrious.');
-            console.error(error);
-        }
-    };
-
-    // Save Product Data Handler
-    const handleSave = async () => {
-        if (!productName || !category || !quantity || price <= 0) {
-            setError('Please fill in all required fields and ensure the price is greater than 0.');
-            return;
-        }
-
-        try {
-            setError('');
-            setIsLoading(true);
-
-            const sku = generateSKU(productName, size, color, wattage, voltage);
-            const barcode = generateBarcode();
-
-            if (!qrcodeData) {
-                setError('QR Code data is missing.');
+            // Check if the QR code already exists in the database
+            const exists = await checkQrcodeExists(qrcodeBase64);
+            if (exists) {
+                setError("This QR code already exists!");
+                setIsSaving(false); // Hide saving modal
                 return;
             }
 
-            const productData = {
-                barcode,
-                productName,
-                size,
-                color,
-                wattage,
-                voltage,
-                quantity,
-                sku,
-                price,
-                category,
-            };
-
-            // Save product data along with QR Code to the database
-            await saveProductToDatabase(productData, qrcodeData);
-
-            handleCloseModal();
+            // Save the Base64 string to the database
+            await addQrcodeToDatabase(qrcodeId, qrcodeBase64);
+            console.log('QR Code saved to database successfully!');
         } catch (error) {
-            setError(`Error saving product: ${error.message}`);
+            console.error('Error saving QR Code to database:', error);
+            setError('Failed to save QR code.');
         } finally {
-            setIsLoading(false);
+            setIsSaving(false); // Hide saving modal after operation is complete
         }
     };
 
     return (
-        <Modal show={showModal} onHide={handleCloseModal} size="lg">
-            <Modal.Header closeButton>
-                <Modal.Title>Set QR Code for Product</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Container fluid='lg'>
-                    <Row style={{ padding: 20 }}>
-                        <Col lg={4} sm={12}>
-                            <Form>
-                                <Form.Group controlId="barcode">
-                                    <Form.Label>Barcode</Form.Label>
-                                    <Form.Control type="text" value={barcodeValue} readOnly />
-                                </Form.Group>
-                                <Form.Group controlId="sku">
-                                    <Form.Label>SKU</Form.Label>
-                                    <Form.Control type="text" value={generateSKU(productName, size, color, wattage, voltage)} readOnly />
-                                </Form.Group>
-                            </Form>
-                        </Col>
+        <>
+            {/* Main Modal */}
+            <Modal show={show} onHide={onClose} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>QR Code Generator</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {error && <Alert variant="danger">{error}</Alert>} {/* Display error if exists */}
 
-                        <Col lg={8} sm={12}>
-                            {error && <Alert variant="danger">{error}</Alert>}
-                            {isLoading && <Spinner animation="border" className="mx-auto d-block" />}
+                    {/* Display the QR code */}
+                    <canvas ref={canvasRef} className="mt-3" />
 
-                            <Form.Group controlId="productName">
-                                <Form.Label>Product Name <span className="text-danger">*</span></Form.Label>
-                                <Form.Control type="text" placeholder="Enter product name" value={productName} onChange={(e) => setProductName(e.target.value)} required />
-                            </Form.Group>
-
-                            <Form.Group controlId="size">
-                                <Form.Label>Product Size (Optional)</Form.Label>
-                                <Form.Control as="select" value={size} onChange={(e) => setSize(e.target.value)}>
-                                    <option value="">Select Size</option>
-                                    {sizes.map((size) => <option key={size} value={size}>{size}</option>)}
-                                </Form.Control>
-                            </Form.Group>
-
-                            <Form.Group controlId="color">
-                                <Form.Label>Product Color (Optional)</Form.Label>
-                                <Form.Control type="text" placeholder="Enter color" value={color} onChange={(e) => setColor(e.target.value)} />
-                            </Form.Group>
-
-                            <Form.Group controlId="wattage">
-                                <Form.Label>Wattage</Form.Label>
-                                <Form.Control type="text" placeholder="Enter wattage (e.g., 60W)" value={wattage} onChange={(e) => setWattage(e.target.value)} />
-                            </Form.Group>
-
-                            <Form.Group controlId="voltage">
-                                <Form.Label>Voltage</Form.Label>
-                                <Form.Control type="text" placeholder="Enter voltage (e.g., 220V)" value={voltage} onChange={(e) => setVoltage(e.target.value)} />
-                            </Form.Group>
-
-                            <Form.Group controlId="quantity">
-                                <Form.Label>Quantity <span className="text-danger">*</span></Form.Label>
-                                <Form.Control type="number" value={quantity} min={1} onChange={(e) => setQuantity(Number(e.target.value))} required />
-                            </Form.Group>
-
-                            <Form.Group controlId="price">
-                                <Form.Label>Price <span className="text-danger">*</span></Form.Label>
-                                <Form.Control type="number" value={price} min={0} onChange={(e) => setPrice(Number(e.target.value))} required />
-                            </Form.Group>
-
-                            <Form.Group controlId="category">
-                                <Form.Label>Category <span className="text-danger">*</span></Form.Label>
-                                <Form.Control as="select" value={category} onChange={(e) => setCategory(e.target.value)} required>
-                                    <option value="">Select Category</option>
-                                    {categories.map((category, index) => (
-                                        <option key={index} value={category.name}>{category.name}</option>
-                                    ))}
-                                </Form.Control>
-                            </Form.Group>
-
-                            <Button variant="primary" onClick={handleGenerateQRCode} className="mt-3">
-                                Generate QR Code
-                            </Button>
-
-                            {isQRCodeGenerated && (
-                                <div className="mt-3">
-                                    <img src={qrcodeData} alt="QR Code" style={{ width: '200px', height: '200px' }} />
-                                </div>
+                    <div>
+                        <Button variant="primary" onClick={generateQRCode} className="mt-3">
+                            Generate QR Code
+                        </Button>
+                        <Button variant="success" onClick={saveQRCode} className="mt-3 ml-2" disabled={isSaving}>
+                            {isSaving ? (
+                                <>
+                                    <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                                    {' '}Saving...
+                                </>
+                            ) : (
+                                'Save QR Code'
                             )}
+                        </Button>
+                    </div>
+                </Modal.Body>
+            </Modal>
 
-                            <Button
-                                variant="success"
-                                onClick={handleSave}
-                                className="mt-3"
-                                disabled={!isQRCodeGenerated} // Disable Save until QR code is generated
-                            >
-                                Save Product
-                            </Button>
-                        </Col>
-                    </Row>
-                </Container>
-            </Modal.Body>
-        </Modal>
+            {/* Loading Modal */}
+            <Modal show={isSaving} centered>
+                <Modal.Body className="text-center">
+                    <Spinner animation="border" variant="primary" />
+                    <p className="mt-3">Saving QR Code...</p>
+                </Modal.Body>
+            </Modal>
+        </>
     );
 }
 
-export default AddQrcode
+export default AddQrcode;
