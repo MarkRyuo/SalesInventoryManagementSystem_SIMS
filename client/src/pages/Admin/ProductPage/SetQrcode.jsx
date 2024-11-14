@@ -159,8 +159,6 @@ function ViewQrCode() {
                                         );
                                     })}
                             </tbody>
-
-
                     </Table>
                 )}
             </div>
