@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { addNewProduct, addCategory, getCategories } from '../../../services/ProductService';
+import { addNewProduct, addCategory, getCategoriesNewAssets } from '../../../services/ProductService';
 import { FaBoxOpen } from "react-icons/fa";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
 
@@ -37,7 +37,7 @@ function NewAssets() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const fetchedCategories = await getCategories();
+                const fetchedCategories = await getCategoriesNewAssets();
                 setCategories(fetchedCategories);
             } catch (error) {
                 setError(error.message);
