@@ -102,51 +102,65 @@ function ViewQrCode() {
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {qrCodes.slice().reverse().map((qr, index) => {
-                                const isSaved = Boolean(savedProductNames[qr.id]);
+                            <tbody>
+                                {qrCodes
+                                    .slice()
+                                    .sort((a, b) => {
+                                        // Sort: QR codes without a product name come first
+                                        const hasNameA = savedProductNames[a.id] ? 1 : 0;
+                                        const hasNameB = savedProductNames[b.id] ? 1 : 0;
+                                        return hasNameA - hasNameB;
+                                    })
+                                    .map((qr, index) => {
+                                        const isSaved = Boolean(savedProductNames[qr.id]);
+                                        const productName = productNames[qr.id] || '';
 
-                                return (
-                                    <tr key={qr.id}>
-                                        <td>{index + 1}</td>
-                                        <td>{qr.id}</td>
-                                        <td>
-                                            <img
-                                                src={qr.qrcodeBase64}
-                                                alt="QR Code"
-                                                style={{ width: '100px', height: '100px' }}
-                                            />
-                                        </td>
-                                        <td>
-                                            <input
-                                                type="text"
-                                                value={productNames[qr.id] || ''}
-                                                onChange={(e) => handleProductNameChange(qr.id, e.target.value)}
-                                                placeholder="Enter product name"
-                                                disabled={isSaved}
-                                            />
-                                        </td>
-                                        <td>
-                                            {!isSaved ? (
-                                                <Button
-                                                    variant="success"
-                                                    onClick={() => handleSaveProductName(qr.id)}
-                                                >
-                                                    Save
-                                                </Button>
-                                            ) : (
-                                                <Button
-                                                    variant="warning"
-                                                    onClick={() => handleEditProductName(qr.id)}
-                                                >
-                                                    Edit
-                                                </Button>
-                                            )}
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
+                                        return (
+                                            <tr key={qr.id}>
+                                                <td>{index + 1}</td>
+                                                <td>{qr.id}</td>
+                                                <td>
+                                                    <img
+                                                        src={qr.qrcodeBase64}
+                                                        alt="QR Code"
+                                                        style={{ width: '100px', height: '100px' }}
+                                                    />
+                                                </td>
+                                                <td>
+                                                    {isSaved ? (
+                                                        <span>{productName}</span>
+                                                    ) : (
+                                                        <input
+                                                            type="text"
+                                                            value={productName}
+                                                            onChange={(e) => handleProductNameChange(qr.id, e.target.value)}
+                                                            placeholder="Enter product name"
+                                                        />
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {!isSaved ? (
+                                                        <Button
+                                                            variant="success"
+                                                            onClick={() => handleSaveProductName(qr.id)}
+                                                        >
+                                                            Save
+                                                        </Button>
+                                                    ) : (
+                                                        <Button
+                                                            variant="warning"
+                                                            onClick={() => handleEditProductName(qr.id)}
+                                                        >
+                                                            Edit
+                                                        </Button>
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                            </tbody>
+
+
                     </Table>
                 )}
             </div>
