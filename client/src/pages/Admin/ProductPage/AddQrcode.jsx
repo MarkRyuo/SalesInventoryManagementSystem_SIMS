@@ -1,19 +1,18 @@
 /* eslint-disable react/prop-types */
-import { useRef, useState } from 'react';
+import { useRef} from 'react';
 import QRCode from 'qrious';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button} from 'react-bootstrap';
 
 function AddQrcode({ onClose, show }) {
-    const [text, setText] = useState('');
     const canvasRef = useRef(null);
 
     const generateQRCode = () => {
-        const qr = new QRCode({
+        new QRCode({
             element: canvasRef.current,
-            value: text,
-            size: 200, // Adjust the size as needed
+            size: 200,
         });
     };
+
 
     return (
         <Modal show={show} onHide={onClose} centered>
