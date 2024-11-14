@@ -64,14 +64,6 @@ function ViewQrCode() {
         }
     };
 
-    const handleEditProductName = (qrId) => {
-        setProductNames((prevState) => ({
-            ...prevState,
-            [qrId]: savedProductNames[qrId],
-        }));
-    };
-
-    // Handle adding/removing QR codes to the list for printing
     const handleToggleSelection = (qr) => {
         setSelectedQrcodes((prev) => {
             const isSelected = prev.some((selectedQr) => selectedQr.id === qr.id);
@@ -83,38 +75,31 @@ function ViewQrCode() {
         });
     };
 
-    // Handle showing the print modal
     const handleShowPrintModal = () => setShowPrintModal(true);
 
-    // Generate PDF of selected QR codes
-    // Generate PDF of selected QR codes
     const generatePDF = () => {
         const doc = new jsPDF();
         let yOffset = 10;
 
         selectedQrcodes.forEach((qr, index) => {
-            // Add image
             const img = new Image();
             img.src = qr.qrcodeBase64;
-            doc.addImage(img, 'PNG', 10, yOffset, 30, 30); // Position and size of the image
-            yOffset += 35; // Increment position for next image
+            doc.addImage(img, 'PNG', 10, yOffset, 30, 30);
+            yOffset += 35;
 
-            // Use the index for serial number (e.g., QR code #1, QR code #2, etc.)
-            doc.text(`QR Code #${index + 1}:`, 50, yOffset); // Add serial number
+            doc.text(`QR Code #${index + 1}:`, 50, yOffset);
             yOffset += 10;
 
-            // Add product name
             doc.text(qr.productName || 'No Product Name', 50, yOffset);
             yOffset += 10;
 
-            // Add a new page if the content overflows
             if (yOffset > 270) {
                 doc.addPage();
-                yOffset = 10; // Reset Y position
+                yOffset = 10;
             }
         });
 
-        doc.save('qr-codes.pdf'); // Save the PDF
+        doc.save('qr-codes.pdf');
     }
 
     return (
@@ -169,7 +154,7 @@ function ViewQrCode() {
                                             ) : (
                                                 <input
                                                     type="text"
-                                                    value={productName}
+                                                    value={productNames[qr.id] || ''}  // Controlled value based on productNames
                                                     onChange={(e) => handleProductNameChange(qr.id, e.target.value)}
                                                     placeholder="Enter product name"
                                                 />
@@ -180,14 +165,10 @@ function ViewQrCode() {
                                                 <Button variant="success" onClick={() => handleSaveProductName(qr.id)}>
                                                     Save
                                                 </Button>
-                                            ) : (
-                                                <Button variant="warning" onClick={() => handleEditProductName(qr.id)}>
-                                                    Edit
-                                                </Button>
-                                            )}
+                                            ) : null}
                                             <Button
-                                                variant={isSelected ? "danger" : "info"} // Toggle button color
-                                                onClick={() => handleToggleSelection(qr)} // Toggle QR selection
+                                                variant={isSelected ? "danger" : "info"}
+                                                onClick={() => handleToggleSelection(qr)}
                                                 style={{ marginLeft: '8px' }}
                                             >
                                                 {isSelected ? 'Remove from Print' : 'Add to Print'}
@@ -201,7 +182,6 @@ function ViewQrCode() {
                 )}
             </div>
 
-            {/* Modal for Viewing Selected QR Codes to Print */}
             <Modal show={showPrintModal} onHide={closePrintModal} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>Selected QR Codes for Printing</Modal.Title>
