@@ -216,8 +216,11 @@ export const getCategories = async () => {
         const snapshot = await get(categoriesRef);
         const categoriesData = snapshot.exists() ? snapshot.val() : {};
 
-        // Return only the category names
-        return Object.keys(categoriesData).map(key => categoriesData[key].name);
+        // Convert the categories object to an array of category names and ids
+        return Object.keys(categoriesData).map(key => ({
+            id: key,
+            name: categoriesData[key].name
+        }));
     } catch (error) {
         throw new Error(`Error retrieving categories: ${error.message}`);
     }
