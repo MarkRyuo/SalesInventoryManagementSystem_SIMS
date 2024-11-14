@@ -10,8 +10,13 @@ function AddQrcode({ onClose, show }) {
     const canvasRef = useRef(null);
 
     const generateQRCode = () => {
+        // Generate a fixed value QR code (for example, use a product ID or a unique identifier)
+        const qrcodeValue = `product-${Date.now()}`;  // Use timestamp or any unique value for QR code
+
+        setError(null); // Clear any previous error
         new QRCode({
             element: canvasRef.current,
+            value: qrcodeValue,  // Set the fixed value for the QR code
             size: 200,  // Adjust the size as needed
         });
     };
@@ -53,7 +58,10 @@ function AddQrcode({ onClose, show }) {
                 </Modal.Header>
                 <Modal.Body>
                     {error && <Alert variant="danger">{error}</Alert>} {/* Display error if exists */}
+
+                    {/* Display the QR code */}
                     <canvas ref={canvasRef} className="mt-3" />
+
                     <div>
                         <Button variant="primary" onClick={generateQRCode} className="mt-3">
                             Generate QR Code
