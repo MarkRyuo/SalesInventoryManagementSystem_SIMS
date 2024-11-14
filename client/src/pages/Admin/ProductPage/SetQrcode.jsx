@@ -84,8 +84,14 @@ function ViewQrCode() {
             }
         });
 
+        // Save the generated PDF
         doc.save('qr-codes.pdf');
+
+        // After printing, clear the selected QR codes
+        setSelectedQrcodes([]);
+        setShowPrintModal(false); // Close the print modal
     };
+
 
     const sortedQrCodes = [
         ...qrCodes.filter(qr => !productNames[qr.id]),
