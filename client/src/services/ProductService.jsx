@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove, push} from 'firebase/database';
 
 
 //* Start of Product
@@ -196,17 +196,34 @@ export const getAllProducts = async () => {
 //? Function to add a new category
 export const addCategory = async (categoryName) => {
     const db = getDatabase();
-    const categoryRef = ref(db, 'categories/' + categoryName); // Save category by name
+    const categoriesRef = ref(db, 'categories');
 
     try {
-        await set(categoryRef, { name: categoryName }); // Store category
+        const newCategoryRef = push(categoriesRef); // Automatically generate a unique ID for the category
+        await set(newCategoryRef, { name: categoryName }); // Store the category with a unique key
     } catch (error) {
         throw new Error(`Error adding category: ${error.message}`);
     }
 };
 
+
 //? Function to retrieve all categories
 export const getCategories = async () => {
+    const db = getDatabase();
+    const categoriesRef = ref(db, 'categories');
+
+    try {
+        const snapshot = await get(categoriesRef);
+        const categoriesData = snapshot.exists() ? snapshot.val() : {};
+
+        // Return only the category names
+        return Object.keys(categoriesData).map(key => categoriesData[key].name);
+    } catch (error) {
+        throw new Error(`Error retrieving categories: ${error.message}`);
+    }
+};
+
+export const getCategoriesNewAssets = async () => {
     const db = getDatabase();
     const categoriesRef = ref(db, 'categories');
 
