@@ -214,15 +214,13 @@ export const getCategories = async () => {
         const snapshot = await get(categoriesRef);
         const categoriesData = snapshot.exists() ? snapshot.val() : {};
 
-        // Convert the categories object to an array of category names and ids
-        return Object.keys(categoriesData).map(key => ({
-            id: key,
-            name: categoriesData[key].name
-        }));
+        // Return only the category names
+        return Object.keys(categoriesData).map(key => categoriesData[key].name);
     } catch (error) {
         throw new Error(`Error retrieving categories: ${error.message}`);
     }
 };
+
 //? Function to delete a category
 export const deleteCategory = async (categoryName) => {
         const db = getDatabase();
