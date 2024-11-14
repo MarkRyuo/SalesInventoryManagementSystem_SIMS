@@ -166,11 +166,19 @@ export const getAllProducts = async () => {
         // Ensure price and tax remain numeric and convert product data into an array
         const formattedProducts = Object.keys(products).map(key => {
             const product = products[key];
-            product.price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
-            product.tax = typeof product.tax === 'number' ? product.tax : parseFloat(product.tax) || 0; // Ensure tax is treated as percentage
-            return product;
-        });
 
+            // Ensure product is an object before proceeding
+            if (typeof product !== 'object' || Array.isArray(product) || !product) {
+                console.warn(`Skipping invalid product data at key: ${key}`);
+                return null; // Skip invalid entries
+            }
+
+            // Ensure price and tax are numeric
+            product.price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
+            product.tax = typeof product.tax === 'number' ? product.tax : parseFloat(product.tax) || 0;
+
+            return product;
+        }).filter(product => product !== null); // Filter out any null values
 
         console.log("Retrieved products:", formattedProducts);
         return formattedProducts;
@@ -179,6 +187,7 @@ export const getAllProducts = async () => {
         throw new Error(`Error retrieving products: ${error.message}`);
     }
 };
+
 
 //! End of Product
 
@@ -481,6 +490,28 @@ export const checkQrcodeExists = async (qrcodeBase64) => {
     } catch (error) {
         console.error('Error checking for existing QR Code:', error);
         throw new Error('Error checking QR Code existence.');
+    }
+};
+
+export const fetchQrcodesFromDatabase = async () => {
+    try {
+        const db = getDatabase();
+        const qrcodesRef = ref(db, 'qrcodes'); // Reference to the qrcodes node in your database
+        const snapshot = await get(qrcodesRef);
+
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            const qrcodes = Object.keys(data).map(key => ({
+                id: key,
+                ...data[key]
+            }));
+            return qrcodes; // Return an array of QR code objects
+        } else {
+            return []; // No QR codes found
+        }
+    } catch (error) {
+        console.error('Error fetching QR codes from the database:', error);
+        throw new Error('Failed to fetch QR codes');
     }
 };
 
