@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove, push} from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
 
 
 //* Start of Product
@@ -196,11 +196,10 @@ export const getAllProducts = async () => {
 //? Function to add a new category
 export const addCategory = async (categoryName) => {
     const db = getDatabase();
-    const categoriesRef = ref(db, 'categories');
+    const categoryRef = ref(db, 'categories/' + categoryName); // Save category by name
 
     try {
-        const newCategoryRef = push(categoriesRef); // Automatically generate a unique ID for the category
-        await set(newCategoryRef, { name: categoryName }); // Store the category with a unique key
+        await set(categoryRef, { name: categoryName }); // Store category
     } catch (error) {
         throw new Error(`Error adding category: ${error.message}`);
     }
