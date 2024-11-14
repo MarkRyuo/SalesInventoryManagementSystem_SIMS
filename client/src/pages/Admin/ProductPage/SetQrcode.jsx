@@ -55,6 +55,7 @@ function ViewQrCode() {
                             <tr>
                                 <th>ID</th>
                                 <th>QR Code</th>
+                                <th>Product Name</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,6 +68,11 @@ function ViewQrCode() {
                                             alt="QR Code"
                                             style={{ width: '100px', height: '100px' }} // Adjust the size of the QR code image
                                         />
+                                    </td>
+                                    <td>
+                                        {/* if the qrcode 
+                                                check the products if qrcode exist display the Product name
+                                         */}
                                     </td>
                                 </tr>
                             ))}
