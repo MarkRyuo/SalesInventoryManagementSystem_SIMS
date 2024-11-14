@@ -533,7 +533,18 @@ export const fetchQrcodesFromDatabase = async () => {
 
 
 
+export const fetchProductsFromDatabase = async () => {
+    const db = getDatabase();
+    const productsRef = ref(db, 'products'); // Reference to products in the database
 
-
-
-
+    try {
+        const snapshot = await get(productsRef);
+        if (!snapshot.exists()) {
+            throw new Error('Products data not found');
+        }
+        return snapshot.val(); // Return products data
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        throw new Error('Unable to fetch products');
+    }
+};

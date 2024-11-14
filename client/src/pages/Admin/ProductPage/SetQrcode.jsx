@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Button, Table, Spinner } from 'react-bootstrap';
 import AddQrcode from './AddQrcode';
-import { fetchQrcodesFromDatabase } from '../../../services/ProductService'; // Import the database function
+import { fetchQrcodesFromDatabase } from '../../../services/ProductService'; // Import the function to fetch QR codes
+import { fetchProductsFromDatabase } from '../../../services/ProductService'; // Import the function to fetch products
 
 function ViewQrCode() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [qrCodes, setQrCodes] = useState([]); // Store the fetched QR codes
+    const [products, setProducts] = useState([]); // Store the fetched products
     const [isLoading, setIsLoading] = useState(true); // Track loading state
 
     const openModal = () => {
@@ -16,20 +18,24 @@ function ViewQrCode() {
         setIsModalOpen(false);
     };
 
-    // Fetch QR codes when the component mounts
+    // Fetch QR codes and products when the component mounts
     useEffect(() => {
-        const fetchQrCodes = async () => {
+        const fetchQrCodesAndProducts = async () => {
             try {
-                const fetchedQrcodes = await fetchQrcodesFromDatabase(); // Function to fetch QR codes from DB
+                const fetchedQrcodes = await fetchQrcodesFromDatabase(); // Fetch QR codes from DB
+                const fetchedProducts = await fetchProductsFromDatabase(); // Fetch products from DB
+
+                // If the fetchedProducts is an object, convert it to an array using Object.values()
                 setQrCodes(fetchedQrcodes); // Set fetched QR codes to state
+                setProducts(Object.values(fetchedProducts)); // Convert products object to array and set it to state
             } catch (error) {
-                console.error('Error fetching QR codes:', error);
+                console.error('Error fetching QR codes or products:', error);
             } finally {
                 setIsLoading(false); // Set loading to false once data is fetched
             }
         };
 
-        fetchQrCodes();
+        fetchQrCodesAndProducts();
     }, []); // Empty dependency array means it will run only once when the component mounts
 
     return (
@@ -55,27 +61,32 @@ function ViewQrCode() {
                             <tr>
                                 <th>ID</th>
                                 <th>QR Code</th>
-                                <th>Product Name</th>
+                                <th>Product Name</th> {/* Display product name */}
                             </tr>
                         </thead>
                         <tbody>
-                            {qrCodes.map((qr) => (
-                                <tr key={qr.id}>
-                                    <td>{qr.id}</td>
-                                    <td>
-                                        <img
-                                            src={qr.qrcodeBase64}
-                                            alt="QR Code"
-                                            style={{ width: '100px', height: '100px' }} // Adjust the size of the QR code image
-                                        />
-                                    </td>
-                                    <td>
-                                        {/* if the qrcode 
-                                                check the products if qrcode exist display the Product name
-                                         */}
-                                    </td>
-                                </tr>
-                            ))}
+                            {qrCodes.map((qr) => {
+                                // Match QR code with product
+                                const matchedProduct = products.find(
+                                    (product) => product.qrcodeId === qr.id // Assuming qrcodeId matches product QR code ID
+                                );
+
+                                return (
+                                    <tr key={qr.id}>
+                                        <td>{qr.id}</td>
+                                        <td>
+                                            <img
+                                                src={qr.qrcodeBase64}
+                                                alt="QR Code"
+                                                style={{ width: '100px', height: '100px' }} // Adjust the size of the QR code image
+                                            />
+                                        </td>
+                                        <td>
+                                            {matchedProduct ? matchedProduct.productName : 'No product found'}
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </Table>
                 )}
