@@ -533,18 +533,19 @@ export const fetchQrcodesFromDatabase = async () => {
 
 
 
-export const fetchProductsFromDatabase = async () => {
-    const db = getDatabase();
-    const productsRef = ref(db, 'products'); // Reference to products in the database
-
+export const saveProductName = async (qrId, productName) => {
     try {
-        const snapshot = await get(productsRef);
-        if (!snapshot.exists()) {
-            throw new Error('Products data not found');
-        }
-        return snapshot.val(); // Return products data
+        // Get a reference to the Realtime Database
+        const db = getDatabase();
+
+        // Reference to the specific QR code using qrId
+        const qrRef = ref(db, 'qrcodes/' + qrId);
+
+        // Update the productName field of the specific QR code
+        await update(qrRef, { productName });
+
     } catch (error) {
-        console.error('Error fetching products:', error);
-        throw new Error('Unable to fetch products');
+        console.error('Error saving product name:', error);
+        throw new Error('Error saving product name');
     }
 };
