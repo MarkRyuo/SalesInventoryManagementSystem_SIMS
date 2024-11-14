@@ -9,7 +9,11 @@
 
 ## Changelog
 
-### v7.2.2-beta (Latest)
+### v7.2.5-beta (Latest)
+- Add Number
+
+
+### v7.2.2-beta
 - Set QrCode arrange
 
 ### v7.2.1-beta
