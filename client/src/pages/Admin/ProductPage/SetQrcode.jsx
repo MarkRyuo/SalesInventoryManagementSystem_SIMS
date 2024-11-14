@@ -1,50 +1,30 @@
-import { useState, useEffect } from 'react';
-import AddQrcode from "./AddQrcode";
-import { Container, Button, Card, Row, Col, Spinner, Alert } from 'react-bootstrap';
-import { fetchQRCodesFromDatabase } from '../../../services/ProductService';
+import { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import AddQrcode from './AddQrcode';
 
-function ProductListWithQRCodes() {
-    const [showModal, setShowModal] = useState(false);
-    const [qrCodes, setQRCodes] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState('');
+function ViewQrCode() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Handle opening the modal
-    const handleShowModal = () => setShowModal(true);
-
-    // Handle closing the modal
-    const handleCloseModal = () => {
-        setShowModal(false);
-        fetchQRCodes(); // Refresh the QR code list after closing modal
+    const openModal = () => {
+        setIsModalOpen(true);
     };
 
-    // Fetch QR codes from the database
-    const fetchQRCodes = async () => {
-        try {
-            setIsLoading(true);
-            const fetchedQRCodes = await fetchQRCodesFromDatabase();
-            setQRCodes(fetchedQRCodes);
-        } catch (error) {
-            setError(`Failed to load QR codes: ${error.message}`);
-        } finally {
-            setIsLoading(false);
-        }
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
-
-    // Load QR codes on component mount
-    useEffect(() => {
-        fetchQRCodes();
-    }, []);
 
     return (
-        <Container fluid="lg">
-            <h3>List of QR Codes</h3>
+        <>
+            <div>
+                <Button variant="primary" onClick={openModal}>
+                    Generate QR Code
+                </Button>
+                <AddQrcode show={isModalOpen} onClose={closeModal} />
+            </div>
 
-            <Button variant="primary" onClick={handleShowModal} className="mb-4">
-                Set QR Code for Product
-            </Button>
-        </Container>
+            
+        </>
     );
 }
 
-export default ProductListWithQRCodes;
+export default ViewQrCode;
