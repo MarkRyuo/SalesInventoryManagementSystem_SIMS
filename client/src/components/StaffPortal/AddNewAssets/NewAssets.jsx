@@ -80,8 +80,20 @@ function NewAssets() {
     };
 
     const handleDone = async () => {
-        if (!productName || !size || !color || !category || !quantity || !price) {
+        // Validate all required fields
+        if (!productName || !category || !quantity || !price) {
             setError('Please fill in all required fields.');
+            return;
+        }
+
+        // Additional validation for numeric fields
+        if (quantity < 1) {
+            setError('Quantity must be at least 1.');
+            return;
+        }
+
+        if (price <= 0) {
+            setError('Price must be greater than 0.');
             return;
         }
 
@@ -108,6 +120,7 @@ function NewAssets() {
             setIsLoading(false);
         }
     };
+
 
     const [backBtn] = useState([
         {
@@ -273,7 +286,7 @@ function NewAssets() {
                                         <Form.Control as="select" value={category} onChange={handleCategoryChange} required>
                                             <option value="">Select Category</option>
                                             {categories.map((cat, index) => (
-                                                <option key={index} value={cat}>{cat}</option>
+                                                <option key={index} value={cat}>{cat}</option>  // Just use 'cat' here, which is a category name
                                             ))}
                                         </Form.Control>
                                         {!category && <small className="text-danger mx-2">Please select a category.</small>}
