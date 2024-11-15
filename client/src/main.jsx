@@ -31,7 +31,6 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx'
 import ProductPage from './pages/Admin/ProductPage/ProductPage.jsx';
 import StaffTransactionHistory from './pages/Staff/StaffTransactionHistory/StaffTransactionHistory.jsx';
 import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/AdminTransactionHistory.jsx';
-import ProductEditor from './pages/Admin/ProductEditor/ProductEditor.jsx';
 import Product from './components/Charts/ProductChart/Product.jsx' ;
 import DashboardPage from '../src/pages/Admin/DashboardPage/DashboardPage.jsx';
 import ReOrdering from './pages/Admin/ProductPage/ReOrdering.jsx';
@@ -74,10 +73,6 @@ const router = createBrowserRouter([
   { //? Transaction History for Admin
     path: "AdminTransactionHistory",
     element: <AdminTransactionHistory />,
-  },
-  { //? Product Editor for Admin
-    path: "ProductEditor",
-    element: <ProductEditor /> ,
   },
   { //? Product for Admin
     path: "Product",
