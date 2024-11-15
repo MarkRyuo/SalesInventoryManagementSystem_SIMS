@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { useNavigate } from 'react-router-dom';
+import PhoneSignUp from './SignUpWithPhoneNumber/PhoneSignUp';
+import { UserAuthContextProvider } from "./SignUpWithPhoneNumber/UserAuthContext";
 
 const ProfileComp = () => {
     const navigate = useNavigate();
@@ -257,6 +259,9 @@ const ProfileComp = () => {
                     disabled={!isEditing}>
                     Save
                 </Button>
+                <UserAuthContextProvider>
+                    <PhoneSignUp />
+                </UserAuthContextProvider>
             </div>
         </Form>
     );
