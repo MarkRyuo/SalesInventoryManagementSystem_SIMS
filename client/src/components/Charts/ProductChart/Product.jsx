@@ -5,7 +5,6 @@ import { getAllProducts, getCategories } from "../../../services/ProductService"
 import SetCategory from "../../../pages/Admin/ProductPage/SetCategory";
 import SetDiscounts from "../../../pages/Admin/ProductPage/SetDiscounts";
 import SetTax from "../../../pages/Admin/ProductPage/SetTax";
-import { IoSearchSharp } from "react-icons/io5";
 
 function ProductChart() {
     const [searchTerm, setSearchTerm] = useState("");
@@ -116,7 +115,7 @@ function ProductChart() {
                         <Col lg={3}>
                             <Form.Control
                                 type="text"
-                                placeholder="Search Products"
+                                placeholder= "Search Products"
                                 className=""
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
