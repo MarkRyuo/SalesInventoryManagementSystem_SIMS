@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Form, Modal, ListGroup, Spinner, Alert } from "react-bootstrap";
 import { addCategory, getCategories, deleteCategory, updateCategory } from '../../../services/ProductService';
 import SetCategoryscss from './SCSS/Sets.module.scss' ;
+import { MdCategory } from "react-icons/md";
 
 function SetCategory() {
     const [showModal, setShowModal] = useState(false);
@@ -102,8 +103,8 @@ function SetCategory() {
 
     return (
         <div className="text-center">
-            <Button variant="success" onClick={handleShowModal} className=>
-                Set Category
+            <Button variant="success" onClick={handleShowModal} className={SetCategoryscss.SetCategoryBtn}>
+                <MdCategory size={15} className="me-1"/>Set Category
             </Button>
 
             <Modal show={showModal} onHide={handleCloseModal} centered>

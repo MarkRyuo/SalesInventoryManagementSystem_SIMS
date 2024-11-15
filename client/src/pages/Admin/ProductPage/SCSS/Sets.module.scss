@@ -26,5 +26,11 @@
 // ! Set Category
 
 .SetCategoryBtn {
-    
+    font-size: 0.9rem;
+    padding: 10px 40px;
+
+    @media (max-width: 700px) {
+        font-size: 0.8rem;
+        padding: 11px 12px;
+    }
 }
