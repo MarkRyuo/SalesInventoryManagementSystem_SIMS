@@ -168,7 +168,11 @@ function SetCategory() {
                     <Button variant="secondary" onClick={handleCloseModal}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleSubmit} disabled={loading}>
+                    <Button
+                        variant="primary"
+                        onClick={handleSubmit}
+                        disabled={loading || !categoryName.trim()}  // Disable if loading or categoryName is empty
+                    >
                         {loading ? 'Processing...' : (editingCategory ? 'Save Changes' : 'Add Category')}
                     </Button>
                 </Modal.Footer>
