@@ -212,6 +212,7 @@ function ProductChart() {
                 <div style={{ display: "inline-flex", gap: 70, marginTop: 10 }}>
                     <div>
                         <DropdownButton
+                            variant=""
                             id="dropdown-basic-button"
                             title=<span>{selectedCategory}</span>
                             className={Productcss.allCategoryBtn}
@@ -228,6 +229,7 @@ function ProductChart() {
                     </div>
                     <div>
                         <DropdownButton
+                            variant=""
                             id="stock-dropdown"
                             title=<span>{selectedStock}</span>
                             className={Productcss.allCategoryBtn}
