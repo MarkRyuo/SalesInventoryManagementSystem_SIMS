@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Modal, ListGroup, Spinner, Alert } from "react-bootstrap";
 import { addCategory, getCategories, deleteCategory, updateCategory } from '../../../services/ProductService';
+import SetCategoryscss from './SCSS/Sets.module.scss' ;
 
 function SetCategory() {
     const [showModal, setShowModal] = useState(false);
@@ -101,10 +102,10 @@ function SetCategory() {
 
     return (
         <div className="text-center">
-            <Button variant="success" onClick={handleShowModal}>
+            <Button variant="success" onClick={handleShowModal} className=>
                 Set Category
             </Button>
-            
+
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{editingCategory ? "Edit Category" : "Add New Category"}</Modal.Title>
