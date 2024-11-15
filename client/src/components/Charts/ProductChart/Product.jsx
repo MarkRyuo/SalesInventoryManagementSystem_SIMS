@@ -127,16 +127,20 @@ function ProductChart() {
     const saveChanges = async () => {
         try {
             console.log('Saving changes for product:', editProduct);
-            setProducts((prev) =>
-                prev.map((product) => (product.barcode === editProduct.barcode ? editProduct : product))
-            );
-            await updateProductInDatabase(editProduct);
+            await updateProductInDatabase(editProduct); // Update in database first
+
+            // Refetch products from the database
+            const allProducts = await getAllProducts();
+            setProducts(Object.values(allProducts)); // Update state with fresh data
+            setFilteredProducts(Object.values(allProducts));
+
             setShowSaveConfirmation(false);
             closeModal();
         } catch (error) {
             console.error('Error saving changes:', error.message);
         }
     };
+
 
     const handleDeleteProduct = async () => {
         try {
@@ -240,7 +244,9 @@ function ProductChart() {
                 <div className={Productcss.colProduct}>
                     <div className={Productcss.productContent}>
                         {loading ? (
-                            <Spinner animation="border" variant="primary" />
+                            <div className="text-center">
+                                <Spinner animation="border" variant="primary" />
+                            </div>
                         ) : (
                             sortedProducts.filter(product => filteredProducts.includes(product)).length > 0 ? (
                                 sortedProducts
