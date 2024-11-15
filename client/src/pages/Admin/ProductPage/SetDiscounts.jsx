@@ -103,8 +103,8 @@ function SetDiscounts() {
                                     <ListGroup.Item key={index}>
                                         <Card>
                                             <Card.Body className={SetDiscountsscss.cardDiscountBody}>
-                                                <p className="me-1 p-0">{discount.name}: </p>
-                                                <p className="fw-medium">{discount.value}%</p>
+                                                <p className="me-1 p-0 mb-0">{discount.name}: </p>
+                                                <p className="fw-medium mb-0">{discount.value}%</p>
                                             </Card.Body>
                                         </Card>
                                     </ListGroup.Item>
