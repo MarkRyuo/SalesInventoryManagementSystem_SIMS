@@ -124,7 +124,7 @@ function ProductChart() {
                     </Form>
                 </Col>
                 <div style={{ display: "inline-flex", gap: 70, marginTop: 10 }}>
-                    <div>
+                    <div className="">
                         <DropdownButton
                             id="dropdown-basic-button"
                             title={selectedCategory}

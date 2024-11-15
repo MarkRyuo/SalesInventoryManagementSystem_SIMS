@@ -10,6 +10,12 @@
         font-size: 0.8rem;
         padding: 10px 15px;
     }
+
+    @media (max-width: 350px) {
+        width: 100vw;
+        font-size: 0.8rem;
+        padding: 11px 12px;
+    }
 }
 
 
@@ -30,6 +36,12 @@
     padding: 10px 40px;
 
     @media (max-width: 800px) {
+        font-size: 0.8rem;
+        padding: 11px 12px;
+    }
+
+    @media (max-width: 350px) {
+        width: 100vw;
         font-size: 0.8rem;
         padding: 11px 12px;
     }
@@ -58,6 +70,12 @@
     padding: 10px 40px;
 
     @media (max-width: 800px) {
+        font-size: 0.8rem;
+        padding: 11px 12px;
+    }
+
+    @media (max-width: 350px) {
+        width: 100vw;
         font-size: 0.8rem;
         padding: 11px 12px;
     }
