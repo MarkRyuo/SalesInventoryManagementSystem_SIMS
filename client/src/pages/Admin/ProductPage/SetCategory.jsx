@@ -100,7 +100,7 @@ function SetCategory() {
     };
 
     return (
-        <div className="text-center mt-3">
+        <div className="text-center">
             {/* Button to show the modal */}
             <Button variant="success" onClick={handleShowModal}>
                 Set Category

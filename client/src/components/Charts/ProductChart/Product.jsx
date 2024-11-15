@@ -98,12 +98,9 @@ function ProductChart() {
     return (
         <>
             <Row className="my-4">
-                <div style={{ border: '1px solid' }}>
+                <div className={Productcss.containerTop}>
                     <div>
                         <SetCategory />
-                    </div>
-                    <div>
-                        {/* Create Barcode */}
                     </div>
                     <div>
                         <SetTax />
