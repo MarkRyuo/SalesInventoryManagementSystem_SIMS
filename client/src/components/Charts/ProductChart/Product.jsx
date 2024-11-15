@@ -127,7 +127,7 @@ function ProductChart() {
                     <div>
                         <DropdownButton
                             id="dropdown-basic-button"
-                            title={selectedCategory}
+                            title={<span>selectedCategory</span>}
                             className={Productcss.allCategoryBtn}
                             onSelect={(eventKey) => setSelectedCategory(eventKey)}
                         >
@@ -143,8 +143,8 @@ function ProductChart() {
                     <div>
                         <DropdownButton
                             id="stock-dropdown"
-                            title={<p>selectedStock</p>}
-                            className={Productcss.allCategoryBtn}
+                            title={<span>selectedStock</span>}
+                            className="ms-3"
                             onSelect={(eventKey) => setSelectedStock(eventKey)}
                         >
                             <Dropdown.Item eventKey="All Stock">All Stock</Dropdown.Item>
