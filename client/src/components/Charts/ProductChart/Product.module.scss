@@ -63,8 +63,29 @@
         
     }
 
+    div:last-child {
+
+        button {
+            border-width: 2px;
+            border-style: solid;
+            border-image: linear-gradient(to right, green, rgb(87, 160, 255)) 1;
+        }
+
+        svg {
+            width: 100;
+        }
+
+        @media (max-width: 700px) {
+            button {
+                padding: 5px;
+            }
+        }
+    }
+
     @media (max-width: 700px) {
-        height: 125px;
+        svg {
+            width: 20px;
+        }
     }
 }
 

@@ -274,11 +274,11 @@ function ProductChart() {
                                                 </div>
                                                 <div>
                                                     <Button
-                                                        variant="primary"
+                                                        variant=""
                                                         onClick={() => openModal(product)}
                                                         className="me-2"
                                                     >
-                                                        <LuFileEdit size={20} />
+                                                        <LuFileEdit size={20}/>
                                                     </Button>
                                                 </div>
                                             </div>
