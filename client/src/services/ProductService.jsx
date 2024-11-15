@@ -551,3 +551,4 @@ export const saveProductName = async (qrId, productName) => {
         throw new Error('Error saving product name');
     }
 };
+
