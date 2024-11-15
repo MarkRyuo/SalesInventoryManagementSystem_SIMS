@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Form, Modal, InputGroup, ListGroup, Card } from "react-bootstrap";
 import { addNewDiscount, fetchAllDiscounts } from "../../../services/ProductService"; // Import the necessary function
 import SetDiscountsscss from './SCSS/Sets.module.scss' ;
+import { MdDiscount } from "react-icons/md";
 
 function SetDiscounts() {
     const [showModal, setShowModal] = useState(false);
