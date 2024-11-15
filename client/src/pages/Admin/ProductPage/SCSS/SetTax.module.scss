@@ -10,8 +10,12 @@
 }
 
 
-.cardBody {
-    height: 50px;
-    display: flex;
-}
+.listGroupContainer {
+    height: 250px;
+    overflow: auto;
 
+    .cardBody {
+        height: 50px;
+        display: flex;
+    }
+}

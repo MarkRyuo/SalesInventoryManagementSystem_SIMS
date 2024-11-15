@@ -100,7 +100,7 @@ function SetTax() {
                     <div>
                         <p className="fs-5 mt-2">Existing Taxes</p>
                         {taxes.length > 0 ? (
-                            <ListGroup>
+                            <ListGroup className={SetTaxscss.listGroupContainer}>
                                 {taxes.map((tax, index) => (
                                     <ListGroup.Item key={index}>
                                         <Card>
