@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Button, Form, Modal, InputGroup, ListGroup, Card } from "react-bootstrap";
 import { addNewTax, fetchAllTaxes } from "../../../services/ProductService"; // Import correct function
 import SetTaxscss from './SCSS/SetTax.module.scss' ;
+import { HiReceiptTax } from "react-icons/hi";
+
 function SetTax() {
     const [showModal, setShowModal] = useState(false);
     const [taxName, setTaxName] = useState("");
@@ -64,7 +66,7 @@ function SetTax() {
 
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Tax Percentage</Modal.Title>
+                    <Modal.Title><HiReceiptTax size={20} />Create Tax </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
