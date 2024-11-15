@@ -7,7 +7,7 @@ import SetDiscounts from "../../../pages/Admin/ProductPage/SetDiscounts";
 import SetTax from "../../../pages/Admin/ProductPage/SetTax";
 import { LuFileEdit } from "react-icons/lu";
 import { editProductInDatabase, deleteProduct } from '../../../services/ProductService';
-
+import { FaProductHunt } from "react-icons/fa";
 
 
 function ProductChart() {
@@ -300,11 +300,12 @@ function ProductChart() {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title>
+                            <FaProductHunt size={20} className="me-2"/>
                             {editProduct ? editProduct.productName : 'Edit Product'}
                             {editProduct && (
                                 <>
                                     <p className='fs-6 m-0 p-0'>SKU: {editProduct.sku}</p>
-                                    <p className='fs-6'>Barcode: {editProduct.barcode}</p>
+                                    <p className='fs-6 m-0'>Barcode: {editProduct.barcode}</p>
                                 </>
                             )}
                         </Modal.Title>
