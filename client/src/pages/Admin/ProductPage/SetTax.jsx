@@ -103,10 +103,8 @@ function SetTax() {
                                     <ListGroup.Item key={index}>
                                         <Card>
                                             <Card.Body className={SetTaxscss.cardBody}>
-                                                <Card.Title className="fs-5">{tax.name}</Card.Title> {/* Ensure this matches your Firebase structure */}
-                                                <Card.Text>
-                                                    <strong>{tax.value}%</strong> {/* Ensure this matches your Firebase structure */}
-                                                </Card.Text>
+                                                <p className="fs-6 me-1 m-0">{tax.name}: </p> {/* Ensure this matches your Firebase structure */}
+                                                <p className="m-0 p-0 fw-medium">{tax.value}%</p> {/* Ensure this matches your Firebase structure */}
                                             </Card.Body>
                                         </Card>
                                     </ListGroup.Item>
