@@ -116,7 +116,7 @@ function ProductChart() {
                             <Form.Control
                                 type="text"
                                 placeholder="Search Products"
-                                className="mr-sm-2"
+                                className=""
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
