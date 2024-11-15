@@ -64,7 +64,7 @@ function SetDiscounts() {
 
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Percentage Discount</Modal.Title>
+                    <p className="fs-4 fw-medium m-0"> <MdDiscount />Create Discount</p>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -83,7 +83,7 @@ function SetDiscounts() {
                             <InputGroup>
                                 <InputGroup.Text>%</InputGroup.Text>
                                 <Form.Control
-                                    type="number"
+                                    type="text"
                                     placeholder="Enter percentage (1 - 100)"
                                     value={discountValue}
                                     onChange={(e) => setDiscountValue(e.target.value)}
@@ -96,7 +96,7 @@ function SetDiscounts() {
 
                     {/* Display the list of added discounts */}
                     <div className="mt-4">
-                        <h5>Existing Discounts</h5>
+                        <p className="fs-5 m-0">Existing Discounts</p>
                         {discounts.length > 0 ? (
                             <ListGroup>
                                 {discounts.map((discount, index) => (
