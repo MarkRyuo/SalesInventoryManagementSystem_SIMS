@@ -18,7 +18,6 @@
 .colProduct {
     box-shadow: 1px 1px 5px var(--chartShadow);
     height: 500px;
-    padding: 10px;
     width: 100%;
     border-radius: 10px;
     overflow: scroll;
@@ -123,9 +122,9 @@
 //! All Category Btn 
 
 .allDropdownyBtn {
-    border: 1px solid;
-    
+        
     button {
+        border: none;
         span {
             font-size: 1rem;
         }
