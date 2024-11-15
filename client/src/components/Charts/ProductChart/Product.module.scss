@@ -100,8 +100,15 @@
 .allCategoryBtn {
     border: 1px solid red;
     
-    p {
-        font-size: rem;
+    span {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 700px) {
+        
+        span {
+            font-size: 0.8rem;
+        }
     }
 
 }

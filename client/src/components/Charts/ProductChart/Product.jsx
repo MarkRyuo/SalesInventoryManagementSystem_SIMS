@@ -127,14 +127,14 @@ function ProductChart() {
                     <div>
                         <DropdownButton
                             id="dropdown-basic-button"
-                            title={<span>selectedCategory</span>}
+                            title=<span>{selectedCategory}</span>
                             className={Productcss.allCategoryBtn}
                             onSelect={(eventKey) => setSelectedCategory(eventKey)}
                         >
-                            <Dropdown.Item eventKey="All Category">All Category</Dropdown.Item>
+                            <Dropdown.Item eventKey="All Category"><span>All Category</span></Dropdown.Item>
                             {categories.map((category) => (
                                 <Dropdown.Item eventKey={category.id} key={category.id}>
-                                    {category.name}
+                                    <span>{category.name}</span>
                                 </Dropdown.Item>
                             ))}
                         </DropdownButton>
@@ -143,16 +143,16 @@ function ProductChart() {
                     <div>
                         <DropdownButton
                             id="stock-dropdown"
-                            title={<span>selectedStock</span>}
-                            className="ms-3"
+                            title=<span>{selectedStock}</span>
+                            className={Productcss.allCategoryBtn}
                             onSelect={(eventKey) => setSelectedStock(eventKey)}
                         >
-                            <Dropdown.Item eventKey="All Stock">All Stock</Dropdown.Item>
-                            <Dropdown.Item eventKey="In Stock">In Stock</Dropdown.Item>
-                            <Dropdown.Item eventKey="Low Stock">Low Stock</Dropdown.Item>
-                            <Dropdown.Item eventKey="High Stock">High Stock</Dropdown.Item>
-                            <Dropdown.Item eventKey="Out of Stock">Out of Stock</Dropdown.Item>
-                            <Dropdown.Item eventKey="Threshold not set">Threshold not set</Dropdown.Item>
+                            <Dropdown.Item eventKey="All Stock"><span>All Stock</span></Dropdown.Item>
+                            <Dropdown.Item eventKey="In Stock"><span>In Stock</span></Dropdown.Item>
+                            <Dropdown.Item eventKey="Low Stock"><span>Low Stock</span></Dropdown.Item>
+                            <Dropdown.Item eventKey="High Stock"><span>High Stock</span></Dropdown.Item>
+                            <Dropdown.Item eventKey="Out of Stock"><span>Out of Stock</span></Dropdown.Item>
+                            <Dropdown.Item eventKey="Threshold not set"><span>Threshold not set</span></Dropdown.Item>
                         </DropdownButton>
                     </div>
                 </div>
