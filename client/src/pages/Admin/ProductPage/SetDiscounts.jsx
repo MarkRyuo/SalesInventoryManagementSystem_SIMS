@@ -104,7 +104,7 @@ function SetDiscounts() {
                                         <Card>
                                             <Card.Body className={SetDiscountsscss.cardDiscountBody}>
                                                 <p className="me-1 p-0">{discount.name}: </p>
-                                                <p>{discount.value}%</p>
+                                                <p className="fw-medium">{discount.value}%</p>
                                             </Card.Body>
                                         </Card>
                                     </ListGroup.Item>
