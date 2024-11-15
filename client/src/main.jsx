@@ -36,6 +36,7 @@ import Product from './components/Charts/ProductChart/Product.jsx' ;
 import DashboardPage from '../src/pages/Admin/DashboardPage/DashboardPage.jsx';
 import ReOrdering from './pages/Admin/ProductPage/ReOrdering.jsx';
 import SetQrcode from './pages/Admin/ProductPage/SetQrcode.jsx' ;
+import LoginMFA from './components/Account/AccountAuh/LoginMFA.jsx' ;
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
   { //? Product for Admin
     path: "SetQrcode",
     element: <SetQrcode /> ,
+  },
+  { //? Product for Admin
+    path: "LoginMFA",
+    element: <LoginMFA /> ,
   },
 
   //! Forgot Password
