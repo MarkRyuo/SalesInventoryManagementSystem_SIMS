@@ -10,7 +10,9 @@ import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
 function NewAssets() {
     const location = useLocation();
     const navigate = useNavigate();
-    const barcode = location.state?.barcode || '';
+    const barcode = location.state?.barcode || 'DEFAULT-BARCODE';
+    console.log("Barcode: ", barcode);
+
 
     const [productName, setProductName] = useState('');
     const [size, setSize] = useState('');
