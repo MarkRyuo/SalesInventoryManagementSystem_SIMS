@@ -78,6 +78,7 @@
     justify-content: space-evenly ;
 
     @media (max-width: 700px) {
-        
+        padding: 0;
+        justify-content: space-between;
     }
 }

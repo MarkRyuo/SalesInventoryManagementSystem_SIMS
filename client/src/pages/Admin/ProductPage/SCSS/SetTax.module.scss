@@ -3,9 +3,11 @@
 
 .SetTaxBtn {
     font-size: 1rem;
+    padding: 10px 40px;
 
     @media (max-width: 700px) {
         font-size: 0.8rem;
+        padding: 10px 15px;
     }
 }
 
