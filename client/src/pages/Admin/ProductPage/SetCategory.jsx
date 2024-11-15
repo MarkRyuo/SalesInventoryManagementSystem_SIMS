@@ -3,6 +3,8 @@ import { Button, Form, Modal, ListGroup, Spinner, Alert } from "react-bootstrap"
 import { addCategory, getCategories, deleteCategory, updateCategory } from '../../../services/ProductService';
 import SetCategoryscss from './SCSS/Sets.module.scss' ;
 import { MdCategory } from "react-icons/md";
+import { FaPen } from "react-icons/fa";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 function SetCategory() {
     const [showModal, setShowModal] = useState(false);
@@ -140,16 +142,18 @@ function SetCategory() {
                             {categories.length === 0 ? (
                                 <p>No categories added yet.</p>
                             ) : (
-                                <ListGroup>
+                                <ListGroup className={SetCategoryscss.listGroupofCategory}>
                                     {categories.map((category) => (
-                                        <ListGroup.Item key={category.id}>
-                                            <strong>{category.name}</strong>
-                                            <Button variant="warning" size="sm" className="ml-2" onClick={() => handleEdit(category)}>
-                                                Edit
-                                            </Button>
-                                            <Button variant="danger" size="sm" className="ml-2" onClick={() => handleDelete(category)}>
-                                                Delete
-                                            </Button>
+                                        <ListGroup.Item key={category.id} className={SetCategoryscss.listItmeofCategory}>
+                                            <p className="fs-6 fw-medium m-0 p-2">{category.name}</p>
+                                            <div>
+                                                <Button variant="outline-info" size="sm" className="me-2 m-0 px-3" onClick={() => handleEdit(category)}>
+                                                    <FaPen />
+                                                </Button>
+                                                <Button variant="danger" size="sm" className="m-0 px-3" onClick={() => handleDelete(category)}>
+                                                    <FaRegTrashAlt />
+                                                </Button>
+                                            </div>
                                         </ListGroup.Item>
                                     ))}
                                 </ListGroup>

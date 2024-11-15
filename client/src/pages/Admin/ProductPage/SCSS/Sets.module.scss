@@ -34,3 +34,18 @@
         padding: 11px 12px;
     }
 }
+
+.listGroupofCategory {
+    height: 240px;
+    overflow: auto;
+
+    .listItmeofCategory {
+        display: flex;
+        border: 1px solid red;
+
+        div {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
