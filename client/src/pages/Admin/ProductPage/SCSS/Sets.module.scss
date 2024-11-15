@@ -62,3 +62,11 @@
         padding: 11px 12px;
     }
 }
+
+.ListGroupDiscount {
+    border: 1px solid red;
+
+    .cardDiscountBody {
+        display: flex;
+    }
+}

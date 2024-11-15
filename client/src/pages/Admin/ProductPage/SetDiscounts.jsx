@@ -98,15 +98,13 @@ function SetDiscounts() {
                     <div className="mt-4">
                         <p className="fs-5 m-0">Existing Discounts</p>
                         {discounts.length > 0 ? (
-                            <ListGroup>
+                            <ListGroup className={SetDiscountsscss.ListGroupDiscount}>
                                 {discounts.map((discount, index) => (
                                     <ListGroup.Item key={index}>
                                         <Card>
-                                            <Card.Body>
-                                                <Card.Title>{discount.name}</Card.Title>
-                                                <Card.Text>
-                                                    <strong>{discount.value}%</strong>
-                                                </Card.Text>
+                                            <Card.Body className={SetDiscountsscss.cardDiscountBody}>
+                                                <p className="me-1 p-0">{discount.name}: </p>
+                                                <p>{discount.value}%</p>
                                             </Card.Body>
                                         </Card>
                                     </ListGroup.Item>
@@ -126,7 +124,7 @@ function SetDiscounts() {
                         onClick={handleCreateDiscount}
                         disabled={!discountName || !discountValue || discountValue <= 0 || discountValue > 100}
                     >
-                        Create Discount
+                        Add Discount
                     </Button>
                 </Modal.Footer>
             </Modal>
