@@ -124,11 +124,11 @@ function ProductChart() {
                     </Form>
                 </Col>
                 <div style={{ display: "inline-flex", gap: 70, marginTop: 10 }}>
-                    <div className="">
+                    <div>
                         <DropdownButton
                             id="dropdown-basic-button"
                             title={selectedCategory}
-                            className="ms-3"
+                            className={Productcss.allCategoryBtn}
                             onSelect={(eventKey) => setSelectedCategory(eventKey)}
                         >
                             <Dropdown.Item eventKey="All Category">All Category</Dropdown.Item>
@@ -143,8 +143,8 @@ function ProductChart() {
                     <div>
                         <DropdownButton
                             id="stock-dropdown"
-                            title={selectedStock}
-                            className="ms-3"
+                            title={<p>selectedStock</p>}
+                            className={Productcss.allCategoryBtn}
                             onSelect={(eventKey) => setSelectedStock(eventKey)}
                         >
                             <Dropdown.Item eventKey="All Stock">All Stock</Dropdown.Item>
