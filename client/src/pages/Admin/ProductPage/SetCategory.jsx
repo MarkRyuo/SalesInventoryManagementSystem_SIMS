@@ -109,12 +109,12 @@ function SetCategory() {
 
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>{editingCategory ? "Edit Category" : "Add New Category"}</Modal.Title>
+                    <p className="fs-4 fw-medium m-0">{editingCategory ? "Edit Category" : "Add Category"}</p>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group controlId="categoryName">
-                            <Form.Label>Category Name</Form.Label>
+                            <Form.Label className="m-1">Category Name</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Enter category name"
@@ -136,7 +136,7 @@ function SetCategory() {
 
                         {/* Category List inside the modal */}
                         <div className="mt-4">
-                            <h5>Existing Categories</h5>
+                            <p className="fs-5 m-1">Existing Categories</p>
                             {categories.length === 0 ? (
                                 <p>No categories added yet.</p>
                             ) : (
