@@ -6,7 +6,6 @@
 
 
 .containerProduct {
-    /* border: 1px solid; */
     height: 100%;
     width: 100%;
     max-height: 600px;
@@ -39,6 +38,7 @@
     text-align: left;
     background-color: #f9f9f9;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 150px;
 
     div:first-child {
         p:first-child {
@@ -55,7 +55,7 @@
             }
             .lastChild {
                 p {
-                    font-size: 0.9rem;
+                    font-size: 0.8rem;
                 }
         }
             
@@ -64,7 +64,7 @@
     }
 
     @media (max-width: 700px) {
-        height: 140px;
+        height: 125px;
     }
 }
 
@@ -98,7 +98,7 @@
 //! All Category Btn 
 
 .allCategoryBtn {
-        
+
     span {
         font-size: 1rem;
     }

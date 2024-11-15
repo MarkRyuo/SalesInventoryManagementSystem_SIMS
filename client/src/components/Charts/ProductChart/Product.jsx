@@ -179,7 +179,7 @@ function ProductChart() {
                                                 <div className={Productcss.lastChild}>
                                                     <p className="m-0 p-0">SKU: {product.sku}</p>
                                                     <p className="m-0 p-0">Quantity: {product.quantity}</p>
-                                                    <p>Category: {product.category}</p>
+                                                    <p>Price: ₱{product.price}</p>
                                                 </div>
                                             </div>
                                         </div>
