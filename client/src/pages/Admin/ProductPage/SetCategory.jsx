@@ -35,11 +35,21 @@ function SetCategory() {
     };
 
     const handleCloseModal = () => {
-        setShowModal(false);
-        setCategoryName(""); // Reset the fields
-        setError("");
-        setSuccess(false); // Reset success message on close
+        if (editingCategory) {
+            // In edit mode, just reset the editing state and input field, but keep the modal open
+            setCategoryName("");
+            setEditingCategory(null);
+            setError("");
+            setSuccess(false);
+        } else {
+            // Not in edit mode, close the modal
+            setShowModal(false);
+            setCategoryName(""); // Reset the fields
+            setError("");
+            setSuccess(false); // Reset success message on close
+        }
     };
+
 
     const handleSubmit = async () => {
         // Basic validation
@@ -170,8 +180,9 @@ function SetCategory() {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>
-                        Close
+                        {editingCategory ? "Cancel" : "Close"}
                     </Button>
+
                     <Button
                         variant="primary"
                         onClick={handleSubmit}
