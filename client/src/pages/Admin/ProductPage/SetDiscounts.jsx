@@ -59,7 +59,7 @@ function SetDiscounts() {
     return (
         <>
             <Button variant="success" onClick={handleShowModal} className={SetDiscountsscss.SetDiscountsBtn}>
-                <MdDiscount size={15}/>Set Discount
+                <MdDiscount size={15} className="me-1"/>Set Discount
             </Button>
 
             <Modal show={showModal} onHide={handleCloseModal} centered>
