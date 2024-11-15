@@ -261,15 +261,15 @@ function ProductChart() {
                                                         <p className="m-0 p-0">Quantity: {product.quantity}</p>
                                                         <p>Price: ₱{product.price}</p>
                                                     </div>
-                                                    <div>
-                                                        <Button
-                                                            variant="primary"
-                                                            onClick={() => openModal(product)}
-                                                            className="me-2"
-                                                        >
-                                                            <LuFileEdit size={20} />
-                                                        </Button>
-                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <Button
+                                                        variant="primary"
+                                                        onClick={() => openModal(product)}
+                                                        className="me-2"
+                                                    >
+                                                        <LuFileEdit size={20} />
+                                                    </Button>
                                                 </div>
                                             </div>
                                         );
