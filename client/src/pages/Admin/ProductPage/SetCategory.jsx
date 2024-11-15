@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Modal, ListGroup, Spinner, Alert } from "react-bootstrap";
-import { addCategory, getCategories, deleteCategory, updateCategory } from '../../../services/ProductService';
-import SetCategoryscss from './SCSS/Sets.module.scss' ;
+import { addCategory, getCategories, deleteCategory, updateCategory } from "../../../services/ProductService";
+import SetCategoryscss from "./SCSS/Sets.module.scss";
 import { MdCategory } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -10,10 +10,14 @@ function SetCategory() {
     const [showModal, setShowModal] = useState(false);
     const [categoryName, setCategoryName] = useState("");
     const [error, setError] = useState("");
-    const [categories, setCategories] = useState([]); // To store added categories
-    const [loading, setLoading] = useState(false); // To track loading state
-    const [success, setSuccess] = useState(false); // To track success state
-    const [editingCategory, setEditingCategory] = useState(null); // For tracking category being edited
+    const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [editingCategory, setEditingCategory] = useState(null);
+
+    // New state for delete confirmation modal
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [categoryToDelete, setCategoryToDelete] = useState(null);
 
     // Fetch categories from Firebase when the component mounts
     useEffect(() => {
@@ -26,102 +30,122 @@ function SetCategory() {
             }
         };
         fetchCategories();
-    }, []); // Empty dependency array to run only once when the component mounts
+    }, []);
 
     const handleShowModal = () => {
         setShowModal(true);
-        setSuccess(false); // Reset success message when opening the modal
-        setEditingCategory(null); // Reset editing category
+        setSuccess(false);
+        setEditingCategory(null);
     };
 
     const handleCloseModal = () => {
         if (editingCategory) {
-            // In edit mode, just reset the editing state and input field, but keep the modal open
             setCategoryName("");
             setEditingCategory(null);
             setError("");
             setSuccess(false);
         } else {
-            // Not in edit mode, close the modal
             setShowModal(false);
-            setCategoryName(""); // Reset the fields
+            setCategoryName("");
             setError("");
-            setSuccess(false); // Reset success message on close
+            setSuccess(false);
         }
     };
 
-
     const handleSubmit = async () => {
-        // Basic validation
         if (!categoryName.trim()) {
             setError("Category name is required.");
             return;
         }
         setError("");
 
-        // If we're editing a category, update it
         if (editingCategory) {
             try {
-                setLoading(true); // Start loading
-                await updateCategory(editingCategory.id, { name: categoryName }); // Update category in Firebase
-                setCategories(prevCategories => prevCategories.map(
-                    cat => cat.id === editingCategory.id ? { ...cat, name: categoryName } : cat
-                ));
-                setSuccess(true); // Set success message
-                setLoading(false); // End loading
-                setCategoryName(""); // Reset the input field
-                setEditingCategory(null); // Reset editing state
+                setLoading(true);
+                await updateCategory(editingCategory.id, { name: categoryName });
+                setCategories((prevCategories) =>
+                    prevCategories.map((cat) =>
+                        cat.id === editingCategory.id ? { ...cat, name: categoryName } : cat
+                    )
+                );
+                setSuccess(true);
+                setTimeout(() => setSuccess(false), 2000);
+                setLoading(false);
+                setCategoryName("");
+                setEditingCategory(null);
             } catch (error) {
                 console.error("Error updating category:", error);
                 setError("Failed to update category.");
-                setLoading(false); // End loading if error occurs
+                setLoading(false);
             }
         } else {
-            // If we're adding a new category, add it
             try {
-                setLoading(true); // Start loading
-                await addCategory(categoryName); // Add category to Firebase
-                setCategories(prevCategories => [
-                    ...prevCategories, { id: Date.now(), name: categoryName }
-                ]); // Update state with new category (assuming Firebase returns an id)
-                setSuccess(true); // Set success message
-                setLoading(false); // End loading
-                setCategoryName(""); // Reset the input field
+                setLoading(true);
+                await addCategory(categoryName);
+                setCategories((prevCategories) => [
+                    ...prevCategories,
+                    { id: Date.now(), name: categoryName },
+                ]);
+                setSuccess(true);
+                setTimeout(() => setSuccess(false), 2000);
+                setLoading(false);
+                setCategoryName("");
             } catch (error) {
                 console.error("Error adding category:", error);
                 setError("Failed to add category.");
-                setLoading(false); // End loading if error occurs
+                setLoading(false);
             }
         }
     };
 
-    const handleDelete = async (category) => {
-        // Delete category
+    const handleDeleteConfirmation = (category) => {
+        setCategoryToDelete(category);
+        setShowDeleteModal(true);
+    };
+
+    const confirmDelete = async () => {
+        if (!categoryToDelete) return;
         try {
-            await deleteCategory(category.id); // Delete from Firebase (ensure category has an id)
-            setCategories(prevCategories => prevCategories.filter(cat => cat.id !== category.id)); // Update state
+            await deleteCategory(categoryToDelete.id);
+            setCategories((prevCategories) =>
+                prevCategories.filter((cat) => cat.id !== categoryToDelete.id)
+            );
+            setShowDeleteModal(false);
+            setCategoryToDelete(null);
         } catch (error) {
             console.error("Error deleting category:", error);
             setError("Failed to delete category.");
         }
     };
 
+    const handleCancelDelete = () => {
+        setShowDeleteModal(false);
+        setCategoryToDelete(null);
+    };
+
     const handleEdit = (category) => {
-        // Set category to be edited
         setEditingCategory(category);
-        setCategoryName(category.name); // Set category name in the input
-        setShowModal(true); // Open modal to edit
+        setCategoryName(category.name);
+        setShowModal(true);
     };
 
     return (
         <div className="text-center">
-            <Button variant="success" onClick={handleShowModal} className={SetCategoryscss.SetCategoryBtn}>
-                <MdCategory size={15} className="me-1"/>Set Category
+            <Button
+                variant="success"
+                onClick={handleShowModal}
+                className={SetCategoryscss.SetCategoryBtn}
+            >
+                <MdCategory size={15} className="me-1" />
+                Set Category
             </Button>
 
+            {/* Add/Edit Category Modal */}
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
-                    <p className="fs-4 fw-medium m-0">{editingCategory ? "Edit Category" : "Add Category"}</p>
+                    <p className="fs-4 fw-medium m-0">
+                        {editingCategory ? "Edit Category" : "Add Category"}
+                    </p>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -139,14 +163,14 @@ function SetCategory() {
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        {/* Show Success Message */}
+                        {/* Success Message */}
                         {success && (
                             <Alert variant="success" className="mt-3">
                                 Category {editingCategory ? "updated" : "added"} successfully!
                             </Alert>
                         )}
 
-                        {/* Category List inside the modal */}
+                        {/* List of Categories */}
                         <div className="mt-4">
                             <p className="fs-5 m-1">Existing Categories</p>
                             {categories.length === 0 ? (
@@ -154,13 +178,26 @@ function SetCategory() {
                             ) : (
                                 <ListGroup className={SetCategoryscss.listGroupofCategory}>
                                     {categories.map((category) => (
-                                        <ListGroup.Item key={category.id} className={SetCategoryscss.listItmeofCategory}>
+                                        <ListGroup.Item
+                                            key={category.id}
+                                            className={SetCategoryscss.listItmeofCategory}
+                                        >
                                             <p className="fs-6 fw-medium m-0 p-2">{category.name}</p>
                                             <div>
-                                                <Button variant="outline-info" size="sm" className="me-2 m-0 px-3" onClick={() => handleEdit(category)}>
+                                                <Button
+                                                    variant="outline-info"
+                                                    size="sm"
+                                                    className="me-2 m-0 px-3"
+                                                    onClick={() => handleEdit(category)}
+                                                >
                                                     <FaPen />
                                                 </Button>
-                                                <Button variant="danger" size="sm" className="m-0 px-3" onClick={() => handleDelete(category)}>
+                                                <Button
+                                                    variant="danger"
+                                                    size="sm"
+                                                    className="m-0 px-3"
+                                                    onClick={() => handleDeleteConfirmation(category)}
+                                                >
                                                     <FaRegTrashAlt />
                                                 </Button>
                                             </div>
@@ -170,7 +207,6 @@ function SetCategory() {
                             )}
                         </div>
 
-                        {/* Show Loading Spinner while the request is in progress */}
                         {loading && (
                             <div className="text-center mt-3">
                                 <Spinner animation="border" variant="primary" />
@@ -182,13 +218,40 @@ function SetCategory() {
                     <Button variant="secondary" onClick={handleCloseModal}>
                         {editingCategory ? "Cancel" : "Close"}
                     </Button>
-
                     <Button
                         variant="primary"
                         onClick={handleSubmit}
-                        disabled={loading || !categoryName.trim()}  // Disable if loading or categoryName is empty
+                        disabled={loading || !categoryName.trim()}
                     >
-                        {loading ? 'Processing...' : (editingCategory ? 'Save Changes' : 'Add Category')}
+                        {loading
+                            ? "Processing..."
+                            : editingCategory
+                                ? "Save Changes"
+                                : "Add Category"}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Delete Confirmation Modal */}
+            <Modal show={showDeleteModal} onHide={handleCancelDelete} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Delete</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>
+                        Are you sure you want to delete the category{" "}
+                        <strong>{categoryToDelete?.name}</strong>?
+                    </p>
+                    <p className="text-danger fw-bold">
+                        This action cannot be undone, and the category cannot be restored.
+                    </p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCancelDelete}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={confirmDelete}>
+                        Yes, Delete
                     </Button>
                 </Modal.Footer>
             </Modal>
