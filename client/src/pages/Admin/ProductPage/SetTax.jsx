@@ -60,7 +60,7 @@ function SetTax() {
 
     return (
         <>
-            <Button variant="success" onClick={handleShowModal} className={SetTaxscss.SetTaxBtn}>
+            <Button variant="" onClick={handleShowModal} className={SetTaxscss.SetTaxBtn}>
                 <HiReceiptTax size={20} />Set Tax
             </Button>
 
