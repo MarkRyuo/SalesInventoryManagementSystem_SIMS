@@ -337,6 +337,18 @@ export const updateProductInDatabase = async (updatedProduct) => {
     }
 };
 
+export const editProductInDatabase = async (updatedProduct) => {
+    const db = getDatabase();
+    const productRef = ref(db, 'products/' + updatedProduct.barcode); // Assuming barcode is the unique key
+
+    try {
+        await update(productRef, updatedProduct); // Update the product with new data
+        console.log('Product updated successfully');
+    } catch (error) {
+        console.error('Error updating product:', error.message);
+    }
+};
+
 //! End of Order
 
 //* Start AddNewDiscount

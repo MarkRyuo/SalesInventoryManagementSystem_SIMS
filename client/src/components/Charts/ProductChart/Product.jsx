@@ -6,7 +6,7 @@ import SetCategory from "../../../pages/Admin/ProductPage/SetCategory";
 import SetDiscounts from "../../../pages/Admin/ProductPage/SetDiscounts";
 import SetTax from "../../../pages/Admin/ProductPage/SetTax";
 import { LuFileEdit } from "react-icons/lu";
-import { updateProductInDatabase, deleteProduct } from '../../../services/ProductService';
+import { editProductInDatabase, deleteProduct } from '../../../services/ProductService';
 
 
 
@@ -120,6 +120,7 @@ function ProductChart() {
         setShowSaveConfirmation(true);
     };
 
+
     const confirmDeleteProduct = () => {
         setShowDeleteConfirmation(true);
     };
@@ -127,7 +128,9 @@ function ProductChart() {
     const saveChanges = async () => {
         try {
             console.log('Saving changes for product:', editProduct);
-            await updateProductInDatabase(editProduct); // Update in database first
+
+            // Update the product in the database (partial update)
+            await editProductInDatabase(editProduct);
 
             // Refetch products from the database
             const allProducts = await getAllProducts();
@@ -140,6 +143,7 @@ function ProductChart() {
             console.error('Error saving changes:', error.message);
         }
     };
+
 
 
     const handleDeleteProduct = async () => {
