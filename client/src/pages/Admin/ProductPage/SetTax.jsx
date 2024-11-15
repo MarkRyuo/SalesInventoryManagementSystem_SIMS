@@ -83,7 +83,7 @@ function SetTax() {
                             <InputGroup>
                                 <InputGroup.Text>%</InputGroup.Text>
                                 <Form.Control
-                                    type="number"
+                                    type="text"
                                     placeholder="Enter percentage (1 - 100)"
                                     value={taxValue}
                                     onChange={(e) => setTaxValue(e.target.value)}
@@ -95,15 +95,15 @@ function SetTax() {
                     </Form>
 
                     {/* Display the list of added taxes */}
-                    <div className="mt-4">
-                        <h5>Existing Taxes</h5>
+                    <div>
+                        <p className="fs-5 mt-2">Existing Taxes</p>
                         {taxes.length > 0 ? (
                             <ListGroup>
                                 {taxes.map((tax, index) => (
                                     <ListGroup.Item key={index}>
                                         <Card>
-                                            <Card.Body>
-                                                <Card.Title>{tax.name}</Card.Title> {/* Ensure this matches your Firebase structure */}
+                                            <Card.Body className={SetTaxscss.cardBody}>
+                                                <Card.Title className="fs-5">{tax.name}</Card.Title> {/* Ensure this matches your Firebase structure */}
                                                 <Card.Text>
                                                     <strong>{tax.value}%</strong> {/* Ensure this matches your Firebase structure */}
                                                 </Card.Text>
