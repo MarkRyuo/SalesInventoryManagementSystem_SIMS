@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Modal, InputGroup, ListGroup, Card } from "react-bootstrap";
 import { addNewTax, fetchAllTaxes } from "../../../services/ProductService"; // Import correct function
-import SetTaxscss from './SCSS/SetTax.module.scss' ;
+import SetTaxscss from './SCSS/Sets.module.scss' ;
 import { HiReceiptTax } from "react-icons/hi";
 
 function SetTax() {
