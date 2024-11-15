@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getAllProducts, getCategories } from '../../../services/ProductService';
-import { Container, ListGroup, Card, Spinner, Button, Form, Modal, Row, Col } from 'react-bootstrap';
+import { Container, ListGroup, Spinner, Button, Form, Modal, Row, Col } from 'react-bootstrap';
 import { updateProductInDatabase, deleteProduct } from '../../../services/ProductService';
 import ProductEditorscss from './ProductEditor.module.scss';
 import { LuFileEdit } from "react-icons/lu";
