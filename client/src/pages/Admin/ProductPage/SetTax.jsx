@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Modal, InputGroup, ListGroup, Card } from "react-bootstrap";
 import { addNewTax, fetchAllTaxes } from "../../../services/ProductService"; // Import correct function
-
+import SetTaxscss from './SCSS/SetTax.module.scss' ;
 function SetTax() {
     const [showModal, setShowModal] = useState(false);
     const [taxName, setTaxName] = useState("");
@@ -58,7 +58,7 @@ function SetTax() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShowModal}>
+            <Button variant="primary" onClick={handleShowModal} className={SetTaxscss.SetTaxBtn}>
                 Set Tax
             </Button>
 
