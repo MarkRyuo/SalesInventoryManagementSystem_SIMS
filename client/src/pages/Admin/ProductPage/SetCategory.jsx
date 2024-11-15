@@ -144,6 +144,7 @@ function SetCategory() {
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
                     <p className="fs-4 fw-medium m-0">
+                        <MdCategory size={25} className="me-1" />
                         {editingCategory ? "Edit Category" : "Add Category"}
                     </p>
                 </Modal.Header>
