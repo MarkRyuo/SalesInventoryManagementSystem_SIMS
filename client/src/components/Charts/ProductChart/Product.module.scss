@@ -122,16 +122,21 @@
 
 //! All Category Btn 
 
-.allCategoryBtn {
-
-    span {
-        font-size: 1rem;
+.allDropdownyBtn {
+    border: 1px solid;
+    
+    button {
+        span {
+            font-size: 1rem;
+        }
     }
 
     @media (max-width: 700px) {
         
-        span {
-            font-size: 0.8rem;
+        button {
+            span {
+                font-size: 0.8rem;
+            }
         }
     }
 
