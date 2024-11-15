@@ -101,12 +101,10 @@ function SetCategory() {
 
     return (
         <div className="text-center">
-            {/* Button to show the modal */}
             <Button variant="success" onClick={handleShowModal}>
                 Set Category
             </Button>
-
-            {/* Modal for adding or editing a category */}
+            
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{editingCategory ? "Edit Category" : "Add New Category"}</Modal.Title>
