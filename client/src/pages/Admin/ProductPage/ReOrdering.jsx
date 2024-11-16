@@ -125,11 +125,9 @@ function ReOrdering() {
             <main className={ReOrderingscss.mainReOrdering}>
                 <h4 className="my-4"><FaTruckLoading size={25} className="me-2" />Reordering Dashboard</h4>
                 <div className={ReOrderingscss.TopButtons}>
-                    <div>
-                        <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
-                            View Reordered Product
-                        </Button>
-                    </div>
+                    <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
+                        View Reordered Product
+                    </Button>
                     <SavedOrderDetails />
                 </div>
                 {loading ? (
