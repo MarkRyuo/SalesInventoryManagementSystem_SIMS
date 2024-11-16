@@ -112,5 +112,10 @@
     .SetQrcodeContent {
         border: 1px solid green;
         padding: 10px;
+
+        div {
+            display: flex;
+            justify-content: space-between;
+        }
     }
 }
