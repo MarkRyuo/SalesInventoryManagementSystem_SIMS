@@ -10,7 +10,7 @@ function Checkout() {
     const scannedItems = location.state?.scannedItems || [];
     const [errorMessage, setErrorMessage] = useState("");
     const currentDate = new Date().toLocaleString();
-    const [customerName, setCustomerName] = useState("Enter the customer name (Optional)");
+    const [customerName, setCustomerName] = useState("Customer name (Optional)");
 
     const [availableDiscounts, setAvailableDiscounts] = useState([]);
     const [selectedDiscount, setSelectedDiscount] = useState(0);
