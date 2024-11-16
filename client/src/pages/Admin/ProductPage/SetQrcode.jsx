@@ -158,7 +158,6 @@ function ViewQrCode() {
 
                             return (
                                 <div key={qr.id} className={SetQrcodescss.SetQrcodeContent}>
-                                    <div>
                                         <div>
                                             <h4>QR Code #{index + 1}</h4>
                                             <Card.Img
@@ -185,7 +184,6 @@ function ViewQrCode() {
                                             </Button>
                                         </div>
                                     </div>
-                                </div>
                             );
                         })}
                     </div>
