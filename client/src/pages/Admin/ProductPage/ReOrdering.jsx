@@ -205,7 +205,7 @@ function ReOrdering() {
                 {/* Reorder List Modal */}
                 <Modal show={showReorderModal} onHide={handleCloseModals} centered>
                     <Modal.Header closeButton>
-                        <Modal.Title>Reorder List</Modal.Title>
+                        <Modal.Title><FaTruckRampBox size={17} className="me-2"/>Reorder List</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {reorderList.length > 0 ? (
@@ -220,8 +220,8 @@ function ReOrdering() {
                                 <tbody>
                                     {reorderList.map((product, index) => (
                                         <tr key={product.barcode}>
-                                            <td>{product.productName}</td>
-                                            <td>{product.sku}</td>
+                                            <td className="fs-6">{product.productName}</td>
+                                            <td className="fs-6">{product.sku}</td>
                                             <td>
                                                 <div className="d-flex justify-content-center">
                                                     <input
