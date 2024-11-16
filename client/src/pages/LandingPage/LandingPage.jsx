@@ -47,8 +47,7 @@ function LandingPage() {
                                 <p>Power Your Life with <span>REYES ELECTRONICS</span></p>
                                 <p className="mb-3">Elevate Your Experience with Top-Tier Electronic Products.</p>
                                 <Button 
-                                    variant='' 
-                                    size='lg' 
+                                    variant=''  
                                     href="#features" 
                                     id="btn"
                                     className={LandingPagecss.Btn}>
