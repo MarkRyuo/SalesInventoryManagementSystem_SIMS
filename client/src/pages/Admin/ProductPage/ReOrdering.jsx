@@ -209,8 +209,8 @@ function ReOrdering() {
                     </Modal.Header>
                     <Modal.Body>
                         {reorderList.length > 0 ? (
-                            <Table bordered>
-                                <thead>
+                            <Table bordered hover responsive>
+                                <thead className="bg-light">
                                     <tr>
                                         <th>Product Name</th>
                                         <th>SKU</th>
@@ -223,45 +223,50 @@ function ReOrdering() {
                                             <td>{product.productName}</td>
                                             <td>{product.sku}</td>
                                             <td>
-                                                <input
-                                                    type="text"
-                                                    min="0"
-                                                    value={product.quantity || 0}
-                                                    onChange={(e) => {
-                                                        const newQuantity = e.target.value;
-                                                        const validQuantity = isNaN(newQuantity) || newQuantity === '' ? 0 : parseInt(newQuantity, 10);
+                                                <div className="d-flex justify-content-center">
+                                                    <input
+                                                        type="number"
+                                                        min="0"
+                                                        value={product.quantity || 0}
+                                                        onChange={(e) => {
+                                                            const newQuantity = e.target.value;
+                                                            const validQuantity = isNaN(newQuantity) || newQuantity === '' ? 0 : parseInt(newQuantity, 10);
 
-                                                        setReorderList((prevList) => {
-                                                            const updatedList = [...prevList];
-                                                            updatedList[index] = {
-                                                                ...updatedList[index],
-                                                                quantity: validQuantity,
-                                                            };
-                                                            localStorage.setItem("reorderList", JSON.stringify(updatedList));
-                                                            return updatedList;
-                                                        });
-                                                    }}
-                                                    style={{
-                                                        width: "80px",
-                                                        appearance: "none",
-                                                        MozAppearance: "textfield",
-                                                        WebkitAppearance: "none",
-                                                    }}
-                                                />
+                                                            setReorderList((prevList) => {
+                                                                const updatedList = [...prevList];
+                                                                updatedList[index] = {
+                                                                    ...updatedList[index],
+                                                                    quantity: validQuantity,
+                                                                };
+                                                                localStorage.setItem("reorderList", JSON.stringify(updatedList));
+                                                                return updatedList;
+                                                            });
+                                                        }}
+                                                        style={{
+                                                            width: "80px",
+                                                            padding: "5px",
+                                                            fontSize: "1rem",
+                                                            borderRadius: "5px",
+                                                            borderColor: "#ccc",
+                                                            textAlign: "center",
+                                                        }}
+                                                    />
+                                                </div>
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </Table>
                         ) : (
-                            <p>No products added to reorder list.</p>
+                            <p className="text-center text-muted">No products added to reorder list.</p>
                         )}
                     </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer className="bg-light">
                         <Button variant="secondary" onClick={handleCloseModals}>Close</Button>
                         <Button variant="success" onClick={handleSaveOrderToFirebase}>Save Order</Button>
                     </Modal.Footer>
                 </Modal>
+
             </main>
         </Container>
     );
