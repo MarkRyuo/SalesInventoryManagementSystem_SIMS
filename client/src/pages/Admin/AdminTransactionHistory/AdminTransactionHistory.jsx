@@ -151,6 +151,7 @@ function AdminTransactionHistory() {
             </div>
 
             {/* Updated Modal for viewing order details */}
+            {/* Updated Modal for viewing order details */}
             <Modal
                 show={showModal}
                 onHide={handleCloseModal}
@@ -164,7 +165,8 @@ function AdminTransactionHistory() {
                 <Modal.Body>
                     {selectedOrder && (
                         <Container>
-                            <h5 className="mb-3">Order Summary</h5>
+                            {/* Order Summary Section */}
+                            <h5 className="mb-4 text-primary">Order Summary</h5>
                             <ListGroup variant="flush">
                                 <ListGroup.Item><strong>Order Date:</strong> {selectedOrder.date}</ListGroup.Item>
                                 <ListGroup.Item><strong>Customer Name:</strong> {selectedOrder.customerName}</ListGroup.Item>
@@ -174,33 +176,40 @@ function AdminTransactionHistory() {
                                 <ListGroup.Item><strong>Total Amount:</strong> <strong>₱{selectedOrder.total.toFixed(2)}</strong></ListGroup.Item>
                             </ListGroup>
 
-                            <h5 className="mt-4">Items</h5>
+                            {/* Items Section */}
+                            <h5 className="mt-4 text-primary">Items</h5>
                             <ListGroup variant="flush">
                                 {selectedOrder.items.map((item, index) => {
                                     const price = parseFloat(item.price);
                                     const total = price * item.quantity;
                                     return (
                                         <ListGroup.Item key={index}>
-                                            <p><strong>Product:</strong> {item.productName}</p>
-                                            <p><strong>Quantity:</strong> {item.quantity}</p>
-                                            <p><strong>Unit Price:</strong> ₱{price.toFixed(2)}</p>
-                                            <p><strong>Total:</strong> ₱{total.toFixed(2)}</p>
+                                            <div className="d-flex justify-content-between">
+                                                <p><strong>Product:</strong> {item.productName}</p>
+                                                <p><strong>Quantity:</strong> {item.quantity}</p>
+                                            </div>
+                                            <div className="d-flex justify-content-between">
+                                                <p><strong>Unit Price:</strong> ₱{price.toFixed(2)}</p>
+                                                <p><strong>Total:</strong> ₱{total.toFixed(2)}</p>
+                                            </div>
                                         </ListGroup.Item>
                                     );
                                 })}
                             </ListGroup>
 
-                            <h5 className="mt-4">Download Receipt QR Code</h5>
+                            {/* QR Code Section */}
+                            <h5 className="mt-4 text-primary">Download Receipt QR Code</h5>
                             <div className="d-flex justify-content-center">
                                 <canvas ref={qrRef} style={{ maxWidth: "100%", height: "auto" }} />
                             </div>
                         </Container>
                     )}
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="bg-light">
                     <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
                 </Modal.Footer>
             </Modal>
+
 
             {/* Delete Confirmation Modal */}
             <Modal
@@ -208,21 +217,24 @@ function AdminTransactionHistory() {
                 onHide={handleCloseDeleteModal}
                 centered
             >
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className="bg-danger text-white">
                     <Modal.Title>Delete Order</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p className="text-danger">
+                    <p className="text-danger font-weight-bold">
                         Warning: Deleting the following products is permanent and cannot be undone:
                     </p>
-                    <p><strong>{selectedOrder ? getProductNames(selectedOrder) : ''}</strong></p>
+                    <p className="font-weight-bold text-danger">
+                        {selectedOrder ? getProductNames(selectedOrder) : ''}
+                    </p>
                     <p>Are you sure you want to delete this order?</p>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="bg-light">
                     <Button variant="secondary" onClick={handleCloseDeleteModal}>Cancel</Button>
                     <Button variant="danger" onClick={() => handleDeleteOrder(selectedOrder.id)}>Delete</Button>
                 </Modal.Footer>
             </Modal>
+
 
         </Container>
     );
