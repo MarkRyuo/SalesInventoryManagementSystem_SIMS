@@ -8,11 +8,12 @@
 }
 
 .transactionMainContainer {
-    border: 1px solid;
+    // border: 1px solid;
     margin-top: 10px;
 
     h4 {
         font-size: 1.5rem;
+        margin-left: 20px;
     }
 
     .containerFilter {
@@ -24,7 +25,40 @@
 }
 
 .transactionchildContainer{
-    border: 1px solid;
+    // border: 1px solid;
     height: 600px;
     overflow: auto;
+    padding: 10px;
+    
+    .ListGroupItem {
+        // border: 1px solid;
+        box-shadow: 1px 1px 4px rgb(240, 240, 240);
+        display: flex;
+        justify-content: space-between;
+        margin: 2px;
+        border-radius: 5px;
+        align-items: center;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            p {
+                font-size: 0.9rem;
+            }
+        }
+
+        div:first-child {
+            h5 {
+                font-size: 1.3rem;
+            }
+        }
+
+        div:last-child {
+            // border: 1px solid;
+            height: 40px;
+            width: 150px;
+            flex-direction: row;
+            justify-content: center;
+        }
+    }
 }

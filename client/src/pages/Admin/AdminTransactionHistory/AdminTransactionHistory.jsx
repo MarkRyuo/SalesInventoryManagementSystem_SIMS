@@ -5,6 +5,7 @@ import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import QRious from 'qrious';
 import { FaEye, FaDownload, FaTrash } from "react-icons/fa"; // Importing icons
 import AdminTransactionScss from './AdminTransactionHistory.module.scss';
+import { FaSave } from "react-icons/fa";
 
 function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
@@ -99,7 +100,7 @@ function AdminTransactionHistory() {
 
     return (
         <Container fluid className={AdminTransactionScss.transactionMainContainer}>
-            <h4>Your Saved Orders</h4>
+            <h4><FaSave size={25}/>Your Saved Orders</h4>
             <div className={AdminTransactionScss.containerFilter}>
                 {/* Filter */}
             </div>
@@ -109,12 +110,12 @@ function AdminTransactionHistory() {
                 <ListGroup variant="flush">
                     {orderHistory.length > 0 ? (
                         orderHistory.map((order) => (
-                            <ListGroup.Item key={order.id} className="d-flex justify-content-between align-items-center">
+                            <ListGroup.Item key={order.id} className={AdminTransactionScss.ListGroupItem}>
                                 <div>
-                                    <h5>Order ID: {order.id}</h5>
-                                    <p>Order Date: {order.date}</p>
-                                    <p>Customer Name: {order.customerName}</p>
-                                    <p>Total: ₱{order.total.toFixed(2)}</p>
+                                    <h5 className="p-0 mb-2">Order ID: {order.id}</h5>
+                                    <p className="p-0 m-0 ms-2">Order Date: {order.date}</p>
+                                    <p className="p-0 m-0 ms-2">Customer Name: {order.customerName}</p>
+                                    <p className="p-0 m-0 ms-2">Total: ₱{order.total.toFixed(2)}</p>
                                 </div>
                                 <div>
                                     <Button
