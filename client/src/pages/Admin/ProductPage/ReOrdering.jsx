@@ -125,9 +125,6 @@ function ReOrdering() {
             <main className={ReOrderingscss.mainReOrdering}>
                 <h4 className="my-4"><FaTruckLoading size={25} className="me-2"/>Reordering Dashboard</h4>
                 <div className={ReOrderingscss.div1}>
-                    <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
-                        View Reordered Product
-                    </Button>
                     <span><SavedOrderDetails /></span>
                 </div>
                 {loading ? (
@@ -137,8 +134,8 @@ function ReOrdering() {
                 ) : (
                     <div>
                         {filteredReorderingProducts.length > 0 ? (
-                            <div style={{ display: "flex", flexDirection: "row", overflowX: "auto" }}>
-                                <Row className="mt-3" style={{ display: "flex", flexWrap: "nowrap" }}>
+                            <div className="mt-3">
+                                <div className={ReOrderingscss.containerReordering}>
                                     {filteredReorderingProducts.map((product) => {
                                         const isOutOfStock = product.quantity === 0;
                                         const isLowStock = product.quantity > 0 && product.quantity <= product.instockthreshold / 4;
@@ -153,7 +150,7 @@ function ReOrdering() {
                                         if (!isOutOfStock && !isLowStock) return null;
 
                                         return (
-                                            <Col md={4} key={product.barcode} className="mb-3" style={{ minWidth: "300px" }}>
+                                            <div key={product.barcode} className="mb-3" style={{ minWidth: "300px" }}>
                                                 <Card>
                                                     <Card.Body>
                                                         <Card.Title>{product.productName}</Card.Title>
@@ -169,14 +166,18 @@ function ReOrdering() {
                                                         </Button>
                                                     </Card.Body>
                                                 </Card>
-                                            </Col>
+                                            </div>
                                         );
                                     })}
-                                </Row>
+                                    
+                                </div>
                             </div>
                         ) : (
                             <p className="text-muted text-center">No products need reordering.</p>
                         )}
+                            <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
+                                View Reordered Product
+                            </Button>
                     </div>
                 )}
 
