@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchReorderingProducts, saveOrderToFirebase } from "../../../services/ProductService";
 import { Spinner, Button, Badge, Container, Modal, Card, Row, Col, Table } from "react-bootstrap"; // Add Table here
 import SavedOrderDetails from "./SavedOrderDetails";
-import ReOrderingscss from './SCSS/ReOrdering.module.scss' ;
+import ReOrderingscss from './SCSS/ReOrdering.module.scss';
 import { FaTruckLoading } from "react-icons/fa";
 
 function ReOrdering() {
@@ -123,7 +123,7 @@ function ReOrdering() {
     return (
         <Container>
             <main className={ReOrderingscss.mainReOrdering}>
-                <h4 className="my-4"><FaTruckLoading size={25} className="me-2"/>Reordering Dashboard</h4>
+                <h4 className="my-4"><FaTruckLoading size={25} className="me-2" />Reordering Dashboard</h4>
                 <div className={ReOrderingscss.div1}>
                     <span><SavedOrderDetails /></span>
                 </div>
@@ -151,31 +151,31 @@ function ReOrdering() {
 
                                         return (
                                             <div key={product.barcode}>
-                                                    <div className={ReOrderingscss.CardBody}>
-                                                        <div>
-                                                            <h4>{product.productName}</h4>
-                                                            <p className="m-0">SKU: {product.sku}</p>
-                                                            <p className="m-0">Quantity: {product.quantity}</p>
-                                                            <p className="m-0">Status: {statusBadge}</p>
-                                                        </div>
-                                                        <div>
-                                                            <Button variant="success" size="md" onClick={() => handleViewProduct(product)}>
-                                                                Reorder
-                                                            </Button>
-                                                        </div>
+                                                <div className={ReOrderingscss.CardBody}>
+                                                    <div>
+                                                        <h4>{product.productName}</h4>
+                                                        <p className="m-0">SKU: {product.sku}</p>
+                                                        <p className="m-0">Quantity: {product.quantity}</p>
+                                                        <p className="m-0">Status: {statusBadge}</p>
                                                     </div>
+                                                    <div>
+                                                        <Button variant="success" size="md" onClick={() => handleViewProduct(product)}>
+                                                            Reorder
+                                                        </Button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         );
                                     })}
-                                    
+
                                 </div>
                             </div>
                         ) : (
                             <p className="text-muted text-center">No products need reordering.</p>
                         )}
-                            <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
-                                View Reordered Product
-                            </Button>
+                        <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
+                            View Reordered Product
+                        </Button>
                     </div>
                 )}
 
