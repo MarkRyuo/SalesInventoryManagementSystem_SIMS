@@ -9,6 +9,11 @@
     background: radial-gradient(circle at 10% 20%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 100.2%);
     // background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     height: 93vh;
+    box-shadow: 1px 2px 5px rgba(217, 253, 169, 0.781);
+
+    @media (max-width: 700px) {
+        background: radial-gradient(circle at 5% 15%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 100.2%);
+    }
 }
 
 .heroSection {
@@ -32,6 +37,10 @@
         box-sizing: border-box;
         color: #ffffff;
 
+        p {
+            font-size: 1.3rem;
+        }
+
         p:first-child {
             font-size: 2.8rem;
             font-family: "Poppins", sans-serif;
@@ -44,24 +53,37 @@
             -webkit-background-clip: text;    /* WebKit syntax for older browsers */
             color: transparent;
         }
-
+        
         .Btn {
             // border: 1px solid;
-            color: #202020;
-            background: radial-gradient(1023px at 3.1% 6.9%, rgb(255, 255, 255) 0%, rgb(205, 40, 83) 74.9%);
+            font-size: 1.3rem;
+            color: #f8f8f8;
+            border: 1px solid;
+            transition: border-width 2s;
+            
         }
-        
-        .Btn:hover {
-            background: radial-gradient(circle at 10% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
-            color: #ffffff;
+
+        .Btn:Hover {
+            border-width: 2px;
+            border-style: solid;
+            border-image: linear-gradient(to right, rgb(221, 49, 49), rgb(119, 0, 0)) 1;
         }
+
         
-        @media (max-width: 500px){
-            width: 100%;
+        
+        @media (max-width: 700px){
             p:first-child {
                 font-size: 2rem;
             }
+            p {
+                font-size: 1rem;
+            }
+
+            .Btn {
+                font-size: 1.1rem;
+            }
         }
+
     }
     div.heroImage {
         box-sizing: border-box;
@@ -113,7 +135,10 @@
     padding: 16px;
     position: sticky;
     top: 0;
-    box-shadow: 2px 2px 4px rgb(168, 200, 255, 20%);
     z-index: 1000;
-    background: radial-gradient(circle at 10% 20%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 100.2%);
+    background: radial-gradient(circle at 10% 20%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 90%);
+
+    @media (max-width: 700px) {
+        background: radial-gradient(circle at 5% 15%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 90%);
+    }
 }

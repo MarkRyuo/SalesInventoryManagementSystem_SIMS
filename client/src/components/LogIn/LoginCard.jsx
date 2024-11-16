@@ -93,6 +93,9 @@ export const LoginCard = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     disabled={loading} // Disable input while loading
+                    style={{
+                        
+                    }}
                 />
             </FloatingLabel>
 

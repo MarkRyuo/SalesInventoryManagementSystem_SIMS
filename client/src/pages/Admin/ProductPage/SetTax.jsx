@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button, Form, Modal, InputGroup, ListGroup, Card } from "react-bootstrap";
 import { addNewTax, fetchAllTaxes } from "../../../services/ProductService"; // Import correct function
+import SetTaxscss from './SCSS/Sets.module.scss' ;
+import { HiReceiptTax } from "react-icons/hi";
 
 function SetTax() {
     const [showModal, setShowModal] = useState(false);
@@ -58,13 +60,13 @@ function SetTax() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShowModal}>
-                Set Tax
+            <Button variant="success" onClick={handleShowModal} className={SetTaxscss.SetTaxBtn}>
+                <HiReceiptTax size={20} />Set Tax
             </Button>
 
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Tax Percentage</Modal.Title>
+                    <Modal.Title><HiReceiptTax size={20} />Create Tax </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -83,7 +85,7 @@ function SetTax() {
                             <InputGroup>
                                 <InputGroup.Text>%</InputGroup.Text>
                                 <Form.Control
-                                    type="number"
+                                    type="text"
                                     placeholder="Enter percentage (1 - 100)"
                                     value={taxValue}
                                     onChange={(e) => setTaxValue(e.target.value)}
@@ -95,18 +97,16 @@ function SetTax() {
                     </Form>
 
                     {/* Display the list of added taxes */}
-                    <div className="mt-4">
-                        <h5>Existing Taxes</h5>
+                    <div>
+                        <p className="fs-5 mt-2">Existing Taxes</p>
                         {taxes.length > 0 ? (
-                            <ListGroup>
+                            <ListGroup className={SetTaxscss.listGroupContainer}>
                                 {taxes.map((tax, index) => (
                                     <ListGroup.Item key={index}>
                                         <Card>
-                                            <Card.Body>
-                                                <Card.Title>{tax.name}</Card.Title> {/* Ensure this matches your Firebase structure */}
-                                                <Card.Text>
-                                                    <strong>{tax.value}%</strong> {/* Ensure this matches your Firebase structure */}
-                                                </Card.Text>
+                                            <Card.Body className={SetTaxscss.cardBody}>
+                                                <p className="fs-6 me-1 m-0">{tax.name}: </p> {/* Ensure this matches your Firebase structure */}
+                                                <p className="m-0 p-0 fw-medium">{tax.value}%</p> {/* Ensure this matches your Firebase structure */}
                                             </Card.Body>
                                         </Card>
                                     </ListGroup.Item>

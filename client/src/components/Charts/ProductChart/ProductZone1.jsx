@@ -6,8 +6,8 @@ import SetCategory from "../../../pages/Admin/ProductPage/SetCategory";
 import SetDiscounts from "../../../pages/Admin/ProductPage/SetDiscounts";
 import SetTax from "../../../pages/Admin/ProductPage/SetTax";
 import { LuFileEdit } from "react-icons/lu";
-import { editProductInDatabase, deleteProduct } from '../../../services/ProductService';
-import { FaProductHunt } from "react-icons/fa";
+import { updateProductInDatabase, deleteProduct } from '../../../services/ProductService';
+
 
 
 function ProductChart() {
@@ -120,7 +120,6 @@ function ProductChart() {
         setShowSaveConfirmation(true);
     };
 
-
     const confirmDeleteProduct = () => {
         setShowDeleteConfirmation(true);
     };
@@ -128,9 +127,7 @@ function ProductChart() {
     const saveChanges = async () => {
         try {
             console.log('Saving changes for product:', editProduct);
-
-            // Update the product in the database (partial update)
-            await editProductInDatabase(editProduct);
+            await updateProductInDatabase(editProduct); // Update in database first
 
             // Refetch products from the database
             const allProducts = await getAllProducts();
@@ -143,7 +140,6 @@ function ProductChart() {
             console.error('Error saving changes:', error.message);
         }
     };
-
 
 
     const handleDeleteProduct = async () => {
@@ -210,11 +206,11 @@ function ProductChart() {
                     </Form>
                 </Col>
                 <div style={{ display: "inline-flex", gap: 70, marginTop: 10 }}>
-                    <div className={Productcss.allDropdownyBtn}>
+                    <div>
                         <DropdownButton
-                            variant=""
                             id="dropdown-basic-button"
                             title=<span>{selectedCategory}</span>
+                            className={Productcss.allCategoryBtn}
                             onSelect={(eventKey) => setSelectedCategory(eventKey)}
                         >
                             <Dropdown.Item eventKey="All Category"><span>All Category</span></Dropdown.Item>
@@ -226,11 +222,11 @@ function ProductChart() {
                         </DropdownButton>
 
                     </div>
-                    <div className={Productcss.allDropdownyBtn}>
+                    <div>
                         <DropdownButton
-                            variant=""
                             id="stock-dropdown"
                             title=<span>{selectedStock}</span>
+                            className={Productcss.allCategoryBtn}
                             onSelect={(eventKey) => setSelectedStock(eventKey)}
                         >
                             <Dropdown.Item eventKey="All Stock"><span>All Stock</span></Dropdown.Item>
@@ -274,11 +270,11 @@ function ProductChart() {
                                                 </div>
                                                 <div>
                                                     <Button
-                                                        variant=""
+                                                        variant="primary"
                                                         onClick={() => openModal(product)}
                                                         className="me-2"
                                                     >
-                                                        <LuFileEdit size={20}/>
+                                                        <LuFileEdit size={20} />
                                                     </Button>
                                                 </div>
                                             </div>
@@ -300,12 +296,11 @@ function ProductChart() {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title>
-                            <FaProductHunt size={20} className="me-2"/>
                             {editProduct ? editProduct.productName : 'Edit Product'}
                             {editProduct && (
                                 <>
                                     <p className='fs-6 m-0 p-0'>SKU: {editProduct.sku}</p>
-                                    <p className='fs-6 m-0'>Barcode: {editProduct.barcode}</p>
+                                    <p className='fs-6'>Barcode: {editProduct.barcode}</p>
                                 </>
                             )}
                         </Modal.Title>
@@ -341,26 +336,15 @@ function ProductChart() {
                                                             value={editProduct[key]}
                                                             onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
                                                             placeholder="Enter stock threshold"
-                                                                style={{ appearance: 'none', MozAppearance: 'textfield' }}
-                                                                isInvalid={editProduct[key] === undefined || editProduct[key] === '' || editProduct[key] <= 0}
+                                                            style={{ appearance: 'none', MozAppearance: 'textfield' }}
                                                         />
-                                                    ) :  key === 'quantity' ? (
-                                                        <Form.Control
-                                                            type="text"
-                                                            value={editProduct[key]}
-                                                            disabled
-                                                            onChange={(e) => handleModalInputChange(key, e.target.value)}
-                                                        />
-                                                    ): (
+                                                    ) : (
                                                         <Form.Control
                                                             type="text"
                                                             value={editProduct[key]}
                                                             onChange={(e) => handleModalInputChange(key, e.target.value)}
                                                         />
                                                     )}
-                                                    <Form.Control.Feedback type="invalid">
-                                                        Please enter a valid threshold greater than 0.
-                                                    </Form.Control.Feedback>
                                                 </Form.Group>
                                             </Col>
                                         ))}

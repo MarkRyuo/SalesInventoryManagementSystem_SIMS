@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
-import { Button, Form, Modal, InputGroup, ListGroup, Card } from "react-bootstrap";
-import { addNewDiscount, fetchAllDiscounts } from "../../../services/ProductService"; // Import the necessary function
+import { Button, Form, Modal, InputGroup, ListGroup, Card, Alert } from "react-bootstrap";
+import { addNewDiscount, fetchAllDiscounts } from "../../../services/ProductService";
+import SetDiscountsscss from './SCSS/Sets.module.scss';
+import { MdDiscount } from "react-icons/md";
 
 function SetDiscounts() {
     const [showModal, setShowModal] = useState(false);
     const [discountName, setDiscountName] = useState("");
     const [discountValue, setDiscountValue] = useState("");
-    const [discounts, setDiscounts] = useState([]); // State to hold the list of discounts
+    const [discounts, setDiscounts] = useState([]);
+    const [success, setSuccess] = useState(false); // New state for success message
 
     useEffect(() => {
         // Fetch the discounts when the component mounts
         const fetchDiscounts = async () => {
             try {
-                const fetchedDiscounts = await fetchAllDiscounts(); // Fetch the discounts
+                const fetchedDiscounts = await fetchAllDiscounts();
                 setDiscounts(fetchedDiscounts);
             } catch (error) {
                 console.error("Error fetching discounts:", error.message);
@@ -20,13 +23,14 @@ function SetDiscounts() {
         };
 
         fetchDiscounts();
-    }, []); // Empty dependency array to run this effect once on mount
+    }, []);
 
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => {
         setShowModal(false);
         setDiscountName("");
         setDiscountValue("");
+        setSuccess(false);
     };
 
     // Function to handle creating and saving a discount
@@ -42,13 +46,16 @@ function SetDiscounts() {
                 discountValue: parseFloat(discountValue), // Ensure numeric value
             });
 
-            console.log("Discount created successfully");
+            // Show success message for 2 seconds
+            setSuccess(true);
+            setTimeout(() => setSuccess(false), 2000);
 
             // After successfully adding a new discount, refetch the discount list
             const fetchedDiscounts = await fetchAllDiscounts();
             setDiscounts(fetchedDiscounts);
 
-            handleCloseModal();
+            setDiscountName("");
+            setDiscountValue("");
         } catch (error) {
             alert(`Error creating discount: ${error.message}`);
         }
@@ -56,15 +63,22 @@ function SetDiscounts() {
 
     return (
         <>
-            <Button variant="success" onClick={handleShowModal}>
-                Set Discount
+            <Button variant="success" onClick={handleShowModal} className={SetDiscountsscss.SetDiscountsBtn}>
+                <MdDiscount size={15} className="me-1" />Set Discount
             </Button>
 
             <Modal show={showModal} onHide={handleCloseModal} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Percentage Discount</Modal.Title>
+                    <p className="fs-4 fw-medium m-0"> <MdDiscount />Create Discount</p>
                 </Modal.Header>
                 <Modal.Body>
+                    {/* Success Alert */}
+                    {success && (
+                        <Alert variant="success" className="mb-3">
+                            Discount added successfully!
+                        </Alert>
+                    )}
+
                     <Form>
                         <Form.Group controlId="discountName">
                             <Form.Label>Discount Name</Form.Label>
@@ -81,7 +95,7 @@ function SetDiscounts() {
                             <InputGroup>
                                 <InputGroup.Text>%</InputGroup.Text>
                                 <Form.Control
-                                    type="number"
+                                    type="text"
                                     placeholder="Enter percentage (1 - 100)"
                                     value={discountValue}
                                     onChange={(e) => setDiscountValue(e.target.value)}
@@ -94,17 +108,15 @@ function SetDiscounts() {
 
                     {/* Display the list of added discounts */}
                     <div className="mt-4">
-                        <h5>Existing Discounts</h5>
+                        <p className="fs-5 m-0">Existing Discounts</p>
                         {discounts.length > 0 ? (
-                            <ListGroup>
+                            <ListGroup className={SetDiscountsscss.ListGroupDiscount}>
                                 {discounts.map((discount, index) => (
                                     <ListGroup.Item key={index}>
                                         <Card>
-                                            <Card.Body>
-                                                <Card.Title>{discount.name}</Card.Title>
-                                                <Card.Text>
-                                                    <strong>{discount.value}%</strong>
-                                                </Card.Text>
+                                            <Card.Body className={SetDiscountsscss.cardDiscountBody}>
+                                                <p className="me-1 p-0 mb-0">{discount.name}: </p>
+                                                <p className="fw-medium mb-0">{discount.value}%</p>
                                             </Card.Body>
                                         </Card>
                                     </ListGroup.Item>
@@ -124,7 +136,7 @@ function SetDiscounts() {
                         onClick={handleCreateDiscount}
                         disabled={!discountName || !discountValue || discountValue <= 0 || discountValue > 100}
                     >
-                        Create Discount
+                        Add Discount
                     </Button>
                 </Modal.Footer>
             </Modal>

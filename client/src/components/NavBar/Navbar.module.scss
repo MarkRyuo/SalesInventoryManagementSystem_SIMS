@@ -12,8 +12,15 @@
     background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(255, 255, 255) 50%);    
     margin: 0;
     padding: 0px 10px ;
-    height: 80px;
+    height: 70px;
     align-content: center;
+    
+
+    @media (max-width: 700px) {
+        span {
+            margin-left: 15px;
+        }
+    }
 }
 
 

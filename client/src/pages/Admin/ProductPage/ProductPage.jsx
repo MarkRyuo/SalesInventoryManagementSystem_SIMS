@@ -4,8 +4,6 @@ import { MainLayout } from "../../../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
 import Product from '../../../components/Charts/ProductChart/Product';
 import { Container } from "react-bootstrap";
-import ProductEditor from "../ProductEditor/ProductEditor";
-import { FaRegEdit } from "react-icons/fa";
 import AdminTransactionHistory from '../AdminTransactionHistory/AdminTransactionHistory'
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
@@ -23,12 +21,6 @@ function ProductNavbarTabs({ setActiveTab }) {
                 <Nav.Link eventKey="/Product">
                     <AiFillProduct size={20}/>
                     <p className='m-0 p-0'>Products</p>
-                </Nav.Link>
-            </Nav.Item>
-            <Nav.Item className={ProductPagescss.mainTabs}>
-                <Nav.Link eventKey="/ProductEditor">
-                    <FaRegEdit size={20} />
-                    <p className='m-0 p-0'>Product Config</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
@@ -64,11 +56,6 @@ export const ProductPage = () => {
                     {activeTab === '/Product' && (
                         <div className="Product">
                             <Product />
-                        </div>
-                    )}
-                    {activeTab === '/ProductEditor' && (
-                        <div className="ProductEditor">
-                            <ProductEditor />
                         </div>
                     )}
                     {activeTab === '/AdminTransactionHistory' && (
