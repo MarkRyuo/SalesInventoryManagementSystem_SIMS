@@ -19,6 +19,10 @@ function NewAssetsScanner() {
     const [videoFade, setVideoFade] = useState(true);
     const [guideFade, setGuideFade] = useState(true);
     const navigate = useNavigate();
+    //! Camera Switching (Front and Back Trigger)
+    const [videoDevices, setVideoDevices] = useState([]);
+    const [selectedDeviceId, setSelectedDeviceId] = useState(null);
+
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
