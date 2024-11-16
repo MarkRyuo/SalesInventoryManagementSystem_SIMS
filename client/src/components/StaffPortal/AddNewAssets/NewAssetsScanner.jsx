@@ -121,12 +121,29 @@ function NewAssetsScanner() {
     ]);
 
     const handleCameraSwitch = () => {
-        if (videoDevices.length > 1) {
-            const currentIndex = videoDevices.findIndex(device => device.deviceId === selectedDeviceId);
-            const nextIndex = (currentIndex + 1) % videoDevices.length;
-            setSelectedDeviceId(videoDevices[nextIndex].deviceId);
+        // Prevent switching if there's only one camera, if no devices found, or if a scan is in progress
+        if (isProcessing) {
+            setError("Cannot switch cameras while processing.");
+            return;
         }
+
+        if (videoDevices.length === 0) {
+            setError("No video devices detected. Cannot switch cameras.");
+            return;
+        }
+
+        if (videoDevices.length < 2) {
+            setError("Only one camera is available. Cannot switch cameras.");
+            return;
+        }
+
+        // Find the current camera index and switch to the next one
+        const currentIndex = videoDevices.findIndex(device => device.deviceId === selectedDeviceId);
+        const nextIndex = (currentIndex + 1) % videoDevices.length;
+        setSelectedDeviceId(videoDevices[nextIndex].deviceId);
+        setError(""); // Clear any previous errors
     };
+
 
 
     return (
@@ -139,10 +156,11 @@ function NewAssetsScanner() {
                             <button
                                 onClick={handleCameraSwitch}
                                 className="btn btn-primary mb-2"
-                                disabled={isProcessing}
+                                disabled={isProcessing || videoDevices.length < 2}
                             >
                                 Switch Camera
                             </button>
+
 
                             <div className="text-center position-relative">
                                 {error && (
