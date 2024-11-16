@@ -180,7 +180,7 @@ function ViewQrCode() {
                                                 onClick={() => handleToggleSelection(qr)}
                                                 style={{ marginTop: '8px' }}
                                             >
-                                                {isSelected ? 'Remove from Print' : 'Add to Print'}
+                                                {isSelected ? 'Remove Print' : 'Add Print'}
                                             </Button>
                                         </div>
                                     </div>
