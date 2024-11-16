@@ -6,6 +6,7 @@ import QRious from 'qrious';
 import { FaEye, FaDownload, FaTrash } from "react-icons/fa"; // Importing icons
 import AdminTransactionScss from './AdminTransactionHistory.module.scss';
 import { FaSave } from "react-icons/fa";
+import { FaTruckRampBox } from "react-icons/fa6";
 
 function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
@@ -159,7 +160,7 @@ function AdminTransactionHistory() {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Order Details</Modal.Title>
+                    <Modal.Title><FaTruckRampBox size={20} className="me-2"/>Order Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {selectedOrder && (
