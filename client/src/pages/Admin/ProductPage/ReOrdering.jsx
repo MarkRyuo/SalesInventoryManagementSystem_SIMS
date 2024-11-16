@@ -111,7 +111,6 @@ function ReOrdering() {
 
     // Filter out reordered products from the list
     const filteredReorderingProducts = reorderingProducts.filter((product) => !reorderedProducts.has(product.barcode));
-
     // Handle modal open and close
     const handleOpenReorderModal = () => setShowReorderModal(true);
     const handleCloseModals = () => {
