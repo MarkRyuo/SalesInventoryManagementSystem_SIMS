@@ -77,11 +77,22 @@
 }
 
 @media (max-width: 400px) {
+
+    .mainReOrdering {
+        h4 {
+            font-size: 1.1rem;
+        }
+    }
+
     .containerReordering {
     
     .CardBody {
-        height: 120px;
+        padding: 10px;
+        height: auto;
         margin: 2px 0px;
+        align-items: baseline;
+        flex-direction: column;
+
         div:first-child {
             h4 {
                 font-size: 1.2rem;
@@ -92,6 +103,7 @@
         }
 
             div:last-child {
+                margin-top: 5px;
                 button {
                     font-size: 0.8rem;
                 }
