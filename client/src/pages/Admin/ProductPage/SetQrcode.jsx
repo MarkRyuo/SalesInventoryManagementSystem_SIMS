@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Button, Spinner, Modal, ListGroup, Form, Card} from 'react-bootstrap';
-import AddQrcode from './AddQrcode';  // If you are still using this
+import { Button, Spinner, Modal, ListGroup, Form, Card, Row, Col } from 'react-bootstrap';
+import AddQrcode from './AddQrcode';
 import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
 import { jsPDF } from 'jspdf';
 
@@ -149,14 +149,14 @@ function ViewQrCode() {
                         <p>Loading QR Codes...</p>
                     </div>
                 ) : (
-                    <div className="d-flex overflow-auto" style={{ flexWrap: 'nowrap' }}>
+                    <Row>
                         {sortedQrCodes.map((qr, index) => {
                             const isSaved = Boolean(savedProductNames[qr.id]);
                             const productName = productNames[qr.id] || '';
                             const isSelected = selectedQrcodes.some((selectedQr) => selectedQr.id === qr.id);
 
                             return (
-                                <div key={qr.id} className="card-wrapper" style={{ marginRight: '16px' }}>
+                                <Col key={qr.id} sm={12} md={6} lg={4} xl={3} className="mb-4">
                                     <Card>
                                         <Card.Body>
                                             <Card.Title>QR Code #{index + 1}</Card.Title>
@@ -184,14 +184,14 @@ function ViewQrCode() {
                                             </Button>
                                         </Card.Body>
                                     </Card>
-                                </div>
+                                </Col>
                             );
                         })}
-                    </div>
+                    </Row>
                 )}
             </div>
 
-
+            {/* Modal for Printing QR Codes */}
             <Modal show={showPrintModal} onHide={closePrintModal} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>Selected QR Codes for Printing</Modal.Title>
