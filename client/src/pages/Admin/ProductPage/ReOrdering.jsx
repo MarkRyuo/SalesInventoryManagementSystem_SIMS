@@ -121,7 +121,7 @@ function ReOrdering() {
 
     return (
         <Container>
-            <main className={}>
+            <main className={ReOrderingscss.mainReOrdering}>
 
             </main>
             <h4 className="my-4 text-center">Reordering Dashboard</h4>
