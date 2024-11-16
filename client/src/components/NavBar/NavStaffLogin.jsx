@@ -18,7 +18,7 @@ function NavStaffLogin() {
                             </Col>
                             <Col className="p-0 pt-1 ps-2">
                                 <Link to={"/"} style={{ color: "rgb(19, 14, 1)", textDecoration: "none" }}>
-                                    <Navbar.Brand className="">Staff Portal</Navbar.Brand>
+                                    <Navbar.Brand className="Nav-brand">Staff Portal</Navbar.Brand>
                                 </Link>
                             </Col>
                         </Row>
