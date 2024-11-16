@@ -1,10 +1,10 @@
-import { Container, Table, Button, Modal } from "react-bootstrap";
+import { Container, Button, Modal, ListGroup } from "react-bootstrap";
 import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import QRious from 'qrious';
 import { FaEye, FaDownload, FaTrash } from "react-icons/fa"; // Importing icons
-import AdminTransactionScss from './AdminTransactionHistory.module.scss' ;
+import AdminTransactionScss from './AdminTransactionHistory.module.scss';
 
 function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
@@ -102,59 +102,48 @@ function AdminTransactionHistory() {
             <h4>Your Saved Orders</h4>
             <Container fluid="lg" className={AdminTransactionScss.transactionMainContainer} >
 
-                {/* Order Table */}
-                <Table striped bordered hover responsive>
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Order Date</th>
-                            <th>Customer Name</th>
-                            <th>Total</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {orderHistory.length > 0 ? (
-                            orderHistory.map((order) => (
-                                <tr key={order.id}>
-                                    <td>{order.id}</td>
-                                    <td>{order.date}</td>
-                                    <td>{order.customerName}</td>
-                                    <td>₱{order.total.toFixed(2)}</td>
-                                    <td>
-                                        <Button
-                                            variant="outline-info"
-                                            size="sm"
-                                            className="me-2"
-                                            onClick={() => handleShowModal(order)}
-                                        >
-                                            <FaEye />
-                                        </Button>
-                                        <Button
-                                            variant="outline-primary"
-                                            size="sm"
-                                            className="me-2"
-                                            onClick={() => handleDownloadOrder(order)}
-                                        >
-                                            <FaDownload />
-                                        </Button>
-                                        <Button
-                                            variant="outline-danger"
-                                            size="sm"
-                                            onClick={() => handleShowDeleteModal(order)}
-                                        >
-                                            <FaTrash />
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="5" className="text-center">No saved orders</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </Table>
+                {/* Mapped Order List */}
+                <ListGroup variant="flush">
+                    {orderHistory.length > 0 ? (
+                        orderHistory.map((order) => (
+                            <ListGroup.Item key={order.id} className="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5>Order ID: {order.id}</h5>
+                                    <p>Order Date: {order.date}</p>
+                                    <p>Customer Name: {order.customerName}</p>
+                                    <p>Total: ₱{order.total.toFixed(2)}</p>
+                                </div>
+                                <div>
+                                    <Button
+                                        variant="outline-info"
+                                        size="sm"
+                                        className="me-2"
+                                        onClick={() => handleShowModal(order)}
+                                    >
+                                        <FaEye />
+                                    </Button>
+                                    <Button
+                                        variant="outline-primary"
+                                        size="sm"
+                                        className="me-2"
+                                        onClick={() => handleDownloadOrder(order)}
+                                    >
+                                        <FaDownload />
+                                    </Button>
+                                    <Button
+                                        variant="outline-danger"
+                                        size="sm"
+                                        onClick={() => handleShowDeleteModal(order)}
+                                    >
+                                        <FaTrash />
+                                    </Button>
+                                </div>
+                            </ListGroup.Item>
+                        ))
+                    ) : (
+                        <ListGroup.Item className="text-center">No saved orders</ListGroup.Item>
+                    )}
+                </ListGroup>
             </Container>
 
             {/* Updated Modal for viewing order details */}
@@ -172,60 +161,30 @@ function AdminTransactionHistory() {
                     {selectedOrder && (
                         <Container>
                             <h5 className="mb-3">Order Summary</h5>
-                            <Table borderless>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Order Date:</strong></td>
-                                        <td>{selectedOrder.date}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Customer Name:</strong></td>
-                                        <td>{selectedOrder.customerName}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Subtotal:</strong></td>
-                                        <td>₱{selectedOrder.subtotal.toFixed(2)}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Tax (12%):</strong></td>
-                                        <td>₱{selectedOrder.tax.toFixed(2)}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Discount:</strong></td>
-                                        <td>-₱{selectedOrder.discount.toFixed(2)}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Total Amount:</strong></td>
-                                        <td><strong>₱{selectedOrder.total.toFixed(2)}</strong></td>
-                                    </tr>
-                                </tbody>
-                            </Table>
+                            <ListGroup variant="flush">
+                                <ListGroup.Item><strong>Order Date:</strong> {selectedOrder.date}</ListGroup.Item>
+                                <ListGroup.Item><strong>Customer Name:</strong> {selectedOrder.customerName}</ListGroup.Item>
+                                <ListGroup.Item><strong>Subtotal:</strong> ₱{selectedOrder.subtotal.toFixed(2)}</ListGroup.Item>
+                                <ListGroup.Item><strong>Tax (12%):</strong> ₱{selectedOrder.tax.toFixed(2)}</ListGroup.Item>
+                                <ListGroup.Item><strong>Discount:</strong> -₱{selectedOrder.discount.toFixed(2)}</ListGroup.Item>
+                                <ListGroup.Item><strong>Total Amount:</strong> <strong>₱{selectedOrder.total.toFixed(2)}</strong></ListGroup.Item>
+                            </ListGroup>
 
                             <h5 className="mt-4">Items</h5>
-                            <Table striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>Product Name</th>
-                                        <th>Quantity</th>
-                                        <th>Unit Price</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {selectedOrder.items.map((item, index) => {
-                                        const price = parseFloat(item.price);
-                                        const total = price * item.quantity;
-                                        return (
-                                            <tr key={index}>
-                                                <td>{item.productName}</td>
-                                                <td>{item.quantity}</td>
-                                                <td>₱{price.toFixed(2)}</td>
-                                                <td>₱{total.toFixed(2)}</td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </Table>
+                            <ListGroup variant="flush">
+                                {selectedOrder.items.map((item, index) => {
+                                    const price = parseFloat(item.price);
+                                    const total = price * item.quantity;
+                                    return (
+                                        <ListGroup.Item key={index}>
+                                            <p><strong>Product:</strong> {item.productName}</p>
+                                            <p><strong>Quantity:</strong> {item.quantity}</p>
+                                            <p><strong>Unit Price:</strong> ₱{price.toFixed(2)}</p>
+                                            <p><strong>Total:</strong> ₱{total.toFixed(2)}</p>
+                                        </ListGroup.Item>
+                                    );
+                                })}
+                            </ListGroup>
 
                             <h5 className="mt-4">Download Receipt QR Code</h5>
                             <div className="d-flex justify-content-center">
