@@ -191,7 +191,7 @@ function AdminTransactionHistory() {
                                 <ListGroup.Item><strong>Order Date:</strong> {selectedOrder.date}</ListGroup.Item>
                                 <ListGroup.Item><strong>Customer Name:</strong> {selectedOrder.customerName}</ListGroup.Item>
                                 <ListGroup.Item><strong>Subtotal:</strong> ₱{selectedOrder.subtotal.toFixed(2)}</ListGroup.Item>
-                                <ListGroup.Item><strong>Tax (12%):</strong> ₱{selectedOrder.tax.toFixed(2)}</ListGroup.Item>
+                                <ListGroup.Item><strong>Tax:</strong> ₱{selectedOrder.tax.toFixed(2)}</ListGroup.Item>
                                 <ListGroup.Item><strong>Discount:</strong> -₱{selectedOrder.discount.toFixed(2)}</ListGroup.Item>
                                 <ListGroup.Item><strong>Total Amount:</strong> <strong>₱{selectedOrder.total.toFixed(2)}</strong></ListGroup.Item>
                             </ListGroup>
