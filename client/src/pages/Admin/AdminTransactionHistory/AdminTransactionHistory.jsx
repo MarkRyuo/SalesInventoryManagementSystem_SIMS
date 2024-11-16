@@ -100,6 +100,9 @@ function AdminTransactionHistory() {
     return (
         <Container fluid className={AdminTransactionScss.transactionMainContainer}>
             <h4>Your Saved Orders</h4>
+            <div>
+                
+            </div>
             <Container fluid="lg" className={AdminTransactionScss.transactionchildContainer} >
 
                 {/* Mapped Order List */}
