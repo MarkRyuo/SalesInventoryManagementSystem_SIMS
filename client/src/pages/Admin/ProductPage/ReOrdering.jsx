@@ -127,7 +127,7 @@ function ReOrdering() {
                 <h4 className="my-4"><FaTruckLoading size={25} className="me-2" />Reordering Dashboard</h4>
                 <div className={ReOrderingscss.TopButtons}>
                     <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
-                        <MdOutlineViewInAr size={20} className="me-2"/>View Reordered Product
+                        <MdOutlineViewInAr size={17} className="me-2"/>View Reordered Product
                     </Button>
                     <SavedOrderDetails />
                 </div>

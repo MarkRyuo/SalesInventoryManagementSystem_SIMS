@@ -78,7 +78,7 @@ function SavedOrderDetails() {
     return (
         <div style={{display: "flex", alignItems: "flex-end"}}>
             <Button variant="primary" onClick={() => setShowModal(true)}>
-                <GrView size={20} className="me-2"/>View Saved Orders
+                <GrView size={17} className="me-2"/>View Saved Orders
             </Button>
 
             {/* Saved Orders Modal */}
