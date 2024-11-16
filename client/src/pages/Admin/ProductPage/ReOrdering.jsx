@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchReorderingProducts, saveOrderToFirebase } from "../../../services/ProductService";
 import { Spinner, Button, Badge, Container, Modal, Card, Row, Col, Table } from "react-bootstrap"; // Add Table here
 import SavedOrderDetails from "./SavedOrderDetails";
+import ReOrderingscss from './SCSS/ReOrdering.module.scss' ;
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
@@ -120,6 +121,9 @@ function ReOrdering() {
 
     return (
         <Container>
+            <main className={}>
+
+            </main>
             <h4 className="my-4 text-center">Reordering Dashboard</h4>
             <SavedOrderDetails />
             {loading ? (
