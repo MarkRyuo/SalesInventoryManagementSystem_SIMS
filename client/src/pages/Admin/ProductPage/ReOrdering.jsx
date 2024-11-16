@@ -5,6 +5,7 @@ import SavedOrderDetails from "./SavedOrderDetails";
 import ReOrderingscss from './SCSS/ReOrdering.module.scss';
 import { FaTruckLoading } from "react-icons/fa";
 import { MdOutlineViewInAr } from "react-icons/md";
+import { FaTruckRampBox } from "react-icons/fa6";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
@@ -205,7 +206,7 @@ function ReOrdering() {
                 {/* Reorder List Modal */}
                 <Modal show={showReorderModal} onHide={handleCloseModals} centered>
                     <Modal.Header closeButton>
-                        <Modal.Title><FaTruckRampBox size={17} className="me-2"/>Reorder List</Modal.Title>
+                        <Modal.Title><FaTruckRampBox size={20} className="me-2"/>Reorder List</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {reorderList.length > 0 ? (
