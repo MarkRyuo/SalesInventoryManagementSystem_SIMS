@@ -4,6 +4,7 @@ import { Spinner, Button, Badge, Container, Modal, Table } from "react-bootstrap
 import SavedOrderDetails from "./SavedOrderDetails";
 import ReOrderingscss from './SCSS/ReOrdering.module.scss';
 import { FaTruckLoading } from "react-icons/fa";
+import { MdOutlineViewInAr } from "react-icons/md";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
@@ -126,7 +127,7 @@ function ReOrdering() {
                 <h4 className="my-4"><FaTruckLoading size={25} className="me-2" />Reordering Dashboard</h4>
                 <div className={ReOrderingscss.TopButtons}>
                     <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
-                        View Reordered Product
+                        <MdOutlineViewInAr size={20} className="me-2"/>View Reordered Product
                     </Button>
                     <SavedOrderDetails />
                 </div>
