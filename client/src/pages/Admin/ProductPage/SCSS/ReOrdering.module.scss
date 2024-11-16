@@ -69,7 +69,9 @@
         }
 
             div:last-child {
-                border: 1px solid;
+                button {
+                    font-size: 0.8rem;
+                }
             }
         }
 
