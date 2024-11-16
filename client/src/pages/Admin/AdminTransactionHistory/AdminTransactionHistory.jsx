@@ -165,8 +165,8 @@ function AdminTransactionHistory() {
                     {selectedOrder && (
                         <Container>
                             {/* Order Summary Section */}
-                            <h5 className="mb-4 text-primary">Order Summary</h5>
-                            <ListGroup variant="flush">
+                            <h5 className="mb-2 text-primary">Order Summary</h5>
+                            <ListGroup variant="flush" style={{height: 150, overflow: 'auto'}}>
                                 <ListGroup.Item><strong>Order Date:</strong> {selectedOrder.date}</ListGroup.Item>
                                 <ListGroup.Item><strong>Customer Name:</strong> {selectedOrder.customerName}</ListGroup.Item>
                                 <ListGroup.Item><strong>Subtotal:</strong> ₱{selectedOrder.subtotal.toFixed(2)}</ListGroup.Item>
@@ -176,8 +176,8 @@ function AdminTransactionHistory() {
                             </ListGroup>
 
                             {/* Items Section */}
-                            <h5 className="mt-4 text-primary">Items</h5>
-                            <ListGroup variant="flush">
+                            <h5 className="mt-3 text-primary">Items</h5>
+                            <ListGroup variant="flush" style={{height: '100px', overflow: 'auto'}}>
                                 {selectedOrder.items.map((item, index) => {
                                     const price = parseFloat(item.price);
                                     const total = price * item.quantity;
