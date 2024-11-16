@@ -128,6 +128,7 @@
             }
             
             p {
+                font-size: 0.9rem;
                 button {
                     font-size: 0.9rem;
                     text-decoration: none;
@@ -148,6 +149,8 @@
     }
 
     @media (max-width: 700px) {
+        padding: 0px;
+
         .SetQrcodeContent {
 
         div {
@@ -157,24 +160,25 @@
             // border: 1px solid;
 
             h4{
-                font-size: 1rem;
+                font-size: 0.8rem;
             }
             
             p {
+                font-size: 0.9rem;
                 button {
-                    font-size: 0.9rem;
+                    font-size: 0.7rem;
                     text-decoration: none;
                 }
             }
 
             img {
-                width: 100px;
+                width: 50px;
                 height: auto;
             }
 
             div {
                 button {
-                    font-size: 0.9rem;
+                    font-size: 0.7rem;
                 }
             }
         }
