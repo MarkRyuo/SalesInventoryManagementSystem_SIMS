@@ -150,20 +150,18 @@ function ReOrdering() {
                                         if (!isOutOfStock && !isLowStock) return null;
 
                                         return (
-                                            <div key={product.barcode} className="mb-3" style={{ minWidth: "300px" }}>
+                                            <div key={product.barcode}>
                                                 <Card>
-                                                    <Card.Body>
+                                                    <Card.Body className={ReOrderingscss.CardBody}>
                                                         <Card.Title>{product.productName}</Card.Title>
                                                         <Card.Text><strong>SKU:</strong> {product.sku}</Card.Text>
                                                         <Card.Text><strong>Quantity:</strong> {product.quantity}</Card.Text>
                                                         <Card.Text>Status: {statusBadge}</Card.Text>
-                                                        <Button
-                                                            variant="success"
-                                                            size="sm"
-                                                            onClick={() => handleViewProduct(product)}
-                                                        >
-                                                            Reorder
-                                                        </Button>
+                                                        <div>
+                                                            <Button variant="success" size="sm" onClick={() => handleViewProduct(product)}>
+                                                                Reorder
+                                                            </Button>
+                                                        </div>
                                                     </Card.Body>
                                                 </Card>
                                             </div>
