@@ -9,10 +9,13 @@
 
 ## Changelog
 
-### v8.0.2 (Latest)
+### v8.0.3-beta (Latest)
+- Scanning
+
+### v8.0.2
 - Inventory UI Design
 
-### v7.2.2-beta (Latest)
+### v7.2.2-beta
 - Set QrCode arrange
 
 ### v7.2.1-beta
