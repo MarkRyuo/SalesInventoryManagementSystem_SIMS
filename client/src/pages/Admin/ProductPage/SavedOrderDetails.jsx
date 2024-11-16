@@ -98,9 +98,10 @@ function SavedOrderDetails() {
         doc.setFont("helvetica", "italic");
         doc.text("REYES ELECTRONICS!", 10, y + 10);
 
-        // Save the PDF
+        // Trigger the download of the PDF
         doc.save(`${order.id}_order.pdf`);
     };
+
 
 
     // Delete an order
