@@ -4,6 +4,7 @@ import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import QRious from 'qrious';
 import { FaEye, FaDownload, FaTrash } from "react-icons/fa"; // Importing icons
+import AdminTransactionScss from './AdminTransactionHistory.module.scss' ;
 
 function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
