@@ -19,6 +19,12 @@
 
     .CardBody {
         border: 1px solid;
+        display: flex;
+        justify-content: space-between;
+
+        div:first-child {
+            
+        }
     }
 
 }
