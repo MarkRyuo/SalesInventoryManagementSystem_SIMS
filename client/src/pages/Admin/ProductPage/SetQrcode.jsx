@@ -157,7 +157,7 @@ function ViewQrCode() {
                             const isSelected = selectedQrcodes.some((selectedQr) => selectedQr.id === qr.id);
 
                             return (
-                                <div key={qr.id} className={SetQrcodescss.SetQrcodescss}>
+                                <div key={qr.id} className={SetQrcodescss.SetQrcodeContent}>
                                     <div>
                                         <div>
                                             <h4>QR Code #{index + 1}</h4>
