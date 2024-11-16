@@ -93,6 +93,10 @@ export const LoginCard = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     disabled={loading} // Disable input while loading
+                    style={{
+                        height: "100%",
+                        maxHeight: '30%'
+                    }}
                 />
             </FloatingLabel>
 
@@ -104,6 +108,14 @@ export const LoginCard = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={loading} // Disable input while loading
+                    style={{
+                        width: "100%", // Default full width
+                        
+                        // Inline media query for smaller screens
+                        '@media (max-width: 700px)': {
+                            height: '100px',
+                        }
+                    }}
                 />
             </FloatingLabel>
 
