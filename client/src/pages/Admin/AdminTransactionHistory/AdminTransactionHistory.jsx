@@ -37,7 +37,7 @@ function AdminTransactionHistory() {
         if (selectedOrder && qrRef.current) {
             new QRious({
                 element: qrRef.current,
-                value: `http://localhost:5173/order/${selectedOrder.id}`
+                value: `http://localhost:5173/order/${selectedOrder.id}` //! Need Function to Online
             });
         }
     }, [selectedOrder]);
