@@ -164,7 +164,6 @@ function ViewQrCode() {
                                             variant="top"
                                             src={qr.qrcodeBase64}
                                             alt="QR Code"
-                                            style={{ width: '100px', height: 'auto' }}
                                         />
                                         <p>
                                             {isSaved ? (
