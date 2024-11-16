@@ -90,7 +90,7 @@ function SavedOrderDetails() {
             // Add extra space after each product
             if (y > 270) {
                 doc.addPage(); // Create a new page if it's close to the bottom of the current one
-                y = 20; // Reset Y to the top of the new page
+                y = 20; // Reset Y to the top of the new p  age
             }
         });
 
