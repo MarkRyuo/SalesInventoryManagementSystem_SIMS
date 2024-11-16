@@ -103,7 +103,6 @@ function SavedOrderDetails() {
     };
 
 
-
     // Delete an order
     const handleDeleteOrder = async (orderId) => {
         try {
