@@ -149,7 +149,7 @@ function ViewQrCode() {
                         <p>Loading QR Codes...</p>
                     </div>
                 ) : (
-                    <div className="" style={{border: '1px solid', padding: "10px"}}>
+                    <div className="" style={{border: '1px solid', padding: "10px", height: "500px", overflow: "auto"}}>
                         {sortedQrCodes.map((qr, index) => {
                             const isSaved = Boolean(savedProductNames[qr.id]);
                             const productName = productNames[qr.id] || '';
