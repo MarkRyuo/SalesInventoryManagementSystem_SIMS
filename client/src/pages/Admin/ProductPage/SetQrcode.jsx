@@ -170,7 +170,7 @@ function ViewQrCode() {
                                                 <span>{productName}</span>
                                             ) : (
                                                 <Button variant="link" onClick={() => handleOpenEditModal(qr.id)}>
-                                                    Add Product Name
+                                                    Product Name
                                                 </Button>
                                             )}
                                         </p>
