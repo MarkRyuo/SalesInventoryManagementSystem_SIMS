@@ -52,9 +52,7 @@ function Checkout() {
     const discountAmount = (subtotal * discountPercentage) / 100; // Calculate the discount amount based on the subtotal
     // Tax calculation after applying the discount
     const taxAmount = ((subtotal - discountAmount) * selectedTaxRate) / 100;
-
-    // Final total after discount and tax
-    const total = subtotal + taxAmount - discountAmount;
+    const total = subtotal + taxAmount - discountAmount; // Final total after discount and tax
 
     const handleCheckout = async () => {
         if (!customerName.trim()) {
