@@ -52,7 +52,7 @@ function LandingPage() {
                                     href="#features" 
                                     id="btn"
                                     className={LandingPagecss.Btn}>
-                                    Explore <span><CiGlobe /></span>
+                                    <span><CiGlobe /></span> Explore
                                 </Button>                         
                             </div>
                             <div className={LandingPagecss.heroImage}>

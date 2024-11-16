@@ -55,19 +55,27 @@
 
         .Btn {
             // border: 1px solid;
+            font-size: 1.2rem;
             color: #202020;
+            background: radial-gradient(1023px at 3.1% 6.9%, rgb(255, 255, 255) 0%, rgb(205, 40, 83) 74.9%);
+        }
+
+        Btn:Hover {
             background: radial-gradient(1023px at 3.1% 6.9%, rgb(255, 255, 255) 0%, rgb(205, 40, 83) 74.9%);
         }
 
         
         
         @media (max-width: 700px){
-            width: 100%;
             p:first-child {
                 font-size: 2rem;
             }
             p {
                 font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
             }
         }
 
@@ -125,4 +133,8 @@
     box-shadow: 2px 2px 4px rgb(168, 200, 255, 20%);
     z-index: 1000;
     background: radial-gradient(circle at 10% 20%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 100.2%);
+
+    @media (max-width: 700px) {
+        background: radial-gradient(circle at 5% 15%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 100.2%);
+    }
 }
