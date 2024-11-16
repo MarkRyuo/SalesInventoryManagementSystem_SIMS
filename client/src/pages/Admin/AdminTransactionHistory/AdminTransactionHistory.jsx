@@ -100,8 +100,8 @@ function AdminTransactionHistory() {
     return (
         <Container fluid className={AdminTransactionScss.transactionMainContainer}>
             <h4>Your Saved Orders</h4>
-            <div>
-                
+            <div className={AdminTransactionScss.containerFilter}>
+                {/* Filter */}
             </div>
             <Container fluid="lg" className={AdminTransactionScss.transactionchildContainer} >
 
