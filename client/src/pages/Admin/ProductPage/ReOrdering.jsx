@@ -121,7 +121,7 @@ function ReOrdering() {
     };
 
     return (
-        <Container>
+        <Container className="m-0 p-0">
             <main className={ReOrderingscss.mainReOrdering}>
                 <h4 className="my-4"><FaTruckLoading size={25} className="me-2" />Reordering Dashboard</h4>
                 <div className={ReOrderingscss.div1}>
