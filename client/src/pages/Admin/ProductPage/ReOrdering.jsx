@@ -124,15 +124,18 @@ function ReOrdering() {
         <Container>
             <main className={ReOrderingscss.mainReOrdering}>
                 <h4 className="my-4"><FaTruckLoading size={25} className="me-2"/>Reordering Dashboard</h4>
-                <div>
-                    <SavedOrderDetails />
+                <div className={ReOrderingscss.div1}>
+                    <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
+                        View Reordered Product
+                    </Button>
+                    <span><SavedOrderDetails /></span>
                 </div>
                 {loading ? (
                     <div className="d-flex justify-content-center">
                         <Spinner animation="border" variant="primary" />
                     </div>
                 ) : (
-                    <>
+                    <div>
                         {filteredReorderingProducts.length > 0 ? (
                             <div style={{ display: "flex", flexDirection: "row", overflowX: "auto" }}>
                                 <Row className="mt-3" style={{ display: "flex", flexWrap: "nowrap" }}>
@@ -174,10 +177,7 @@ function ReOrdering() {
                         ) : (
                             <p className="text-muted text-center">No products need reordering.</p>
                         )}
-                        <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
-                            View Reordered Products
-                        </Button>
-                    </>
+                    </div>
                 )}
 
                 {/* Product Details Modal */}
