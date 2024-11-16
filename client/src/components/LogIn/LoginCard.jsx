@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Alert, FloatingLabel, Button, Form, Spinner } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import LoginUser from '../../services/LoginUser'; // Import the LoginUser function
-// import LoginCardcss from './SCSS/LoginCard.module.scss'
+import LoginCardcss from './SCSS/LoginCard.module.scss'
 
 export const LoginCard = () => {
     const navigate = useNavigate();
@@ -94,8 +94,7 @@ export const LoginCard = () => {
                     onChange={(e) => setUsername(e.target.value)}
                     disabled={loading} // Disable input while loading
                     style={{
-                        height: "100%",
-                        maxHeight: '30%'
+                        
                     }}
                 />
             </FloatingLabel>
@@ -108,14 +107,7 @@ export const LoginCard = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={loading} // Disable input while loading
-                    style={{
-                        width: "100%", // Default full width
-                        
-                        // Inline media query for smaller screens
-                        '@media (max-width: 700px)': {
-                            height: '100px',
-                        }
-                    }}
+                    className={LoginCardcss.customInput}
                 />
             </FloatingLabel>
 
