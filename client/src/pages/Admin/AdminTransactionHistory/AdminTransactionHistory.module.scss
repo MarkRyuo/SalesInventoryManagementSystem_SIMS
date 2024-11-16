@@ -39,7 +39,7 @@
         margin: 2px;
         border-radius: 5px;
         align-items: center;
-        
+
         div {
             display: flex;
             flex-direction: column;
@@ -49,6 +49,7 @@
         }
 
         div:first-child {
+            padding: 10px;
             h5 {
                 font-size: 1.3rem;
             }
@@ -60,6 +61,10 @@
             width: auto;
             flex-direction: row;
             justify-content: center;
+
+            button {
+                font-size: 0.1rem;
+            }
         }
     }
 }
