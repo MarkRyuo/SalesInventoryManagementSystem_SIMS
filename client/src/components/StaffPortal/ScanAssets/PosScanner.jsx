@@ -147,14 +147,14 @@ function PosScanner() {
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg' style={{ width: '100%', height: '80vh' }}>
-                <Row className="justify-content-center" style={{ height: '100%' }}>
+                <Row className="justify-content-center" style={{ height: '100%' }}> 
                     <Col md={8} className='p-0 mt-3'>
                         <Card style={{ height: '100%' }}>
                             <div className="text-center position-relative">
                                 <Row className="justify-content-center mt-3">
                                     <Col md={8} className="text-center">
                                         <Button
-                                            variant="primary"
+                                            variant="secondary"
                                             onClick={handleCameraToggle}
                                             disabled={videoDevices.length < 2}
                                         >
