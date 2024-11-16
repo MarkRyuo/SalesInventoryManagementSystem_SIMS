@@ -109,7 +109,7 @@ function Checkout() {
                             <Form.Label>Sold To:</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Enter customer name"
+                                placeholder="Enter customer name (Optional)"
                                 value={customerName}
                                 onChange={(e) => setCustomerName(e.target.value)}
                             />
