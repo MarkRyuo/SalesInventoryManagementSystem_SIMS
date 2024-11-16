@@ -104,7 +104,7 @@ function AdminTransactionHistory() {
             <div className={AdminTransactionScss.containerFilter}>
                 {/* Filter */}
             </div>
-            <Container fluid="lg" className={AdminTransactionScss.transactionchildContainer} >
+            <div className={AdminTransactionScss.transactionchildContainer} >
 
                 {/* Mapped Order List */}
                 <ListGroup variant="flush">
@@ -113,9 +113,9 @@ function AdminTransactionHistory() {
                             <ListGroup.Item key={order.id} className={AdminTransactionScss.ListGroupItem}>
                                 <div>
                                     <h5 className="p-0 mb-2">Order ID: {order.id}</h5>
-                                    <p className="p-0 m-0 ms-2">Order Date: {order.date}</p>
-                                    <p className="p-0 m-0 ms-2">Customer Name: {order.customerName}</p>
-                                    <p className="p-0 m-0 ms-2">Total: ₱{order.total.toFixed(2)}</p>
+                                    <p className="p-0 m-0">Order Date: {order.date}</p>
+                                    <p className="p-0 m-0">Customer Name: {order.customerName}</p>
+                                    <p className="p-0 m-0">Total: ₱{order.total.toFixed(2)}</p>
                                 </div>
                                 <div>
                                     <Button
@@ -148,7 +148,7 @@ function AdminTransactionHistory() {
                         <ListGroup.Item className="text-center">No saved orders</ListGroup.Item>
                     )}
                 </ListGroup>
-            </Container>
+            </div>
 
             {/* Updated Modal for viewing order details */}
             <Modal
