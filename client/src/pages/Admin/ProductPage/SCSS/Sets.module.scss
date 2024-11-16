@@ -110,7 +110,9 @@
     overflow: auto;
 
     .SetQrcodeContent {
-        border: 1px solid green;
+        // border: 1px solid green;
+        border-radius: 15px;
+        box-shadow: 1px 1px 3px rgb(180, 179, 179);
         padding: 10px;
 
         div {
