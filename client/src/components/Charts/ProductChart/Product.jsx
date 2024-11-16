@@ -358,6 +358,9 @@ function ProductChart() {
                                                             onChange={(e) => handleModalInputChange(key, e.target.value)}
                                                         />
                                                     )}
+                                                    <Form.Control.Feedback type="invalid">
+                                                        Please enter a valid threshold greater than 0.
+                                                    </Form.Control.Feedback>
                                                 </Form.Group>
                                             </Col>
                                         ))}
