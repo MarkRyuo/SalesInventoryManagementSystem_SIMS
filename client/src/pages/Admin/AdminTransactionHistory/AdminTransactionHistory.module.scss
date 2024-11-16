@@ -1,14 +1,46 @@
 
 
+h4 {
+    font-size: 1.5rem;
+}
+
+
 .transactionMainContainer {
     margin-top: 20px;
     border: 1px solid red;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
 
-    h4 {
-        font-size: 1.5rem;
+
+    table {
+        width: 100%;
+        height: 100%; /* Ensures table takes the full height of its container */
+        border-collapse: collapse; /* Collapses table borders for a cleaner look */
+        display: flex;
+        flex-direction: column; /* Flex layout for the table */
+
+        thead {
+            flex: 0 1 auto; /* Ensures thead does not take unnecessary space */
+            width: 100%; /* Full width for thead */
+            border: 1px solid green;
+        }
+
+        tbody {
+            flex: 1 1 auto; /* Ensures tbody takes remaining space */
+            overflow-y: auto; /* Allows scrolling if content exceeds */
+            width: 100%; /* Full width for tbody */
+        }
+
+        tr {
+            display: flex; /* Flex layout for table rows */
+            width: 100%;
+        }
+
+        th, td {
+            flex: 1; /* Evenly distribute width for cells */
+            padding: 8px;
+            border: 1px solid #ccc; /* Border for visual clarity */
+        }
     }
-
-
-
-
-} //! End line 
+}

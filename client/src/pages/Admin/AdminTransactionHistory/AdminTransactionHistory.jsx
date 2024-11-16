@@ -99,8 +99,8 @@ function AdminTransactionHistory() {
 
     return (
         <Container fluid className="m-0 p-0">
+            <h4>Your Saved Orders</h4>
             <Container fluid="lg" className={AdminTransactionScss.transactionMainContainer} >
-                <h4>Your Saved Orders</h4>
 
                 {/* Order Table */}
                 <Table striped bordered hover responsive>
