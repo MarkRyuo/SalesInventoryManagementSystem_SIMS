@@ -157,9 +157,9 @@ function ViewQrCode() {
                             const isSelected = selectedQrcodes.some((selectedQr) => selectedQr.id === qr.id);
 
                             return (
-                                <div key={qr.id} style={{border: '1px solid', padding: "10px"}}>
+                                <div key={qr.id} className={SetQrcodescss.SetQrcodescss}>
                                     <div>
-                                        <div style={{display: "flex", justifyContent: "space-between"}}>
+                                        <div>
                                             <h4>QR Code #{index + 1}</h4>
                                             <Card.Img
                                                 variant="top"
