@@ -154,10 +154,10 @@ function ReOrdering() {
                                                 <Card>
                                                     <Card.Body className={ReOrderingscss.CardBody}>
                                                         <div>
-                                                            <Card.Title>{product.productName}</Card.Title>
-                                                            <p className="m-0"><strong>SKU:</strong> {product.sku}</p>
-                                                            <p className="m-0"><strong>Quantity:</strong> {product.quantity}</p>
-                                                            <p>Status: {statusBadge}</p>
+                                                            <h4>{product.productName}</h4>
+                                                            <p className="m-0">SKU: {product.sku}</p>
+                                                            <p className="m-0">Quantity: {product.quantity}</p>
+                                                            <p className="m-0">Status: {statusBadge}</p>
                                                         </div>
                                                         <div>
                                                             <Button variant="success" size="md" onClick={() => handleViewProduct(product)}>
