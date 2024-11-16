@@ -123,7 +123,7 @@ function ReOrdering() {
     return (
         <Container>
             <main className={ReOrderingscss.mainReOrdering}>
-                <h4 className="my-4">Reordering Dashboard</h4>
+                <h4 className="my-4"><FaTruckLoading size={25} className="me-2"/>Reordering Dashboard</h4>
                 <div>
                     <SavedOrderDetails />
                 </div>
