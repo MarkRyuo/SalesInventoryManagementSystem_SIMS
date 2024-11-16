@@ -47,24 +47,47 @@ function AdminTransactionHistory() {
 
     const handleDownloadOrder = async (order) => {
         const doc = new jsPDF();
-        doc.setFontSize(20);
-        doc.text('Receipt', 105, 10, { align: 'center' });
-        doc.setFontSize(12);
-        doc.text(`Order Date: ${order.date}`, 10, 30);
-        doc.text(`Sold To: ${order.customerName}`, 10, 40);
-        doc.text(`Subtotal: ₱${order.subtotal.toFixed(2)}`, 10, 50);
-        doc.text(`Tax (12%): ₱${order.tax.toFixed(2)}`, 10, 60);
-        doc.text(`Discount: -₱${order.discount.toFixed(2)}`, 10, 70);
-        doc.text(`Total Amount: ₱${order.total.toFixed(2)}`, 10, 80);
 
+        doc.addFont('https://cdnjs.cloudflare.com/ajax/libs/jsPDF/2.5.1/fonts/DejaVuSans.ttf', 'DejaVu', 'normal');
+        doc.setFont('DejaVu');
+
+        // Title
+        doc.setFontSize(22);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Receipt', 105, 20, { align: 'center' });
+
+        // Order details
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Order Date: ${order.date}`, 10, 40);
+        doc.text(`Sold To: ${order.customerName}`, 10, 50);
+        doc.text(`Order ID: ${order.id}`, 10, 60);
+
+        // Pricing Breakdown using Unicode for Peso Symbol
+        doc.text(`Subtotal: \u20B1${order.subtotal.toFixed(2)}`, 10, 70);
+        doc.text(`Tax (12%): \u20B1${order.tax.toFixed(2)}`, 10, 80);
+        doc.text(`Discount: -\u20B1${order.discount.toFixed(2)}`, 10, 90);
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`Total Amount: \u20B1${order.total.toFixed(2)}`, 10, 110);
+
+        // QR Code
         const qrCanvas = qrRef.current;
         if (qrCanvas) {
             const qrDataUrl = qrCanvas.toDataURL("image/png");
-            doc.addImage(qrDataUrl, 'PNG', 10, 90, 50, 50);
+            doc.addImage(qrDataUrl, 'PNG', 150, 60, 50, 50);
         }
 
+        // Footer Message
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'italic');
+        doc.text('Thank you for your purchase!', 105, 150, { align: 'center' });
+
+        // Save as PDF
         doc.save(`Order_${order.id}.pdf`);
     };
+
+
 
     const handleDeleteOrder = (id) => {
         const orderRef = ref(db, `TransactionHistory/${id}`);
