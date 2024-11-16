@@ -3,6 +3,7 @@ import { Modal, Button, Spinner, Alert, Table } from "react-bootstrap";
 import { fetchSavedOrders, deleteSavedOrder } from "../../../services/ProductService"; // Assuming you have a delete function in the service
 import jsPDF from "jspdf";
 import { LuDownload } from "react-icons/lu";
+import { GrView } from "react-icons/gr";
 
 function SavedOrderDetails() {
     const [savedOrders, setSavedOrders] = useState([]);
@@ -77,7 +78,7 @@ function SavedOrderDetails() {
     return (
         <div style={{display: "flex", alignItems: "flex-end"}}>
             <Button variant="primary" onClick={() => setShowModal(true)}>
-                View Saved Orders
+                <GrView size={20} classname="me-2"/>View Saved Orders
             </Button>
 
             {/* Saved Orders Modal */}
