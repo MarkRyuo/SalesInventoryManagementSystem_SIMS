@@ -4,6 +4,8 @@ import AddQrcode from './AddQrcode';  // If you are still using this
 import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
 import { jsPDF } from 'jspdf';
 
+import SetQrcodescss from './SCSS/Sets.module.scss';
+
 function ViewQrCode() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [qrCodes, setQrCodes] = useState([]);
