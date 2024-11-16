@@ -76,7 +76,7 @@ function SavedOrderDetails() {
 
     return (
         <>
-            <Button variant="primary" onClick={() => setShowModal(true)} className="m-0 p-0">
+            <Button variant="primary" onClick={() => setShowModal(true)}>
                 View Saved Orders
             </Button>
 

@@ -130,7 +130,7 @@ function ReOrdering() {
                             View Reordered Product
                         </Button>
                     </div>
-                    <span><SavedOrderDetails /></span>
+                    <SavedOrderDetails />
                 </div>
                 {loading ? (
                     <div className="d-flex justify-content-center">
