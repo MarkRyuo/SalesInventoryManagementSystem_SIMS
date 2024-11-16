@@ -45,14 +45,11 @@ function Checkout() {
         setSelectedTaxRate(parseFloat(value));
     };
 
-    // Calculation
     // Calculate subtotal before using it in other calculations
     const subtotal = scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
     // Discount calculation as percentage of subtotal
     const discountPercentage = selectedDiscount; // The percentage selected from the dropdown
     const discountAmount = (subtotal * discountPercentage) / 100; // Calculate the discount amount based on the subtotal
-
     // Tax calculation after applying the discount
     const taxAmount = ((subtotal - discountAmount) * selectedTaxRate) / 100;
 
