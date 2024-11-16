@@ -160,14 +160,14 @@ function ViewQrCode() {
                                 <div key={qr.id} style={{border: '1px solid', padding: "10px"}}>
                                     <div>
                                         <div style={{display: "flex", justifyContent: "space-between"}}>
-                                            <Card.Title>QR Code #{index + 1}</Card.Title>
+                                            <h4>QR Code #{index + 1}</h4>
                                             <Card.Img
                                                 variant="top"
                                                 src={qr.qrcodeBase64}
                                                 alt="QR Code"
                                                 style={{ width: '100px', height: 'auto' }}
                                             />
-                                            <Card.Text>
+                                            <p>
                                                 {isSaved ? (
                                                     <span>{productName}</span>
                                                 ) : (
@@ -175,7 +175,7 @@ function ViewQrCode() {
                                                         Add Product Name
                                                     </Button>
                                                 )}
-                                            </Card.Text>
+                                            </p>
                                             <Button
                                                 variant={isSelected ? "danger" : "info"}
                                                 onClick={() => handleToggleSelection(qr)}
