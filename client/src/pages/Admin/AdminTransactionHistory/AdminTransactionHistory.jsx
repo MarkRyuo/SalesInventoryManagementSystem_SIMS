@@ -151,7 +151,6 @@ function AdminTransactionHistory() {
             </div>
 
             {/* Updated Modal for viewing order details */}
-            {/* Updated Modal for viewing order details */}
             <Modal
                 show={showModal}
                 onHide={handleCloseModal}
