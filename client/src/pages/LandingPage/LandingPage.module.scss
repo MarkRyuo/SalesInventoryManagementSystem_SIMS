@@ -11,7 +11,7 @@
     height: 93vh;
 
     @media (max-width: 700px) {
-        background: radial-gradient(circle at 10% 20%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 100.2%);
+        background: radial-gradient(circle at 5% 15%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 100.2%);
     }
 }
 
@@ -35,6 +35,10 @@
         align-content: center ;
         box-sizing: border-box;
         color: #ffffff;
+
+        p {
+            font-size: 1.3rem;
+        }
 
         p:first-child {
             font-size: 2.8rem;
@@ -60,12 +64,16 @@
             color: #ffffff;
         }
         
-        @media (max-width: 500px){
+        @media (max-width: 700px){
             width: 100%;
             p:first-child {
                 font-size: 2rem;
             }
+            p {
+                font-size: 1rem;
+            }
         }
+
     }
     div.heroImage {
         box-sizing: border-box;
