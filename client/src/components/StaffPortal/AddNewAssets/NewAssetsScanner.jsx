@@ -27,12 +27,21 @@ function NewAssetsScanner() {
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
 
-        const startScanner = async () => {
+        const startScanner = async (deviceId = null) => {
             try {
-                const videoInputDevices = await codeReader.listVideoInputDevices();
-                const firstDeviceId = videoInputDevices[0].deviceId;
+                const devices = await codeReader.listVideoInputDevices();
+                setVideoDevices(devices);
 
-                codeReader.decodeFromVideoDevice(firstDeviceId, videoRef.current, async (result, err) => {
+                // Set default to back camera if available
+                const backCamera = devices.find(device =>
+                    device.label.toLowerCase().includes('back') || device.label.toLowerCase().includes('rear')
+                );
+
+                const selectedDevice = deviceId || (backCamera ? backCamera.deviceId : devices[0]?.deviceId);
+                setSelectedDeviceId(selectedDevice);
+
+                // Start decoding from selected camera
+                codeReader.decodeFromVideoDevice(selectedDevice, videoRef.current, async (result, err) => {
                     if (result && scanning) {
                         const barcode = result.text;
 
@@ -49,13 +58,11 @@ function NewAssetsScanner() {
                                 const product = await fetchProductByBarcode(barcode);
 
                                 if (product) {
-                                    const additionalQuantity = 1; // Increment quantity as needed
-                                    const updatedQuantity = await updateProductQuantity(barcode, additionalQuantity); // Get updated quantity
+                                    const additionalQuantity = 1;
+                                    const updatedQuantity = await updateProductQuantity(barcode, additionalQuantity);
 
                                     const productName = product.productName || "Unknown Product";
-                                    const newQuantity = updatedQuantity; // This now holds the updated quantity
-
-                                    setMessage(`Quantity updated for ${productName}: New Quantity is ${newQuantity}.`);
+                                    setMessage(`Quantity updated for ${productName}: New Quantity is ${updatedQuantity}.`);
                                 } else {
                                     navigate('/NewAssets', { state: { barcode: barcode } });
                                 }
@@ -70,7 +77,7 @@ function NewAssetsScanner() {
                                         setVideoFade(true);
                                         setGuideFade(true);
                                         setScanning(true);
-                                        startScanner(); // Restart scanning
+                                        startScanner(selectedDeviceId); // Restart scanning
                                     }, 1000);
                                 }, 2000);
 
@@ -90,12 +97,12 @@ function NewAssetsScanner() {
             }
         };
 
-        startScanner();
+        startScanner(selectedDeviceId);
 
         return () => {
             codeReader.reset();
         };
-    }, [navigate, scanning, lastScannedBarcode]);
+    }, [navigate, scanning, lastScannedBarcode, selectedDeviceId]);
 
     const resetScanner = () => {
         setScanning(true);
@@ -113,6 +120,15 @@ function NewAssetsScanner() {
         }
     ]);
 
+    const handleCameraSwitch = () => {
+        if (videoDevices.length > 1) {
+            const currentIndex = videoDevices.findIndex(device => device.deviceId === selectedDeviceId);
+            const nextIndex = (currentIndex + 1) % videoDevices.length;
+            setSelectedDeviceId(videoDevices[nextIndex].deviceId);
+        }
+    };
+
+
     return (
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
@@ -120,6 +136,14 @@ function NewAssetsScanner() {
                 <Row className="justify-content-center" style={{ height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
                     <Col md={8} className='p-0 mt-3' style={{ display: 'flex', justifyContent: 'center'}}> {/* Child */}
                         <Card style={{ height: '100%', display: 'flex', justifyContent: 'center', width: '100%' }}>
+                            <button
+                                onClick={handleCameraSwitch}
+                                className="btn btn-primary mb-2"
+                                disabled={isProcessing}
+                            >
+                                Switch Camera
+                            </button>
+
                             <div className="text-center position-relative">
                                 {error && (
                                     <Alert variant="danger"
