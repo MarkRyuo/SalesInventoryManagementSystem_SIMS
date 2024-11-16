@@ -4,6 +4,7 @@ import { fetchSavedOrders, deleteSavedOrder } from "../../../services/ProductSer
 import jsPDF from "jspdf";
 import { LuDownload } from "react-icons/lu";
 import { GrView } from "react-icons/gr";
+import { FaTruckRampBox } from "react-icons/fa6";
 
 function SavedOrderDetails() {
     const [savedOrders, setSavedOrders] = useState([]);
@@ -84,7 +85,7 @@ function SavedOrderDetails() {
             {/* Saved Orders Modal */}
             <Modal show={showModal} onHide={handleCloseModal} size="lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Saved Order Details</Modal.Title>
+                    <Modal.Title><FaTruckRampBox size={20} className="me-2 p-0"/>Saved Order Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {loading ? (
