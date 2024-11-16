@@ -3,6 +3,7 @@ import { fetchReorderingProducts, saveOrderToFirebase } from "../../../services/
 import { Spinner, Button, Badge, Container, Modal, Card, Row, Col, Table } from "react-bootstrap"; // Add Table here
 import SavedOrderDetails from "./SavedOrderDetails";
 import ReOrderingscss from './SCSS/ReOrdering.module.scss' ;
+import { FaTruckLoading } from "react-icons/fa";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
@@ -122,8 +123,10 @@ function ReOrdering() {
     return (
         <Container>
             <main className={ReOrderingscss.mainReOrdering}>
-                <h4 className="my-4 text-center">Reordering Dashboard</h4>
-                <SavedOrderDetails />
+                <h4 className="my-4">Reordering Dashboard</h4>
+                <div>
+                    <SavedOrderDetails />
+                </div>
                 {loading ? (
                     <div className="d-flex justify-content-center">
                         <Spinner animation="border" variant="primary" />
