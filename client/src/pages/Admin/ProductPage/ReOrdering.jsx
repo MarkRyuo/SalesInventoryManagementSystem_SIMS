@@ -124,7 +124,12 @@ function ReOrdering() {
         <Container className="m-0 p-0">
             <main className={ReOrderingscss.mainReOrdering}>
                 <h4 className="my-4"><FaTruckLoading size={25} className="me-2" />Reordering Dashboard</h4>
-                <div className={ReOrderingscss.div1}>
+                <div className={ReOrderingscss.TopButtons}>
+                    <div>
+                        <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
+                            View Reordered Product
+                        </Button>
+                    </div>
                     <span><SavedOrderDetails /></span>
                 </div>
                 {loading ? (
@@ -173,9 +178,6 @@ function ReOrdering() {
                         ) : (
                             <p className="text-muted text-center">No products need reordering.</p>
                         )}
-                        <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
-                            View Reordered Product
-                        </Button>
                     </div>
                 )}
 
