@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchReorderingProducts, saveOrderToFirebase } from "../../../services/ProductService";
-import { Table, Spinner, Button, Badge, Container, Modal } from "react-bootstrap";
+import { Spinner, Button, Badge, Container, Modal, Card, Row, Col, Table } from "react-bootstrap"; // Add Table here
 import SavedOrderDetails from "./SavedOrderDetails";
 
 function ReOrdering() {
@@ -131,17 +131,8 @@ function ReOrdering() {
             ) : (
                 <>
                     {filteredReorderingProducts.length > 0 ? (
-                        <Table responsive bordered hover className="mt-3">
-                            <thead className="table-primary">
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>SKU</th>
-                                    <th>Quantity</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <div style={{ display: "flex", flexDirection: "row", overflowX: "auto" }}>
+                            <Row className="mt-3" style={{ display: "flex", flexWrap: "nowrap" }}>
                                 {filteredReorderingProducts.map((product) => {
                                     const isOutOfStock = product.quantity === 0;
                                     const isLowStock = product.quantity > 0 && product.quantity <= product.instockthreshold / 4;
@@ -156,25 +147,27 @@ function ReOrdering() {
                                     if (!isOutOfStock && !isLowStock) return null;
 
                                     return (
-                                        <tr key={product.barcode}>
-                                            <td>{product.productName}</td>
-                                            <td>{product.sku}</td>
-                                            <td>{product.quantity}</td>
-                                            <td>{statusBadge}</td>
-                                            <td>
-                                                <Button
-                                                    variant="success"
-                                                    size="sm"
-                                                    onClick={() => handleViewProduct(product)}
-                                                >
-                                                    Reorder
-                                                </Button>
-                                            </td>
-                                        </tr>
+                                        <Col md={4} key={product.barcode} className="mb-3" style={{ minWidth: "300px" }}>
+                                            <Card>
+                                                <Card.Body>
+                                                    <Card.Title>{product.productName}</Card.Title>
+                                                    <Card.Text><strong>SKU:</strong> {product.sku}</Card.Text>
+                                                    <Card.Text><strong>Quantity:</strong> {product.quantity}</Card.Text>
+                                                    <Card.Text>Status: {statusBadge}</Card.Text>
+                                                    <Button
+                                                        variant="success"
+                                                        size="sm"
+                                                        onClick={() => handleViewProduct(product)}
+                                                    >
+                                                        Reorder
+                                                    </Button>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>
                                     );
                                 })}
-                            </tbody>
-                        </Table>
+                            </Row>
+                        </div>
                     ) : (
                         <p className="text-muted text-center">No products need reordering.</p>
                     )}
