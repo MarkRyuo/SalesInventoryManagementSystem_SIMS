@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Spinner, Modal, ListGroup, Form, Card} from 'react-bootstrap';
+import { Button, Spinner, Modal, ListGroup, Form, Card } from 'react-bootstrap';
 import AddQrcode from './AddQrcode';  // If you are still using this
 import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
 import { jsPDF } from 'jspdf';
@@ -158,23 +158,24 @@ function ViewQrCode() {
 
                             return (
                                 <div key={qr.id} className={SetQrcodescss.SetQrcodeContent}>
+                                    <div>
+                                        <h4>QR Code #{index + 1}</h4>
+                                        <Card.Img
+                                            variant="top"
+                                            src={qr.qrcodeBase64}
+                                            alt="QR Code"
+                                            style={{ width: '100px', height: 'auto' }}
+                                        />
+                                        <p>
+                                            {isSaved ? (
+                                                <span>{productName}</span>
+                                            ) : (
+                                                <Button variant="link" onClick={() => handleOpenEditModal(qr.id)}>
+                                                    Add Product Name
+                                                </Button>
+                                            )}
+                                        </p>
                                         <div>
-                                            <h4>QR Code #{index + 1}</h4>
-                                            <Card.Img
-                                                variant="top"
-                                                src={qr.qrcodeBase64}
-                                                alt="QR Code"
-                                                style={{ width: '100px', height: 'auto' }}
-                                            />
-                                            <p>
-                                                {isSaved ? (
-                                                    <span>{productName}</span>
-                                                ) : (
-                                                    <Button variant="link" onClick={() => handleOpenEditModal(qr.id)}>
-                                                        Add Product Name
-                                                    </Button>
-                                                )}
-                                            </p>
                                             <Button
                                                 variant={isSelected ? "danger" : "info"}
                                                 onClick={() => handleToggleSelection(qr)}
@@ -184,6 +185,7 @@ function ViewQrCode() {
                                             </Button>
                                         </div>
                                     </div>
+                                </div>
                             );
                         })}
                     </div>
