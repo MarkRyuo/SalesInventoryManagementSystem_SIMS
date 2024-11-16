@@ -48,21 +48,60 @@ function SavedOrderDetails() {
     // Generate PDF for the order
     const downloadPDF = (order) => {
         const doc = new jsPDF();
-        doc.text(`Order ID: ${order.id}`, 10, 10);
-        doc.text(`Order Date: ${new Date(order.date).toLocaleDateString()}`, 10, 20);
 
-        let y = 30; // Starting Y position for products
+        // Title
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(18);
+        doc.text("Order Details", 10, 10);
 
+        // Order ID and Date
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(12);
+        doc.text(`Order ID: ${order.id}`, 10, 20);
+        doc.text(`Order Date: ${new Date(order.date).toLocaleDateString()}`, 10, 30);
+
+        let y = 40; // Starting Y position for products
+
+        // Product Heading
+        doc.setFont("helvetica", "bold");
+        doc.text("Products:", 10, y);
+        y += 10; // Add some space after the heading
+
+        // Table headers for products
+        doc.setFont("helvetica", "normal");
+        doc.text("No.", 10, y);
+        doc.text("Name", 30, y);
+        doc.text("SKU", 100, y);
+        doc.text("Quantity", 150, y);
+        y += 10;
+
+        // Draw a line separating the headers from the product list
+        doc.line(10, y, 200, y);
+        y += 10;
+
+        // Product List
         order.products.forEach((product, index) => {
-            doc.text(`Product ${index + 1}:`, 10, y);
-            doc.text(`Name: ${product.productName || "No Name"}`, 20, y + 10);
-            doc.text(`SKU: ${product.sku || "N/A"}`, 20, y + 20);
-            doc.text(`Quantity: ${product.quantity || "0"}`, 20, y + 30);
-            y += 40; // Adjust space between products
+            doc.text((index + 1).toString(), 10, y);
+            doc.text(product.productName || "No Name", 30, y);
+            doc.text(product.sku || "N/A", 100, y);
+            doc.text((product.quantity || 0).toString(), 150, y);
+            y += 10;
+
+            // Add extra space after each product
+            if (y > 270) {
+                doc.addPage(); // Create a new page if it's close to the bottom of the current one
+                y = 20; // Reset Y to the top of the new page
+            }
         });
 
+        // Footer
+        doc.setFont("helvetica", "italic");
+        doc.text("REYES ELECTRONICS!", 10, y + 10);
+
+        // Save the PDF
         doc.save(`${order.id}_order.pdf`);
     };
+
 
     // Delete an order
     const handleDeleteOrder = async (orderId) => {
