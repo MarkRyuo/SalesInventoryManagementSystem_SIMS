@@ -159,7 +159,7 @@ function ReOrdering() {
                                                         <p className="m-0">Status: {statusBadge}</p>
                                                     </div>
                                                     <div>
-                                                        <Button variant="success" size="md" onClick={() => handleViewProduct(product)}>
+                                                        <Button variant="success" onClick={() => handleViewProduct(product)}>
                                                             Reorder
                                                         </Button>
                                                     </div>

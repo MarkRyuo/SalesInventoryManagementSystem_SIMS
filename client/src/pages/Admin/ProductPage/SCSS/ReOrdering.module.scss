@@ -58,9 +58,8 @@
     
     .CardBody {
         height: 120px;
-
+        
         div:first-child {
-            
             h4 {
                 font-size: 1.2rem;
             }
@@ -69,7 +68,10 @@
             }
         }
 
-    }
+            div:last-child {
+                border: 1px solid;
+            }
+        }
 
-}
+    }   
 }
