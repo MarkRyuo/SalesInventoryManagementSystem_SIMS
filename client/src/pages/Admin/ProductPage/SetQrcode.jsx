@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Table, Spinner, Modal, ListGroup, Form } from 'react-bootstrap';
+import { Button, Spinner, Modal, ListGroup, Form, Card} from 'react-bootstrap';
 import AddQrcode from './AddQrcode';  // If you are still using this
 import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
 import { jsPDF } from 'jspdf';
@@ -92,7 +92,6 @@ function ViewQrCode() {
         setShowPrintModal(false); // Close the print modal
     };
 
-
     const sortedQrCodes = [
         ...qrCodes.filter(qr => !productNames[qr.id]),
         ...qrCodes.filter(qr => productNames[qr.id]),
@@ -150,56 +149,48 @@ function ViewQrCode() {
                         <p>Loading QR Codes...</p>
                     </div>
                 ) : (
-                    <Table striped bordered hover responsive>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>QR Code</th>
-                                <th>Product Name</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {sortedQrCodes.map((qr, index) => {
-                                const isSaved = Boolean(savedProductNames[qr.id]);
-                                const productName = productNames[qr.id] || '';
-                                const isSelected = selectedQrcodes.some((selectedQr) => selectedQr.id === qr.id);
+                    <div className="d-flex overflow-auto" style={{ flexWrap: 'nowrap' }}>
+                        {sortedQrCodes.map((qr, index) => {
+                            const isSaved = Boolean(savedProductNames[qr.id]);
+                            const productName = productNames[qr.id] || '';
+                            const isSelected = selectedQrcodes.some((selectedQr) => selectedQr.id === qr.id);
 
-                                return (
-                                    <tr key={qr.id}>
-                                        <td>{index + 1}</td>
-                                        <td>
-                                            <img
+                            return (
+                                <div key={qr.id} className="card-wrapper" style={{ marginRight: '16px' }}>
+                                    <Card>
+                                        <Card.Body>
+                                            <Card.Title>QR Code #{index + 1}</Card.Title>
+                                            <Card.Img
+                                                variant="top"
                                                 src={qr.qrcodeBase64}
                                                 alt="QR Code"
-                                                style={{ width: '100px', height: '100px' }}
+                                                style={{ width: '100%', height: 'auto' }}
                                             />
-                                        </td>
-                                        <td>
-                                            {isSaved ? (
-                                                <span>{productName}</span>
-                                            ) : (
-                                                <Button variant="link" onClick={() => handleOpenEditModal(qr.id)}>
-                                                    Add Product Name
-                                                </Button>
-                                            )}
-                                        </td>
-                                        <td>
+                                            <Card.Text>
+                                                {isSaved ? (
+                                                    <span>{productName}</span>
+                                                ) : (
+                                                    <Button variant="link" onClick={() => handleOpenEditModal(qr.id)}>
+                                                        Add Product Name
+                                                    </Button>
+                                                )}
+                                            </Card.Text>
                                             <Button
                                                 variant={isSelected ? "danger" : "info"}
                                                 onClick={() => handleToggleSelection(qr)}
-                                                style={{ marginLeft: '8px' }}
+                                                style={{ marginTop: '8px' }}
                                             >
                                                 {isSelected ? 'Remove from Print' : 'Add to Print'}
                                             </Button>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </Table>
+                                        </Card.Body>
+                                    </Card>
+                                </div>
+                            );
+                        })}
+                    </div>
                 )}
             </div>
+
 
             <Modal show={showPrintModal} onHide={closePrintModal} size="lg">
                 <Modal.Header closeButton>
