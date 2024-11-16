@@ -26,7 +26,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 25px;
-        margin: 5px 0px;
+        margin: 4px 0px;
         height: 130px;
 
         div:first-child {
@@ -58,13 +58,13 @@
     
     .CardBody {
         height: 120px;
-        
+        margin: 2px 0px;
         div:first-child {
             h4 {
                 font-size: 1.2rem;
             }
             p {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
             }
         }
 
@@ -76,4 +76,8 @@
         }
 
     }   
+}
+
+@media (max-width: 400px) {
+    
 }
