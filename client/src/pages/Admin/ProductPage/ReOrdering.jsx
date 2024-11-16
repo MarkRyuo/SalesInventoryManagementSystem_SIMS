@@ -155,8 +155,8 @@ function ReOrdering() {
                                                     <Card.Body className={ReOrderingscss.CardBody}>
                                                         <div>
                                                             <Card.Title>{product.productName}</Card.Title>
-                                                            <p><strong>SKU:</strong> {product.sku}</p>
-                                                            <p><strong>Quantity:</strong> {product.quantity}</p>
+                                                            <p className="m-0"><strong>SKU:</strong> {product.sku}</p>
+                                                            <p className="m-0"><strong>Quantity:</strong> {product.quantity}</p>
                                                             <p>Status: {statusBadge}</p>
                                                         </div>
                                                         <div>
