@@ -151,8 +151,7 @@ function ReOrdering() {
 
                                         return (
                                             <div key={product.barcode}>
-                                                <Card>
-                                                    <Card.Body className={ReOrderingscss.CardBody}>
+                                                    <div className={ReOrderingscss.CardBody}>
                                                         <div>
                                                             <h4>{product.productName}</h4>
                                                             <p className="m-0">SKU: {product.sku}</p>
@@ -164,8 +163,7 @@ function ReOrdering() {
                                                                 Reorder
                                                             </Button>
                                                         </div>
-                                                    </Card.Body>
-                                                </Card>
+                                                    </div>
                                             </div>
                                         );
                                     })}
