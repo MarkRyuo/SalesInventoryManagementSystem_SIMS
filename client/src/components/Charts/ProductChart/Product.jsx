@@ -343,13 +343,22 @@ function ProductChart() {
                                                             placeholder="Enter stock threshold"
                                                             style={{ appearance: 'none', MozAppearance: 'textfield' }}
                                                         />
-                                                    ) : (
+                                                    ) :  key === 'quantity' ? (
+                                                        <Form.Control
+                                                            type="text"
+                                                            value={editProduct[key]}
+                                                            disabled
+                                                            onChange={(e) => handleModalInputChange(key, e.target.value)}
+                                                        />
+                                                    ): (
                                                         <Form.Control
                                                             type="text"
                                                             value={editProduct[key]}
                                                             onChange={(e) => handleModalInputChange(key, e.target.value)}
                                                         />
-                                                    )}
+                                                    ) 
+                                                    
+                                                    }
                                                 </Form.Group>
                                             </Col>
                                         ))}
