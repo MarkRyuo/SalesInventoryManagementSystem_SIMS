@@ -84,7 +84,6 @@ function ReOrdering() {
 
             await saveOrderToFirebase(orderData);
             alert("Order saved successfully to Firebase!");
-
             // Update reordered products state after saving
             const reorderedProductBarcodes = new Set(orderDetails.map((product) => product.barcode));
             setReorderedProducts((prevSet) => {
