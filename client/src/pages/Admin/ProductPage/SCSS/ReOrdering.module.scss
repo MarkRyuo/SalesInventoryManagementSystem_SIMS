@@ -87,7 +87,19 @@
             }
         }
 
-    }   
+    }
+    
+    .mainReOrdering {
+        .TopButtons {
+        
+        button {
+            font-size: 0.8rem;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 10px 10px;
+        }
+    }
+    }
 }
 
 @media (max-width: 400px) {
@@ -124,5 +136,16 @@
             }
         }
 
+    }
+
+    .mainReOrdering {
+        .TopButtons {
+        button {
+            font-size: 0.8rem;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 10px 10px;
+        }
+    }
     }
 }
