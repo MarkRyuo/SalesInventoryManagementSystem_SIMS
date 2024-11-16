@@ -48,9 +48,6 @@ function AdminTransactionHistory() {
     const handleDownloadOrder = async (order) => {
         const doc = new jsPDF();
 
-        doc.addFont('https://cdnjs.cloudflare.com/ajax/libs/jsPDF/2.5.1/fonts/DejaVuSans.ttf', 'DejaVu', 'normal');
-        doc.setFont('DejaVu');
-
         // Title
         doc.setFontSize(22);
         doc.setFont('helvetica', 'bold');
