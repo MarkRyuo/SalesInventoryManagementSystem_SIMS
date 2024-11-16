@@ -75,7 +75,7 @@ function SavedOrderDetails() {
     };
 
     return (
-        <div style={{border: '1px solid', display: "flex", alignItems: "flex-end"}}>
+        <div style={{display: "flex", alignItems: "flex-end"}}>
             <Button variant="primary" onClick={() => setShowModal(true)}>
                 View Saved Orders
             </Button>
