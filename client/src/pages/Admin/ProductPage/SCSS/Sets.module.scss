@@ -115,6 +115,7 @@
         box-shadow: 1px 1px 3px rgb(180, 179, 179);
         padding: 10px;
         margin: 5px;
+        background-color: #ffffff;
 
         div {
             display: flex;
@@ -147,7 +148,37 @@
     }
 
     @media (max-width: 700px) {
-        
+        .SetQrcodeContent {
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // border: 1px solid;
+
+            h4{
+                font-size: 1rem;
+            }
+            
+            p {
+                button {
+                    font-size: 0.9rem;
+                    text-decoration: none;
+                }
+            }
+
+            img {
+                width: 100px;
+                height: auto;
+            }
+
+            div {
+                button {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
     }
 
 }//!End 
