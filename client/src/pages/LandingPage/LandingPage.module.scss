@@ -55,19 +55,11 @@
 
         .Btn {
             // border: 1px solid;
-            background: radial-gradient(circle at 10% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
-            color: #ffffff;
+            color: #202020;
+            background: radial-gradient(1023px at 3.1% 6.9%, rgb(255, 255, 255) 0%, rgb(205, 40, 83) 74.9%);
         }
 
-        .btn:visited {
-            background: radial-gradient(circle at 10% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
-            color: #ffffff;
-        }
         
-        .Btn:hover {
-            background: radial-gradient(circle at 10% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
-            color: #ffffff;
-        }
         
         @media (max-width: 700px){
             width: 100%;
