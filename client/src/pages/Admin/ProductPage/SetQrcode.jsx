@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Button, Spinner, Modal, ListGroup, Form, Card, Row, Col } from 'react-bootstrap';
-import AddQrcode from './AddQrcode';
+import { Button, Spinner, Modal, ListGroup, Form, Card} from 'react-bootstrap';
+import AddQrcode from './AddQrcode';  // If you are still using this
 import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
 import { jsPDF } from 'jspdf';
 
@@ -149,16 +149,16 @@ function ViewQrCode() {
                         <p>Loading QR Codes...</p>
                     </div>
                 ) : (
-                    <Row>
+                    <div className="d-flex overflow-auto" style={{border: '1px solid', padding: "10px"}}>
                         {sortedQrCodes.map((qr, index) => {
                             const isSaved = Boolean(savedProductNames[qr.id]);
                             const productName = productNames[qr.id] || '';
                             const isSelected = selectedQrcodes.some((selectedQr) => selectedQr.id === qr.id);
 
                             return (
-                                <Col key={qr.id} sm={12} md={6} lg={4} xl={3} className="mb-4">
-                                    <Card>
-                                        <Card.Body>
+                                <div key={qr.id} className="card-wrapper" style={{border: '1px solid', padding: "10px"}}>
+                                    <div>
+                                        <div>
                                             <Card.Title>QR Code #{index + 1}</Card.Title>
                                             <Card.Img
                                                 variant="top"
@@ -182,16 +182,16 @@ function ViewQrCode() {
                                             >
                                                 {isSelected ? 'Remove from Print' : 'Add to Print'}
                                             </Button>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
+                                        </div>
+                                    </div>
+                                </div>
                             );
                         })}
-                    </Row>
+                    </div>
                 )}
             </div>
 
-            {/* Modal for Printing QR Codes */}
+
             <Modal show={showPrintModal} onHide={closePrintModal} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>Selected QR Codes for Printing</Modal.Title>
