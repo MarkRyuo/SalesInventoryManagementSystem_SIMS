@@ -149,22 +149,22 @@ function ViewQrCode() {
                         <p>Loading QR Codes...</p>
                     </div>
                 ) : (
-                    <div className="d-flex overflow-auto" style={{border: '1px solid', padding: "10px"}}>
+                    <div className="" style={{border: '1px solid', padding: "10px"}}>
                         {sortedQrCodes.map((qr, index) => {
                             const isSaved = Boolean(savedProductNames[qr.id]);
                             const productName = productNames[qr.id] || '';
                             const isSelected = selectedQrcodes.some((selectedQr) => selectedQr.id === qr.id);
 
                             return (
-                                <div key={qr.id} className="card-wrapper" style={{border: '1px solid', padding: "10px"}}>
+                                <div key={qr.id} style={{border: '1px solid', padding: "10px"}}>
                                     <div>
-                                        <div>
+                                        <div style={{display: "flex", justifyContent: "space-between"}}>
                                             <Card.Title>QR Code #{index + 1}</Card.Title>
                                             <Card.Img
                                                 variant="top"
                                                 src={qr.qrcodeBase64}
                                                 alt="QR Code"
-                                                style={{ width: '100%', height: 'auto' }}
+                                                style={{ width: '100px', height: 'auto' }}
                                             />
                                             <Card.Text>
                                                 {isSaved ? (
