@@ -124,7 +124,7 @@ function AdminTransactionHistory() {
                                         className="me-2"
                                         onClick={() => handleShowModal(order)}
                                     >
-                                        <FaEye />
+                                        <FaEye size={15}/>
                                     </Button>
                                     <Button
                                         variant="outline-primary"
@@ -132,14 +132,14 @@ function AdminTransactionHistory() {
                                         className="me-2"
                                         onClick={() => handleDownloadOrder(order)}
                                     >
-                                        <FaDownload />
+                                        <FaDownload size={15}/>
                                     </Button>
                                     <Button
                                         variant="outline-danger"
                                         size="sm"
                                         onClick={() => handleShowDeleteModal(order)}
                                     >
-                                        <FaTrash />
+                                        <FaTrash size={15}/>
                                     </Button>
                                 </div>
                             </ListGroup.Item>
