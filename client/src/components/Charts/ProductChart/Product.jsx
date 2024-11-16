@@ -341,7 +341,8 @@ function ProductChart() {
                                                             value={editProduct[key]}
                                                             onChange={(e) => handleModalInputChange(key, parseFloat(e.target.value))}
                                                             placeholder="Enter stock threshold"
-                                                            style={{ appearance: 'none', MozAppearance: 'textfield' }}
+                                                                style={{ appearance: 'none', MozAppearance: 'textfield' }}
+                                                                isInvalid={editProduct[key] === undefined || editProduct[key] === '' || editProduct[key] <= 0}
                                                         />
                                                     ) :  key === 'quantity' ? (
                                                         <Form.Control
@@ -356,9 +357,7 @@ function ProductChart() {
                                                             value={editProduct[key]}
                                                             onChange={(e) => handleModalInputChange(key, e.target.value)}
                                                         />
-                                                    ) 
-                                                    
-                                                    }
+                                                    )}
                                                 </Form.Group>
                                             </Col>
                                         ))}
