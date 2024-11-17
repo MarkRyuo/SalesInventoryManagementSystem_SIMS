@@ -179,7 +179,6 @@ function NewAssetsScanner() {
                 </div>
             </Container>
         </Container>
-
     );
 }
 export default NewAssetsScanner;
