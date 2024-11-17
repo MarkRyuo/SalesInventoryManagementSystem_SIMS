@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
+import NewProductscss from './NewProduct.module.scss' ;
 
 function NewAssetsScanner() {
     const videoRef = useRef(null);
