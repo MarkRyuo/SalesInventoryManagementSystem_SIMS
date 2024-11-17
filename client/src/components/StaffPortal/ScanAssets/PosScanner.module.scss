@@ -8,6 +8,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 
     button {
         font-size: 1.1rem;
@@ -19,6 +20,7 @@
         align-items: center;
         width: 100%;
         height: auto;
+        gap: 10px;
     }
 
     video {
