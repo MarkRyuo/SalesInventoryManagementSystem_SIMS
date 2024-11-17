@@ -19,6 +19,11 @@ function PosScanner() {
     const [fadeOut, setFadeOut] = useState(false);
     const videoRef = useRef(null);
     const scanningInProgress = useRef(false); // Flag to manage scanning state
+    //! Set up for Back and front camera trigger.
+    const [selectedDeviceId, setSelectedDeviceId] = useState(null); // Camera device ID
+    const [isUsingBackCamera, setIsUsingBackCamera] = useState(true); // Default to back camera
+    const [videoDevices, setVideoDevices] = useState([]); // Store available video devices
+
 
     const handleScan = useCallback(async (scannedText) => {
         if (isLoading || scanningInProgress.current) return; // Prevent scanning if loading or already scanning
@@ -86,9 +91,15 @@ function PosScanner() {
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
         codeReader.listVideoInputDevices().then((videoInputDevices) => {
-            if (videoInputDevices.length > 0) {
-                const selectedDeviceId = videoInputDevices[0].deviceId;
-                codeReader.decodeFromVideoDevice(selectedDeviceId, videoRef.current, (result, error) => {
+            setVideoDevices(videoInputDevices);
+
+            // Auto-select the back camera if available, otherwise use the first one
+            const defaultDevice = videoInputDevices.find(device => device.label.toLowerCase().includes("back")) || videoInputDevices[0];
+            setSelectedDeviceId(defaultDevice?.deviceId);
+
+            // Start decoding using the selected device
+            if (defaultDevice) {
+                codeReader.decodeFromVideoDevice(defaultDevice.deviceId, videoRef.current, (result, error) => {
                     if (result) {
                         handleScan(result.getText());
                     }
@@ -96,10 +107,11 @@ function PosScanner() {
                         console.error("Scanning error: ", error);
                     }
                 });
-                setCameraLoading(false);
             } else {
                 setErrorMessages(['No camera found.']);
             }
+
+            setCameraLoading(false);
         }).catch((error) => {
             setErrorMessages(['Error accessing video devices.', error.message]);
         });
@@ -107,7 +119,25 @@ function PosScanner() {
         return () => {
             codeReader.reset();
         };
-    }, [handleScan, isLoading]);
+    }, [handleScan, isLoading, selectedDeviceId]);
+
+    const handleCameraToggle = () => {
+        if (videoDevices.length < 2) {
+            setErrorMessages(["Only one camera available. Cannot switch."]);
+            return;
+        }
+
+        const newCamera = isUsingBackCamera
+            ? videoDevices.find(device => device.label.toLowerCase().includes("front")) // Front camera
+            : videoDevices.find(device => device.label.toLowerCase().includes("back")); // Back camera
+
+        if (newCamera) {
+            setSelectedDeviceId(newCamera.deviceId);
+            setIsUsingBackCamera(!isUsingBackCamera); // Toggle camera state
+            setCameraLoading(true); // Indicate camera switching
+        }
+    };
+
 
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });
@@ -117,10 +147,22 @@ function PosScanner() {
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg' style={{ width: '100%', height: '80vh' }}>
-                <Row className="justify-content-center" style={{ height: '100%' }}>
+                <Row className="justify-content-center" style={{ height: '100%' }}> 
                     <Col md={8} className='p-0 mt-3'>
                         <Card style={{ height: '100%' }}>
                             <div className="text-center position-relative">
+                                <Row className="justify-content-center mt-3">
+                                    <Col md={8} className="text-center">
+                                        <Button
+                                            variant="secondary"
+                                            onClick={handleCameraToggle}
+                                            disabled={videoDevices.length < 2}
+                                        >
+                                            Switch to {isUsingBackCamera ? "Front" : "Back"} Camera
+                                        </Button>
+                                    </Col>
+                                </Row>
+
                                 {errorMessages.length > 0 && (
                                     <Alert variant="danger" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
                                         {errorMessages[errorMessages.length - 1]}
