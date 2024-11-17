@@ -159,7 +159,7 @@ function ViewQrCode() {
                             return (
                                 <div key={qr.id} className={SetQrcodescss.SetQrcodeContent}>
                                     <div>
-                                        <h4>QR Code #{index + 1}</h4>
+                                        <h4 className='m-0 p-0'>QR Code #{index + 1}</h4>
                                         <Card.Img
                                             variant="top"
                                             src={qr.qrcodeBase64}

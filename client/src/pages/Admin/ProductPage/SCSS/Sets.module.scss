@@ -164,7 +164,7 @@
             }
             
             p {
-                font-size: 0.9rem;
+                font-size: 0.7rem;
                 button {
                     font-size: 0.7rem;
                     text-decoration: none;
@@ -184,5 +184,42 @@
         }
     }
     }
+    
+    @media (max-width: 400px) {
+        padding: 0px;
 
+        .SetQrcodeContent {
+            height: auto;
+            
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // border: 1px solid;
+
+            h4{
+                font-size: 0.8rem;
+            }
+            
+            p {
+                font-size: 0.7rem;
+                button {
+                    font-size: 0.7rem;
+                    text-decoration: none;
+                }
+            }
+
+            img {
+                width: 50px;
+                height: auto;
+            }
+
+            div {
+                button {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+    }
+    }
 }//!End 
