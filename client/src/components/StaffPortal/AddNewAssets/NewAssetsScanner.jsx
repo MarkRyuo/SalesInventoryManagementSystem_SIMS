@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
-import { Container, Row, Col, Alert, Card, Spinner } from 'react-bootstrap';
+import { Container, Alert, Spinner, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
-
-
+import NewProductscss from './NewProduct.module.scss';
+import { MdCameraswitch } from "react-icons/md";
 
 function NewAssetsScanner() {
     const videoRef = useRef(null);
@@ -23,10 +23,8 @@ function NewAssetsScanner() {
     const [videoDevices, setVideoDevices] = useState([]);
     const [selectedDeviceId, setSelectedDeviceId] = useState(null);
 
-
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
-
         const startScanner = async (deviceId = null) => {
             try {
                 const devices = await codeReader.listVideoInputDevices();
@@ -128,79 +126,58 @@ function NewAssetsScanner() {
         }
     };
 
-
     return (
-        <Container fluid>
+        <Container fluid className='m-0 p-0'>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' style={{ width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
-                <Row className="justify-content-center" style={{ height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
-                    <Col md={8} className='p-0 mt-3' style={{ display: 'flex', justifyContent: 'center'}}> {/* Child */}
-                        <Card style={{ height: '100%', display: 'flex', justifyContent: 'center', width: '100%' }}>
-                            <button
-                                onClick={handleCameraSwitch}
-                                className="btn btn-primary mb-2"
-                                disabled={isProcessing}
-                            >
-                                Switch Camera
-                            </button>
-
-                            <div className="text-center position-relative">
+            <Container fluid='lg' className={NewProductscss.NewProductContainer}>
+                <div className={NewProductscss.NewProductCol}> {/* Child */}
+                    <div>
+                        <Button onClick={handleCameraSwitch} variant='primary' className="mb-2" disabled={isProcessing}>
+                            <MdCameraswitch size={20} className="me-2" />
+                            Switch Camera
+                        </Button>
+                        {/* Camera */}
+                        <div className={NewProductscss.NewProductCamera}>
+                            <div>
                                 {error && (
                                     <Alert variant="danger"
-                                        style={{
-                                            opacity: fadeOut ? 0 : 1,
-                                            transition: 'opacity 1s ease-in-out',
-                                        }}>
+                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out'}}>
                                         Error: {error}
                                     </Alert>
                                 )}
                                 {message && (
                                     <Alert variant="success"
-                                        style={{
-                                            opacity: fadeOut ? 0 : 1,
-                                            transition: 'opacity 1s ease-in-out',
-                                        }}>
+                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out'}}>
                                         {message}
                                     </Alert>
                                 )}
-                                {isProcessing && <Spinner animation="border" />}
-
-                                <div
-                                    style={{
-                                        position: 'absolute',
-                                        top: '50%',
-                                        left: '50%',
-                                        transform: 'translate(-50%, -50%)',
-                                        width: '70%',
-                                        height: '50%',
-                                        border: '1px dashed rgba(255, 255, 255, 0.8)',
-                                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                                        pointerEvents: 'none',
-                                        opacity: guideFade ? 1 : 0,
-                                        transition: 'opacity 1s ease-in-out',
-                                    }}
-                                />
-
-                                <video
-                                    ref={videoRef}
-                                    style={{
-                                        width: '100%',
-                                        height: 'auto',
-                                        maxHeight: '80vh',  // Limits height to fit within the viewport
-                                        display: isProcessing ? 'none' : 'block',
-                                        opacity: videoFade ? 1 : 0,
-                                        transition: 'opacity 1s ease-in-out'
-                                    }}
-                                />
                             </div>
-                        </Card>
-                    </Col>
-                </Row>
+                            {isProcessing && <Spinner animation="grow" variant="success" />}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
+                                    width: '60%',
+                                    height: '50%',
+                                    border: '2px dashed rgba(255, 255, 255, 0.5)',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                                    pointerEvents: 'none',
+                                    opacity: guideFade ? 1 : 0,
+                                    transition: 'opacity 1s ease-in-out',
+                                }}
+                            />
+                            <video
+                                ref={videoRef}
+                                style={{ display: isProcessing ? 'none' : 'block', opacity: videoFade ? 1 : 0, transition: 'opacity 1s ease-in-out'
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
             </Container>
-
         </Container>
-        
     );
 }
-
 export default NewAssetsScanner;

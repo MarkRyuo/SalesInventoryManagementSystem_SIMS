@@ -1,10 +1,12 @@
-import { Container, Row, Col, Button, Spinner, Card, Alert } from "react-bootstrap";
+import { Container, Button, Spinner, Card, Alert } from "react-bootstrap";
 import StaffNavBar from "../StaffNavbar/StaffNavBar";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fetchProductByBarcode } from '../../../services/ProductService';
+import PosScannerscss from './PosScanner.module.scss';
+import { FaCameraRotate } from "react-icons/fa6";
 
 function PosScanner() {
     const location = useLocation();
@@ -17,96 +19,113 @@ function PosScanner() {
     const [isLoading, setIsLoading] = useState(false);
     const [cameraLoading, setCameraLoading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
+    const [canScanAgain, setCanScanAgain] = useState(false); // Track if user can scan again
+    const [cameraVisible, setCameraVisible] = useState(true); // Camera visibility state
+
     const videoRef = useRef(null);
     const scanningInProgress = useRef(false); // Flag to manage scanning state
-    //! Set up for Back and front camera trigger.
     const [selectedDeviceId, setSelectedDeviceId] = useState(null); // Camera device ID
     const [isUsingBackCamera, setIsUsingBackCamera] = useState(true); // Default to back camera
     const [videoDevices, setVideoDevices] = useState([]); // Store available video devices
 
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
     const handleScan = useCallback(async (scannedText) => {
-        if (isLoading || scanningInProgress.current) return; // Prevent scanning if loading or already scanning
+        if (isLoading || scanningInProgress.current) return;
 
-        scanningInProgress.current = true; // Set scanning in progress
+        const currentTime = Date.now(); // Get current timestamp
+        const timeSinceLastScan = currentTime - lastScanTime.current; // Time difference from last scan
+
+        // Block scanning if the interval between scans is too short (e.g., less than 1000ms)
+        if (timeSinceLastScan < 1000) {
+            setErrorMessages(prev => [...prev, "You are scanning too quickly. Please wait a moment."]);
+            setCanScanAgain(false); // Disable scanning until time has passed
+            setTimeout(() => {
+                setCanScanAgain(true); // Enable scanning again after a delay
+                setErrorMessages(prev => prev.filter(msg => msg !== "You are scanning too quickly. Please wait a moment."));
+            }, 1000); // Delay for 1 second before allowing scanning again
+            return;
+        }
+
+        scanningInProgress.current = true;
         setErrorMessages([]);
         setMessage("");
 
         try {
-            setIsLoading(true); // Start loading
+            setIsLoading(true);
+
+            // Delay for 1 second before scanning
+            await delay(1000);
+
             const product = await fetchProductByBarcode(scannedText);
 
-            // Check if the product exists and if its quantity is zero
             if (product && product.quantity === 0) {
                 setErrorMessages(prev => [...prev, `Cannot scan ${product.productName}. Quantity is zero.`]);
                 setFadeOut(false);
-                setTimeout(() => {
-                    setFadeOut(true);
-                }, 4000); // Show for 4 seconds
-                return; // Exit early without adding the item
+                setTimeout(() => setFadeOut(true), 2000);
+                return;
             }
 
             if (product) {
-                // If the product was found and quantity is valid, update the scanned items
                 const existingItemIndex = scannedItems.findIndex(item => item.barcode === scannedText);
-
                 setScannedItems(prevItems => {
                     const updatedItems = [...prevItems];
                     if (existingItemIndex !== -1) {
-                        // Product already scanned, increment quantity
                         updatedItems[existingItemIndex].quantity += 1;
                     } else {
-                        // New product scanned, add it to the list with quantity 1
                         updatedItems.push({ ...product, quantity: 1 });
                     }
-                    return updatedItems; // Return updated list
+                    return updatedItems;
                 });
 
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
-                setTimeout(() => {
-                    setFadeOut(true);
-                }, 4000); // Show for 4 seconds
+                setTimeout(() => setFadeOut(true), 2000);
+
+                // Hide the camera while the success message is shown, then show it again after the message fades
+                setCameraVisible(false);
+                setTimeout(() => setCameraVisible(true), 2000); // Hide camera during success message
             } else {
-                // If no product found, set an error message
                 setErrorMessages(prev => [...prev, `No product found for barcode: ${scannedText}`]);
                 setFadeOut(false);
-                setTimeout(() => {
-                    setFadeOut(true);
-                }, 4000); // Show for 4 seconds
+                setTimeout(() => setFadeOut(true), 2000);
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
-            setIsLoading(false); // Reset loading state
-            setTimeout(() => {
-                scanningInProgress.current = false; // Reset scanning state
-            }, 2000); // 2 seconds delay
+            setIsLoading(false);
+            scanningInProgress.current = false; // Reset scanning state immediately
+
+            // Update the last scan time after the scan process is completed
+            lastScanTime.current = Date.now();
         }
     }, [isLoading, scannedItems]);
 
-    // Include scannedItems in the dependency array
-
+    // Store the timestamp of the last scan
+    const lastScanTime = useRef(0);
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
+
+        const startDecoding = (deviceId) => {
+            codeReader.decodeFromVideoDevice(deviceId, videoRef.current, (result, error) => {
+                if (result) {
+                    handleScan(result.getText());
+                }
+                if (error && !isLoading) {
+                    console.error("Scanning error: ", error);
+                }
+            });
+        };
+
         codeReader.listVideoInputDevices().then((videoInputDevices) => {
             setVideoDevices(videoInputDevices);
 
-            // Auto-select the back camera if available, otherwise use the first one
             const defaultDevice = videoInputDevices.find(device => device.label.toLowerCase().includes("back")) || videoInputDevices[0];
             setSelectedDeviceId(defaultDevice?.deviceId);
 
-            // Start decoding using the selected device
             if (defaultDevice) {
-                codeReader.decodeFromVideoDevice(defaultDevice.deviceId, videoRef.current, (result, error) => {
-                    if (result) {
-                        handleScan(result.getText());
-                    }
-                    if (error && !isLoading) {
-                        console.error("Scanning error: ", error);
-                    }
-                });
+                startDecoding(defaultDevice.deviceId);
             } else {
                 setErrorMessages(['No camera found.']);
             }
@@ -117,7 +136,7 @@ function PosScanner() {
         });
 
         return () => {
-            codeReader.reset();
+            codeReader.reset(); // Ensure to reset the reader when unmounting
         };
     }, [handleScan, isLoading, selectedDeviceId]);
 
@@ -138,78 +157,65 @@ function PosScanner() {
         }
     };
 
-
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });
     };
 
     return (
-        <Container fluid>
+        <Container fluid className="m-0 p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' style={{ width: '100%', height: '80vh' }}>
-                <Row className="justify-content-center" style={{ height: '100%' }}> 
-                    <Col md={8} className='p-0 mt-3'>
-                        <Card style={{ height: '100%' }}>
-                            <div className="text-center position-relative">
-                                <Row className="justify-content-center mt-3">
-                                    <Col md={8} className="text-center">
-                                        <Button
-                                            variant="secondary"
-                                            onClick={handleCameraToggle}
-                                            disabled={videoDevices.length < 2}
-                                        >
-                                            Switch to {isUsingBackCamera ? "Front" : "Back"} Camera
-                                        </Button>
-                                    </Col>
-                                </Row>
+            <Container fluid='lg' className="p-0">
+                <div className={PosScannerscss.PosscannerMessage}>
+                    {errorMessages.length > 0 && (
+                        <Alert variant="danger" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
+                            {errorMessages[errorMessages.length - 1]}
+                        </Alert>
+                    )}
+                    {canScanAgain && (
+                        <Alert variant="info" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
+                            You can scan again.
+                        </Alert>
+                    )}
+                    {message && (
+                        <Alert variant="success" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
+                            {message}
+                        </Alert>
+                    )}
+                </div>
+                <div className={PosScannerscss.Posscannermain}>
+                    <Card className="m-0 p-0">
+                        <Button variant="secondary" onClick={handleCameraToggle} disabled={videoDevices.length < 2} className="mt-3">
+                            <FaCameraRotate size={20} className="me-2" />
+                            Switch to {isUsingBackCamera ? "Front" : "Back"} Camera
+                        </Button>
 
-                                {errorMessages.length > 0 && (
-                                    <Alert variant="danger" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
-                                        {errorMessages[errorMessages.length - 1]}
-                                    </Alert>
-                                )}
-                                {message && (
-                                    <Alert variant="success" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
-                                        {message}
-                                    </Alert>
-                                )}
-                                {isLoading && <Spinner animation="border" />}
+                        {isLoading && <Spinner animation="border" variant="info" />}
+                        <div style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: '45%',
+                            minWidth: "40%",
+                            height: '50%',
+                            border: '2px dashed rgba(255, 255, 255, 0.5)',
+                            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                        }} />
 
-                                <div style={{
-                                    position: 'absolute',
-                                    top: '50%',
-                                    left: '50%',
-                                    transform: 'translate(-50%, -50%)',
-                                    width: '70%',
-                                    height: '50%',
-                                    border: '1px dashed rgba(255, 255, 255, 0.8)',
-                                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                                }} />
+                        <video
+                            ref={videoRef}
+                            style={{
+                                display: cameraLoading || isLoading || !cameraVisible ? 'none' : 'block',
+                                opacity: cameraLoading || isLoading || !cameraVisible ? 0 : 1,
+                                transition: 'opacity 1s ease-in-out',
+                            }}
+                        />
 
-                                <video
-                                    ref={videoRef}
-                                    style={{
-                                        width: '100%',
-                                        maxHeight: '80vh',
-                                        display: cameraLoading ? 'none' : 'block',
-                                        opacity: cameraLoading ? 0 : 1,
-                                        transition: 'opacity 1s ease-in-out',
-                                    }}
-                                />
-                                <div style={{ position: 'absolute', bottom: '10%', left: '50%', transform: 'translateX(-50%)', color: 'white' }}>
-                                    <p>Please position the barcode within the dashed area and ensure good lighting.</p>
-                                </div>
-                            </div>
-                        </Card>
-                    </Col>
-                </Row>
-                <Row className="justify-content-center mt-3">
-                    <Col md={8} className="text-center">
-                        <Button variant="primary" onClick={handleCheckout} disabled={scannedItems.length === 0}>
+                        <Button variant="primary" onClick={handleCheckout} disabled={scannedItems.length === 0} className="mb-2">
                             Proceed to Checkout
                         </Button>
-                    </Col>
-                </Row>
+                    </Card>
+                </div>
             </Container>
         </Container>
     );
