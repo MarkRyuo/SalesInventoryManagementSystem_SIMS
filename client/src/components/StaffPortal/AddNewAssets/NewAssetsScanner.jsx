@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
-import NewProductscss from './NewProduct.module.scss' ;
+import NewProductscss from './NewProduct.module.scss';
 
 function NewAssetsScanner() {
     const videoRef = useRef(null);
@@ -128,10 +128,9 @@ function NewAssetsScanner() {
 
 
     return (
-        <Container fluid>
-            <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' style={{ border: "1px solid",width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
-                <div className="justify-content-center" style={{border:"1px solid" ,height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
+        <>
+            <Container fluid='lg'>
+                <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
                     <div className={NewProductscss.NewProductCol}> {/* Child */}
                         <div>
                             <button
@@ -193,11 +192,9 @@ function NewAssetsScanner() {
                             </div>
                         </div>
                     </div>
-                </div>
             </Container>
+        </>
 
-        </Container>
-        
     );
 }
 
