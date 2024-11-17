@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
-import { Container, Row, Col, Alert, Card, Spinner } from 'react-bootstrap';
+import { Container, Alert, Card, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
 import { IoMdArrowBack } from "react-icons/io";
@@ -131,7 +131,7 @@ function NewAssetsScanner() {
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg' style={{ border: "1px solid",width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
-                <Row className="justify-content-center" style={{border:"1px solid" ,height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
+                <div className="justify-content-center" style={{border:"1px solid" ,height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
                     <div className={NewProductscss.NewProductCol}> {/* Child */}
                         <Card style={{ height: '100%', display: 'flex', justifyContent: 'center', width: '100%' }}>
                             <button
@@ -193,7 +193,7 @@ function NewAssetsScanner() {
                             </div>
                         </Card>
                     </div>
-                </Row>
+                </div>
             </Container>
 
         </Container>
