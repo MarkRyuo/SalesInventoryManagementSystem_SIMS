@@ -11,6 +11,7 @@ import { PiHandArrowUpBold } from "react-icons/pi";
 import ProductPagescss from './ProductPage.module.scss' ;
 import ReOrdering from './ReOrdering';
 import SetQrcode from './SetQrcode';
+import { LiaQrcodeSolid } from "react-icons/lia";
 
 
 // eslint-disable-next-line react/prop-types
@@ -37,7 +38,7 @@ function ProductNavbarTabs({ setActiveTab }) {
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/SetQrcode">
-                    <PiHandArrowUpBold size={20} />
+                    <LiaQrcodeSolid size={20}/>
                     <p className='m-0 p-0'>Set Qrcode</p>
                 </Nav.Link>
             </Nav.Item>
