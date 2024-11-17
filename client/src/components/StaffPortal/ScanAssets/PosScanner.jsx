@@ -24,7 +24,6 @@ function PosScanner() {
     const [isUsingBackCamera, setIsUsingBackCamera] = useState(true); // Default to back camera
     const [videoDevices, setVideoDevices] = useState([]); // Store available video devices
 
-
     const handleScan = useCallback(async (scannedText) => {
         if (isLoading || scanningInProgress.current) return; // Prevent scanning if loading or already scanning
 
