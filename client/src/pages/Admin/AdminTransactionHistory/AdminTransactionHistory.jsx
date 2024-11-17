@@ -16,6 +16,23 @@ function AdminTransactionHistory() {
     const db = getDatabase();
     const qrRef = useRef(null);
 
+    //!Filtering
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+
+    useEffect(() => {
+        const filtered = orderHistory.filter(order => {
+            const orderDate = moment(order.date, 'YYYY-MM-DD'); // Assuming order date is in 'YYYY-MM-DD' format
+            const start = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
+            const end = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
+            const withinStartDate = start ? orderDate.isSameOrAfter(start) : true;
+            const withinEndDate = end ? orderDate.isSameOrBefore(end) : true;
+            return withinStartDate && withinEndDate;
+        });
+        setFilteredOrders(filtered);
+    }, [startDate, endDate, orderHistory]);
+
+
     useEffect(() => {
         const historyRef = ref(db, 'TransactionHistory/');
         onValue(historyRef, (snapshot) => {
