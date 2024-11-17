@@ -149,6 +149,7 @@ function PosScanner() {
                 <div className={PosScannerscss.Posscannermain}>
                     <Card className="m-0 p-0">
                         <Button variant="secondary" onClick={handleCameraToggle} disabled={videoDevices.length < 2} >
+                            <FaCameraRotate size={20} className="me-2"/>
                             Switch to {isUsingBackCamera ? "Front" : "Back"} Camera
                         </Button>
 
