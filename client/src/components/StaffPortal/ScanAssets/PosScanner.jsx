@@ -146,7 +146,7 @@ function PosScanner() {
         <Container fluid className="m-0 p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
-                <div className="justify-content-center" style={{ height: '100%' }}> 
+                <div className={PosScannerscss.Posscannermain}> 
                     <div className='p-0 mt-3'>
                         <Card style={{ height: '100%' }}>
                             <div className="text-center position-relative">
