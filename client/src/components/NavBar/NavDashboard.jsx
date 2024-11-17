@@ -1,4 +1,4 @@
-import { Container, Navbar, Button, Offcanvas, Image, Modal, Spinner, Alert } from 'react-bootstrap';
+import { Container, Navbar, Button, Offcanvas, Image, Modal, Spinner } from 'react-bootstrap';
 import { useState } from 'react';
 import Navbars from './Navbar.module.scss';
 import { Buttons } from './Buttons';
@@ -16,12 +16,15 @@ export const NavDashboard = () => {
     const [show, setShow] = useState(false);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [showLogoutModal, setShowLogoutModal] = useState(false); // For logout confirmation modal
+    const [showSuccessModal, setShowSuccessModal] = useState(false); // For success modal
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const handleShowLogoutModal = () => setShowLogoutModal(true); // Show logout modal
     const handleCloseLogoutModal = () => setShowLogoutModal(false); // Close logout modal
+
+    const handleCloseSuccessModal = () => setShowSuccessModal(false); // Close success modal
 
     //* Buttons
     const [buttons] = useState([
@@ -38,8 +41,14 @@ export const NavDashboard = () => {
             localStorage.removeItem('adminId'); // Clear the stored adminId from localStorage
             setIsLoggingOut(false); // End loading state
 
-            window.alert("You have successfully logged out.");
-            window.location.href = "/LoginPage"; // Redirect after logout
+            // Show success modal after logout
+            setShowLogoutModal(false); // Close logout modal
+            setShowSuccessModal(true); // Show success modal
+
+            // Redirect after 2 seconds (adjust as needed)
+            setTimeout(() => {
+                window.location.href = "/LoginPage"; // Redirect to login page
+            }, 2000);
         }, 2000); // Simulate a 2-second loading time
     };
 
@@ -101,7 +110,6 @@ export const NavDashboard = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <p className="text-center">Are you sure you want to log out?</p>
-                    <p className="text-center text-muted">You will be redirected to the login page.</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseLogoutModal}>
@@ -113,6 +121,22 @@ export const NavDashboard = () => {
                         ) : (
                             "Logout"
                         )}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Success Modal */}
+            <Modal show={showSuccessModal} onHide={handleCloseSuccessModal} centered>
+                <Modal.Header closeButton className="bg-success text-white">
+                    <Modal.Title>Logout Successful</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p className="text-center">You have successfully logged out.</p>
+                    <p className="text-center text-muted">Redirecting to the login page...</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseSuccessModal}>
+                        Close
                     </Button>
                 </Modal.Footer>
             </Modal>
