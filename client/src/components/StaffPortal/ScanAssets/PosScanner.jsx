@@ -49,17 +49,24 @@ function PosScanner() {
             }
 
             if (product) {
-                const existingItemIndex = scannedItems.findIndex(item => item.barcode === scannedText);
+                // Use the functional set state to ensure the latest scannedItems state
                 setScannedItems(prevItems => {
-                    const updatedItems = [...prevItems];
+                    // Check if the product already exists in the scannedItems array
+                    const existingItemIndex = prevItems.findIndex(item => item.barcode === scannedText);
+
                     if (existingItemIndex !== -1) {
-                        updatedItems[existingItemIndex].quantity += 1;
+                        // If the product already exists, we show a message but do not update the quantity
+                        setMessage(`Already scanned ${product.productName}.`);
+                        setFadeOut(false);
+                        setTimeout(() => setFadeOut(true), 5000);
+                        return prevItems; // Return the previous state as is, no update needed
                     } else {
-                        updatedItems.push({ ...product, quantity: 1 });
+                        // If it's a new product, add it to the list with quantity = 1
+                        return [...prevItems, { ...product, quantity: 1 }];
                     }
-                    return updatedItems;
                 });
 
+                // Allow the scan message to show the success but prevent double-counting
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
                 setTimeout(() => setFadeOut(true), 5000);
@@ -81,7 +88,11 @@ function PosScanner() {
             setIsLoading(false);
             scanningInProgress.current = false; // Reset scanning state immediately
         }
-    }, [isLoading, scannedItems]);
+    }, [isLoading]);
+
+
+
+
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
