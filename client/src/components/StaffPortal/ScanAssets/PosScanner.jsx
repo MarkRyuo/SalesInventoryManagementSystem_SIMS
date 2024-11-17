@@ -19,13 +19,8 @@ function PosScanner() {
     const [isLoading, setIsLoading] = useState(false);
     const [cameraLoading, setCameraLoading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
-    const [isCameraBlocked, setIsCameraBlocked] = useState(false); // New state to block camera
     const videoRef = useRef(null);
     const scanningInProgress = useRef(false); // Flag to manage scanning state
-    //! Set up for Back and front camera trigger.
-    const [selectedDeviceId, setSelectedDeviceId] = useState(null); // Camera device ID
-    const [isUsingBackCamera, setIsUsingBackCamera] = useState(true); // Default to back camera
-    const [videoDevices, setVideoDevices] = useState([]); // Store available video devices
 
     const handleScan = useCallback(async (scannedText) => {
         if (isLoading || scanningInProgress.current) return; // Prevent scanning if loading or already scanning
