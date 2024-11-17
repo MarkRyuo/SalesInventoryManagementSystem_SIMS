@@ -10,11 +10,13 @@ function Checkout() {
     const scannedItems = location.state?.scannedItems || [];
     const [errorMessage, setErrorMessage] = useState("");
     const currentDate = new Date().toLocaleString();
-    const [customerName, setCustomerName] = useState("Enter the customer name (Optional)");
+    const [customerName, setCustomerName] = useState("");
+
     const [availableDiscounts, setAvailableDiscounts] = useState([]);
     const [selectedDiscount, setSelectedDiscount] = useState(0);
     const [availableTaxes, setAvailableTaxes] = useState([]);
     const [selectedTaxRate, setSelectedTaxRate] = useState(0);
+    
 
     // Load available discounts and taxes
     useEffect(() => {
@@ -43,11 +45,14 @@ function Checkout() {
         setSelectedTaxRate(parseFloat(value));
     };
 
-    // Calculations
+    // Calculate subtotal before using it in other calculations
     const subtotal = scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const discount = selectedDiscount;
-    const taxAmount = ((subtotal - discount) * selectedTaxRate) / 100;
-    const total = subtotal + taxAmount - discount;
+    // Discount calculation as percentage of subtotal
+    const discountPercentage = selectedDiscount; // The percentage selected from the dropdown
+    const discountAmount = (subtotal * discountPercentage) / 100; // Calculate the discount amount based on the subtotal
+    // Tax calculation after applying the discount
+    const taxAmount = ((subtotal - discountAmount) * selectedTaxRate) / 100;
+    const total = subtotal + taxAmount - discountAmount; // Final total after discount and tax
 
     const handleCheckout = async () => {
         if (!customerName.trim()) {
@@ -65,11 +70,13 @@ function Checkout() {
             date: currentDate,
             customerName,
             items: scannedItems,
-            subtotal,
+            subtotal, // Make sure the subtotal is included here
             tax: taxAmount,
-            discount,
+            discount: discountAmount, // Pass the calculated discount amount
+            discountPercentage, // Pass the discount percentage
             total,
         };
+
 
         const db = getDatabase();
         const newOrderRef = ref(db, 'TransactionHistory/' + Date.now());
@@ -102,7 +109,7 @@ function Checkout() {
                             <Form.Label>Sold To:</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Enter customer name"
+                                placeholder="Enter customer name (Optional)"
                                 value={customerName}
                                 onChange={(e) => setCustomerName(e.target.value)}
                             />
@@ -119,11 +126,12 @@ function Checkout() {
                                 <option value={0}>No Discount</option>
                                 {availableDiscounts.map((discount) => (
                                     <option key={discount.id} value={discount.value}>
-                                        {discount.name} - ₱{discount.value.toFixed(2)}
+                                        {discount.name} - {discount.value}%
                                     </option>
                                 ))}
                             </Form.Select>
                         </Form.Group>
+
 
                         {/* Global Tax Dropdown */}
                         <Form.Group className="mt-3">
@@ -165,9 +173,10 @@ function Checkout() {
                                     <td>₱{subtotal.toFixed(2)}</td>
                                 </tr>
                                 <tr>
-                                    <td colSpan="3" className="text-end"><strong>Discount:</strong></td>
-                                    <td>-₱{discount.toFixed(2)}</td>
+                                    <td colSpan="3" className="text-end"><strong>Discount ({discountPercentage}%):</strong></td>
+                                    <td>-₱{discountAmount.toFixed(2)}</td>
                                 </tr>
+
                                 <tr>
                                     <td colSpan="3" className="text-end"><strong>Total Tax:</strong></td>
                                     <td>₱{taxAmount.toFixed(2)}</td>
