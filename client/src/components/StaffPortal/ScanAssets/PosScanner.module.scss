@@ -1,11 +1,18 @@
 
 .PosscannerMessage{
     border: 1px solid;
+    height: auto;
+    display: flex;
+    justify-content: center;
+
+    div {
+        font-size: 1rem;
+    }
 }
 
 .Posscannermain {
     border: 1px solid red;
-    height: 85vh;
+    height: 80vh;
     padding: 10px;
     display: flex;
     flex-direction: column;
