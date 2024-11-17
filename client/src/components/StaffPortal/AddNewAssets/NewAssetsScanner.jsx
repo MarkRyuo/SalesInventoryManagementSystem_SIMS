@@ -133,7 +133,7 @@ function NewAssetsScanner() {
             <Container fluid='lg' style={{ border: "1px solid",width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
                 <div className="justify-content-center" style={{border:"1px solid" ,height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
                     <div className={NewProductscss.NewProductCol}> {/* Child */}
-                        <Card style={{ height: '100%', display: 'flex', justifyContent: 'center', width: '100%' }}>
+                        <div>
                             <button
                                 onClick={handleCameraSwitch}
                                 className="btn btn-primary mb-2"
@@ -191,7 +191,7 @@ function NewAssetsScanner() {
                                     }}
                                 />
                             </div>
-                        </Card>
+                        </div>
                     </div>
                 </div>
             </Container>
