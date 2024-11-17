@@ -74,8 +74,6 @@ function PosScanner() {
 
 
     // Include scannedItems in the dependency array
-
-
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
 
