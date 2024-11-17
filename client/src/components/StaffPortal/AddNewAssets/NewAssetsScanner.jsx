@@ -134,11 +134,7 @@ function NewAssetsScanner() {
             <Container fluid='lg' className={NewProductscss.NewProductContainer}>
                 <div className={NewProductscss.NewProductCol}> {/* Child */}
                     <div>
-                        <button
-                            onClick={handleCameraSwitch}
-                            className="btn btn-primary mb-2"
-                            disabled={isProcessing}
-                        >
+                        <button onClick={handleCameraSwitch} className="btn btn-primary mb-2" disabled={isProcessing}>
                             <MdCameraswitch size={20} className="me-2" />
                             Switch Camera
                         </button>
