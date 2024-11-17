@@ -6,8 +6,6 @@ import { fetchProductByBarcode, updateProductQuantity } from '../../../services/
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
 
-
-
 function NewAssetsScanner() {
     const videoRef = useRef(null);
     const [error, setError] = useState('');
@@ -26,7 +24,6 @@ function NewAssetsScanner() {
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
-
         const startScanner = async (deviceId = null) => {
             try {
                 const devices = await codeReader.listVideoInputDevices();
