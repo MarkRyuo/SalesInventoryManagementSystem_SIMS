@@ -44,17 +44,18 @@ function PosScanner() {
             if (product && product.quantity === 0) {
                 setErrorMessages(prev => [...prev, `Cannot scan ${product.productName}. Quantity is zero.`]);
                 setFadeOut(false);
-                setTimeout(() => setFadeOut(true), 5000);
+                setTimeout(() => setFadeOut(true), 4000);
                 return;
             }
 
             if (product) {
                 // Use the functional set state to ensure the latest scannedItems state
                 setScannedItems(prevItems => {
+                    // Check if the product already exists in the scannedItems array
                     const existingItemIndex = prevItems.findIndex(item => item.barcode === scannedText);
 
                     if (existingItemIndex !== -1) {
-                        // If the product already exists, increase the quantity
+                        // If the product already exists, just increase the quantity
                         const updatedItems = [...prevItems];
                         updatedItems[existingItemIndex].quantity += 1;
                         return updatedItems;
@@ -70,7 +71,7 @@ function PosScanner() {
                 setTimeout(() => setFadeOut(true), 5000);
 
                 // Re-enable the camera after 2 seconds delay
-                setTimeout(() => setIsCameraBlocked(false), 6000);
+                setTimeout(() => setIsCameraBlocked(false), 4000);
             } else {
                 setErrorMessages(prev => [...prev, `No product found for barcode: ${scannedText}`]);
                 setFadeOut(false);
@@ -87,6 +88,7 @@ function PosScanner() {
             scanningInProgress.current = false; // Reset scanning state immediately
         }
     }, [isLoading]);
+
 
 
     useEffect(() => {
