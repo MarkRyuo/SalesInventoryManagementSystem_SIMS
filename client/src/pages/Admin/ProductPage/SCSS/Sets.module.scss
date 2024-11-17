@@ -240,4 +240,11 @@
     button:last-child {
         border-top-right-radius: 20px;
     }
+
+    @media (max-width: 800px) {
+        
+        button {
+            font-size: 0.8rem;
+        }
+    }
 }
