@@ -162,9 +162,8 @@ function NewAssetsScanner() {
                                         {message}
                                     </Alert>
                                 )}
-                            
-                            {isProcessing && <Spinner animation="grow" variant="success" />}
                             </div>
+                            {isProcessing && <Spinner animation="grow" variant="success" />}
                             
 
                             <div className=''
