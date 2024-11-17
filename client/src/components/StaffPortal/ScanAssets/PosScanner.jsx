@@ -27,6 +27,8 @@ function PosScanner() {
     const [videoDevices, setVideoDevices] = useState([]); // Store available video devices
     
 
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
     const handleScan = useCallback(async (scannedText) => {
         if (isLoading || scanningInProgress.current) return;
 
@@ -36,6 +38,10 @@ function PosScanner() {
 
         try {
             setIsLoading(true);
+
+            // Delay for 1 second before scanning
+            await delay(1000);
+
             const product = await fetchProductByBarcode(scannedText);
 
             if (product && product.quantity === 0) {
@@ -72,7 +78,6 @@ function PosScanner() {
             scanningInProgress.current = false; // Reset scanning state immediately
         }
     }, [isLoading, scannedItems]);
-
 
     // Include scannedItems in the dependency array
 
