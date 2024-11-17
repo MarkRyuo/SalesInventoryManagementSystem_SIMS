@@ -147,22 +147,24 @@ function PosScanner() {
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
                 <div className={PosScannerscss.Posscannermain}>
-                    <Card style={{ height: '100%' }}>
+                    <Card className="m-0 p-0">
                         <Button variant="secondary" onClick={handleCameraToggle} disabled={videoDevices.length < 2} >
                             Switch to {isUsingBackCamera ? "Front" : "Back"} Camera
                         </Button>
 
-                        {errorMessages.length > 0 && (
-                            <Alert variant="danger" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
-                                {errorMessages[errorMessages.length - 1]}
-                            </Alert>
-                        )}
-                        {message && (
-                            <Alert variant="success" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
-                                {message}
-                            </Alert>
-                        )}
-                        {isLoading && <Spinner animation="border" />}
+                        <div>
+                            {errorMessages.length > 0 && (
+                                <Alert variant="danger" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
+                                    {errorMessages[errorMessages.length - 1]}
+                                </Alert>
+                            )}
+                            {message && (
+                                <Alert variant="success" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
+                                    {message}
+                                </Alert>
+                            )}
+                            {isLoading && <Spinner animation="border" />}
+                        </div>
 
                         <div style={{
                             position: 'absolute',
@@ -189,7 +191,7 @@ function PosScanner() {
                             <p>Please position the barcode within the dashed area and ensure good lighting.</p>
                         </div>
                     </Card>
-                    
+
                     <Button variant="primary" onClick={handleCheckout} disabled={scannedItems.length === 0}>
                         Proceed to Checkout
                     </Button>
