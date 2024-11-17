@@ -152,7 +152,7 @@ function PosScanner() {
                 </div>
                 <div className={PosScannerscss.Posscannermain}>
                     <Card className="m-0 p-0">
-                        <Button variant="secondary" onClick={handleCameraToggle} disabled={videoDevices.length < 2} >
+                        <Button variant="secondary" onClick={handleCameraToggle} disabled={videoDevices.length < 2} className="mt-3">
                             <FaCameraRotate size={20} className="me-2" />
                             Switch to {isUsingBackCamera ? "Front" : "Back"} Camera
                         </Button>
@@ -179,7 +179,7 @@ function PosScanner() {
                             }}
                         />
 
-                        <Button variant="primary" onClick={handleCheckout} disabled={scannedItems.length === 0}>
+                        <Button variant="primary" onClick={handleCheckout} disabled={scannedItems.length === 0} className="mb-2">
                             Proceed to Checkout
                         </Button>
                     </Card>
