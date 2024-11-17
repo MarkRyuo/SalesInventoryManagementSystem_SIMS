@@ -35,24 +35,6 @@ function PosScanner() {
 
         try {
             setIsLoading(true);
-
-            // Check if the item is already scanned
-            const existingItemIndex = scannedItems.findIndex(item => item.barcode === scannedText);
-
-            if (existingItemIndex !== -1) {
-                // If already scanned, increment the quantity
-                setScannedItems(prevItems => {
-                    const updatedItems = [...prevItems];
-                    updatedItems[existingItemIndex].quantity += 1;
-                    return updatedItems;
-                });
-
-                setMessage(`Product quantity updated: ${scannedItems[existingItemIndex].productName}`);
-                setFadeOut(false);
-                setTimeout(() => setFadeOut(true), 4000);
-                return;
-            }
-
             const product = await fetchProductByBarcode(scannedText);
 
             if (product && product.quantity === 0) {
@@ -63,7 +45,17 @@ function PosScanner() {
             }
 
             if (product) {
-                setScannedItems(prevItems => [...prevItems, { ...product, quantity: 1 }]);
+                const existingItemIndex = scannedItems.findIndex(item => item.barcode === scannedText);
+                setScannedItems(prevItems => {
+                    const updatedItems = [...prevItems];
+                    if (existingItemIndex !== -1) {
+                        updatedItems[existingItemIndex].quantity += 1;
+                    } else {
+                        updatedItems.push({ ...product, quantity: 1 });
+                    }
+                    return updatedItems;
+                });
+
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
                 setTimeout(() => setFadeOut(true), 4000);
@@ -79,6 +71,9 @@ function PosScanner() {
             scanningInProgress.current = false; // Reset scanning state immediately
         }
     }, [isLoading, scannedItems]);
+
+
+    // Include scannedItems in the dependency array
 
 
     useEffect(() => {
