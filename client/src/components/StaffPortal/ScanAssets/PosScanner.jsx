@@ -19,6 +19,7 @@ function PosScanner() {
     const [isLoading, setIsLoading] = useState(false);
     const [cameraLoading, setCameraLoading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
+    const [isCameraBlocked, setIsCameraBlocked] = useState(false); // New state to block camera
     const videoRef = useRef(null);
     const scanningInProgress = useRef(false); // Flag to manage scanning state
     //! Set up for Back and front camera trigger.
@@ -32,6 +33,9 @@ function PosScanner() {
         scanningInProgress.current = true;
         setErrorMessages([]);
         setMessage("");
+
+        // Block camera during scan
+        setIsCameraBlocked(true);
 
         try {
             setIsLoading(true);
@@ -59,29 +63,32 @@ function PosScanner() {
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
                 setTimeout(() => setFadeOut(true), 4000);
+
+                // Re-enable the camera after 2 seconds delay
+                setTimeout(() => setIsCameraBlocked(false), 2000);
             } else {
                 setErrorMessages(prev => [...prev, `No product found for barcode: ${scannedText}`]);
                 setFadeOut(false);
                 setTimeout(() => setFadeOut(true), 4000);
+                // Re-enable the camera after 2 seconds delay if no product is found
+                setTimeout(() => setIsCameraBlocked(false), 2000);
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
+            // Re-enable the camera after 2 seconds delay in case of error
+            setTimeout(() => setIsCameraBlocked(false), 2000);
         } finally {
             setIsLoading(false);
             scanningInProgress.current = false; // Reset scanning state immediately
         }
     }, [isLoading, scannedItems]);
 
-
-    // Include scannedItems in the dependency array
-
-
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
 
         const startDecoding = (deviceId) => {
             codeReader.decodeFromVideoDevice(deviceId, videoRef.current, (result, error) => {
-                if (result) {
+                if (result && !isCameraBlocked) { // Ensure camera is active before processing
                     handleScan(result.getText());
                 }
                 if (error && !isLoading) {
@@ -110,7 +117,7 @@ function PosScanner() {
         return () => {
             codeReader.reset(); // Ensure to reset the reader when unmounting
         };
-    }, [handleScan, isLoading, selectedDeviceId]);
+    }, [handleScan, isLoading, selectedDeviceId, isCameraBlocked]);
 
 
     const handleCameraToggle = () => {
@@ -173,8 +180,8 @@ function PosScanner() {
                         <video
                             ref={videoRef}
                             style={{
-                                display: cameraLoading ? 'none' : 'block',
-                                opacity: cameraLoading ? 0 : 1,
+                                display: cameraLoading || isCameraBlocked ? 'none' : 'block', // Block the camera if needed
+                                opacity: cameraLoading || isCameraBlocked ? 0 : 1,
                                 transition: 'opacity 1s ease-in-out',
                             }}
                         />
