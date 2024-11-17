@@ -175,8 +175,8 @@ function PosScanner() {
                             transform: 'translate(-50%, -50%)',
                             width: '40%',
                             height: '50%',
-                            border: '2px dashed rgba(255, 255, 255, 0.8)',
-                            backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                            border: '2px dashed rgba(255, 255, 255, 0.5)',
+                            backgroundColor: 'rgba(0, 0, 0, 0.1)',
                         }} />
 
                         <video
