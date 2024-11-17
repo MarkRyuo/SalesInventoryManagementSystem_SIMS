@@ -170,7 +170,6 @@ function NewAssetsScanner() {
                                     transition: 'opacity 1s ease-in-out',
                                 }}
                             />
-
                             <video
                                 ref={videoRef}
                                 style={{
