@@ -41,7 +41,7 @@ function PosScanner() {
             if (product && product.quantity === 0) {
                 setErrorMessages(prev => [...prev, `Cannot scan ${product.productName}. Quantity is zero.`]);
                 setFadeOut(false);
-                setTimeout(() => setFadeOut(true), 4000);
+                setTimeout(() => setFadeOut(true), 2000);
                 return;
             }
 
