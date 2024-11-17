@@ -148,7 +148,7 @@
         }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 900px) {
         padding: 0px;
 
         .SetQrcodeContent {
@@ -192,12 +192,9 @@
             height: auto;
 
         div {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline ;
+            align-items:center ;
             flex-direction: column;
             // border: 1px solid;
-
             h4{
                 font-size: 0.8rem;
             }
@@ -216,6 +213,7 @@
             }
 
             div {
+                // border: 1px solid;
                 button {
                     font-size: 0.7rem;
                 }

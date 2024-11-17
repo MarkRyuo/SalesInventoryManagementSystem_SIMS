@@ -165,11 +165,11 @@ function ViewQrCode() {
                                             src={qr.qrcodeBase64}
                                             alt="QR Code"
                                         />
-                                        <p>
+                                        <p className='p-0 m-0'>
                                             {isSaved ? (
                                                 <span>{productName}</span>
                                             ) : (
-                                                <Button variant="link" onClick={() => handleOpenEditModal(qr.id)}>
+                                                <Button variant="link" onClick={() => handleOpenEditModal(qr.id)} className='m-0 p-0'>
                                                     Product Name
                                                 </Button>
                                             )}
