@@ -45,7 +45,11 @@
 
 @media (max-width: 600px) {
     .NewProductContainer {
-    
+        border: 1px solid;
+        height: 90vh;
+        padding: 10px;
+        display: flex;
+        align-items: center;
 
     .NewProductCol {
         // border: 1px solid red;
