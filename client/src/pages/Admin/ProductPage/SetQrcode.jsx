@@ -133,7 +133,7 @@ function ViewQrCode() {
 
     return (
         <>
-            <div className="mb-4">
+            <div className={SetQrcodescss.SetQrcodeBtn}>
                 <Button variant="primary" onClick={openModal}>
                     Generate QR Code
                 </Button>
