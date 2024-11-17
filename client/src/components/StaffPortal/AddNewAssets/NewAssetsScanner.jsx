@@ -155,9 +155,9 @@ function NewAssetsScanner() {
                                 )}
                                 {message && (
                                     <Alert variant="success"
-                                        style={{
-                                            opacity: fadeOut ? 0 : 1,
-                                            transition: 'opacity 1s ease-in-out',
+                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out',
+                                            width: '400px',
+                                            height: '85px'
                                         }}>
                                         {message}
                                     </Alert>
@@ -170,7 +170,7 @@ function NewAssetsScanner() {
                                         top: '50%',
                                         left: '50%',
                                         transform: 'translate(-50%, -50%)',
-                                        width: '50%',
+                                        width: '60%',
                                         height: '50%',
                                         border: '1px dashed rgba(255, 255, 255, 0.8)',
                                         backgroundColor: 'rgba(0, 0, 0, 0.2)',
