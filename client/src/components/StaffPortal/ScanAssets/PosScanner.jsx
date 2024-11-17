@@ -89,10 +89,7 @@ function PosScanner() {
             scanningInProgress.current = false; // Reset scanning state immediately
         }
     }, [isLoading]);
-
-
-
-
+    
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
