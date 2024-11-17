@@ -146,7 +146,7 @@ function PosScanner() {
     return (
         <Container fluid className="m-0 p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg'>
+            <Container fluid='lg' className="p-0">
                 <div className={PosScannerscss.Posscannermain}>
                     <Card className="m-0 p-0">
                         <Button variant="secondary" onClick={handleCameraToggle} disabled={videoDevices.length < 2} >
@@ -170,10 +170,12 @@ function PosScanner() {
 
                         <div style={{
                             position: 'absolute',
-                            top: '50%',
+                            top: '58%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: '40%',
+                            width: '100%',
+                            maxWidth:"45%",
+                            minWidth: "45%",
                             height: '50%',
                             border: '2px dashed rgba(255, 255, 255, 0.5)',
                             backgroundColor: 'rgba(0, 0, 0, 0.1)',
@@ -187,9 +189,6 @@ function PosScanner() {
                                 transition: 'opacity 1s ease-in-out',
                             }}
                         />
-                        <div style={{ position: 'absolute', bottom: '7%', left: '50%', transform: 'translateX(-50%)', color: 'white' }}>
-                            <p>Please position the barcode within the dashed <br/> area and ensure good lighting.</p>
-                        </div>
                     </Card>
 
                     <Button variant="primary" onClick={handleCheckout} disabled={scannedItems.length === 0}>

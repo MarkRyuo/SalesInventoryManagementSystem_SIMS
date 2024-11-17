@@ -1,7 +1,7 @@
 
 
 .Posscannermain {
-    border: 1px solid red;
+    // border: 1px solid red;
     height: 85vh;
     padding: 10px;
     display: flex;
@@ -33,5 +33,26 @@
 }
 
 @media (max-width: 500px) {
-    
+    .Posscannermain {
+        height: 75vh;
+        padding: 0;
+
+    button {
+        font-size: 0.9rem;
+    }
+
+    div:first-child {
+        width: 100%;
+        height: auto;
+        gap: 10px;
+    }
+
+    video {
+        border: 1px solid;
+        width: 100%;
+        max-width: fit-content;
+        border-radius: 10px;
+    }
+
+}
 }
