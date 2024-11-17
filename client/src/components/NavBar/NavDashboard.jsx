@@ -134,11 +134,6 @@ export const NavDashboard = () => {
                     <p className="text-center">You have successfully logged out.</p>
                     <p className="text-center text-muted">Redirecting to the login page...</p>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseSuccessModal}>
-                        Close
-                    </Button>
-                </Modal.Footer>
             </Modal>
         </main>
     );
