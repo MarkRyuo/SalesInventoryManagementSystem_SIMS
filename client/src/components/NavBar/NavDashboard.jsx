@@ -1,4 +1,4 @@
-import { Container, Navbar, Button, Offcanvas, Image } from 'react-bootstrap';
+import { Container, Navbar, Button, Offcanvas, Image, Modal, Spinner } from 'react-bootstrap';
 import { useState } from 'react';
 import Navbars from './Navbar.module.scss';
 import { Buttons } from './Buttons';
@@ -15,9 +15,16 @@ import { MdOutlineInventory2 } from "react-icons/md";
 export const NavDashboard = () => {
     const [show, setShow] = useState(false);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const [showLogoutModal, setShowLogoutModal] = useState(false); // For logout confirmation modal
+    const [showSuccessModal, setShowSuccessModal] = useState(false); // For success modal
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handleShowLogoutModal = () => setShowLogoutModal(true); // Show logout modal
+    const handleCloseLogoutModal = () => setShowLogoutModal(false); // Close logout modal
+
+    const handleCloseSuccessModal = () => setShowSuccessModal(false); // Close success modal
 
     //* Buttons
     const [buttons] = useState([
@@ -29,20 +36,20 @@ export const NavDashboard = () => {
 
     //* Handle logout with confirmation and loading state
     const handleLogout = () => {
-        const confirmLogout = window.confirm("Are you sure you want to log out?");
-        if (confirmLogout) {
-            setIsLoggingOut(true); //* Start loading
+        setIsLoggingOut(true); // Start loading
+        setTimeout(() => {
+            localStorage.removeItem('adminId'); // Clear the stored adminId from localStorage
+            setIsLoggingOut(false); // End loading state
+
+            // Show success modal after logout
+            setShowLogoutModal(false); // Close logout modal
+            setShowSuccessModal(true); // Show success modal
+
+            // Redirect after 2 seconds (adjust as needed)
             setTimeout(() => {
-                localStorage.removeItem('adminId'); //? Clear the stored adminId from localStorage
-                setIsLoggingOut(false); //* End loading state
-
-                // Show window alert for successful logout
-                window.alert("You have successfully logged out.");
-
-                // Redirect after showing the alert
-                window.location.href = "/LoginPage"; //? Redirect the user to the login page or home page
-            }, 2000); //? Simulate a 2-second loading time (can adjust as needed)
-        }
+                window.location.href = "/LoginPage"; // Redirect to login page
+            }, 2000);
+        }, 2000); // Simulate a 2-second loading time
     };
 
     return (
@@ -80,10 +87,12 @@ export const NavDashboard = () => {
                             <Button
                                 variant="light"
                                 className={Navbars.btnOffcanvas}
-                                onClick={handleLogout}
-                                disabled={isLoggingOut} //? Disable the button while logging out
+                                onClick={handleShowLogoutModal} // Show logout modal
+                                disabled={isLoggingOut}
                             >
-                                {isLoggingOut ? "Logging out..." : (
+                                {isLoggingOut ? (
+                                    <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                                ) : (
                                     <>
                                         <RiLogoutCircleLine size={20} className='me-2' /> Logout
                                     </>
@@ -93,6 +102,39 @@ export const NavDashboard = () => {
                     </div>
                 </Offcanvas.Body>
             </Offcanvas>
+
+            {/* Logout Confirmation Modal */}
+            <Modal show={showLogoutModal} onHide={handleCloseLogoutModal} centered>
+                <Modal.Header closeButton className="bg-danger text-white">
+                    <Modal.Title>Confirm Logout</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p className="text-center">Are you sure you want to log out?</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseLogoutModal}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleLogout} disabled={isLoggingOut}>
+                        {isLoggingOut ? (
+                            <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                        ) : (
+                            "Logout"
+                        )}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Success Modal */}
+            <Modal show={showSuccessModal} onHide={handleCloseSuccessModal} centered>
+                <Modal.Header closeButton className="bg-success text-white">
+                    <Modal.Title>Logout Successful</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p className="text-center">You have successfully logged out.</p>
+                    <p className="text-center text-muted">Redirecting to the login page...</p>
+                </Modal.Body>
+            </Modal>
         </main>
     );
 };

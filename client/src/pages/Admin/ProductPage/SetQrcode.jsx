@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Button, Spinner, Modal, ListGroup, Form, Card} from 'react-bootstrap';
+import { Button, Spinner, Modal, ListGroup, Form, Card } from 'react-bootstrap';
 import AddQrcode from './AddQrcode';  // If you are still using this
 import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
 import { jsPDF } from 'jspdf';
+import SetQrcodescss from './SCSS/Sets.module.scss';
+import { MdOutlineQrCode2 } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
 
 function ViewQrCode() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -132,12 +135,12 @@ function ViewQrCode() {
 
     return (
         <>
-            <div className="mb-4">
-                <Button variant="primary" onClick={openModal}>
-                    Generate QR Code
+            <div className={SetQrcodescss.SetQrcodeBtn}>
+                <Button variant="success" onClick={openModal}>
+                    <MdOutlineQrCode2 size={20} className="me-1"/> Generate QR Code
                 </Button>
-                <Button variant="secondary" onClick={handleShowPrintModal} className="ml-2">
-                    View Selected QrCodes
+                <Button variant="success" onClick={handleShowPrintModal} className="ml-2">
+                    <FaEye size={20} className="me-1"/>Selected QrCodes
                 </Button>
                 <AddQrcode show={isModalOpen} onClose={closeModal} />
             </div>
@@ -149,41 +152,40 @@ function ViewQrCode() {
                         <p>Loading QR Codes...</p>
                     </div>
                 ) : (
-                    <div className="d-flex overflow-auto" style={{ flexWrap: 'nowrap' }}>
+                    <div className={SetQrcodescss.SetQrcodemain}>
                         {sortedQrCodes.map((qr, index) => {
                             const isSaved = Boolean(savedProductNames[qr.id]);
                             const productName = productNames[qr.id] || '';
                             const isSelected = selectedQrcodes.some((selectedQr) => selectedQr.id === qr.id);
 
                             return (
-                                <div key={qr.id} className="card-wrapper" style={{ marginRight: '16px' }}>
-                                    <Card>
-                                        <Card.Body>
-                                            <Card.Title>QR Code #{index + 1}</Card.Title>
-                                            <Card.Img
-                                                variant="top"
-                                                src={qr.qrcodeBase64}
-                                                alt="QR Code"
-                                                style={{ width: '100%', height: 'auto' }}
-                                            />
-                                            <Card.Text>
-                                                {isSaved ? (
-                                                    <span>{productName}</span>
-                                                ) : (
-                                                    <Button variant="link" onClick={() => handleOpenEditModal(qr.id)}>
-                                                        Add Product Name
-                                                    </Button>
-                                                )}
-                                            </Card.Text>
+                                <div key={qr.id} className={SetQrcodescss.SetQrcodeContent}>
+                                    <div>
+                                        <h4 className='m-0 p-0'>QR Code #{index + 1}</h4>
+                                        <Card.Img
+                                            variant="top"
+                                            src={qr.qrcodeBase64}
+                                            alt="QR Code"
+                                        />
+                                        <p className='p-0 m-0'>
+                                            {isSaved ? (
+                                                <span>{productName}</span>
+                                            ) : (
+                                                <Button variant="link" onClick={() => handleOpenEditModal(qr.id)} className='m-0 p-0'>
+                                                    Product Name
+                                                </Button>
+                                            )}
+                                        </p>
+                                        <div>
                                             <Button
                                                 variant={isSelected ? "danger" : "info"}
                                                 onClick={() => handleToggleSelection(qr)}
                                                 style={{ marginTop: '8px' }}
                                             >
-                                                {isSelected ? 'Remove from Print' : 'Add to Print'}
+                                                {isSelected ? 'Remove Print' : 'Add Print'}
                                             </Button>
-                                        </Card.Body>
-                                    </Card>
+                                        </div>
+                                    </div>
                                 </div>
                             );
                         })}
@@ -192,62 +194,76 @@ function ViewQrCode() {
             </div>
 
 
-            <Modal show={showPrintModal} onHide={closePrintModal} size="lg">
-                <Modal.Header closeButton>
-                    <Modal.Title>Selected QR Codes for Printing</Modal.Title>
+            {/* Selected QR Codes for Printing Modal */}
+            <Modal show={showPrintModal} onHide={closePrintModal} size="lg" centered>
+                <Modal.Header closeButton className="">
+                    <Modal.Title><MdOutlineQrCode2 size={20} className="me-1" />Selected QR Codes</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ListGroup>
-                        {selectedQrcodes.length > 0 ? (
-                            selectedQrcodes.map((qr) => (
-                                <ListGroup.Item key={qr.id}>
+                    {selectedQrcodes.length > 0 ? (
+                        <ListGroup className="mb-3">
+                            {selectedQrcodes.map((qr) => (
+                                <ListGroup.Item key={qr.id} className="d-flex align-items-center">
                                     <img
                                         src={qr.qrcodeBase64}
                                         alt={`QR Code ${qr.id}`}
-                                        style={{ width: '50px', height: '50px', marginRight: '10px' }}
+                                        style={{
+                                            width: '50px',
+                                            height: '50px',
+                                            objectFit: 'cover',
+                                            borderRadius: '5px',
+                                            border: '1px solid #ddd',
+                                            marginRight: '15px',
+                                        }}
                                     />
-                                    {qr.productName || 'No Product Name'}
+                                    <div>
+                                        <span className="font-weight-bold">{qr.productName || 'No Product Name'}</span>
+                                    </div>
                                 </ListGroup.Item>
-                            ))
-                        ) : (
-                            <p>No QR codes selected for printing.</p>
-                        )}
-                    </ListGroup>
+                            ))}
+                        </ListGroup>
+                    ) : (
+                        <p className="text-center text-muted">No QR codes selected for printing.</p>
+                    )}
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={closePrintModal}>
+                <Modal.Footer className="bg-light">
+                    <Button variant="outline-secondary" onClick={closePrintModal}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={generatePDF}>
-                        Print QR Codes as PDF
+                    <Button variant="success" onClick={generatePDF}>
+                        Print PDF
                     </Button>
                 </Modal.Footer>
             </Modal>
 
-            {/* Modal for Editing Product Name */}
-            <Modal show={showEditModal} onHide={closeEditModal}>
-                <Modal.Header closeButton>
+            {/* Edit Product Name Modal */}
+            <Modal show={showEditModal} onHide={closeEditModal} centered>
+                <Modal.Header closeButton className="">
                     <Modal.Title>Edit Product Name</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group>
-                        <Form.Label>Product Name</Form.Label>
+                        <Form.Label className="font-weight-bold">Product Name</Form.Label>
                         <Form.Control
                             type="text"
+                            placeholder="Enter new product name"
                             value={currentProductName}
                             onChange={(e) => setCurrentProductName(e.target.value)}
+                            className="mb-3"
+                            autoFocus
                         />
                     </Form.Group>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={closeEditModal}>
+                <Modal.Footer className="bg-light">
+                    <Button variant="outline-secondary" onClick={closeEditModal}>
                         Cancel
                     </Button>
                     <Button variant="primary" onClick={handleSaveProductNameInModal}>
-                        Save
+                        Save Changes
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </>
     );
 }

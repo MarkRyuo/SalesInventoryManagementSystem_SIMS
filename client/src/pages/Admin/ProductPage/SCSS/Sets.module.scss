@@ -99,3 +99,162 @@
         display: flex;
     }
 }
+
+
+//! Set Qr-Code 
+
+.SetQrcodemain {
+    // border: 1px solid red;
+    padding: 10px;
+    height: 500px;
+    overflow: auto;
+
+    .SetQrcodeContent {
+        // border: 1px solid green;
+        border-radius: 10px;
+        box-shadow: 1px 1px 3px rgb(180, 179, 179);
+        padding: 10px;
+        margin: 5px;
+        background-color: #ffffff;
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // border: 1px solid;
+
+            h4{
+                font-size: 1rem;
+            }
+            
+            p {
+                font-size: 0.9rem;
+                button {
+                    color: red;
+                    font-size: 0.9rem;
+                    text-decoration: none;
+                }
+            }
+
+            img {
+                width: 100px;
+                height: auto;
+            }
+
+            div {
+                button {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 900px) {
+        padding: 0px;
+
+        .SetQrcodeContent {
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // border: 1px solid;
+
+            h4{
+                font-size: 0.8rem;
+            }
+            
+            p {
+                font-size: 0.7rem;
+                button {
+                    font-size: 0.7rem;
+                    text-decoration: none;
+                }
+            }
+
+            img {
+                width: 50px;
+                height: auto;
+            }
+
+            div {
+                button {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+    }
+    }
+    
+    @media (max-width: 400px) {
+        padding: 0px;
+
+        .SetQrcodeContent {
+            height: auto;
+
+        div {
+            align-items:center ;
+            flex-direction: column;
+            // border: 1px solid;
+            h4{
+                font-size: 0.8rem;
+            }
+            
+            p {
+                font-size: 0.7rem;
+                button {
+                    font-size: 0.7rem;
+                    text-decoration: none;
+                }
+            }
+
+            img {
+                width: 50px;
+                height: auto;
+            }
+
+            div {
+                // border: 1px solid;
+                button {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+    }
+    }
+}//!End 
+
+.SetQrcodeBtn {
+    margin-top: 10px;
+    // border: 1px solid;
+    display: flex;
+    justify-content: space-evenly;
+
+    button {
+        font-size: 1rem;
+    }
+
+    button:first-child {
+        border-top-left-radius: 20px;
+    }
+    button:last-child {
+        border-top-right-radius: 20px;
+    }
+
+    @media (max-width: 800px) {
+        
+        button {
+            font-size: 0.8rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        flex-direction: column;
+
+        button {
+            margin: 5px 1px;
+            font-size: 0.7rem;
+            border-radius: 0px;
+        }
+    }
+}

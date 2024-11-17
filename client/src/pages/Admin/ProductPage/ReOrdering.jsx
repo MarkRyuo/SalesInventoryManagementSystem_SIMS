@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchReorderingProducts, saveOrderToFirebase } from "../../../services/ProductService";
-import { Spinner, Button, Badge, Container, Modal, Card, Row, Col, Table } from "react-bootstrap"; // Add Table here
+import { Spinner, Button, Badge, Container, Modal, Table } from "react-bootstrap"; // Add Table here
 import SavedOrderDetails from "./SavedOrderDetails";
+import ReOrderingscss from './SCSS/ReOrdering.module.scss';
+import { FaTruckLoading } from "react-icons/fa";
+import { MdOutlineViewInAr } from "react-icons/md";
+import { FaTruckRampBox } from "react-icons/fa6";
 
 function ReOrdering() {
     const [reorderingProducts, setReorderingProducts] = useState([]);
@@ -84,7 +88,6 @@ function ReOrdering() {
 
             await saveOrderToFirebase(orderData);
             alert("Order saved successfully to Firebase!");
-
             // Update reordered products state after saving
             const reorderedProductBarcodes = new Set(orderDetails.map((product) => product.barcode));
             setReorderedProducts((prevSet) => {
@@ -112,7 +115,6 @@ function ReOrdering() {
 
     // Filter out reordered products from the list
     const filteredReorderingProducts = reorderingProducts.filter((product) => !reorderedProducts.has(product.barcode));
-
     // Handle modal open and close
     const handleOpenReorderModal = () => setShowReorderModal(true);
     const handleCloseModals = () => {
@@ -121,144 +123,152 @@ function ReOrdering() {
     };
 
     return (
-        <Container>
-            <h4 className="my-4 text-center">Reordering Dashboard</h4>
-            <SavedOrderDetails />
-            {loading ? (
-                <div className="d-flex justify-content-center">
-                    <Spinner animation="border" variant="primary" />
-                </div>
-            ) : (
-                <>
-                    {filteredReorderingProducts.length > 0 ? (
-                        <div style={{ display: "flex", flexDirection: "row", overflowX: "auto" }}>
-                            <Row className="mt-3" style={{ display: "flex", flexWrap: "nowrap" }}>
-                                {filteredReorderingProducts.map((product) => {
-                                    const isOutOfStock = product.quantity === 0;
-                                    const isLowStock = product.quantity > 0 && product.quantity <= product.instockthreshold / 4;
-
-                                    const statusBadge = isOutOfStock ? (
-                                        <Badge bg="danger">Out of Stock</Badge>
-                                    ) : (
-                                        isLowStock && <Badge bg="warning">Low Stock</Badge>
-                                    );
-
-                                    // Skip products that don't need reordering
-                                    if (!isOutOfStock && !isLowStock) return null;
-
-                                    return (
-                                        <Col md={4} key={product.barcode} className="mb-3" style={{ minWidth: "300px" }}>
-                                            <Card>
-                                                <Card.Body>
-                                                    <Card.Title>{product.productName}</Card.Title>
-                                                    <Card.Text><strong>SKU:</strong> {product.sku}</Card.Text>
-                                                    <Card.Text><strong>Quantity:</strong> {product.quantity}</Card.Text>
-                                                    <Card.Text>Status: {statusBadge}</Card.Text>
-                                                    <Button
-                                                        variant="success"
-                                                        size="sm"
-                                                        onClick={() => handleViewProduct(product)}
-                                                    >
-                                                        Reorder
-                                                    </Button>
-                                                </Card.Body>
-                                            </Card>
-                                        </Col>
-                                    );
-                                })}
-                            </Row>
-                        </div>
-                    ) : (
-                        <p className="text-muted text-center">No products need reordering.</p>
-                    )}
+        <Container className="m-0 p-0">
+            <main className={ReOrderingscss.mainReOrdering}>
+                <h4 className="my-2"><FaTruckLoading size={25} className="me-2" />Reordering Dashboard</h4>
+                <div className={ReOrderingscss.TopButtons}>
                     <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
-                        View Reordered Products
+                        <MdOutlineViewInAr size={17} className="me-1"/>View Reordered Product
                     </Button>
-                </>
-            )}
+                    <SavedOrderDetails />
+                </div>
+                {loading ? (
+                    <div className="d-flex justify-content-center">
+                        <Spinner animation="border" variant="primary" />
+                    </div>
+                ) : (
+                    <div>
+                        {filteredReorderingProducts.length > 0 ? (
+                            <div className="mt-3">
+                                <div className={ReOrderingscss.containerReordering}>
+                                    {filteredReorderingProducts.map((product) => {
+                                        const isOutOfStock = product.quantity === 0;
+                                        const isLowStock = product.quantity > 0 && product.quantity <= product.instockthreshold / 4;
 
-            {/* Product Details Modal */}
-            <Modal show={showProductModal} onHide={handleCloseModals} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Product Details</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {selectedProduct && (
-                        <div>
-                            <p><strong>Name:</strong> {selectedProduct.productName}</p>
-                            <p><strong>SKU:</strong> {selectedProduct.sku}</p>
-                            <p><strong>Quantity:</strong> {selectedProduct.quantity}</p>
-                        </div>
-                    )}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModals}>Close</Button>
-                    <Button variant="success" onClick={() => handleReorderProduct(selectedProduct)}>
-                        Add to Reorder List
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                                        const statusBadge = isOutOfStock ? (
+                                            <Badge bg="danger">Out of Stock</Badge>
+                                        ) : (
+                                            isLowStock && <Badge bg="warning">Low Stock</Badge>
+                                        );
 
-            {/* Reorder List Modal */}
-            <Modal show={showReorderModal} onHide={handleCloseModals} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Reorder List</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {reorderList.length > 0 ? (
-                        <Table bordered>
-                            <thead>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>SKU</th>
-                                    <th>Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {reorderList.map((product, index) => (
-                                    <tr key={product.barcode}>
-                                        <td>{product.productName}</td>
-                                        <td>{product.sku}</td>
-                                        <td>
-                                            <input
-                                                type="text"
-                                                min="0"
-                                                value={product.quantity || 0}
-                                                onChange={(e) => {
-                                                    const newQuantity = e.target.value;
-                                                    const validQuantity = isNaN(newQuantity) || newQuantity === '' ? 0 : parseInt(newQuantity, 10);
+                                        // Skip products that don't need reordering
+                                        if (!isOutOfStock && !isLowStock) return null;
 
-                                                    setReorderList((prevList) => {
-                                                        const updatedList = [...prevList];
-                                                        updatedList[index] = {
-                                                            ...updatedList[index],
-                                                            quantity: validQuantity,
-                                                        };
-                                                        localStorage.setItem("reorderList", JSON.stringify(updatedList));
-                                                        return updatedList;
-                                                    });
-                                                }}
-                                                style={{
-                                                    width: "80px",
-                                                    appearance: "none",
-                                                    MozAppearance: "textfield",
-                                                    WebkitAppearance: "none",
-                                                }}
-                                            />
-                                        </td>
+                                        return (
+                                            <div key={product.barcode}>
+                                                <div className={ReOrderingscss.CardBody}>
+                                                    <div>
+                                                        <h4>{product.productName}</h4>
+                                                        <p className="m-0">SKU: {product.sku}</p>
+                                                        <p className="m-0">Quantity: {product.quantity}</p>
+                                                        <p className="m-0">Status: {statusBadge}</p>
+                                                    </div>
+                                                    <div>
+                                                        <Button variant="success" onClick={() => handleViewProduct(product)}>
+                                                            Reorder
+                                                        </Button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+
+                                </div>
+                            </div>
+                        ) : (
+                            <p className="text-muted text-center">No products need reordering.</p>
+                        )}
+                    </div>
+                )}
+
+                {/* Product Details Modal */}
+                <Modal show={showProductModal} onHide={handleCloseModals} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Product Details</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {selectedProduct && (
+                            <div>
+                                <p><strong>Name:</strong> {selectedProduct.productName}</p>
+                                <p><strong>SKU:</strong> {selectedProduct.sku}</p>
+                                <p><strong>Quantity:</strong> {selectedProduct.quantity}</p>
+                            </div>
+                        )}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseModals}>Close</Button>
+                        <Button variant="success" onClick={() => handleReorderProduct(selectedProduct)}>
+                            Add to Reorder List
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                {/* Reorder List Modal */}
+                <Modal show={showReorderModal} onHide={handleCloseModals} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title><FaTruckRampBox size={20} className="me-2"/>Reorder List</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {reorderList.length > 0 ? (
+                            <Table bordered hover responsive>
+                                <thead className="bg-light">
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>SKU</th>
+                                        <th>Quantity</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                    ) : (
-                        <p>No products added to reorder list.</p>
-                    )}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseModals}>Close</Button>
-                    <Button variant="success" onClick={handleSaveOrderToFirebase}>Save Order</Button>
-                </Modal.Footer>
-            </Modal>
+                                </thead>
+                                <tbody>
+                                    {reorderList.map((product, index) => (
+                                        <tr key={product.barcode}>
+                                            <td className="fs-6">{product.productName}</td>
+                                            <td className="fs-6">{product.sku}</td>
+                                            <td>
+                                                <div className="d-flex justify-content-center">
+                                                    <input
+                                                        type="number"
+                                                        min="0"
+                                                        value={product.quantity || 0}
+                                                        onChange={(e) => {
+                                                            const newQuantity = e.target.value;
+                                                            const validQuantity = isNaN(newQuantity) || newQuantity === '' ? 0 : parseInt(newQuantity, 10);
+
+                                                            setReorderList((prevList) => {
+                                                                const updatedList = [...prevList];
+                                                                updatedList[index] = {
+                                                                    ...updatedList[index],
+                                                                    quantity: validQuantity,
+                                                                };
+                                                                localStorage.setItem("reorderList", JSON.stringify(updatedList));
+                                                                return updatedList;
+                                                            });
+                                                        }}
+                                                        style={{
+                                                            width: "80px",
+                                                            padding: "5px",
+                                                            fontSize: "1rem",
+                                                            borderRadius: "5px",
+                                                            borderColor: "#ccc",
+                                                            textAlign: "center",
+                                                        }}
+                                                    />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        ) : (
+                            <p className="text-center text-muted">No products added to reorder list.</p>
+                        )}
+                    </Modal.Body>
+                    <Modal.Footer className="bg-light">
+                        <Button variant="secondary" onClick={handleCloseModals}>Close</Button>
+                        <Button variant="success" onClick={handleSaveOrderToFirebase}>Save Order</Button>
+                    </Modal.Footer>
+                </Modal>
+
+            </main>
         </Container>
     );
 }
