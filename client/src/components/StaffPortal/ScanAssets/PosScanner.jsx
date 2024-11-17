@@ -25,12 +25,10 @@ function PosScanner() {
     const [selectedDeviceId, setSelectedDeviceId] = useState(null); // Camera device ID
     const [isUsingBackCamera, setIsUsingBackCamera] = useState(true); // Default to back camera
     const [videoDevices, setVideoDevices] = useState([]); // Store available video devices
-
-    const [isCameraBlocked, setIsCameraBlocked] = useState(false); // State to block camera for 4s after scanning
-
+    
 
     const handleScan = useCallback(async (scannedText) => {
-        if (isLoading || scanningInProgress.current || isCameraBlocked) return; // Prevent scanning if blocked
+        if (isLoading || scanningInProgress.current) return;
 
         scanningInProgress.current = true;
         setErrorMessages([]);
@@ -62,23 +60,18 @@ function PosScanner() {
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
                 setTimeout(() => setFadeOut(true), 2000);
-
-                // Block the camera for 4 seconds after a successful scan
-                setIsCameraBlocked(true);
-                setTimeout(() => setIsCameraBlocked(false), 4000);
             } else {
                 setErrorMessages(prev => [...prev, `No product found for barcode: ${scannedText}`]);
                 setFadeOut(false);
-                setTimeout(() => setFadeOut(true), 4000);
+                setTimeout(() => setFadeOut(true), 2000);
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
             setIsLoading(false);
-            scanningInProgress.current = false;
+            scanningInProgress.current = false; // Reset scanning state immediately
         }
-    }, [isLoading, scannedItems, isCameraBlocked]);
-
+    }, [isLoading, scannedItems]);
 
 
     // Include scannedItems in the dependency array
@@ -88,8 +81,6 @@ function PosScanner() {
         const codeReader = new BrowserMultiFormatReader();
 
         const startDecoding = (deviceId) => {
-            if (isCameraBlocked) return; // Prevent scanning if the camera is blocked
-
             codeReader.decodeFromVideoDevice(deviceId, videoRef.current, (result, error) => {
                 if (result) {
                     handleScan(result.getText());
@@ -99,7 +90,6 @@ function PosScanner() {
                 }
             });
         };
-
 
         codeReader.listVideoInputDevices().then((videoInputDevices) => {
             setVideoDevices(videoInputDevices);
@@ -121,7 +111,7 @@ function PosScanner() {
         return () => {
             codeReader.reset(); // Ensure to reset the reader when unmounting
         };
-    }, [handleScan, isLoading, selectedDeviceId, isCameraBlocked]);
+    }, [handleScan, isLoading, selectedDeviceId]);
 
 
     const handleCameraToggle = () => {
@@ -184,8 +174,8 @@ function PosScanner() {
                         <video
                             ref={videoRef}
                             style={{
-                                display: cameraLoading || isCameraBlocked ? 'none' : 'block', // Hide camera when blocked
-                                opacity: cameraLoading || isCameraBlocked ? 0 : 1,
+                                display: cameraLoading ? 'none' : 'block',
+                                opacity: cameraLoading ? 0 : 1,
                                 transition: 'opacity 1s ease-in-out',
                             }}
                         />
