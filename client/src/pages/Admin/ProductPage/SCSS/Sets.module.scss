@@ -190,11 +190,12 @@
 
         .SetQrcodeContent {
             height: auto;
-            
+
         div {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: baseline ;
+            flex-direction: column;
             // border: 1px solid;
 
             h4{
