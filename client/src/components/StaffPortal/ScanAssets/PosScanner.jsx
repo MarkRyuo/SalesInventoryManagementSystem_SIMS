@@ -44,7 +44,7 @@ function PosScanner() {
             if (product && product.quantity === 0) {
                 setErrorMessages(prev => [...prev, `Cannot scan ${product.productName}. Quantity is zero.`]);
                 setFadeOut(false);
-                setTimeout(() => setFadeOut(true), 4000);
+                setTimeout(() => setFadeOut(true), 5000);
                 return;
             }
 
@@ -62,21 +62,21 @@ function PosScanner() {
 
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
-                setTimeout(() => setFadeOut(true), 4000);
+                setTimeout(() => setFadeOut(true), 5000);
 
                 // Re-enable the camera after 2 seconds delay
-                setTimeout(() => setIsCameraBlocked(false), 2000);
+                setTimeout(() => setIsCameraBlocked(false), 4000);
             } else {
                 setErrorMessages(prev => [...prev, `No product found for barcode: ${scannedText}`]);
                 setFadeOut(false);
-                setTimeout(() => setFadeOut(true), 4000);
+                setTimeout(() => setFadeOut(true), 5000);
                 // Re-enable the camera after 2 seconds delay if no product is found
-                setTimeout(() => setIsCameraBlocked(false), 2000);
+                setTimeout(() => setIsCameraBlocked(false), 4000);
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
             // Re-enable the camera after 2 seconds delay in case of error
-            setTimeout(() => setIsCameraBlocked(false), 2000);
+            setTimeout(() => setIsCameraBlocked(false), 4000);
         } finally {
             setIsLoading(false);
             scanningInProgress.current = false; // Reset scanning state immediately
