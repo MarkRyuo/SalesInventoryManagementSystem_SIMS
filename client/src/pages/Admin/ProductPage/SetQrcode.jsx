@@ -135,7 +135,7 @@ function ViewQrCode() {
         <>
             <div className={SetQrcodescss.SetQrcodeBtn}>
                 <Button variant="success" onClick={openModal}>
-                    Generate QR Code
+                    <MdOutlineQrCode2 size={20} className="me-1"/> Generate QR Code
                 </Button>
                 <Button variant="success" onClick={handleShowPrintModal} className="ml-2">
                     View Selected QrCodes

@@ -230,6 +230,10 @@
     display: flex;
     justify-content: space-evenly;
 
+    button {
+        font-size: 1rem;
+    }
+
     button:first-child {
         border-top-left-radius: 20px;
     }
