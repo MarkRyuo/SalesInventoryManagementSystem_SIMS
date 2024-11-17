@@ -128,9 +128,9 @@ function NewAssetsScanner() {
 
 
     return (
-        <>
+        <Container fluid>
+            <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
-                <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
                     <div className={NewProductscss.NewProductCol}> {/* Child */}
                         <div>
                             <button
@@ -193,7 +193,7 @@ function NewAssetsScanner() {
                         </div>
                     </div>
             </Container>
-        </>
+        </Container>
 
     );
 }
