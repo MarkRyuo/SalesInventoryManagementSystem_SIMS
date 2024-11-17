@@ -4,6 +4,7 @@ import AddQrcode from './AddQrcode';  // If you are still using this
 import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/ProductService';
 import { jsPDF } from 'jspdf';
 import SetQrcodescss from './SCSS/Sets.module.scss';
+import { MdOutlineQrCode2 } from "react-icons/md";
 
 function ViewQrCode() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -138,7 +139,7 @@ function ViewQrCode() {
                     <MdOutlineQrCode2 size={20} className="me-1"/> Generate QR Code
                 </Button>
                 <Button variant="success" onClick={handleShowPrintModal} className="ml-2">
-                    View Selected QrCodes
+                    <FaEye size={20} className="me-1"/>Selected QrCodes
                 </Button>
                 <AddQrcode show={isModalOpen} onClose={closeModal} />
             </div>
