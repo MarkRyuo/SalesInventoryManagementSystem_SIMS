@@ -1,4 +1,4 @@
-import { Container, Button, Modal, ListGroup } from "react-bootstrap";
+import { Container, Button, Modal, ListGroup, Row, Col, Form } from "react-bootstrap";
 import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
@@ -141,20 +141,24 @@ function AdminTransactionHistory() {
         <Container fluid className={AdminTransactionScss.transactionMainContainer}>
             <h4><FaSave size={25}/>Your Saved Orders</h4>
             <div className={AdminTransactionScss.containerFilter}>
-                <input
-                    type="date"
-                    className="form-control mb-2"
-                    placeholder="Filter by Date"
-                    value={filterDate}
-                    onChange={(e) => setFilterDate(e.target.value)}
-                />
-                <input
-                    type="text"
-                    className="form-control mb-2"
-                    placeholder="Filter by Customer Name"
-                    value={filterCustomer}
-                    onChange={(e) => setFilterCustomer(e.target.value)}
-                />
+                <Row>
+                    <Col md={6} sm={12} className="mb-2">
+                        <Form.Control
+                            type="date"
+                            placeholder="Filter by Date"
+                            value={filterDate}
+                            onChange={(e) => setFilterDate(e.target.value)}
+                        />
+                    </Col>
+                    <Col md={6} sm={12} className="mb-2">
+                        <Form.Control
+                            type="text"
+                            placeholder="Filter by Customer Name"
+                            value={filterCustomer}
+                            onChange={(e) => setFilterCustomer(e.target.value)}
+                        />
+                    </Col>
+                </Row>
             </div>
 
             <div className={AdminTransactionScss.transactionchildContainer} >
