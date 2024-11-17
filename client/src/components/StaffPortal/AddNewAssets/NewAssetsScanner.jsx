@@ -147,10 +147,7 @@ function NewAssetsScanner() {
                             <div>
                                 {error && (
                                     <Alert variant="danger"
-                                        style={{
-                                            opacity: fadeOut ? 0 : 1,
-                                            transition: 'opacity 1s ease-in-out',
-                                        }}>
+                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out'}}>
                                         Error: {error}
                                     </Alert>
                                 )}
