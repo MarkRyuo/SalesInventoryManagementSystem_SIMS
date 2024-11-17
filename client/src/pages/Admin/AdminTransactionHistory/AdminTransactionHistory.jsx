@@ -16,23 +16,10 @@ function AdminTransactionHistory() {
     const db = getDatabase();
     const qrRef = useRef(null);
 
-    //!Filtering
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [filterDate, setFilterDate] = useState('');
+    const [filterCustomer, setFilterCustomer] = useState('');
 
-    useEffect(() => {
-        const filtered = orderHistory.filter(order => {
-            const orderDate = moment(order.date, 'YYYY-MM-DD'); // Assuming order date is in 'YYYY-MM-DD' format
-            const start = startDate ? moment(startDate, 'YYYY-MM-DD') : null;
-            const end = endDate ? moment(endDate, 'YYYY-MM-DD') : null;
-            const withinStartDate = start ? orderDate.isSameOrAfter(start) : true;
-            const withinEndDate = end ? orderDate.isSameOrBefore(end) : true;
-            return withinStartDate && withinEndDate;
-        });
-        setFilteredOrders(filtered);
-    }, [startDate, endDate, orderHistory]);
-
-
+    
     useEffect(() => {
         const historyRef = ref(db, 'TransactionHistory/');
         onValue(historyRef, (snapshot) => {
@@ -44,6 +31,8 @@ function AdminTransactionHistory() {
                 tax: parseFloat(value.tax) || 0,
                 discount: parseFloat(value.discount) || 0,
                 total: parseFloat(value.total) || 0,
+                // Format the date if it's a timestamp
+                date: value.date ? new Date(value.date).toLocaleDateString() : 'N/A', // Format the date
                 items: value.items.map(item => ({
                     ...item,
                     price: parseFloat(item.price) || 0
@@ -52,6 +41,18 @@ function AdminTransactionHistory() {
             setOrderHistory(formattedHistory);
         });
     }, [db]);
+
+    const filteredOrders = orderHistory.filter(order => {
+        const orderDate = order.date;
+        const parsedFilterDate = filterDate ? new Date(filterDate).toLocaleDateString() : '';
+
+        return (
+            (filterDate ? orderDate.includes(parsedFilterDate) : true) &&
+            (filterCustomer ? order.customerName.toLowerCase().includes(filterCustomer.toLowerCase()) : true)
+        );
+    });
+
+
 
     useEffect(() => {
         if (selectedOrder && qrRef.current) {
@@ -140,14 +141,28 @@ function AdminTransactionHistory() {
         <Container fluid className={AdminTransactionScss.transactionMainContainer}>
             <h4><FaSave size={25}/>Your Saved Orders</h4>
             <div className={AdminTransactionScss.containerFilter}>
-                {/* Filter */}
+                <input
+                    type="date"
+                    className="form-control mb-2"
+                    placeholder="Filter by Date"
+                    value={filterDate}
+                    onChange={(e) => setFilterDate(e.target.value)}
+                />
+                <input
+                    type="text"
+                    className="form-control mb-2"
+                    placeholder="Filter by Customer Name"
+                    value={filterCustomer}
+                    onChange={(e) => setFilterCustomer(e.target.value)}
+                />
             </div>
+
             <div className={AdminTransactionScss.transactionchildContainer} >
 
                 {/* Mapped Order List */}
                 <ListGroup variant="flush">
-                    {orderHistory.length > 0 ? (
-                        orderHistory.map((order) => (
+                    {filteredOrders.length > 0 ? (
+                        filteredOrders.map((order) => (
                             <ListGroup.Item key={order.id} className={AdminTransactionScss.ListGroupItem}>
                                 <div>
                                     <h5 className="p-0 mb-2">Order ID: {order.id}</h5>
