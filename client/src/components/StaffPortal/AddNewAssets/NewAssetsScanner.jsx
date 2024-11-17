@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
-import { Container, Alert, Spinner } from 'react-bootstrap';
+import { Container, Alert, Spinner, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
 import { IoMdArrowBack } from "react-icons/io";
@@ -132,10 +132,10 @@ function NewAssetsScanner() {
             <Container fluid='lg' className={NewProductscss.NewProductContainer}>
                 <div className={NewProductscss.NewProductCol}> {/* Child */}
                     <div>
-                        <button onClick={handleCameraSwitch} className="btn btn-primary mb-2" disabled={isProcessing}>
+                        <Button onClick={handleCameraSwitch} variant='primary' className="mb-2" disabled={isProcessing}>
                             <MdCameraswitch size={20} className="me-2" />
                             Switch Camera
-                        </button>
+                        </Button>
                         {/* Camera */}
                         <div className={NewProductscss.NewProductCamera}>
                             <div>
