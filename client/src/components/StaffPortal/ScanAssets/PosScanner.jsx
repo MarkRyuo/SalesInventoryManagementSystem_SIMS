@@ -138,33 +138,33 @@ function PosScanner() {
         <Container fluid className="m-0 p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg' className="p-0">
+                <div>
+                    {errorMessages.length > 0 && (
+                        <Alert variant="danger" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
+                            {errorMessages[errorMessages.length - 1]}
+                        </Alert>
+                    )}
+                    {message && (
+                        <Alert variant="success" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
+                            {message}
+                        </Alert>
+                    )}
+                </div>
                 <div className={PosScannerscss.Posscannermain}>
                     <Card className="m-0 p-0">
                         <Button variant="secondary" onClick={handleCameraToggle} disabled={videoDevices.length < 2} >
-                            <FaCameraRotate size={20} className="me-2"/>
+                            <FaCameraRotate size={20} className="me-2" />
                             Switch to {isUsingBackCamera ? "Front" : "Back"} Camera
                         </Button>
 
-                            {errorMessages.length > 0 && (
-                                <Alert variant="danger" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
-                                    {errorMessages[errorMessages.length - 1]}
-                                </Alert>
-                            )}
-                            {message && (
-                                <Alert variant="success" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
-                                    {message}
-                                </Alert>
-                            )}
-                            {isLoading && <Spinner animation="border" />}
-
-
+                        {isLoading && <Spinner animation="border" variant="info" />}
                         <div style={{
                             position: 'absolute',
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
                             width: '100%',
-                            maxWidth:"45%",
+                            maxWidth: "45%",
                             minWidth: "45%",
                             height: '50%',
                             border: '2px dashed rgba(255, 255, 255, 0.5)',
