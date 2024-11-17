@@ -1,11 +1,33 @@
 
 
 
-.NewProductCol {
-    border: 1px solid red;
-}
+
 
 .NewProductContainer {
     border: 1px solid;
     height: 80vh;
+    padding: 10px;
+
+    .NewProductCol {
+        border: 1px solid red;
+        
+        div:first-child {
+            border: 1px solid green;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+
+            .NewProductCamera {
+                position: relative;
+
+                video {
+                    border: 1px solid;
+                    width: 100%;
+                    height: auto;
+                    max-width: fit-content;
+                }
+            }
+
+        }
+    }
 }
