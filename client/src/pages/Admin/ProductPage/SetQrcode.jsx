@@ -5,6 +5,7 @@ import { fetchQrcodesFromDatabase, saveProductName } from '../../../services/Pro
 import { jsPDF } from 'jspdf';
 import SetQrcodescss from './SCSS/Sets.module.scss';
 import { MdOutlineQrCode2 } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
 
 function ViewQrCode() {
     const [isModalOpen, setIsModalOpen] = useState(false);
