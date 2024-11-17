@@ -145,8 +145,8 @@ function PosScanner() {
     return (
         <Container fluid className="m-0 p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' style={{ width: '100%', height: '80vh' }}>
-                <Row className="justify-content-center" style={{ height: '100%' }}> 
+            <Container fluid='lg'>
+                <div className="justify-content-center" style={{ height: '100%' }}> 
                     <div className='p-0 mt-3'>
                         <Card style={{ height: '100%' }}>
                             <div className="text-center position-relative">
@@ -201,7 +201,7 @@ function PosScanner() {
                             </div>
                         </Card>
                     </div>
-                </Row>
+                </div>
                 <Row className="justify-content-center mt-3">
                     <Col md={8} className="text-center">
                         <Button variant="primary" onClick={handleCheckout} disabled={scannedItems.length === 0}>
