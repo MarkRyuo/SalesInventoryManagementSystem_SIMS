@@ -5,6 +5,7 @@ import { IoMdArrowBack } from "react-icons/io";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fetchProductByBarcode } from '../../../services/ProductService';
+import PosScannerscss from './PosScanner.module.scss' ;
 
 function PosScanner() {
     const location = useLocation();
