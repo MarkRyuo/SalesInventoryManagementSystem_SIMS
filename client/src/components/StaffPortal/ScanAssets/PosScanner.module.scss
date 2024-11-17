@@ -20,4 +20,10 @@
         height: auto;
     }
 
+    video {
+        border: 1px solid;
+        width: 100%;
+        max-width: fit-content;
+    }
+
 }

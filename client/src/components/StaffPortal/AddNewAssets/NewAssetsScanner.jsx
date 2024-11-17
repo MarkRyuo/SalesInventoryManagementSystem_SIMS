@@ -161,7 +161,7 @@ function NewAssetsScanner() {
                                     transform: 'translate(-50%, -50%)',
                                     width: '60%',
                                     height: '50%',
-                                    border: '1px dashed rgba(255, 255, 255, 0.8)',
+                                    border: '2px dashed rgba(255, 255, 255, 0.8)',
                                     backgroundColor: 'rgba(0, 0, 0, 0.2)',
                                     pointerEvents: 'none',
                                     opacity: guideFade ? 1 : 0,

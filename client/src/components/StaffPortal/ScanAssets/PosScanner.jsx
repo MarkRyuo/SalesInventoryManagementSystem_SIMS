@@ -173,17 +173,15 @@ function PosScanner() {
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: '70%',
+                            width: '40%',
                             height: '50%',
-                            border: '1px dashed rgba(255, 255, 255, 0.8)',
+                            border: '2px dashed rgba(255, 255, 255, 0.8)',
                             backgroundColor: 'rgba(0, 0, 0, 0.2)',
                         }} />
 
                         <video
                             ref={videoRef}
                             style={{
-                                width: '100%',
-                                maxHeight: '80vh',
                                 display: cameraLoading ? 'none' : 'block',
                                 opacity: cameraLoading ? 0 : 1,
                                 transition: 'opacity 1s ease-in-out',
