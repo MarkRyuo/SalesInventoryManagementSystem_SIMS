@@ -21,95 +21,96 @@ function PosScanner() {
     const [fadeOut, setFadeOut] = useState(false);
     const videoRef = useRef(null);
     const scanningInProgress = useRef(false); // Flag to manage scanning state
+    //! Set up for Back and front camera trigger.
+    const [selectedDeviceId, setSelectedDeviceId] = useState(null); // Camera device ID
+    const [isUsingBackCamera, setIsUsingBackCamera] = useState(true); // Default to back camera
+    const [videoDevices, setVideoDevices] = useState([]); // Store available video devices
 
     const handleScan = useCallback(async (scannedText) => {
-        if (isLoading || scanningInProgress.current) return; // Prevent scanning if loading or already scanning
+        if (isLoading || scanningInProgress.current) return;
 
-        scanningInProgress.current = true; // Set scanning in progress
+        scanningInProgress.current = true;
         setErrorMessages([]);
         setMessage("");
 
         try {
-            setIsLoading(true); // Start loading
+            setIsLoading(true);
             const product = await fetchProductByBarcode(scannedText);
 
-            // Check if the product exists and if its quantity is zero
             if (product && product.quantity === 0) {
                 setErrorMessages(prev => [...prev, `Cannot scan ${product.productName}. Quantity is zero.`]);
                 setFadeOut(false);
-                setTimeout(() => {
-                    setFadeOut(true);
-                }, 4000); // Show for 4 seconds
-                return; // Exit early without adding the item
+                setTimeout(() => setFadeOut(true), 4000);
+                return;
             }
 
             if (product) {
-                // If the product was found and quantity is valid, update the scanned items
                 const existingItemIndex = scannedItems.findIndex(item => item.barcode === scannedText);
-
                 setScannedItems(prevItems => {
                     const updatedItems = [...prevItems];
                     if (existingItemIndex !== -1) {
-                        // Product already scanned, increment quantity
                         updatedItems[existingItemIndex].quantity += 1;
                     } else {
-                        // New product scanned, add it to the list with quantity 1
                         updatedItems.push({ ...product, quantity: 1 });
                     }
-                    return updatedItems; // Return updated list
+                    return updatedItems;
                 });
 
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
-                setTimeout(() => {
-                    setFadeOut(true);
-                }, 4000); // Show for 4 seconds
+                setTimeout(() => setFadeOut(true), 4000);
             } else {
-                // If no product found, set an error message
                 setErrorMessages(prev => [...prev, `No product found for barcode: ${scannedText}`]);
                 setFadeOut(false);
-                setTimeout(() => {
-                    setFadeOut(true);
-                }, 4000); // Show for 4 seconds
+                setTimeout(() => setFadeOut(true), 4000);
             }
         } catch (error) {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
-            setIsLoading(false); // Reset loading state
-            setTimeout(() => {
-                scanningInProgress.current = false; // Reset scanning state
-            }, 2000); // 2 seconds delay
+            setIsLoading(false);
+            scanningInProgress.current = false; // Reset scanning state immediately
         }
     }, [isLoading, scannedItems]);
+
 
     // Include scannedItems in the dependency array
 
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
+
+        const startDecoding = (deviceId) => {
+            codeReader.decodeFromVideoDevice(deviceId, videoRef.current, (result, error) => {
+                if (result) {
+                    handleScan(result.getText());
+                }
+                if (error && !isLoading) {
+                    console.error("Scanning error: ", error);
+                }
+            });
+        };
+
         codeReader.listVideoInputDevices().then((videoInputDevices) => {
-            if (videoInputDevices.length > 0) {
-                const selectedDeviceId = videoInputDevices[0].deviceId;
-                codeReader.decodeFromVideoDevice(selectedDeviceId, videoRef.current, (result, error) => {
-                    if (result) {
-                        handleScan(result.getText());
-                    }
-                    if (error && !isLoading) {
-                        console.error("Scanning error: ", error);
-                    }
-                });
-                setCameraLoading(false);
+            setVideoDevices(videoInputDevices);
+
+            const defaultDevice = videoInputDevices.find(device => device.label.toLowerCase().includes("back")) || videoInputDevices[0];
+            setSelectedDeviceId(defaultDevice?.deviceId);
+
+            if (defaultDevice) {
+                startDecoding(defaultDevice.deviceId);
             } else {
                 setErrorMessages(['No camera found.']);
             }
+
+            setCameraLoading(false);
         }).catch((error) => {
             setErrorMessages(['Error accessing video devices.', error.message]);
         });
 
         return () => {
-            codeReader.reset();
+            codeReader.reset(); // Ensure to reset the reader when unmounting
         };
-    }, [handleScan, isLoading]);
+    }, [handleScan, isLoading, selectedDeviceId]);
 
 
     const handleCameraToggle = () => {
