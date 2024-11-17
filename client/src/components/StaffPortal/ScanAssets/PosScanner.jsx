@@ -61,7 +61,7 @@ function PosScanner() {
 
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
-                setTimeout(() => setFadeOut(true), 4000);
+                setTimeout(() => setFadeOut(true), 2000);
 
                 // Block the camera for 4 seconds after a successful scan
                 setIsCameraBlocked(true);
