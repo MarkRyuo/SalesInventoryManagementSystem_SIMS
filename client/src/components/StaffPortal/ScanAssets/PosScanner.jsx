@@ -189,8 +189,7 @@ function PosScanner() {
                             <p>Please position the barcode within the dashed area and ensure good lighting.</p>
                         </div>
                     </Card>
-                </div>
-                <div className="mt-3">
+                    
                     <Button variant="primary" onClick={handleCheckout} disabled={scannedItems.length === 0}>
                         Proceed to Checkout
                     </Button>
