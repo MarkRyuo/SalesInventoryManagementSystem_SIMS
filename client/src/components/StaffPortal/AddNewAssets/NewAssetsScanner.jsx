@@ -157,8 +157,7 @@ function NewAssetsScanner() {
                                 {message && (
                                     <Alert variant="success"
                                         style={{
-                                            opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out',
-                                        }}>
+                                            opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out'}}>
                                         {message}
                                     </Alert>
                                 )}
@@ -198,5 +197,4 @@ function NewAssetsScanner() {
 
     );
 }
-
 export default NewAssetsScanner;
