@@ -138,7 +138,7 @@ function PosScanner() {
         <Container fluid className="m-0 p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg' className="p-0">
-                <div>
+                <div className={PosScannerscss.PosscannerMessage}>
                     {errorMessages.length > 0 && (
                         <Alert variant="danger" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
                             {errorMessages[errorMessages.length - 1]}
