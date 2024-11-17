@@ -44,5 +44,39 @@
 }
 
 @media (max-width: 600px) {
+    .NewProductContainer {
     
+
+    .NewProductCol {
+        // border: 1px solid red;
+        width: 100%;
+        div:first-child {
+            border: 1px solid green;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            button {
+                font-size: 1.2rem;
+            }
+
+            .NewProductCamera {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                border: 1px solid;
+                height: auto;
+                
+
+                video {
+                    border: 1px solid;
+                    width: 100%;
+                    height: auto;
+                    max-width: 800px ;
+                }
+            }
+
+        }
+    }
+}
 }
