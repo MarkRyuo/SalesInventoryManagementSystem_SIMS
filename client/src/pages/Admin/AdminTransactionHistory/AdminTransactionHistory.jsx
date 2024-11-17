@@ -141,7 +141,7 @@ function AdminTransactionHistory() {
         <Container fluid className={AdminTransactionScss.transactionMainContainer}>
             <h4><FaSave size={25}/>Your Saved Orders</h4>
             <div className={AdminTransactionScss.containerFilter}>
-                <Row>
+                <Row className="m-2 mt-3">
                     <Col md={6} sm={12} className="mb-2">
                         <Form.Control
                             type="date"
