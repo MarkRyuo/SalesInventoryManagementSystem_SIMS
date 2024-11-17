@@ -23,7 +23,6 @@ function NewAssetsScanner() {
     const [videoDevices, setVideoDevices] = useState([]);
     const [selectedDeviceId, setSelectedDeviceId] = useState(null);
 
-
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
         const startScanner = async (deviceId = null) => {
