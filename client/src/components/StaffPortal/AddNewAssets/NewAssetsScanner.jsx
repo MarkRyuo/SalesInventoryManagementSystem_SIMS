@@ -172,10 +172,7 @@ function NewAssetsScanner() {
                             />
                             <video
                                 ref={videoRef}
-                                style={{
-                                    display: isProcessing ? 'none' : 'block',
-                                    opacity: videoFade ? 1 : 0,
-                                    transition: 'opacity 1s ease-in-out'
+                                style={{ display: isProcessing ? 'none' : 'block', opacity: videoFade ? 1 : 0, transition: 'opacity 1s ease-in-out'
                                 }}
                             />
                         </div>
