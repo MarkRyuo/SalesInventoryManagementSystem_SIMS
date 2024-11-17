@@ -132,19 +132,19 @@ function NewAssetsScanner() {
         <Container fluid className='m-0 p-0'>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg' className={NewProductscss.NewProductContainer}>
-                    <div className={NewProductscss.NewProductCol}> {/* Child */}
-                        <div>
-                            <button
-                                onClick={handleCameraSwitch}
-                                className="btn btn-primary mb-2"
-                                disabled={isProcessing}
-                            >
-                                <MdCameraswitch size={20} className="me-2"/>
-                                Switch Camera
-                            </button>
+                <div className={NewProductscss.NewProductCol}> {/* Child */}
+                    <div>
+                        <button
+                            onClick={handleCameraSwitch}
+                            className="btn btn-primary mb-2"
+                            disabled={isProcessing}
+                        >
+                            <MdCameraswitch size={20} className="me-2" />
+                            Switch Camera
+                        </button>
 
-                            <div className={NewProductscss.NewProductCamera}>
-                                <div>
+                        <div className={NewProductscss.NewProductCamera}>
+                            <div>
                                 {error && (
                                     <Alert variant="danger"
                                         style={{
@@ -158,42 +158,42 @@ function NewAssetsScanner() {
                                     <Alert variant="success"
                                         style={{
                                             opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out',
-                                            width: '400px',
-                                            height: '100px',
                                         }}>
                                         {message}
                                     </Alert>
                                 )}
-                                {isProcessing && <Spinner animation="grow" variant="success" />}
-                                </div>
-
-                                <div className=''
-                                    style={{
-                                        position: 'absolute',
-                                        top: '50%',
-                                        left: '50%',
-                                        transform: 'translate(-50%, -50%)',
-                                        width: '60%',
-                                        height: '50%',
-                                        border: '1px dashed rgba(255, 255, 255, 0.8)',
-                                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                                        pointerEvents: 'none',
-                                        opacity: guideFade ? 1 : 0,
-                                        transition: 'opacity 1s ease-in-out',
-                                    }}
-                                />
-
-                                <video
-                                    ref={videoRef}
-                                    style={{
-                                        display: isProcessing ? 'none' : 'block',
-                                        opacity: videoFade ? 1 : 0,
-                                        transition: 'opacity 1s ease-in-out'
-                                    }}
-                                />
+                            
+                            {isProcessing && <Spinner animation="grow" variant="success" />}
                             </div>
+                            
+
+                            <div className=''
+                                style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
+                                    width: '60%',
+                                    height: '50%',
+                                    border: '1px dashed rgba(255, 255, 255, 0.8)',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                                    pointerEvents: 'none',
+                                    opacity: guideFade ? 1 : 0,
+                                    transition: 'opacity 1s ease-in-out',
+                                }}
+                            />
+
+                            <video
+                                ref={videoRef}
+                                style={{
+                                    display: isProcessing ? 'none' : 'block',
+                                    opacity: videoFade ? 1 : 0,
+                                    transition: 'opacity 1s ease-in-out'
+                                }}
+                            />
                         </div>
                     </div>
+                </div>
             </Container>
         </Container>
 
