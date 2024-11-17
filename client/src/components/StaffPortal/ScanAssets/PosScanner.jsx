@@ -51,15 +51,13 @@ function PosScanner() {
             if (product) {
                 // Use the functional set state to ensure the latest scannedItems state
                 setScannedItems(prevItems => {
-                    // Check if the product already exists in the scannedItems array
                     const existingItemIndex = prevItems.findIndex(item => item.barcode === scannedText);
 
                     if (existingItemIndex !== -1) {
-                        // If the product already exists, we show a message but do not update the quantity
-                        setMessage(`Already scanned ${product.productName}.`);
-                        setFadeOut(false);
-                        setTimeout(() => setFadeOut(true), 5000);
-                        return prevItems; // Return the previous state as is, no update needed
+                        // If the product already exists, increase the quantity
+                        const updatedItems = [...prevItems];
+                        updatedItems[existingItemIndex].quantity += 1;
+                        return updatedItems;
                     } else {
                         // If it's a new product, add it to the list with quantity = 1
                         return [...prevItems, { ...product, quantity: 1 }];
@@ -72,7 +70,7 @@ function PosScanner() {
                 setTimeout(() => setFadeOut(true), 5000);
 
                 // Re-enable the camera after 2 seconds delay
-                setTimeout(() => setIsCameraBlocked(false), 4000);
+                setTimeout(() => setIsCameraBlocked(false), 6000);
             } else {
                 setErrorMessages(prev => [...prev, `No product found for barcode: ${scannedText}`]);
                 setFadeOut(false);
@@ -89,7 +87,7 @@ function PosScanner() {
             scanningInProgress.current = false; // Reset scanning state immediately
         }
     }, [isLoading]);
-    
+
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
