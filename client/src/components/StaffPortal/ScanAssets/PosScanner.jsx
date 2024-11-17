@@ -187,7 +187,7 @@ function PosScanner() {
                                 transition: 'opacity 1s ease-in-out',
                             }}
                         />
-                        <div style={{ position: 'absolute', bottom: '10%', left: '50%', transform: 'translateX(-50%)', color: 'white' }}>
+                        <div style={{ position: 'absolute', bottom: '7%', left: '50%', transform: 'translateX(-50%)', color: 'white' }}>
                             <p>Please position the barcode within the dashed <br/> area and ensure good lighting.</p>
                         </div>
                     </Card>
