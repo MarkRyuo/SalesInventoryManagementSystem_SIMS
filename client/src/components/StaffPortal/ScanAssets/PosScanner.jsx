@@ -177,8 +177,8 @@ function PosScanner() {
                         <video
                             ref={videoRef}
                             style={{
-                                display: cameraLoading || isCameraBlocked ? 'none' : 'block', // Block the camera if needed
-                                opacity: cameraLoading || isCameraBlocked ? 0 : 1,
+                                display: cameraLoading ? 'none' : 'block',
+                                opacity: cameraLoading ? 0 : 1,
                                 transition: 'opacity 1s ease-in-out',
                             }}
                         />
