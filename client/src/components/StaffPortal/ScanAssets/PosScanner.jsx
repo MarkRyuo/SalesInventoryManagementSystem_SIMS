@@ -32,6 +32,15 @@ function PosScanner() {
     const handleScan = useCallback(async (scannedText) => {
         if (isLoading || scanningInProgress.current) return;
 
+        const currentTime = Date.now(); // Get current timestamp
+        const timeSinceLastScan = currentTime - lastScanTime.current; // Time difference from last scan
+
+        // Block scanning if the interval between scans is too short (e.g., less than 1000ms)
+        if (timeSinceLastScan < 1000) {
+            setErrorMessages(prev => [...prev, "You are scanning too quickly. Please wait a moment."]);
+            return;
+        }
+
         scanningInProgress.current = true;
         setErrorMessages([]);
         setMessage("");
@@ -76,8 +85,15 @@ function PosScanner() {
         } finally {
             setIsLoading(false);
             scanningInProgress.current = false; // Reset scanning state immediately
+
+            // Update the last scan time after the scan process is completed
+            lastScanTime.current = Date.now();
         }
     }, [isLoading, scannedItems]);
+
+    // Store the timestamp of the last scan
+    const lastScanTime = useRef(0);
+
 
     // Include scannedItems in the dependency array
 
