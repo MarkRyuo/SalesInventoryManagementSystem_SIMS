@@ -23,13 +23,14 @@ function NewAssetsScanner() {
     const [videoDevices, setVideoDevices] = useState([]);
     const [selectedDeviceId, setSelectedDeviceId] = useState(null);
 
+
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
         const startScanner = async (deviceId = null) => {
             try {
                 const devices = await codeReader.listVideoInputDevices();
                 setVideoDevices(devices);
-                
+
                 // Set default to back camera if available
                 const backCamera = devices.find(device =>
                     device.label.toLowerCase().includes('back') || device.label.toLowerCase().includes('rear')
