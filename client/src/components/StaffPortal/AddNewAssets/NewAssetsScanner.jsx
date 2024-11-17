@@ -142,7 +142,7 @@ function NewAssetsScanner() {
                             <MdCameraswitch size={20} className="me-2" />
                             Switch Camera
                         </button>
-
+                        {/* Camera */}
                         <div className={NewProductscss.NewProductCamera}>
                             <div>
                                 {error && (
@@ -159,7 +159,7 @@ function NewAssetsScanner() {
                                 )}
                             </div>
                             {isProcessing && <Spinner animation="grow" variant="success" />}
-                            <div className=''
+                            <div
                                 style={{
                                     position: 'absolute',
                                     top: '50%',
