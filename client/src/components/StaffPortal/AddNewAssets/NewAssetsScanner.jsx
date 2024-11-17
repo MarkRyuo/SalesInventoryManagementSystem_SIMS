@@ -131,7 +131,7 @@ function NewAssetsScanner() {
         <Container fluid>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg' style={{ border: "1px solid",width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
-                <Row className="justify-content-center" style={{ height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
+                <Row className="justify-content-center" style={{border:"1px solid" ,height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
                     <Col md={8} className='p-0 mt-3' style={{ display: 'flex', justifyContent: 'center'}}> {/* Child */}
                         <Card style={{ height: '100%', display: 'flex', justifyContent: 'center', width: '100%' }}>
                             <button
