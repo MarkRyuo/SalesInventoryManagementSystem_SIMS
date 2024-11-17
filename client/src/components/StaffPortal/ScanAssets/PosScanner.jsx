@@ -84,13 +84,11 @@ function PosScanner() {
                 if (result) {
                     handleScan(result.getText());
                 }
-                // Suppress NotFoundException errors from logging
-                if (error && !isLoading && error.name !== "NotFoundException") {
+                if (error && !isLoading) {
                     console.error("Scanning error: ", error);
                 }
             });
         };
-
 
         codeReader.listVideoInputDevices().then((videoInputDevices) => {
             setVideoDevices(videoInputDevices);
