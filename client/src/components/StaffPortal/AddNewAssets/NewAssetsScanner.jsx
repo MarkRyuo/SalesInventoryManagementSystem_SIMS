@@ -6,6 +6,7 @@ import { fetchProductByBarcode, updateProductQuantity } from '../../../services/
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
 import NewProductscss from './NewProduct.module.scss';
+import { MdCameraswitch } from "react-icons/md";
 
 function NewAssetsScanner() {
     const videoRef = useRef(null);
@@ -128,7 +129,7 @@ function NewAssetsScanner() {
 
 
     return (
-        <Container fluid>
+        <Container fluid className='m-0 p-0'>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg' className={NewProductscss.NewProductContainer}>
                     <div className={NewProductscss.NewProductCol}> {/* Child */}
@@ -138,10 +139,11 @@ function NewAssetsScanner() {
                                 className="btn btn-primary mb-2"
                                 disabled={isProcessing}
                             >
+                                <MdCameraswitch size={20} className="me-2"/>
                                 Switch Camera
                             </button>
 
-                            <div className="text-center position-relative">
+                            <div className={NewProductscss.NewProductCamera}>
                                 {error && (
                                     <Alert variant="danger"
                                         style={{
@@ -162,13 +164,13 @@ function NewAssetsScanner() {
                                 )}
                                 {isProcessing && <Spinner animation="border" />}
 
-                                <div
+                                <div className=''
                                     style={{
                                         position: 'absolute',
                                         top: '50%',
                                         left: '50%',
                                         transform: 'translate(-50%, -50%)',
-                                        width: '70%',
+                                        width: '50%',
                                         height: '50%',
                                         border: '1px dashed rgba(255, 255, 255, 0.8)',
                                         backgroundColor: 'rgba(0, 0, 0, 0.2)',
@@ -181,9 +183,6 @@ function NewAssetsScanner() {
                                 <video
                                     ref={videoRef}
                                     style={{
-                                        width: '100%',
-                                        height: 'auto',
-                                        maxHeight: '80vh',  // Limits height to fit within the viewport
                                         display: isProcessing ? 'none' : 'block',
                                         opacity: videoFade ? 1 : 0,
                                         transition: 'opacity 1s ease-in-out'
