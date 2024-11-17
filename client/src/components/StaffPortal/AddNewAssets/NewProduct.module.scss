@@ -30,6 +30,9 @@
                 // border: 1px solid;
                 height: auto;
                 
+                div:first-child {
+                    font-size: 1rem;                    
+                }
 
                 video {
                     // border: 1px solid;
@@ -62,6 +65,9 @@
                 justify-content: center;
                 height: auto;
                 
+                div:first-child {
+                    font-size: 0.8rem;                    
+                }
 
                 video {
                     width: 100%;

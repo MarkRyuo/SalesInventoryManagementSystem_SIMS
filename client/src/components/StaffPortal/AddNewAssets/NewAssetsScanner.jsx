@@ -144,6 +144,7 @@ function NewAssetsScanner() {
                             </button>
 
                             <div className={NewProductscss.NewProductCamera}>
+                                <div>
                                 {error && (
                                     <Alert variant="danger"
                                         style={{
@@ -155,14 +156,16 @@ function NewAssetsScanner() {
                                 )}
                                 {message && (
                                     <Alert variant="success"
-                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out',
+                                        style={{
+                                            opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out',
                                             width: '400px',
                                             height: '100px',
                                         }}>
                                         {message}
                                     </Alert>
                                 )}
-                                {isProcessing && <Spinner animation="border" />}
+                                {isProcessing && <Spinner animation="grow" variant="success" />}
+                                </div>
 
                                 <div className=''
                                     style={{
