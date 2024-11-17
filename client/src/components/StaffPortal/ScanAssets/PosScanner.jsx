@@ -138,21 +138,20 @@ function PosScanner() {
         }
     };
 
-
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });
     };
 
     return (
-        <Container fluid>
+        <Container fluid className="m-0 p-0">
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg' style={{ width: '100%', height: '80vh' }}>
                 <Row className="justify-content-center" style={{ height: '100%' }}> 
-                    <Col md={8} className='p-0 mt-3'>
+                    <div className='p-0 mt-3'>
                         <Card style={{ height: '100%' }}>
                             <div className="text-center position-relative">
-                                <Row className="justify-content-center mt-3">
-                                    <Col md={8} className="text-center">
+                                <div className="justify-content-center mt-3">
+                                    <div className="text-center">
                                         <Button
                                             variant="secondary"
                                             onClick={handleCameraToggle}
@@ -160,8 +159,8 @@ function PosScanner() {
                                         >
                                             Switch to {isUsingBackCamera ? "Front" : "Back"} Camera
                                         </Button>
-                                    </Col>
-                                </Row>
+                                    </div>
+                                </div>
 
                                 {errorMessages.length > 0 && (
                                     <Alert variant="danger" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
@@ -201,7 +200,7 @@ function PosScanner() {
                                 </div>
                             </div>
                         </Card>
-                    </Col>
+                    </div>
                 </Row>
                 <Row className="justify-content-center mt-3">
                     <Col md={8} className="text-center">
