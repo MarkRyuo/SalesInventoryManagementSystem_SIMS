@@ -159,8 +159,6 @@ function NewAssetsScanner() {
                                 )}
                             </div>
                             {isProcessing && <Spinner animation="grow" variant="success" />}
-                            
-
                             <div className=''
                                 style={{
                                     position: 'absolute',
