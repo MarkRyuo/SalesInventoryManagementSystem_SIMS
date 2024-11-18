@@ -24,7 +24,7 @@
     ],
     "rewrites": [
       {
-        "source": "/ProductPage/**",
+        "source": "**",
         "destination": "/index.html"
       }
     ]
