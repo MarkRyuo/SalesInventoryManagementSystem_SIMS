@@ -109,7 +109,7 @@ function Checkout() {
                             <Form.Label>Sold To:</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Enter customer name (Optional)"
+                                placeholder="Enter customer name"
                                 value={customerName}
                                 onChange={(e) => setCustomerName(e.target.value)}
                             />
@@ -164,8 +164,8 @@ function Checkout() {
                                     <tr key={item.productId}>
                                         <td>{item.productName}</td>
                                         <td>{item.quantity}</td>
-                                        <td>₱{item.price.toFixed(2)}</td>
-                                        <td>₱{(item.price * item.quantity).toFixed(2)}</td>
+                                        <td>₱{parseFloat(item.price).toFixed(2)}</td> {/* Ensure price is a number */}
+                                        <td>₱{(parseFloat(item.price) * item.quantity).toFixed(2)}</td> {/* Ensure amount is calculated correctly */}
                                     </tr>
                                 ))}
                                 <tr>
@@ -176,7 +176,6 @@ function Checkout() {
                                     <td colSpan="3" className="text-end"><strong>Discount ({discountPercentage}%):</strong></td>
                                     <td>-₱{discountAmount.toFixed(2)}</td>
                                 </tr>
-
                                 <tr>
                                     <td colSpan="3" className="text-end"><strong>Total Tax:</strong></td>
                                     <td>₱{taxAmount.toFixed(2)}</td>
@@ -187,6 +186,7 @@ function Checkout() {
                                 </tr>
                             </tbody>
                         </Table>
+
                         <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
                     </Col>
                 </Row>
