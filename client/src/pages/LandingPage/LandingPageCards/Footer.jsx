@@ -53,8 +53,6 @@ function Footer() {
                         <Nav className="flex-column">
                             <Nav.Link href="#!" className="text-reset">Terms and Condition</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">Developers</Nav.Link>
-                            <Nav.Link href="#!" className="text-reset">Orders</Nav.Link>
-                            <Nav.Link href="#!" className="text-reset">Help</Nav.Link>
                         </Nav>
                     </Col>
 
