@@ -7,7 +7,8 @@ function AboutCard() {
             <h1 id='Aboutus' className='mb-4'>About Us <FcAbout size={20} className='ms-1' /></h1>
             <p>REYES ELECTRONICS is a leading provider of high-quality electronics</p>
 
-            <h2>&quot;With many years of experience in the business industry,REYES ELECTRONICS has established <br />itself as trusted name, offering high-quality products and services to the customers.&quot;</h2>
+            <h2>&quot;With years of industry experience, REYES ELECTRONICS has built a reputation for providing high-quality products and services.&quot;</h2>
+
 
 
             <div className={AboutCardscss.aboutCards}>
