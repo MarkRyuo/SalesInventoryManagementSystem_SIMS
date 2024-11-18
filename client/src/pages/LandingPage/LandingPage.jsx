@@ -29,9 +29,13 @@ function LandingPage() {
                             </div>
                         </div>
 
-                        <div>
+                        <div className={LandingPagecss.partners}>
                             <img src="https://www.fireflyelectric.com/wp-content/uploads/2021/05/FELCO-logo-2021-cropped-1.png"/>
-                            <img src="/Mosca.png" />
+                            <img src="https://www.mosca-elektronik.de/images/template/logo_mosca.png" />
+                            <img src="https://www.chinafsl.com/en/templates/specialty/images/logo.png" />
+                            <img src="https://static.tp-link.com/assets/images/icon/logo.svg" />
+                            <span></span>
+
                         </div>
                     </div>
                     <div className={LandingPagecss.AboutCard}> {/* Main Container */}
