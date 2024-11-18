@@ -10,10 +10,26 @@
     align-items: center;
     padding: 20px;
     height: 100vh;
+    gap: 10px;
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    div:first-child {
+        h2 {
+            font-size: 2rem;
+        }
+    }
 
     .aboutCards {
         border: 1px solid red;
         width: 100%;
+        height: auto;
         max-width: 60vw;
         display: flex;
         justify-content: space-around;
@@ -23,4 +39,10 @@
         }
 
     }
+}
+
+
+
+@media (max-width: 700px) {
+    
 }
