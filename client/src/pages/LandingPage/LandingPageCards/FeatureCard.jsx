@@ -40,7 +40,7 @@ function LandingPageCard() {
                 <div>
                     
                 </div>
-                <div className={LandingPagecss.colFeature}>
+                <div>
                     
                 </div>
                 <div className={LandingPagecss.colFeature}>
