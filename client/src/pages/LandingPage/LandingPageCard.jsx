@@ -10,7 +10,7 @@ function LandingPageCard({card}) {
                     style={{ 
                         background: 'rgb(6, 249, 119, 15%)', 
                         borderRadius: 15,
-                        
+                        height: 'auto'
                         }}>
                     <span className='text-center'>{cards.icon}</span>
                     <div>
