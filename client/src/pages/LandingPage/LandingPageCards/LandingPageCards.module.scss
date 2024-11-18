@@ -4,6 +4,18 @@
 }
 
 .parentAboutus {
+    border: 1px solid;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100vh;
+
+    .aboutCards {
+        border: 1px solid red;
+        width: 60vw;
+        display: flex;
+        justify-content: space-around;
+    }
 }

@@ -11,7 +11,7 @@ function AboutCard() {
                 <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</h2>
             </div>
 
-            <div style={{ border: '1px solid', display: 'flex' }}>
+            <div className={AboutCardscss.aboutCards}>
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
