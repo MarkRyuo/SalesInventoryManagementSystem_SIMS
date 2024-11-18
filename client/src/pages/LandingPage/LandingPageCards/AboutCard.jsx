@@ -1,9 +1,10 @@
 import AboutCardscss from './LandingPageCards.module.scss';
+import { FcAbout } from "react-icons/fc";
 
 function AboutCard() {
     return (
         <div className={AboutCardscss.parentAboutus}> {/* Parent */}
-            <h1 id='Aboutus'>About Us</h1>
+            <h1 id='Aboutus' className='mb-4'>About Us <FcAbout size={20} className='ms-1' /></h1>
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
 
             <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</h2>
