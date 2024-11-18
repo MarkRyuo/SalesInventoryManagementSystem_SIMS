@@ -12,6 +12,7 @@
     border: 1px solid red;
     width: 100%;
     height: 16vh;
+    margin-bottom: 10px;
 
     .componentHeroCard {
         margin: 0;
@@ -50,11 +51,18 @@
     }
 }
 
+.mainBottomComponent {
+    border: 1px solid red;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+}
 
 
 .chartContainer {
-        border: 1px solid;
+        border: 1px solid green;
         height: auto;
+        height: 100vh;
 
         .smallContainer {
             border: 1px solid red;
@@ -62,16 +70,14 @@
             height: 200px;
             padding: 10px;
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-evenly;
         }
 
         .largeContainer {
             border: 1px solid green;
             width: 100%;
-            height: 400px;
+            height: 800px;
             gap: 15px;
-            justify-content: space-evenly;
             min-width: 500px;
 
             div {
@@ -81,13 +87,6 @@
 
     }
 
-
-.colContainerLg {
-    /* border: 1px solid; */
-    padding: 0;
-    overflow: auto;
-    width: auto;
-}
 
 
 

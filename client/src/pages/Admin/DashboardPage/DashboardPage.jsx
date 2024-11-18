@@ -1,4 +1,4 @@
-import { Image} from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import { MainLayout } from '../../../layout/MainLayout';
 import DashboardCss from './Dashboard.module.scss';
 import { useEffect, useState } from 'react';
@@ -95,29 +95,19 @@ export const DashboardPage = () => {
                     )}
                 </div>
             </div>
-            
+
             <div className={DashboardCss.mainBottomComponent}>
                 {!isLoading && (
                     <div className={DashboardCss.chartContainer}>
                         <div className={DashboardCss.smallContainer}>
-                            <div>
-                                <Chart1 />
-                            </div>
-                            <div>
-                                <Chart2 />
-                            </div>
-                            <div>
-                                <Chart3 />
-                            </div>
+                            <Chart1 />
+                            <Chart2 />
+                            <Chart3 />
                         </div>
 
                         <div className={DashboardCss.largeContainer}>
-                            <div className={DashboardCss.colContainerLg}>
-                                <ChartLg1 />
-                            </div>
-                            <div className={DashboardCss.colContainerLg}>
-                                <ChartLg2 />
-                            </div>
+                            <ChartLg1 />
+                            <ChartLg2 />
                         </div>
                     </div>
                 )}
