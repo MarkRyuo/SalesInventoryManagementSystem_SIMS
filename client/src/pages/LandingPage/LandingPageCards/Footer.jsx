@@ -58,7 +58,7 @@ function Footer() {
                     <Col md={3} lg={2} xl={2} className="mb-4">
                         <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
                         <Nav className="flex-column">
-                            <Nav.Link href="#!" className="text-reset">Pricing</Nav.Link>
+                            <Nav.Link href="#!" className="text-reset">Terms and Condition</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">Settings</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">Orders</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">Help</Nav.Link>
@@ -67,9 +67,9 @@ function Footer() {
 
                     <Col md={4} lg={3} xl={3} className="mb-4">
                         <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><FaHome className="me-2" /> New York, NY 10012, US</p>
-                        <p><FaEnvelope className="me-2" /> info@example.com</p>
-                        <p><FaPhone className="me-2" /> + 01 234 567 88</p>
+                        <p><FaHome className="me-2" /> Set Up</p>
+                        <p><FaEnvelope className="me-2" /> ReyesElectronics@gmail.com</p>
+                        <p><FaPhone className="me-2" /> + 63 0992 902 2322/p>
                         <p><FaPrint className="me-2" /> + 01 234 567 89</p>
                     </Col>
                 </Row>
