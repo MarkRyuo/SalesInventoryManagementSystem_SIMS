@@ -266,7 +266,7 @@ function AdminTransactionHistory() {
                 </Modal.Header>
                 <Modal.Body>
                     <p className="text-danger font-weight-bold">
-                        Warning: Deleting these products is permanent and cannot be undone.
+                        Warning: Deleting these products is permanent and cannot be undone!
                     </p>
                     <p className="font-weight-bold text-danger">
                         {selectedOrder ? getProductNames(selectedOrder) : ''}
