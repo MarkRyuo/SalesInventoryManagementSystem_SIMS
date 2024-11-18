@@ -1,4 +1,5 @@
 import { Container, Row, Col, Nav} from 'react-bootstrap';
+import { BsShop } from "react-icons/bs";
 import { FaFacebookF, FaGoogle, FaInstagram, FaGem, FaHome, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 function Footer() {
@@ -58,7 +59,7 @@ function Footer() {
 
                     <Col md={4} lg={3} xl={3} className="mb-4">
                         <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><FaHome className="me-2" />Brgy 4, Rizal St. Lipa City Batangas</p>
+                        <p><BsShop className='me-2'/>Brgy 4, Rizal St. Lipa City Batangas</p>
                         <p><FaEnvelope className="me-2" /> rramilelectronics@gmail.com</p>
                         <p><FaPhone className="me-2" /> + 63 921 238 8866</p>
                     </Col>
