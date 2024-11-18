@@ -36,6 +36,7 @@ function LandingPageCard() {
                 <div>
                     <span><MdOutlineInventory size={50} /></span>
                     <h4>Inventory Tracking</h4>
+                    <p>Keep real-time tabs on stock levels and prevent shortages.</p>
                 </div>
                 <div>
                     
