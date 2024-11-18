@@ -34,7 +34,7 @@ function AboutCard() {
                     </Card.Body>
                 </Card>
 
-                <Card style={{ width: '20rem' }}>
+                <Card>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
                         <Card.Title>Card Title</Card.Title>

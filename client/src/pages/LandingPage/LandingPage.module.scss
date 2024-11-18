@@ -109,7 +109,7 @@
 
 .featureContainer {
     box-sizing: border-box;
-    height: 50vh;
+    height: 100vh;
     padding-top: 40px;
 
     .rowFeature {
@@ -149,4 +149,6 @@
 
 .AboutCard {
     border: 1px solid;
+    width: 100%;
+    height: 100vh;
 }
