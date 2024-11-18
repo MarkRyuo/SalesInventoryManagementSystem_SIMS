@@ -64,23 +64,21 @@
             flex-wrap: wrap;
             justify-content: space-evenly;
         }
+
+        .largeContainer {
+            border: 1px solid green;
+            padding: 5px;
+            margin: 0px;
+            width: 100%;
+            height: auto;
+            gap: 15px;
+            justify-content: space-evenly;
+            min-width: 500px;
+        }
+
     }
 }
 
-
-
-/* !(Warning): This is for ChartLg */
-
-.largeContainer {
-    border: 1px solid green;
-    padding: 5px;
-    margin: 0px;
-    width: 100%;
-    height: auto;
-    gap: 15px;
-    justify-content: space-evenly;
-    min-width: 500px;
-}
 
 .colContainerLg {
     /* border: 1px solid; */
