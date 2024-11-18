@@ -12,7 +12,7 @@ export const NavLogin = () => {
                     <Row>
                         <Col className="pt-1 m-0 p-0">
                             <Link to={"/"} style={{ color: "rgb(19, 14, 1)", textDecoration: "none" }}>
-                                <p className="fs-5 fw-medium">REYES ELECTRONICS</p>
+                                <p className="fs-5 fw-medium mt-2">REYES ELECTRONICS</p>
                             </Link>
                         </Col>
                     </Row>
