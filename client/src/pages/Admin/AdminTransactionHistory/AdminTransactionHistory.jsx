@@ -148,6 +148,7 @@ function AdminTransactionHistory() {
                             placeholder="Filter by Date"
                             value={filterDate}
                             onChange={(e) => setFilterDate(e.target.value)}
+                            className="bg-info"
                         />
                     </Col>
                     <Col md={6} sm={12} className="mb-2">
