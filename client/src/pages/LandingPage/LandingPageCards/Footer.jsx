@@ -68,7 +68,7 @@ function Footer() {
                 </Row>
             </Container>
             {/* Copyright */}
-            <div className="text-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
+            <div className="text-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.06)' }}>
                 © 2024 Copyright
             </div>
         </footer>
