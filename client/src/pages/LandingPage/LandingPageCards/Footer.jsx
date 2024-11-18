@@ -17,7 +17,7 @@ function Footer() {
                         <Nav.Link href="https://www.facebook.com/ReyesElectronics" className="text-reset">
                             <FaFacebookF />
                         </Nav.Link>
-                        <Nav.Link href="#" className="text-reset">
+                        <Nav.Link href="rramilelectronics@gmail.com" className="text-reset">
                             <FaGoogle />
                         </Nav.Link>
                         <Nav.Link href="#" className="text-reset">
