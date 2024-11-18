@@ -28,6 +28,10 @@ function LandingPage() {
                                 <img src="/E-commerce.png" />
                             </div>
                         </div>
+
+                        <div>
+                            
+                        </div>
                     </div>
                     <div className={LandingPagecss.AboutCard}> {/* Main Container */}
                         <AboutCard />
