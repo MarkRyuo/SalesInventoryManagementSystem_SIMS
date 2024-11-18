@@ -32,6 +32,21 @@
                 height: 100px;
                 margin-right: 10px;
             }
+
+            div {
+                display: flex;
+                flex-direction: column;
+                padding: 5px;
+        
+                p {
+                    font-size: 1rem;
+                    }
+
+                p:first-child {
+                    font-size: 1.5rem;
+                }
+
+            }
         }
 
     }
@@ -77,44 +92,6 @@
     width: auto;
 }
 
-
-
-/*? Redesigning */
-
-.credentialDashboard {
-
-    @media (max-width: 500px) {
-        
-        img {
-            width: 80px;
-            height: 80px;
-        }
-    }
-
-    div {
-        display: flex;
-        flex-direction: column;
-        padding: 5px;
-        
-        p {
-            font-size: 1rem;
-        }
-
-        p:first-child {
-            font-size: 1.5rem;
-        }
-
-        @media (max-width: 500px) {
-            p {
-                font-size: 0.9rem;
-            }
-
-            p:first-child {
-                font-size: 1.3rem;
-            }
-        }
-
-    }
 }
 
 
