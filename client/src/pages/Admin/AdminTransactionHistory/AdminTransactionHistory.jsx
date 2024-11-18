@@ -54,12 +54,17 @@ function AdminTransactionHistory() {
 
     useEffect(() => {
         if (selectedOrder && qrRef.current) {
+            // Generate QR code with correct URL format
+            const url = `https://salesinventorymanagement-1bb27.web.app/ProductPage/${selectedOrder.id}`;
+            console.log("QR Code URL:", url);
+
             new QRious({
                 element: qrRef.current,
-                value: `https://salesinventorymanagement-1bb27.web.app/ProductPage${selectedOrder.id}` //! Need Function to Online
+                value: url,
             });
         }
     }, [selectedOrder]);
+
 
     const handleDownloadOrder = async (order) => {
         const doc = new jsPDF();
