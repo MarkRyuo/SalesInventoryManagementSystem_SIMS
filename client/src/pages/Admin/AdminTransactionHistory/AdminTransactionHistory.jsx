@@ -7,7 +7,6 @@ import { FaEye, FaDownload, FaTrash } from "react-icons/fa"; // Importing icons
 import AdminTransactionScss from './AdminTransactionHistory.module.scss';
 import { FaSave } from "react-icons/fa";
 import { FaTruckRampBox } from "react-icons/fa6";
-import { getDynamicLink } from "../../../services/ProductService"; // Import your Firebase service
 
 function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
@@ -54,16 +53,12 @@ function AdminTransactionHistory() {
     });
 
     useEffect(() => {
-        const generateDynamicLink = async () => {
-            if (selectedOrder && qrRef.current) {
-                const link = await getDynamicLink(selectedOrder.id);
-                new QRious({
-                    element: qrRef.current,
-                    value: link,
-                });
-            }
-        };
-        generateDynamicLink();
+        if (selectedOrder && qrRef.current) {
+            new QRious({
+                element: qrRef.current,
+                value: `https://salesinventorymanagement-1bb27.web.app/${selectedOrder.id}` //! Need Function to Online
+            });
+        }
     }, [selectedOrder]);
 
     const handleDownloadOrder = async (order) => {
