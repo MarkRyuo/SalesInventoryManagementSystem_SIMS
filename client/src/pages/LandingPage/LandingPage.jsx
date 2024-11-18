@@ -1,6 +1,6 @@
 import { Container, Button} from "react-bootstrap"
 import NavBars from "./NavBars"
-import LandingPageCard from './LandingPageCard'
+import LandingPageCard from './LandingPageCards/LandingPageCard'
 import LandingPagecss from './LandingPage.module.scss'
 import { CiGlobe } from "react-icons/ci";
 import { useState } from "react";
@@ -62,7 +62,7 @@ function LandingPage() {
                     </div>
 
                     <div className={LandingPagecss.featureContainer}>
-                    
+
                     </div>
 
                     <div className={LandingPagecss.AboutCard}> {/* Main Container */}
