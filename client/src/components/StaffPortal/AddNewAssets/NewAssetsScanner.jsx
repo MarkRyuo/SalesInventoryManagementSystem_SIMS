@@ -60,7 +60,7 @@ function NewAssetsScanner() {
                                     const updatedQuantity = await updateProductQuantity(barcode, additionalQuantity);
 
                                     const productName = product.productName || "Unknown Product";
-                                    setMessage(`Updated: ${productName} - ${updatedQuantity}.`);
+                                    setMessage(`Updated: ${productName}: -${updatedQuantity}.`);
                                 } else {
                                     navigate('/NewAssets', { state: { barcode: barcode } });
                                 }
