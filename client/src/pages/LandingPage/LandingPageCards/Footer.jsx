@@ -46,12 +46,12 @@ function Footer() {
                     </Col>
 
                     <Col md={2} lg={2} xl={2} className="mb-4">
-                        <h6 className="text-uppercase fw-bold mb-4">Products</h6>
+                        <h6 className="text-uppercase fw-bold mb-4">Partners</h6>
                         <Nav className="flex-column">
-                            <Nav.Link href="#!" className="text-reset">Angular</Nav.Link>
-                            <Nav.Link href="#!" className="text-reset">React</Nav.Link>
-                            <Nav.Link href="#!" className="text-reset">Vue</Nav.Link>
-                            <Nav.Link href="#!" className="text-reset">Laravel</Nav.Link>
+                            <Nav.Link href="#!" className="text-reset">FELCO</Nav.Link>
+                            <Nav.Link href="#!" className="text-reset">MOSCA</Nav.Link>
+                            <Nav.Link href="#!" className="text-reset">FSL</Nav.Link>
+                            <Nav.Link href="#!" className="text-reset">Tapo</Nav.Link>
                         </Nav>
                     </Col>
 
