@@ -123,8 +123,6 @@ function NewAssetsScanner() {
             const currentIndex = videoDevices.findIndex(device => device.deviceId === selectedDeviceId);
             const nextIndex = (currentIndex + 1) % videoDevices.length;
             const nextDeviceId = videoDevices[nextIndex].deviceId;
-            console.log("Switch")
-
             // Stop the current video stream and reset the scanner
             setSelectedDeviceId(nextDeviceId);
             setScanning(false); // stop scanning momentarily
