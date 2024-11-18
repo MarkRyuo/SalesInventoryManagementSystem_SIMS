@@ -2,7 +2,7 @@
 
 function AboutCard() {
     return (
-        <div>
+        <div> {/* Main Container */}
             <div>
                 <h1>About Us</h1>
             </div>
