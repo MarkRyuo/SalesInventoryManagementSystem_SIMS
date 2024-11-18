@@ -49,8 +49,8 @@ function Footer() {
                         <h6 className="text-uppercase fw-bold mb-4">Partners</h6>
                         <Nav className="flex-column">
                             <Nav.Link href="https://www.fireflyelectric.com" className="text-reset">FELCO</Nav.Link>
-                            <Nav.Link href="https://www.mosca-elektronik.de/" className="text-reset">MOSCA</Nav.Link>
-                            <Nav.Link href="#!" className="text-reset">FSL</Nav.Link>
+                            <Nav.Link href="https://www.mosca-elektronik.de" className="text-reset">MOSCA</Nav.Link>
+                            <Nav.Link href="https://www.chinafsl.com/en/index.php?ac=article&at=read&did=148" className="text-reset">FSL</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">Tapo</Nav.Link>
                         </Nav>
                     </Col>
