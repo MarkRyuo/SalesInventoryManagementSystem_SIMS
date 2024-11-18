@@ -1,4 +1,5 @@
 import { Card } from 'react-bootstrap';
+import AboutCardscss from './LandingPageCards.module.scss'
 
 function AboutCard() {
     return (
