@@ -112,6 +112,7 @@ function Checkout() {
                                 placeholder="Enter customer name"
                                 value={customerName}
                                 onChange={(e) => setCustomerName(e.target.value)}
+                                required
                             />
                         </Form.Group>
 
