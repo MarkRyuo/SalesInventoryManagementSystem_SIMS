@@ -31,7 +31,7 @@ function LandingPageCard() {
     ])
 
     return (
-        <>
+        <div>
             <h1 className="mb-5" id="features">Features</h1>
             <div >
                 <div className={LandingPagecss.colFeature}>
@@ -62,7 +62,7 @@ function LandingPageCard() {
                     </div>
                 </div> 
             ))}
-        </>
+        </div>
     )
 }
 
