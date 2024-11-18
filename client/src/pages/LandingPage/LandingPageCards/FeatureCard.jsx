@@ -35,7 +35,7 @@ function LandingPageCard() {
             <h1 className="mb-5" id="features">Features</h1>
             <div >
                 <div>
-                    
+                    <span></span>
                 </div>
                 <div>
                     
