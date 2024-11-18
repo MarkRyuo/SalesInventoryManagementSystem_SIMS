@@ -40,7 +40,7 @@ function AboutCard() {
 
                 <div className={AboutCardscss.card}>
                     <div>
-                        <img src="/client/public/img4.jpg" />
+                        <img src="/img3.jpg" />
                     </div>
                     <div>
                         <h5>Card Title</h5>
