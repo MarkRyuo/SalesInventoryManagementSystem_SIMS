@@ -96,22 +96,25 @@ export const DashboardPage = () => {
                 </div>
             </div>
 
-                {!isLoading && (
-                    <div className={DashboardCss.chartContainer}>
+            {!isLoading && (
+                <div className={DashboardCss.chartContainer}>
 
-                        <div className={DashboardCss.smallContainer}>
-                            <Chart1 />
-                            <Chart2 />
-                            <Chart3 />
-                        </div>
+                    <div className={DashboardCss.smallContainer}>
+                        <Chart1 />
+                        <Chart2 />
+                        <Chart3 />
+                    </div>
 
-                        <div className={DashboardCss.largeContainer}>
+                    <div className={DashboardCss.largeContainer}>
+                        <div>
                             <ChartLg1 />
                             <ChartLg2 />
                         </div>
-
+                        <ChartLg1 />
                     </div>
-                )}
+
+                </div>
+            )}
         </MainLayout>
     );
 };
