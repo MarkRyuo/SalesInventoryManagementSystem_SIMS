@@ -110,14 +110,14 @@ export const DashboardPage = () => {
 
                         </div>
 
-                        <Row className={DashboardCss.rowContainerLg}>
-                            <Col className={DashboardCss.colContainerLg} sm={12} lg={6}>
+                        <div className={DashboardCss.rowContainerLg}>
+                            <div className={DashboardCss.colContainerLg}>
                                 <ChartLg1 />
-                            </Col>
-                            <Col className={DashboardCss.colContainerLg} lg={5} md={9} sm={10} xs={10}>
+                            </div>
+                            <div className={DashboardCss.colContainerLg}>
                                 <ChartLg2 />
-                            </Col>
-                        </Row>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
