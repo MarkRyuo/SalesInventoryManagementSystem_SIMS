@@ -16,13 +16,11 @@
     .componentHeroCard {
         margin: 0;
         padding: 10px 20px;
-        border: 1px solid blue;
         width: 100%;
         height: auto;
         gap: 5px;
 
         .credentialDashboard {  
-            border: 1px solid green;
             display: flex;
             margin-top: 15px;
 
@@ -95,5 +93,32 @@
 
 
 @media (max-width: 700px) {
-    
+    .mainComponent {
+
+    .componentHeroCard {
+        margin: 0;
+        padding: 0;
+
+        .credentialDashboard {  
+            padding: 10px;            
+            img {
+                width: 90px;
+                height: 90px;
+                margin-right: 10px;
+            }
+
+            div {        
+                p {
+                    font-size: 0.9rem;
+                    }
+
+                p:first-child {
+                    font-size: 1.3rem;
+                }
+
+            }
+        }
+
+    }
+}
 }
