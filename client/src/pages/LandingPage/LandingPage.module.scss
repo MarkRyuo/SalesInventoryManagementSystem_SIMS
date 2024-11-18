@@ -112,13 +112,13 @@
     }
     div.heroImage {
         box-sizing: border-box;
-        width: 750px;
-        // border: 1px solid;
+        width: 600px;
+        height: 60vh;
+        border: 1px solid;
+        text-align: center;
         img {
-            border-right: 1px solid;
-            border-top-right-radius: 15px;
-            border-bottom-right-radius: 15px;
-            width: 100%;
+            margin-top: 30px;
+            width: 80%;
             margin: 0px 20px;
         }
         
