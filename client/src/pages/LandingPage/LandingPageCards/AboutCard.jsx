@@ -5,9 +5,10 @@ function AboutCard() {
     return (
         <div className={AboutCardscss.parentAboutus}> {/* Parent */}
             <h1 id='Aboutus' className='mb-4'>About Us <FcAbout size={20} className='ms-1' /></h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+            <p>REYES ELECTRONICS is a leading provider of high-quality electronics</p>
 
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</h2>
+            <h2>&quot;With many years of experience in the business industry,REYES ELECTRONICS has established <br />itself as trusted name, offering high-quality products and services to the customers.&quot;</h2>
+
 
             <div className={AboutCardscss.aboutCards}>
                 <div className={AboutCardscss.card}>
