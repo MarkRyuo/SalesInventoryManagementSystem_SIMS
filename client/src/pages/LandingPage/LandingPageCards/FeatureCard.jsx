@@ -5,7 +5,6 @@ function LandingPageCard() {
 
     const [card] = useState([
         {
-            icon: <MdOutlineInventory size={50} />,
             cardTitle: 'Inventory Tracking',
             cardText: 'Keep real-time tabs on stock levels and prevent shortages.',
             cardId: 1
@@ -35,7 +34,7 @@ function LandingPageCard() {
             <h1 className="mb-5" id="features">Features</h1>
             <div >
                 <div>
-                    <span></span>
+                    <span><MdOutlineInventory size={50} />,</span>
                 </div>
                 <div>
                     
