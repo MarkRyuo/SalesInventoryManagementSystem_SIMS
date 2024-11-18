@@ -67,15 +67,15 @@ function LandingPage() {
                             <div className={LandingPagecss.colFeature}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                             </div>
-                            <div>
+                            <div className={LandingPagecss.colFeature}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 2)} />
                             </div>
-                            <Col>
+                            <div className={LandingPagecss.colFeature}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 3)} />
-                            </Col>
-                            <Col lg={3}>
+                            </div>
+                            <div className={LandingPagecss.colFeature}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 4)} />
-                            </Col>
+                            </div>
                         </div>
                     </div>
 
