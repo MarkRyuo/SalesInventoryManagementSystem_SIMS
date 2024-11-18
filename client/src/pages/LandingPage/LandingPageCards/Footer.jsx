@@ -1,6 +1,7 @@
 import { Container, Row, Col, Nav} from 'react-bootstrap';
 import { BsShop } from "react-icons/bs";
-import { FaFacebookF, FaGoogle, FaInstagram, FaGem, FaHome, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { FaFacebookF, FaGoogle, FaInstagram, FaGem, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 function Footer() {
     return (
@@ -62,6 +63,7 @@ function Footer() {
                         <p><BsShop className='me-2'/>Brgy 4, Rizal St. Lipa City Batangas</p>
                         <p><FaEnvelope className="me-2" /> rramilelectronics@gmail.com</p>
                         <p><FaPhone className="me-2" /> + 63 921 238 8866</p>
+                        <p><BsFillTelephoneFill className='me-2'/>(043) 741-0922</p>
                     </Col>
                 </Row>
             </Container>
