@@ -107,11 +107,11 @@ export const DashboardPage = () => {
                     </div>
 
                     <div className={DashboardCss.largeContainer}>
+                        <ChartLg3 />
                         <div>
                             <ChartLg1 />
                             <ChartLg2 />
                         </div>
-                        <ChartLg3 />
                     </div>
 
                 </div>

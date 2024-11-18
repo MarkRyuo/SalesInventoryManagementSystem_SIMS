@@ -54,7 +54,7 @@
 
 .chartContainer {
         // border: 1px solid green;
-        height: 100vh;
+        height: 60vh;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -74,12 +74,13 @@
             height: 100vh;
             padding: 15px;
             display: flex;
-            flex-direction: row;
+            gap: 15px;
+            flex-direction: column;
             justify-content: space-between;
 
-            div:first-child {
+            div:last-child {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 gap: 10px;
             }
         }
@@ -118,4 +119,6 @@
 
     }
 }
+
+
 }
