@@ -117,8 +117,11 @@
         height: auto ;
         padding: 20px;
 
+        .colFeature {
+            border: 1px solid;
+        }
+
         @media (max-width: 1000px) {
-            height: 100vh;
             gap: 10px;
         }
     

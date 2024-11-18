@@ -63,20 +63,20 @@ function LandingPage() {
 
                     <div className={LandingPagecss.featureContainer}>
                         <h1 className="text-center mb-5" id="features">Features</h1>
-                        <Row className={LandingPagecss.rowFeature}>
-                            <Col lg={3} className={LandingPagecss.colFeature}>
+                        <div className={LandingPagecss.rowFeature}>
+                            <div className={LandingPagecss.colFeature}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
-                            </Col>
-                            <Col lg={3}>
+                            </div>
+                            <div>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 2)} />
-                            </Col>
-                            <Col lg={3} >
+                            </div>
+                            <Col>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 3)} />
                             </Col>
                             <Col lg={3}>
                                 <LandingPageCard card={card.filter(cards => cards.cardId === 4)} />
                             </Col>
-                        </Row>
+                        </div>
                     </div>
 
                     <div className={LandingPagecss.AboutCard}> {/* Main Container */}
