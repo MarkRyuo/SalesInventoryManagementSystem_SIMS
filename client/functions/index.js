@@ -18,20 +18,3 @@ const logger = require("firebase-functions/logger");
 //   response.send("Hello from Firebase!");
 // });
 
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-admin.initializeApp();
-
-exports.createDynamicLink = functions.https.onCall(async (data, context) => {
-    const productId = data.productId;
-    const dynamicLinksDomain = "https://salesinventorymanagement-1bb27.web.app"; // Palitan sa domain mo
-
-    const link = `/ProductPage${productId}`;
-    const response = await admin.dynamicLinks.createLink({
-        longDynamicLink: `${dynamicLinksDomain}/?link=${link}&apn=com.yourapp.package`,
-        suffix: { option: "SHORT" }
-    });
-
-    return response;
-});
-
