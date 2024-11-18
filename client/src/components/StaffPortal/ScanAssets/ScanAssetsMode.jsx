@@ -60,9 +60,17 @@ function Checkout() {
             return;
         }
 
+        // Ensure all quantities are greater than 0
         const zeroQuantityItem = scannedItems.find(item => item.quantity <= 0);
         if (zeroQuantityItem) {
             setErrorMessage(`Cannot proceed to checkout. ${zeroQuantityItem.productName} has a quantity of zero.`);
+            return;
+        }
+
+        // Ensure stock is sufficient before proceeding
+        const insufficientStockItem = scannedItems.find(item => item.quantity > item.stockNumber);
+        if (insufficientStockItem) {
+            setErrorMessage(`Insufficient stock for ${insufficientStockItem.productName}.`);
             return;
         }
 
@@ -77,19 +85,25 @@ function Checkout() {
             total,
         };
 
-
         const db = getDatabase();
         const newOrderRef = ref(db, 'TransactionHistory/' + Date.now());
         await set(newOrderRef, orderDetails);
 
+        // Update product quantities in the database
         try {
-            await Promise.all(scannedItems.map(item => updateProductQuantity(item.barcode, -item.quantity)));
+            await Promise.all(
+                scannedItems.map(async (item) => {
+                    // Subtract item quantity from database stock
+                    await updateProductQuantity(item.barcode, -item.quantity);
+                })
+            );
             navigate('/PosSuccess');
         } catch (error) {
             console.error("Error updating product quantities:", error);
             setErrorMessage("Failed to finalize checkout. Please try again.");
         }
     };
+
 
     return (
         <Container fluid className="m-0 p-0">
