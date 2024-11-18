@@ -1,4 +1,4 @@
-import { Container, Button, Row, Col } from "react-bootstrap"
+import { Container, Button} from "react-bootstrap"
 import NavBars from "./NavBars"
 import LandingPageCard from './LandingPageCard'
 import LandingPagecss from './LandingPage.module.scss'
