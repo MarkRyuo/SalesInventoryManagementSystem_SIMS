@@ -5,7 +5,7 @@ function Footer() {
     return (
         <footer className="bg-body-tertiary text-muted">
             {/* Social Media Section */}
-            <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <div className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
                 <div className="me-5 d-none d-lg-block">
                     <span>Get connected with us on social networks:</span>
                 </div>
@@ -31,17 +31,17 @@ function Footer() {
                         </Nav.Link>
                     </Nav>
                 </div>
-            </section>
+            </div>
 
             {/* Links Section */}
             <Container className="text-center text-md-start mt-5">
                 <Row className="mt-3">
                     <Col md={3} lg={4} xl={3} className="mb-4">
                         <h6 className="text-uppercase fw-bold mb-4">
-                            <FaGem className="me-2" /> Company name
+                            <FaGem className="me-2" /> REYES ELECTRONICS
                         </h6>
                         <p>
-                            Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Our mission is to bring affordable, high-quality electronics to every home, making technology accessible for everyone.
                         </p>
                     </Col>
 
