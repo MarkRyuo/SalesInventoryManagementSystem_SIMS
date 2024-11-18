@@ -3,7 +3,7 @@ import AboutCardscss from './LandingPageCards.module.scss';
 function AboutCard() {
     return (
         <div className={AboutCardscss.parentAboutus}> {/* Parent */}
-            <h1>About Us</h1>
+            <h1 id='Aboutus'>About Us</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
 
             <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</h2>

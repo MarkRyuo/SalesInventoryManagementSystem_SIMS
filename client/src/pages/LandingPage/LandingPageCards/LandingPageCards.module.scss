@@ -34,9 +34,7 @@
         justify-content: space-evenly;
         
         .card {
-                        box-shadow: 1px 1px 3px;
-
-            border: 1px solid;
+            box-shadow: 1px 1px 3px;
             padding: 10px;
             display: flex;
             flex-direction: column;
@@ -100,7 +98,7 @@
         .card {
             display: flex;
             flex-direction: row;
-            padding: 0px;
+            padding: 10px;
             width: 100%;
             height: 200px;
             
