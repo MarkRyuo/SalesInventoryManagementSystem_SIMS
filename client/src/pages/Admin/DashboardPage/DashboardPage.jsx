@@ -96,7 +96,7 @@ export const DashboardPage = () => {
                 </div>
 
                 {!isLoading && (
-                    <>
+                    <div>
                         <div className={DashboardCss.rowContainer}>
                             <div>
                                 <Chart1 />
@@ -118,7 +118,7 @@ export const DashboardPage = () => {
                                 <ChartLg2 />
                             </Col>
                         </Row>
-                    </>
+                    </div>
                 )}
             </div>
         </MainLayout>
