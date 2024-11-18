@@ -31,6 +31,7 @@ function LandingPage() {
 
                         <div>
                             <img src="https://www.fireflyelectric.com/wp-content/uploads/2021/05/FELCO-logo-2021-cropped-1.png"/>
+                            <img src="/Mosca.png" />
                         </div>
                     </div>
                     <div className={LandingPagecss.AboutCard}> {/* Main Container */}
