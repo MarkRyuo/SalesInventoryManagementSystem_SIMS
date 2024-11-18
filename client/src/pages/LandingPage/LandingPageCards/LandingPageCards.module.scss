@@ -1,4 +1,9 @@
 
 *, ::before, ::after {
-    b
+    box-sizing: border-box;
+}
+
+.parentAboutus {
+    display: flex;
+    flex-direction: column;
 }
