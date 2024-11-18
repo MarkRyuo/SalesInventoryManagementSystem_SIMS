@@ -1,9 +1,9 @@
 import { Card } from 'react-bootstrap';
-import AboutCardscss from './LandingPageCards.module.scss'
+import AboutCardscss from './LandingPageCards.module.scss' ;
 
 function AboutCard() {
     return (
-        <div> {/* Parent */}
+        <div className={AboutCardscss.parentAboutus}> {/* Parent */}
             <h1>About Us</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
 
