@@ -151,18 +151,18 @@
 
 @media (max-width: 700px) {
     .containerChartLg1 {
-    // border: 1px solid yellow;
+    border: 1px solid rgb(235, 235, 135);
     width: 100%;
-    height: 400px;
+    height: 290px;
     background-color: var(--BgColor);
     border-radius: 20px;
     box-shadow: 1px 1px 3px var(--chartShadow);
 }
 
 .containerChartLg2 {
-    // border: 1px solid violet;
-    width: 700px;
-    height: 400px;
+    border: 1px solid rgb(238, 130, 238);
+    width: 100%;
+    height: 290px;
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 1px 3px var(--chartShadow);
     background-color: var(--BgColor);
@@ -172,7 +172,7 @@
 .containerChartLg3 {
     // border: 1px solid rgb(130, 238, 144);
     width: 100%;
-    height: 400px;
+    height: 300px;
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 1px 3px var(--chartShadow);
     background-color: var(--BgColor);
