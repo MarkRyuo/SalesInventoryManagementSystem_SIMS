@@ -48,7 +48,7 @@ function Footer() {
                     <Col md={2} lg={2} xl={2} className="mb-4">
                         <h6 className="text-uppercase fw-bold mb-4">Partners</h6>
                         <Nav className="flex-column">
-                            <Nav.Link href="https://www.fireflyelectric.com/" className="text-reset">FELCO</Nav.Link>
+                            <Nav.Link href="https://www.fireflyelectric.com" className="text-reset">FELCO</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">MOSCA</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">FSL</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">Tapo</Nav.Link>
