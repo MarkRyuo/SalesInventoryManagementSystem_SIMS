@@ -15,7 +15,6 @@ function AdminTransactionHistory() {
     const [selectedOrder, setSelectedOrder] = useState(null);
     const db = getDatabase();
     const qrRef = useRef(null);
-
     const [filterDate, setFilterDate] = useState('');
     const [filterCustomer, setFilterCustomer] = useState('');
 
