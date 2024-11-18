@@ -18,7 +18,6 @@ function AdminTransactionHistory() {
     const [filterDate, setFilterDate] = useState('');
     const [filterCustomer, setFilterCustomer] = useState('');
 
-    
     useEffect(() => {
         const historyRef = ref(db, 'TransactionHistory/');
         onValue(historyRef, (snapshot) => {
