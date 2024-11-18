@@ -1,4 +1,4 @@
-import { Row, Col, Image} from 'react-bootstrap';
+import { Image} from 'react-bootstrap';
 import { MainLayout } from '../../../layout/MainLayout';
 import DashboardCss from './Dashboard.module.scss';
 import { useEffect, useState } from 'react';
