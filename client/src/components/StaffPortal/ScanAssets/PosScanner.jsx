@@ -86,7 +86,7 @@ function PosScanner() {
                 setCameraVisible(false);
                 setTimeout(() => setCameraVisible(true), 2000); // Hide camera during success message
             } else {
-                setErrorMessages(prev => [...prev, `No product found for barcode: ${scannedText}`]);
+                setErrorMessages(prev => [...prev, `No product found: ${scannedText}`]);
                 setFadeOut(false);
                 setTimeout(() => setFadeOut(true), 2000);
             }
