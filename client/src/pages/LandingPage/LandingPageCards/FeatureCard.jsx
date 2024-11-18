@@ -34,7 +34,8 @@ function LandingPageCard() {
             <h1 className="mb-5" id="features">Features</h1>
             <div >
                 <div>
-                    <span><MdOutlineInventory size={50} />,</span>
+                    <span><MdOutlineInventory size={50} /></span>
+                    <h4>Inventory Tracking</h4>
                 </div>
                 <div>
                     
