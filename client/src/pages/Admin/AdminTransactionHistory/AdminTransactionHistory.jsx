@@ -260,11 +260,7 @@ function AdminTransactionHistory() {
             </Modal>
 
             {/* Delete Confirmation Modal */}
-            <Modal
-                show={showDeleteModal}
-                onHide={handleCloseDeleteModal}
-                centered
-            >
+            <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered >
                 <Modal.Header closeButton className="bg-danger text-white">
                     <Modal.Title>Delete Order</Modal.Title>
                 </Modal.Header>
