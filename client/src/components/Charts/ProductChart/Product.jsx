@@ -297,7 +297,7 @@ function ProductChart() {
                     size="lg"
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title>
+                        <Modal.Title style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
                             <FaProductHunt size={20} className="me-2"/>
                             {editProduct ? editProduct.productName : 'Edit Product'}
                             {editProduct && (
