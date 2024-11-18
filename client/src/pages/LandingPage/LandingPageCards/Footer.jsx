@@ -12,7 +12,7 @@ function Footer() {
                 </div>
                 <div>
                     <Nav className="justify-content-center">
-                        <Nav.Link href="#" className="text-reset">
+                        <Nav.Link href="https://www.facebook.com/ReyesElectronics" className="text-reset">
                             <FaFacebookF />
                         </Nav.Link>
                         <Nav.Link href="#" className="text-reset">
