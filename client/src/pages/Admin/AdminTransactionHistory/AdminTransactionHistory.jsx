@@ -52,8 +52,6 @@ function AdminTransactionHistory() {
         );
     });
 
-
-
     useEffect(() => {
         if (selectedOrder && qrRef.current) {
             new QRious({
