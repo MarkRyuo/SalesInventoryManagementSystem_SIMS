@@ -69,9 +69,8 @@ function Footer() {
                         <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
                         <p><FaHome className="me-2" /> Set Up</p>
                         <p><FaEnvelope className="me-2" /> ReyesElectronics@gmail.com</p>
-                        <p><FaPhone className="me-2" /> + 63 0992 902 2322/p>
-                        <p><FaPrint className="me-2" /> + 01 234 567 89</p>
-                    </Col>
+                        <p><FaPhone className="me-2" /> + 63 0992 902 2322</p>
+\                    </Col>
                 </Row>
             </Container>
 
