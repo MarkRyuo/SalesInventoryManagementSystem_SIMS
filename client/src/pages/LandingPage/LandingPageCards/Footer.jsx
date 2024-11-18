@@ -15,19 +15,10 @@ function Footer() {
                             <FaFacebookF />
                         </Nav.Link>
                         <Nav.Link href="#" className="text-reset">
-                            <FaTwitter />
-                        </Nav.Link>
-                        <Nav.Link href="#" className="text-reset">
                             <FaGoogle />
                         </Nav.Link>
                         <Nav.Link href="#" className="text-reset">
                             <FaInstagram />
-                        </Nav.Link>
-                        <Nav.Link href="#" className="text-reset">
-                            <FaLinkedin />
-                        </Nav.Link>
-                        <Nav.Link href="#" className="text-reset">
-                            <FaGithub />
                         </Nav.Link>
                     </Nav>
                 </div>
