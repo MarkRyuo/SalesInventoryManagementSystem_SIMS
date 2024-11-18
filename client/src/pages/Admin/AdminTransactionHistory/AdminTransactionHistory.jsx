@@ -259,7 +259,6 @@ function AdminTransactionHistory() {
                 </Modal.Footer>
             </Modal>
 
-
             {/* Delete Confirmation Modal */}
             <Modal
                 show={showDeleteModal}
