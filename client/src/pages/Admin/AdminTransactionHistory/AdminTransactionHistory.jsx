@@ -278,8 +278,7 @@ function AdminTransactionHistory() {
                     <Button variant="danger" onClick={() => handleDeleteOrder(selectedOrder.id)}>Delete</Button>
                 </Modal.Footer>
             </Modal>
-
-
+            
         </Container>
     );
 }
