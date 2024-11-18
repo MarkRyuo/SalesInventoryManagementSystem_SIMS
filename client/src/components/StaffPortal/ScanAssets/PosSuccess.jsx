@@ -10,7 +10,7 @@ function PosSuccess() {
     useEffect(() => {
         // Redirect to the scanner page after 3 seconds
         const timer = setTimeout(() => {
-            navigate('/PosScanner'); // Replace '/scanner' with the correct path to your scanner component
+            navigate('/ScanAssets'); // Replace '/scanner' with the correct path to your scanner component
         }, 3000); // 3000 milliseconds = 3 seconds
 
         return () => clearTimeout(timer); // Clean up the timer on component unmount
