@@ -22,6 +22,7 @@ function PosScanner() {
     const [canScanAgain, setCanScanAgain] = useState(false); // Track if user can scan again
     const [cameraVisible, setCameraVisible] = useState(true); // Camera visibility state
 
+    
     const videoRef = useRef(null);
     const scanningInProgress = useRef(false); // Flag to manage scanning state
     const [selectedDeviceId, setSelectedDeviceId] = useState(null); // Camera device ID
