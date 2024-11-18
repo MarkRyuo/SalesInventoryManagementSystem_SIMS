@@ -106,36 +106,7 @@
 
 //! End of Hero Section 
 
-
-.featureContainer {
-    box-sizing: border-box;
-    height: 100vh;
-    padding-top: 40px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
-    .rowFeature {
-        width: 100%;
-        height: auto;
-        padding: 20px;
-
-        .colFeature {
-            border: 1px solid;
-        }
-
-        @media (max-width: 1000px) {
-            gap: 10px;
-        }
-    
-    }
-}
-
-
-
-
 //? Navbar 
-
 
 .Navbar {
     height: auto;
