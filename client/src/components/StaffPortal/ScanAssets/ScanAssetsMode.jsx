@@ -84,7 +84,6 @@ function Checkout() {
 
         try {
             await Promise.all(scannedItems.map(item => updateProductQuantity(item.barcode, -item.quantity)));
-            alert('Order saved successfully!');
             navigate('/PosSuccess');
         } catch (error) {
             console.error("Error updating product quantities:", error);
