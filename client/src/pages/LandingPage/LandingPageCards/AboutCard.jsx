@@ -5,7 +5,7 @@ function AboutCard() {
         <div> {/* Main Container */}
             <div>
                 <h1>About Us</h1>
-                <p>Some Text</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
             </div>
         </div>
     )
