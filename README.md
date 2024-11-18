@@ -10,7 +10,7 @@
 ## Changelog
 
 ### v.deploy-2 (Latest)
-- 
+- v8.0.4 and v8.0.3-beta 
 
 ### v8.0.4
 - Merge with v8.0.3-beta
