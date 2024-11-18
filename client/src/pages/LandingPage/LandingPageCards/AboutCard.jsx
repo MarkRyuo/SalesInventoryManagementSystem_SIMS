@@ -8,4 +8,4 @@ function AboutCard() {
     )
 }
 
-export default AboutCard
+export default AboutCard ;
