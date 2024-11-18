@@ -154,8 +154,26 @@ function PosScanner() {
             setSelectedDeviceId(newCamera.deviceId);
             setIsUsingBackCamera(!isUsingBackCamera); // Toggle camera state
             setCameraLoading(true); // Indicate camera switching
+
+            // Reset the video stream
+            const codeReader = new BrowserMultiFormatReader();
+            codeReader.reset(); // Reset the reader to stop the current video stream
+
+            // Start the new camera stream after switching
+            setTimeout(() => {
+                codeReader.decodeFromVideoDevice(newCamera.deviceId, videoRef.current, (result, error) => {
+                    if (result) {
+                        handleScan(result.getText());
+                    }
+                    if (error && !isLoading) {
+                        console.error("Scanning error: ", error);
+                    }
+                });
+                setCameraLoading(false); // Camera switching done
+            }, 500); // Delay to allow camera reset to complete
         }
     };
+
 
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });
