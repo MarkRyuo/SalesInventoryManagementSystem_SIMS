@@ -34,17 +34,17 @@ function LandingPageCard() {
         <div>
             <h1 className="mb-5" id="features">Features</h1>
             <div >
-                <div className={LacolFeature}>
-                    <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
+                <div>
+                    
+                </div>
+                <div>
+                    
                 </div>
                 <div className={LandingPagecss.colFeature}>
-                    <LandingPageCard card={card.filter(cards => cards.cardId === 2)} />
+                    
                 </div>
                 <div className={LandingPagecss.colFeature}>
-                    <LandingPageCard card={card.filter(cards => cards.cardId === 3)} />
-                </div>
-                <div className={LandingPagecss.colFeature}>
-                    <LandingPageCard card={card.filter(cards => cards.cardId === 4)} />
+                    
                 </div>
             </div>
             {card.map((cards) => (
