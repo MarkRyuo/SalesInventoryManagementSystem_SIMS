@@ -1,6 +1,7 @@
-/* eslint-disable react/prop-types */
+import { useState } from "react";
+import { MdOutlineInventory } from "react-icons/md";
 
-function LandingPageCard({card}) {
+function LandingPageCard() {
 
     const [card] = useState([
         {
@@ -32,7 +33,7 @@ function LandingPageCard({card}) {
     return (
         <>
             <h1 className="mb-5" id="features">Features</h1>
-            <div className={LandingPagecss.rowFeature}>
+            <div >
                 <div className={LandingPagecss.colFeature}>
                     <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                 </div>
