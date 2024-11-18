@@ -72,7 +72,7 @@ export const DashboardPage = () => {
 
     return (
         <MainLayout>
-            <div className={DashboardCss.mainComponent}>
+            <div className={DashboardCss.mainTopComponent}>
                 <div className={DashboardCss.componentHeroCard}>
                     {isLoading ? (
                         <div className={DashboardCss.loadingContainer}>

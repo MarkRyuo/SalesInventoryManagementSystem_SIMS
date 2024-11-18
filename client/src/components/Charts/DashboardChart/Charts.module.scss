@@ -119,7 +119,7 @@
 /* !Warning This is for ChartLg */
 
 .containerChartLg1 {
-    /* border: 1px solid red; */
+    border: 1px solid yellow;
     width: 100%;
     height: 400px;
     background-color: var(--BgColor);
@@ -127,8 +127,8 @@
 }
 
 .containerChartLg2 {
-    /* border: 1px solid red; */
-    width: 500px;
+    border: 1px solid violet;
+    width: 100%;
     height: 400px;
     /*! Change this in auto if chart-lg is coded*/
     /* box-shadow: 1px 1px 3px var(--chartShadow); */
