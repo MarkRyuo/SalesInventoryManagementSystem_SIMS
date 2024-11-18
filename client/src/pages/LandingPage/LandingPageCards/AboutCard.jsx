@@ -9,8 +9,6 @@ function AboutCard() {
 
             <h2>&quot;With years of industry experience, REYES ELECTRONICS has built a reputation for providing high-quality products and services.&quot;</h2>
 
-
-
             <div className={AboutCardscss.aboutCards}>
                 <div className={AboutCardscss.card}>
                     <div>
