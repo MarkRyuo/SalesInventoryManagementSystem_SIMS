@@ -96,7 +96,6 @@ export const DashboardPage = () => {
                 </div>
             </div>
 
-            <div className={DashboardCss.mainBottomComponent}>
                 {!isLoading && (
                     <div className={DashboardCss.chartContainer}>
 
@@ -110,10 +109,9 @@ export const DashboardPage = () => {
                             <ChartLg1 />
                             <ChartLg2 />
                         </div>
-                        
+
                     </div>
                 )}
-            </div>
         </MainLayout>
     );
 };
