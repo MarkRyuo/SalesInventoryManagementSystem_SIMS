@@ -79,11 +79,11 @@ function LandingPage() {
                         </Row>
                     </div>
 
-                    <section>
-                        <div>
+                    <div>
+                        <div> {/* Main Container */}
                             <AboutCard />
                         </div>
-                    </section>
+                    </div>
                 </main>
             </Container>
         </Container>
