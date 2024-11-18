@@ -123,5 +123,4 @@ export const DashboardPage = () => {
         </MainLayout>
     );
 };
-
 export default DashboardPage;
