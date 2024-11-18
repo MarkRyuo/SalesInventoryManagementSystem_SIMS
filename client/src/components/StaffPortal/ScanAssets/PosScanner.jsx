@@ -60,7 +60,7 @@ function PosScanner() {
             const product = await fetchProductByBarcode(scannedText);
 
             if (product && product.quantity === 0) {
-                setErrorMessages(prev => [...prev, `Cannot scan ${product.productName}. Quantity is zero.`]);
+                setErrorMessages(prev => [...prev, `Cannot scan ${product.productName}. Quantity is 0.`]);
                 setFadeOut(false);
                 setTimeout(() => setFadeOut(true), 2000);
                 return;
