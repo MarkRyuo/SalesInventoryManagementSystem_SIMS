@@ -6,7 +6,7 @@ import { FaFacebookF, FaGoogle, FaInstagram, FaGem, FaEnvelope, FaPhone } from '
 
 function Footer() {
     return (
-        <footer className="bg-body-tertiary text-muted">
+        <footer className="bg-body-tertiary text-muted" style={{ background: 'radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%)' }}    >
             {/* Social Media Section */}
             <div className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
                 <div className="me-5 d-none d-lg-block">
