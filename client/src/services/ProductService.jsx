@@ -545,8 +545,6 @@ export const fetchQrcodesFromDatabase = async () => {
     }
 };
 
-
-
 export const saveProductName = async (qrId, productName) => {
     try {
         // Get a reference to the Realtime Database

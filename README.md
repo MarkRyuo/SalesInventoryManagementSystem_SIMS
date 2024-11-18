@@ -9,6 +9,9 @@
 
 ## Changelog
 
+### v8.0.5 (Latest)
+- Landing Page Full design
+
 ### v.deploy-2 (Latest)
 - v8.0.4 and v8.0.3-beta 
 

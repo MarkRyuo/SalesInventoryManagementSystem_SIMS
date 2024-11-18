@@ -70,7 +70,7 @@ export const NavDashboard = () => {
                 <Offcanvas.Header closeButton className={Navbars.offCanvasHeader}>
                     <Offcanvas.Title>
                         <Image width={40} className='me-2'
-                            src="/ReyesElectronicsLogo.png" rounded />
+                            src="/Reyes_Electronics_LogoBg.png" rounded />
                         REYES ELECTRONICS
                     </Offcanvas.Title>
                 </Offcanvas.Header>

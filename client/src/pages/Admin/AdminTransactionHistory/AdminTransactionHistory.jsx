@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import QRious from 'qrious';
-import { FaEye, FaDownload, FaTrash } from "react-icons/fa"; // Importing icons
+import { FaEye, FaDownload, FaTrash } from "react-icons/fa";
 import AdminTransactionScss from './AdminTransactionHistory.module.scss';
 import { FaSave } from "react-icons/fa";
 import { FaTruckRampBox } from "react-icons/fa6";
@@ -15,11 +15,9 @@ function AdminTransactionHistory() {
     const [selectedOrder, setSelectedOrder] = useState(null);
     const db = getDatabase();
     const qrRef = useRef(null);
-
     const [filterDate, setFilterDate] = useState('');
     const [filterCustomer, setFilterCustomer] = useState('');
 
-    
     useEffect(() => {
         const historyRef = ref(db, 'TransactionHistory/');
         onValue(historyRef, (snapshot) => {
@@ -52,17 +50,17 @@ function AdminTransactionHistory() {
         );
     });
 
-
-
     useEffect(() => {
         if (selectedOrder && qrRef.current) {
             new QRious({
                 element: qrRef.current,
-                value: `https://salesinventorymanagement-1bb27.web.app/ProductPage/${selectedOrder.id}` //! Need Function to Online
+                value: `https://us-central1-your-project-id.cloudfunctions.net/api/downloadOrder?id=${selectedOrder.id}`, // Updated to Firebase Function URL
+                size: 256,
             });
+
         }
     }, [selectedOrder]);
-
+    
     const handleDownloadOrder = async (order) => {
         const doc = new jsPDF();
 
@@ -101,8 +99,6 @@ function AdminTransactionHistory() {
         // Save as PDF
         doc.save(`Order_${order.id}.pdf`);
     };
-
-
 
     const handleDeleteOrder = (id) => {
         const orderRef = ref(db, `TransactionHistory/${id}`);
@@ -148,6 +144,7 @@ function AdminTransactionHistory() {
                             placeholder="Filter by Date"
                             value={filterDate}
                             onChange={(e) => setFilterDate(e.target.value)}
+                            className="bg-info"
                         />
                     </Col>
                     <Col md={6} sm={12} className="mb-2">
@@ -208,13 +205,7 @@ function AdminTransactionHistory() {
             </div>
 
             {/* Updated Modal for viewing order details */}
-            <Modal
-                show={showModal}
-                onHide={handleCloseModal}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
+            <Modal show={showModal} onHide={handleCloseModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered >
                 <Modal.Header closeButton>
                     <Modal.Title><FaTruckRampBox size={20} className="me-2"/>Order Details</Modal.Title>
                 </Modal.Header>
@@ -266,24 +257,19 @@ function AdminTransactionHistory() {
                 </Modal.Footer>
             </Modal>
 
-
             {/* Delete Confirmation Modal */}
-            <Modal
-                show={showDeleteModal}
-                onHide={handleCloseDeleteModal}
-                centered
-            >
+            <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered >
                 <Modal.Header closeButton className="bg-danger text-white">
                     <Modal.Title>Delete Order</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p className="text-danger font-weight-bold">
-                        Warning: Deleting the following products is permanent and cannot be undone:
+                        Warning: Deleting these products is permanent and cannot be undone!
                     </p>
                     <p className="font-weight-bold text-danger">
                         {selectedOrder ? getProductNames(selectedOrder) : ''}
                     </p>
-                    <p>Are you sure you want to delete this order?</p>
+                    <p>Delete this order permanently?</p>
                 </Modal.Body>
                 <Modal.Footer className="bg-light">
                     <Button variant="secondary" onClick={handleCloseDeleteModal}>Cancel</Button>
@@ -291,9 +277,7 @@ function AdminTransactionHistory() {
                 </Modal.Footer>
             </Modal>
 
-
         </Container>
     );
 }
-
 export default AdminTransactionHistory;

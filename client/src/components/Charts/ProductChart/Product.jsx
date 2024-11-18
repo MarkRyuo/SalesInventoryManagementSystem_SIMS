@@ -262,9 +262,7 @@ function ProductChart() {
                                                 <div>
                                                     <div className="d-flex">
                                                         <p className="m-0 pb-2">{product.productName}</p>
-                                                        <p style={{ color: color, fontSize: '0.9rem' }} className="pt-2 m-0">
-                                                            <span style={{ color: color }} className="p-0">•</span> {text}
-                                                        </p>
+                                                        <span style={{ color: color }} className="p-0">• {text}</span>
                                                     </div>
                                                     <div className={Productcss.lastChild}>
                                                         <p className="m-0 p-0">SKU: {product.sku}</p>
@@ -299,7 +297,7 @@ function ProductChart() {
                     size="lg"
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title>
+                        <Modal.Title style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
                             <FaProductHunt size={20} className="me-2"/>
                             {editProduct ? editProduct.productName : 'Edit Product'}
                             {editProduct && (

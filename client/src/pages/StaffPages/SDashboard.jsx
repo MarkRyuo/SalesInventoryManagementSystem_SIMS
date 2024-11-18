@@ -126,7 +126,7 @@ function SDashboard() {
                     <>
                         <div className={SDashboardCss.componentHeroCard}>
                             <Image
-                                src="/ReyesElectronicsLogo.png"
+                                src="/Reyes_Electronics_LogoBg.png"
                                 roundedCircle
                                 style={{ width: '100%', maxWidth: '100px', height: '100px' }}
                             />

@@ -1,4 +1,4 @@
-import { Row, Col, Image, Container } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import { MainLayout } from '../../../layout/MainLayout';
 import DashboardCss from './Dashboard.module.scss';
 import { useEffect, useState } from 'react';
@@ -11,6 +11,7 @@ import Chart2 from '../../../components/Charts/DashboardChart/Chart2';
 import Chart3 from '../../../components/Charts/DashboardChart/Chart3';
 import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
 import ChartLg2 from '../../../components/Charts/DashboardChart/ChartLg2';
+import ChartLg3 from '../../../components/Charts/DashboardChart/ChartLg3';
 
 export const DashboardPage = () => {
     const [adminName, setAdminName] = useState('');
@@ -72,7 +73,7 @@ export const DashboardPage = () => {
 
     return (
         <MainLayout>
-            <div className={DashboardCss.mainComponent}>
+            <div className={DashboardCss.mainTopComponent}>
                 <div className={DashboardCss.componentHeroCard}>
                     {isLoading ? (
                         <div className={DashboardCss.loadingContainer}>
@@ -81,48 +82,43 @@ export const DashboardPage = () => {
                     ) : (
                         <div className={DashboardCss.credentialDashboard}>
                             <Image
-                                src="/ReyesElectronicsLogo.png"
+                                src="/Reyes_Electronics_LogoBg.png"
                                 roundedCircle
                             />
                             <div>
-                                <p className='m-0'>
+                                <h4 className='m-0'>
                                     <span className='fw-semibold'>Hello,</span> <span>{getSalutation(adminGender)}</span> {adminName || 'Admin'}
-                                </p>
+                                </h4>
                                 <p className='m-0'>REYES ELECTRONICS.</p>
                                 <p className='m-0'>{currentDate}</p>
                             </div>
                         </div>
                     )}
                 </div>
-
-                {!isLoading && (
-                    <Container>
-                        <div className={DashboardCss.rowContainer}>
-                            <div>
-                                <Chart1 />
-                            </div>
-                            <div>
-                                <Chart2 />
-                            </div>
-                            <div>
-                                <Chart3 />
-                            </div>
-
-                        </div>
-
-                        <Row className={DashboardCss.rowContainerLg}>
-                            <Col className={DashboardCss.colContainerLg} sm={12} lg={6}>
-                                <ChartLg1 />
-                            </Col>
-                            <Col className={DashboardCss.colContainerLg} lg={5} md={9} sm={10} xs={10}>
-                                <ChartLg2 />
-                            </Col>
-                        </Row>
-                    </Container>
-                )}
             </div>
+
+            {!isLoading && (
+                <div className={DashboardCss.chartContainer}>
+
+                    <div className={DashboardCss.smallContainer}>
+                        <Chart1 />
+                        <Chart2 />
+                        <Chart3 />
+                    </div>
+
+                    <div className={DashboardCss.largeContainer}>
+                        <div>
+                            <ChartLg3 />
+                        </div>
+                        <div>
+                            <ChartLg1 />
+                            <ChartLg2 />
+                        </div>
+                    </div>
+
+                </div>
+            )}
         </MainLayout>
     );
 };
-
 export default DashboardPage;

@@ -16,6 +16,30 @@
     }
 }
 
+.partners {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 87%;
+    left: 15%;
+    width: 70vw;
+    img {
+        width: 150px;;
+        height: 50px ;
+        opacity: 60%;
+    }
+
+    @media (max-width: 700px) {
+        left: 0%;
+        width: 100%;
+
+        img {
+            width: 70px;
+            height: 40px;
+        }
+    }
+}
+
 .heroSection {
     display: flex;
     justify-content: center;
@@ -23,6 +47,7 @@
     height: 50vh;
     box-sizing: border-box;
     padding-top: 8vh;
+    position: relative;
 
     @media (max-width: 500px) {
         padding-top: 0vh;
@@ -87,13 +112,13 @@
     }
     div.heroImage {
         box-sizing: border-box;
-        width: 750px;
-        // border: 1px solid;
+        width: 600px;
+        height: 60vh;
+        text-align: center;
+        padding-top: 50px;
         img {
-            border-right: 1px solid;
-            border-top-right-radius: 15px;
-            border-bottom-right-radius: 15px;
-            width: 100%;
+            opacity: 90%;
+            width: 80%;
             margin: 0px 20px;
         }
         
@@ -106,29 +131,7 @@
 
 //! End of Hero Section 
 
-
-.featureContainer {
-    box-sizing: border-box;
-    height: 50vh;
-    padding-top: 40px;
-
-    .rowFeature {
-        width: 100%;
-        height: auto ;
-        padding: 20px;
-
-        @media (max-width: 1000px) {
-            gap: 10px;
-        }
-    
-    }
-}
-
-
-
-
 //? Navbar 
-
 
 .Navbar {
     height: auto;
@@ -141,4 +144,13 @@
     @media (max-width: 700px) {
         background: radial-gradient(circle at 5% 15%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 90%);
     }
+}
+
+
+
+//! About Card
+
+.AboutCard {
+    width: 100vw;
+    height: 100vh;
 }

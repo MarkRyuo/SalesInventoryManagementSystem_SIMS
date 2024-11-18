@@ -10,7 +10,7 @@ function NavBars() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                         <Nav.Link href="#home" style={{ color: '#ffffff' }}>Home</Nav.Link>
-                        <Nav.Link href="#" style={{ color: '#ffffff' }}>About us</Nav.Link>
+                        <Nav.Link href="#Aboutus" style={{ color: '#ffffff' }}>About us</Nav.Link>
                         <NavDropdown title={<span style={{ color: '#ffffff' }}>User Type</span>} id="basic-nav-dropdown">
                                 <NavDropdown.Item href="LoginPage">Admin Portal</NavDropdown.Item>
                                 <NavDropdown.Item href="SLogin">Staff Portal</NavDropdown.Item>

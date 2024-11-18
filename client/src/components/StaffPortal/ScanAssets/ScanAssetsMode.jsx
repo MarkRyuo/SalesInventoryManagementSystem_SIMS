@@ -60,9 +60,17 @@ function Checkout() {
             return;
         }
 
+        // Ensure all quantities are greater than 0
         const zeroQuantityItem = scannedItems.find(item => item.quantity <= 0);
         if (zeroQuantityItem) {
             setErrorMessage(`Cannot proceed to checkout. ${zeroQuantityItem.productName} has a quantity of zero.`);
+            return;
+        }
+
+        // Ensure stock is sufficient before proceeding
+        const insufficientStockItem = scannedItems.find(item => item.quantity > item.stockNumber);
+        if (insufficientStockItem) {
+            setErrorMessage(`Insufficient stock for ${insufficientStockItem.productName}.`);
             return;
         }
 
@@ -77,20 +85,25 @@ function Checkout() {
             total,
         };
 
-
         const db = getDatabase();
         const newOrderRef = ref(db, 'TransactionHistory/' + Date.now());
         await set(newOrderRef, orderDetails);
 
+        // Update product quantities in the database
         try {
-            await Promise.all(scannedItems.map(item => updateProductQuantity(item.barcode, -item.quantity)));
-            alert('Order saved successfully!');
+            await Promise.all(
+                scannedItems.map(async (item) => {
+                    // Subtract item quantity from database stock
+                    await updateProductQuantity(item.barcode, -item.quantity);
+                })
+            );
             navigate('/PosSuccess');
         } catch (error) {
             console.error("Error updating product quantities:", error);
             setErrorMessage("Failed to finalize checkout. Please try again.");
         }
     };
+
 
     return (
         <Container fluid className="m-0 p-0">
@@ -109,9 +122,10 @@ function Checkout() {
                             <Form.Label>Sold To:</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Enter customer name (Optional)"
+                                placeholder="Enter customer name"
                                 value={customerName}
                                 onChange={(e) => setCustomerName(e.target.value)}
+                                required
                             />
                         </Form.Group>
 
@@ -164,8 +178,8 @@ function Checkout() {
                                     <tr key={item.productId}>
                                         <td>{item.productName}</td>
                                         <td>{item.quantity}</td>
-                                        <td>₱{item.price.toFixed(2)}</td>
-                                        <td>₱{(item.price * item.quantity).toFixed(2)}</td>
+                                        <td>₱{parseFloat(item.price).toFixed(2)}</td> {/* Ensure price is a number */}
+                                        <td>₱{(parseFloat(item.price) * item.quantity).toFixed(2)}</td> {/* Ensure amount is calculated correctly */}
                                     </tr>
                                 ))}
                                 <tr>
@@ -176,7 +190,6 @@ function Checkout() {
                                     <td colSpan="3" className="text-end"><strong>Discount ({discountPercentage}%):</strong></td>
                                     <td>-₱{discountAmount.toFixed(2)}</td>
                                 </tr>
-
                                 <tr>
                                     <td colSpan="3" className="text-end"><strong>Total Tax:</strong></td>
                                     <td>₱{taxAmount.toFixed(2)}</td>
@@ -187,6 +200,7 @@ function Checkout() {
                                 </tr>
                             </tbody>
                         </Table>
+
                         <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
                     </Col>
                 </Row>
