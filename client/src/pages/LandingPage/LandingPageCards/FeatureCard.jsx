@@ -34,7 +34,7 @@ function LandingPageCard() {
         <div>
             <h1 className="mb-5" id="features">Features</h1>
             <div >
-                <div className={LandingPagecss.colFeature}>
+                <div className={LacolFeature}>
                     <LandingPageCard card={card.filter(cards => cards.cardId === 1)} />
                 </div>
                 <div className={LandingPagecss.colFeature}>
