@@ -52,27 +52,21 @@
     .chartContainer {
         border: 1px solid;
         height: auto;
+
+        .smallContainer {
+            border: 1px solid red;
+            width: 100%;
+            height: auto;
+            padding: 10px;
+            margin: 12px 0;
+            display: flex;
+            padding: 10px;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
     }
 }
 
-/* !(Warning): This is for ChartSm */
-
-.rowContainer {
-    border: 1px solid red;
-    width: 100%;
-    height: auto;
-    padding: 10px;
-    margin: 12px 0;
-    display: flex;
-    padding: 10px;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    
-
-    @media (max-width: 1100px) {
-        gap: 15px;
-    }
-}
 
 
 /* !(Warning): This is for ChartLg */
