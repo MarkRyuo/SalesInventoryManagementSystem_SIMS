@@ -26,7 +26,7 @@ exports.createDynamicLink = functions.https.onCall(async (data, context) => {
     const productId = data.productId;
     const dynamicLinksDomain = "https://salesinventorymanagement-1bb27.web.app/"; // Palitan sa domain mo
 
-    const link = `https://salesinventorymanagement-1bb27.web.app/ProductPage/${productId}`;
+    const link = `/ProductPage${productId}`;
     const response = await admin.dynamicLinks.createLink({
         longDynamicLink: `${dynamicLinksDomain}/?link=${link}&apn=com.yourapp.package`,
         suffix: { option: "SHORT" }
