@@ -19,14 +19,13 @@ function PosScanner() {
     const [isLoading, setIsLoading] = useState(false);
     const [cameraLoading, setCameraLoading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
-    const [canScanAgain, setCanScanAgain] = useState(false); // Track if user can scan again
-    const [cameraVisible, setCameraVisible] = useState(true); // Camera visibility state
-
     const videoRef = useRef(null);
     const scanningInProgress = useRef(false); // Flag to manage scanning state
+    //! Set up for Back and front camera trigger.
     const [selectedDeviceId, setSelectedDeviceId] = useState(null); // Camera device ID
     const [isUsingBackCamera, setIsUsingBackCamera] = useState(true); // Default to back camera
     const [videoDevices, setVideoDevices] = useState([]); // Store available video devices
+    
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -39,11 +38,6 @@ function PosScanner() {
         // Block scanning if the interval between scans is too short (e.g., less than 1000ms)
         if (timeSinceLastScan < 1000) {
             setErrorMessages(prev => [...prev, "You are scanning too quickly. Please wait a moment."]);
-            setCanScanAgain(false); // Disable scanning until time has passed
-            setTimeout(() => {
-                setCanScanAgain(true); // Enable scanning again after a delay
-                setErrorMessages(prev => prev.filter(msg => msg !== "You are scanning too quickly. Please wait a moment."));
-            }, 1000); // Delay for 1 second before allowing scanning again
             return;
         }
 
@@ -81,10 +75,6 @@ function PosScanner() {
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
                 setTimeout(() => setFadeOut(true), 2000);
-
-                // Hide the camera while the success message is shown, then show it again after the message fades
-                setCameraVisible(false);
-                setTimeout(() => setCameraVisible(true), 2000); // Hide camera during success message
             } else {
                 setErrorMessages(prev => [...prev, `No product found for barcode: ${scannedText}`]);
                 setFadeOut(false);
@@ -103,6 +93,10 @@ function PosScanner() {
 
     // Store the timestamp of the last scan
     const lastScanTime = useRef(0);
+
+
+    // Include scannedItems in the dependency array
+
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
@@ -140,6 +134,7 @@ function PosScanner() {
         };
     }, [handleScan, isLoading, selectedDeviceId]);
 
+
     const handleCameraToggle = () => {
         if (videoDevices.length < 2) {
             setErrorMessages(["Only one camera available. Cannot switch."]);
@@ -171,11 +166,6 @@ function PosScanner() {
                             {errorMessages[errorMessages.length - 1]}
                         </Alert>
                     )}
-                    {canScanAgain && (
-                        <Alert variant="info" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
-                            You can scan again.
-                        </Alert>
-                    )}
                     {message && (
                         <Alert variant="success" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
                             {message}
@@ -205,8 +195,8 @@ function PosScanner() {
                         <video
                             ref={videoRef}
                             style={{
-                                display: cameraLoading || isLoading || !cameraVisible ? 'none' : 'block',
-                                opacity: cameraLoading || isLoading || !cameraVisible ? 0 : 1,
+                                display: cameraLoading ? 'none' : 'block',
+                                opacity: cameraLoading ? 0 : 1,
                                 transition: 'opacity 1s ease-in-out',
                             }}
                         />
