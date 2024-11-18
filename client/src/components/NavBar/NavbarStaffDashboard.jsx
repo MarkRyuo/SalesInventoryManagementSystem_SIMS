@@ -69,7 +69,7 @@ function NavbarStaffDashboard() {
             <Offcanvas show={show} onHide={handleClose} style={{ width: 320 }}>
                 <Offcanvas.Header closeButton className={Navbars.offCanvasHeader}>
                     <Offcanvas.Title>
-                        <Image width={40} className='me-2' src="/ReyesElectronicsLogo.png" rounded />
+                        <Image width={40} className='me-2' src="/Reyes_Electronics_LogoBg.png" rounded />
                         REYES ELECTRONICS
                     </Offcanvas.Title>
                 </Offcanvas.Header>
