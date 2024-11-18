@@ -20,6 +20,9 @@
     display: flex;
     border: 1px solid;
     justify-content: space-evenly;
+    position: absolute;
+    top: 80%;
+    width: 100%;
     img {
         width: 100px;;
         height: 100px ;
@@ -33,6 +36,7 @@
     height: 50vh;
     box-sizing: border-box;
     padding-top: 8vh;
+    position: relative;
 
     @media (max-width: 500px) {
         padding-top: 0vh;
