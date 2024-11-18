@@ -9,7 +9,14 @@
 
 ## Changelog
 
-### v8.0.2 (Latest)
+### v8.0.4 (Latest)
+- Merge with v8.0.3-beta
+- Design Scanner Responsive
+
+### v8.0.3-beta
+- Scanning
+
+### v8.0.2
 - Inventory UI Design
 
 ### v7.2.2-beta

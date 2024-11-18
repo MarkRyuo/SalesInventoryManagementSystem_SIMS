@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { BrowserMultiFormatReader, NotFoundException } from '@zxing/library';
-import { Container, Row, Col, Alert, Card, Spinner } from 'react-bootstrap';
+import { Container, Alert, Spinner, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { fetchProductByBarcode, updateProductQuantity } from '../../../services/ProductService';
 import { IoMdArrowBack } from "react-icons/io";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
-
-
+import NewProductscss from './NewProduct.module.scss';
+import { MdCameraswitch } from "react-icons/md";
 
 function NewAssetsScanner() {
     const videoRef = useRef(null);
@@ -19,16 +19,27 @@ function NewAssetsScanner() {
     const [videoFade, setVideoFade] = useState(true);
     const [guideFade, setGuideFade] = useState(true);
     const navigate = useNavigate();
+    //! Camera Switching (Front and Back Trigger)
+    const [videoDevices, setVideoDevices] = useState([]);
+    const [selectedDeviceId, setSelectedDeviceId] = useState(null);
 
     useEffect(() => {
         const codeReader = new BrowserMultiFormatReader();
-
-        const startScanner = async () => {
+        const startScanner = async (deviceId = null) => {
             try {
-                const videoInputDevices = await codeReader.listVideoInputDevices();
-                const firstDeviceId = videoInputDevices[0].deviceId;
+                const devices = await codeReader.listVideoInputDevices();
+                setVideoDevices(devices);
 
-                codeReader.decodeFromVideoDevice(firstDeviceId, videoRef.current, async (result, err) => {
+                // Set default to back camera if available
+                const backCamera = devices.find(device =>
+                    device.label.toLowerCase().includes('back') || device.label.toLowerCase().includes('rear')
+                );
+
+                const selectedDevice = deviceId || (backCamera ? backCamera.deviceId : devices[0]?.deviceId);
+                setSelectedDeviceId(selectedDevice);
+
+                // Start decoding from selected camera
+                codeReader.decodeFromVideoDevice(selectedDevice, videoRef.current, async (result, err) => {
                     if (result && scanning) {
                         const barcode = result.text;
 
@@ -45,13 +56,11 @@ function NewAssetsScanner() {
                                 const product = await fetchProductByBarcode(barcode);
 
                                 if (product) {
-                                    const additionalQuantity = 1; // Increment quantity as needed
-                                    const updatedQuantity = await updateProductQuantity(barcode, additionalQuantity); // Get updated quantity
+                                    const additionalQuantity = 1;
+                                    const updatedQuantity = await updateProductQuantity(barcode, additionalQuantity);
 
                                     const productName = product.productName || "Unknown Product";
-                                    const newQuantity = updatedQuantity; // This now holds the updated quantity
-
-                                    setMessage(`Quantity updated for ${productName}: New Quantity is ${newQuantity}.`);
+                                    setMessage(`Quantity updated for ${productName}: New Quantity is ${updatedQuantity}.`);
                                 } else {
                                     navigate('/NewAssets', { state: { barcode: barcode } });
                                 }
@@ -66,7 +75,7 @@ function NewAssetsScanner() {
                                         setVideoFade(true);
                                         setGuideFade(true);
                                         setScanning(true);
-                                        startScanner(); // Restart scanning
+                                        startScanner(selectedDeviceId); // Restart scanning
                                     }, 1000);
                                 }, 2000);
 
@@ -86,12 +95,12 @@ function NewAssetsScanner() {
             }
         };
 
-        startScanner();
+        startScanner(selectedDeviceId);
 
         return () => {
             codeReader.reset();
         };
-    }, [navigate, scanning, lastScannedBarcode]);
+    }, [navigate, scanning, lastScannedBarcode, selectedDeviceId]);
 
     const resetScanner = () => {
         setScanning(true);
@@ -109,70 +118,66 @@ function NewAssetsScanner() {
         }
     ]);
 
+    const handleCameraSwitch = () => {
+        if (videoDevices.length > 1) {
+            const currentIndex = videoDevices.findIndex(device => device.deviceId === selectedDeviceId);
+            const nextIndex = (currentIndex + 1) % videoDevices.length;
+            setSelectedDeviceId(videoDevices[nextIndex].deviceId);
+        }
+    };
+
     return (
-        <Container fluid>
+        <Container fluid className='m-0 p-0'>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
-            <Container fluid='lg' style={{ width: '100%', height: '80vh', boxSizing: 'border-box' }}>  {/* Parent */}
-                <Row className="justify-content-center" style={{ height: '100%', boxSizing: 'border-box' }}> {/* Sub parent */}
-                    <Col md={8} className='p-0 mt-3' style={{ display: 'flex', justifyContent: 'center'}}> {/* Child */}
-                        <Card style={{ height: '100%', display: 'flex', justifyContent: 'center', width: '100%' }}>
-                            <div className="text-center position-relative">
+            <Container fluid='lg' className={NewProductscss.NewProductContainer}>
+                <div className={NewProductscss.NewProductCol}> {/* Child */}
+                    <div>
+                        <Button onClick={handleCameraSwitch} variant='primary' className="mb-2" disabled={isProcessing}>
+                            <MdCameraswitch size={20} className="me-2" />
+                            Switch Camera
+                        </Button>
+                        {/* Camera */}
+                        <div className={NewProductscss.NewProductCamera}>
+                            <div>
                                 {error && (
                                     <Alert variant="danger"
-                                        style={{
-                                            opacity: fadeOut ? 0 : 1,
-                                            transition: 'opacity 1s ease-in-out',
-                                        }}>
+                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out'}}>
                                         Error: {error}
                                     </Alert>
                                 )}
                                 {message && (
                                     <Alert variant="success"
-                                        style={{
-                                            opacity: fadeOut ? 0 : 1,
-                                            transition: 'opacity 1s ease-in-out',
-                                        }}>
+                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out'}}>
                                         {message}
                                     </Alert>
                                 )}
-                                {isProcessing && <Spinner animation="border" />}
-
-                                <div
-                                    style={{
-                                        position: 'absolute',
-                                        top: '50%',
-                                        left: '50%',
-                                        transform: 'translate(-50%, -50%)',
-                                        width: '70%',
-                                        height: '50%',
-                                        border: '1px dashed rgba(255, 255, 255, 0.8)',
-                                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                                        pointerEvents: 'none',
-                                        opacity: guideFade ? 1 : 0,
-                                        transition: 'opacity 1s ease-in-out',
-                                    }}
-                                />
-
-                                <video
-                                    ref={videoRef}
-                                    style={{
-                                        width: '100%',
-                                        height: 'auto',
-                                        maxHeight: '80vh',  // Limits height to fit within the viewport
-                                        display: isProcessing ? 'none' : 'block',
-                                        opacity: videoFade ? 1 : 0,
-                                        transition: 'opacity 1s ease-in-out'
-                                    }}
-                                />
                             </div>
-                        </Card>
-                    </Col>
-                </Row>
+                            {isProcessing && <Spinner animation="grow" variant="success" />}
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
+                                    width: '60%',
+                                    height: '50%',
+                                    border: '2px dashed rgba(255, 255, 255, 0.5)',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                                    pointerEvents: 'none',
+                                    opacity: guideFade ? 1 : 0,
+                                    transition: 'opacity 1s ease-in-out',
+                                }}
+                            />
+                            <video
+                                ref={videoRef}
+                                style={{ display: isProcessing ? 'none' : 'block', opacity: videoFade ? 1 : 0, transition: 'opacity 1s ease-in-out'
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
             </Container>
-
         </Container>
-        
     );
 }
-
 export default NewAssetsScanner;

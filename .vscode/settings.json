@@ -4,14 +4,18 @@
         "backgroud",
         "Barcodes",
         "btnmargin",
+        "Cameraswitch",
         "Dropdowny",
         "instockthreshold",
         "Orderingscss",
         "Pagecss",
         "Pagescss",
+        "Posscanner",
+        "Productscss",
         "Qrcode",
         "qrious",
         "Rious",
+        "Scannerscss",
         "transactionchild",
         "zxing"
     ]
