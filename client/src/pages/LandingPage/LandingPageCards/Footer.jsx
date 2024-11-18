@@ -1,6 +1,7 @@
 import { Container, Row, Col, Nav} from 'react-bootstrap';
 import { BsShop } from "react-icons/bs";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import { FaShoppingCart } from "react-icons/fa";
 import { FaFacebookF, FaGoogle, FaInstagram, FaGem, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 function Footer() {
@@ -59,6 +60,7 @@ function Footer() {
                     <Col md={4} lg={3} xl={3} className="mb-4">
                         <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
                         <p><BsShop className='me-2'/>Brgy 4, Rizal St. Lipa City Batangas</p>
+                        <p><FaShoppingCart className='me-2'/><a className='m-0 p-0' href='https://shopee.ph/reyeselectronics?fbclid=IwY2xjawGoJaBleHRuA2FlbQIxMAABHZeteTkZfvcjrqobcCIOnhtALf9tnpL5EavTI-F-2Sj_GJkM7gmpJOgyeg_aem_6fnRuc25GZqBjftFPAuF5Q' style={{textDecoration: 'none'}}>Our Online Shop</a></p>
                         <p><FaEnvelope className="me-2" /> rramilelectronics@gmail.com</p>
                         <p><FaPhone className="me-2" /> + 63 921 238 8866</p>
                         <p><BsFillTelephoneFill className='me-2'/>(043) 741-0922</p>
