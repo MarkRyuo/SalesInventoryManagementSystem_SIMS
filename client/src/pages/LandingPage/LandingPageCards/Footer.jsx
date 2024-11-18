@@ -78,7 +78,7 @@ function Footer() {
             {/* Copyright */}
             <div className="text-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
                 © 2024 Copyright:
-                <a className="text-reset fw-bold" href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+            <a className="text-reset fw-bold" href="https://mdbootstrap.com/"> modaOfficial.com</a>
             </div>
         </footer>
     );

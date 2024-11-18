@@ -3,6 +3,7 @@ import NavBars from "./NavBars"
 import LandingPagecss from './LandingPage.module.scss'
 import { CiGlobe } from "react-icons/ci";
 import AboutCard from "./LandingPageCards/AboutCard";
+import Footer from "./LandingPageCards/Footer";
 
 function LandingPage() {
 
@@ -38,6 +39,10 @@ function LandingPage() {
                     </div>
                     <div className={LandingPagecss.AboutCard} id="Aboutus"> {/* Main Container */}
                         <AboutCard />
+                    </div>
+
+                    <div>
+                        <Footer />
                     </div>
                 </main>
             </Container>
