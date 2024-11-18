@@ -24,7 +24,7 @@ admin.initializeApp();
 
 exports.createDynamicLink = functions.https.onCall(async (data, context) => {
     const productId = data.productId;
-    const dynamicLinksDomain = "https://salesinventorymanagement-1bb27.web.app/"; // Palitan sa domain mo
+    const dynamicLinksDomain = "https://salesinventorymanagement-1bb27.web.app"; // Palitan sa domain mo
 
     const link = `/ProductPage${productId}`;
     const response = await admin.dynamicLinks.createLink({
