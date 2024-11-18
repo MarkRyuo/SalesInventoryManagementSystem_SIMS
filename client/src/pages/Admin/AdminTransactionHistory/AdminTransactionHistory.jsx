@@ -56,12 +56,11 @@ function AdminTransactionHistory() {
         if (selectedOrder && qrRef.current) {
             new QRious({
                 element: qrRef.current,
-                value: `https://salesinventorymanagement-1bb27.web.app/generate-pdf?id=${selectedOrder.id}`,  // Make sure this points to the right endpoint
+                value: `https://salesinventorymanagement-1bb27.web.app/ProductPage?id=${selectedOrder.id}`, // Correct URL format
                 size: 256,
             });
         }
     }, [selectedOrder]);
-
     
     const handleDownloadOrder = async (order) => {
         const doc = new jsPDF();
