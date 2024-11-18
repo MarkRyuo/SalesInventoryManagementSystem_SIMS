@@ -51,7 +51,7 @@ function Footer() {
                             <Nav.Link href="https://www.fireflyelectric.com" className="text-reset">FELCO</Nav.Link>
                             <Nav.Link href="https://www.mosca-elektronik.de" className="text-reset">MOSCA</Nav.Link>
                             <Nav.Link href="https://www.chinafsl.com/en/index.php?ac=article&at=read&did=148" className="text-reset">FSL</Nav.Link>
-                            <Nav.Link href="#https://www.tapo.com/ph/product/smart-camera/" className="text-reset">Tapo</Nav.Link>
+                            <Nav.Link href="#https://www.tapo.com/ph/product/smart-camera" className="text-reset">Tapo</Nav.Link>
                         </Nav>
                     </Col>
 
@@ -78,7 +78,6 @@ function Footer() {
             {/* Copyright */}
             <div className="text-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
                 © 2024 Copyright:
-            <a className="text-reset fw-bold" href="https://mdbootstrap.com/"> modaOfficial.com</a>
             </div>
         </footer>
     );
