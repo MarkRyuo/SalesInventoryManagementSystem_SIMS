@@ -49,10 +49,10 @@ function Footer() {
                     </Col>
 
                     <Col md={3} lg={2} xl={2} className="mb-4">
-                        <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
+                        <h6 className="text-uppercase fw-bold mb-4">About</h6>
                         <Nav className="flex-column">
                             <Nav.Link href="#!" className="text-reset">Terms and Condition</Nav.Link>
-                            <Nav.Link href="#!" className="text-reset">Settings</Nav.Link>
+                            <Nav.Link href="#!" className="text-reset">Developers</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">Orders</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">Help</Nav.Link>
                         </Nav>
