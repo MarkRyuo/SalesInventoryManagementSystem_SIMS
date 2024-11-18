@@ -6,6 +6,7 @@ import { CiGlobe } from "react-icons/ci";
 import { useState } from "react";
 
 import { MdOutlineInventory } from "react-icons/md";
+import AboutCard from "./LandingPageCards/AboutCard";
 
 function LandingPage() {
 
@@ -78,6 +79,11 @@ function LandingPage() {
                         </Row>
                     </div>
 
+                    <section>
+                        <div>
+                            <AboutCard />
+                        </div>
+                    </section>
                 </main>
             </Container>
         </Container>
