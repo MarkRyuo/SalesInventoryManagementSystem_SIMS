@@ -19,7 +19,7 @@ function LandingPage() {
                                 <p className="mb-3">Elevate Your Experience with Top-Tier Electronic Products.</p>
                                 <Button
                                     variant=''
-                                    href="#features"
+                                    href="#footer"
                                     id="btn"
                                     className={LandingPagecss.Btn}>
                                     <span><CiGlobe /></span> Explore
@@ -41,7 +41,7 @@ function LandingPage() {
                         <AboutCard />
                     </div>
 
-                    <div>
+                    <div id="footer">
                         <Footer />
                     </div>
                 </main>
