@@ -99,6 +99,7 @@ export const DashboardPage = () => {
             <div className={DashboardCss.mainBottomComponent}>
                 {!isLoading && (
                     <div className={DashboardCss.chartContainer}>
+
                         <div className={DashboardCss.smallContainer}>
                             <Chart1 />
                             <Chart2 />
@@ -109,6 +110,7 @@ export const DashboardPage = () => {
                             <ChartLg1 />
                             <ChartLg2 />
                         </div>
+                        
                     </div>
                 )}
             </div>
