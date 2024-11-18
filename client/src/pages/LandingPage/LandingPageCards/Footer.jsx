@@ -59,8 +59,8 @@ function Footer() {
                     <Col md={4} lg={3} xl={3} className="mb-4">
                         <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
                         <p><FaHome className="me-2" />Brgy 4, Rizal St. Lipa City Batangas</p>
-                        <p><FaEnvelope className="me-2" /> ReyesElectronics@gmail.com</p>
-                        <p><FaPhone className="me-2" /> + 63 0992 902 2322</p>
+                        <p><FaEnvelope className="me-2" /> rramilelectronics@gmail.com</p>
+                        <p><FaPhone className="me-2" /> + 63 921 238 8866</p>
                     </Col>
                 </Row>
             </Container>
