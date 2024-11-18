@@ -38,11 +38,11 @@ function PosScanner() {
 
         // Block scanning if the interval between scans is too short (e.g., less than 1000ms)
         if (timeSinceLastScan < 1000) {
-            setErrorMessages(prev => [...prev, "You are scanning too quickly. Please wait a moment."]);
+            setErrorMessages(prev => [...prev, "Scanning too fast. Please wait!"]);
             setCanScanAgain(false); // Disable scanning until time has passed
             setTimeout(() => {
                 setCanScanAgain(true); // Enable scanning again after a delay
-                setErrorMessages(prev => prev.filter(msg => msg !== "You are scanning too quickly. Please wait a moment."));
+                setErrorMessages(prev => prev.filter(msg => msg !== "Scanning too fast. Please wait!"));
             }, 1000); // Delay for 1 second before allowing scanning again
             return;
         }
