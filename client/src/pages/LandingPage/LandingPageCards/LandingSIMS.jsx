@@ -7,4 +7,4 @@ function LandingSIMS() {
     )
 }
 
-export default LandingSIMS
+export default LandingSIMS ;

@@ -29,11 +29,6 @@ function LandingPage() {
                             </div>
                         </div>
                     </div>
-
-                    <div className={LandingPagecss.featureContainer}>
-
-                    </div>
-
                     <div className={LandingPagecss.AboutCard}> {/* Main Container */}
                         <AboutCard />
                     </div>
