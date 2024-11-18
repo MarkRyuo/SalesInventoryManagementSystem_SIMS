@@ -564,3 +564,20 @@ export const saveProductName = async (qrId, productName) => {
     }
 };
 
+import { getFunctions, httpsCallable } from "firebase/functions";
+
+export const getDynamicLink = async (productId) => {
+    const functions = getFunctions();
+    const createLink = httpsCallable(functions, "createDynamicLink");
+
+    try {
+        const result = await createLink({
+            productId,
+            link: `https://salesinventorymanagement-1bb27.web.app/ProductPage/${productId}`,
+        });
+        return result.data.shortLink || result.data.longLink;
+    } catch (error) {
+        console.error("Error creating dynamic link:", error);
+        return `https://salesinventorymanagement-1bb27.web.app/ProductPage/${productId}`;
+    }
+};
