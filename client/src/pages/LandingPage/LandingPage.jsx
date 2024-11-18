@@ -1,4 +1,4 @@
-import { Container, Button, Row, Col} from "react-bootstrap"
+import { Container, Button, Row, Col } from "react-bootstrap"
 import NavBars from "./NavBars"
 import LandingPageCard from './LandingPageCard'
 import LandingPagecss from './LandingPage.module.scss'
@@ -11,11 +11,11 @@ import AboutCard from "./LandingPageCards/AboutCard";
 function LandingPage() {
 
     const [card] = useState([
-        { 
-            icon: <MdOutlineInventory size={50}/>, 
-            cardTitle: 'Inventory Tracking', 
-            cardText: 'Keep real-time tabs on stock levels and prevent shortages.', 
-            cardId: 1 
+        {
+            icon: <MdOutlineInventory size={50} />,
+            cardTitle: 'Inventory Tracking',
+            cardText: 'Keep real-time tabs on stock levels and prevent shortages.',
+            cardId: 1
         },
         {
             icon: <MdOutlineInventory size={50} />,
@@ -47,13 +47,13 @@ function LandingPage() {
                             <div className={LandingPagecss.heroText}> {/* Child */}
                                 <p>Power Your Life with <span>REYES ELECTRONICS</span></p>
                                 <p className="mb-3">Elevate Your Experience with Top-Tier Electronic Products.</p>
-                                <Button 
-                                    variant=''  
-                                    href="#features" 
+                                <Button
+                                    variant=''
+                                    href="#features"
                                     id="btn"
                                     className={LandingPagecss.Btn}>
                                     <span><CiGlobe /></span> Explore
-                                </Button>                         
+                                </Button>
                             </div>
                             <div className={LandingPagecss.heroImage}>
                                 <img src="/E-commerce.png" />
@@ -79,15 +79,13 @@ function LandingPage() {
                         </Row>
                     </div>
 
-                    <div>
-                        <div> {/* Main Container */}
-                            <AboutCard />
-                        </div>
+                    <div className={LandingPagecss.AboutCard}> {/* Main Container */}
+                        <AboutCard />
                     </div>
                 </main>
             </Container>
         </Container>
-    )   
+    )
 }
 
 export default LandingPage

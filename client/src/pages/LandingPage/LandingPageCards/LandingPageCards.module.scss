@@ -14,7 +14,8 @@
 
     .aboutCards {
         border: 1px solid red;
-        width: 60vw;
+        width: 100%;
+        max-width: 60vw;
         display: flex;
         justify-content: space-around;
     }
