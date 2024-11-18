@@ -22,9 +22,17 @@
         max-width: 500px;
         gap: 5px;
 
-        .credentialDashboard {
+        .credentialDashboard {  
+            border: 1px solid;
+            display: flex;
+            padding: 10px;
 
-        
+            img {
+                width: 100%;
+                max-width: 100px;
+                height: 100px;
+                margin-right: 10px;
+            }
         }
 
 }
