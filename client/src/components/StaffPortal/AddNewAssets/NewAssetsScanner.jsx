@@ -122,9 +122,17 @@ function NewAssetsScanner() {
         if (videoDevices.length > 1) {
             const currentIndex = videoDevices.findIndex(device => device.deviceId === selectedDeviceId);
             const nextIndex = (currentIndex + 1) % videoDevices.length;
-            setSelectedDeviceId(videoDevices[nextIndex].deviceId);
+            const nextDeviceId = videoDevices[nextIndex].deviceId;
+
+            // Stop the current video stream and reset the scanner
+            setSelectedDeviceId(nextDeviceId);
+            setScanning(false); // stop scanning momentarily
+            setTimeout(() => {
+                setScanning(true); // restart scanning after camera switch
+            }, 300);
         }
     };
+
 
     return (
         <Container fluid className='m-0 p-0'>
