@@ -207,13 +207,7 @@ function AdminTransactionHistory() {
             </div>
 
             {/* Updated Modal for viewing order details */}
-            <Modal
-                show={showModal}
-                onHide={handleCloseModal}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
+            <Modal show={showModal} onHide={handleCloseModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered >
                 <Modal.Header closeButton>
                     <Modal.Title><FaTruckRampBox size={20} className="me-2"/>Order Details</Modal.Title>
                 </Modal.Header>
