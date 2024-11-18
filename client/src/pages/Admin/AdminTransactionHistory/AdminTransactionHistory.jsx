@@ -102,8 +102,6 @@ function AdminTransactionHistory() {
         doc.save(`Order_${order.id}.pdf`);
     };
 
-
-
     const handleDeleteOrder = (id) => {
         const orderRef = ref(db, `TransactionHistory/${id}`);
         remove(orderRef);
