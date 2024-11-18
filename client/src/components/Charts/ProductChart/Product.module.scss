@@ -42,7 +42,16 @@
     div:first-child {
         p:first-child {
             font-size: 1.5rem;
+            white-space: nowrap; /* Prevents text from wrapping */
+            overflow: hidden;
+            text-overflow: ellipsis; /* Adds ellipsis (...) if text overflows */
         }
+
+        span {
+            margin-top: 8px;
+            font-size: 1rem;
+        }
+
         .lastChild {
             p {
                 font-size: 1rem;
@@ -50,7 +59,11 @@
         }
         @media (max-width: 700px) {
             p:first-child {
-                font-size: 1.3rem;
+                font-size: 1rem;
+            }
+            span {
+                margin-top: 3px;
+                font-size: 0.8rem;
             }
             .lastChild {
                 p {
