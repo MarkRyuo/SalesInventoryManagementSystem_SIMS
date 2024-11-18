@@ -16,6 +16,16 @@
     }
 }
 
+.partners {
+    display: flex;
+    border: 1px solid;
+    justify-content: space-evenly;
+    img {
+        width: 100px;;
+        height: 100px ;
+    }
+}
+
 .heroSection {
     display: flex;
     justify-content: center;
@@ -128,11 +138,4 @@
 .AboutCard {
     width: 100vw;
     height: 100vh;
-}
-
-
-
-.partners {
-    span {
-    }
 }
