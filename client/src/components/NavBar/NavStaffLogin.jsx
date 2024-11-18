@@ -11,11 +11,6 @@ function NavStaffLogin() {
                 <Navbar>
                     <Container>
                         <Row>
-                            <Col className="p-0 d-none d-md-block"> 
-                                <Link to={"/"} style={{ color: "rgb(19, 14, 1)" }}>
-                                    <BsBox size={40} />
-                                </Link> 
-                            </Col>
                             <Col className="p-0 pt-1 ps-2">
                                 <Link to={"/"} style={{ color: "rgb(19, 14, 1)", textDecoration: "none" }}>
                                     <Navbar.Brand className="Nav-brand">Staff Portal</Navbar.Brand>
