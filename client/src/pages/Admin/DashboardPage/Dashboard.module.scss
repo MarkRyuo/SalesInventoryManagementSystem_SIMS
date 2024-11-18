@@ -129,12 +129,15 @@
     .chartContainer {
 
         .smallContainer {
-            // border: 1px solid red;
+            border: 1px solid red;
             width: 100%;
-            height: 200px;
+            height: auto;
             padding: 10px;
             display: flex;
-            justify-content: space-evenly;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
 
         .largeContainer {
@@ -161,7 +164,7 @@
 
 @media (max-width: 500px) {
     .mainTopComponent {
-
+    
     .componentHeroCard {
         margin: 0;
         padding: 0;
@@ -193,21 +196,22 @@
 }
 
     .chartContainer {
-
         .smallContainer {
             // border: 1px solid red;
             width: 100%;
-            height: 200px;
+            height: auto;
+            padding: 0px;
             padding: 10px;
             display: flex;
             justify-content: space-evenly;
+            gap: 10px;
         }
 
         .largeContainer {
             // border: 1px solid black;
             width: 100%;
             height: auto;
-            padding: 15px;
+            padding: 0px;
             display: flex;
             gap: 15px;
             flex-direction: column;
