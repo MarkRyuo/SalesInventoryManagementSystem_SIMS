@@ -135,8 +135,6 @@ function AdminTransactionHistory() {
         return order.items.map(item => item.productName).join(", ");
     };
 
-    
-
     return (
         <Container fluid className={AdminTransactionScss.transactionMainContainer}>
             <h4><FaSave size={25}/>Your Saved Orders</h4>
