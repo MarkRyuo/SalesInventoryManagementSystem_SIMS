@@ -25,7 +25,6 @@
         .credentialDashboard {  
             border: 1px solid;
             display: flex;
-            padding: 10px;
 
             img {
                 width: 100%;
@@ -83,18 +82,6 @@
 /*? Redesigning */
 
 .credentialDashboard {
-    border: 1px solid;
-    display: flex;
-    padding: 10px;
-
-    img {
-        width: 100%;
-        max-width: 100px;
-        height: 100px;
-        margin-right: 10px;
-    }
-
-
 
     @media (max-width: 500px) {
         
@@ -128,4 +115,9 @@
         }
 
     }
+}
+
+
+@media (max-width: 700px) {
+    
 }
