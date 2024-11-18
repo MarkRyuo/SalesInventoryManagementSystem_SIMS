@@ -1,5 +1,5 @@
 import { Container, Row, Col, Nav} from 'react-bootstrap';
-import { FaFacebookF, FaTwitter, FaGoogle, FaInstagram, FaGem, FaHome, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaFacebookF, FaGoogle, FaInstagram, FaGem, FaHome, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 function Footer() {
     return (
