@@ -75,6 +75,13 @@
             padding: 15px;
             display: flex;
             flex-direction: row;
+            justify-content: space-between;
+
+            div:first-child {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
     }
