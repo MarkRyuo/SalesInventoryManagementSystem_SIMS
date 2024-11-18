@@ -40,7 +40,7 @@ function Footer() {
                     </Col>
 
                     <Col md={2} lg={2} xl={2} className="mb-4">
-                        <h6 className="text-uppercase fw-bold mb-4">Partners</h6>
+                        <h6 className="text-uppercase fw-bold mb-2">Partners</h6>
                         <Nav className="flex-column">
                             <Nav.Link href="https://www.fireflyelectric.com" className="text-reset">FELCO</Nav.Link>
                             <Nav.Link href="https://www.mosca-elektronik.de" className="text-reset">MOSCA</Nav.Link>
@@ -50,7 +50,7 @@ function Footer() {
                     </Col>
 
                     <Col md={3} lg={2} xl={2} className="mb-4">
-                        <h6 className="text-uppercase fw-bold mb-4">About</h6>
+                        <h6 className="text-uppercase fw-bold mb-2 ms-4">About</h6>
                         <Nav className="flex-column">
                             <Nav.Link href="#!" className="text-reset">Terms and Condition</Nav.Link>
                             <Nav.Link href="#!" className="text-reset">Developers</Nav.Link>
@@ -58,7 +58,7 @@ function Footer() {
                     </Col>
 
                     <Col md={4} lg={3} xl={3} className="mb-4">
-                        <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
+                        <h6 className="text-uppercase fw-bold mb-2">Contact</h6>
                         <p><BsShop className='me-2'/>Brgy 4, Rizal St. Lipa City Batangas</p>
                         <p><FaShoppingCart className='me-2'/><a className='m-0 p-0' href='https://shopee.ph/reyeselectronics?fbclid=IwY2xjawGoJaBleHRuA2FlbQIxMAABHZeteTkZfvcjrqobcCIOnhtALf9tnpL5EavTI-F-2Sj_GJkM7gmpJOgyeg_aem_6fnRuc25GZqBjftFPAuF5Q' style={{textDecoration: 'none'}}>Our Online Shop</a></p>
                         <p><FaEnvelope className="me-2" /> rramilelectronics@gmail.com</p>
