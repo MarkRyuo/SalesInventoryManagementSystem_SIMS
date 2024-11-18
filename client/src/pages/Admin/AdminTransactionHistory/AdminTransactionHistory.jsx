@@ -56,7 +56,7 @@ function AdminTransactionHistory() {
         if (selectedOrder && qrRef.current) {
             new QRious({
                 element: qrRef.current,
-                value: `https://salesinventorymanagement-1bb27.web.app/ProductPage/${selectedOrder.id}` //! Need Function to Online
+                value: `https://salesinventorymanagement-1bb27.web.app/${selectedOrder.id}` //! Need Function to Online
             });
         }
     }, [selectedOrder]);
