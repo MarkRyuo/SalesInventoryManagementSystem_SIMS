@@ -266,12 +266,12 @@ function AdminTransactionHistory() {
                 </Modal.Header>
                 <Modal.Body>
                     <p className="text-danger font-weight-bold">
-                        Warning: Deleting the following products is permanent and cannot be undone:
+                        Warning: Deleting these products is permanent and cannot be undone.
                     </p>
                     <p className="font-weight-bold text-danger">
                         {selectedOrder ? getProductNames(selectedOrder) : ''}
                     </p>
-                    <p>Are you sure you want to delete this order?</p>
+                    <p>Delete this order permanently?</p>
                 </Modal.Body>
                 <Modal.Footer className="bg-light">
                     <Button variant="secondary" onClick={handleCloseDeleteModal}>Cancel</Button>
