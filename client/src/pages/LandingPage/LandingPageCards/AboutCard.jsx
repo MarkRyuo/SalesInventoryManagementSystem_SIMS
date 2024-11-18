@@ -1,4 +1,4 @@
-
+import {Card, Col, Row} from 'react-bootstrap';
 
 function AboutCard() {
     return (
@@ -11,7 +11,9 @@ function AboutCard() {
                     <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</h2>
                 </div>
 
-                <div></div>
+                <div>
+
+                </div>
             </div>
         </div>
     )
