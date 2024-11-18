@@ -94,7 +94,9 @@ export const DashboardPage = () => {
                         </div>
                     )}
                 </div>
-
+            </div>
+            
+            <div className={DashboardCss.mainBottomComponent}>
                 {!isLoading && (
                     <div className={DashboardCss.chartContainer}>
                         <div className={DashboardCss.smallContainer}>
