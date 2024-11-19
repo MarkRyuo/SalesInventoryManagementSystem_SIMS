@@ -23,18 +23,10 @@ export const ReportPage = () => {
                     <h5 className='m-0 p-o'><span><TbReport /></span> Sales Report</h5>
                 </div>
                 <div className={Reportcss.containerReportSmall}>
-                    <div>
                         <ReportChart1 />
-                    </div>
-                    <div>
                         <ReportChart2 />
-                    </div>
-                    <div>
                         <ReportChart3 />
-                    </div>
-                    <div>
                         <ReportChart4 />
-                    </div>
                 </div>
 
                 {/* Big-Charts */}
