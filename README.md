@@ -7,7 +7,7 @@
 ### Admin Login
 ![Web App Staff Screenshot](https://i.pinimg.com/736x/a0/a9/df/a0a9df692fb4807859f4d21e37e17e83.jpg)
 ### Staff Login
-![Web App Staff Screenshot](/client/public/StaffLogin.png)
+![Web App Staff Screenshot](https://i.pinimg.com/736x/16/8b/2c/168b2c3c8639900884be76167a647661.jpg)
 
 ## Changelog
 
