@@ -20,7 +20,7 @@ export const ReportPage = () => {
         <MainLayout>
             <Container className={Reportcss.reportMain}>
                 <div className={Reportcss.reportTitle}>
-                    <p className='m-0 p-o'><span><TbReport /></span> Sales Report</p>
+                    <h5 className='m-0 p-o'><span><TbReport /></span> Sales Report</h5>
                 </div>
                 <div className={Reportcss.containerReportSmall}>
                     <div>

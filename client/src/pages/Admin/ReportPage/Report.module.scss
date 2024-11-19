@@ -6,8 +6,10 @@
     border: 1px solid red;
     height: 100vh;
     width: 100vw;
+    padding: 10px;
 
     .reportTitle {
+        border: 1px solid green;
         p {
             font-size: 2rem;
         }
