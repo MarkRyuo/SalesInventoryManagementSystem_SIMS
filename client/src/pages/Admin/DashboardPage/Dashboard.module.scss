@@ -9,7 +9,7 @@
 
 
 .mainTopComponent {
-    // border: 1px solid red;
+    border: 1px solid red;
     width: 100%;
     height: 16vh;
     // margin-bottom: 10px;
@@ -56,17 +56,18 @@
 
 
 .chartContainer {
-        // border: 1px solid green;
-        height: 60vh;
+        border: 1px solid green;
+        height: auto;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        margin-top: 5px;
 
         .smallContainer {
             padding: 0px 20px;
-            // border: 1px solid red;
+            border: 1px solid red;
             width: 100%;
-            height: 200px;
+            height: auto;
             display: flex;
             justify-content: space-between;
         }
