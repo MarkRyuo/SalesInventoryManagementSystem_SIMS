@@ -3,13 +3,13 @@
 /* * Reportcss */
 
 .reportMain {
-    border: 1px solid red;
+    // border: 1px solid red;
     height: auto;
     width: 100%;
     padding: 0;
 
     .reportTitle {
-        border: 1px solid green;
+        // border: 1px solid green;
         margin-bottom: 5px;
         h5 {
             padding: 20px 10px;
@@ -19,7 +19,7 @@
     }
 
     .containerReportSmall {
-        border: 1px solid;
+        // border: 1px solid;
         width: 100%;
         padding: 10px;
         display: flex;
@@ -30,7 +30,7 @@
 
     .containerReportLarge {
         padding: 10px;
-        border: 1px solid;
+        // border: 1px solid;
         display: flex;
         justify-content: space-between;
         height: auto;
@@ -62,11 +62,12 @@
 
     .containerReportLarge {
         padding: 10px;
-        border: 1px solid;
+        // border: 1px solid;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         height: auto;
+        gap: 10px;
     }
 
 }//! End 1200px
@@ -93,8 +94,9 @@
     }
 
     .containerReportLarge {
+        gap: 10px;
         padding: 10px;
-        border: 1px solid;
+        // border: 1px solid;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
