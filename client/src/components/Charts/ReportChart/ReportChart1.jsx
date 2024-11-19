@@ -6,7 +6,7 @@ function ReportChart1() {
     return (
         <div className={ReportChartcss.containerChart1}>
             <div className={ReportChartcss.containerText}>
-                <FaReact size={25} />
+                <FaReact size={23} />
                 <p className='m-0 p-0'>Text Here</p>
             </div>
             <div className={ReportChartcss.contentChart}>
