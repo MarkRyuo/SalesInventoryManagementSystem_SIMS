@@ -75,6 +75,10 @@
     width: 300px;
     background-color: var(--char3Color);
     box-shadow: 1px 1px 3px var(--chartShadow);
+
+    @media (max-width: 700px) {
+        width: 100%;
+    }
 }
 
 /* Chart 4 */
@@ -86,6 +90,10 @@
     width: 300px;
     background-color: var(--char3Color);
     box-shadow: 1px 1px 3px var(--chartShadow);
+
+    @media (max-width: 700px) {
+        width: 90%;
+    }
 }
 
 
