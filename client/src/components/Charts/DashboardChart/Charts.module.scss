@@ -9,18 +9,17 @@
 
 
 .contentChart {
-    // border: 1px solid;
+    border: 1px solid;
     text-align: center;
     height: auto;
-    align-content: center;
-    border-radius: 10px;
+    box-sizing: border-box;
     
     p:first-child {
-        font-size: 2.2rem;
+        font-size: 1.7rem;
     }
 
     p{
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     @media (max-width: 700px) {
@@ -43,7 +42,7 @@
     gap: 5px;
 
     p {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -54,11 +53,10 @@
     box-sizing: border-box;
     border-radius: 10px;
     //! Top&Bottom / Left&Right
-    padding: 15px 20px;
+    padding: 15px;
     height: auto;
     background-color: var(--chart1Color);
-    // box-shadow: 1px 1px 3px var(--chartShadow);
-    width: 370px;
+    width: 300px;
     flex-shrink: 0;
 
     @media (max-width: 1200px) {
