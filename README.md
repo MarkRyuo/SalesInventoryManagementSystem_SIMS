@@ -9,6 +9,9 @@
 
 ## Changelog
 
+### v8.0.6 (Latest)
+- Design Dashboards
+
 ### v8.0.5 (Latest)
 - Landing Page Full design
 
