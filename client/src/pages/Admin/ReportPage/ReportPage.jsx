@@ -19,7 +19,7 @@ export const ReportPage = () => {
     return (
         <MainLayout>
             <Container className={Reportcss.reportMain}>
-                <div>
+                <div className={Reportcss.reportTitle}>
                     <p className='fs-4 m-4'><span><TbReport /></span> Sales Report</p>
                 </div>
                 <div className={Reportcss.containerReportSmall}>
