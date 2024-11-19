@@ -134,8 +134,8 @@
             height: auto;
             padding: 0px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex-direction: row;
+            justify-content: space-between;
             align-items: center;
             gap: 10px;
         }
