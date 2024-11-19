@@ -2,8 +2,8 @@
 
 ## Screenshots
 
-### Admin Login
-![Web App Screenshot](/client/public/AdminLogin.png)
+### Landing Page
+![Web App Screenshot](https://i.pinimg.com/736x/5d/75/eb/5d75eb3622a5a6af89c0b436c8355700.jpg)
 ### Staff Login
 ![Web App Staff Screenshot](/client/public/StaffLogin.png)
 
