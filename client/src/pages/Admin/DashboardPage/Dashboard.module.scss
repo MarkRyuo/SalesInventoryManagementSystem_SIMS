@@ -65,12 +65,9 @@
         .smallContainer {
             border: 1px solid red;
             width: 100%;
-            height: auto;
-            display: grid;
+            height: 100px;
+            display: flex;
             padding: 5px;
-
-            grid-template-columns: repeat(10, 1fr);
-            grid-template-rows: 1fr;
         }
 
         .largeContainer {
