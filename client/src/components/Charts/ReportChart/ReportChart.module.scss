@@ -22,6 +22,12 @@
     p:first-child {
         font-size: 1.7rem;
     }
+
+    @media (max-width: 800px) {
+        p {
+            font-size: 0.9;
+        }
+    }
 }
 
 .containerText {
