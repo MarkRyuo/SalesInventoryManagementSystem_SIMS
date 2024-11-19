@@ -60,9 +60,9 @@
 .containerChart1 {
     // border: 1px solid;
     border-radius: 10px;
-    padding: 5px;
+    //! Top&Bottom / Lfet&Right
+    padding: 15px 20px;
     height: auto;
-    max-height: 200px;
     background-color: var(--chart1Color);
     // box-shadow: 1px 1px 3px var(--chartShadow);
     width: 350px;
