@@ -57,6 +57,10 @@
     background-color: var(--chart1Color);
     width: 400px;
     flex-shrink: 0;
+
+    @media (max-width: 1200px) {
+        
+    }
 }
 
 /* ?Chart 2 */
