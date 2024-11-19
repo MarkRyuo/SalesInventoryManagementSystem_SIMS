@@ -18,7 +18,7 @@ export const ReportPage = () => {
 
     return (
         <MainLayout>
-            <Container className={Reportcss.reportMain}>
+            <Container fluid='lg' className={Reportcss.reportMain}>
                 <div className={Reportcss.reportTitle}>
                     <h5 className='m-0 p-o'><span><TbReport /></span> Sales Report</h5>
                 </div>

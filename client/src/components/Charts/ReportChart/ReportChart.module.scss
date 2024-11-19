@@ -60,6 +60,10 @@
     width: 300px;
     background-color: var(--chart2Color);
     box-shadow: 1px 1px 3px var(--chartShadow);
+
+    @media (max-width: 700px) {
+        width: 100%;
+    }
 }
 
 /* Chart 3 */
