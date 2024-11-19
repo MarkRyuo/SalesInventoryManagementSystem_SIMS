@@ -10,7 +10,7 @@ function ReportChart2() {
             </div>
             <div className={ReportChartcss.contentChart}>
                 <p className="m-0 p2">0</p>
-                <p>From the running month</p>
+                <p className="m-0">From the running month</p>
             </div>
         </div>
     )
