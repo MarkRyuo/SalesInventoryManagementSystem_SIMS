@@ -1,6 +1,5 @@
 import { MainLayout } from '../../../layout/MainLayout';
 import { TbReport } from "react-icons/tb";
-import { Row, Col } from 'react-bootstrap';
 
 import Reportcss from './Report.module.scss';
 import ReportChart1 from '../../../components/Charts/ReportChart/ReportChart1'
