@@ -52,7 +52,7 @@
     box-sizing: border-box;
     border-radius: 10px;
     //! Top&Bottom / Left&Right
-    padding: 15px;
+    padding: 20px;
     height: auto;
     background-color: var(--chart1Color);
     width: 300px;
@@ -69,7 +69,7 @@
     }
 
     @media (max-width: 700px) {
-        width: 100%;
+        width: 90%;
         padding: 5px 10px;
     }
 }
@@ -97,7 +97,7 @@
     }
 
     @media (max-width: 700px) {
-        width: 100%;
+        width: 90%;
         padding: 5px 10px;
     }
 }
@@ -119,13 +119,12 @@
     }
 
     @media (max-width: 900px) {
-        grid-column: 7 / 9;
         width: 80%;
         padding: 5px 10px;
     }
 
     @media (max-width: 700px) {
-        width: 100%;
+        width: 90%;
         padding: 5px 10px;
     }
 }
