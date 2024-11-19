@@ -8,7 +8,6 @@ import ReportChart3 from '../../../components/Charts/ReportChart/ReportChart3';
 import ReportChart4 from '../../../components/Charts/ReportChart/ReportChart4';
 import ReportChartLg1 from '../../../components/Charts/ReportChart/ReportChartLg1';
 import ReportChartLg2 from '../../../components/Charts/ReportChart/ReportChartLg2';
-import { Container } from 'react-bootstrap';
 
 
 //* Report Page
@@ -18,7 +17,7 @@ export const ReportPage = () => {
 
     return (
         <MainLayout>
-            <Container fluid='lg' className={Reportcss.reportMain}>
+            <div className={Reportcss.reportMain}>
                 <div className={Reportcss.reportTitle}>
                     <h5 className='m-0 p-o'><span><TbReport /></span> Sales Report</h5>
                 </div>
@@ -38,7 +37,7 @@ export const ReportPage = () => {
                         <ReportChartLg2 />
                     </div>
                 </div>
-            </Container>
+            </div>
 
         </MainLayout>
     )
