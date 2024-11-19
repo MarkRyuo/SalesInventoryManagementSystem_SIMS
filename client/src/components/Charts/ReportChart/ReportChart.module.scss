@@ -25,7 +25,11 @@
 
     @media (max-width: 800px) {
         p {
-            font-size: 0.9;
+            font-size: 0.9rem;
+        }
+
+        p:first-child {
+            font-size: 1.5rem;
         }
     }
 }
