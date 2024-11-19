@@ -21,7 +21,7 @@
         font-size: 0.9rem;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 800px) {
         p:first-child {
             font-size: 1.7rem;
         }
@@ -59,7 +59,11 @@
     flex-shrink: 0;
 
     @media (max-width: 1200px) {
-        
+        width: 300px;
+    }
+
+    @media (max-width: 850px) {
+        width: 260px;
     }
 }
 
@@ -75,6 +79,14 @@
     width: 300px;
     flex-shrink: 0;
 
+    @media (max-width: 1200px) {
+        width: 250px;
+    }
+
+    @media (max-width: 850px) {
+        width: 350px;
+    }
+
 }
 
 /* ?Chart 3 */
@@ -87,6 +99,14 @@
     // box-shadow: 1px 1px 3px var(--chartShadow);
     width: 300px;
     flex-shrink: 0;
+
+    @media (max-width: 1200px) {
+        width: 250px;
+    }
+
+    @media (max-width: 800px) {
+        width: 350px;
+    }
 
 }
 
