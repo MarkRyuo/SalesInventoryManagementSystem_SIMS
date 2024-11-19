@@ -64,20 +64,12 @@
 
         .smallContainer {
             border: 1px solid red;
-            width: auto;
+            width: 100%;
             height: auto;
             display: grid;
-            justify-content: space-evenly;
-            // justify-content: space-around ;
             padding: 5px;
 
-            .mergeChart{
-                // border: 1px solid;
-                width: 100%;
-                gap: 80px;
-                display: flex;
-                justify-content: space-evenly;
-            }
+            
         }
 
         .largeContainer {
