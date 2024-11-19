@@ -12,10 +12,10 @@
 ### v8.0.6 (Latest)
 - Design Dashboards
 
-### v8.0.5 (Latest)
+### v8.0.5
 - Landing Page Full design
 
-### v.deploy-2 (Latest)
+### v.deploy-2
 - v8.0.4 and v8.0.3-beta 
 
 ### v8.0.4
