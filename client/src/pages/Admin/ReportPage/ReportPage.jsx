@@ -37,7 +37,7 @@ export const ReportPage = () => {
                 </div>
 
                 {/* Big-Charts */}
-                <div className={Reportcss.LargeContainer}>
+                <div className={Reportcss.containerReportSmall}>
                     <div className={Reportcss.colContainerLarge}>
                         <ReportChartLg1 />
                     </div>
