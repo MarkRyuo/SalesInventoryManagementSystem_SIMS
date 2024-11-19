@@ -234,11 +234,12 @@
 
 @media (max-width: 500px) {
     .mainTopComponent {
-    // border: 1px solid;
+    height: auto;
+    margin-bottom: 3px;
     .componentHeroCard {
         margin: 0;
         padding: 0;
-        // border: 1px solid;
+        border: 1px solid;
 
         .credentialDashboard {  
             padding: 10px;            
