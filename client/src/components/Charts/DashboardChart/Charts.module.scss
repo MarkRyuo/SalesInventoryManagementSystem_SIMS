@@ -57,21 +57,6 @@
     background-color: var(--chart1Color);
     width: 300px;
     flex-shrink: 0;
-
-    @media (max-width: 1200px) {
-        width: 300px;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 900px) {
-        width: 400px;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 700px) {
-        width: 200px;
-        padding: 5px 10px;
-    }
 }
 
 /* ?Chart 2 */
@@ -83,23 +68,9 @@
     height: auto;
     background-color: var(--chart2Color);
     // box-shadow: 1px 1px 3px var(--chartShadow);
-    width: 350px;
+    width: 300px;
     flex-shrink: 0;
 
-    @media (max-width: 1200px) {
-        width: 300px;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 900px) {
-        width: 80%;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 700px) {
-        width: 90%;
-        padding: 5px 10px;
-    }
 }
 
 /* ?Chart 3 */
@@ -110,23 +81,9 @@
     height: auto;
     background-color: var(--char3Color);
     // box-shadow: 1px 1px 3px var(--chartShadow);
-    width: 350px;
+    width: 300px;
     flex-shrink: 0;
 
-    @media (max-width: 1200px) {
-        width: 300px;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 900px) {
-        width: 80%;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 700px) {
-        width: 90%;
-        padding: 5px 10px;
-    }
 }
 
 
