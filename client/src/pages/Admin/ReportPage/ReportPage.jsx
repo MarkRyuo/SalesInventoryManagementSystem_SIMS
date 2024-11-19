@@ -29,12 +29,12 @@ export const ReportPage = () => {
                     <div>
                         <ReportChart2 />
                     </div>
-                    <div lg={6} md={12}>
+                    <div>
                         <ReportChart3 />
                     </div>
-                    <Col lg={5} md={12}>
+                    <div>
                         <ReportChart4 />
-                    </Col>
+                    </div>
                 </div>
 
                 {/* Big-Charts */}
