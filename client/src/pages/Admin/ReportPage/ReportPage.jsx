@@ -26,7 +26,7 @@ export const ReportPage = () => {
                     <div>
                         <ReportChart1 />
                     </div>
-                    <div lg={5} md={12}>
+                    <div>
                         <ReportChart2 />
                     </div>
                     <div lg={6} md={12}>
