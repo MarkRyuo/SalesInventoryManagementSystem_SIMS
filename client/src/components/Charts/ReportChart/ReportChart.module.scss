@@ -49,8 +49,8 @@
     /* border: 1px solid; */
     border-radius: 10px;
     padding: 5px;
-    height: 100%;
-    max-height: 200px;
+    height: auto;
+    width: 300px;
     background-color: var(--chart2Color);
     box-shadow: 1px 1px 3px var(--chartShadow);
 }
