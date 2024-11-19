@@ -2,7 +2,7 @@ import { MainLayout } from '../../../layout/MainLayout';
 import { TbReport } from "react-icons/tb";
 import { Row, Col } from 'react-bootstrap';
 
-import Reportcss from './Css/Report.module.css';
+import Reportcss from './Report.module.scss';
 import ReportChart1 from '../../../components/Charts/ReportChart/ReportChart1'
 import ReportChart2 from '../../../components/Charts/ReportChart/ReportChart2';
 import ReportChart3 from '../../../components/Charts/ReportChart/ReportChart3';
