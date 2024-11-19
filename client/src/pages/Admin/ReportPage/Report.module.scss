@@ -4,7 +4,7 @@
 
 .reportMain {
     border: 1px solid red;
-    height: 100vh;
+    height: auto;
     width: 100vw;
     padding: 10px;
 
@@ -23,6 +23,7 @@
         width: 100%;
         padding: 10px;
         display: flex;
+        margin-bottom: 5px;
     }
 
     .containerReportLarge {
