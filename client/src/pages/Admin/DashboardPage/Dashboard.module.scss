@@ -214,8 +214,10 @@
             width: 100%;
             height: auto;
             padding: 15px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+            justify-content: space-between;
 
 
             div:last-child {
@@ -272,7 +274,9 @@
             height: auto;
             padding: 0px;
             padding: 10px;
-            display: grid;
+            display: flex;
+            justify-content: space-evenly;
+            gap: 10px;
         }
 
         .largeContainer {
