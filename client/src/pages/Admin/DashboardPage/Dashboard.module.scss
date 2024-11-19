@@ -69,7 +69,8 @@
             display: flex;
             justify-content: space-evenly;
             // justify-content: space-around ;
-            padding: 10px;
+            padding: 5px;
+
             .mergeChart{
                 // border: 1px solid;
                 width: auto;
@@ -98,3 +99,7 @@
 
 }
 
+
+@media (max-width: 1200px) {
+    
+}
