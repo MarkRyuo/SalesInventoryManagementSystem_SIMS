@@ -9,8 +9,8 @@ function Chart1() {
                     <p className='m-0 p-0'>Text Here</p>
                 </div>
                 <div className={Chartcss.contentChart}>
-                    <p>0</p>
-                    <p>From the running month</p>
+                    <p className='m-0 mt-2'>0</p>
+                    <p className='m-1'>From the running month</p>
                 </div>
         </div>
     )
