@@ -9,9 +9,9 @@
 
 
 .mainTopComponent {
-    border: 1px solid red;
+    // border: 1px solid red;
     width: 100%;
-    height: auto;
+    height: 16vh;
     // margin-bottom: 10px;
 
     .componentHeroCard {
@@ -57,17 +57,18 @@
 
 .chartContainer {
         // border: 1px solid green;
-        height: auto;
+        height: 60vh;
         display: flex;
         flex-direction: column;
-        margin-top: 5px;
+        justify-content: space-between;
 
         .smallContainer {
-            border: 1px solid red;
+            padding: 0px 20px;
+            // border: 1px solid red;
             width: 100%;
-            height: auto;
+            height: 200px;
             display: flex;
-            padding: 5px;
+            justify-content: space-between;
         }
 
         .largeContainer {
@@ -86,6 +87,217 @@
                 gap: 10px;
             }
         }
+
+}
+
+
+
+
+@media (max-width: 1200px) {
+    .mainTopComponent {
+
+    .componentHeroCard {
+        margin: 0;
+        padding: 0;
+
+        .credentialDashboard {  
+            padding: 10px;            
+            img {
+                width: 90px;
+                height: 90px;
+                margin-right: 10px;
+            }
+
+            div {        
+                p {
+                    font-size: 1rem;
+                    }
+
+                h4 {
+                    font-size: 1.5rem;
+                    span {
+                        font-size: 1.5rem;
+                    }
+                }
+
+            }
+        }
+
+    }
+}
+
+    .chartContainer {
+
+        .smallContainer {
+            // border: 1px solid red;
+            width: 100%;
+            height: auto;
+            padding: 0px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .largeContainer {
+            // border: 1px solid black;
+            width: 100%;
+            height: auto;
+            padding: 15px;
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+            justify-content: space-between;
+
+
+            div:last-child {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+}
+
+}
+
+@media (max-width: 900px) {
+    .mainTopComponent {
+
+    .componentHeroCard {
+        margin: 0;
+        padding: 0;
+
+        .credentialDashboard {  
+            padding: 10px;            
+            img {
+                width: 90px;
+                height: 90px;
+                margin-right: 10px;
+            }
+
+            div {        
+                p {
+                    font-size: 1rem;
+                    }
+
+                h4 {
+                    font-size: 1.5rem;
+                    span {
+                        font-size: 1.5rem;
+                    }
+                }
+
+            }
+        }
+
+    }
+}
+
+    .chartContainer {
+
+        .smallContainer {
+            // border: 1px solid red;
+            width: 100%;
+            height: auto;
+            padding: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .largeContainer {
+            // border: 1px solid black;
+            width: 100%;
+            height: auto;
+            padding: 15px;
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+            justify-content: space-between;
+
+
+            div:last-child {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+}
+
+}
+
+
+@media (max-width: 500px) {
+    .mainTopComponent {
+    height: auto;
+    margin-bottom: 3px;
+    .componentHeroCard {
+        margin: 0;
+        padding: 0;
+        // border: 1px solid;
+
+        .credentialDashboard {  
+            padding: 10px;            
+            img {
+                width: 90px;
+                height: 90px;
+                margin-right: 10px;
+            }
+
+            div {        
+                p {
+                    font-size: 0.9rem;
+                    }
+
+                h4{
+                    font-size: 1.3rem;
+                    span {
+                        font-size: 1.3rem;
+                    }
+                }
+
+            }
+        }
+
+    }
+}
+
+    .chartContainer {
+        .smallContainer {
+            // border: 1px solid red;
+            width: 100%;
+            height: auto;
+            padding: 0px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-evenly;
+            gap: 10px;
+        }
+
+        .largeContainer {
+            // border: 1px solid black;
+            width: 100%;
+            height: auto;
+            padding: 0px;
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+            justify-content: space-between;
+
+
+            div:last-child {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+}
 
 }
 
