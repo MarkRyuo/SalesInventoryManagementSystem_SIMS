@@ -3,7 +3,7 @@ import ReportChartcss from './ReportChart.module.scss'
 //* ReportChart1 Small
 function ReportChart4() {
     return (
-        <div className={ReportChartcss.containerChart1}>
+        <div className={ReportChartcss.containerChart4}>
             <div className={ReportChartcss.containerText}>
                 <FaReact size={25} />
                 <p className='fs-5 m-0'>Text Here</p>
