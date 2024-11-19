@@ -101,9 +101,9 @@ export const DashboardPage = () => {
                 <div className={DashboardCss.chartContainer}>
 
                     <div className={DashboardCss.smallContainer}>
-                            <Chart1 />
-                            <Chart2 />
-                            <Chart3 />
+                        <Chart1 />
+                        <Chart2 />
+                        <Chart3 />
                     </div>
 
                     <div className={DashboardCss.largeContainer}>
