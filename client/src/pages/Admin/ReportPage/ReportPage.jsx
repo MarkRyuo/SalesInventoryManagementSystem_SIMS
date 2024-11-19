@@ -38,11 +38,11 @@ export const ReportPage = () => {
                 </div>
 
                 {/* Big-Charts */}
-                <div className={Reportcss.rowContainerLg}>
-                    <div className={Reportcss.colContainerLg}>
+                <div className={Reportcss.LargeContainer}>
+                    <div className={Reportcss.colContainerLarge}>
                         <ReportChartLg1 />
                     </div>
-                    <div className={Reportcss.colContainerLg}>
+                    <div className={Reportcss.colContainerLarge}>
                         <ReportChartLg2 />
                     </div>
                 </div>
