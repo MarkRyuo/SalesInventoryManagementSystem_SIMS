@@ -8,14 +8,6 @@
 }
 
 
-.containerContent {
-    // border: 1px solid;
-    border-radius: 10px;
-    padding: 5px;
-    height: 100%;
-    max-height: 200px;
-}
-
 .contentChart {
     /* border: 1px solid; */
     text-align: center;
@@ -58,8 +50,8 @@
 /* ?Chart 1 */
 
 .containerChart1 {
-    box-sizing: border-box;
     // border: 1px solid;
+    box-sizing: border-box;
     border-radius: 10px;
     //! Top&Bottom / Left&Right
     padding: 15px 20px;
