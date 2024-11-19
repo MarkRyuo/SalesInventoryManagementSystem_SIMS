@@ -49,5 +49,15 @@
         }
     }
 
+    .containerReportSmall {
+        border: 1px solid;
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        height: auto;
+        margin-bottom: 5px;
+        flex-direction: column;
+        gap: 10px;
+    }
 
 }//! End 700px
