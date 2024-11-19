@@ -4,7 +4,6 @@ import App from './App.jsx'
 import './index.scss'
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 //? Pages Import
-import ReportPage from './pages/Admin/ReportPage/ReportPage.jsx';
 import StaffAccount from './pages/StaffAccount.jsx'
 import MyProfile from './pages/MyProfile.jsx';
 import SLogin from './pages/LoginPage/SLogin.jsx';
@@ -35,6 +34,7 @@ import Product from './components/Charts/ProductChart/Product.jsx' ;
 import DashboardPage from '../src/pages/Admin/DashboardPage/DashboardPage.jsx';
 import ReOrdering from './pages/Admin/ProductPage/ReOrdering.jsx';
 import SetQrcode from './pages/Admin/ProductPage/SetQrcode.jsx' ;
+import ReportPage from './pages/Admin/ReportPage/ReportPage.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
