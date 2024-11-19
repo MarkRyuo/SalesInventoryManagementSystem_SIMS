@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.scss'
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 //? Pages Import
-import ReportPage from './pages/ReportPage.jsx';
+import ReportPage from './pages/Admin/ReportPage/ReportPage.jsx';
 import StaffAccount from './pages/StaffAccount.jsx'
 import MyProfile from './pages/MyProfile.jsx';
 import SLogin from './pages/LoginPage/SLogin.jsx';

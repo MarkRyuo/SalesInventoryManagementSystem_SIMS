@@ -1,14 +1,14 @@
-import { MainLayout } from '../layout/MainLayout';
+import { MainLayout } from '../../../layout/MainLayout';
 import { TbReport } from "react-icons/tb";
 import { Row, Col } from 'react-bootstrap';
 
 import Reportcss from './Css/Report.module.css';
-import ReportChart1 from '../components/Charts/ReportChart/ReportChart1'
-import ReportChart2 from '../components/Charts/ReportChart/ReportChart2';
-import ReportChart3 from '../components/Charts/ReportChart/ReportChart3';
-import ReportChart4 from '../components/Charts/ReportChart/ReportChart4';
-import ReportChartLg1 from '../components/Charts/ReportChart/ReportChartLg1';
-import ReportChartLg2 from '../components/Charts/ReportChart/ReportChartLg2';
+import ReportChart1 from '../../../components/Charts/ReportChart/ReportChart1'
+import ReportChart2 from '../../../components/Charts/ReportChart/ReportChart2';
+import ReportChart3 from '../../../components/Charts/ReportChart/ReportChart3';
+import ReportChart4 from '../../../components/Charts/ReportChart/ReportChart4';
+import ReportChartLg1 from '../../../components/Charts/ReportChart/ReportChartLg1';
+import ReportChartLg2 from '../../../components/Charts/ReportChart/ReportChartLg2';
 
 
 //* Report Page
