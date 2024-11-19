@@ -60,7 +60,6 @@
         height: auto;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         margin-top: 5px;
 
         .smallContainer {
@@ -69,7 +68,14 @@
             width: 100%;
             height: auto;
             display: flex;
-            justify-content: space-between;
+            // justify-content: space-around ;
+
+            .mergeChart{
+                // border: 1px solid;
+                width: 100%;
+                display: flex;
+                justify-content: space-evenly;
+            }
         }
 
         .largeContainer {

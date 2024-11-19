@@ -102,7 +102,7 @@ export const DashboardPage = () => {
 
                     <div className={DashboardCss.smallContainer}>
                         <Chart1 />
-                        <div>
+                        <div className={DashboardCss.mergeChart}>
                             <Chart2 />
                             <Chart3 />
                         </div>
