@@ -157,6 +157,7 @@
 }
 
 
+
 /* Warning This is for ChartLg */
 .containerChartLg1 {
     border: 1px solid red;
@@ -166,6 +167,10 @@
     /* box-shadow: 1px 1px 3px var(--chartShadow); */
     background-color: var(--BgColor);
     border-radius: 20px;
+
+    @media (max-width: 1400pxc) {
+        
+    }
 }
 
 .containerChartLg2 {
