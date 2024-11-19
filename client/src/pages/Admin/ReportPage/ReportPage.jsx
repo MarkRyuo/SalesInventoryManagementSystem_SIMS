@@ -21,7 +21,7 @@ export const ReportPage = () => {
                 <div>
                     <p className='fs-4 m-4'><span><TbReport /></span> Sales Report</p>
                 </div>
-                <div className={Reportcss.conteinerReportsmall}>
+                <div className={Reportcss.conteinerReportSmall}>
                     <div>
                         <ReportChart1 />
                     </div>
