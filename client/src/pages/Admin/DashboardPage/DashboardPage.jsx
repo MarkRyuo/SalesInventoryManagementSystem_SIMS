@@ -101,11 +101,9 @@ export const DashboardPage = () => {
                 <div className={DashboardCss.chartContainer}>
 
                     <div className={DashboardCss.smallContainer}>
-                        <Chart1 />
-                        <div className={DashboardCss.mergeChart}>
+                            <Chart1 />
                             <Chart2 />
                             <Chart3 />
-                        </div>
                     </div>
 
                     <div className={DashboardCss.largeContainer}>
