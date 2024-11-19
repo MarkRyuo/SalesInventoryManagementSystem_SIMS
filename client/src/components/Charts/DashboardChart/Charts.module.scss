@@ -60,10 +60,9 @@
     // box-shadow: 1px 1px 3px var(--chartShadow);
     width: 350px;
     flex-shrink: 0;
-    opacity: 90%;
+    opacity: 100%;
 
     @media (max-width: 700px) {
-        width: 90%;
         padding: 5px 10px;
     }
 }
@@ -79,10 +78,9 @@
     // box-shadow: 1px 1px 3px var(--chartShadow);
     width: 350px;
     flex-shrink: 0;
-    opacity: 90%;
 
     @media (max-width: 700px) {
-            width: 90%;
+            width: 100%;
             padding: 5px 10px;
         }
 }
@@ -97,7 +95,6 @@
     // box-shadow: 1px 1px 3px var(--chartShadow);
     width: 350px;
     flex-shrink: 0;
-    opacity: 90%;
 
     @media (max-width: 700px) {
             width: 90%;
