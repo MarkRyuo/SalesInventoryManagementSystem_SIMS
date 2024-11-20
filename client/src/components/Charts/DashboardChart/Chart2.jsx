@@ -2,8 +2,6 @@ import Chartcss from './Charts.module.scss';
 import { FaReact } from "react-icons/fa";
 import { useState, useEffect, useCallback } from "react";
 import { fetchSalesData } from '../../../services/ProductService';  // Import the fetchSalesData function
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function Chart2() {
     const [totalSales, setTotalSales] = useState(0);
@@ -72,18 +70,18 @@ function Chart2() {
                 <p className='m-0'>
                     {totalSales.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
                 </p>
-                <DropdownButton
-                    id="dropdown-time-range"
-                    title={`Time Range: ${timeRange}`}
-                    variant="primary"
-                    className={Chartcss.dropdownButton}
-                >
-                    <Dropdown.Item onClick={() => setTimeRange('today')}>Today</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setTimeRange('3days')}>Last 3 Days</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setTimeRange('7days')}>Last 7 Days</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setTimeRange('month')}>Month</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setTimeRange('year')}>Year</Dropdown.Item>
-                </DropdownButton>
+                <div className={Chartcss.dropdown}>
+                    <select
+                        className="form-select"
+                        value={timeRange}
+                        onChange={(e) => setTimeRange(e.target.value)} // Handle change to set the selected value
+                    >
+                        <option value="Today">Today</option>
+                        <option value="7 Days">7 Days</option>
+                        <option value="Month">Month</option>
+                        <option value="Year">Year</option>
+                    </select>
+                </div>
             </div>
 
         </div>

@@ -1,7 +1,6 @@
 import Chartcss from './Charts.module.scss';
 import { FaReact } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { Dropdown } from "react-bootstrap";
 import { fetchQuantitySoldByRange } from '../../../services/ProductService'; // Import the new service
 
 function Chart3() {
@@ -31,18 +30,18 @@ function Chart3() {
 
             <div className={Chartcss.contentChart}>
                 <p className='m-0'>{quantitySold}</p>
-                <Dropdown className={Chartcss.dropdown}>
-                    <Dropdown.Toggle variant="primary" id="timeRangeDropdown">
-                        {timeRange}
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => setTimeRange("Today")}>Today</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setTimeRange("7 Days")}>7 Days</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setTimeRange("Month")}>Month</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setTimeRange("Year")}>Year</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
+                <div className={Chartcss.dropdown}>
+                    <select
+                        className="form-select"
+                        value={timeRange}
+                        onChange={(e) => setTimeRange(e.target.value)} // Handle change to set the selected value
+                    >
+                        <option value="Today">Today</option>
+                        <option value="7 Days">7 Days</option>
+                        <option value="Month">Month</option>
+                        <option value="Year">Year</option>
+                    </select>
+                </div>
             </div>
 
         </div>
