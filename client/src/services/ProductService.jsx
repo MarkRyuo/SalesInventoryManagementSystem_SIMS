@@ -8,7 +8,7 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
     const productRef = ref(db, 'products/' + barcode);
 
     try {
-        // Adjust for Philippine Time (UTC +8)
+        //! Adjust for Philippine Time (UTC +8)
         const today = new Date();
         const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
         const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
