@@ -255,7 +255,6 @@ export const updateCategory = async (categoryName, newCategoryData) => {
 //! End of Category
 
 //* Start of PreserveQuantityHistoryForExistingProducts
-
 //? Function to update existing products to include preserveQuantityHistory
 export const updatePreserveQuantityHistoryForExistingProducts = async () => {
     const db = getDatabase();
