@@ -92,7 +92,6 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
                 });
             }
         }
-
         // Update deducted quantity history
         const newDeductedQuantityHistory = [...(productData.deductedQuantityHistory || [])];
         if (additionalQuantity < 0) {
