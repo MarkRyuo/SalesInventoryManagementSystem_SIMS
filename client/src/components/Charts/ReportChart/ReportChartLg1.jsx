@@ -1,4 +1,4 @@
-import ReportChartcss from './ReportChart.module.css'
+import ReportChartcss from './ReportChart.module.scss'
 
 function ReportChartLg1() {
     return (

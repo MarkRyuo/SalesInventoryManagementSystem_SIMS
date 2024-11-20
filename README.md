@@ -2,17 +2,22 @@
 
 ## Screenshots
 
+### Landing Page
+![Web App Screenshot](https://i.pinimg.com/736x/5d/75/eb/5d75eb3622a5a6af89c0b436c8355700.jpg)
 ### Admin Login
-![Web App Screenshot](/client/public/AdminLogin.png)
+![Web App Staff Screenshot](https://i.pinimg.com/736x/a0/a9/df/a0a9df692fb4807859f4d21e37e17e83.jpg)
 ### Staff Login
-![Web App Staff Screenshot](/client/public/StaffLogin.png)
+![Web App Staff Screenshot](https://i.pinimg.com/736x/16/8b/2c/168b2c3c8639900884be76167a647661.jpg)
 
 ## Changelog
 
-### v8.0.5 (Latest)
+### v8.0.6 (Latest)
+- Design Dashboards
+
+### v8.0.5
 - Landing Page Full design
 
-### v.deploy-2 (Latest)
+### v.deploy-2
 - v8.0.4 and v8.0.3-beta 
 
 ### v8.0.4

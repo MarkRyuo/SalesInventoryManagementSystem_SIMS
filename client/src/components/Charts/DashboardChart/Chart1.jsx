@@ -6,11 +6,11 @@ function Chart1() {
         <div className={Chartcss.containerChart1}>
                 <div className={Chartcss.containerText}>
                     <FaReact size={25}/>
-                    <p>Text Here</p>
+                    <p className='m-0 p-0'>Text Here</p>
                 </div>
                 <div className={Chartcss.contentChart}>
-                    <p>00000</p>
-                    <p>From the running month</p>
+                    <p className='m-0'>0</p>
+                    <p className='m-2'>From the running month</p>
                 </div>
         </div>
     )
