@@ -16,7 +16,6 @@ function Checkout() {
     const [selectedDiscount, setSelectedDiscount] = useState(0);
     const [availableTaxes, setAvailableTaxes] = useState([]);
     const [selectedTaxRate, setSelectedTaxRate] = useState(0);
-    
 
     // Load available discounts and taxes
     useEffect(() => {
@@ -82,19 +81,24 @@ function Checkout() {
                 productName: item.productName,
                 quantity: item.quantity,
                 price: item.price,
-                totalAmount: (item.price * item.quantity).toFixed(2), // Store item total
+                totalAmount: (item.price * item.quantity).toFixed(2), // Total amount per item
             })),
-            subtotal: subtotal.toFixed(2),
-            tax: taxAmount.toFixed(2),
-            discount: discountAmount.toFixed(2),
+            subtotal: subtotal.toFixed(2), // Ensure the subtotal is formatted
+            tax: taxAmount.toFixed(2), // Round tax amount
+            discount: discountAmount.toFixed(2), // Round discount amount
             discountPercentage,
-            total: total.toFixed(2),
+            total: total.toFixed(2), // Round total
         };
-
 
         const db = getDatabase();
         const newOrderRef = ref(db, 'TransactionHistory/' + Date.now());
-        await set(newOrderRef, orderDetails);
+        try {
+            await set(newOrderRef, orderDetails);
+            console.log("Order saved successfully");
+        } catch (error) {
+            console.error("Error saving order:", error);
+            setErrorMessage("Failed to save order. Please try again.");
+        }
 
         // Update product quantities in the database
         try {
@@ -104,12 +108,13 @@ function Checkout() {
                     await updateProductQuantity(item.barcode, -item.quantity);
                 })
             );
-            navigate('/PosSuccess');
+            navigate('/PosSuccess'); // Redirect to success page
         } catch (error) {
             console.error("Error updating product quantities:", error);
             setErrorMessage("Failed to finalize checkout. Please try again.");
         }
     };
+
 
 
     return (

@@ -12,17 +12,18 @@ function ChartLg3() {
     const [loading, setLoading] = useState(true);
     const [view, setView] = useState('daily'); // Default view
 
+    // Group data by the selected view (daily, monthly, quarterly, yearly)
     const groupDataByView = (sales, view) => {
         const groupedData = {};
 
-        sales.forEach(({ date, quantity, totalAmount }) => {
+        sales.forEach(({ date, quantitySold, totalAmount }) => {
             let key;
             switch (view) {
                 case 'daily':
                     key = date;
                     break;
                 case 'monthly':
-                    key = date.slice(0, 7);
+                    key = date.slice(0, 7); // Extract YYYY-MM from date
                     break;
                 case 'quarterly': {
                     const [year, month] = date.split('-');
@@ -31,7 +32,7 @@ function ChartLg3() {
                     break;
                 }
                 case 'yearly':
-                    key = date.slice(0, 4);
+                    key = date.slice(0, 4); // Extract YYYY from date
                     break;
                 default:
                     key = date;
@@ -40,20 +41,21 @@ function ChartLg3() {
             if (!groupedData[key]) {
                 groupedData[key] = { quantity: 0, salesAmount: 0 };
             }
-            groupedData[key].quantity += quantity;
+            groupedData[key].quantity += quantitySold;
             groupedData[key].salesAmount += totalAmount;
         });
 
         return groupedData;
     };
 
+    // Fetch sales data and group it by the selected view
     useEffect(() => {
         const fetchAndGroupSales = async () => {
             setLoading(true);
             try {
                 const sales = await fetchSalesData();
-                console.log(sales); // Check if sales data is fetched properly
                 const groupedSales = groupDataByView(sales, view);
+                console.log(groupedSales);  // Debugging the grouped sales data
                 setSalesData(groupedSales);
             } catch (error) {
                 console.error('Error fetching sales data:', error);

@@ -578,7 +578,7 @@ export const fetchAddedQuantityHistory = (callback) => {
 
 export const fetchSalesData = async () => {
     const db = getDatabase();
-    const ordersRef = ref(db, 'orders');  // Change to orders node
+    const ordersRef = ref(db, 'TransactionHistory');  // Change to orders node
 
     try {
         const snapshot = await get(ordersRef);
@@ -608,7 +608,7 @@ export const fetchSalesData = async () => {
 
 export const logSale = async ({ barcode, quantitySold, totalAmount }) => {
     const db = getDatabase();
-    const ordersRef = ref(db, 'orders');  // Change to orders node
+    const ordersRef = ref(db, 'TransactionHistory');  // Change to orders node
     const productRef = ref(db, 'products/' + barcode);
 
     try {
@@ -654,3 +654,25 @@ export const logSale = async ({ barcode, quantitySold, totalAmount }) => {
     }
 };
 
+
+export const fetchTransactionHistory = async () => {
+    const db = getDatabase();
+    const transactionHistoryRef = ref(db, 'TransactionHistory/');  // Reference to the TransactionHistory node
+
+    try {
+        const snapshot = await get(transactionHistoryRef);
+
+        if (!snapshot.exists()) {
+            console.log("No transaction history found");
+            return [];  // Return an empty array if no data is found
+        }
+
+        // Convert the snapshot to an array of transaction objects
+        const transactionHistory = Object.values(snapshot.val());
+
+        return transactionHistory;
+    } catch (error) {
+        console.error("Error fetching transaction history:", error);
+        throw new Error("Failed to fetch transaction history");
+    }
+};

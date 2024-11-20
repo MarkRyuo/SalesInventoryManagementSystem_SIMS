@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { fetchSalesData } from '../../../services/ProductService';
+import { fetchTransactionHistory } from '../../../services/ProductService';
 
 function ChartLg3() {
     const [chartData, setChartData] = useState(null);
@@ -8,14 +8,15 @@ function ChartLg3() {
     useEffect(() => {
         const fetchAndProcessSalesData = async () => {
             try {
-                const sales = await fetchSalesData();
+                const sales = await fetchTransactionHistory();
 
                 // Group sales by date
                 const salesByDate = sales.reduce((acc, sale) => {
-                    if (!acc[sale.date]) {
-                        acc[sale.date] = 0;
+                    const saleDate = new Date(sale.date).toLocaleDateString(); // Format date to be consistent
+                    if (!acc[saleDate]) {
+                        acc[saleDate] = 0;
                     }
-                    acc[sale.date] += sale.totalAmount;
+                    acc[saleDate] += sale.total; // Assuming 'total' is the total amount in the transaction
                     return acc;
                 }, {});
 
