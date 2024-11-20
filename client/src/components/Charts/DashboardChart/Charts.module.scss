@@ -155,13 +155,16 @@
 
 .containerChartLg2 {
     // border: 1px solid violet;
-    width: 700px;
+    width: 100%;
     height: 400px;
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 1px 3px var(--chartShadow);
     background-color: var(--BgColor);
     border-radius: 20px;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 }
 
 .containerChartLg3 {
@@ -173,6 +176,8 @@
     background-color: var(--BgColor);
     border-radius: 20px;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 

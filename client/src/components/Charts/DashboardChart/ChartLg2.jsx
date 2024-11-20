@@ -82,8 +82,6 @@ function ChartLg2() {
 
     return (
         <div className={Chartcss.containerChartLg2}>
-            <h3>Inventory Turnover Chart</h3>
-
             <div className={Chartcss.datePickerContainer}>
                 <Form.Group controlId="startDate">
                     <Form.Label>Select Start Date:</Form.Label>

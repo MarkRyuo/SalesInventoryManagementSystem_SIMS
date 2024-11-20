@@ -111,7 +111,7 @@ export const DashboardPage = () => {
                             <ChartLg3 />
                         </div>
                         <div>
-                            <ChartLg1 />
+                            {/* <ChartLg1 /> */}
                             <ChartLg2 />
                         </div>
                     </div>
