@@ -4,7 +4,7 @@ import { getDatabase, ref, set, get, update, remove, onValue} from 'firebase/dat
 
 //* Start of Product
 // Function to add a new product
-export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, category }) => {
+export const addNewProduct = async ({ barcode, productName, size, color, wattage, voltage, quantity = 1, sku, price, category}) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
 
@@ -29,19 +29,16 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
             preserveQuantityHistory: true,
             sku: sku,
             price: price,
+            // tax: tax, // Store tax as percentage
             category: category,
             dateAdded: formattedToday,
             lastUpdated: formattedToday,
         });
 
-        // Log the activity
-        await logActivity('added', 'product', { barcode, productName, category });
-
     } catch (error) {
         throw new Error(`Error adding product: ${error.message}`);
     }
 };
-
 
 // Function to update the product quantity with separate tracking for additions and deductions
 export const updateProductQuantity = async (barcode, additionalQuantity) => {
@@ -120,12 +117,6 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
             lastUpdated: formattedToday, // Update last updated date (only date)
         });
 
-        // Log the activity (e.g., adding or reducing quantity)
-        const action = additionalQuantity > 0 ? 'Added' : 'Deducted';
-        const details = `Updated quantity of product ${barcode}. Added: ${additionalQuantity > 0 ? additionalQuantity : 0}, Deducted: ${additionalQuantity < 0 ? Math.abs(additionalQuantity) : 0}.`;
-        await logActivity(action, 'Product Quantity', details); // Log the action to Firebase
-
-
         return updatedQuantity; // Return the updated quantity
     } catch (error) {
         throw new Error(`Error updating quantity: ${error.message}`);
@@ -200,8 +191,6 @@ export const addCategory = async (categoryName) => {
 
     try {
         await set(categoryRef, { name: categoryName }); // Store category
-        // Log the activity
-        await logActivity('Added', 'Category', `Added new category: ${categoryName}`);
     } catch (error) {
         throw new Error(`Error adding category: ${error.message}`);
     }
@@ -583,22 +572,4 @@ export const fetchAddedQuantityHistory = (callback) => {
             callback(null); // Handle case where data doesn't exist
         }
     });
-};
-
-// Function to log activities (adding, updating, deleting)
-const logActivity = async (action, entity, details) => {
-    const db = getDatabase();
-    const activityRef = ref(db, 'activityLogs/' + Date.now()); // Use timestamp as unique ID for each log entry
-
-    try {
-        await set(activityRef, {
-            action,
-            entity,
-            details,
-            timestamp: new Date().toISOString(), // Timestamp for when the action was performed
-        });
-        console.log("Activity logged successfully");
-    } catch (error) {
-        console.error(`Error logging activity: ${error.message}`);
-    }
 };
