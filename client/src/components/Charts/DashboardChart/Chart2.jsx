@@ -72,20 +72,20 @@ function Chart2() {
                 <p className='m-0'>
                     {totalSales.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
                 </p>
+                <DropdownButton
+                    id="dropdown-time-range"
+                    title={`Time Range: ${timeRange}`}
+                    variant="primary"
+                    className={Chartcss.dropdownButton}
+                >
+                    <Dropdown.Item onClick={() => setTimeRange('today')}>Today</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setTimeRange('3days')}>Last 3 Days</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setTimeRange('7days')}>Last 7 Days</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setTimeRange('month')}>Month-to-Date</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setTimeRange('year')}>Year-to-Date</Dropdown.Item>
+                </DropdownButton>
             </div>
 
-            <DropdownButton
-                id="dropdown-time-range"
-                title={`Time Range: ${timeRange}`}
-                variant="primary"
-                className={Chartcss.dropdownButton}
-            >
-                <Dropdown.Item onClick={() => setTimeRange('today')}>Today</Dropdown.Item>
-                <Dropdown.Item onClick={() => setTimeRange('3days')}>Last 3 Days</Dropdown.Item>
-                <Dropdown.Item onClick={() => setTimeRange('7days')}>Last 7 Days</Dropdown.Item>
-                <Dropdown.Item onClick={() => setTimeRange('month')}>Month-to-Date</Dropdown.Item>
-                <Dropdown.Item onClick={() => setTimeRange('year')}>Year-to-Date</Dropdown.Item>
-            </DropdownButton>
         </div>
     );
 }
