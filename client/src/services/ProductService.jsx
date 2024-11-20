@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove, onValue} from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove, onValue, push} from 'firebase/database';
 
 //? Product Management, Category Management, Order Management, Discount Management, Tax Management, Preserve Quantity History, Re Ordering
 
@@ -573,3 +573,84 @@ export const fetchAddedQuantityHistory = (callback) => {
         }
     });
 };
+
+
+
+export const fetchSalesData = async () => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'orders');  // Change to orders node
+
+    try {
+        const snapshot = await get(ordersRef);
+        if (!snapshot.exists()) {
+            console.log('No sales data found.');
+            return [];
+        }
+
+        const orders = snapshot.val();
+
+        // Convert orders object to array
+        const formattedSales = Object.keys(orders).map((key) => ({
+            id: key,
+            ...orders[key],
+        }));
+
+        console.log('Sales data retrieved:', formattedSales);
+        return formattedSales;
+    } catch (error) {
+        console.error('Error fetching sales data:', error);
+        throw new Error(`Error fetching sales data: ${error.message}`);
+    }
+};
+
+
+
+
+export const logSale = async ({ barcode, quantitySold, totalAmount }) => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'orders');  // Change to orders node
+    const productRef = ref(db, 'products/' + barcode);
+
+    try {
+        // Fetch the product data
+        const productSnapshot = await get(productRef);
+        if (!productSnapshot.exists()) {
+            throw new Error('Product not found');
+        }
+
+        const productData = productSnapshot.val();
+        const currentQuantity = productData.quantity || 0;
+
+        // Check if enough stock is available
+        if (currentQuantity < quantitySold) {
+            throw new Error(`Insufficient stock. Current quantity: ${currentQuantity}`);
+        }
+
+        //! Adjust for Philippine Time (UTC +8)
+        const today = new Date();
+        const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
+        const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
+        const formattedToday = localTime.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+
+        // Log sale data in the orders node
+        const newOrderRef = push(ordersRef);
+        await set(newOrderRef, {
+            barcode: barcode,
+            productName: productData.productName,
+            quantitySold: quantitySold,
+            totalAmount: totalAmount,
+            date: formattedToday,
+        });
+
+        // Update product quantity
+        await update(productRef, {
+            quantity: currentQuantity - quantitySold,
+            lastUpdated: formattedToday,
+        });
+
+        console.log(`Sale logged successfully for barcode: ${barcode}`);
+    } catch (error) {
+        throw new Error(`Error logging sale: ${error.message}`);
+    }
+};
+
