@@ -57,27 +57,28 @@ function Chart1() {
                 <FaReact size={25} />
                 <p className='m-0 p-0'>Stock In Overview</p>
             </div>
-            <div className={Chartcss.contentChart}></div>
-            <div className="d-flex justify-content-center mb-2">
-                <select
-                    className="form-select w-auto"
-                    value={filter}
-                    onChange={(e) => setFilter(e.target.value)}
-                >
-                    <option value="today">Today</option>
-                    <option value="7days">Last 7 Days</option>
-                    <option value="month">This Month</option>
-                    <option value="year">This Year</option>
-                </select>
-            </div>
             <div className={Chartcss.contentChart}>
-                <p className='m-0'>{stockInTotal}</p>
-                <p className='m-2'>
-                    {filter === "today" && "From today"}
-                    {filter === "7days" && "From the last 7 days"}
-                    {filter === "month" && "From this month"}
-                    {filter === "year" && "From this year"}
-                </p>
+                <div className={Chartcss.contentChart}>
+                    <p className='m-0'>{stockInTotal}</p>
+                    <p className='m-2'>
+                        {filter === "today" && "From today"}
+                        {filter === "7days" && "From the last 7 days"}
+                        {filter === "month" && "From this month"}
+                        {filter === "year" && "From this year"}
+                    </p>
+                    <div className="d-flex justify-content-center mb-2">
+                        <select
+                            className="form-select w-auto"
+                            value={filter}
+                            onChange={(e) => setFilter(e.target.value)}
+                        >
+                            <option value="today">Today</option>
+                            <option value="7days">Last 7 Days</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     );
