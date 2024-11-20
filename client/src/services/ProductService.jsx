@@ -180,8 +180,6 @@ export const getAllProducts = async () => {
         throw new Error(`Error retrieving products: ${error.message}`);
     }
 };
-
-
 //! End of Product
 
 //* Start Category  
