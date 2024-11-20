@@ -77,7 +77,6 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         // If no entry exists, add a new entry for today's quantity
             newQuantityHistory.push({ date: formattedToday, quantity: updatedQuantity });
         }
-
         // Update added quantity history
         const newAddedQuantityHistory = [...(productData.addedQuantityHistory || [])];
         if (additionalQuantity > 0) {
