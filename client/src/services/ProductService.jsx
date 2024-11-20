@@ -62,7 +62,6 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
         const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
         const formattedToday = localTime.toISOString().split('T')[0]; // Format as YYYY-MM-DD
-
         // Check if preserveQuantityHistory is enabled
         const preserveQuantityHistory = productData.preserveQuantityHistory || false;
 
