@@ -33,17 +33,16 @@ function PosScanner() {
     const handleScan = useCallback(async (scannedText) => {
         if (isLoading || scanningInProgress.current) return;
 
-        const currentTime = Date.now(); // Get current timestamp
-        const timeSinceLastScan = currentTime - lastScanTime.current; // Time difference from last scan
+        const currentTime = Date.now();
+        const timeSinceLastScan = currentTime - lastScanTime.current;
 
-        // Block scanning if the interval between scans is too short (e.g., less than 1000ms)
         if (timeSinceLastScan < 1000) {
             setErrorMessages(prev => [...prev, "Scanning too fast. Please wait!"]);
-            setCanScanAgain(false); // Disable scanning until time has passed
+            setCanScanAgain(false);
             setTimeout(() => {
-                setCanScanAgain(true); // Enable scanning again after a delay
+                setCanScanAgain(true);
                 setErrorMessages(prev => prev.filter(msg => msg !== "Scanning too fast. Please wait!"));
-            }, 1000); // Delay for 1 second before allowing scanning again
+            }, 1000);
             return;
         }
 
@@ -53,11 +52,10 @@ function PosScanner() {
 
         try {
             setIsLoading(true);
-
-            // Delay for 1 second before scanning
             await delay(1000);
 
-            const product = await fetchProductByBarcode(scannedText);
+            // Fetch product using barcode
+            const product = await fetchProductByBarcode(scannedText); // Call your Firebase service
 
             if (product && product.quantity === 0) {
                 setErrorMessages(prev => [...prev, `Cannot scan ${product.productName}. Quantity is 0.`]);
@@ -67,16 +65,14 @@ function PosScanner() {
             }
 
             if (product) {
-                // Include product ID when updating the scanned items state
                 setScannedItems(prevItems => {
                     const existingItemIndex = prevItems.findIndex(item => item.barcode === scannedText);
                     const updatedItems = [...prevItems];
 
                     if (existingItemIndex === -1) {
-                        // Add the product with quantity 1 and include the product ID
-                        updatedItems.push({ ...product, quantity: 1, productId: product.id });
+                        // Ensure `productId` is correctly mapped
+                        updatedItems.push({ ...product, quantity: 1 });
                     } else {
-                        // If product exists, update its quantity
                         updatedItems[existingItemIndex] = {
                             ...updatedItems[existingItemIndex],
                             quantity: updatedItems[existingItemIndex].quantity + 1
@@ -105,6 +101,7 @@ function PosScanner() {
             lastScanTime.current = Date.now();
         }
     }, [isLoading]);
+
 
     
 
