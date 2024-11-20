@@ -57,6 +57,7 @@ function Chart1() {
                 <FaReact size={25} />
                 <p className='m-0 p-0'>Stock In Overview</p>
             </div>
+            <div className={Chartcss.contentChart}></div>
             <div className="d-flex justify-content-center mb-2">
                 <select
                     className="form-select w-auto"
