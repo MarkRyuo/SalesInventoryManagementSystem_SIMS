@@ -1,5 +1,6 @@
 import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
 
+//? Product Management, Category Management, Order Management, Discount Management, Tax Management, Preserve Quantity History, Re Ordering
 
 //* Start of Product
 // Function to add a new product
