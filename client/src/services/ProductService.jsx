@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove, onValue, push} from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove, onValue, push, runTransaction } from 'firebase/database';
 
 //? Product Management, Category Management, Order Management, Discount Management, Tax Management, Preserve Quantity History, Re Ordering
 
@@ -578,7 +578,7 @@ export const fetchAddedQuantityHistory = (callback) => {
 
 export const fetchSalesData = async () => {
     const db = getDatabase();
-    const ordersRef = ref(db, 'TransactionHistory');  // Change to orders node
+    const ordersRef = ref(db, 'TransactionHistory');  // Reference to TransactionHistory node
 
     try {
         const snapshot = await get(ordersRef);
@@ -589,10 +589,12 @@ export const fetchSalesData = async () => {
 
         const orders = snapshot.val();
 
-        // Convert orders object to array
+        // Convert orders object to array and map the fields needed
         const formattedSales = Object.keys(orders).map((key) => ({
             id: key,
             ...orders[key],
+            quantitySold: orders[key].items.reduce((acc, item) => acc + item.quantitySold, 0), // Sum quantitySold for items
+            totalAmount: orders[key].total, // Assuming total is already present in the transaction
         }));
 
         console.log('Sales data retrieved:', formattedSales);
@@ -606,10 +608,11 @@ export const fetchSalesData = async () => {
 
 
 
+
 export const logSale = async ({ barcode, quantitySold, totalAmount }) => {
     const db = getDatabase();
-    const ordersRef = ref(db, 'TransactionHistory');  // Change to orders node
-    const productRef = ref(db, 'products/' + barcode);
+    const ordersRef = ref(db, 'TransactionHistory');  // Reference to TransactionHistory node
+    const productRef = ref(db, 'products/' + barcode); // Reference to specific product by barcode
 
     try {
         // Fetch the product data
@@ -642,14 +645,31 @@ export const logSale = async ({ barcode, quantitySold, totalAmount }) => {
             date: formattedToday,
         });
 
-        // Update product quantity
-        await update(productRef, {
-            quantity: currentQuantity - quantitySold,
-            lastUpdated: formattedToday,
+        // Use a transaction to safely update the product quantity (avoiding race conditions)
+        await runTransaction(productRef, (currentProductData) => {
+            if (currentProductData === null) {
+                throw new Error('Product not found during stock update');
+            }
+
+            // Calculate the new quantity
+            const newQuantity = currentProductData.quantity - quantitySold;
+
+            // If the stock is not enough, cancel the transaction
+            if (newQuantity < 0) {
+                throw new Error('Insufficient stock during update');
+            }
+
+            // Return the updated product data
+            return {
+                ...currentProductData,
+                quantity: newQuantity,
+                lastUpdated: formattedToday
+            };
         });
 
         console.log(`Sale logged successfully for barcode: ${barcode}`);
     } catch (error) {
+        console.error('Error logging sale:', error.message);
         throw new Error(`Error logging sale: ${error.message}`);
     }
 };

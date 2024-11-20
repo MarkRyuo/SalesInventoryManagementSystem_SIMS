@@ -4,7 +4,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 import Chartcss from './Charts.module.scss';
 import { fetchSalesData } from '../../../services/ProductService';
 
-// Registering Chart.js components including the Filler plugin
+// Registering Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
 function ChartLg3() {
@@ -12,7 +12,6 @@ function ChartLg3() {
     const [loading, setLoading] = useState(true);
     const [view, setView] = useState('daily'); // Default view
 
-    // Group data by the selected view (daily, monthly, quarterly, yearly)
     const groupDataByView = (sales, view) => {
         const groupedData = {};
 
@@ -48,14 +47,12 @@ function ChartLg3() {
         return groupedData;
     };
 
-    // Fetch sales data and group it by the selected view
     useEffect(() => {
         const fetchAndGroupSales = async () => {
             setLoading(true);
             try {
                 const sales = await fetchSalesData();
                 const groupedSales = groupDataByView(sales, view);
-                console.log(groupedSales);  // Debugging the grouped sales data
                 setSalesData(groupedSales);
             } catch (error) {
                 console.error('Error fetching sales data:', error);
@@ -67,7 +64,7 @@ function ChartLg3() {
         fetchAndGroupSales();
     }, [view]);
 
-    const sortedKeys = Object.keys(salesData).sort(); // Sort time periods
+    const sortedKeys = Object.keys(salesData).sort();
     const sortedValues = sortedKeys.map((key) => salesData[key]);
 
     const chartData = {
@@ -78,14 +75,14 @@ function ChartLg3() {
                 data: sortedValues.map((data) => data.quantity),
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true, // Now the 'Filler' plugin is registered
+                fill: true,
             },
             {
                 label: 'Sales Amount',
                 data: sortedValues.map((data) => data.salesAmount),
                 borderColor: 'rgba(153, 102, 255, 1)',
                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                fill: true, // Same here
+                fill: true,
             },
         ],
     };
