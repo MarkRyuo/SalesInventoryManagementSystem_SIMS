@@ -67,32 +67,31 @@ function PosScanner() {
             }
 
             if (product) {
-                // Using functional update to ensure latest scannedItems state
+                // Include product ID when updating the scanned items state
                 setScannedItems(prevItems => {
                     const existingItemIndex = prevItems.findIndex(item => item.barcode === scannedText);
-                    const updatedItems = [...prevItems]; // Create a new array to avoid mutating the original state
+                    const updatedItems = [...prevItems];
 
                     if (existingItemIndex === -1) {
-                        // If product isn't already scanned, add it with quantity 1
-                        updatedItems.push({ ...product, quantity: 1 });
+                        // Add the product with quantity 1 and include the product ID
+                        updatedItems.push({ ...product, quantity: 1, productId: product.id });
                     } else {
-                        // If product already exists, increment the quantity by 1
+                        // If product exists, update its quantity
                         updatedItems[existingItemIndex] = {
                             ...updatedItems[existingItemIndex],
-                            quantity: updatedItems[existingItemIndex].quantity + 1 // Increment by 1
+                            quantity: updatedItems[existingItemIndex].quantity + 1
                         };
                     }
 
-                    return updatedItems; // Return the updated list
+                    return updatedItems;
                 });
 
                 setMessage(`Successfully scanned ${product.productName}.`);
                 setFadeOut(false);
                 setTimeout(() => setFadeOut(true), 2000);
 
-                // Hide the camera while the success message is shown, then show it again after the message fades
                 setCameraVisible(false);
-                setTimeout(() => setCameraVisible(true), 2000); // Hide camera during success message
+                setTimeout(() => setCameraVisible(true), 2000);
             } else {
                 setErrorMessages(prev => [...prev, `Product not found: ${scannedText}`]);
                 setFadeOut(false);
@@ -102,12 +101,11 @@ function PosScanner() {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
             setIsLoading(false);
-            scanningInProgress.current = false; // Reset scanning state immediately
-
-            // Update the last scan time after the scan process is completed
+            scanningInProgress.current = false;
             lastScanTime.current = Date.now();
         }
     }, [isLoading]);
+
 
 
 
