@@ -81,8 +81,8 @@ function Chart2() {
                     <Dropdown.Item onClick={() => setTimeRange('today')}>Today</Dropdown.Item>
                     <Dropdown.Item onClick={() => setTimeRange('3days')}>Last 3 Days</Dropdown.Item>
                     <Dropdown.Item onClick={() => setTimeRange('7days')}>Last 7 Days</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setTimeRange('month')}>Month-to-Date</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setTimeRange('year')}>Year-to-Date</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setTimeRange('month')}>Month</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setTimeRange('year')}>Year</Dropdown.Item>
                 </DropdownButton>
             </div>
 
