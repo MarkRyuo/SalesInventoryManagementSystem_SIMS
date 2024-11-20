@@ -67,15 +67,18 @@ function PosScanner() {
             }
 
             if (product) {
-                const existingItemIndex = scannedItems.findIndex(item => item.barcode === scannedText);
+                // Using functional update to ensure latest scannedItems state
                 setScannedItems(prevItems => {
-                    const updatedItems = [...prevItems];
+                    const existingItemIndex = prevItems.findIndex(item => item.barcode === scannedText);
+                    const updatedItems = [...prevItems]; // Create a new array to avoid mutating the original state
+
                     if (existingItemIndex !== -1) {
-                        updatedItems[existingItemIndex].quantity += 1;
+                        updatedItems[existingItemIndex].quantity += 1; // Merge quantities if product already exists
                     } else {
-                        updatedItems.push({ ...product, quantity: 1 });
+                        updatedItems.push({ ...product, quantity: 1 }); // Add new product if not already scanned
                     }
-                    return updatedItems;
+
+                    return updatedItems; // Return the updated list
                 });
 
                 setMessage(`Successfully scanned ${product.productName}.`);
@@ -99,7 +102,8 @@ function PosScanner() {
             // Update the last scan time after the scan process is completed
             lastScanTime.current = Date.now();
         }
-    }, [isLoading, scannedItems]);
+    }, [isLoading]);
+
 
     // Store the timestamp of the last scan
     const lastScanTime = useRef(0);
