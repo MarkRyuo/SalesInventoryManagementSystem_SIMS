@@ -129,7 +129,6 @@ export const fetchProductByBarcode = async (barcode) => {
     const snapshot = await get(productRef);
     return snapshot.exists() ? snapshot.val() : null;
 };
-
 // Function to delete a product by barcode
 export const deleteProduct = async (barcode) => {
     const db = getDatabase();
