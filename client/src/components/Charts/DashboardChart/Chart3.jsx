@@ -31,21 +31,20 @@ function Chart3() {
 
             <div className={Chartcss.contentChart}>
                 <p className='m-0'>{quantitySold}</p>
-                <p className='m-2'>For the selected range</p>
+                <Dropdown className={Chartcss.dropdown}>
+                    <Dropdown.Toggle variant="primary" id="timeRangeDropdown">
+                        {timeRange}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => setTimeRange("Today")}>Today</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setTimeRange("7 Days")}>7 Days</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setTimeRange("Month")}>Month</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setTimeRange("Year")}>Year</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
 
-            <Dropdown className={Chartcss.dropdown}>
-                <Dropdown.Toggle variant="primary" id="timeRangeDropdown">
-                    {timeRange}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => setTimeRange("Today")}>Today</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setTimeRange("7 Days")}>7 Days</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setTimeRange("Month")}>Month</Dropdown.Item>
-                    <Dropdown.Item onClick={() => setTimeRange("Year")}>Year</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
         </div>
     );
 }
