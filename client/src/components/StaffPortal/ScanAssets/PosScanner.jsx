@@ -72,10 +72,15 @@ function PosScanner() {
                     const existingItemIndex = prevItems.findIndex(item => item.barcode === scannedText);
                     const updatedItems = [...prevItems]; // Create a new array to avoid mutating the original state
 
-                    if (existingItemIndex !== -1) {
-                        updatedItems[existingItemIndex].quantity += 1; // Merge quantities if product already exists
+                    if (existingItemIndex === -1) {
+                        // If product isn't already scanned, add it with quantity 1
+                        updatedItems.push({ ...product, quantity: 1 });
                     } else {
-                        updatedItems.push({ ...product, quantity: 1 }); // Add new product if not already scanned
+                        // If product already exists, increment the quantity by 1
+                        updatedItems[existingItemIndex] = {
+                            ...updatedItems[existingItemIndex],
+                            quantity: updatedItems[existingItemIndex].quantity + 1 // Increment by 1
+                        };
                     }
 
                     return updatedItems; // Return the updated list
@@ -103,6 +108,8 @@ function PosScanner() {
             lastScanTime.current = Date.now();
         }
     }, [isLoading]);
+
+
 
 
     // Store the timestamp of the last scan
