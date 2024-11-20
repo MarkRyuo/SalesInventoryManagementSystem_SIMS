@@ -191,7 +191,7 @@ function Checkout() {
                             <tbody>
                                 {scannedItems.map(item => (
                                     <tr key={item.productId}>
-                                        <td>{item.productName}</td>
+                                        <td>{item.productName}-{item.wattage}-{item.voltage}-{item.size}-{item.color}</td>
                                         <td>{item.quantity}</td>
                                         <td>₱{parseFloat(item.price).toFixed(2)}</td> {/* Ensure price is a number */}
                                         <td>₱{(parseFloat(item.price) * item.quantity).toFixed(2)}</td> {/* Ensure amount is calculated correctly */}
