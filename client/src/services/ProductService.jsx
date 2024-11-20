@@ -64,7 +64,6 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         const formattedToday = localTime.toISOString().split('T')[0]; // Format as YYYY-MM-DD
         // Check if preserveQuantityHistory is enabled
         const preserveQuantityHistory = productData.preserveQuantityHistory || false;
-
         // Update quantity history: Keep the history unchanged
         const newQuantityHistory = preserveQuantityHistory
             ? [...(productData.quantityHistory || [])]
