@@ -77,13 +77,20 @@ function Checkout() {
         const orderDetails = {
             date: currentDate,
             customerName,
-            items: scannedItems,
-            subtotal, // Make sure the subtotal is included here
-            tax: taxAmount,
-            discount: discountAmount, // Pass the calculated discount amount
-            discountPercentage, // Pass the discount percentage
-            total,
+            items: scannedItems.map(item => ({
+                productId: item.productId,
+                productName: item.productName,
+                quantity: item.quantity,
+                price: item.price,
+                totalAmount: (item.price * item.quantity).toFixed(2), // Store item total
+            })),
+            subtotal: subtotal.toFixed(2),
+            tax: taxAmount.toFixed(2),
+            discount: discountAmount.toFixed(2),
+            discountPercentage,
+            total: total.toFixed(2),
         };
+
 
         const db = getDatabase();
         const newOrderRef = ref(db, 'TransactionHistory/' + Date.now());
