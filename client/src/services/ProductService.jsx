@@ -43,7 +43,6 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
 export const updateProductQuantity = async (barcode, additionalQuantity) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
-
     try {
         const productSnapshot = await get(productRef);
         if (!productSnapshot.exists()) {
@@ -58,7 +57,6 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         if (updatedQuantity < 0) {
             throw new Error(`Insufficient quantity. Current quantity is ${currentQuantity}. Cannot reduce by ${Math.abs(additionalQuantity)}.`);
         }
-
         // Adjust for Philippine Time (UTC +8)
         const today = new Date();
         const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
