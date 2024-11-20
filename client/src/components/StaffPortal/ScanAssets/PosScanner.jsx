@@ -33,17 +33,16 @@ function PosScanner() {
     const handleScan = useCallback(async (scannedText) => {
         if (isLoading || scanningInProgress.current) return;
 
-        const currentTime = Date.now(); // Get current timestamp
-        const timeSinceLastScan = currentTime - lastScanTime.current; // Time difference from last scan
+        const currentTime = Date.now();
+        const timeSinceLastScan = currentTime - lastScanTime.current;
 
-        // Block scanning if the interval between scans is too short (e.g., less than 1000ms)
         if (timeSinceLastScan < 1000) {
             setErrorMessages(prev => [...prev, "Scanning too fast. Please wait!"]);
-            setCanScanAgain(false); // Disable scanning until time has passed
+            setCanScanAgain(false);
             setTimeout(() => {
-                setCanScanAgain(true); // Enable scanning again after a delay
+                setCanScanAgain(true);
                 setErrorMessages(prev => prev.filter(msg => msg !== "Scanning too fast. Please wait!"));
-            }, 1000); // Delay for 1 second before allowing scanning again
+            }, 1000);
             return;
         }
 
@@ -53,11 +52,10 @@ function PosScanner() {
 
         try {
             setIsLoading(true);
-
-            // Delay for 1 second before scanning
             await delay(1000);
 
-            const product = await fetchProductByBarcode(scannedText);
+            // Fetch product using barcode
+            const product = await fetchProductByBarcode(scannedText); // Call your Firebase service
 
             if (product && product.quantity === 0) {
                 setErrorMessages(prev => [...prev, `Cannot scan ${product.productName}. Quantity is 0.`]);
@@ -67,14 +65,20 @@ function PosScanner() {
             }
 
             if (product) {
-                const existingItemIndex = scannedItems.findIndex(item => item.barcode === scannedText);
                 setScannedItems(prevItems => {
+                    const existingItemIndex = prevItems.findIndex(item => item.barcode === scannedText);
                     const updatedItems = [...prevItems];
-                    if (existingItemIndex !== -1) {
-                        updatedItems[existingItemIndex].quantity += 1;
+
+                    if (existingItemIndex === -1) {
+                        // Ensure `productId` is correctly mapped
+                        updatedItems.push({ ...product, quantity: 1, productId: product.productId });
                     } else {
-                        updatedItems.push({ ...product, quantity: 1 });
+                        updatedItems[existingItemIndex] = {
+                            ...updatedItems[existingItemIndex],
+                            quantity: updatedItems[existingItemIndex].quantity + 1
+                        };
                     }
+
                     return updatedItems;
                 });
 
@@ -82,9 +86,8 @@ function PosScanner() {
                 setFadeOut(false);
                 setTimeout(() => setFadeOut(true), 2000);
 
-                // Hide the camera while the success message is shown, then show it again after the message fades
                 setCameraVisible(false);
-                setTimeout(() => setCameraVisible(true), 2000); // Hide camera during success message
+                setTimeout(() => setCameraVisible(true), 2000);
             } else {
                 setErrorMessages(prev => [...prev, `Product not found: ${scannedText}`]);
                 setFadeOut(false);
@@ -94,12 +97,15 @@ function PosScanner() {
             setErrorMessages(prev => [...prev, `Error fetching product: ${error.message}`]);
         } finally {
             setIsLoading(false);
-            scanningInProgress.current = false; // Reset scanning state immediately
-
-            // Update the last scan time after the scan process is completed
+            scanningInProgress.current = false;
             lastScanTime.current = Date.now();
         }
-    }, [isLoading, scannedItems]);
+    }, [isLoading]);
+
+
+    
+
+
 
     // Store the timestamp of the last scan
     const lastScanTime = useRef(0);

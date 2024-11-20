@@ -128,8 +128,14 @@ export const fetchProductByBarcode = async (barcode) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
     const snapshot = await get(productRef);
-    return snapshot.exists() ? snapshot.val() : null;
+    if (snapshot.exists()) {
+        const productData = snapshot.val();
+        // Include the barcode as the productId, or map it if you store the productId elsewhere
+        return { ...productData, productId: barcode }; // Assuming the barcode is the productId
+    }
+    return null;
 };
+
 
 // Function to delete a product by barcode
 export const deleteProduct = async (barcode) => {
