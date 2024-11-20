@@ -1,5 +1,6 @@
-import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove, onValue, push, runTransaction } from 'firebase/database';
 
+//? Product Management, Category Management, Order Management, Discount Management, Tax Management, Preserve Quantity History, Re Ordering
 
 //* Start of Product
 // Function to add a new product
@@ -8,7 +9,7 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
     const productRef = ref(db, 'products/' + barcode);
 
     try {
-        // Adjust for Philippine Time (UTC +8)
+        //! Adjust for Philippine Time (UTC +8)
         const today = new Date();
         const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
         const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
@@ -43,7 +44,6 @@ export const addNewProduct = async ({ barcode, productName, size, color, wattage
 export const updateProductQuantity = async (barcode, additionalQuantity) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
-
     try {
         const productSnapshot = await get(productRef);
         if (!productSnapshot.exists()) {
@@ -58,31 +58,26 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         if (updatedQuantity < 0) {
             throw new Error(`Insufficient quantity. Current quantity is ${currentQuantity}. Cannot reduce by ${Math.abs(additionalQuantity)}.`);
         }
-
         // Adjust for Philippine Time (UTC +8)
         const today = new Date();
         const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
         const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
         const formattedToday = localTime.toISOString().split('T')[0]; // Format as YYYY-MM-DD
-
         // Check if preserveQuantityHistory is enabled
         const preserveQuantityHistory = productData.preserveQuantityHistory || false;
-
         // Update quantity history: Keep the history unchanged
         const newQuantityHistory = preserveQuantityHistory
             ? [...(productData.quantityHistory || [])]
             : [];
-
         // Update today's quantity in the history
         const quantityEntry = newQuantityHistory.find(entry => entry.date === formattedToday);
         if (quantityEntry) {
-            // Update the existing entry with the new total quantity
+        // Update the existing entry with the new total quantity
             quantityEntry.quantity = updatedQuantity; // This keeps the quantity for today updated
         } else {
-            // If no entry exists, add a new entry for today's quantity
+        // If no entry exists, add a new entry for today's quantity
             newQuantityHistory.push({ date: formattedToday, quantity: updatedQuantity });
         }
-
         // Update added quantity history
         const newAddedQuantityHistory = [...(productData.addedQuantityHistory || [])];
         if (additionalQuantity > 0) {
@@ -98,7 +93,6 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
                 });
             }
         }
-
         // Update deducted quantity history
         const newDeductedQuantityHistory = [...(productData.deductedQuantityHistory || [])];
         if (additionalQuantity < 0) {
@@ -134,8 +128,14 @@ export const fetchProductByBarcode = async (barcode) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + barcode);
     const snapshot = await get(productRef);
-    return snapshot.exists() ? snapshot.val() : null;
+    if (snapshot.exists()) {
+        const productData = snapshot.val();
+        // Include the barcode as the productId, or map it if you store the productId elsewhere
+        return { ...productData, productId: barcode }; // Assuming the barcode is the productId
+    }
+    return null;
 };
+
 
 // Function to delete a product by barcode
 export const deleteProduct = async (barcode) => {
@@ -187,12 +187,9 @@ export const getAllProducts = async () => {
         throw new Error(`Error retrieving products: ${error.message}`);
     }
 };
-
-
 //! End of Product
 
 //* Start Category  
-
 //? Function to add a new category
 export const addCategory = async (categoryName) => {
     const db = getDatabase();
@@ -204,7 +201,6 @@ export const addCategory = async (categoryName) => {
         throw new Error(`Error adding category: ${error.message}`);
     }
 };
-
 
 //? Function to retrieve all categories
 export const getCategories = async () => {
@@ -266,7 +262,6 @@ export const updateCategory = async (categoryName, newCategoryData) => {
 //! End of Category
 
 //* Start of PreserveQuantityHistoryForExistingProducts
-
 //? Function to update existing products to include preserveQuantityHistory
 export const updatePreserveQuantityHistoryForExistingProducts = async () => {
     const db = getDatabase();
@@ -340,7 +335,6 @@ export const updateProductInDatabase = async (updatedProduct) => {
 export const editProductInDatabase = async (updatedProduct) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + updatedProduct.barcode); // Assuming barcode is the unique key
-
     try {
         await update(productRef, updatedProduct); // Update the product with new data
         console.log('Product updated successfully');
@@ -354,7 +348,7 @@ export const editProductInDatabase = async (updatedProduct) => {
 //* Start AddNewDiscount
 export const addNewDiscount = async ({ discountName, discountValue }) => {
     const db = getDatabase();
-    const discountId = Date.now(); // Gamitin ang timestamp bilang unique ID
+    const discountId = Date.now();
     const discountRef = ref(db, `discounts/${discountId}`);
 
     try {
@@ -559,6 +553,310 @@ export const saveProductName = async (qrId, productName) => {
     } catch (error) {
         console.error('Error saving product name:', error);
         throw new Error('Error saving product name');
+    }
+};
+
+// Fetch addedQuantityHistory for all products
+export const fetchAddedQuantityHistory = (callback) => {
+    const db = getDatabase();
+    const productsRef = ref(db, 'products/'); // Reference to all products
+
+    onValue(productsRef, (snapshot) => {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+
+            // Extract addedQuantityHistory from each product
+            const allAddedQuantityHistory = Object.values(data).reduce((acc, product) => {
+                if (product.addedQuantityHistory) {
+                    acc.push(...product.addedQuantityHistory);
+                }
+                return acc;
+            }, []);
+
+            callback(allAddedQuantityHistory); // Pass the combined history to the callback
+        } else {
+            callback(null); // Handle case where data doesn't exist
+        }
+    });
+};
+
+
+
+export const fetchSalesData = async () => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'TransactionHistory');  // Reference to TransactionHistory node
+
+    try {
+        const snapshot = await get(ordersRef);
+        if (!snapshot.exists()) {
+            console.log('No sales data found.');
+            return [];
+        }
+
+        const orders = snapshot.val();
+
+        // Convert orders object to array and map the fields needed
+        const formattedSales = Object.keys(orders).map((key) => ({
+            id: key,
+            ...orders[key],
+            quantitySold: orders[key].items.reduce((acc, item) => acc + item.quantitySold, 0), // Sum quantitySold for items
+            totalAmount: parseFloat(orders[key].total) || 0, // Ensure totalAmount is a number
+        }));
+
+        console.log('Sales data retrieved:', formattedSales);
+        return formattedSales;
+    } catch (error) {
+        console.error('Error fetching sales data:', error);
+        throw new Error(`Error fetching sales data: ${error.message}`);
+    }
+};
+
+
+
+
+
+
+export const logSale = async ({ barcode, quantitySold, totalAmount }) => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'TransactionHistory');  // Reference to TransactionHistory node
+    const productRef = ref(db, 'products/' + barcode); // Reference to specific product by barcode
+
+    try {
+        // Fetch the product data
+        const productSnapshot = await get(productRef);
+        if (!productSnapshot.exists()) {
+            throw new Error('Product not found');
+        }
+
+        const productData = productSnapshot.val();
+        const currentQuantity = productData.quantity || 0;
+
+        // Check if enough stock is available
+        if (currentQuantity < quantitySold) {
+            throw new Error(`Insufficient stock. Current quantity: ${currentQuantity}`);
+        }
+
+        //! Adjust for Philippine Time (UTC +8)
+        const today = new Date();
+        const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
+        const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
+        const formattedToday = localTime.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+
+        // Log sale data in the orders node
+        const newOrderRef = push(ordersRef);
+        await set(newOrderRef, {
+            barcode: barcode,
+            productName: productData.productName,
+            quantitySold: quantitySold,
+            totalAmount: totalAmount,
+            date: formattedToday,
+        });
+
+        // Use a transaction to safely update the product quantity (avoiding race conditions)
+        await runTransaction(productRef, (currentProductData) => {
+            if (currentProductData === null) {
+                throw new Error('Product not found during stock update');
+            }
+
+            // Calculate the new quantity
+            const newQuantity = currentProductData.quantity - quantitySold;
+
+            // If the stock is not enough, cancel the transaction
+            if (newQuantity < 0) {
+                throw new Error('Insufficient stock during update');
+            }
+
+            // Return the updated product data
+            return {
+                ...currentProductData,
+                quantity: newQuantity,
+                lastUpdated: formattedToday
+            };
+        });
+
+        console.log(`Sale logged successfully for barcode: ${barcode}`);
+    } catch (error) {
+        console.error('Error logging sale:', error.message);
+        throw new Error(`Error logging sale: ${error.message}`);
+    }
+};
+
+
+export const fetchTransactionHistory = async () => {
+    const db = getDatabase();
+    const transactionHistoryRef = ref(db, 'TransactionHistory/');  // Reference to the TransactionHistory node
+
+    try {
+        const snapshot = await get(transactionHistoryRef);
+
+        if (!snapshot.exists()) {
+            console.log("No transaction history found");
+            return [];  // Return an empty array if no data is found
+        }
+
+        // Convert the snapshot to an array of transaction objects
+        const transactionHistory = Object.values(snapshot.val());
+
+        return transactionHistory;
+    } catch (error) {
+        console.error("Error fetching transaction history:", error);
+        throw new Error("Failed to fetch transaction history");
+    }
+};
+
+export const saveTransactionHistory = async (orderDetails) => {
+    const db = getDatabase();
+    const transactionHistoryRef = ref(db, 'TransactionHistory/' + Date.now());  // Use timestamp as unique ID for the transaction
+
+    try {
+        await set(transactionHistoryRef, orderDetails);  // Save the order details to the database
+        console.log("Transaction saved successfully");
+    } catch (error) {
+        console.error("Error saving transaction:", error);
+        throw new Error(`Error saving transaction: ${error.message}`);
+    }
+};
+
+// Fetch the sales data (COGS) between a specified date range
+export const fetchSalesDataAndCOGS = async (startDate, endDate) => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'TransactionHistory'); // Reference to TransactionHistory
+
+    try {
+        const snapshot = await get(ordersRef);
+        if (!snapshot.exists()) {
+            console.log('No sales data found.');
+            return 0; // If no sales data, return 0
+        }
+
+        const orders = snapshot.val();
+        let totalCOGS = 0;
+
+        // Calculate COGS by summing the totalAmount (which is the sales price) within the date range
+        Object.keys(orders).forEach((key) => {
+            const order = orders[key];
+            const { date, totalAmount } = order;
+
+            // Check if the order's date is within the selected range
+            if (date >= startDate && date <= endDate) {
+                totalCOGS += totalAmount; // Add up the total sales amount to calculate COGS
+            }
+        });
+
+        console.log('COGS for the period:', totalCOGS);
+        return totalCOGS;
+
+    } catch (error) {
+        console.error('Error fetching sales data:', error);
+        throw new Error(`Error fetching sales data: ${error.message}`);
+    }
+};
+
+// Fetch the beginning and ending inventory for a specific product
+export const fetchProductInventory = async (productId) => {
+    const db = getDatabase();
+    const productRef = ref(db, 'products/' + productId); // Reference to specific product by ID
+
+    try {
+        const snapshot = await get(productRef);
+        if (!snapshot.exists()) {
+            console.log('Product not found.');
+            return { beginningInventory: 0, endingInventory: 0 }; // Return 0 if no product is found
+        }
+
+        const productData = snapshot.val();
+        const beginningInventory = productData.quantity || 0;  // Assume productData.quantity holds current inventory
+        const endingInventory = beginningInventory;  // You can adjust this logic to get the ending inventory based on stock movement
+
+        return { beginningInventory, endingInventory };
+    } catch (error) {
+        console.error('Error fetching product inventory:', error);
+        throw new Error(`Error fetching product inventory: ${error.message}`);
+    }
+};
+
+// Calculate Inventory Turnover using the COGS and average inventory
+export const calculateInventoryTurnover = async (productId, startDate, endDate) => {
+    try {
+        // Fetch COGS (Cost of Goods Sold) from sales data
+        const cogs = await fetchSalesDataAndCOGS(startDate, endDate);
+
+        // Fetch Beginning and Ending Inventory for the product
+        const { beginningInventory, endingInventory } = await fetchProductInventory(productId);
+
+        if (beginningInventory === 0 || endingInventory === 0 || cogs === 0) {
+            console.log('Insufficient data to calculate Inventory Turnover.');
+            return 0; // Return 0 if any data is missing
+        }
+
+        // Calculate Average Inventory
+        const averageInventory = (beginningInventory + endingInventory) / 2;
+
+        // Calculate Inventory Turnover
+        const turnover = cogs / averageInventory;
+
+        console.log(`Inventory Turnover: ${turnover}`);
+        return turnover;
+
+    } catch (error) {
+        console.error('Error calculating Inventory Turnover:', error);
+    }
+};
+
+export const fetchQuantitySoldByRange = async (timeRange) => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'TransactionHistory'); // Reference to TransactionHistory node
+
+    try {
+        const snapshot = await get(ordersRef);
+        if (!snapshot.exists()) {
+            console.log('No sales data found.');
+            return 0; // Return 0 if no data
+        }
+
+        const orders = snapshot.val();
+        const now = new Date();
+        let startDate, endDate;
+
+        // Calculate the start and end date for the given range
+        switch (timeRange) {
+            case "Today":
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                endDate = now;
+                break;
+            case "7 Days":
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+                endDate = now;
+                break;
+            case "Month":
+                startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+                endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                break;
+            case "Year":
+                startDate = new Date(now.getFullYear(), 0, 1);
+                endDate = new Date(now.getFullYear(), 11, 31);
+                break;
+            default:
+                return 0;
+        }
+
+        // Calculate the total quantity sold within the date range
+        const totalQuantity = Object.keys(orders).reduce((acc, key) => {
+            const order = orders[key];
+            const orderDate = new Date(order.date);
+
+            if (orderDate >= startDate && orderDate <= endDate) {
+                // Sum up the quantity of items sold in the order
+                const quantitySold = order.items.reduce((sum, item) => sum + item.quantity, 0); // Use item.quantity directly
+                acc += quantitySold;
+            }
+            return acc;
+        }, 0);
+
+        return totalQuantity;
+    } catch (error) {
+        console.error('Error fetching quantity sold:', error);
+        throw new Error(`Error fetching quantity sold: ${error.message}`);
     }
 };
 

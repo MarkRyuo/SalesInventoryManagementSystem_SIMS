@@ -9,4 +9,4 @@ function ChartLg1() {
     )
 }
 
-export default ChartLg1 ;
+export default ChartLg1;

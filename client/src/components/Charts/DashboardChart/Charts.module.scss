@@ -129,10 +129,6 @@
     }
 }
 
-
-
-
-
 /* !Warning This is for ChartLg */
 
 .containerChartLg1 {
@@ -142,16 +138,33 @@
     background-color: var(--BgColor);
     border-radius: 20px;
     box-shadow: 1px 1px 3px var(--chartShadow);
+    overflow: auto;
+
+    .activityItem {
+    margin-bottom: 1rem;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    .activityItem p {
+    color: #4CAF50;  // You can customize the colors
+    }
 }
 
 .containerChartLg2 {
     // border: 1px solid violet;
-    width: 700px;
+    width: 100%;
     height: 400px;
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 1px 3px var(--chartShadow);
     background-color: var(--BgColor);
     border-radius: 20px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 }
 
 .containerChartLg3 {
@@ -162,6 +175,9 @@
     box-shadow: 1px 1px 3px var(--chartShadow);
     background-color: var(--BgColor);
     border-radius: 20px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -195,4 +211,17 @@
     background-color: var(--BgColor);
     border-radius: 20px;
 }
+}
+
+
+.activityItem {
+    margin-bottom: 1rem;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.activityItem p {
+    color: #4CAF50;  // You can customize the colors
 }
