@@ -59,14 +59,14 @@ function Checkout() {
             return;
         }
 
-        // Validate zero quantity item
+        // Ensure all quantities are greater than 0
         const zeroQuantityItem = scannedItems.find(item => item.quantity <= 0);
         if (zeroQuantityItem) {
             setErrorMessage(`Cannot proceed to checkout. ${zeroQuantityItem.productName} has a quantity of zero.`);
             return;
         }
 
-        // Validate insufficient stock
+        // Ensure stock is sufficient before proceeding
         const insufficientStockItem = scannedItems.find(item => item.quantity > item.stockNumber);
         if (insufficientStockItem) {
             setErrorMessage(`Insufficient stock for ${insufficientStockItem.productName}.`);
@@ -85,30 +85,32 @@ function Checkout() {
             date: currentDate,
             customerName,
             items: scannedItems.map(item => ({
-                productId: item.productId,  // Make sure this is defined
+                productId: item.productId,  // Ensure productId is defined
                 productName: item.productName,
                 quantity: item.quantity,
                 price: item.price,
                 totalAmount: (item.price * item.quantity).toFixed(2),
             })),
-            subtotal: subtotal.toFixed(2),
-            tax: taxAmount.toFixed(2),
-            discount: discountAmount.toFixed(2),
-            discountPercentage,
-            total: total.toFixed(2),
+            subtotal, // Make sure the subtotal is included here
+            tax: taxAmount,
+            discount: discountAmount, // Pass the calculated discount amount
+            discountPercentage, // Pass the discount percentage
+            total,
         };
 
+        // Save transaction history to Firebase
+        const db = getDatabase();
+        const newOrderRef = ref(db, 'TransactionHistory/' + Date.now());
         try {
-            // Save the transaction history to Firebase
-            await saveTransactionHistory(orderDetails);
+            await set(newOrderRef, orderDetails);
             console.log("Transaction saved successfully");
         } catch (error) {
             setErrorMessage(`Failed to save transaction. ${error.message}`);
             return;
         }
 
+        // Update product quantities in the database
         try {
-            // Update the product quantities in Firebase
             await Promise.all(
                 scannedItems.map(async (item) => {
                     await updateProductQuantity(item.barcode, -item.quantity);  // Deduct the quantity
@@ -116,9 +118,11 @@ function Checkout() {
             );
             navigate('/PosSuccess');  // Redirect to success page
         } catch (error) {
-            setErrorMessage(`Failed to finalize checkout. ${error.message}`);
+            console.error("Error updating product quantities:", error);
+            setErrorMessage("Failed to finalize checkout. Please try again.");
         }
     };
+
 
 
 
