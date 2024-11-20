@@ -183,7 +183,6 @@ export const getAllProducts = async () => {
 //! End of Product
 
 //* Start Category  
-
 //? Function to add a new category
 export const addCategory = async (categoryName) => {
     const db = getDatabase();
