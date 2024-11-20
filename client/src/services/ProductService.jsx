@@ -68,7 +68,6 @@ export const updateProductQuantity = async (barcode, additionalQuantity) => {
         const newQuantityHistory = preserveQuantityHistory
             ? [...(productData.quantityHistory || [])]
             : [];
-
         // Update today's quantity in the history
         const quantityEntry = newQuantityHistory.find(entry => entry.date === formattedToday);
         if (quantityEntry) {
