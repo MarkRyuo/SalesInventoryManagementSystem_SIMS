@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Chartcss from './Charts.module.scss';
 import { FaReact } from "react-icons/fa";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { fetchAddedQuantityHistory } from '../../../services/ProductService'; // Adjust path
 
 function Chart1() {
     const [stockInTotal, setStockInTotal] = useState(0);
@@ -9,14 +9,9 @@ function Chart1() {
 
     // Fetch data from Firebase on component mount
     useEffect(() => {
-        const db = getDatabase();
-        const stockInRef = ref(db, 'addedQuantityHistory'); // Adjust path to match your database structure
-
-        const unsubscribe = onValue(stockInRef, (snapshot) => {
-            if (snapshot.exists()) {
-                const data = snapshot.val();
-
-                console.log("Fetched data:", data);  // Debugging: Log data fetched from Firebase
+        fetchAddedQuantityHistory((data) => {
+            if (data) {
+                console.log("Fetched data:", data); // Debugging: Log data fetched from Firebase
 
                 // Filter data based on the selected filter
                 const filteredTotal = Object.values(data).reduce((total, entry) => {
@@ -44,8 +39,6 @@ function Chart1() {
                 setStockInTotal(0); // No data available
             }
         });
-
-        return () => unsubscribe(); // Clean up listener on unmount
     }, [filter]); // Re-run effect when filter changes
 
     // Helper functions

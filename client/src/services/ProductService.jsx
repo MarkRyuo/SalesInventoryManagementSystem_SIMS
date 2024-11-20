@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove} from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove, onValue} from 'firebase/database';
 
 //? Product Management, Category Management, Order Management, Discount Management, Tax Management, Preserve Quantity History, Re Ordering
 
@@ -548,4 +548,28 @@ export const saveProductName = async (qrId, productName) => {
         console.error('Error saving product name:', error);
         throw new Error('Error saving product name');
     }
+};
+
+// Fetch addedQuantityHistory for all products
+export const fetchAddedQuantityHistory = (callback) => {
+    const db = getDatabase();
+    const productsRef = ref(db, 'products/'); // Reference to all products
+
+    onValue(productsRef, (snapshot) => {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+
+            // Extract addedQuantityHistory from each product
+            const allAddedQuantityHistory = Object.values(data).reduce((acc, product) => {
+                if (product.addedQuantityHistory) {
+                    acc.push(...product.addedQuantityHistory);
+                }
+                return acc;
+            }, []);
+
+            callback(allAddedQuantityHistory); // Pass the combined history to the callback
+        } else {
+            callback(null); // Handle case where data doesn't exist
+        }
+    });
 };
