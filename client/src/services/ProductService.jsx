@@ -341,7 +341,7 @@ export const editProductInDatabase = async (updatedProduct) => {
 //* Start AddNewDiscount
 export const addNewDiscount = async ({ discountName, discountValue }) => {
     const db = getDatabase();
-    const discountId = Date.now(); // Gamitin ang timestamp bilang unique ID
+    const discountId = Date.now();
     const discountRef = ref(db, `discounts/${discountId}`);
 
     try {
@@ -548,4 +548,3 @@ export const saveProductName = async (qrId, productName) => {
         throw new Error('Error saving product name');
     }
 };
-
