@@ -2,7 +2,7 @@ import Chartcss from './Charts.module.scss';
 import { FaReact } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { Dropdown } from "react-bootstrap";
-import { fetchSalesData } from '../../../services/ProductService'; // Fetch sales data
+import { fetchQuantitySoldByRange } from '../../../services/ProductService'; // Import the new service
 
 function Chart3() {
     const [quantitySold, setQuantitySold] = useState(0);
@@ -11,45 +11,11 @@ function Chart3() {
     useEffect(() => {
         const fetchQuantitySold = async () => {
             try {
-                const salesData = await fetchSalesData(); // Fetch all sales data
-
-                const now = new Date();
-                let startDate, endDate;
-
-                // Calculate the date range based on the selected time range
-                switch (timeRange) {
-                    case "Today":
-                        startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // Start of today
-                        endDate = now;
-                        break;
-                    case "7 Days":
-                        startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6); // 7 days ago
-                        endDate = now;
-                        break;
-                    case "Month":
-                        startDate = new Date(now.getFullYear(), now.getMonth(), 1); // Start of the month
-                        endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0); // End of the month
-                        break;
-                    case "Year":
-                        startDate = new Date(now.getFullYear(), 0, 1); // Start of the year
-                        endDate = new Date(now.getFullYear(), 11, 31); // End of the year
-                        break;
-                    default:
-                        return;
-                }
-
-                // Calculate total quantity sold for the selected range
-                const totalQuantity = salesData.reduce((acc, sale) => {
-                    const saleDate = new Date(sale.date);
-                    if (saleDate >= startDate && saleDate <= endDate) {
-                        acc += sale.quantitySold || 0; // Add the sold quantity from each transaction
-                    }
-                    return acc;
-                }, 0);
-
+                const totalQuantity = await fetchQuantitySoldByRange(timeRange);
                 setQuantitySold(totalQuantity);
             } catch (error) {
                 console.error('Error fetching quantity sold:', error);
+                setQuantitySold(0); // Fallback to 0 in case of error
             }
         };
 

@@ -782,3 +782,63 @@ export const calculateInventoryTurnover = async (productId, startDate, endDate) 
         console.error('Error calculating Inventory Turnover:', error);
     }
 };
+
+export const fetchQuantitySoldByRange = async (timeRange) => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'TransactionHistory'); // Reference to TransactionHistory node
+
+    try {
+        const snapshot = await get(ordersRef);
+        if (!snapshot.exists()) {
+            console.log('No sales data found.');
+            return 0; // Return 0 if no data
+        }
+
+        const orders = snapshot.val();
+        const now = new Date();
+        let startDate, endDate;
+
+        // Calculate the start and end date for the given range
+        switch (timeRange) {
+            case "Today":
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                endDate = now;
+                break;
+            case "7 Days":
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+                endDate = now;
+                break;
+            case "Month":
+                startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+                endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                break;
+            case "Year":
+                startDate = new Date(now.getFullYear(), 0, 1);
+                endDate = new Date(now.getFullYear(), 11, 31);
+                break;
+            default:
+                return 0;
+        }
+
+        // Calculate the total quantity sold within the date range
+        const totalQuantity = Object.keys(orders).reduce((acc, key) => {
+            const order = orders[key];
+            const orderDate = new Date(order.date);
+
+            if (orderDate >= startDate && orderDate <= endDate) {
+                // Sum up the quantity of items sold in the order
+                const quantitySold = order.items.reduce((sum, item) => sum + item.quantity, 0); // Use item.quantity directly
+                acc += quantitySold;
+            }
+            return acc;
+        }, 0);
+
+        return totalQuantity;
+    } catch (error) {
+        console.error('Error fetching quantity sold:', error);
+        throw new Error(`Error fetching quantity sold: ${error.message}`);
+    }
+};
+
+
+
