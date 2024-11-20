@@ -696,3 +696,89 @@ export const fetchTransactionHistory = async () => {
         throw new Error("Failed to fetch transaction history");
     }
 };
+
+// Fetch the sales data (COGS) between a specified date range
+export const fetchSalesDataAndCOGS = async (startDate, endDate) => {
+    const db = getDatabase();
+    const ordersRef = ref(db, 'TransactionHistory'); // Reference to TransactionHistory
+
+    try {
+        const snapshot = await get(ordersRef);
+        if (!snapshot.exists()) {
+            console.log('No sales data found.');
+            return 0; // If no sales data, return 0
+        }
+
+        const orders = snapshot.val();
+        let totalCOGS = 0;
+
+        // Calculate COGS by summing the totalAmount (which is the sales price) within the date range
+        Object.keys(orders).forEach((key) => {
+            const order = orders[key];
+            const { date, totalAmount } = order;
+
+            // Check if the order's date is within the selected range
+            if (date >= startDate && date <= endDate) {
+                totalCOGS += totalAmount; // Add up the total sales amount to calculate COGS
+            }
+        });
+
+        console.log('COGS for the period:', totalCOGS);
+        return totalCOGS;
+
+    } catch (error) {
+        console.error('Error fetching sales data:', error);
+        throw new Error(`Error fetching sales data: ${error.message}`);
+    }
+};
+
+// Fetch the beginning and ending inventory for a specific product
+export const fetchProductInventory = async (productId) => {
+    const db = getDatabase();
+    const productRef = ref(db, 'products/' + productId); // Reference to specific product by ID
+
+    try {
+        const snapshot = await get(productRef);
+        if (!snapshot.exists()) {
+            console.log('Product not found.');
+            return { beginningInventory: 0, endingInventory: 0 }; // Return 0 if no product is found
+        }
+
+        const productData = snapshot.val();
+        const beginningInventory = productData.quantity || 0;  // Assume productData.quantity holds current inventory
+        const endingInventory = beginningInventory;  // You can adjust this logic to get the ending inventory based on stock movement
+
+        return { beginningInventory, endingInventory };
+    } catch (error) {
+        console.error('Error fetching product inventory:', error);
+        throw new Error(`Error fetching product inventory: ${error.message}`);
+    }
+};
+
+// Calculate Inventory Turnover using the COGS and average inventory
+export const calculateInventoryTurnover = async (productId, startDate, endDate) => {
+    try {
+        // Fetch COGS (Cost of Goods Sold) from sales data
+        const cogs = await fetchSalesDataAndCOGS(startDate, endDate);
+
+        // Fetch Beginning and Ending Inventory for the product
+        const { beginningInventory, endingInventory } = await fetchProductInventory(productId);
+
+        if (beginningInventory === 0 || endingInventory === 0 || cogs === 0) {
+            console.log('Insufficient data to calculate Inventory Turnover.');
+            return 0; // Return 0 if any data is missing
+        }
+
+        // Calculate Average Inventory
+        const averageInventory = (beginningInventory + endingInventory) / 2;
+
+        // Calculate Inventory Turnover
+        const turnover = cogs / averageInventory;
+
+        console.log(`Inventory Turnover: ${turnover}`);
+        return turnover;
+
+    } catch (error) {
+        console.error('Error calculating Inventory Turnover:', error);
+    }
+};
