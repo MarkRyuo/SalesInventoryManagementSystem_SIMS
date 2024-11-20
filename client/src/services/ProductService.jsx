@@ -697,6 +697,19 @@ export const fetchTransactionHistory = async () => {
     }
 };
 
+export const saveTransactionHistory = async (orderDetails) => {
+    const db = getDatabase();
+    const transactionHistoryRef = ref(db, 'TransactionHistory/' + Date.now());  // Use timestamp as unique ID for the transaction
+
+    try {
+        await set(transactionHistoryRef, orderDetails);  // Save the order details to the database
+        console.log("Transaction saved successfully");
+    } catch (error) {
+        console.error("Error saving transaction:", error);
+        throw new Error(`Error saving transaction: ${error.message}`);
+    }
+};
+
 // Fetch the sales data (COGS) between a specified date range
 export const fetchSalesDataAndCOGS = async (startDate, endDate) => {
     const db = getDatabase();

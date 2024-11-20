@@ -1,8 +1,7 @@
 import { Container, Navbar, Row, Col, Button, Table, Alert, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updateProductQuantity, fetchAllDiscounts, fetchAllTaxes } from '../../../services/ProductService';
+import { updateProductQuantity, fetchAllDiscounts, fetchAllTaxes, saveTransactionHistory } from '../../../services/ProductService';
 import { useState, useEffect } from 'react';
-import { getDatabase, ref, set } from 'firebase/database';
 
 function Checkout() {
     const location = useLocation();
@@ -54,66 +53,74 @@ function Checkout() {
     const total = subtotal + taxAmount - discountAmount; // Final total after discount and tax
 
     const handleCheckout = async () => {
+        // Validate customer name
         if (!customerName.trim()) {
             setErrorMessage("Customer name is required.");
             return;
         }
 
-        // Ensure all quantities are greater than 0
+        // Validate zero quantity item
         const zeroQuantityItem = scannedItems.find(item => item.quantity <= 0);
         if (zeroQuantityItem) {
             setErrorMessage(`Cannot proceed to checkout. ${zeroQuantityItem.productName} has a quantity of zero.`);
             return;
         }
 
-        // Ensure stock is sufficient before proceeding
+        // Validate insufficient stock
         const insufficientStockItem = scannedItems.find(item => item.quantity > item.stockNumber);
         if (insufficientStockItem) {
             setErrorMessage(`Insufficient stock for ${insufficientStockItem.productName}.`);
             return;
         }
 
+        // Check for missing productId in scannedItems
+        const missingProductIdItem = scannedItems.find(item => !item.productId);
+        if (missingProductIdItem) {
+            setErrorMessage(`Missing productId for item: ${missingProductIdItem.productName}`);
+            return;
+        }
+
+        // Prepare order details
         const orderDetails = {
             date: currentDate,
             customerName,
             items: scannedItems.map(item => ({
-                productId: item.productId,
+                productId: item.productId,  // Make sure this is defined
                 productName: item.productName,
                 quantity: item.quantity,
                 price: item.price,
-                totalAmount: (item.price * item.quantity).toFixed(2), // Total amount per item
+                totalAmount: (item.price * item.quantity).toFixed(2),
             })),
-            subtotal: subtotal.toFixed(2), // Ensure the subtotal is formatted
-            tax: taxAmount.toFixed(2), // Round tax amount
-            discount: discountAmount.toFixed(2), // Round discount amount
+            subtotal: subtotal.toFixed(2),
+            tax: taxAmount.toFixed(2),
+            discount: discountAmount.toFixed(2),
             discountPercentage,
-            total: total.toFixed(2), // Round total
+            total: total.toFixed(2),
         };
 
-        const db = getDatabase();
-        const newOrderRef = ref(db, 'TransactionHistory/' + Date.now());
         try {
-            await set(newOrderRef, orderDetails);
-            console.log("Order saved successfully");
+            // Save the transaction history to Firebase
+            await saveTransactionHistory(orderDetails);
+            console.log("Transaction saved successfully");
         } catch (error) {
-            console.error("Error saving order:", error);
-            setErrorMessage("Failed to save order. Please try again.");
+            setErrorMessage(`Failed to save transaction. ${error.message}`);
+            return;
         }
 
-        // Update product quantities in the database
         try {
+            // Update the product quantities in Firebase
             await Promise.all(
                 scannedItems.map(async (item) => {
-                    // Subtract item quantity from database stock
-                    await updateProductQuantity(item.barcode, -item.quantity);
+                    await updateProductQuantity(item.barcode, -item.quantity);  // Deduct the quantity
                 })
             );
-            navigate('/PosSuccess'); // Redirect to success page
+            navigate('/PosSuccess');  // Redirect to success page
         } catch (error) {
-            console.error("Error updating product quantities:", error);
-            setErrorMessage("Failed to finalize checkout. Please try again.");
+            setErrorMessage(`Failed to finalize checkout. ${error.message}`);
         }
     };
+
+
 
 
 
