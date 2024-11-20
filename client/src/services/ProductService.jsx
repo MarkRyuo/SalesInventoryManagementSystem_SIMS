@@ -600,7 +600,7 @@ export const fetchSalesData = async () => {
             id: key,
             ...orders[key],
             quantitySold: orders[key].items.reduce((acc, item) => acc + item.quantitySold, 0), // Sum quantitySold for items
-            totalAmount: orders[key].total, // Assuming total is already present in the transaction
+            totalAmount: parseFloat(orders[key].total) || 0, // Ensure totalAmount is a number
         }));
 
         console.log('Sales data retrieved:', formattedSales);
@@ -610,6 +610,7 @@ export const fetchSalesData = async () => {
         throw new Error(`Error fetching sales data: ${error.message}`);
     }
 };
+
 
 
 

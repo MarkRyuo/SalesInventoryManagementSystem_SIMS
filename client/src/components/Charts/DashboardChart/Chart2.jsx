@@ -1,15 +1,15 @@
 import Chartcss from './Charts.module.scss';
 import { FaReact } from "react-icons/fa";
 import { useState, useEffect, useCallback } from "react";
-import { fetchSalesData } from '../../../services/ProductService'; // Import the fetchSalesData function
+import { fetchSalesData } from '../../../services/ProductService';  // Import the fetchSalesData function
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function Chart2() {
     const [totalSales, setTotalSales] = useState(0);
-    const [timeRange, setTimeRange] = useState('today'); // Default range is 'today'
+    const [timeRange, setTimeRange] = useState('today');  // Default to 'today' for time range
 
-    // Define calculateDateRange with useCallback to ensure stable reference
+    // Function to calculate the date range based on the selected time range
     const calculateDateRange = useCallback(() => {
         const now = new Date();
         const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -36,15 +36,15 @@ function Chart2() {
         }
 
         return { startDate, endDate: now };
-    }, [timeRange]); // Depend only on timeRange
+    }, [timeRange]);
 
     useEffect(() => {
         const fetchTotalSales = async () => {
             try {
                 const salesData = await fetchSalesData(); // Fetch all sales data
-                const { startDate, endDate } = calculateDateRange();
+                const { startDate, endDate } = calculateDateRange(); // Calculate the date range based on selected range
 
-                // Filter sales data for the selected range
+                // Filter sales data for the selected date range
                 const totalForRange = salesData.reduce((acc, sale) => {
                     const saleDate = new Date(sale.date);
                     if (saleDate >= startDate && saleDate <= endDate) {
@@ -60,7 +60,7 @@ function Chart2() {
         };
 
         fetchTotalSales();
-    }, [timeRange, calculateDateRange]); // Ensure dependencies are correctly listed
+    }, [timeRange, calculateDateRange]); // Re-run when timeRange changes
 
     return (
         <div className={Chartcss.containerChart2}>
@@ -69,9 +69,11 @@ function Chart2() {
                 <p className='m-0 p-0'>Total Sales</p>
             </div>
             <div className={Chartcss.contentChart}>
-                <p className='m-0'>{totalSales}</p>
-                <p className='m-2'>From the selected range</p>
+                <p className='m-0'>
+                    {totalSales.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
+                </p>
             </div>
+
             <DropdownButton
                 id="dropdown-time-range"
                 title={`Time Range: ${timeRange}`}
