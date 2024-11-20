@@ -9,7 +9,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import Chart1 from '../../../components/Charts/DashboardChart/Chart1';
 import Chart2 from '../../../components/Charts/DashboardChart/Chart2';
 import Chart3 from '../../../components/Charts/DashboardChart/Chart3';
-import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
+// import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
 import ChartLg2 from '../../../components/Charts/DashboardChart/ChartLg2';
 import ChartLg3 from '../../../components/Charts/DashboardChart/ChartLg3';
 
