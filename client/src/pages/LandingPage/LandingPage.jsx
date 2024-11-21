@@ -42,7 +42,7 @@ function LandingPage() {
                         <AboutCard />
                     </div>
 
-                    <div>
+                    <div className={LandingPagecss.LogInMainContainer}>
                         {/* Login */}
                         <LogInCardPage />
                     </div>

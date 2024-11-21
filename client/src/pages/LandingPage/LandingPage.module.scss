@@ -171,12 +171,18 @@
 
 //! Login in LandingPage|| LogInCardPagecss
 
-.LogInContainer {
+.LogInMainContainer {
     box-sizing: border-box;
     height: 100vh;
-    width: 100%;
-    border: 1px solid;
+    border: 5px solid red;
+
+    .LogInContainer {
+        box-sizing: border-box;
+        border: 1px solid;
+    }
+
 }
+
 
 
 
