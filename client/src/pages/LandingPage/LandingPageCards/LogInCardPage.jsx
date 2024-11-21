@@ -7,8 +7,9 @@ function LogInCardPage() {
             </div>
 
             <div>
-                
+
             </div>
+            
         </div>
     )
 }
