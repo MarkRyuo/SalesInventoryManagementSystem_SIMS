@@ -173,7 +173,10 @@
         h1 {
             font-size: 4.5rem;
             padding: 0px 20px;
-            color: #ffffff;
+            background: radial-gradient(circle at 30% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
+            background-clip: text;            /* Standard syntax */
+            -webkit-background-clip: text;    /* WebKit syntax for older browsers */
+            color: transparent;
         }
     }
 
