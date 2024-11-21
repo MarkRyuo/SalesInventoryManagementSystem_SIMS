@@ -173,7 +173,7 @@
         h1 {
             font-size: 4.5rem;
             padding: 0px 20px;
-            background: radial-gradient(circle at 30% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
+            background: radial-gradient(circle at 30% 50%, rgb(221, 49, 49) 20%, rgb(119, 0, 0) 90%);
             background-clip: text;            /* Standard syntax */
             -webkit-background-clip: text;    /* WebKit syntax for older browsers */
             color: transparent;
@@ -193,7 +193,9 @@
             display: flex;
             flex-direction: column;
             // border: 1px solid;
-            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 4px #3cd483;
+            padding: 70px;
             height: auto;
             width: auto;
             gap: 20px;

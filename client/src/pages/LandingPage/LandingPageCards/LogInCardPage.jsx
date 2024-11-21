@@ -31,7 +31,7 @@ function LogInCardPage() {
                     </Button>
 
                     <Link to={"/"}>
-                        Forgot Password
+                        Forgot Password?
                     </Link>
                 </div>
             </div>
