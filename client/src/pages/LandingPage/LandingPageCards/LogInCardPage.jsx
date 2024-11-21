@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import LogInCardPagecss from './LandingPageCards.module.scss' ;
+import { Link } from "react-router-dom";
 
 function LogInCardPage() {
     return (
@@ -28,7 +29,9 @@ function LogInCardPage() {
                         Login
                     </Button>
 
-                    
+                    <Link to={''}>
+
+                    </Link>
                 </div>
             </div>
         </div>
