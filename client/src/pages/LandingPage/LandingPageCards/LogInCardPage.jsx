@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import unifiedLogin from '../../../services/UnifiedLogIn'; // The combined login function
 import LogInCardPagecss from './LandingPageCards.module.scss';
@@ -39,7 +39,7 @@ function LogInCardPage() {
                         <h2>Welcome</h2>
                         {error && <p style={{ color: 'red' }}>{error}</p>}
                         <div>
-                            <label>Username*</label>
+                            <Form.Label>Username*</Form.Label>
                             <input
                                 type="text"
                                 placeholder="Enter your username"
@@ -49,7 +49,7 @@ function LogInCardPage() {
                             />
                         </div>
                         <div>
-                            <label>Password*</label>
+                            <Form.Label>Password*</Form.Label>
                             <div style={{ position: 'relative' }}>
                                 <input
                                     type={isPasswordVisible ? 'text' : 'password'}
