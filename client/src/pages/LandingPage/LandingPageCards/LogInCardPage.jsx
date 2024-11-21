@@ -1,4 +1,5 @@
 import { Button } from "react-bootstrap";
+import LogInCardPage from './LandingPageCards.module.scss'
 
 function LogInCardPage() {
     return (
