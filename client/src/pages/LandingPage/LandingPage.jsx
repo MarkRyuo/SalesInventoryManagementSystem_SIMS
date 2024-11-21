@@ -25,7 +25,8 @@ function LandingPage() {
                                     <span><CiGlobe /></span> Explore
                                 </Button>
                             </div>
-                            <div className={LandingPagecss.heroImage}>
+                            <div className={LandingPagecss.heroImage}> 
+                            {/* Hero Image */}
                                 <img src="/Reyes_Electronics_LogoBg.png" />
                             </div>
                         </div>
