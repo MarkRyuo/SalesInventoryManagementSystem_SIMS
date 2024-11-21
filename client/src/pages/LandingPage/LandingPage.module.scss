@@ -136,6 +136,14 @@
     top: 0;
     z-index: 1000;
     background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 100%);
+
+    span {
+        border: 1px solid;
+        width: auto;
+        img {
+            width: 50px;
+        }
+    }
 }
 
 
