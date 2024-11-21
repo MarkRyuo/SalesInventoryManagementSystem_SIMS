@@ -1,6 +1,6 @@
 import React from 'react'
 
-function LogInCardPage ;() {
+function LogInCardPage() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function LogInCardPage ;() {
   )
 }
 
-export default LogInCardPage ;
+export default LogInCardPage
