@@ -5,7 +5,7 @@ function NavBars() {
     return (
         <Navbar expand="lg" className={LandingPagecss.Navbar}>
                 <Container>
-                <span className={LandingPagecss.logo}>
+                <span className={LandingPagecss.logoNav}>
                     <img src="/Reyes_Electronics_LogoBg.png"/>
                 </span>
                 <Navbar.Brand href="#home" style={{ color: '#4b4b4b'}}>
