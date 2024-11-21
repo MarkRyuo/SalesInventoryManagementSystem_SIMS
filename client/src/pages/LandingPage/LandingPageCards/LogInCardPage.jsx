@@ -77,7 +77,7 @@ function LogInCardPage() {
                         </Button>
                     </form>
 
-                    <a href="/forgot-password">Forgot Password?</a>
+                    <a href="#">Forgot Password?</a>
                 </div>
             </div>
         </div>
