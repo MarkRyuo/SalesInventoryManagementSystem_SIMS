@@ -1,7 +1,7 @@
 
 function LogInCardPage() {
     return (
-        <div>
+        <div className="LogInCardPage">
             <div>
 
             </div>
@@ -9,7 +9,7 @@ function LogInCardPage() {
             <div>
 
             </div>
-            
+
         </div>
     )
 }
