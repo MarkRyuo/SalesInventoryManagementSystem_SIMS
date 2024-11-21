@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Button, Form, FloatingLabel, Table, Row, Col } from 'react-bootstrap';
 import { db } from '../../services/firebase'; // Update path as needed
 import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import bcrypt from 'bcryptjs'; // Add this import
+
 
 const StaffComp = () => {
     const [firstname, setFirstname] = useState('');
@@ -42,6 +44,9 @@ const StaffComp = () => {
         try {
             const staffCollection = collection(db, 'staffs');
 
+            // Hash the password before saving it
+            const hashedPassword = await bcrypt.hash(password, 10);
+
             // If editing, update the staff, otherwise add a new one
             if (editingStaffId) {
                 const staffDoc = doc(db, 'staffs', editingStaffId);
@@ -50,7 +55,7 @@ const StaffComp = () => {
                     lastname,
                     gender,
                     username,
-                    password,
+                    password: hashedPassword, // Store the hashed password
                     active, // Update active status
                 });
                 alert('Staff member updated successfully!');
@@ -60,7 +65,7 @@ const StaffComp = () => {
                     lastname,
                     gender,
                     username,
-                    password,
+                    password: hashedPassword, // Store the hashed password
                     active, // Set initial active status
                 });
                 alert('Staff member added successfully!');
@@ -74,6 +79,7 @@ const StaffComp = () => {
             alert('Error processing staff. Please try again.');
         }
     };
+
 
     const clearForm = () => {
         setFirstname('');

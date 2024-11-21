@@ -47,7 +47,7 @@ export const NavDashboard = () => {
 
             // Redirect after 2 seconds (adjust as needed)
             setTimeout(() => {
-                window.location.href = "/LoginPage"; // Redirect to login page
+                window.location.href = "/"; // Redirect to login page
             }, 2000);
         }, 2000); // Simulate a 2-second loading time
     };

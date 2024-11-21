@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Alert, FloatingLabel, Button, Form, Spinner } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
-import LoginUser from '../../services/LoginUser'; // Import the LoginUser function
-// import LoginCardcss from './SCSS/LoginCard.module.scss'
+import unifiedLogin from '../../services/UnifiedLogIn'; // Import the unifiedLogin function
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // You need to install react-icons
+
 
 export const LoginCard = () => {
     const navigate = useNavigate();
@@ -13,19 +14,25 @@ export const LoginCard = () => {
     const [loading, setLoading] = useState(false); // State for loading indicator
     const [success, setSuccess] = useState(false); // State for success message
 
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setIsPasswordVisible(!isPasswordVisible);
+    };
+
     const handleLogin = async () => {
         setLoading(true); // Start loading
         setSuccess(false); // Reset success message
         setError(null); // Reset error message
         try {
             // Attempt to log in using the provided username and password
-            await LoginUser(username, password);
+            await unifiedLogin(username, password, navigate);
             setSuccess(true); // Set success state
             setUsername(''); // Clear the username input field
             setPassword(''); // Clear the password input field
             setTimeout(() => {
-                navigate('/DashboardPage'); // Navigate to the dashboard after a delay
-            }, 2500); // Delay for success message display
+                // The navigation will be handled by unifiedLogin
+            }, 2000); // Delay for success message display
         } catch (error) {
             // Handle login errors (e.g., incorrect username or password)
             setError(error.message);
@@ -62,7 +69,7 @@ export const LoginCard = () => {
                     }}
                 >
                     <Alert.Heading>Login Successful!</Alert.Heading>
-                    <p>You are being redirected to your dashboard...</p>
+                    <p>Redirecting to your Dashboard...</p>
                 </Alert>
             )}
 
@@ -80,7 +87,7 @@ export const LoginCard = () => {
                 >
                     <Alert.Heading>Login Failed</Alert.Heading>
                     <p>
-                        {error} Please check your username and password and try again.
+                        {error} Please check your credentials and try again.
                     </p>
                 </Alert>
             )}
@@ -93,21 +100,30 @@ export const LoginCard = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     disabled={loading} // Disable input while loading
-                    style={{
-                        
-                    }}
                 />
             </FloatingLabel>
 
             {/* Password */}
-            <FloatingLabel controlId="floatingPassword" label="Password">
+            <FloatingLabel controlId="floatingPassword" label="Password" className="position-relative">
                 <Form.Control
-                    type="password"
+                    type={isPasswordVisible ? 'text' : 'password'}
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={loading} // Disable input while loading
                 />
+                <span
+                    onClick={togglePasswordVisibility}
+                    style={{
+                        position: 'absolute',
+                        right: '43px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer',
+                    }}
+                >
+                    {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </span>
             </FloatingLabel>
 
             {/* Login Button */}
@@ -120,7 +136,7 @@ export const LoginCard = () => {
             >
                 {loading ? (
                     <>
-                        <Spinner animation="border" size="sm" role="status" aria-hidden="true" /> Logging in...
+                        <Spinner animation="grow" variant="primary" size="sm" role="status" aria-hidden="true" /> Logging in...
                     </>
                 ) : (
                     'Login'

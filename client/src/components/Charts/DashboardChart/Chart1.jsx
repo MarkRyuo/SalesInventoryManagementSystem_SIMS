@@ -7,41 +7,7 @@ function Chart1() {
     const [stockInTotal, setStockInTotal] = useState(0);
     const [filter, setFilter] = useState("today"); // Default filter is 'today'
 
-    // Fetch data from Firebase on component mount
-    useEffect(() => {
-        fetchAddedQuantityHistory((data) => {
-            if (data) {
-                console.log("Fetched data:", data); // Debugging: Log data fetched from Firebase
-
-                // Filter data based on the selected filter
-                const filteredTotal = Object.values(data).reduce((total, entry) => {
-                    const entryDate = new Date(entry.date); // Assuming `date` exists in each entry
-                    const now = new Date();
-
-                    if (filter === "today") {
-                        return isSameDay(entryDate, now) ? total + entry.quantity : total;
-                    } else if (filter === "7days") {
-                        return isWithinLastNDays(entryDate, now, 7) ? total + entry.quantity : total;
-                    } else if (filter === "month") {
-                        return entryDate.getMonth() === now.getMonth() &&
-                            entryDate.getFullYear() === now.getFullYear() ? total + entry.quantity : total;
-                    } else if (filter === "year") {
-                        return entryDate.getFullYear() === now.getFullYear() ? total + entry.quantity : total;
-                    }
-
-                    return total;
-                }, 0);
-
-                console.log("Filtered Total:", filteredTotal); // Debugging: Log the filtered total
-
-                setStockInTotal(filteredTotal);
-            } else {
-                setStockInTotal(0); // No data available
-            }
-        });
-    }, [filter]); // Re-run effect when filter changes
-
-    // Helper functions
+    // Helper functions for filtering
     const isSameDay = (date1, date2) => {
         return date1.toDateString() === date2.toDateString();
     };
@@ -50,6 +16,41 @@ function Chart1() {
         const diff = now - date;
         return diff >= 0 && diff <= n * 24 * 60 * 60 * 1000;
     };
+
+    // Fetch data from Firebase on component mount
+    useEffect(() => {
+        fetchAddedQuantityHistory((data) => {
+            if (data && data.length > 0) {
+                console.log("Fetched data:", data); // Debugging: Log data fetched from Firebase
+
+                // Get current date and time for comparison
+                const now = new Date();
+
+                // Filter data based on the selected filter
+                const filteredTotal = data.reduce((total, entry) => {
+                    const entryDate = new Date(entry.date); // Assuming `date` exists in each entry
+
+                    if (filter === "today" && isSameDay(entryDate, now)) {
+                        return total + entry.quantity;
+                    } else if (filter === "7days" && isWithinLastNDays(entryDate, now, 7)) {
+                        return total + entry.quantity;
+                    } else if (filter === "month" && entryDate.getMonth() === now.getMonth() &&
+                        entryDate.getFullYear() === now.getFullYear()) {
+                        return total + entry.quantity;
+                    } else if (filter === "year" && entryDate.getFullYear() === now.getFullYear()) {
+                        return total + entry.quantity;
+                    }
+
+                    return total;
+                }, 0);
+
+                console.log("Filtered Total:", filteredTotal); // Debugging: Log the filtered total
+                setStockInTotal(filteredTotal);
+            } else {
+                setStockInTotal(0); // No data available
+            }
+        });
+    }, [filter]); // Re-run effect when filter changes
 
     return (
         <div className={Chartcss.containerChart1}>
