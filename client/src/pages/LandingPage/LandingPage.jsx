@@ -4,6 +4,7 @@ import LandingPagecss from './LandingPage.module.scss'
 import { CiGlobe } from "react-icons/ci";
 import AboutCard from "./LandingPageCards/AboutCard";
 import Footer from "./LandingPageCards/Footer";
+import LogInCardPage from "./LandingPageCards/LogInCardPage";
 
 function LandingPage() {
 
@@ -43,6 +44,7 @@ function LandingPage() {
 
                     <div>
                         {/* Login */}
+                        <LogInCardPage />
                     </div>
 
                     <div id="footer">
