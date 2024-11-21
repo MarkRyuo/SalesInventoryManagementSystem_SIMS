@@ -14,10 +14,11 @@ function LandingPage() {
                 <main className={LandingPagecss.main}>
                     <div className={LandingPagecss.heroContainer}>
                         <div className={LandingPagecss.heroSection}> {/* Main Component */}
+                        
                             <div className={LandingPagecss.heroText}> {/* Child */}
                                 <p>Power Your Life with <span>REYES ELECTRONICS</span></p>
                                 <p className="mb-3">Elevate Your Experience with Top-Tier Electronic Products.</p>
-                                
+
                                 <Button variant='' href="#footer" id="btn" className={LandingPagecss.Btn}>
                                     <span><CiGlobe /></span> Explore
                                 </Button>
