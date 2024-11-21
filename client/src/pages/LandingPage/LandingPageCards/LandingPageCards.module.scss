@@ -159,19 +159,21 @@
 
 .LogInContainer {
     box-sizing: border-box;
-    border: 5px solid green;
+    // border: 5px solid green;
     height: 100vh;
     display: flex;
 
     .LoginText {
         width: 50vw;
-        border: 1px solid;
+        // border: 1px solid;
         display: inline-flex;
         align-items: center;
         padding: 10px;
+        
         h1 {
             font-size: 4.5rem;
             padding: 0px 20px;
+            color: #ffffff;
         }
     }
 
