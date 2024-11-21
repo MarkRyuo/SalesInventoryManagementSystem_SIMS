@@ -27,8 +27,8 @@ function LandingPage() {
                                 <img src="/Reyes_Electronics_LogoBg.png" />
                             </div>
                         </div>
-                        
-                        <div className={LandingPagecss.partners}>
+
+                        <div className={LandingPagecss.partners}> {/* Floating Partners */}
                             <img src="https://www.fireflyelectric.com/wp-content/uploads/2021/05/FELCO-logo-2021-cropped-1.png"/>
                             <img src="https://www.mosca-elektronik.de/images/template/logo_mosca.png" />
                             <img src="https://www.chinafsl.com/en/templates/specialty/images/logo.png" />
