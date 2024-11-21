@@ -3,7 +3,7 @@ import LogInCardPagecss from './LandingPageCards.module.scss' ;
 
 function LogInCardPage() {
     return (
-        <div className="LogInCardPageContainer">
+        <div className={LogInCardPagecss.LogInContainer}>
             <form>
                 <input type="text" placeholder="username" />
                 <input type="password" placeholder="password" />
