@@ -3,12 +3,18 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import unifiedLogin from '../../../services/UnifiedLogIn'; // The combined login function
 import LogInCardPagecss from './LandingPageCards.module.scss';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // You need to install react-icons
 
 function LogInCardPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setIsPasswordVisible(!isPasswordVisible);
+    };
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -44,13 +50,27 @@ function LogInCardPage() {
                         </div>
                         <div>
                             <label>Password*</label>
-                            <input
-                                type="password"
-                                placeholder="Enter your password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
+                            <div style={{ position: 'relative' }}>
+                                <input
+                                    type={isPasswordVisible ? 'text' : 'password'}
+                                    placeholder="Enter your password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                                <span
+                                    onClick={togglePasswordVisibility}
+                                    style={{
+                                        position: 'absolute',
+                                        right: '10px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                                </span>
+                            </div>
                         </div>
                         <Button type="submit" className={LogInCardPagecss.LoginButton}>
                             Login
