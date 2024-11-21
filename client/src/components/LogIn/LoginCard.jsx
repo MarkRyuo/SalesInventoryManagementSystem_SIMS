@@ -79,7 +79,7 @@ export const LoginCard = () => {
                 >
                     <Alert.Heading>Login Failed</Alert.Heading>
                     <p>
-                        {error} Please check your username and password and try again.
+                        {error} Please check your credentials and try again.
                     </p>
                 </Alert>
             )}
@@ -116,7 +116,7 @@ export const LoginCard = () => {
             >
                 {loading ? (
                     <>
-                        <Spinner animation="border" size="sm" role="status" aria-hidden="true" /> Logging in...
+                        <Spinner animation="grow" variant="primary" size="sm" role="status" aria-hidden="true" /> Logging in...
                     </>
                 ) : (
                     'Login'
