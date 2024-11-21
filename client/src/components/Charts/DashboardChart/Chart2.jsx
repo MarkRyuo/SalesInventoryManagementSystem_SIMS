@@ -71,24 +71,35 @@ function Chart2() {
 
     // Effect to fetch and calculate total sales based on selected time range
     useEffect(() => {
-        const fetchTotalSales = async () => {
-            const salesData = await fetchSalesData(); // Fetch all sales data
-            const { startDate, endDate } = calculateDateRange(); // Calculate the date range based on selected range
+    const fetchTotalSales = async () => {
+        const salesData = await fetchSalesData(); // Fetch all sales data
+        const { startDate, endDate } = calculateDateRange(); // Calculate the date range based on selected range
 
-            // Filter sales data for the selected date range
-            const totalForRange = salesData.reduce((acc, sale) => {
-                const saleDate = new Date(sale.date);
-                if (saleDate >= startDate && saleDate <= endDate) {
-                    acc += sale.totalAmount; // Add up the sales total for this transaction
-                }
-                return acc;
-            }, 0);
+        // If the time range is "Today", ensure we strip the time from both startDate and endDate
+        if (timeRange === "Today") {
+            startDate.setHours(0, 0, 0, 0); // Set to midnight of today
+            endDate.setHours(23, 59, 59, 999); // Set to the last moment of today
+        }
 
-            setTotalSales(totalForRange);
-        };
+        // Filter sales data for the selected date range
+        const totalForRange = salesData.reduce((acc, sale) => {
+            const saleDate = new Date(sale.date);
+            
+            // Ensure the saleDate has no time component for accurate comparison (for today)
+            saleDate.setHours(0, 0, 0, 0); // Set sale's date to midnight (remove time portion)
 
-        fetchTotalSales();
-    }, [timeRange, calculateDateRange, fetchSalesData]); // Re-run when timeRange changes
+            if (saleDate >= startDate && saleDate <= endDate) {
+                acc += sale.totalAmount; // Add up the sales total for this transaction
+            }
+            return acc;
+        }, 0);
+
+        setTotalSales(totalForRange);
+    };
+
+    fetchTotalSales();
+}, [timeRange, calculateDateRange, fetchSalesData]); // Re-run when timeRange changes
+
 
     return (
         <div className={Chartcss.containerChart2}>
