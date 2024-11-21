@@ -13,7 +13,9 @@ function LogInCardPage() {
 
             <div>
                 <form>
+                    <label>Username*</label>
                     <input type="text" placeholder="username" />
+                    <label>Password*</label>
                     <input type="password" placeholder="password" />
                 </form>
 
