@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 //? Pages Import
 import StaffAccount from './pages/StaffAccount.jsx'
 import MyProfile from './pages/MyProfile.jsx';
-import SLogin from './pages/LoginPage/SLogin.jsx';
 import SDashboard from './pages/StaffPages/SDashboard.jsx';
 import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
 import AddNewAssets from './pages/StaffPages/AddNewAssets.jsx';
@@ -106,10 +105,6 @@ const router = createBrowserRouter([
   },
 
   //! Staff Portal
-  {
-    path: "SLogin",
-    element: <SLogin />, //* Staff Login Page
-  },
   {
     path: "SDashboard",
     element: <SDashboard />, //* Staff Dashboard Page
