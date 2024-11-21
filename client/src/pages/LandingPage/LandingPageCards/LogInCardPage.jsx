@@ -28,9 +28,7 @@ function LogInCardPage() {
                         Login
                     </Button>
 
-                    <Link >
-
-                    </Link>
+                    
                 </div>
             </div>
         </div>
