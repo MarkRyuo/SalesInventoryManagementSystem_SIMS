@@ -40,7 +40,6 @@ function LandingPage() {
                     <div className={LandingPagecss.AboutCard} id="Aboutus"> {/* Main Container */}
                         <AboutCard />
                     </div>
-
                     <div id="footer">
                         <Footer />
                     </div>
