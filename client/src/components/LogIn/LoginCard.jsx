@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Alert, FloatingLabel, Button, Form, Spinner } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import unifiedLogin from '../../services/UnifiedLogIn'; // Import the unifiedLogin function
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // You need to install react-icons
+
 
 export const LoginCard = () => {
     const navigate = useNavigate();
@@ -11,6 +13,12 @@ export const LoginCard = () => {
     const [showError, setShowError] = useState(false);
     const [loading, setLoading] = useState(false); // State for loading indicator
     const [success, setSuccess] = useState(false); // State for success message
+
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setIsPasswordVisible(!isPasswordVisible);
+    };
 
     const handleLogin = async () => {
         setLoading(true); // Start loading
@@ -96,14 +104,26 @@ export const LoginCard = () => {
             </FloatingLabel>
 
             {/* Password */}
-            <FloatingLabel controlId="floatingPassword" label="Password">
+            <FloatingLabel controlId="floatingPassword" label="Password" className="position-relative">
                 <Form.Control
-                    type="password"
+                    type={isPasswordVisible ? 'text' : 'password'}
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={loading} // Disable input while loading
                 />
+                <span
+                    onClick={togglePasswordVisibility}
+                    style={{
+                        position: 'absolute',
+                        right: '43px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer',
+                    }}
+                >
+                    {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </span>
             </FloatingLabel>
 
             {/* Login Button */}

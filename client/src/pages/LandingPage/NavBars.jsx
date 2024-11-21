@@ -1,6 +1,5 @@
-import { Container, Nav, Navbar, Button} from "react-bootstrap"
+import { Container, Nav, Navbar} from "react-bootstrap"
 import LandingPagecss from './LandingPage.module.scss'
-import { Link } from "react-router-dom"
 
 function NavBars() {
     return (
@@ -19,7 +18,7 @@ function NavBars() {
                         <Nav className="me-auto">
                         <Nav.Link href="#home" style={{ color: '#4b4b4b' }}>Home</Nav.Link>
                         <Nav.Link href="#Aboutus" style={{ color: '#4b4b4b' }}>About us</Nav.Link>
-                        <Button as={Link} to={"/LoginPage"}>Login</Button>
+                        <Nav.Link href="/LoginPage" style={{ color: '#4b4b4b' }}>Login</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
