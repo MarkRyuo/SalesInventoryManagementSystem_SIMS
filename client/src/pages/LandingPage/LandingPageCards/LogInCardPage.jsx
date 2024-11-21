@@ -26,7 +26,7 @@ function LogInCardPage() {
 
                 <Button variant="" className="">
                     Login
-                    </Button>
+                </Button>
                 </div>
             </div>
         </div>
