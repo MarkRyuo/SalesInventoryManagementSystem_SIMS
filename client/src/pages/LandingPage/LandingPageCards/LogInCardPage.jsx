@@ -5,18 +5,20 @@ function LogInCardPage() {
     return (
         <div className={LogInCardPagecss.LogInContainer}>
 
-            <p>
-                Manage your entire inventory in a single system
-            </p>
+            <div>
+                <h1>
+                    Manage your entire inventory in a single system
+                </h1>
+            </div>
 
             <form>
                 <input type="text" placeholder="username" />
                 <input type="password" placeholder="password" />
-            </form>
 
-            <Button variant="" className="">
-                Login
-            </Button>
+                <Button variant="" className="">
+                    Login
+                </Button>
+            </form>
 
         </div>
     )
