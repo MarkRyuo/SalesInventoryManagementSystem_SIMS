@@ -41,7 +41,9 @@ function LandingPage() {
                         <AboutCard />
                     </div>
 
-                    <div
+                    <div>
+                        {/* Login */}
+                    </div>
 
                     <div id="footer">
                         <Footer />
