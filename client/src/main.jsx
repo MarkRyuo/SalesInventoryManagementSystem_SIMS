@@ -86,7 +86,6 @@ const router = createBrowserRouter([
     path: "SetQrcode",
     element: <SetQrcode /> ,
   },
-  
 
   //! Forgot Password
   { //? ForgotPasswordMode for Admin
