@@ -7,7 +7,7 @@ function NavBars() {
                 <Container>
                 <Navbar.Brand href="#home" style={{ color: '#4b4b4b'}}>
                 <span>
-                    <img src="" />
+                    <img src="/Reyes_Electronics_LogoBg.png" />
                 </span>
                 REYES ELECTRONICS
                 </Navbar.Brand>
