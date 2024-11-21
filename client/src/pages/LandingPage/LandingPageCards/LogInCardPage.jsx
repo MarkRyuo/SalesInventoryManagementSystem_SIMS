@@ -29,7 +29,7 @@ function LogInCardPage() {
                         Login
                     </Button>
 
-                    <Link to={''}>
+                    <Link to={"/"}>
 
                     </Link>
                 </div>
