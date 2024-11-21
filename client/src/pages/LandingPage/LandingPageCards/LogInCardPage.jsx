@@ -8,7 +8,7 @@ function LogInCardPage() {
 
             <div className={LogInCardPagecss.LoginText}>
                 <h1>
-                    Manage your entire inventory in a single system
+                    Manage your entire Inventory in a single System
                 </h1>
             </div>
 
