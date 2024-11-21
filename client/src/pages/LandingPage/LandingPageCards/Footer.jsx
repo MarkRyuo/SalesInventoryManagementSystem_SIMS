@@ -50,10 +50,10 @@ function Footer() {
                     </Col>
 
                     <Col md={3} lg={2} xl={2} className="mb-4">
-                        <h6 className="text-uppercase fw-bold mb-2 ms-4">About</h6>
+                        <h6 className="text-uppercase fw-bold mb-2">About</h6>
                         <Nav className="flex-column">
-                            <Nav.Link href="#!" className="text-reset">Terms and Condition</Nav.Link>
-                            <Nav.Link href="#!" className="text-reset">Developers</Nav.Link>
+                            <Nav.Link href="#!" className="text-reset p-0">Terms and Condition</Nav.Link>
+                            <Nav.Link href="#!" className="text-reset p-0 pt-1">Developers</Nav.Link>
                         </Nav>
                     </Col>
 
