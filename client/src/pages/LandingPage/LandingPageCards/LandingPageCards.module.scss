@@ -161,4 +161,18 @@
     box-sizing: border-box;
     border: 5px solid green;
     height: 100vh;
+    display: flex;
+
+    div:first-child {
+        border: 1px solid;
+        display: inline-flex;
+        align-items: center;
+        h1 {
+
+        }
+    }
+
+    div:last-child {
+        border: 1px solid;
+    }
 }

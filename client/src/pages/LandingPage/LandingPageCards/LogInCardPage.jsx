@@ -11,14 +11,16 @@ function LogInCardPage() {
                 </h1>
             </div>
 
-            <form>
-                <input type="text" placeholder="username" />
-                <input type="password" placeholder="password" />
+            <div>
+                <form>
+                    <input type="text" placeholder="username" />
+                    <input type="password" placeholder="password" />
+                </form>
 
                 <Button variant="" className="">
                     Login
                 </Button>
-            </form>
+            </div>
 
         </div>
     )
