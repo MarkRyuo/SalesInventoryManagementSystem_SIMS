@@ -76,15 +76,14 @@ const ProfileComp = () => {
         try {
             let updatedPassword = userData.password;
 
-            // Hash the password if it's changed
             if (updatedPassword && updatedPassword !== '') {
-                updatedPassword = await bcrypt.hash(updatedPassword, 10);  // Hash with salt rounds
+                updatedPassword = await bcrypt.hash(updatedPassword, 10);
             }
 
-            // Prepare the updated data with the hashed password (if changed)
             const updatedData = {
                 ...userData,
-                password: updatedPassword || userData.password  // Use hashed password or original
+                password: updatedPassword || userData.password,
+                email: userData.email || "" // Save Gmail to database
             };
 
             const adminDocRef = doc(db, 'admins', adminId);
@@ -92,13 +91,12 @@ const ProfileComp = () => {
 
             alert("Profile updated successfully.");
             setIsEditing(false);
-            setShowRecovery(false);
-            setAnswerVisibility({});
         } catch (error) {
             console.error("Error updating profile:", error);
             alert(`Failed to update profile: ${error.message}`);
         }
     };
+
 
 
 
@@ -141,6 +139,10 @@ const ProfileComp = () => {
     return (
         <Form>
             <Row style={{ width: "100%", margin: 0, padding: 0 }}>
+                <Col lg={6}>
+
+                </Col>
+
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="firstname">
                         <Form.Label>FIRST NAME</Form.Label>
