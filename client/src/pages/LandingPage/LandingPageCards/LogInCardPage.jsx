@@ -1,7 +1,7 @@
 
 function LogInCardPage() {
     return (
-        <div className="LogInCardPage">
+        <div className="LogInCardPageContainer">
             <div>
 
             </div>
