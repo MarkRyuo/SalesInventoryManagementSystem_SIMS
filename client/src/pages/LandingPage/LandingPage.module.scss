@@ -141,9 +141,14 @@
         border: 1px solid;
         width: auto;
         margin-right: 10px;
+        display: none;
         img {
             width: 50px;
         }
+    }
+
+    @media (max-width: 600px) {
+        
     }
 }
 
