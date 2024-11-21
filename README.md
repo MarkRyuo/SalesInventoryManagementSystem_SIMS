@@ -11,7 +11,7 @@
 
 ## Changelog
 
-### v8.0.7-beta (Latest)
+### v8.0.7-beta
 - Login Update
 
 ### v8.0.6
