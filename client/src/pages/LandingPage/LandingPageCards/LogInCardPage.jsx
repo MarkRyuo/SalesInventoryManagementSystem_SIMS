@@ -12,22 +12,23 @@ function LogInCardPage() {
             </div>
 
             <div className={LogInCardPagecss.LoginForm}>
-                <form>
-                    <div>
-                        <label>Username*</label>
-                        <input type="text" placeholder="username" />
-                    </div>
-                    <div>
-                        <label>Password*</label>
-                        <input type="password" placeholder="password" />
-                    </div>
-                </form>
+                <div>
+                    <form>
+                        <div>
+                            <label>Username*</label>
+                            <input type="text" placeholder="username" />
+                        </div>
+                        <div>
+                            <label>Password*</label>
+                            <input type="password" placeholder="password" />
+                        </div>
+                    </form>
 
-                <Button variant="" className="">
-                    Login
-                </Button>
+                    <Button variant="" className="">
+                        Login
+                    </Button>
+                </div>
             </div>
-
         </div>
     )
 }
