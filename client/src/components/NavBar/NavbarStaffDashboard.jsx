@@ -45,7 +45,7 @@ function NavbarStaffDashboard() {
     // Redirect to login after showing success modal
     const handleSuccessModalClose = () => {
         setShowSuccessModal(false);
-        navigate("/LandingPage"); // Redirect the user to the login page
+        navigate("/"); // Redirect the user to the login page
     };
 
     // Modal control functions
