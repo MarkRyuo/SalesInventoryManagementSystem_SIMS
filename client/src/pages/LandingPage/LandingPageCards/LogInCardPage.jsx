@@ -1,3 +1,4 @@
+import { Button } from "react-bootstrap";
 
 function LogInCardPage() {
     return (
@@ -7,9 +8,9 @@ function LogInCardPage() {
                 <input type="password" placeholder="password" />
             </form>
 
-            <div>
-
-            </div>
+            <Button>
+                Login
+            </Button>
 
         </div>
     )
