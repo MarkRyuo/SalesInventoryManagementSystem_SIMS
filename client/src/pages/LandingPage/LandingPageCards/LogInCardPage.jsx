@@ -62,7 +62,7 @@ function LogInCardPage() {
                                     onClick={togglePasswordVisibility}
                                     style={{
                                         position: 'absolute',
-                                        right: '10px',
+                                        right: '40px',
                                         top: '50%',
                                         transform: 'translateY(-50%)',
                                         cursor: 'pointer',
