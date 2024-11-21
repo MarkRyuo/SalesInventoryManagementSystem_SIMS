@@ -1,11 +1,10 @@
-import React from 'react'
 
 function LogInCardPage() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+
+        </div>
+    )
 }
 
-export default LogInCardPage
+export default LogInCardPage;
