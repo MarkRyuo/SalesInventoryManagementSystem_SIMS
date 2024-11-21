@@ -72,7 +72,7 @@ function LogInCardPage() {
                                 </span>
                             </div>
                         </div>
-                        <Button type="submit" className={LogInCardPagecss.LoginButton}>
+                        <Button variant='' className={LogInCardPagecss.LoginButton}>
                             Login
                         </Button>
                     </form>
