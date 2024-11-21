@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Alert, FloatingLabel, Button, Form, Spinner } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
-import LoginUser from '../../services/LoginUser'; // Import the LoginUser function
-// import LoginCardcss from './SCSS/LoginCard.module.scss'
+import unifiedLogin from '../../services/UnifiedLogIn'; // Import the unifiedLogin function
 
 export const LoginCard = () => {
     const navigate = useNavigate();
@@ -19,13 +18,13 @@ export const LoginCard = () => {
         setError(null); // Reset error message
         try {
             // Attempt to log in using the provided username and password
-            await LoginUser(username, password);
+            await unifiedLogin(username, password, navigate);
             setSuccess(true); // Set success state
             setUsername(''); // Clear the username input field
             setPassword(''); // Clear the password input field
             setTimeout(() => {
-                navigate('/DashboardPage'); // Navigate to the dashboard after a delay
-            }, 2500); // Delay for success message display
+                // The navigation will be handled by unifiedLogin
+            }, 2000); // Delay for success message display
         } catch (error) {
             // Handle login errors (e.g., incorrect username or password)
             setError(error.message);
@@ -62,7 +61,7 @@ export const LoginCard = () => {
                     }}
                 >
                     <Alert.Heading>Login Successful!</Alert.Heading>
-                    <p>You are being redirected to your dashboard...</p>
+                    <p>Redirecting to your Dashboard...</p>
                 </Alert>
             )}
 
@@ -93,9 +92,6 @@ export const LoginCard = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     disabled={loading} // Disable input while loading
-                    style={{
-                        
-                    }}
                 />
             </FloatingLabel>
 
