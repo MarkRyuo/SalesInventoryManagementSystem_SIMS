@@ -2,9 +2,9 @@
 function LogInCardPage() {
     return (
         <div className="LogInCardPageContainer">
-            <div>
-
-            </div>
+            <form>
+                <input type="text" placeholder="Username" />
+            </form>
 
             <div>
 
