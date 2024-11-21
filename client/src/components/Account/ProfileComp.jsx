@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs';  // Import bcryptjs for password hashing
+
 
 const ProfileComp = () => {
     const navigate = useNavigate();
@@ -72,18 +74,33 @@ const ProfileComp = () => {
 
     const handleSave = async () => {
         try {
-            console.log("Updating user data:", userData);
+            let updatedPassword = userData.password;
+
+            // Hash the password if it's changed
+            if (updatedPassword && updatedPassword !== '') {
+                updatedPassword = await bcrypt.hash(updatedPassword, 10);  // Hash with salt rounds
+            }
+
+            // Prepare the updated data with the hashed password (if changed)
+            const updatedData = {
+                ...userData,
+                password: updatedPassword || userData.password  // Use hashed password or original
+            };
+
             const adminDocRef = doc(db, 'admins', adminId);
-            await updateDoc(adminDocRef, userData);
+            await updateDoc(adminDocRef, updatedData);
+
             alert("Profile updated successfully.");
             setIsEditing(false);
-            setShowRecovery(false); // Hide recovery questions after saving
-            setAnswerVisibility({}); // Reset answer visibility to keep answers hidden
+            setShowRecovery(false);
+            setAnswerVisibility({});
         } catch (error) {
             console.error("Error updating profile:", error);
             alert(`Failed to update profile: ${error.message}`);
         }
     };
+
+
 
     const handleAddQuestion = (question) => {
         if (!userData.recoveryQuestions.includes(question) && userData.recoveryQuestions.length < 3) {
@@ -188,7 +205,7 @@ const ProfileComp = () => {
                     name="password"
                     value={userData.password}
                     onChange={handleInputChange}
-                    disabled
+                    disabled={!isEditing}  // Make password editable only when in edit mode
                 />
             </Form.Group>
 

@@ -1,5 +1,6 @@
 import { db } from './firebase'; // Firebase configuration
 import { getDocs, collection, query, where } from "firebase/firestore";
+import bcrypt from 'bcryptjs'; // Import bcrypt for password comparison
 
 const unifiedLogin = async (username, password, navigate) => {
     try {
@@ -10,9 +11,12 @@ const unifiedLogin = async (username, password, navigate) => {
 
         if (!adminSnapshot.empty) {
             const adminDoc = adminSnapshot.docs[0];
-            const storedPassword = adminDoc.data().password;
+            const storedPassword = adminDoc.data().password; // Stored hashed password
 
-            if (storedPassword !== password) throw new Error("Incorrect password.");
+            // Compare the entered password with the stored hashed password
+            const isPasswordValid = await bcrypt.compare(password, storedPassword);
+
+            if (!isPasswordValid) throw new Error("Incorrect password.");
 
             // Redirect Admin to Dashboard
             localStorage.setItem('adminId', adminDoc.id);
@@ -27,9 +31,12 @@ const unifiedLogin = async (username, password, navigate) => {
 
         if (!staffSnapshot.empty) {
             const staffDoc = staffSnapshot.docs[0];
-            const { password: storedPassword, active } = staffDoc.data();
+            const { password: storedPassword, active } = staffDoc.data(); // Stored hashed password
 
-            if (storedPassword !== password) throw new Error("Incorrect password.");
+            // Compare the entered password with the stored hashed password
+            const isPasswordValid = await bcrypt.compare(password, storedPassword);
+
+            if (!isPasswordValid) throw new Error("Incorrect password.");
             if (!active) throw new Error("Your account is inactive. Please contact Admin.");
 
             // Redirect Staff to Dashboard
