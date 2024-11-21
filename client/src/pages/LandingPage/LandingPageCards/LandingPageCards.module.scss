@@ -179,9 +179,12 @@
         width: 50vw;
 
         form {
-
+            display: flex;
+            align-items: center;
         }
 
-        
+        button {
+            background-color: red;
+        }
     }
 }
