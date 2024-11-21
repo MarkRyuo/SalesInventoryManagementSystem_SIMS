@@ -8,7 +8,7 @@ function LogInCardPage() {
                 <input type="password" placeholder="password" />
             </form>
 
-            <Button variant="" class>
+            <Button variant="" className="">
                 Login
             </Button>
 
