@@ -151,10 +151,9 @@
     }
 
     @media (max-width: 600px) {
-        margin-right: 0px;
-        
         div:first-child {
             .logoNav {
+                margin-right: 10px;
                 display: block;
             }
         }
