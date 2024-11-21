@@ -3,7 +3,8 @@ function LogInCardPage() {
     return (
         <div className="LogInCardPageContainer">
             <form>
-                <input type="text" placeholder="Username" />
+                <input type="text" placeholder="username" />
+                <input type="password" placeholder="password" />
             </form>
 
             <div>
