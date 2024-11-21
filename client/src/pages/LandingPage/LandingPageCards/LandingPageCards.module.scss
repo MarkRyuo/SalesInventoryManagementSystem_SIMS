@@ -188,8 +188,8 @@
             flex-direction: column;
             border: 1px solid;
             padding: 10px;
-            height: 400px;
-            width: 350px;
+            height: auto;
+            width: auto;
             gap: 20px;
             justify-content: center;
             // align-items: center ;
@@ -198,27 +198,36 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
+                h2 {
+                    font-size: 2rem;
+                    text-align: center;
+                    padding: 20px;
+                }
                 div {
                     display: flex;
                     flex-direction: column;
                     input {
                         padding: 10px;
                         height: 45px;
+                        width: 400px;
                     }
                 } 
 
             }
 
             a {
+                text-align: center;
                 text-decoration: none;
                 color: #6b6b6b;
+                padding: 20px 10px;
+            }
+
+            button {
+                // background-color: red;
+                border: 1px solid;
+                border-radius: 0px;
             }
         }
-
-        button {
-            // background-color: red;
-            border: 1px solid;
-            border-radius: 0px;
-        }
     }
+
 }

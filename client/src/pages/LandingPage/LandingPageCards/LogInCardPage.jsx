@@ -15,6 +15,7 @@ function LogInCardPage() {
             <div className={LogInCardPagecss.LoginFormContainer}>
                 <div className={LogInCardPagecss.LoginForm}>
                     <form>
+                        <h2>Welcome</h2>
                         <div>
                             <label>Username*</label>
                             <input type="text" placeholder="Enter your username" />
