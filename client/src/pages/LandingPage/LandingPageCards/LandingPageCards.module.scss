@@ -164,6 +164,7 @@
     display: flex;
 
     div:first-child {
+        width: 50vw;
         border: 1px solid;
         display: inline-flex;
         align-items: center;
@@ -175,5 +176,6 @@
 
     div:last-child {
         border: 1px solid;
+        width: 50vw;
     }
 }

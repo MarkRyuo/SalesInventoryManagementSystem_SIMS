@@ -15,8 +15,10 @@ function LogInCardPage() {
                 <form>
                     <label>Username*</label>
                     <input type="text" placeholder="username" />
-                    <label>Password*</label>
-                    <input type="password" placeholder="password" />
+                    <div>
+                        <label>Password*</label>
+                        <input type="password" placeholder="password" />
+                    </div>
                 </form>
 
                 <Button variant="" className="">
