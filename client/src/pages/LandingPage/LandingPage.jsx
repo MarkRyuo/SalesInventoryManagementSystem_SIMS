@@ -37,6 +37,7 @@ function LandingPage() {
                             <img src="https://www.tapo.com/res/images/home/tapo-logo.png" />
                         </div>
                     </div>
+                    
                     <div className={LandingPagecss.AboutCard} id="Aboutus"> {/* Main Container */}
                         <AboutCard />
                     </div>
