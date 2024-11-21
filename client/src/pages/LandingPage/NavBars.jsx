@@ -1,5 +1,6 @@
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
+import { Container, Nav, Navbar, Button} from "react-bootstrap"
 import LandingPagecss from './LandingPage.module.scss'
+import { Link } from "react-router-dom"
 
 function NavBars() {
     return (
@@ -18,14 +19,7 @@ function NavBars() {
                         <Nav className="me-auto">
                         <Nav.Link href="#home" style={{ color: '#4b4b4b' }}>Home</Nav.Link>
                         <Nav.Link href="#Aboutus" style={{ color: '#4b4b4b' }}>About us</Nav.Link>
-                        <NavDropdown title={<span style={{ color: '#4b4b4b' }}>User Type</span>} id="basic-nav-dropdown" >
-                                <NavDropdown.Item href="LoginPage">Admin Portal</NavDropdown.Item>
-                                <NavDropdown.Item href="SLogin">Staff Portal</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="">
-                                    Developer
-                                </NavDropdown.Item>
-                            </NavDropdown>
+                        <Button as={Link} to={"/LoginPage"}>Login</Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
