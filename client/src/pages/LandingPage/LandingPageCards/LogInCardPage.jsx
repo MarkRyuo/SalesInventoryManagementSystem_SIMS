@@ -5,7 +5,7 @@ function LogInCardPage() {
     return (
         <div className={LogInCardPagecss.LogInContainer}>
 
-            <div>
+            <div className={LogInCardPagecss.LoginText}>
                 <h1>
                     Manage your entire inventory in a single system
                 </h1>
