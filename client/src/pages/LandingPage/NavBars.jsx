@@ -5,12 +5,14 @@ function NavBars() {
     return (
         <Navbar expand="lg" className={LandingPagecss.Navbar}>
                 <Container>
-                <span className={LandingPagecss.logoNav}>
-                    <img src="/Reyes_Electronics_LogoBg.png"/>
-                </span>
+                <div>
+                    <span className={LandingPagecss.logoNav}>
+                        <img src="/Reyes_Electronics_LogoBg.png" />
+                    </span>
                 <Navbar.Brand href="#home" style={{ color: '#4b4b4b'}}>
                 REYES ELECTRONICS
                 </Navbar.Brand>
+                </div>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
