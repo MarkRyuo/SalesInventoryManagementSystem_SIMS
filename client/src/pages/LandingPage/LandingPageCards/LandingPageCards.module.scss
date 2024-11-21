@@ -178,9 +178,14 @@
         border: 1px solid;
         width: 50vw;
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         form {
             display: flex;
+            flex-direction: column;
             align-items: center;
         }
 
