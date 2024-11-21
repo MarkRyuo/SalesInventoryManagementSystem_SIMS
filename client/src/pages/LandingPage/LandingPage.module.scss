@@ -136,10 +136,6 @@
     top: 0;
     z-index: 1000;
     background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 100%);
-
-    @media (max-width: 700px) {
-        background: radial-gradient(circle at 5% 15%, rgb(50, 172, 109) 0%, rgb(209, 251, 155) 90%);
-    }
 }
 
 
