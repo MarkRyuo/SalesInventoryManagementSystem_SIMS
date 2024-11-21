@@ -26,7 +26,7 @@ function LandingPage() {
                                 </Button>
                             </div>
                             <div className={LandingPagecss.heroImage}> 
-                            {/* Hero Image */}
+                                {/* Hero Image */}
                                 <img src="/Reyes_Electronics_LogoBg.png" />
                             </div>
                         </div>
