@@ -11,8 +11,8 @@ function LogInCardPage() {
                 </h1>
             </div>
 
+            <div className={LogInCardPagecss.LoginFormContainer}>
             <div className={LogInCardPagecss.LoginForm}>
-            <div>
                 <form>
                     <div>
                         <label>Username*</label>
