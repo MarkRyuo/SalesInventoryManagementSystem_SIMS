@@ -137,7 +137,7 @@
     z-index: 1000;
     background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 100%);
 
-    span {
+    .logoNav {
         border: 1px solid;
         width: auto;
         margin-right: 10px;
@@ -149,7 +149,7 @@
 
     @media (max-width: 600px) {
         
-        span {
+        .logoNav {
             display: block;
         }
     }
