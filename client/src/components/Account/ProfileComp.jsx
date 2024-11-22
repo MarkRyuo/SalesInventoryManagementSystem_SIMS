@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { auth, db, googleProvider } from '../../services/firebase'; // Firebase config
-import { signInWithPopup } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { signInWithPopup, updatePassword } from 'firebase/auth'; // Import updatePassword
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const ProfileComp = () => {
     const navigate = useNavigate();
@@ -12,6 +12,7 @@ const ProfileComp = () => {
         lastname: "",
         username: "",
         email: "",
+        password: "", // Add password to state
     });
     const [isEditing, setIsEditing] = useState(false);
     const adminId = localStorage.getItem('adminId');
@@ -26,7 +27,22 @@ const ProfileComp = () => {
             }
 
             try {
-                // You can add Firestore code to fetch user data here
+                // Get user data from Firestore (admins collection)
+                const docRef = doc(db, "admins", adminId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const user = docSnap.data();
+                    setUserData({
+                        firstname: user.firstname || '',
+                        lastname: user.lastname || '',
+                        email: user.email || '',
+                        username: user.username || '',
+                        password: '', // Initialize password as empty string
+                    });
+                } else {
+                    console.log("No user data found!");
+                }
             } catch (error) {
                 console.error("Error fetching user data:", error.message);
                 alert("Failed to fetch user data.");
@@ -49,7 +65,7 @@ const ProfileComp = () => {
             // Save or update user data in Firestore
             await setDoc(doc(db, "admins", uid), {
                 firstname: displayName.split(" ")[0],
-                lastname: displayName.split(" ")[1],
+                lastname: displayName.split(" ")[1] || '',  // Handling case where last name might be missing
                 email: email,
                 username: email.split('@')[0], // Generate username from email
             });
@@ -57,9 +73,10 @@ const ProfileComp = () => {
             localStorage.setItem("adminId", uid);
             setUserData({
                 firstname: displayName.split(" ")[0],
-                lastname: displayName.split(" ")[1],
+                lastname: displayName.split(" ")[1] || '',
                 email,
                 username: email.split('@')[0],
+                password: '', // Reset password field
             });
 
             alert("Successfully signed in with Google!");
@@ -68,6 +85,34 @@ const ProfileComp = () => {
         } catch (error) {
             console.error("Error during Google sign-in:", error.message);
             alert("Failed to sign in with Google.");
+        }
+    };
+
+    // Handle updating user data
+    const handleSaveChanges = async () => {
+        try {
+            // If password is set, update the password
+            if (userData.password) {
+                const user = auth.currentUser;
+                if (user) {
+                    await updatePassword(user, userData.password); // Update password in Firebase
+                    alert("Password updated successfully!");
+                }
+            }
+
+            // Save other updated data to Firestore
+            await setDoc(doc(db, "admins", adminId), {
+                firstname: userData.firstname,
+                lastname: userData.lastname,
+                email: userData.email,
+                username: userData.username,
+            });
+
+            setIsEditing(false);
+            alert("User data updated successfully!");
+        } catch (error) {
+            console.error("Error saving data:", error.message);
+            alert("Failed to update user data.");
         }
     };
 
@@ -125,14 +170,37 @@ const ProfileComp = () => {
                     </Col>
                 </Row>
 
-                {!isEditing && (
-                    <Button variant="primary" onClick={() => setIsEditing(true)}>Edit</Button>
+                {/* Password Field */}
+                {isEditing && (
+                    <Row>
+                        <Col lg={6}>
+                            <Form.Group className="mb-3" controlId="password">
+                                <Form.Label>New Password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    value={userData.password}
+                                    onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+                                    placeholder="Enter new password"
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
                 )}
 
-                <Button variant="primary" onClick={handleGoogleSignIn}>
-                    Sign in with Google
-                </Button>
-
+                {!isEditing ? (
+                    <>
+                        <Button variant="primary" onClick={() => setIsEditing(true)}>
+                            Edit
+                        </Button>
+                        <Button variant="secondary" onClick={handleGoogleSignIn}>
+                            Sign in with Google
+                        </Button>
+                    </>
+                ) : (
+                    <Button variant="success" onClick={handleSaveChanges}>
+                        Save Changes
+                    </Button>
+                )}
             </Form>
         </div>
     );
