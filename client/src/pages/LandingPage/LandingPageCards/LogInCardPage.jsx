@@ -65,7 +65,7 @@ function LogInCardPage() {
                                         right: '40px',
                                         top: '50%',
                                         transform: 'translateY(-50%)',
-                                        cursor: 'pointer', 
+                                        cursor: 'pointer',
                                     }}
                                 >
                                     {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
