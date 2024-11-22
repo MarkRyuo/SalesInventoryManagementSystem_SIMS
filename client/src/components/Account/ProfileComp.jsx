@@ -54,7 +54,7 @@ const ProfileComp = () => {
     }, [adminId, navigate]);
 
     // Handle Google Sign-In for Admin
-    const handleGoogleSignIn = async () => {
+    const handleConnectGoogle = async () => {
         try {
             // If the admin is already signed in, don't trigger a new sign-in
             if (adminId) {
@@ -218,7 +218,7 @@ const ProfileComp = () => {
                         <Button variant="primary" onClick={() => setIsEditing(true)}>
                             Edit
                         </Button>
-                        <Button variant="secondary" onClick={handleGoogleSignIn}>
+                        <Button variant="secondary" onClick={handleConnectGoogle}>
                             Connect To Google
                         </Button>
                     </>
