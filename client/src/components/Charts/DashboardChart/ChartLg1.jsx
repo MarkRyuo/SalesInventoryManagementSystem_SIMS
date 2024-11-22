@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Chartcss from './Charts.module.scss';
-import { getAllProducts } from '../../../services/ProductService'; // Replace with actual service function
+import { fetchAllProducts } from '../../../services/ProductService'; // Replace with actual service function
 import { LiaProductHunt } from 'react-icons/lia';
 
 function ChartLg1() {
@@ -12,7 +12,7 @@ function ChartLg1() {
 
     const fetchProductsAddedOrUpdatedToday = async () => {
         try {
-            const products = await getAllProducts(); // Fetch all products
+            const products = await fetchAllProducts(); // Fetch all products
             const today = new Date();
             const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
             const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);

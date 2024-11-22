@@ -187,6 +187,46 @@ export const getAllProducts = async () => {
         throw new Error(`Error retrieving products: ${error.message}`);
     }
 };
+
+export const fetchAllProducts = async () => {
+    const db = getDatabase();
+    const productsRef = ref(db, 'products');
+
+    try {
+        const snapshot = await get(productsRef);
+        if (!snapshot.exists()) {
+            console.log("No products found.");
+            return []; // Return an empty array if no products are found
+        }
+
+        const products = snapshot.val();
+
+        // Format and validate products
+        const formattedProducts = Object.keys(products).map(key => {
+            const product = products[key];
+
+            // Skip invalid entries
+            if (typeof product !== 'object' || Array.isArray(product) || !product) {
+                console.warn(`Invalid product at key: ${key}`);
+                return null;
+            }
+
+            // Ensure price and tax are numeric
+            product.price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
+            product.tax = typeof product.tax === 'number' ? product.tax : parseFloat(product.tax) || 0;
+
+            return { ...product, id: key }; // Add the product key as an ID
+        }).filter(product => product !== null);
+
+        console.log("Products fetched:", formattedProducts);
+        return formattedProducts;
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        throw new Error(`Error fetching products: ${error.message}`);
+    }
+};
+
+
 //! End of Product
 
 //* Start Category  
