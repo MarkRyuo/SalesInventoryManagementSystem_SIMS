@@ -34,6 +34,7 @@ import DashboardPage from '../src/pages/Admin/DashboardPage/DashboardPage.jsx';
 import ReOrdering from './pages/Admin/ProductPage/ReOrdering.jsx';
 import SetQrcode from './pages/Admin/ProductPage/SetQrcode.jsx' ;
 import ReportPage from './pages/Admin/ReportPage/ReportPage.jsx';
+import ResetPassJWT from './pages/LandingPage/LandingPageCards/ResetPassJWT.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
   { //? Product for Admin
     path: "SetQrcode",
     element: <SetQrcode /> ,
+  },
+  { //? Product for Admin
+    path: "ResetPassJWT",
+    element: <ResetPassJWT /> ,
   },
 
   //! Forgot Password
