@@ -11,6 +11,9 @@
 
 ## Changelog
 
+### v8.1 (Latest)
+- Create a login
+
 ### v8.0.6
 - Design Dashboards
 
