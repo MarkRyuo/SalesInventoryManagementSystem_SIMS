@@ -11,8 +11,6 @@
 
 ## Changelog
 
-
-
 ### v8.0.6
 - Design Dashboards
 
