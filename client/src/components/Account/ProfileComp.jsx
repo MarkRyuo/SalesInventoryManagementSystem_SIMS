@@ -5,7 +5,6 @@ import { db } from '../../services/firebase';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';  // Import bcryptjs for password hashing
 
-
 const ProfileComp = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
@@ -13,13 +12,14 @@ const ProfileComp = () => {
         lastname: "",
         gender: "",
         username: "",
+        email: "",
         password: "",
         recoveryQuestions: [],
         answers: {}
     });
     const [isEditing, setIsEditing] = useState(false);
     const [showRecovery, setShowRecovery] = useState(false);
-    const [answerVisibility, setAnswerVisibility] = useState({}); // State for individual answer visibility
+    const [answerVisibility, setAnswerVisibility] = useState({});
     const adminId = localStorage.getItem('adminId');
 
     const availableQuestions = [
@@ -76,15 +76,13 @@ const ProfileComp = () => {
         try {
             let updatedPassword = userData.password;
 
-            // Hash the password if it's changed
             if (updatedPassword && updatedPassword !== '') {
-                updatedPassword = await bcrypt.hash(updatedPassword, 10);  // Hash with salt rounds
+                updatedPassword = await bcrypt.hash(updatedPassword, 10);
             }
 
-            // Prepare the updated data with the hashed password (if changed)
             const updatedData = {
                 ...userData,
-                password: updatedPassword || userData.password  // Use hashed password or original
+                password: updatedPassword || userData.password
             };
 
             const adminDocRef = doc(db, 'admins', adminId);
@@ -100,18 +98,15 @@ const ProfileComp = () => {
         }
     };
 
-
-
     const handleAddQuestion = (question) => {
         if (!userData.recoveryQuestions.includes(question) && userData.recoveryQuestions.length < 3) {
             setUserData((prevData) => ({
                 ...prevData,
                 recoveryQuestions: [...prevData.recoveryQuestions, question],
             }));
-            // Initialize visibility state for the new question
             setAnswerVisibility((prevVisibility) => ({
                 ...prevVisibility,
-                [question]: false // Initially set to false (hidden)
+                [question]: false
             }));
         }
     };
@@ -124,7 +119,6 @@ const ProfileComp = () => {
                 [question]: answer,
             },
         }));
-        // Hide the answer input field after the answer is filled
         setAnswerVisibility((prevVisibility) => ({
             ...prevVisibility,
             [question]: false
@@ -134,7 +128,7 @@ const ProfileComp = () => {
     const toggleAnswerVisibility = (question) => {
         setAnswerVisibility((prevVisibility) => ({
             ...prevVisibility,
-            [question]: !prevVisibility[question] // Toggle visibility for this specific question
+            [question]: !prevVisibility[question]
         }));
     };
 
@@ -187,6 +181,17 @@ const ProfileComp = () => {
                 </DropdownButton>
             </InputGroup>
 
+            <Form.Group className="mb-3" controlId="email" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                    type="email"
+                    name="email"
+                    value={userData.email}
+                    onChange={handleInputChange}
+                    disabled={!isEditing}
+                />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
@@ -205,7 +210,7 @@ const ProfileComp = () => {
                     name="password"
                     value={userData.password}
                     onChange={handleInputChange}
-                    disabled={!isEditing}  // Make password editable only when in edit mode
+                    disabled={!isEditing}
                 />
             </Form.Group>
 
@@ -240,14 +245,14 @@ const ProfileComp = () => {
                                 <Form.Group key={question} className="mb-3" style={{ position: "relative" }}>
                                     <Form.Label>Your Answer for: {question}</Form.Label>
                                     <Form.Control
-                                        type={answerVisibility[question] ? "text" : "password"} // Toggle individual answer visibility
+                                        type={answerVisibility[question] ? "text" : "password"}
                                         value={userData.answers[question] || ''}
                                         onChange={(e) => handleAnswerChange(question, e.target.value)}
-                                        readOnly={!isEditing} // Make answers read-only when not editing
+                                        readOnly={!isEditing}
                                     />
                                     <Button
                                         variant="link"
-                                        onClick={() => toggleAnswerVisibility(question)} // Toggle answer visibility for this specific question
+                                        onClick={() => toggleAnswerVisibility(question)}
                                         style={{ padding: 0 }}
                                     >
                                         {answerVisibility[question] ? "Hide Answer" : "Show Answer"}
