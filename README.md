@@ -11,7 +11,8 @@
 
 ## Changelog
 
-
+### v8.0.9-beta (Latest)
+- JWT 
 
 ### v8.0.6
 - Design Dashboards
