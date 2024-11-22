@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove, onValue, push, runTransaction, query, orderByChild, startAt, endAt } from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove, onValue, push, runTransaction} from 'firebase/database';
 
 //? Product Management, Category Management, Order Management, Discount Management, Tax Management, Preserve Quantity History, Re Ordering
 
@@ -872,43 +872,39 @@ export const getTodaysProductActivity = async () => {
         const todayEnd = new Date();
         todayEnd.setHours(23, 59, 59, 999); // End of today
 
-        // Query for products added or updated today
-        const productQuery = query(
-            productsRef,
-            orderByChild('addedAt'),
-            startAt(todayStart.getTime()),
-            endAt(todayEnd.getTime())
-        );
-
-        const snapshot = await get(productQuery);
+        const snapshot = await get(productsRef);
         if (!snapshot.exists()) {
             console.log("No products added/updated today.");
-            return []; // Return an empty array if no products are found for today
+            return []; // Return an empty array if no products are found
         }
 
         const products = snapshot.val();
+        const formattedToday = todayStart.toISOString().split('T')[0]; // Format as YYYY-MM-DD
 
-        // Convert product data into an array and ensure numeric values for price and tax
         const formattedProducts = Object.keys(products).map(key => {
             const product = products[key];
 
-            // Ensure product is an object before proceeding
-            if (typeof product !== 'object' || Array.isArray(product) || !product) {
-                console.warn(`Skipping invalid product data at key: ${key}`);
-                return null; // Skip invalid entries
-            }
+            // Ensure valid product data
+            if (!product || typeof product !== 'object') return null;
 
-            // Ensure price and tax are numeric
-            product.price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
-            product.tax = typeof product.tax === 'number' ? product.tax : parseFloat(product.tax) || 0;
+            // Check today's added and deducted quantities
+            const addedQuantityEntry = (product.addedQuantityHistory || []).find(entry => entry.date === formattedToday) || { quantity: 0 };
+            const deductedQuantityEntry = (product.deductedQuantityHistory || []).find(entry => entry.date === formattedToday) || { quantity: 0 };
 
-            return product;
-        }).filter(product => product !== null); // Filter out invalid/null products
+            return {
+                name: product.name || 'Unnamed Product',
+                price: product.price || 0,
+                quantity: product.quantity || 0,
+                addedToday: addedQuantityEntry.quantity,
+                deductedToday: deductedQuantityEntry.quantity,
+            };
+        }).filter(product => product !== null);
 
         console.log("Today's Product Activity:", formattedProducts);
         return formattedProducts;
     } catch (error) {
-        console.error("Error retrieving products:", error);
+        console.error("Error retrieving today's products:", error);
         throw new Error(`Error retrieving today's products: ${error.message}`);
     }
 };
+
