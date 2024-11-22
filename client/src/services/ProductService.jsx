@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, update, remove, onValue, push, runTransaction } from 'firebase/database';
+import { getDatabase, ref, set, get, update, remove, onValue, push, runTransaction, query, orderByChild, startAt, endAt } from 'firebase/database';
 
 //? Product Management, Category Management, Order Management, Discount Management, Tax Management, Preserve Quantity History, Re Ordering
 
@@ -860,4 +860,55 @@ export const fetchQuantitySoldByRange = async (timeRange) => {
     }
 };
 
+// Function to get products added or updated today
+export const getTodaysProductActivity = async () => {
+    const db = getDatabase();
+    const productsRef = ref(db, 'products');
 
+    try {
+        // Get today's date range (from 12:00 AM to 11:59 PM)
+        const todayStart = new Date();
+        todayStart.setHours(0, 0, 0, 0); // Start of today
+        const todayEnd = new Date();
+        todayEnd.setHours(23, 59, 59, 999); // End of today
+
+        // Query for products added or updated today
+        const productQuery = query(
+            productsRef,
+            orderByChild('addedAt'),
+            startAt(todayStart.getTime()),
+            endAt(todayEnd.getTime())
+        );
+
+        const snapshot = await get(productQuery);
+        if (!snapshot.exists()) {
+            console.log("No products added/updated today.");
+            return []; // Return an empty array if no products are found for today
+        }
+
+        const products = snapshot.val();
+
+        // Convert product data into an array and ensure numeric values for price and tax
+        const formattedProducts = Object.keys(products).map(key => {
+            const product = products[key];
+
+            // Ensure product is an object before proceeding
+            if (typeof product !== 'object' || Array.isArray(product) || !product) {
+                console.warn(`Skipping invalid product data at key: ${key}`);
+                return null; // Skip invalid entries
+            }
+
+            // Ensure price and tax are numeric
+            product.price = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
+            product.tax = typeof product.tax === 'number' ? product.tax : parseFloat(product.tax) || 0;
+
+            return product;
+        }).filter(product => product !== null); // Filter out invalid/null products
+
+        console.log("Today's Product Activity:", formattedProducts);
+        return formattedProducts;
+    } catch (error) {
+        console.error("Error retrieving products:", error);
+        throw new Error(`Error retrieving today's products: ${error.message}`);
+    }
+};
