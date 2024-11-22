@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getTodaysProductActivity } from './path-to-your-function'; // Import the function
+import { getTodaysProductActivity } from '../../../services/ProductService'; // Import the function
 import Chartcss from './Charts.module.scss';
 
 function ChartLg1() {
