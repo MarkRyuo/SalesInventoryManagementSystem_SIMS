@@ -1,9 +1,9 @@
 
 function ResetPassJWT() {
     return (
-        <div>
+        <>
 
-        </div>
+        </>
     )
 }
 
