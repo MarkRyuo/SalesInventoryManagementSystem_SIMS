@@ -78,8 +78,8 @@ function ChartLg1() {
                             <p className="fs-6 m-0">SKU: {product.sku}</p>
                             <p className="fs-6 m-0">Price: {product.price}</p>
                             <p className="fs-6 m-0">Quantity: {product.quantity}</p> {/* Change this to Total Quantity */}
-                            {/* Add Added Today */}
-                            {/* Deducted Today */}
+                            {/* Add Added Today if added display this*/}
+                            {/* Deducted Today if deducted display this*/}
                         </div>
                     ))}
                 </div>
