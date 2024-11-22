@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import unifiedLogin from '../../../services/UnifiedLogIn'; // The combined login function
 import LogInCardPagecss from './LandingPageCards.module.scss';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // You need to install react-icons
+import { Link } from 'react-router-dom';
 
 function LogInCardPage() {
     const [username, setUsername] = useState("");
@@ -77,7 +78,7 @@ function LogInCardPage() {
                         </Button>
                     </form>
 
-                    <a href="#">Forgot Password?</a>
+                    <Link to={"/ResetPassJWT"}>Forgot Password?</Link>
                 </div>
             </div>
         </div>
