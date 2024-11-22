@@ -3,7 +3,6 @@ import { auth } from './firebase'; // Firebase Auth configuration
 import { sendPasswordResetEmail } from "firebase/auth"; // Import reset functionality
 import { getDocs, collection, query, where, updateDoc, doc } from "firebase/firestore";
 import bcrypt from 'bcryptjs'; // Import bcrypt for password comparison
-
 const MAX_ATTEMPTS = 5; // Maximum number of login attempts
 
 const unifiedLogin = async (username, password, navigate) => {
@@ -22,17 +21,13 @@ const unifiedLogin = async (username, password, navigate) => {
             const adminDoc = adminSnapshot.docs[0];
             const { password: storedPassword, email, loginAttempts } = adminDoc.data();
 
-            if (!email) {
-                throw new Error("No Gmail connected. Contact support to link Gmail.");
-            }
-
             if (loginAttempts >= MAX_ATTEMPTS) {
                 // Trigger password reset email if too many failed attempts
                 await sendPasswordResetEmail(auth, email);
                 throw new Error("Too many failed attempts. Reset link sent to your Gmail.");
             }
 
-            // For now, skip bcrypt validation for the admin
+            // Skip Gmail link check and allow login if the password matches
             if (password !== storedPassword) {
                 // Increment login attempts for admin
                 await updateDoc(doc(db, "admins", adminDoc.id), {
