@@ -4,6 +4,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';  // Import bcryptjs for password hashing
+import axios from 'axios';
 
 
 const ProfileComp = () => {
@@ -21,6 +22,8 @@ const ProfileComp = () => {
     const [showRecovery, setShowRecovery] = useState(false);
     const [answerVisibility, setAnswerVisibility] = useState({}); // State for individual answer visibility
     const adminId = localStorage.getItem('adminId');
+    const [isEmailVerified, setIsEmailVerified] = useState(false);
+
 
     const availableQuestions = [
         "In which city was your first business located?",
@@ -36,8 +39,13 @@ const ProfileComp = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setUserData({ ...userData, [name]: value });
+        setUserData((prevData) => ({
+            ...prevData,
+            [name]: value,
+            originalEmail: name === 'email' ? prevData.email : prevData.originalEmail
+        }));
     };
+
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -81,6 +89,18 @@ const ProfileComp = () => {
                 updatedPassword = await bcrypt.hash(updatedPassword, 10);  // Hash with salt rounds
             }
 
+            // Check if email has changed and needs verification
+            if (userData.email !== userData.originalEmail) {
+                // Call the backend API to send the verification email
+                const response = await axios.post('http://localhost:5000/send-verification-email', {
+                    email: userData.email,
+                });
+
+                alert(response.data.message);  // Show the message from the backend
+                setIsEmailVerified(false);  // Wait for email verification
+                return;  // Stop the save process until email is verified
+            }
+
             // Prepare the updated data with the hashed password (if changed)
             const updatedData = {
                 ...userData,
@@ -99,6 +119,7 @@ const ProfileComp = () => {
             alert(`Failed to update profile: ${error.message}`);
         }
     };
+
 
 
 
@@ -197,7 +218,10 @@ const ProfileComp = () => {
                     disabled={!isEditing}
                     placeholder="Enter your email"
                 />
+                {isEmailVerified && <Form.Text className="text-success">Email verified</Form.Text>}
+                {!isEmailVerified && !isEditing && <Form.Text className="text-danger">Email not verified</Form.Text>}
             </Form.Group>
+
 
             <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Username</Form.Label>
