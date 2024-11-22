@@ -8,10 +8,15 @@ const MAX_ATTEMPTS = 5; // Maximum number of login attempts
 
 const unifiedLogin = async (username, password, navigate) => {
     try {
-        // Check in the admins collection
-        const adminsCollection = collection(db, "admins");
-        const adminQuery = query(adminsCollection, where("username", "==", username));
-        const adminSnapshot = await getDocs(adminQuery);
+        // Check in the admins collection by username first
+        let adminQuery = query(collection(db, "admins"), where("username", "==", username));
+        let adminSnapshot = await getDocs(adminQuery);
+
+        if (adminSnapshot.empty) {
+            // If no result by username, check by email
+            adminQuery = query(collection(db, "admins"), where("email", "==", username));
+            adminSnapshot = await getDocs(adminQuery);
+        }
 
         if (!adminSnapshot.empty) {
             const adminDoc = adminSnapshot.docs[0];
@@ -27,10 +32,8 @@ const unifiedLogin = async (username, password, navigate) => {
                 throw new Error("Too many failed attempts. Reset link sent to your Gmail.");
             }
 
-            // Compare the entered password with the stored hashed password
-            const isPasswordValid = await bcrypt.compare(password, storedPassword);
-
-            if (!isPasswordValid) {
+            // For now, skip bcrypt validation for the admin
+            if (password !== storedPassword) {
                 // Increment login attempts for admin
                 await updateDoc(doc(db, "admins", adminDoc.id), {
                     loginAttempts: loginAttempts + 1,
@@ -60,6 +63,7 @@ const unifiedLogin = async (username, password, navigate) => {
                 throw new Error("Too many failed attempts. Contact the admin.");
             }
 
+            // Use bcrypt for staff password comparison
             const isPasswordValid = await bcrypt.compare(password, storedPassword);
 
             if (!isPasswordValid) {
@@ -80,7 +84,7 @@ const unifiedLogin = async (username, password, navigate) => {
             return;
         }
 
-        throw new Error("Username not found.");
+        throw new Error("Username or email not found.");
     } catch (error) {
         console.error("Login Error:", error.message);
         throw error;

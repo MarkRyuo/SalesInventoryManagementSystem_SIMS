@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth, db, googleProvider } from '../../services/firebase'; // Firebase config
 import { signInWithPopup, updatePassword } from 'firebase/auth'; // Import updatePassword
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import bcrypt from 'bcryptjs'; // Import bcryptjs
 
 const ProfileComp = () => {
     const navigate = useNavigate();
@@ -91,13 +92,11 @@ const ProfileComp = () => {
     // Handle updating user data
     const handleSaveChanges = async () => {
         try {
-            // If password is set, update the password
+            // If password is set, hash it before saving
+            let hashedPassword = userData.password;
             if (userData.password) {
-                const user = auth.currentUser;
-                if (user) {
-                    await updatePassword(user, userData.password); // Update password in Firebase
-                    alert("Password updated successfully!");
-                }
+                // Hash password using bcrypt
+                hashedPassword = await bcrypt.hash(userData.password, 10);
             }
 
             // Save other updated data to Firestore
@@ -106,7 +105,17 @@ const ProfileComp = () => {
                 lastname: userData.lastname,
                 email: userData.email,
                 username: userData.username,
+                password: hashedPassword, // Save hashed password in Firestore
             });
+
+            // If password was updated, update it in Firebase Auth as well
+            if (userData.password) {
+                const user = auth.currentUser;
+                if (user) {
+                    await updatePassword(user, userData.password); // Update password in Firebase Auth
+                    alert("Password updated successfully!");
+                }
+            }
 
             setIsEditing(false);
             alert("User data updated successfully!");
