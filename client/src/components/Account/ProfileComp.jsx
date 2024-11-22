@@ -54,56 +54,40 @@ const ProfileComp = () => {
     }, [adminId, navigate]);
 
     // Handle Google Sign-In for Admin
-    const handleConnectGoogle = async () => {
+    const handleGoogleSignIn = async () => {
         try {
-            // If the admin is already signed in, don't trigger a new sign-in
-            if (adminId) {
-                alert("You are already signed in.");
-                return;
-            }
-
-            // Sign in with Google
+            // Use Firebase Auth to sign in with Google
             const result = await signInWithPopup(auth, googleProvider);
+
+            // Get user info from Google
             const user = result.user;
             const { displayName, email, uid } = user;
 
-            // Check if the signed-in user matches the adminId
-            if (uid === adminId) {
-                // User exists in Firestore, update the user data
-                const docRef = doc(db, "admins", uid);
-                const docSnap = await getDoc(docRef);
+            // Save or update user data in Firestore
+            await setDoc(doc(db, "admins", uid), {
+                firstname: displayName.split(" ")[0],
+                lastname: displayName.split(" ")[1] || '',  // Handling case where last name might be missing
+                email: email,
+                username: email.split('@')[0], // Generate username from email
+            });
 
-                if (docSnap.exists()) {
-                    // Update the user data
-                    await setDoc(docRef, {
-                        firstname: displayName.split(" ")[0],
-                        lastname: displayName.split(" ")[1] || '',
-                        email: email,
-                        username: email.split('@')[0], // Generate username from email
-                    }, { merge: true });
-                }
+            localStorage.setItem("adminId", uid);
+            setUserData({
+                firstname: displayName.split(" ")[0],
+                lastname: displayName.split(" ")[1] || '',
+                email,
+                username: email.split('@')[0],
+                password: '', // Reset password field
+            });
 
-                // Save user data to state and localStorage
-                setUserData({
-                    firstname: displayName.split(" ")[0],
-                    lastname: displayName.split(" ")[1] || '',
-                    email,
-                    username: email.split('@')[0],
-                    password: '', // Reset password field
-                });
+            alert("Successfully signed in with Google!");
+            navigate("/DashboardPage");
 
-                alert("Successfully signed in with Google!");
-                navigate("/DashboardPage");
-            } else {
-                // If the UID doesn't match the adminId, show an error or prompt user to log in first
-                alert("This Google account does not match the existing admin account.");
-            }
         } catch (error) {
             console.error("Error during Google sign-in:", error.message);
             alert("Failed to sign in with Google.");
         }
     };
-
 
     // Handle updating user data
     const handleSaveChanges = async () => {
@@ -218,8 +202,8 @@ const ProfileComp = () => {
                         <Button variant="primary" onClick={() => setIsEditing(true)}>
                             Edit
                         </Button>
-                        <Button variant="secondary" onClick={handleConnectGoogle}>
-                            Connect To Google
+                        <Button variant="secondary" onClick={handleGoogleSignIn}>
+                            Sign in with Google
                         </Button>
                     </>
                 ) : (

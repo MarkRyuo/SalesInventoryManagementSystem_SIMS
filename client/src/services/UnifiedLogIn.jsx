@@ -27,8 +27,10 @@ const unifiedLogin = async (username, password, navigate) => {
                 throw new Error("Too many failed attempts. Reset link sent to your Gmail.");
             }
 
-            // Skip Gmail link check and allow login if the password matches
-            if (password !== storedPassword) {
+            // Use bcrypt for password comparison for admin
+            const isPasswordValid = await bcrypt.compare(password, storedPassword);
+
+            if (!isPasswordValid) {
                 // Increment login attempts for admin
                 await updateDoc(doc(db, "admins", adminDoc.id), {
                     loginAttempts: loginAttempts + 1,
