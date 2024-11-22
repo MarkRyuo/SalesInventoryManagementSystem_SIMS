@@ -187,6 +187,18 @@ const ProfileComp = () => {
                 </DropdownButton>
             </InputGroup>
 
+            <Form.Group className="mb-3" controlId="email" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                    type="email"
+                    name="email"
+                    value={userData.email}
+                    onChange={handleInputChange}
+                    disabled={!isEditing}
+                    placeholder="Enter your email"
+                />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
