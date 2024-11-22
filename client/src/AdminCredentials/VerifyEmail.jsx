@@ -1,19 +1,22 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { db } from './firebase'; // Firebase configuration
-import { doc, updateDoc } from 'firebase/firestore';
+import { useParams, useNavigate } from 'react-router-dom'; // useNavigate for redirection
+import { db } from '../services/firebase'; // Firebase configuration
+import { query, where, getDocs, collection, doc, updateDoc } from 'firebase/firestore';
 
 const VerifyEmail = () => {
     const { token } = useParams(); // Get the verification token from the URL
+    const navigate = useNavigate(); // For navigation after email verification
 
     useEffect(() => {
-        // Call the backend to verify the token
         const verifyToken = async () => {
             try {
-                const adminRef = await db.collection('admins').where('verification_code', '==', token).get();
+                // Query Firestore for the admin document with the matching verification code
+                const adminsCollection = collection(db, 'admins');
+                const adminQuery = query(adminsCollection, where('verification_code', '==', token));
+                const adminSnapshot = await getDocs(adminQuery);
 
-                if (!adminRef.empty) {
-                    const adminDoc = adminRef.docs[0];
+                if (!adminSnapshot.empty) {
+                    const adminDoc = adminSnapshot.docs[0];
                     const adminId = adminDoc.id;
 
                     // Update the email_verified field to true
@@ -22,6 +25,7 @@ const VerifyEmail = () => {
                     });
 
                     alert('Email verified successfully!');
+                    navigate('/login'); // Redirect to login page after successful verification
                 } else {
                     alert('Invalid or expired verification token.');
                 }
@@ -31,7 +35,7 @@ const VerifyEmail = () => {
         };
 
         verifyToken();
-    }, [token]);
+    }, [token, navigate]); // Include navigate in the dependency array
 
     return <div>Verifying your email...</div>;
 };

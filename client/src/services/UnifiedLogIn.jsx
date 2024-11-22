@@ -14,10 +14,15 @@ const unifiedLogin = async (username, password, navigate) => {
         if (!adminSnapshot.empty) {
             const adminDoc = adminSnapshot.docs[0];
             const storedPassword = adminDoc.data().password; // Stored hashed password
+            const emailVerified = adminDoc.data().email_verified; // Check if email is verified
             const attempts = adminDoc.data().loginAttempts || 0; // Track failed attempts
 
             if (attempts >= MAX_ATTEMPTS) {
                 throw new Error("Too many failed attempts. Please reset your password.");
+            }
+
+            if (!emailVerified) {
+                throw new Error("Your email is not verified. Please check your inbox for the verification link.");
             }
 
             // Compare the entered password with the stored hashed password
@@ -42,7 +47,7 @@ const unifiedLogin = async (username, password, navigate) => {
             return;
         }
 
-        // Check in the staffs collection
+        // Check in the staffs collection (same as before)
         const staffsCollection = collection(db, "staffs");
         const staffQuery = query(staffsCollection, where("username", "==", username));
         const staffSnapshot = await getDocs(staffQuery);
