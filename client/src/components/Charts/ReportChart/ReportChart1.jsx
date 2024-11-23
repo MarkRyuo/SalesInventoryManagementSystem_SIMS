@@ -5,6 +5,7 @@ import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import ReportChartcss from './ReportChart.module.scss';
 import { fetchStockInOverview, fetchStockInByDate } from '../../../services/SalesReports/StockInReportService';  // Import the helpers
+import 'jspdf-autotable';  // Import jsPDF autotable for table handling
 
 function ReportChart1() {
     const [totalStock, setTotalStock] = useState(0);
@@ -40,39 +41,38 @@ function ReportChart1() {
     const downloadPDF = (data) => {
         const doc = new jsPDF();
 
-        // Set up the table headers
+        // Title for the document
         doc.setFontSize(12);
         doc.text('Filtered Stock In Data', 10, 10);
 
-        const headers = ['No.', 'Product Name', 'Barcode', 'SKU', 'Date', 'Quantity', 'Price'];
+        // Create table headers and data
+        const tableHeaders = ['No.', 'Product Name', 'Barcode', 'SKU', 'Date', 'Quantity', 'Price'];
+        const tableData = data.map((entry, index) => [
+            (index + 1).toString(),
+            entry.productName,
+            entry.barcode,
+            entry.sku,
+            entry.addedQuantityHistory.date,
+            entry.addedQuantityHistory.quantity.toString(),
+            entry.price,
+        ]);
 
-        // Table column positions and sizes
-        const columnWidths = [10, 50, 30, 30, 25, 20, 25]; // Adjust widths as needed
-        let y = 20; // Start position for the first row
-
-        // Draw table headers
-        headers.forEach((header, index) => {
-            doc.text(header, 10 + (columnWidths.slice(0, index).reduce((a, b) => a + b, 0)), y);
-        });
-
-        y += 5; // Space between header and data rows
-
-        // Draw the table data
-        data.forEach((entry, index) => {
-            doc.text((index + 1).toString(), 10, y);  // Serial number
-            doc.text(entry.productName, 10 + columnWidths[0], y);  // Product Name
-            doc.text(entry.barcode, 10 + columnWidths[0] + columnWidths[1], y);  // Barcode
-            doc.text(entry.sku, 10 + columnWidths[0] + columnWidths[1] + columnWidths[2], y);  // SKU
-            doc.text(entry.addedQuantityHistory.date, 10 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], y);  // Date
-            doc.text(entry.addedQuantityHistory.quantity.toString(), 10 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3] + columnWidths[4], y);  // Quantity
-            doc.text(entry.price, 10 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3] + columnWidths[4] + columnWidths[5], y);  // Price
-            y += 10;  // Increment y position for the next row
-
-            // Add a page if necessary
-            if (y > 280) {  // Check if the content is about to overflow the page
-                doc.addPage();
-                y = 20;  // Reset y position for the next page
-            }
+        // Use jsPDF autoTable plugin to generate the table
+        doc.autoTable({
+            head: [tableHeaders],
+            body: tableData,
+            startY: 20,  // Starting Y position
+            theme: 'grid',  // Table theme
+            columnStyles: {
+                0: { cellWidth: 10 },  // Column 1 (No.)
+                1: { cellWidth: 50 },  // Column 2 (Product Name)
+                2: { cellWidth: 30 },  // Column 3 (Barcode)
+                3: { cellWidth: 30 },  // Column 4 (SKU)
+                4: { cellWidth: 25 },  // Column 5 (Date)
+                5: { cellWidth: 20 },  // Column 6 (Quantity)
+                6: { cellWidth: 25 },  // Column 7 (Price)
+            },
+            margin: { top: 20 },  // Set the top margin for table
         });
 
         // Save the document
@@ -81,7 +81,10 @@ function ReportChart1() {
 
 
     // Download XLSX function with detailed product info
+    import * as XLSX from 'xlsx';
+
     const downloadXLSX = (data) => {
+        // Format the data
         const formattedData = data.map(entry => ({
             ProductName: entry.productName,
             Barcode: entry.barcode,
@@ -91,11 +94,47 @@ function ReportChart1() {
             Price: entry.price
         }));
 
-        const ws = XLSX.utils.json_to_sheet(formattedData);
+        // Create a new workbook
         const wb = XLSX.utils.book_new();
+
+        // Create worksheet from the formatted data
+        const ws = XLSX.utils.json_to_sheet(formattedData);
+
+        // Style Headers
+        const header = ws['!rows'] || [];  // Ensure header style exists
+        ws['!cols'] = [
+            { width: 20 },  // Product Name
+            { width: 15 },  // Barcode
+            { width: 10 },  // SKU
+            { width: 15 },  // Date
+            { width: 10 },  // Quantity
+            { width: 15 },  // Price
+        ];
+
+        // Add header style
+        Object.keys(ws).forEach((cellRef) => {
+            if (cellRef.includes('1')) {  // This is where the header row is
+                ws[cellRef].s = {
+                    font: { bold: true },        // Make header text bold
+                    alignment: { horizontal: 'center' },  // Center align
+                    fill: { patternType: 'solid', fgColor: { rgb: 'FFFF00' } }, // Yellow background color
+                    border: {
+                        top: { style: 'thin', color: { rgb: '000000' } },
+                        bottom: { style: 'thin', color: { rgb: '000000' } },
+                        left: { style: 'thin', color: { rgb: '000000' } },
+                        right: { style: 'thin', color: { rgb: '000000' } }
+                    },
+                };
+            }
+        });
+
+        // Add the sheet to the workbook
         XLSX.utils.book_append_sheet(wb, ws, 'Stock In Data');
+
+        // Write the Excel file
         XLSX.writeFile(wb, 'stock_in_report.xlsx');
     };
+
 
     return (
         <div className={ReportChartcss.containerChart1}>
