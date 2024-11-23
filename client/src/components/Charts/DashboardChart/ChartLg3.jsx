@@ -47,6 +47,7 @@ function ChartLg3() {
         return groupedData;
     };
 
+
     useEffect(() => {
         const fetchAndGroupSales = async () => {
             setLoading(true);

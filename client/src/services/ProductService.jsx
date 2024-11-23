@@ -599,7 +599,7 @@ export const fetchSalesData = async () => {
         const formattedSales = Object.keys(orders).map((key) => ({
             id: key,
             ...orders[key],
-            quantitySold: orders[key].items.reduce((acc, item) => acc + item.quantitySold, 0), // Sum quantitySold for items
+            quantitySold: orders[key].totalQuantity, // Use totalQuantity directly
             totalAmount: parseFloat(orders[key].total) || 0, // Ensure totalAmount is a number
         }));
 
@@ -610,10 +610,6 @@ export const fetchSalesData = async () => {
         throw new Error(`Error fetching sales data: ${error.message}`);
     }
 };
-
-
-
-
 
 
 export const logSale = async ({ barcode, quantitySold, totalAmount }) => {
