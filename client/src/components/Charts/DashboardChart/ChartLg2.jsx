@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import Chartcss from './Charts.module.scss';
-import { calculateInventoryTurnover } from '../../../services/ProductService'; // Assuming you have this function to calculate turnover
 import { Form } from 'react-bootstrap';
+import { fetchSalesData } from '../../../services/ProductService';
 
 // Registering Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -16,55 +16,73 @@ function ChartLg2() {
     const [startDate, setStartDate] = useState('2024-01-01');  // Default to January 1, 2024
     const [endDate, setEndDate] = useState('2024-12-31');    // Default to December 31, 2024
 
-    // Assuming you want to calculate monthly turnover for a product
-    const productId = 'some-product-id';  // Replace with actual product ID
+    // Filter sales data by date
+    const filterSalesDataByDate = useCallback((data, startDate, endDate) => {
+        return data.filter((item) => {
+            const orderDate = new Date(item.date); // Assuming `item.date` is the date of the sale
+            return orderDate >= new Date(startDate) && orderDate <= new Date(endDate);
+        });
+    }, []);
 
+    // Group sales data by month
+    const groupSalesByMonth = useCallback((salesData) => {
+        const months = salesData.reduce((acc, item) => {
+            const date = new Date(item.date);
+            const monthYear = date.toLocaleString('default', { month: 'long', year: 'numeric' }); // 'January 2024'
+
+            if (!acc[monthYear]) acc[monthYear] = [];
+            acc[monthYear].push(item);
+
+            return acc;
+        }, {});
+
+        return Object.keys(months).map((month) => {
+            return {
+                month, // Correct month format (e.g. 'January 2024')
+                data: months[month]
+            };
+        });
+    }, []);
+
+
+    // Calculate Inventory Turnover
+    const calculateTurnover = useCallback((salesData) => {
+        const groupedData = groupSalesByMonth(salesData);
+        console.log(groupedData); // Debug log to check the grouping logic
+
+        const currentInventory = 30000; // Replace with actual inventory data
+
+        return groupedData.map((monthData) => {
+            const totalCOGS = monthData.data.reduce((acc, item) => acc + item.totalAmount, 0); // Total sales value for the month
+            const turnover = totalCOGS / currentInventory;  // Inventory Turnover Formula
+            return {
+                month: monthData.month, // Correct month from grouping
+                turnover,
+            };
+        });
+    }, [groupSalesByMonth]);
+
+
+
+    // Fetch sales data and calculate inventory turnover
     useEffect(() => {
-        const fetchTurnoverData = async () => {
-            setLoading(true);
+        const fetchData = async () => {
             try {
-                // You can dynamically calculate the months within the date range (startDate to endDate)
-                const months = getMonthsInRange(startDate, endDate);
-                const turnoverResults = [];
-
-                // Loop through each month in the range and calculate turnover
-                for (let i = 0; i < months.length; i++) {
-                    const [year, month] = months[i].split('-');
-                    const monthStart = `${year}-${month}-01`;  // Start of the month
-                    const monthEnd = `${year}-${month}-31`;    // End of the month
-
-                    // Calculate turnover for the month (replace with your actual logic to fetch sales data)
-                    const turnover = await calculateInventoryTurnover(productId, monthStart, monthEnd);
-                    turnoverResults.push({ month: months[i], turnover });
-                }
-
-                setTurnoverData(turnoverResults);
+                setLoading(true);
+                const salesData = await fetchSalesData();
+                const filteredData = filterSalesDataByDate(salesData, startDate, endDate);
+                const turnoverValues = calculateTurnover(filteredData);
+                setTurnoverData(turnoverValues);
+                setLoading(false);
+                console.log(turnoverValues); // Debug log to check the turnover data
             } catch (error) {
-                console.error('Error fetching turnover data:', error);
-            } finally {
+                console.error('Error fetching sales data:', error);
                 setLoading(false);
             }
         };
 
-        fetchTurnoverData();
-    }, [productId, startDate, endDate]);
-
-    // Utility function to get months in a date range
-    const getMonthsInRange = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const months = [];
-        let currentDate = start;
-
-        while (currentDate <= end) {
-            const year = currentDate.getFullYear();
-            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Get month in format MM
-            months.push(`${year}-${month}`);
-            currentDate.setMonth(currentDate.getMonth() + 1);
-        }
-
-        return months;
-    };
+        fetchData();
+    }, [startDate, endDate, filterSalesDataByDate, calculateTurnover]);
 
     // Prepare data for the chart
     const chartData = {
