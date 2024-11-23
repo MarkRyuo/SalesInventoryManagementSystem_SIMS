@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { getDatabase, ref, get } from "firebase/database";
 
 // Helper function to calculate if a transaction is within a specific date range
@@ -9,9 +10,16 @@ const isTransactionInRange = (transactionDate, range) => {
         case 'today':
             return transactionTime.toDateString() === now.toDateString();
         case 'week':
-            // eslint-disable-next-line no-case-declarations
-            const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay())); // Sunday
-            return transactionTime >= startOfWeek && transactionTime <= now;
+            // Create a copy of `now` to avoid modifying the original date
+            const startOfWeek = new Date(now);
+            startOfWeek.setDate(now.getDate() - now.getDay()); // Set to the start of the week (Sunday)
+
+            // Calculate the end of the week (Saturday, 6 days after Sunday)
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(startOfWeek.getDate() + 6);
+
+            // Check if the transaction time is within the week range
+            return transactionTime >= startOfWeek && transactionTime <= endOfWeek;
         case 'month':
             return transactionTime.getMonth() === now.getMonth() && transactionTime.getFullYear() === now.getFullYear();
         case 'year':
@@ -20,6 +28,7 @@ const isTransactionInRange = (transactionDate, range) => {
             return false;
     }
 };
+
 
 export const fetchSalesData = async (range) => {
     const db = getDatabase();
