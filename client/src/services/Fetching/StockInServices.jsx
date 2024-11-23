@@ -1,5 +1,6 @@
 import { getDatabase, ref, get } from 'firebase/database';
 
+// Function to fetch product quantity history from Firebase
 export const getProductQuantityHistory = async (productId) => {
     const db = getDatabase();
     const productRef = ref(db, 'products/' + productId);
@@ -9,7 +10,6 @@ export const getProductQuantityHistory = async (productId) => {
         if (snapshot.exists()) {
             const productData = snapshot.val();
             const quantityHistory = productData.quantityHistory || [];
-
             return quantityHistory;
         } else {
             return [];
@@ -20,7 +20,7 @@ export const getProductQuantityHistory = async (productId) => {
     }
 };
 
-// Utility function to filter quantities by date range
+// Utility function to filter quantities by selected time range
 export const filterQuantityByRange = (quantityHistory, range) => {
     const now = new Date();
     let startDate;
