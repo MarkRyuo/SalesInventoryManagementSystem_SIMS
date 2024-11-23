@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2'; // Change from Line to Bar
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'; // Import BarElement
 import Chartcss from './Charts.module.scss';
 import { Form } from 'react-bootstrap';
 import { fetchSalesData, fetchProductsData } from '../../../services/ProductService';
 
 // Registering Chart.js components
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend); // Register BarElement
 
 function ChartLg2() {
     const [turnoverData, setTurnoverData] = useState([]);
@@ -114,9 +114,9 @@ function ChartLg2() {
             {
                 label: 'Inventory Turnover',
                 data: turnoverData.map(item => item.turnover), // Y-axis: turnover values
+                backgroundColor: 'rgba(75, 192, 192, 0.6)', // Bar color
                 borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
+                borderWidth: 1,
             },
         ],
     };
@@ -148,7 +148,7 @@ function ChartLg2() {
             ) : turnoverData.length === 0 ? (
                 <p>No data available to display turnover.</p>
             ) : (
-                <Line data={chartData} />
+                <Bar data={chartData} />  
             )}
         </div>
     );
