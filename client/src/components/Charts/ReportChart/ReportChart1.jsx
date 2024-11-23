@@ -1,59 +1,62 @@
 import { FaReact } from "react-icons/fa";
-import ReportChartcss from './ReportChart.module.scss'
+import ReportChartcss from './ReportChart.module.scss';
 import { useEffect, useState } from 'react';
 import { fetchAddedQuantityHistory } from '../../../services/ProductService'; // Adjust path
+import { Modal, Button, Form } from "react-bootstrap";
+import jsPDF from "jspdf";
+import * as XLSX from "xlsx";
 
-
-//* ReportChart1 Small
 function ReportChart1() {
-
     const [stockInTotal, setStockInTotal] = useState(0);
-    const [filter, setFilter] = useState("today"); // Default filter is 'today'
+    const [filter, setFilter] = useState("today");
+    const [data, setData] = useState([]);
+    const [showDownloadModal, setShowDownloadModal] = useState(false);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
 
     // Helper functions for filtering
-    const isSameDay = (date1, date2) => {
-        return date1.toDateString() === date2.toDateString();
-    };
+    const isSameDay = (date1, date2) => date1.toDateString() === date2.toDateString();
 
     const isWithinLastNDays = (date, now, n) => {
-        const diff = now - date;
-        return diff >= 0 && diff <= n * 24 * 60 * 60 * 1000;
+        const diff = now - date; // Difference in milliseconds
+        return diff >= 0 && diff <= n * 24 * 60 * 60 * 1000; // Check if within the last `n` days
     };
 
-    // Fetch data from Firebase on component mount
+    const isWithinRange = (date, start, end) => date >= new Date(start) && date <= new Date(end);
+
     useEffect(() => {
-        fetchAddedQuantityHistory((data) => {
-            if (data && data.length > 0) {
-                console.log("Fetched data:", data); // Debugging: Log data fetched from Firebase
-
-                // Get current date and time for comparison
-                const now = new Date();
-
-                // Filter data based on the selected filter
-                const filteredTotal = data.reduce((total, entry) => {
-                    const entryDate = new Date(entry.date); // Assuming `date` exists in each entry
-
-                    if (filter === "today" && isSameDay(entryDate, now)) {
-                        return total + entry.quantity;
-                    } else if (filter === "7days" && isWithinLastNDays(entryDate, now, 7)) {
-                        return total + entry.quantity;
-                    } else if (filter === "month" && entryDate.getMonth() === now.getMonth() &&
-                        entryDate.getFullYear() === now.getFullYear()) {
-                        return total + entry.quantity;
-                    } else if (filter === "year" && entryDate.getFullYear() === now.getFullYear()) {
-                        return total + entry.quantity;
-                    }
-
-                    return total;
-                }, 0);
-
-                console.log("Filtered Total:", filteredTotal); // Debugging: Log the filtered total
-                setStockInTotal(filteredTotal);
-            } else {
-                setStockInTotal(0); // No data available
-            }
+        fetchAddedQuantityHistory((fetchedData) => {
+            setData(fetchedData || []);
+            const now = new Date();
+            const filteredTotal = fetchedData.reduce((total, entry) => {
+                const entryDate = new Date(entry.date);
+                if (filter === "today" && isSameDay(entryDate, now)) return total + entry.quantity;
+                if (filter === "7days" && isWithinLastNDays(entryDate, now, 7)) return total + entry.quantity;
+                if (filter === "month" && entryDate.getMonth() === now.getMonth()) return total + entry.quantity;
+                if (filter === "year" && entryDate.getFullYear() === now.getFullYear()) return total + entry.quantity;
+                return total;
+            }, 0);
+            setStockInTotal(filteredTotal);
         });
-    }, [filter]); // Re-run effect when filter changes
+    }, [filter]);
+
+    const downloadPDF = () => {
+        const filteredData = data.filter((entry) => isWithinRange(new Date(entry.date), startDate, endDate));
+        const doc = new jsPDF();
+        doc.text("Stock-In Report", 10, 10);
+        filteredData.forEach((entry, i) => {
+            doc.text(`${i + 1}. Date: ${entry.date}, Quantity: ${entry.quantity}`, 10, 20 + i * 10);
+        });
+        doc.save("Stock-In-Report.pdf");
+    };
+
+    const downloadExcel = () => {
+        const filteredData = data.filter((entry) => isWithinRange(new Date(entry.date), startDate, endDate));
+        const worksheet = XLSX.utils.json_to_sheet(filteredData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Stock-In Data");
+        XLSX.writeFile(workbook, "Stock-In-Report.xlsx");
+    };
 
     return (
         <div className={ReportChartcss.containerChart1}>
@@ -79,9 +82,50 @@ function ReportChart1() {
                     <option value="month">This Month</option>
                     <option value="year">This Year</option>
                 </select>
+                <Button variant="primary" onClick={() => setShowDownloadModal(true)}>
+                    Download Report
+                </Button>
             </div>
+
+            {/* Modal for selecting date range */}
+            <Modal show={showDownloadModal} onHide={() => setShowDownloadModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Download Stock-In Report</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>Start Date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                value={startDate}
+                                onChange={(e) => setStartDate(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>End Date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                value={endDate}
+                                onChange={(e) => setEndDate(e.target.value)}
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDownloadModal(false)}>
+                        Close
+                    </Button>
+                    <Button variant="success" onClick={downloadExcel}>
+                        Download Excel
+                    </Button>
+                    <Button variant="danger" onClick={downloadPDF}>
+                        Download PDF
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
-    )
+    );
 }
 
 export default ReportChart1;
