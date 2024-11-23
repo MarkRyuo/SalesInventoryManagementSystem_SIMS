@@ -81,7 +81,6 @@ function ReportChart1() {
 
 
     // Download XLSX function with detailed product info
-    import * as XLSX from 'xlsx';
 
     const downloadXLSX = (data) => {
         // Format the data
