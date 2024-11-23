@@ -5,7 +5,7 @@ import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import ReportChartcss from './ReportChart.module.scss';
 import { fetchStockInOverview, fetchStockInByDate } from '../../../services/SalesReports/StockInReportService';  // Import the helpers
-import 'jspdf-autotable';  // Import jsPDF autotable for table handling
+import 'jspdf-autotable';  // Import jsPDF auto-table for table handling
 
 function ReportChart1() {
     const [totalStock, setTotalStock] = useState(0);
