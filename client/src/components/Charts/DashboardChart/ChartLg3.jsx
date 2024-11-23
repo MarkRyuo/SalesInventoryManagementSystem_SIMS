@@ -40,7 +40,7 @@ function ChartLg3() {
             if (!groupedData[key]) {
                 groupedData[key] = { quantity: 0, salesAmount: 0 };
             }
-            groupedData[key].quantity += quantitySold;
+            groupedData[key].quantity += quantitySold;  // Sum the quantitySold
             groupedData[key].salesAmount += totalAmount;
         });
 

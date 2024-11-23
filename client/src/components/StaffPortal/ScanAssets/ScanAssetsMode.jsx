@@ -52,6 +52,9 @@ function Checkout() {
     const taxAmount = ((subtotal - discountAmount) * selectedTaxRate) / 100;
     const total = subtotal + taxAmount - discountAmount; // Final total after discount and tax
 
+    // Calculate total quantity
+    const totalQuantity = scannedItems.reduce((acc, item) => acc + item.quantity, 0);
+
     const handleCheckout = async () => {
         // Validate customer name
         if (!customerName.trim()) {
@@ -96,6 +99,7 @@ function Checkout() {
             discount: discountAmount.toFixed(2),
             discountPercentage,
             total: total.toFixed(2),
+            totalQuantity,  // Add Total Quantity Here
         };
 
         try {
@@ -161,7 +165,6 @@ function Checkout() {
                             </Form.Select>
                         </Form.Group>
 
-
                         {/* Global Tax Dropdown */}
                         <Form.Group className="mt-3">
                             <Form.Label>Tax Rate:</Form.Label>
@@ -208,6 +211,10 @@ function Checkout() {
                                 <tr>
                                     <td colSpan="3" className="text-end"><strong>Total Tax:</strong></td>
                                     <td>₱{taxAmount.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td colSpan="3" className="text-end"><strong>Total Quantity:</strong></td>
+                                    <td>{totalQuantity}</td>
                                 </tr>
                                 <tr>
                                     <td colSpan="3" className="text-end"><strong>Total:</strong></td>
