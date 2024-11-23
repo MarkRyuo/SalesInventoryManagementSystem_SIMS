@@ -45,7 +45,14 @@ export const fetchStockInByDate = async (startDate, endDate) => {
                     const entry = addedQuantityHistory[key];
                     const entryDate = new Date(entry.date);
                     if (entryDate >= new Date(startDate) && entryDate <= new Date(endDate)) {
-                        filteredData.push({ productId, ...entry });
+                        filteredData.push({
+                            productId,
+                            productName: product.productName,
+                            barcode: product.barcode,
+                            sku: product.sku,
+                            addedQuantityHistory: entry,
+                            price: product.price,
+                        });
                     }
                 });
             });

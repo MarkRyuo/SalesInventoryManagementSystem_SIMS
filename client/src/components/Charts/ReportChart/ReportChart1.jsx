@@ -36,21 +36,33 @@ function ReportChart1() {
         }
     };
 
-    // Download PDF function
+    // Download PDF function with detailed product info
     const downloadPDF = (data) => {
         const doc = new jsPDF();
         doc.text('Filtered Stock In Data', 10, 10);
         let y = 20;
         data.forEach((entry, index) => {
-            doc.text(`${index + 1}. Product ID: ${entry.productId}, Date: ${entry.date}, Quantity: ${entry.quantity}`, 10, y);
+            doc.text(
+                `${index + 1}. Product Name: ${entry.productName}, Barcode: ${entry.barcode}, SKU: ${entry.sku}, Date: ${entry.addedQuantityHistory.date}, Quantity: ${entry.addedQuantityHistory.quantity}, Price: ${entry.price}`,
+                10, y
+            );
             y += 10;
         });
         doc.save('stock_in_report.pdf');
     };
 
-    // Download XLSX function
+    // Download XLSX function with detailed product info
     const downloadXLSX = (data) => {
-        const ws = XLSX.utils.json_to_sheet(data);
+        const formattedData = data.map(entry => ({
+            ProductName: entry.productName,
+            Barcode: entry.barcode,
+            SKU: entry.sku,
+            Date: entry.addedQuantityHistory.date,
+            Quantity: entry.addedQuantityHistory.quantity,
+            Price: entry.price
+        }));
+
+        const ws = XLSX.utils.json_to_sheet(formattedData);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Stock In Data');
         XLSX.writeFile(wb, 'stock_in_report.xlsx');
