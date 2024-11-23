@@ -42,7 +42,7 @@ function ReportChart2() {
         y += 10;
 
         // Table data
-        filteredTransactions.forEach((entry, i) => {
+        filteredTransactions.forEach((entry) => {
             const row = [
                 entry.id,
                 entry.customerName,
