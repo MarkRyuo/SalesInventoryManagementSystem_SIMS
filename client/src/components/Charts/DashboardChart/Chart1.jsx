@@ -4,8 +4,7 @@ import Chartcss from './Charts.module.scss';
 import { getProductQuantityHistory, filterQuantityByRange } from '../../../services/Fetching/StockInServices'; // Import the functions
 
 // Chart1 Small component to display quantity data for the selected time range
-// eslint-disable-next-line react/prop-types
-function Chart1({ productId }) {
+function Chart1() {
     const [quantity, setQuantity] = useState(0);
     const [timeRange, setTimeRange] = useState('Today'); // Default to 'Today'
 
@@ -16,8 +15,9 @@ function Chart1({ productId }) {
     useEffect(() => {
         const fetchQuantity = async () => {
             try {
-                const quantityHistory = await getProductQuantityHistory(productId);
-                const totalQuantity = filterQuantityByRange(quantityHistory, timeRange);
+                const quantityHistories = await getProductQuantityHistory();
+                // Filter the quantity histories by selected time range
+                const totalQuantity = filterQuantityByRange(quantityHistories, timeRange);
                 setQuantity(totalQuantity);
             } catch (error) {
                 console.error('Error fetching quantity:', error);
@@ -25,13 +25,13 @@ function Chart1({ productId }) {
         };
 
         fetchQuantity();
-    }, [productId, timeRange]); // Re-fetch data if productId or timeRange changes
+    }, [timeRange]); // Re-fetch data if timeRange changes
 
     return (
         <div className={Chartcss.containerChart1}>
             <div className={Chartcss.containerText}>
                 <FaReact size={25} />
-                <p>{productId}</p>
+                <p>Stock Quantity</p>
             </div>
             <div className={Chartcss.contentChart}>
                 <p>{quantity}</p>
