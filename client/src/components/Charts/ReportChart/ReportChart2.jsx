@@ -73,8 +73,6 @@ function ReportChart2() {
         XLSX.writeFile(wb, "sales_report.xlsx");
     };
 
-
-
     return (
         <div className={ReportChartcss.containerChart2}>
             <div className={ReportChartcss.containerText}>
