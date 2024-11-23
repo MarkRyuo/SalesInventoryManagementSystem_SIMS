@@ -1,90 +1,105 @@
 import { useEffect, useState } from "react";
 import Chartcss from './Charts.module.scss';
-import { fetchAllProducts } from '../../../services/ProductService'; // Replace with actual service function
+import { getDatabase, ref, onValue } from "firebase/database";
 import { LiaProductHunt } from 'react-icons/lia';
 
 function ChartLg1() {
-    const [productsToday, setProductsToday] = useState([]);
+    const [activityToday, setActivityToday] = useState([]);
 
     useEffect(() => {
-        fetchProductsAddedOrUpdatedToday();
+        const db = getDatabase();
+        const productsRef = ref(db, 'products');
+
+        const today = new Date();
+        const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
+        const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
+        const formattedToday = localTime.toISOString().split('T')[0];
+
+        // Listen for live updates
+        const unsubscribe = onValue(productsRef, (snapshot) => {
+            const products = snapshot.val();
+            if (!products) {
+                setActivityToday([]);
+                return;
+            }
+
+            // Collect all today's activities (added and deducted)
+            const activities = [];
+            Object.keys(products).forEach(key => {
+                const product = products[key];
+
+                // Add added activities for today
+                product.addedQuantityHistory?.forEach(entry => {
+                    if (entry.date === formattedToday) {
+                        activities.push({
+                            productName: product.productName,
+                            sku: product.sku,
+                            price: product.price,
+                            type: 'Added',
+                            quantity: entry.quantity,
+                        });
+                    }
+                });
+
+                // Add deducted activities for today
+                product.deductedQuantityHistory?.forEach(entry => {
+                    if (entry.date === formattedToday) {
+                        activities.push({
+                            productName: product.productName,
+                            sku: product.sku,
+                            price: product.price,
+                            type: 'Deducted',
+                            quantity: entry.quantity,
+                        });
+                    }
+                });
+            });
+
+            setActivityToday(activities);
+        });
+
+        // Cleanup listener on component unmount
+        return () => unsubscribe();
     }, []);
-
-    const fetchProductsAddedOrUpdatedToday = async () => {
-        try {
-            const products = await fetchAllProducts(); // Fetch all products
-            const today = new Date();
-            const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
-            const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
-            const formattedToday = localTime.toISOString().split('T')[0];
-
-            // Filter products based on `dateAdded` or `quantityHistory`
-            const productsToday = products.filter(product => {
-                const dateAdded = product.dateAdded && String(product.dateAdded).split('T')[0];
-                const isAddedToday = dateAdded === formattedToday;
-
-                const isUpdatedToday = product.quantityHistory?.some(entry => {
-                    const entryDate = String(entry.date).split('T')[0];
-                    return entryDate === formattedToday;
-                });
-
-                return isAddedToday || isUpdatedToday;
-            });
-
-            const mappedProductsToday = productsToday.map(product => {
-                let quantity = product.quantity;
-
-                // Locate today's quantity entry in quantity history
-                const todayEntry = product.quantityHistory?.find(entry => {
-                    const entryDate = String(entry.date).split('T')[0];
-                    return entryDate === formattedToday;
-                });
-                if (todayEntry) {
-                    quantity = todayEntry.quantity;
-                }
-
-                return {
-                    ...product,
-                    quantity,
-                };
-            });
-
-            setProductsToday(mappedProductsToday);
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        }
-    };
 
     return (
         <div className={Chartcss.containerChartLg1}>
-            <p className="fs-6 m-0 ps-4">Products Added or Updated Today</p>
-            {productsToday.length > 0 ? (
-                <div style={{ display: 'flex', gap: '10px', overflowX: 'auto' }}>
-                    {productsToday.map(product => (
+            <p className="fs-6 m-0 ps-4">Products Activities Today</p>
+            {activityToday.length > 0 ? (
+                <div
+                    style={{
+                        display: 'flex',
+                        gap: '10px',
+                        overflowX: 'auto',
+                        alignItems: 'flex-start',
+                        flexWrap: 'wrap',
+                    }}
+                >
+                    {activityToday.map((activity, index) => (
                         <div
-                            key={product.barcode}
+                            key={index}
                             style={{
                                 width: 'auto',
                                 padding: 20,
                                 boxShadow: '1px 1px 5px #e2dfdf',
                                 borderRadius: 15,
                                 flexShrink: 0,
-                                borderLeft: '2px solid #92E3B8',
+                                borderLeft: activity.type === 'Added' ? '2px solid #92E3B8' : '2px solid #F28C8C',
                                 boxSizing: "border-box",
                             }}
                         >
                             <span><LiaProductHunt size={25} /></span>
-                            <p className="fs-5 m-0">{product.productName}</p>
-                            <p className="fs-6 m-0">SKU: {product.sku}</p>
-                            <p className="fs-6 m-0">Price: {product.price}</p>
-                            <p className="fs-6 m-0">Quantity: {product.quantity}</p> {/* Change this to Total Quantity */}
-                            {/* Add Added Today if added display this*/}
-                            {/* Deducted Today if deducted display this*/}
+                            <p className="fs-5 m-0">{activity.productName}</p>
+                            <p className="fs-6 m-0">SKU: {activity.sku}</p>
+                            <p className="fs-6 m-0">Price: {activity.price}</p>
+                            <p className={`fs-6 m-0 ${activity.type === 'Added' ? 'text-success' : 'text-danger'}`}>
+                                {activity.type} Today: {activity.quantity}
+                            </p>
                         </div>
                     ))}
                 </div>
             ) : (
-                <p>No products added or updated today.</p>
+                <p>No activities recorded today.</p>
             )}
         </div>
     );
