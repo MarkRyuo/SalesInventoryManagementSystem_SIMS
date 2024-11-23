@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { fetchInventoryTurnover } from "../../../services/Fetching/InventoryTurnOverService";
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from "chart.js";
 import Chartcss from "./Charts.module.scss"; // Import your design styles
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+// Register necessary plugins, including the Filler plugin
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
 function ChartLg2() {
     const [turnoverData, setTurnoverData] = useState([]);
@@ -37,7 +38,7 @@ function ChartLg2() {
                 data: turnoverData,
                 borderColor: "rgba(75, 192, 192, 1)",
                 backgroundColor: "rgba(75, 192, 192, 0.2)",
-                fill: true,
+                fill: true, // Fill under the line
                 tension: 0.4,
             },
         ],
@@ -62,14 +63,14 @@ function ChartLg2() {
     };
 
     return (
-        <div className={Chartcss.containerChartLg2}> {/* Use your design container */}
-            <div className={Chartcss.rangeButtons}> {/* Optional style for buttons */}
+        <div className={Chartcss.containerChartLg2}>
+            <div className={Chartcss.rangeButtons}>
                 <button onClick={() => handleRangeChange("today")}>Today</button>
                 <button onClick={() => handleRangeChange("week")}>Week</button>
                 <button onClick={() => handleRangeChange("month")}>Month</button>
                 <button onClick={() => handleRangeChange("year")}>Year</button>
             </div>
-            <Line data={chartData} options={chartOptions} /> {/* Chart component */}
+            <Line data={chartData} options={chartOptions} />
         </div>
     );
 }
