@@ -857,3 +857,23 @@ export const fetchQuantitySoldByRange = async (timeRange) => {
 };
 
 
+// Fetch all products data from Firebase
+export const fetchProductsData = async () => {
+    const db = getDatabase();
+    const productsRef = ref(db, 'products');  // Adjust the path as per your Firebase structure
+
+    try {
+        const snapshot = await get(productsRef);
+        if (snapshot.exists()) {
+            // Assuming each product has fields: quantity and price
+            return Object.values(snapshot.val()); // Return an array of products
+        } else {
+            throw new Error('No products data found');
+        }
+    } catch (error) {
+        console.error('Error fetching product data:', error);
+        throw error;  // Rethrow the error to be handled in the component
+    }
+};
+
+

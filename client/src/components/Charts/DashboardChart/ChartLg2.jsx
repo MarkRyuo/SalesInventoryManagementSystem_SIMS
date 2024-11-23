@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import Chartcss from './Charts.module.scss';
 import { Form } from 'react-bootstrap';
-import { fetchSalesData } from '../../../services/ProductService';
+import { fetchSalesData, fetchProductsData } from '../../../services/ProductService';
 
 // Registering Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -15,6 +15,19 @@ function ChartLg2() {
     // Initialize start and end date states
     const [startDate, setStartDate] = useState('2024-01-01');  // Default to January 1, 2024
     const [endDate, setEndDate] = useState('2024-12-31');    // Default to December 31, 2024
+
+    // Fetch products data (including quantity and price)
+    const [products, setProducts] = useState([]);
+
+    // Function to fetch product data (quantity, price)
+    const fetchProductData = async () => {
+        try {
+            const productData = await fetchProductsData(); // Fetch products data (quantity and price)
+            setProducts(productData);
+        } catch (error) {
+            console.error('Error fetching product data:', error);
+        }
+    };
 
     // Filter sales data by date
     const filterSalesDataByDate = useCallback((data, startDate, endDate) => {
@@ -44,45 +57,55 @@ function ChartLg2() {
         });
     }, []);
 
-
     // Calculate Inventory Turnover
     const calculateTurnover = useCallback((salesData) => {
         const groupedData = groupSalesByMonth(salesData);
         console.log(groupedData); // Debug log to check the grouping logic
 
-        const currentInventory = 30000; // Replace with actual inventory data
+        // Calculate current inventory value based on products quantity and price
+        const currentInventoryValue = products.reduce((acc, product) => {
+            const productQuantity = product.quantity || 0;
+            const productPrice = product.price || 0;
+            return acc + (productQuantity * productPrice); // Sum the value of all products in stock
+        }, 0);
 
         return groupedData.map((monthData) => {
             const totalCOGS = monthData.data.reduce((acc, item) => acc + item.totalAmount, 0); // Total sales value for the month
-            const turnover = totalCOGS / currentInventory;  // Inventory Turnover Formula
+            const turnover = totalCOGS / currentInventoryValue;  // Inventory Turnover Formula (COGS / Inventory Value)
             return {
                 month: monthData.month, // Correct month from grouping
                 turnover,
             };
         });
-    }, [groupSalesByMonth]);
+    }, [groupSalesByMonth, products]);
 
+    // Fetch sales data and calculate inventory turnover once products data is available
+    const fetchData = async () => {
+        try {
+            setLoading(true);
+            const salesData = await fetchSalesData();
+            const filteredData = filterSalesDataByDate(salesData, startDate, endDate);
+            const turnoverValues = calculateTurnover(filteredData);
+            setTurnoverData(turnoverValues);
+            setLoading(false);
+            console.log(turnoverValues); // Debug log to check the turnover data
+        } catch (error) {
+            console.error('Error fetching sales data:', error);
+            setLoading(false);
+        }
+    };
 
-
-    // Fetch sales data and calculate inventory turnover
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const salesData = await fetchSalesData();
-                const filteredData = filterSalesDataByDate(salesData, startDate, endDate);
-                const turnoverValues = calculateTurnover(filteredData);
-                setTurnoverData(turnoverValues);
-                setLoading(false);
-                console.log(turnoverValues); // Debug log to check the turnover data
-            } catch (error) {
-                console.error('Error fetching sales data:', error);
-                setLoading(false);
-            }
-        };
+        // Fetch products data once on initial load
+        fetchProductData();
+    }, []); // This effect runs once when the component mounts to fetch products data
 
-        fetchData();
-    }, [startDate, endDate, filterSalesDataByDate, calculateTurnover]);
+    useEffect(() => {
+        // Only fetch sales data once products data is available
+        if (products.length > 0) {
+            fetchData();
+        }
+    }, [products, startDate, endDate, filterSalesDataByDate, calculateTurnover]); // This will run when products are available or the date range changes
 
     // Prepare data for the chart
     const chartData = {
