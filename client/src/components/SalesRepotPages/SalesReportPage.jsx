@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, Row, Col, Table, Alert } from "react-bootstrap";
+import { Button, Form, Row, Col, Table, Alert, Spinner } from "react-bootstrap";
 import { getDatabase, ref, query, orderByChild, startAt, endAt, get } from "firebase/database";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
@@ -11,6 +11,7 @@ const SalesReportPage = () => {
     const [endDate, setEndDate] = useState("");
     const [reportType, setReportType] = useState("Overall Summary");
     const [previewData, setPreviewData] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
     const handleGenerateReport = async () => {
@@ -19,6 +20,7 @@ const SalesReportPage = () => {
             return;
         }
         setError("");
+        setLoading(true);
 
         try {
             const db = getDatabase();
@@ -47,6 +49,8 @@ const SalesReportPage = () => {
         } catch (err) {
             console.error("Error fetching sales data:", err);
             setError("Failed to fetch sales data.");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -112,8 +116,8 @@ const SalesReportPage = () => {
                     </Col>
                 </Row>
 
-                <Button onClick={handleGenerateReport} variant="primary">
-                    Generate Report
+                <Button onClick={handleGenerateReport} variant="primary" disabled={loading}>
+                    {loading ? <Spinner animation="border" size="sm" /> : "Generate Report"}
                 </Button>
             </Form>
 
