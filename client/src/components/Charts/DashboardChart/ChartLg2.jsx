@@ -10,7 +10,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 // Fetch all transaction history from Firebase
 const fetchTransactionHistory = async () => {
     const db = getDatabase();
-    const transactionHistoryRef = ref(db, 'TransactionHistory/');
+    const transactionHistoryRef = ref(db, 'TransactionHistory');
 
     try {
         const snapshot = await get(transactionHistoryRef);
@@ -56,11 +56,11 @@ const fetchSalesDataAndCOGS = async (startDate, endDate) => {
         const totalCOGS = await filteredTransactions.reduce(async (sumPromise, { items }) => {
             let sum = await sumPromise;
             const itemsCOGS = await items.reduce(async (itemSumPromise, { productId, quantity }) => {
-                const productCost = await fetchProductCost(productId);
+                const productCost = await fetchProductCost(productId); // Get product cost
                 const itemSum = await itemSumPromise;
                 return itemSum + (productCost * quantity); // Calculate cost for each item
             }, 0);
-            return sum + itemsCOGS;
+            return sum + itemsCOGS; // Accumulate the total COGS
         }, Promise.resolve(0));
 
         return totalCOGS;
