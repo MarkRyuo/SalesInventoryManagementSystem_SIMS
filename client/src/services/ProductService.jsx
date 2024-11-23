@@ -817,20 +817,20 @@ export const fetchQuantitySoldByRange = async (timeRange) => {
         // Calculate the start and end date for the given range
         switch (timeRange) {
             case "Today":
-                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                endDate = now;
+                startDate = new Date(now.setHours(0, 0, 0, 0)); // Start of today
+                endDate = new Date(); // Current time
                 break;
             case "7 Days":
-                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
-                endDate = now;
+                startDate = new Date(now.setDate(now.getDate() - 6)); // 7 days ago
+                endDate = new Date(); // Current time
                 break;
             case "Month":
-                startDate = new Date(now.getFullYear(), now.getMonth(), 1);
-                endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                startDate = new Date(now.setDate(1)); // Start of this month
+                endDate = new Date(now.setMonth(now.getMonth() + 1, 0)); // End of this month
                 break;
             case "Year":
-                startDate = new Date(now.getFullYear(), 0, 1);
-                endDate = new Date(now.getFullYear(), 11, 31);
+                startDate = new Date(now.setMonth(0, 1)); // Start of the year
+                endDate = new Date(now.setMonth(11, 31)); // End of the year
                 break;
             default:
                 return 0;
@@ -843,7 +843,7 @@ export const fetchQuantitySoldByRange = async (timeRange) => {
 
             if (orderDate >= startDate && orderDate <= endDate) {
                 // Sum up the quantity of items sold in the order
-                const quantitySold = order.items.reduce((sum, item) => sum + item.quantity, 0); // Use item.quantity directly
+                const quantitySold = order.items.reduce((sum, item) => sum + item.quantity, 0);
                 acc += quantitySold;
             }
             return acc;
@@ -855,4 +855,5 @@ export const fetchQuantitySoldByRange = async (timeRange) => {
         throw new Error(`Error fetching quantity sold: ${error.message}`);
     }
 };
+
 
