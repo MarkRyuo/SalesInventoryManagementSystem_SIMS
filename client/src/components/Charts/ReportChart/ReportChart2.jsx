@@ -53,8 +53,6 @@ function ReportChart2() {
         doc.save("sales_report.pdf");
     };
 
-
-
     // Download XLSX
     const downloadXLSX = () => {
         const formattedData = filteredTransactions.map((entry) => ({
