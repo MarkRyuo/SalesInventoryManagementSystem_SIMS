@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Button, Form, Row, Col, Table, Alert } from "react-bootstrap";
 import { getDatabase, ref, query, orderByChild, startAt, endAt, get } from "firebase/database";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 const SalesReportPage = () => {
     const [startDate, setStartDate] = useState("");
@@ -18,10 +22,10 @@ const SalesReportPage = () => {
 
         try {
             const db = getDatabase();
-            const ordersRef = ref(db, "orders"); // Adjust the node path based on your database
+            const ordersRef = ref(db, "orders"); // Adjust the node path
             const ordersQuery = query(
                 ordersRef,
-                orderByChild("date"), // Assuming orders have a 'date' field
+                orderByChild("date"),
                 startAt(startDate),
                 endAt(endDate)
             );
@@ -31,7 +35,7 @@ const SalesReportPage = () => {
                 const data = snapshot.val();
                 const formattedData = Object.values(data).map((order, index) => ({
                     id: index + 1,
-                    productName: order.productName, // Adjust based on your data structure
+                    productName: order.productName,
                     quantitySold: order.quantity,
                     totalSales: order.totalAmount,
                 }));
@@ -44,6 +48,32 @@ const SalesReportPage = () => {
             console.error("Error fetching sales data:", err);
             setError("Failed to fetch sales data.");
         }
+    };
+
+    const handleDownloadPDF = () => {
+        const doc = new jsPDF();
+        doc.text("Sales Report", 20, 10);
+        doc.autoTable({
+            head: [["#", "Product", "Quantity Sold", "Total Sales"]],
+            body: previewData.map(({ id, productName, quantitySold, totalSales }) => [
+                id,
+                productName,
+                quantitySold,
+                totalSales,
+            ]),
+        });
+        doc.save(`Sales_Report_${startDate}_to_${endDate}.pdf`);
+    };
+
+    const handleDownloadExcel = () => {
+        const worksheet = XLSX.utils.json_to_sheet(previewData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Sales Report");
+        const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+        saveAs(
+            new Blob([excelBuffer], { type: "application/octet-stream" }),
+            `Sales_Report_${startDate}_to_${endDate}.xlsx`
+        );
     };
 
     return (
@@ -89,7 +119,6 @@ const SalesReportPage = () => {
 
             {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
 
-            {/* Preview Section */}
             {previewData.length > 0 && (
                 <div className="mt-4">
                     <h4>Report Preview</h4>
@@ -113,18 +142,17 @@ const SalesReportPage = () => {
                             ))}
                         </tbody>
                     </Table>
+
+                    <div className="mt-3">
+                        <Button onClick={handleDownloadPDF} variant="success" className="me-2">
+                            Download PDF
+                        </Button>
+                        <Button onClick={handleDownloadExcel} variant="info">
+                            Download Excel
+                        </Button>
+                    </div>
                 </div>
             )}
-
-            {/* Download Buttons */}
-            <div className="mt-3">
-                <Button variant="success" className="me-2">
-                    Download PDF
-                </Button>
-                <Button variant="info">
-                    Download Excel
-                </Button>
-            </div>
         </div>
     );
 };
