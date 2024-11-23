@@ -6,15 +6,19 @@ import { fetchQuantitySoldByRange } from '../../../services/ProductService'; // 
 function Chart3() {
     const [quantitySold, setQuantitySold] = useState(0);
     const [timeRange, setTimeRange] = useState("Today");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchQuantitySold = async () => {
+            setLoading(true); // Set loading to true when fetching data
             try {
                 const totalQuantity = await fetchQuantitySoldByRange(timeRange);
                 setQuantitySold(totalQuantity);
             } catch (error) {
                 console.error('Error fetching quantity sold:', error);
                 setQuantitySold(0); // Fallback to 0 in case of error
+            } finally {
+                setLoading(false); // Set loading to false when data is fetched
             }
         };
 
@@ -29,7 +33,7 @@ function Chart3() {
             </div>
 
             <div className={Chartcss.contentChart}>
-                <p className='m-0'>{quantitySold}</p>
+                <p className='m-0'>{loading ? "Loading..." : quantitySold}</p>
                 <div className={Chartcss.dropdown}>
                     <select
                         className="form-select"

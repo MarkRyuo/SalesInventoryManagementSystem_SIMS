@@ -1,116 +1,139 @@
-import { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+/* eslint-disable no-case-declarations */
+import { useState, useEffect } from 'react';
 import Chartcss from './Charts.module.scss';
-import { fetchSalesData } from '../../../services/ProductService';
+import { fetchSalesData } from '../../../services/Fetching/SalesServices';  // Import fetchSalesData function
+import { Line } from 'react-chartjs-2'; // Import Line from react-chartjs-2
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js'; // Import necessary chart.js components
 
-// Registering Chart.js components
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+// Register the components with Chart.js
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 function ChartLg3() {
-    const [salesData, setSalesData] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [view, setView] = useState('daily'); // Default view
-
-    const groupDataByView = (sales, view) => {
-        const groupedData = {};
-
-        sales.forEach(({ date, quantitySold, totalAmount }) => {
-            let key;
-            switch (view) {
-                case 'daily':
-                    key = date;
-                    break;
-                case 'monthly':
-                    key = date.slice(0, 7); // Extract YYYY-MM from date
-                    break;
-                case 'quarterly': {
-                    const [year, month] = date.split('-');
-                    const quarter = Math.ceil(parseInt(month, 10) / 3);
-                    key = `${year}-Q${quarter}`;
-                    break;
-                }
-                case 'yearly':
-                    key = date.slice(0, 4); // Extract YYYY from date
-                    break;
-                default:
-                    key = date;
-            }
-
-            if (!groupedData[key]) {
-                groupedData[key] = { quantity: 0, salesAmount: 0 };
-            }
-            groupedData[key].quantity += quantitySold;
-            groupedData[key].salesAmount += totalAmount;
-        });
-
-        return groupedData;
-    };
+    const [salesData, setSalesData] = useState({ totalQuantity: [], totalSales: [], dates: [] });
+    const [selectedRange, setSelectedRange] = useState('month');  // Default to 'month'
 
     useEffect(() => {
-        const fetchAndGroupSales = async () => {
-            setLoading(true);
+        const fetchData = async () => {
             try {
-                const sales = await fetchSalesData();
-                const groupedSales = groupDataByView(sales, view);
-                setSalesData(groupedSales);
+                // Fetch sales data for the selected range
+                const data = await fetchSalesData(selectedRange);
+                setSalesData(data);  // Set the sales data for the graph
             } catch (error) {
-                console.error('Error fetching sales data:', error);
-            } finally {
-                setLoading(false);
+                console.error("Error fetching sales data:", error);
             }
         };
 
-        fetchAndGroupSales();
-    }, [view]);
+        fetchData();  // Fetch data when the component mounts or when the range changes
+    }, [selectedRange]);
 
-    const sortedKeys = Object.keys(salesData).sort();
-    const sortedValues = sortedKeys.map((key) => salesData[key]);
+    // Handle range selection (Today, Week, Month, Year)
+    const handleRangeChange = (range) => {
+        setSelectedRange(range);  // Update the range
+    };
 
+    // Generate date labels for the x-axis
+    const generateDateLabels = (range) => {
+        const now = new Date();
+        let labels = [];
+        switch (range) {
+            case 'today':
+                // For today, generate labels for each hour of the day
+                for (let i = 0; i < 24; i++) {
+                    const hour = new Date(now.setHours(i, 0, 0, 0)); // Set hours and reset minutes, seconds, and ms
+                    labels.push(hour.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+                }
+                break;
+            case 'week':
+                const startOfWeek = new Date(now);
+                startOfWeek.setDate(now.getDate() - now.getDay()); // Set to Sunday
+                for (let i = 0; i < 7; i++) {
+                    const day = new Date(startOfWeek);
+                    day.setDate(startOfWeek.getDate() + i);
+                    labels.push(day.toLocaleDateString());
+                }
+                break;
+            case 'month':
+                const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+                const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+                for (let i = 0; i < daysInMonth; i++) {
+                    const day = new Date(startOfMonth);
+                    day.setDate(startOfMonth.getDate() + i);
+                    labels.push(day.toLocaleDateString());
+                }
+                break;
+            case 'year':
+                for (let i = 0; i < 12; i++) {
+                    const month = new Date(now.getFullYear(), i, 1);
+                    labels.push(month.toLocaleString('default', { month: 'short' }));
+                }
+                break;
+            default:
+                break;
+        }
+        return labels;
+    };
+
+    // Chart data setup
     const chartData = {
-        labels: sortedKeys,
+        labels: generateDateLabels(selectedRange), // Use generated date labels
         datasets: [
             {
-                label: 'Quantity Sold',
-                data: sortedValues.map((data) => data.quantity),
+                label: 'Total Sales (₱)',
+                data: salesData.totalSales, // Sales data
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 fill: true,
+                tension: 0.4, // Smooth lines
             },
             {
-                label: 'Sales Amount',
-                data: sortedValues.map((data) => data.salesAmount),
+                label: 'Total Quantity',
+                data: salesData.totalQuantity, // Quantity data
                 borderColor: 'rgba(153, 102, 255, 1)',
                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
                 fill: true,
-            },
+                tension: 0.4, // Smooth lines
+            }
         ],
+    };
+
+    // Chart options
+    const chartOptions = {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Amount (₱) and Quantity',
+                },
+            },
+        },
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            tooltip: {
+                callbacks: {
+                    label: (context) => {
+                        const label = context.dataset.label || '';
+                        const value = context.raw;
+                        return `${label}: ₱${value.toLocaleString()}`;
+                    },
+                },
+            },
+        },
     };
 
     return (
         <div className={Chartcss.containerChartLg3}>
-            <div className={Chartcss.filterControls}>
-                <label htmlFor="view-select">View by:</label>
-                <select
-                    id="view-select"
-                    value={view}
-                    onChange={(e) => setView(e.target.value)}
-                    className={Chartcss.selectView}
-                >
-                    <option value="daily">Daily</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="quarterly">Quarterly</option>
-                    <option value="yearly">Yearly</option>
-                </select>
+            <div className={Chartcss.rangeButtons}>
+                <button onClick={() => handleRangeChange('today')}>Today</button>
+                <button onClick={() => handleRangeChange('week')}>Week</button>
+                <button onClick={() => handleRangeChange('month')}>Month</button>
+                <button onClick={() => handleRangeChange('year')}>Year</button>
             </div>
-
-            {loading ? (
-                <p>Loading chart data...</p>
-            ) : sortedKeys.length === 0 ? (
-                <p>No sales data available.</p>
-            ) : (
-                <Line data={chartData} />
-            )}
+            {/* Render the Line chart here */}
+            <Line data={chartData} options={chartOptions} />
         </div>
     );
 }

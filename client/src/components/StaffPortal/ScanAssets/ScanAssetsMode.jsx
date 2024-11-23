@@ -10,13 +10,14 @@ function Checkout() {
     const [errorMessage, setErrorMessage] = useState("");
     const currentDate = new Date().toLocaleString();
     const [customerName, setCustomerName] = useState("");
+    const [paymentAmount, setPaymentAmount] = useState(""); // New state for payment amount
+    const [change, setChange] = useState(0); // New state for change
 
     const [availableDiscounts, setAvailableDiscounts] = useState([]);
     const [selectedDiscount, setSelectedDiscount] = useState(0);
     const [availableTaxes, setAvailableTaxes] = useState([]);
     const [selectedTaxRate, setSelectedTaxRate] = useState(0);
 
-    // Load available discounts and taxes
     useEffect(() => {
         const loadDiscountsAndTaxes = async () => {
             try {
@@ -33,59 +34,62 @@ function Checkout() {
         loadDiscountsAndTaxes();
     }, []);
 
-    // Handle discount change
     const handleDiscountChange = (value) => {
         setSelectedDiscount(parseFloat(value));
     };
 
-    // Handle global tax rate change
     const handleGlobalTaxChange = (value) => {
         setSelectedTaxRate(parseFloat(value));
     };
 
-    // Calculate subtotal before using it in other calculations
     const subtotal = scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    // Discount calculation as percentage of subtotal
-    const discountPercentage = selectedDiscount; // The percentage selected from the dropdown
-    const discountAmount = (subtotal * discountPercentage) / 100; // Calculate the discount amount based on the subtotal
-    // Tax calculation after applying the discount
+    const discountPercentage = selectedDiscount;
+    const discountAmount = (subtotal * discountPercentage) / 100;
     const taxAmount = ((subtotal - discountAmount) * selectedTaxRate) / 100;
-    const total = subtotal + taxAmount - discountAmount; // Final total after discount and tax
+    const total = subtotal + taxAmount - discountAmount;
+
+    const totalQuantity = scannedItems.reduce((acc, item) => acc + item.quantity, 0);
+
+    // Function to calculate change
+    const handlePaymentChange = (e) => {
+        const payment = parseFloat(e.target.value);
+        setPaymentAmount(payment || "");
+        if (payment >= total) {
+            setChange(payment - total);
+        } else {
+            setChange(0);
+        }
+    };
 
     const handleCheckout = async () => {
-        // Validate customer name
         if (!customerName.trim()) {
             setErrorMessage("Customer name is required.");
             return;
         }
 
-        // Validate zero quantity item
         const zeroQuantityItem = scannedItems.find(item => item.quantity <= 0);
         if (zeroQuantityItem) {
             setErrorMessage(`Cannot proceed to checkout. ${zeroQuantityItem.productName} has a quantity of zero.`);
             return;
         }
 
-        // Validate insufficient stock
         const insufficientStockItem = scannedItems.find(item => item.quantity > item.stockNumber);
         if (insufficientStockItem) {
             setErrorMessage(`Insufficient stock for ${insufficientStockItem.productName}.`);
             return;
         }
 
-        // Check for missing productId in scannedItems
         const missingProductIdItem = scannedItems.find(item => !item.productId);
         if (missingProductIdItem) {
             setErrorMessage(`Missing productId for item: ${missingProductIdItem.productName}`);
             return;
         }
 
-        // Prepare order details
         const orderDetails = {
             date: currentDate,
             customerName,
             items: scannedItems.map(item => ({
-                productId: item.productId,  // Make sure this is defined
+                productId: item.productId,
                 productName: item.productName,
                 quantity: item.quantity,
                 price: item.price,
@@ -96,11 +100,13 @@ function Checkout() {
             discount: discountAmount.toFixed(2),
             discountPercentage,
             total: total.toFixed(2),
+            totalQuantity,
+            paymentAmount: paymentAmount.toFixed(2),  // Add payment amount
+            change: change.toFixed(2),  // Add change
         };
 
         try {
-            // Save the transaction history to Firebase
-            await saveTransactionHistory(orderDetails);
+            await saveTransactionHistory(orderDetails);  // Save transaction with new fields
             console.log("Transaction saved successfully");
         } catch (error) {
             setErrorMessage(`Failed to save transaction. ${error.message}`);
@@ -108,10 +114,9 @@ function Checkout() {
         }
 
         try {
-            // Update the product quantities in Firebase
             await Promise.all(
                 scannedItems.map(async (item) => {
-                    await updateProductQuantity(item.barcode, -item.quantity);  // Deduct the quantity
+                    await updateProductQuantity(item.barcode, -item.quantity); // Update stock
                 })
             );
             navigate('/PosSuccess');  // Redirect to success page
@@ -119,6 +124,7 @@ function Checkout() {
             setErrorMessage(`Failed to finalize checkout. ${error.message}`);
         }
     };
+
 
     return (
         <Container fluid className="m-0 p-0">
@@ -161,7 +167,6 @@ function Checkout() {
                             </Form.Select>
                         </Form.Group>
 
-
                         {/* Global Tax Dropdown */}
                         <Form.Group className="mt-3">
                             <Form.Label>Tax Rate:</Form.Label>
@@ -179,6 +184,24 @@ function Checkout() {
                             </Form.Select>
                         </Form.Group>
 
+                        {/* Payment Amount */}
+                        <Form.Group className="mt-3">
+                            <Form.Label>Amount Paid:</Form.Label>
+                            <Form.Control
+                                type="number"
+                                placeholder="Enter payment amount"
+                                value={paymentAmount}
+                                onChange={handlePaymentChange}
+                            />
+                        </Form.Group>
+
+                        {/* Displaying Change */}
+                        {paymentAmount && paymentAmount >= total && (
+                            <div className="mt-3">
+                                <strong>Change: </strong>₱{change.toFixed(2)}
+                            </div>
+                        )}
+
                         <Table striped bordered hover className="mt-3">
                             <thead>
                                 <tr>
@@ -193,8 +216,8 @@ function Checkout() {
                                     <tr key={item.productId}>
                                         <td>{item.productName}-{item.wattage}-{item.voltage}-{item.size}-{item.color}</td>
                                         <td>{item.quantity}</td>
-                                        <td>₱{parseFloat(item.price).toFixed(2)}</td> {/* Ensure price is a number */}
-                                        <td>₱{(parseFloat(item.price) * item.quantity).toFixed(2)}</td> {/* Ensure amount is calculated correctly */}
+                                        <td>₱{parseFloat(item.price).toFixed(2)}</td>
+                                        <td>₱{(parseFloat(item.price) * item.quantity).toFixed(2)}</td>
                                     </tr>
                                 ))}
                                 <tr>
@@ -208,6 +231,10 @@ function Checkout() {
                                 <tr>
                                     <td colSpan="3" className="text-end"><strong>Total Tax:</strong></td>
                                     <td>₱{taxAmount.toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td colSpan="3" className="text-end"><strong>Total Quantity:</strong></td>
+                                    <td>{totalQuantity}</td>
                                 </tr>
                                 <tr>
                                     <td colSpan="3" className="text-end"><strong>Total:</strong></td>

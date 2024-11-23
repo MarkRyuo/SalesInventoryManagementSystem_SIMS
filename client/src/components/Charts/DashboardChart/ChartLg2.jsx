@@ -1,114 +1,76 @@
-import { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
-import Chartcss from './Charts.module.scss';
-import { calculateInventoryTurnover } from '../../../services/ProductService'; // Assuming you have this function to calculate turnover
-import { Form } from 'react-bootstrap';
+import { useState, useEffect } from "react";
+import { Line } from "react-chartjs-2";
+import { fetchInventoryTurnover } from "../../../services/Fetching/InventoryTurnOverService";
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from "chart.js";
+import Chartcss from "./Charts.module.scss"; // Import your design styles
 
-// Registering Chart.js components
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+// Register necessary plugins, including the Filler plugin
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
 function ChartLg2() {
     const [turnoverData, setTurnoverData] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    // Initialize start and end date states
-    const [startDate, setStartDate] = useState('2024-01-01');  // Default to January 1, 2024
-    const [endDate, setEndDate] = useState('2024-12-31');    // Default to December 31, 2024
-
-    // Assuming you want to calculate monthly turnover for a product
-    const productId = 'some-product-id';  // Replace with actual product ID
+    const [labels, setLabels] = useState([]);
+    const [selectedRange, setSelectedRange] = useState("month");
 
     useEffect(() => {
-        const fetchTurnoverData = async () => {
-            setLoading(true);
+        const fetchData = async () => {
             try {
-                // You can dynamically calculate the months within the date range (startDate to endDate)
-                const months = getMonthsInRange(startDate, endDate);
-                const turnoverResults = [];
+                const turnover = await fetchInventoryTurnover(selectedRange);
+                const now = new Date();
 
-                // Loop through each month in the range and calculate turnover
-                for (let i = 0; i < months.length; i++) {
-                    const [year, month] = months[i].split('-');
-                    const monthStart = `${year}-${month}-01`;  // Start of the month
-                    const monthEnd = `${year}-${month}-31`;    // End of the month
-
-                    // Calculate turnover for the month (replace with your actual logic to fetch sales data)
-                    const turnover = await calculateInventoryTurnover(productId, monthStart, monthEnd);
-                    turnoverResults.push({ month: months[i], turnover });
-                }
-
-                setTurnoverData(turnoverResults);
+                setTurnoverData((prev) => [...prev, turnover]);
+                setLabels((prev) => [...prev, now.toLocaleDateString()]);
             } catch (error) {
-                console.error('Error fetching turnover data:', error);
-            } finally {
-                setLoading(false);
+                console.error("Error fetching turnover data:", error);
             }
         };
 
-        fetchTurnoverData();
-    }, [productId, startDate, endDate]);
+        fetchData();
+    }, [selectedRange]);
 
-    // Utility function to get months in a date range
-    const getMonthsInRange = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const months = [];
-        let currentDate = start;
+    const handleRangeChange = (range) => setSelectedRange(range);
 
-        while (currentDate <= end) {
-            const year = currentDate.getFullYear();
-            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Get month in format MM
-            months.push(`${year}-${month}`);
-            currentDate.setMonth(currentDate.getMonth() + 1);
-        }
-
-        return months;
-    };
-
-    // Prepare data for the chart
     const chartData = {
-        labels: turnoverData.map(item => item.month), // X-axis: months
+        labels,
         datasets: [
             {
-                label: 'Inventory Turnover',
-                data: turnoverData.map(item => item.turnover), // Y-axis: turnover values
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                fill: true,
+                label: "Inventory Turnover",
+                data: turnoverData,
+                borderColor: "rgba(75, 192, 192, 1)",
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                fill: true, // Fill under the line
+                tension: 0.4,
             },
         ],
     };
 
+    const chartOptions = {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: "Turnover Rate",
+                },
+            },
+        },
+        plugins: {
+            legend: {
+                position: "top",
+            },
+        },
+    };
+
     return (
         <div className={Chartcss.containerChartLg2}>
-            <div className={Chartcss.datePickerContainer}>
-                <Form.Group controlId="startDate">
-                    <Form.Label>Select Start Date:</Form.Label>
-                    <Form.Control
-                        type="date"
-                        value={startDate}
-                        onChange={(e) => setStartDate(e.target.value)}
-                    />
-                </Form.Group>
-
-                <Form.Group controlId="endDate">
-                    <Form.Label>Select End Date:</Form.Label>
-                    <Form.Control
-                        type="date"
-                        value={endDate}
-                        onChange={(e) => setEndDate(e.target.value)}
-                    />
-                </Form.Group>
+            <div className={Chartcss.rangeButtons}>
+                <button onClick={() => handleRangeChange("today")}>Today</button>
+                <button onClick={() => handleRangeChange("week")}>Week</button>
+                <button onClick={() => handleRangeChange("month")}>Month</button>
+                <button onClick={() => handleRangeChange("year")}>Year</button>
             </div>
-
-            {loading ? (
-                <p>Loading Inventory Turnover...</p>
-            ) : turnoverData.length === 0 ? (
-                <p>No data available to display turnover.</p>
-            ) : (
-                <Line data={chartData} />
-            )}
+            <Line data={chartData} options={chartOptions} />
         </div>
     );
 }

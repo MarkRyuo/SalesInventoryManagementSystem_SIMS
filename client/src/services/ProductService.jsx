@@ -599,7 +599,7 @@ export const fetchSalesData = async () => {
         const formattedSales = Object.keys(orders).map((key) => ({
             id: key,
             ...orders[key],
-            quantitySold: orders[key].items.reduce((acc, item) => acc + item.quantitySold, 0), // Sum quantitySold for items
+            quantitySold: orders[key].totalQuantity, // Use totalQuantity directly
             totalAmount: parseFloat(orders[key].total) || 0, // Ensure totalAmount is a number
         }));
 
@@ -610,10 +610,6 @@ export const fetchSalesData = async () => {
         throw new Error(`Error fetching sales data: ${error.message}`);
     }
 };
-
-
-
-
 
 
 export const logSale = async ({ barcode, quantitySold, totalAmount }) => {
@@ -821,20 +817,20 @@ export const fetchQuantitySoldByRange = async (timeRange) => {
         // Calculate the start and end date for the given range
         switch (timeRange) {
             case "Today":
-                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                endDate = now;
+                startDate = new Date(now.setHours(0, 0, 0, 0)); // Start of today
+                endDate = new Date(); // Current time
                 break;
             case "7 Days":
-                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
-                endDate = now;
+                startDate = new Date(now.setDate(now.getDate() - 6)); // 7 days ago
+                endDate = new Date(); // Current time
                 break;
             case "Month":
-                startDate = new Date(now.getFullYear(), now.getMonth(), 1);
-                endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+                startDate = new Date(now.setDate(1)); // Start of this month
+                endDate = new Date(now.setMonth(now.getMonth() + 1, 0)); // End of this month
                 break;
             case "Year":
-                startDate = new Date(now.getFullYear(), 0, 1);
-                endDate = new Date(now.getFullYear(), 11, 31);
+                startDate = new Date(now.setMonth(0, 1)); // Start of the year
+                endDate = new Date(now.setMonth(11, 31)); // End of the year
                 break;
             default:
                 return 0;
@@ -847,7 +843,7 @@ export const fetchQuantitySoldByRange = async (timeRange) => {
 
             if (orderDate >= startDate && orderDate <= endDate) {
                 // Sum up the quantity of items sold in the order
-                const quantitySold = order.items.reduce((sum, item) => sum + item.quantity, 0); // Use item.quantity directly
+                const quantitySold = order.items.reduce((sum, item) => sum + item.quantity, 0);
                 acc += quantitySold;
             }
             return acc;
@@ -859,4 +855,25 @@ export const fetchQuantitySoldByRange = async (timeRange) => {
         throw new Error(`Error fetching quantity sold: ${error.message}`);
     }
 };
+
+
+// Fetch all products data from Firebase
+export const fetchProductsData = async () => {
+    const db = getDatabase();
+    const productsRef = ref(db, 'products');  // Adjust the path as per your Firebase structure
+
+    try {
+        const snapshot = await get(productsRef);
+        if (snapshot.exists()) {
+            // Assuming each product has fields: quantity and price
+            return Object.values(snapshot.val()); // Return an array of products
+        } else {
+            throw new Error('No products data found');
+        }
+    } catch (error) {
+        console.error('Error fetching product data:', error);
+        throw error;  // Rethrow the error to be handled in the component
+    }
+};
+
 

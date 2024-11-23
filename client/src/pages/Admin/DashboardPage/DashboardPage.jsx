@@ -9,9 +9,10 @@ import { doc, getDoc } from 'firebase/firestore';
 import Chart1 from '../../../components/Charts/DashboardChart/Chart1';
 import Chart2 from '../../../components/Charts/DashboardChart/Chart2';
 import Chart3 from '../../../components/Charts/DashboardChart/Chart3';
-// import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
+import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
 import ChartLg2 from '../../../components/Charts/DashboardChart/ChartLg2';
 import ChartLg3 from '../../../components/Charts/DashboardChart/ChartLg3';
+import Chart4 from '../../../components/Charts/DashboardChart/Chart4';
 
 export const DashboardPage = () => {
     const [adminName, setAdminName] = useState('');
@@ -104,14 +105,13 @@ export const DashboardPage = () => {
                         <Chart1 />
                         <Chart2 />
                         <Chart3 />
+                        <Chart4 />
                     </div>
 
                     <div className={DashboardCss.largeContainer}>
-                        <div>
                             <ChartLg3 />
-                        </div>
                         <div>
-                            {/* <ChartLg1 /> */}
+                            <ChartLg1 />
                             <ChartLg2 />
                         </div>
                     </div>
