@@ -1,15 +1,49 @@
 import { useState } from "react";
-import { Button, Form, Row, Col, Table } from "react-bootstrap";
+import { Button, Form, Row, Col, Table, Alert } from "react-bootstrap";
+import { getDatabase, ref, query, orderByChild, startAt, endAt, get } from "firebase/database";
 
 const SalesReportPage = () => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [reportType, setReportType] = useState("Overall Summary");
     const [previewData, setPreviewData] = useState([]);
+    const [error, setError] = useState("");
 
-    const handleGenerateReport = () => {
-        // Fetch data logic will go here
-        console.log("Generating report for:", startDate, endDate, reportType);
+    const handleGenerateReport = async () => {
+        if (!startDate || !endDate) {
+            setError("Please select both start and end dates.");
+            return;
+        }
+        setError("");
+
+        try {
+            const db = getDatabase();
+            const ordersRef = ref(db, "orders"); // Adjust the node path based on your database
+            const ordersQuery = query(
+                ordersRef,
+                orderByChild("date"), // Assuming orders have a 'date' field
+                startAt(startDate),
+                endAt(endDate)
+            );
+
+            const snapshot = await get(ordersQuery);
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                const formattedData = Object.values(data).map((order, index) => ({
+                    id: index + 1,
+                    productName: order.productName, // Adjust based on your data structure
+                    quantitySold: order.quantity,
+                    totalSales: order.totalAmount,
+                }));
+                setPreviewData(formattedData);
+            } else {
+                setPreviewData([]);
+                setError("No sales data found for the selected date range.");
+            }
+        } catch (err) {
+            console.error("Error fetching sales data:", err);
+            setError("Failed to fetch sales data.");
+        }
     };
 
     return (
@@ -53,6 +87,8 @@ const SalesReportPage = () => {
                 </Button>
             </Form>
 
+            {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
+
             {/* Preview Section */}
             {previewData.length > 0 && (
                 <div className="mt-4">
@@ -67,9 +103,9 @@ const SalesReportPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {previewData.map((data, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
+                            {previewData.map((data) => (
+                                <tr key={data.id}>
+                                    <td>{data.id}</td>
                                     <td>{data.productName}</td>
                                     <td>{data.quantitySold}</td>
                                     <td>{data.totalSales}</td>
