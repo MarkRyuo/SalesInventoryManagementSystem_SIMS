@@ -2,142 +2,151 @@ import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import Chartcss from './Charts.module.scss';
-import { getDatabase, ref, get } from 'firebase/database';  // Firebase imports
-import { Form } from 'react-bootstrap';
+import { getDatabase, ref, get } from 'firebase/database';
+import { Form, Spinner } from 'react-bootstrap';
 
-// Registering Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-// Fetch the sales data (COGS) between a specified date range
-const fetchSalesDataAndCOGS = async (startDate, endDate) => {
+// Fetch all transaction history from Firebase
+const fetchTransactionHistory = async () => {
     const db = getDatabase();
-    const ordersRef = ref(db, 'TransactionHistory');
+    const transactionHistoryRef = ref(db, 'TransactionHistory/');
 
     try {
-        const snapshot = await get(ordersRef);
+        const snapshot = await get(transactionHistoryRef);
+
         if (!snapshot.exists()) {
-            console.log('No sales data found.');
-            return 0; // If no sales data, return 0
+            console.log("No transaction history found");
+            return [];
         }
 
-        const orders = snapshot.val();
-        let totalCOGS = 0;
-
-        // Calculate COGS by summing the totalAmount (sales price) within the date range
-        Object.keys(orders).forEach((key) => {
-            const order = orders[key];
-            const { date, totalAmount } = order;
-
-            // Check if the order's date is within the selected range
-            if (date >= startDate && date <= endDate) {
-                totalCOGS += totalAmount; // Add up the total sales amount to calculate COGS
-            }
-        });
-
-        console.log('COGS for the period:', totalCOGS);
-        return totalCOGS;
-
+        return Object.values(snapshot.val());
     } catch (error) {
-        console.error('Error fetching sales data:', error);
-        throw new Error(`Error fetching sales data: ${error.message}`);
+        console.error("Error fetching transaction history:", error);
+        return [];
     }
 };
 
-// Fetch the beginning and ending inventory for a specific product
-const fetchProductInventory = async (productId) => {
+// Fetch product cost for an individual product
+const fetchProductCost = async (productId) => {
     const db = getDatabase();
-    const productRef = ref(db, 'products/' + productId);
+    const productRef = ref(db, `products/${productId}`);
 
     try {
         const snapshot = await get(productRef);
-        if (!snapshot.exists()) {
-            console.log('Product not found.');
-            return { beginningInventory: 0, endingInventory: 0 };
-        }
+        if (!snapshot.exists()) return 0;
 
         const productData = snapshot.val();
-        const beginningInventory = productData.quantity || 0;  // Assume productData.quantity holds current inventory
-        const endingInventory = beginningInventory;  // You can adjust this logic to get the ending inventory based on stock movement
+        return productData.cost || 0; // Assuming `cost` is stored in the product data
+    } catch (error) {
+        console.error('Error fetching product cost:', error);
+        return 0;
+    }
+};
+
+// Fetch sales data (COGS) for a specific date range
+const fetchSalesDataAndCOGS = async (startDate, endDate) => {
+    try {
+        const transactions = await fetchTransactionHistory();
+
+        // Filter transactions by date range
+        const filteredTransactions = transactions.filter(({ date }) => date >= startDate && date <= endDate);
+
+        // Calculate total COGS from item-level costs in the transaction
+        const totalCOGS = await filteredTransactions.reduce(async (sumPromise, { items }) => {
+            let sum = await sumPromise;
+            const itemsCOGS = await items.reduce(async (itemSumPromise, { productId, quantity }) => {
+                const productCost = await fetchProductCost(productId);
+                const itemSum = await itemSumPromise;
+                return itemSum + (productCost * quantity); // Calculate cost for each item
+            }, 0);
+            return sum + itemsCOGS;
+        }, Promise.resolve(0));
+
+        return totalCOGS;
+    } catch (error) {
+        console.error('Error fetching sales data:', error);
+        return 0;
+    }
+};
+
+// Fetch beginning and ending inventory for a product
+const fetchProductInventory = async (productId) => {
+    const db = getDatabase();
+    const productRef = ref(db, `products/${productId}`);
+
+    try {
+        const snapshot = await get(productRef);
+        if (!snapshot.exists()) return { beginningInventory: 0, endingInventory: 0 };
+
+        const productData = snapshot.val();
+        const beginningInventory = productData.quantity || 0;
+        const endingInventory = beginningInventory; // Adjust for stock movements if needed
 
         return { beginningInventory, endingInventory };
     } catch (error) {
         console.error('Error fetching product inventory:', error);
-        throw new Error(`Error fetching product inventory: ${error.message}`);
+        return { beginningInventory: 0, endingInventory: 0 };
     }
 };
 
-// Calculate Inventory Turnover using the COGS and average inventory
+// Calculate Inventory Turnover
 const calculateInventoryTurnover = async (productId, startDate, endDate) => {
     try {
-        // Fetch COGS (Cost of Goods Sold)
         const cogs = await fetchSalesDataAndCOGS(startDate, endDate);
-        if (!cogs) {
-            console.log('COGS data is missing.');
-            return 0;
-        }
+        const { beginningInventory, endingInventory } = await fetchProductInventory(productId);
 
-        // Fetch Inventory Data
-        const inventoryData = await fetchProductInventory(productId);
-        if (!inventoryData) {
-            throw new Error('Product not found');
-        }
-
-        const { beginningInventory, endingInventory } = inventoryData;
-
-        if (beginningInventory === 0 || endingInventory === 0) {
-            console.log('Insufficient inventory data to calculate Inventory Turnover.');
-            return 0;
-        }
-
-        // Calculate Average Inventory
         const averageInventory = (beginningInventory + endingInventory) / 2;
-        if (averageInventory === 0) {
-            console.log('Average Inventory is zero. Cannot calculate turnover.');
-            return 0;
-        }
+        if (averageInventory === 0) return 0;
 
-        // Calculate and return Inventory Turnover
-        const turnover = cogs / averageInventory;
-        console.log(`Inventory Turnover: ${turnover}`);
-        return Math.round(turnover * 100) / 100; // Rounded to 2 decimals
-
+        return Math.round((cogs / averageInventory) * 100) / 100;
     } catch (error) {
-        console.error('Error calculating Inventory Turnover:', error);
-        return 0; // Return 0 on failure
+        console.error('Error calculating inventory turnover:', error);
+        return 0;
     }
 };
 
+// Function to get the list of all days between two dates
+const getDaysInRange = (startDate, endDate) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const days = [];
+    let currentDate = start;
+
+    while (currentDate <= end) {
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        days.push(`${year}-${month}-${day}`);  // Format as YYYY-MM-DD
+        currentDate.setDate(currentDate.getDate() + 1);  // Increment by one day
+    }
+
+    return days;
+};
+
+// Chart Component
 function ChartLg2() {
     const [turnoverData, setTurnoverData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [startDate, setStartDate] = useState('2024-01-01');
+    const [endDate, setEndDate] = useState('2024-12-31');
 
-    // Initialize start and end date states
-    const [startDate, setStartDate] = useState('2024-01-01');  // Default to January 1, 2024
-    const [endDate, setEndDate] = useState('2024-12-31');    // Default to December 31, 2024
-
-    // Assuming you want to calculate monthly turnover for a product
-    const productId = 'some-product-id';  // Replace with actual product ID
+    const productId = 'some-product-id'; // Replace with actual product ID
 
     useEffect(() => {
         const fetchTurnoverData = async () => {
             setLoading(true);
+
             try {
-                // Dynamically calculate the months within the date range (startDate to endDate)
-                const months = getMonthsInRange(startDate, endDate);
-                const turnoverResults = [];
+                const days = getDaysInRange(startDate, endDate); // Use days instead of months
+                const results = await Promise.all(
+                    days.map(async (day) => {
+                        const turnover = await calculateInventoryTurnover(productId, day, day); // Same day start and end
+                        return { day, turnover };
+                    })
+                );
 
-                // Loop through each month in the range and calculate turnover
-                for (let i = 0; i < months.length; i++) {
-                    const [year, month] = months[i].split('-');
-                    const monthStart = `${year}-${month}-01`;  // Start of the month
-                    const monthEnd = `${year}-${month}-31`;    // End of the month
-
-                    // Calculate turnover for the month
-                    const turnover = await calculateInventoryTurnover(productId, monthStart, monthEnd);
-                    turnoverResults.push({ month: months[i], turnover });
-                }
-
-                setTurnoverData(turnoverResults);
+                setTurnoverData(results);
             } catch (error) {
                 console.error('Error fetching turnover data:', error);
             } finally {
@@ -148,30 +157,12 @@ function ChartLg2() {
         fetchTurnoverData();
     }, [productId, startDate, endDate]);
 
-    // Utility function to get months in a date range
-    const getMonthsInRange = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const months = [];
-        let currentDate = start;
-
-        while (currentDate <= end) {
-            const year = currentDate.getFullYear();
-            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Get month in format MM
-            months.push(`${year}-${month}`);
-            currentDate.setMonth(currentDate.getMonth() + 1);
-        }
-
-        return months;
-    };
-
-    // Prepare data for the chart
     const chartData = {
-        labels: turnoverData.map(item => item.month), // X-axis: months
+        labels: turnoverData.map(({ day }) => day), // Use day for the labels
         datasets: [
             {
                 label: 'Inventory Turnover',
-                data: turnoverData.map(item => item.turnover), // Y-axis: turnover values
+                data: turnoverData.map(({ turnover }) => turnover),
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 fill: true,
@@ -202,7 +193,10 @@ function ChartLg2() {
             </div>
 
             {loading ? (
-                <p>Loading Inventory Turnover...</p>
+                <div className="text-center">
+                    <Spinner animation="border" />
+                    <p>Loading Inventory Turnover...</p>
+                </div>
             ) : turnoverData.length === 0 ? (
                 <p>No data available to display turnover.</p>
             ) : (
