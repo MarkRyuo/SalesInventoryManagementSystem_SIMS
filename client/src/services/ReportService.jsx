@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, get, onValue} from 'firebase/database';
+import { getDatabase, ref, get, onValue} from 'firebase/database';
 
 
 // Function to fetch a product by barcode
