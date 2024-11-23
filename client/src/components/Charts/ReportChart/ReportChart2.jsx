@@ -4,7 +4,8 @@ import { Modal, Button, Form } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import ReportChartcss from './ReportChart.module.scss';
-import { fetchTotalSales } from "../../../services/SalesReports/StockInReportService";
+import { fetchTotalSales } from "../../../services/SalesReports/TotalSalesService";
+import "jspdf-autotable"; // For better table handling (optional but recommended)
 
 function ReportChart2() {
     const [showModal, setShowModal] = useState(false);
@@ -30,65 +31,51 @@ function ReportChart2() {
         doc.setFontSize(12);
         doc.text("Sales Report", 10, 10);
 
-        // Table headers
-        const headers = ["ID", "Customer Name", "Discount %", "Payment", "Tax", "Quantity", "Total"];
-        const columnWidths = [20, 40, 30, 30, 20, 20, 30];
-        let y = 20;
+        const tableData = filteredTransactions.map((entry) => [
+            entry.id?.toString() || "N/A",
+            entry.customerName || "N/A",
+            (Number(entry.discountPercentage) || 0).toFixed(2), // Ensure it's a number
+            (Number(entry.paymentAmount) || 0).toFixed(2), // Ensure it's a number
+            (Number(entry.tax) || 0).toFixed(2), // Ensure it's a number
+            entry.totalQuantity?.toString() || "0",
+            (Number(entry.total) || 0).toFixed(2), // Ensure it's a number
+        ]);
 
-        headers.forEach((header, i) => {
-            doc.text(header, 10 + (columnWidths.slice(0, i).reduce((a, b) => a + b, 0)), y);
+        doc.autoTable({
+            head: [["ID", "Customer Name", "Discount %", "Payment", "Tax", "Quantity", "Total"]],
+            body: tableData,
+            startY: 20,
         });
 
-        y += 10;
-
-        // Table data
-        filteredTransactions.forEach((entry) => {
-            const row = [
-                entry.id,
-                entry.customerName,
-                entry.discountPercentage.toString(),
-                entry.paymentAmount,
-                entry.tax,
-                entry.totalQuantity.toString(),
-                entry.total,
-            ];
-            row.forEach((text, j) => {
-                doc.text(text, 10 + (columnWidths.slice(0, j).reduce((a, b) => a + b, 0)), y);
-            });
-            y += 10;
-
-            if (y > 270) {
-                doc.addPage();
-                y = 20;
-            }
-        });
-
-        // Total sales
-        y += 10;
-        doc.text(`Total Sales: ${totalSales.toFixed(2)}`, 10, y);
+        const totalY = doc.previousAutoTable.finalY + 10;
+        doc.text(`Total Sales: ₱${(Number(totalSales) || 0).toFixed(2)}`, 10, totalY); // Ensure it's a number
 
         doc.save("sales_report.pdf");
     };
 
+
+
     // Download XLSX
     const downloadXLSX = () => {
         const formattedData = filteredTransactions.map((entry) => ({
-            ID: entry.id,
-            CustomerName: entry.customerName,
-            DiscountPercentage: entry.discountPercentage,
-            PaymentAmount: entry.paymentAmount,
-            Tax: entry.tax,
-            TotalQuantity: entry.totalQuantity,
-            Total: entry.total,
+            ID: entry.id || "N/A",
+            CustomerName: entry.customerName || "N/A",
+            DiscountPercentage: (Number(entry.discountPercentage) || 0).toFixed(2), // Ensure it's a number
+            PaymentAmount: (Number(entry.paymentAmount) || 0).toFixed(2), // Ensure it's a number
+            Tax: (Number(entry.tax) || 0).toFixed(2), // Ensure it's a number
+            TotalQuantity: entry.totalQuantity || 0,
+            Total: (Number(entry.total) || 0).toFixed(2), // Ensure it's a number
         }));
 
-        formattedData.push({ TotalSales: totalSales.toFixed(2) });
+        formattedData.push({ TotalSales: (Number(totalSales) || 0).toFixed(2) }); // Ensure it's a number
 
         const ws = XLSX.utils.json_to_sheet(formattedData);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "Sales Report");
         XLSX.writeFile(wb, "sales_report.xlsx");
     };
+
+
 
     return (
         <div className={ReportChartcss.containerChart2}>

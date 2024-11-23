@@ -22,10 +22,17 @@ export const fetchTotalSales = async (startDate, endDate) => {
                 ) {
                     filteredTransactions.push({
                         id: transactionId,
+                        customerName: transaction.customerName || "N/A",
+                        discountPercentage: transaction.discountPercentage || 0,
+                        paymentAmount: transaction.paymentAmount || 0,
+                        tax: transaction.tax || 0,
+                        totalQuantity: transaction.totalQuantity || 0,
+                        total: transaction.total || 0,
                         ...transaction,
                     });
-                    totalSales += parseFloat(transaction.total);
+                    totalSales += parseFloat(transaction.total || 0);
                 }
+
             });
 
             return { filteredTransactions, totalSales };
