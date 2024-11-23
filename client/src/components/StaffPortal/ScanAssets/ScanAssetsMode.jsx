@@ -8,7 +8,7 @@ function Checkout() {
     const navigate = useNavigate();
     const scannedItems = location.state?.scannedItems || [];
     const [errorMessage, setErrorMessage] = useState("");
-    const currentDate = new Date().toLocaleString();
+    const currentDate = new Date()
     const [customerName, setCustomerName] = useState("");
 
     const [availableDiscounts, setAvailableDiscounts] = useState([]);
