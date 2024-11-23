@@ -4,7 +4,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import ReportChartcss from './ReportChart.module.scss';
-import { fetchStockInOverview, fetchStockInByDate } from './stockHelpers';  // Import the helpers
+import { fetchStockInOverview, fetchStockInByDate } from '../../../services/SalesReports/StockInReportService';  // Import the helpers
 
 function ReportChart1() {
     const [totalStock, setTotalStock] = useState(0);
