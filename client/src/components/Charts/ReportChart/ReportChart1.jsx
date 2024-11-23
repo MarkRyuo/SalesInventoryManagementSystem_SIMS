@@ -39,17 +39,46 @@ function ReportChart1() {
     // Download PDF function with detailed product info
     const downloadPDF = (data) => {
         const doc = new jsPDF();
+
+        // Set up the table headers
+        doc.setFontSize(12);
         doc.text('Filtered Stock In Data', 10, 10);
-        let y = 20;
-        data.forEach((entry, index) => {
-            doc.text(
-                `${index + 1}. Product Name: ${entry.productName}, Barcode: ${entry.barcode}, SKU: ${entry.sku}, Date: ${entry.addedQuantityHistory.date}, Quantity: ${entry.addedQuantityHistory.quantity}, Price: ${entry.price}`,
-                10, y
-            );
-            y += 10;
+
+        const headers = ['No.', 'Product Name', 'Barcode', 'SKU', 'Date', 'Quantity', 'Price'];
+
+        // Table column positions and sizes
+        const columnWidths = [10, 50, 30, 30, 25, 20, 25]; // Adjust widths as needed
+        let y = 20; // Start position for the first row
+
+        // Draw table headers
+        headers.forEach((header, index) => {
+            doc.text(header, 10 + (columnWidths.slice(0, index).reduce((a, b) => a + b, 0)), y);
         });
+
+        y += 5; // Space between header and data rows
+
+        // Draw the table data
+        data.forEach((entry, index) => {
+            doc.text((index + 1).toString(), 10, y);  // Serial number
+            doc.text(entry.productName, 10 + columnWidths[0], y);  // Product Name
+            doc.text(entry.barcode, 10 + columnWidths[0] + columnWidths[1], y);  // Barcode
+            doc.text(entry.sku, 10 + columnWidths[0] + columnWidths[1] + columnWidths[2], y);  // SKU
+            doc.text(entry.addedQuantityHistory.date, 10 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], y);  // Date
+            doc.text(entry.addedQuantityHistory.quantity.toString(), 10 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3] + columnWidths[4], y);  // Quantity
+            doc.text(entry.price, 10 + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3] + columnWidths[4] + columnWidths[5], y);  // Price
+            y += 10;  // Increment y position for the next row
+
+            // Add a page if necessary
+            if (y > 280) {  // Check if the content is about to overflow the page
+                doc.addPage();
+                y = 20;  // Reset y position for the next page
+            }
+        });
+
+        // Save the document
         doc.save('stock_in_report.pdf');
     };
+
 
     // Download XLSX function with detailed product info
     const downloadXLSX = (data) => {
