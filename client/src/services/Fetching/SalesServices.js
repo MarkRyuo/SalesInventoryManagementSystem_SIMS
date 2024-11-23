@@ -9,6 +9,7 @@ const isTransactionInRange = (transactionDate, range) => {
         case 'today':
             return transactionTime.toDateString() === now.toDateString();
         case 'week':
+            // eslint-disable-next-line no-case-declarations
             const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay())); // Sunday
             return transactionTime >= startOfWeek && transactionTime <= now;
         case 'month':
