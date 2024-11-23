@@ -99,8 +99,7 @@ function ReportChart1() {
         // Create worksheet from the formatted data
         const ws = XLSX.utils.json_to_sheet(formattedData);
 
-        // Style Headers
-        const header = ws['!rows'] || [];  // Ensure header style exists
+        // Set column widths for better formatting
         ws['!cols'] = [
             { width: 20 },  // Product Name
             { width: 15 },  // Barcode
