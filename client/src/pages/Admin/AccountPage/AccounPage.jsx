@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { MainLayout } from "../../../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
-import Product from '../../../components/Charts/ProductChart/Product';
 import { Container } from "react-bootstrap";
-import AdminTransactionHistory from '../AdminTransactionHistory/AdminTransactionHistory'
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
 
@@ -12,6 +10,7 @@ import ProductPagescss from './ProductPage.module.scss';
 import ReOrdering from './ReOrdering';
 import SetQrcode from './SetQrcode';
 import { LiaQrcodeSolid } from "react-icons/lia";
+import MyAccount from '../../../components/Account/MyAccount';
 
 
 // eslint-disable-next-line react/prop-types
@@ -54,14 +53,14 @@ export const ProductPage = () => {
             <Container className={ProductPagescss.Products}>
                 <ProductNavbarTabs setActiveTab={setActiveTab} />
                 <div className="ProductContent">
-                    {activeTab === '/Product' && (
+                    {activeTab === '/' && (
                         <div className="Product">
-                            <My
+                            <MyAccount />
                         </div>
                     )}
                     {activeTab === '/AdminTransactionHistory' && (
                         <div className="Unknown">
-                            <AdminTransactionHistory />
+
                         </div>
                     )}
                     {activeTab === '/ReOrdering' && (
