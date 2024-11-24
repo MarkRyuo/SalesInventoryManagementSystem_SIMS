@@ -54,7 +54,7 @@ function NavbarStaffDashboard() {
 
     return (
         <Container fluid style={{ margin: "0px", padding: "0px" }}>
-            <Navbar className={Navbars.navDashboard}>
+            <Navbar className={Navbars.navStaffDashboard}>
                 <Container>
                     <Navbar.Brand>
                         <Button variant="" className={Navbars.btnOffcanvas} onClick={handleShow}>
