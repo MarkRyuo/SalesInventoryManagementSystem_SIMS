@@ -132,36 +132,6 @@ function LowStockReport() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-
-            {/* Display Low Stock Report */}
-            <div>
-                {lowStockData.length > 0 && (
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product Name</th>
-                                <th>SKU</th>
-                                <th>Barcode</th>
-                                <th>Quantity</th>
-                                <th>In-Stock Threshold</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {lowStockData.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.productName}</td>
-                                    <td>{item.sku}</td>
-                                    <td>{item.barcode}</td>
-                                    <td>{item.quantity}</td>
-                                    <td>{item.instockthreshold}</td>
-                                    <td>{item.status}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
-            </div>
         </div>
     );
 }
