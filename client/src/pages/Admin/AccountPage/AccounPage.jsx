@@ -6,7 +6,6 @@ import { Container } from "react-bootstrap";
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
 import AccountPagescss from './AccountPage.module.scss';
-import { LiaQrcodeSolid } from "react-icons/lia";
 import MyAccount from '../../../components/Account/MyAccount';
 import StaffComp from '../../../components/Account/StaffComp';
 import ProfileComp from '../../../components/Account/ProfileComp';
