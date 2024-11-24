@@ -104,7 +104,7 @@ function SalesReportQuantitySold() {
     return (
         <div className={ReportChartcss.containerChart3}>
             {/* Report Header */}
-                <p className="m-0 p-0">Sales Report: Quantity Sold</p>
+                <h1 className="m-0 p-0">Sales Report: Quantity Sold</h1>
 
             {/* Report Summary */}
             <div className={ReportChartcss.contentChart}>
