@@ -136,8 +136,7 @@ function ReportChart1() {
 
     return (
         <div className={ReportChartcss.containerChart1}>
-            <div className={ReportChartcss.containerText}>
-                <FaReact size={23} />
+            <div className={ReportChartcss.containerText1}>
                 <p className="m-0 p-0">Stock Overview</p>
             </div>
             <div className={ReportChartcss.contentChart}>
