@@ -141,14 +141,22 @@
         .activityItem {
             border: 1px solid;
             display: flex;
-            gap: 10px;
+            flex-direction: column;
             padding: 10px;
             border-radius: 10px;
     
             .activityDetails {
                 border: 1px solid;
                 display: flex;
-                padding: 10px;
+                flex-direction: column;
+
+                h1 {
+                    font-size: 1.3rem;
+                }
+
+                p {
+                    font-size: 0.9rem;
+                }
             }
         }
     }
