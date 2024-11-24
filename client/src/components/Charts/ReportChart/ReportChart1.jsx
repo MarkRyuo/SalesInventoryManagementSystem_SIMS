@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { FaReact } from 'react-icons/fa';
 import { Modal, Button, Form } from 'react-bootstrap';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
