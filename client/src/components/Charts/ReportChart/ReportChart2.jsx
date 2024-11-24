@@ -76,7 +76,6 @@ function ReportChart2() {
         <div className={ReportChartcss.containerChart2}>
             <h1 className="m-0 p-0">Total Sales</h1>
             <p className="m-0 p-2">{`₱${totalSales.toFixed(2)}`}</p>
-            <p className="m-0 pb-2">Filtered by date range</p>
             <Button variant="" onClick={() => setShowModal(true)}>
                 Filter by Date range
             </Button>
