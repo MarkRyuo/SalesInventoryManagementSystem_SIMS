@@ -7,8 +7,8 @@ import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
 import AccountPagescss from './AccountPage.module.scss';
 import StaffComp from '../../../components/Account/StaffComp';
-import ProfileComp from '../../../components/Account/ProfileComp';
 import ProfileMode from '../../../components/Account/ProfileMode';
+import ProfileComp from '../../../components/Account/ProfileComp';
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
     return (
