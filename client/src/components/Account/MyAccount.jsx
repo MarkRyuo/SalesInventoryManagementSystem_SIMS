@@ -2,7 +2,7 @@
 function MyAccount() {
     return (
         <div>
-            My Account Page
+            <h1>My Account</h1>
         </div>
     )
 }
