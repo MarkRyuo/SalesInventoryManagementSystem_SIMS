@@ -20,4 +20,4 @@ function MainStaffLayout({children}) {
     )
 }
 
-export default MainStaffLayout
+export default MainStaffLayout;
