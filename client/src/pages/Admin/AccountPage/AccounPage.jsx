@@ -5,7 +5,7 @@ import { AiFillProduct } from "react-icons/ai";
 import { Container } from "react-bootstrap";
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
-import AccountPagescss from './'
+import AccountPagescss from './AccountPage.module.scss'
 
 import { LiaQrcodeSolid } from "react-icons/lia";
 import MyAccount from '../../../components/Account/MyAccount';
@@ -21,7 +21,7 @@ function ProductNavbarTabs({ setActiveTab }) {
                     <p className='m-0 p-0'>My Account</p>
                 </Nav.Link>
             </Nav.Item>
-            <Nav.Item className={ProductPagescss.mainTabs}>
+            <Nav.Item className={Account.mainTabs}>
                 <Nav.Link eventKey="/">
                     <FaHistory size={20} />
                     <p className='m-0 p-0'>Profile</p>
