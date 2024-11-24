@@ -13,6 +13,8 @@ import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
 import ChartLg2 from '../../../components/Charts/DashboardChart/ChartLg2';
 import ChartLg3 from '../../../components/Charts/DashboardChart/ChartLg3';
 import Chart4 from '../../../components/Charts/DashboardChart/Chart4';
+import { MdSpaceDashboard } from "react-icons/md";
+
 
 export const DashboardPage = () => {
     const [adminName, setAdminName] = useState('');
@@ -75,7 +77,7 @@ export const DashboardPage = () => {
         <MainLayout>
             <div className={DashboardCss.mainTopComponent}>
                 <div className={DashboardCss.componentHeroCard}>
-                    <h1>Dashboard</h1>
+                    <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0' />Dashboard</h1>
                     {isLoading ? (
                         <div className={DashboardCss.loadingContainer}>
                             <p>Loading admin Dashboard</p>
