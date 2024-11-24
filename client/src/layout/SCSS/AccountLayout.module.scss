@@ -12,9 +12,9 @@
     border: 1px solid red;
     height: 100vh;
     display: flex;
-    padding: 0px;
+    padding: 10px;
 
-    div:first-child {
+    .SideBar {
         border: 1px solid green;
     }
 
