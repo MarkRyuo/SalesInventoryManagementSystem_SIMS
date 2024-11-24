@@ -11,7 +11,7 @@ function MyAccount() {
 
                 <div>
                     <div>
-                        <
+                        <img />
                     </div>
                     <div>
 
