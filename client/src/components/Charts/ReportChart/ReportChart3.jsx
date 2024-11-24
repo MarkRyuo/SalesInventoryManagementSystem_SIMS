@@ -105,9 +105,8 @@ function SalesReportQuantitySold() {
         <div className={ReportChartcss.containerChart3}>
             {/* Report Header */}
             <h1 className="m-0 p-0">Sales Report: Quantity Sold</h1>
-
             {/* Report Summary */}
-                <p className="m-0 p-2">{`Total Quantity Sold: ${totalQuantity}`}</p>
+            <p className="m-0 p-2">{`Total Quantity Sold: ${totalQuantity}`}</p>
                 <p className="m-0 pb-2">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
 
             {/* Filter Button */}
