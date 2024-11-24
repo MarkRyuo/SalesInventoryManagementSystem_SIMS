@@ -36,7 +36,7 @@ function Chart2() {
                 {/* <p>From the {selectedRange}</p> */}
             </div>
             <div className={Chartcss.rangeSelector}>
-                <select onChange={(e) => handleRangeChange(e.target.value)} defaultValue="today">
+                <select onChange={(e) => handleRangeChange(e.target.value)} defaultValue="today" className='form-select'>
                     <option value="today">Today</option>
                     <option value="week">Week</option>
                     <option value="month">Month</option>

@@ -31,7 +31,7 @@ function Chart3() {
 
             <div className={Chartcss.contentChart3}>
                 <p className='m-0'>{loading ? "Loading..." : quantitySold}</p>
-                <div className={Chartcss.dropdown}>
+                <div>
                     <select
                         className="form-select"
                         value={timeRange}

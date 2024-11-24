@@ -34,7 +34,7 @@ function Chart1() {
                 <p>{quantity}</p>
             </div>
             <div className={Chartcss.rangeSelector}>
-                <select onChange={(e) => handleTimeRangeChange(e.target.value)} value={timeRange}>
+                <select onChange={(e) => handleTimeRangeChange(e.target.value)} value={timeRange} className='form-select'>
                     <option value="Today">Today</option>
                     <option value="Week">Week</option>
                     <option value="Month">Month</option>
