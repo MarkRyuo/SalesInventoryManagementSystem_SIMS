@@ -35,6 +35,7 @@ import ReOrdering from './pages/Admin/ProductPage/ReOrdering.jsx';
 import SetQrcode from './pages/Admin/ProductPage/SetQrcode.jsx' ;
 import ReportPage from './pages/Admin/ReportPage/ReportPage.jsx';
 import AccountPage from './pages/Admin/AccountPage/AccountPage.jsx'
+import ProfileComp from './components/Account/ProfileComp.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
