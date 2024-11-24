@@ -29,7 +29,7 @@ function Chart1() {
     return (
         <div className={Chartcss.containerChart1}>
             <h5>Stock Quantity</h5>
-            <div className={Chartcss.contentChart}>
+            <div className={Chartcss.contentChart1}>
                 <p>{quantity}</p>
                 <p>From the running {timeRange.toLowerCase()}</p>
                 <div>
