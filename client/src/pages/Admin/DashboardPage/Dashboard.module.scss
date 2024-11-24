@@ -28,14 +28,13 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 10px;
+            padding: 10px 30px;
 
             img {
                 width: 100px;
             }
 
             div:last-child {
-                border: 1px solid green;
 
                 h4 {
                     font-size: 1.5rem;
