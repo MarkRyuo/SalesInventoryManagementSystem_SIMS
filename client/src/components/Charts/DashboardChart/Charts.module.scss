@@ -1,12 +1,36 @@
 
-
+:root {
+    --bgChart1: #CDC3FF ;
+}
 
 
 .containerChart1 {
     display: flex;
     border: 1px solid;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px;
+    background-color: var(--bgChart1);
+
+    h5 {
+        text-align: center;
+    }
+
+    div:first-child {
+        select {
+            height: 40px;
+            font-size: 1rem;
+            border: 0px;
+            background-color: var(--bgChart1);
+        }
+    }
+
+
+    .contentChart1 {
+        text-align: center;
+        p:first-child {
+            font-size: 1.5rem;
+        }
+    }   
 }
 
 
