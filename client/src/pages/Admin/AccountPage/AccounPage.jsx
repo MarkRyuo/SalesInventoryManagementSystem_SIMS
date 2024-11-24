@@ -6,9 +6,9 @@ import { Container } from "react-bootstrap";
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
 import AccountPagescss from './AccountPage.module.scss';
-import MyAccount from '../../../components/Account/MyAccount';
 import StaffComp from '../../../components/Account/StaffComp';
 import ProfileComp from '../../../components/Account/ProfileComp';
+import ProfileMode from '../../../components/Account/ProfileMode';
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
     return (
@@ -51,7 +51,7 @@ export const ProductPage = () => {
                 <div className="ProductContent">
                     {activeTab === '/MyAccount' && (
                         <div className="Product">
-                            <Profi
+                            <ProfileMode />
                         </div>
                     )}
                     {activeTab === '/Profile' && (
