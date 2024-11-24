@@ -135,9 +135,26 @@ function SalesReportQuantitySold() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleFilter} className="mt-3 w-100">
-                            Filter
-                        </Button>
+                        <div className="d-flex justify-content-between mt-3">
+                            <Button variant="primary" onClick={handleFilter}>
+                                Filter
+                            </Button>
+                            <Button
+                                variant="warning"
+                                onClick={() => {
+                                    setStartDate('');
+                                    setEndDate('');
+                                    setFilteredData([]);
+                                    setTotalQuantity(0);
+                                    setTotalRevenue(0);
+                                    setTotalDiscount(0);
+                                    setTotalTax(0);
+                                    setNetRevenue(0);
+                                }}
+                            >
+                                Clear
+                            </Button>
+                        </div>
                     </Form>
                     {/* Action Buttons */}
                     <div className="d-flex justify-content-between mt-4">
@@ -163,6 +180,7 @@ function SalesReportQuantitySold() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
 
     );
