@@ -162,13 +162,13 @@
 }
 
 .containerChartLg3 {
-    border: 1px solid rgb(130, 238, 144);
+    // border: 1px solid rgb(130, 238, 144);
     width: 100%;
     height: 300px;
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 1px 3px var(--chartShadow);
     background-color: var(--BgColor);
-    border-radius: 20px;
+    // border-radius: 20px;
     overflow: auto;
     display: flex;
     flex-direction: column;
