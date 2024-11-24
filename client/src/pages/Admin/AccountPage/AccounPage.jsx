@@ -7,7 +7,6 @@ import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
 
 import ProductPagescss from './ProductPage.module.scss';
-
 import { LiaQrcodeSolid } from "react-icons/lia";
 import MyAccount from '../../../components/Account/MyAccount';
 
