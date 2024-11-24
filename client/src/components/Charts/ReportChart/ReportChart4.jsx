@@ -98,9 +98,21 @@ function LowStockReport() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleFilter} className="mt-3 w-100">
-                            Filter
-                        </Button>
+                        <div className="d-flex justify-content-between mt-3">
+                            <Button variant="primary" onClick={handleFilter}>
+                                Filter
+                            </Button>
+                            <Button
+                                variant="warning"
+                                onClick={() => {
+                                    setStartDate('');
+                                    setEndDate('');
+                                    setLowStockData([]);
+                                }}
+                            >
+                                Clear
+                            </Button>
+                        </div>
                     </Form>
                     {/* Download Buttons */}
                     <div className="d-flex justify-content-between mt-4">
@@ -126,6 +138,7 @@ function LowStockReport() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
 
     );
