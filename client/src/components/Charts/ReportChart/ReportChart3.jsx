@@ -110,8 +110,8 @@ function SalesReportQuantitySold() {
             <p className="m-0 pb-2">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
             {/* Filter Button */}
             <Button variant="primary" onClick={() => setShowModal(true)}>
-                    Filter by Date
-                </Button>
+                Filter by Date
+            </Button>
 
             {/* Modal for Date Filtering */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
