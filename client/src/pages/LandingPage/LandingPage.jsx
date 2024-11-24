@@ -46,7 +46,7 @@ function LandingPage() {
                         <AboutCard />
                     </div>
 
-                    <div className={LandingPagecss.LogInMainContainer} id="Login">
+                    <div className={LandingPagecss.LogInMainContainer} id="Logins">
                         {/* Login */}
                         <LogInCardPage />
                     </div>
