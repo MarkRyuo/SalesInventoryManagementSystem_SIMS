@@ -33,13 +33,16 @@ function Chart1() {
                 <p>{quantity}</p>
                 <p>From the running {timeRange.toLowerCase()}</p>
                 <div>
-                    <button onClick={() => handleTimeRangeChange('Today')}>Today</button>
-                    <button onClick={() => handleTimeRangeChange('Week')}>Week</button>
-                    <button onClick={() => handleTimeRangeChange('Month')}>Month</button>
-                    <button onClick={() => handleTimeRangeChange('Year')}>Year</button>
+                    <select onChange={(e) => handleTimeRangeChange(e.target.value)} value={timeRange}>
+                        <option value="Today">Today</option>
+                        <option value="Week">Week</option>
+                        <option value="Month">Month</option>
+                        <option value="Year">Year</option>
+                    </select>
                 </div>
             </div>
         </div>
+
     );
 }
 
