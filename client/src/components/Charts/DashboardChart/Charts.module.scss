@@ -126,7 +126,6 @@
 /* !Warning This is for ChartLg */
 
 .containerChartLg1 {
-    border: 1px solid yellow;
     width: 100%;
     height: 580px;
     background-color: var(--BgColor);
@@ -137,11 +136,10 @@
 }
 
 .containerChartLg2 {
-    border: 1px solid;
+    // border: 1px solid;
     width: 750px;
     height: 300px;
     /*! Change this in auto if chart-lg is coded*/
-    box-shadow: 1px 1px 3px var(--chartShadow);
     background-color: var(--BgColor);
     border-radius: 10px;
     overflow: auto;
@@ -162,5 +160,6 @@
     overflow: auto;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
 
 }
