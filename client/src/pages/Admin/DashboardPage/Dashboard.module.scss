@@ -51,10 +51,12 @@
 .chartContainer {
     // border: 1px solid red;
     height: auto;
-    padding: 10px;
+    
 
     .smallContainer {
-        border: 1px solid green;
+        border: 1px solid ;
+        border-radius: 15px;
+        padding: 10px;
         width: auto;
         display: flex;
         gap: 20px;
