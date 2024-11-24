@@ -99,7 +99,7 @@ const router = createBrowserRouter([
   },
   { //? Product for Admin
     path: "AccountPage",
-    element: <MyAccount />,
+    element: <AccountPage /> ,
   },
 
   //! Forgot Password
