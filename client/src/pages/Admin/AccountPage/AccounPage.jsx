@@ -19,13 +19,13 @@ function ProductNavbarTabs({ setActiveTab }) {
     return (
         <Nav justify variant="tabs" defaultActiveKey="/MyAccount" className="" onSelect={setActiveTab}>
             <Nav.Item className={ProductPagescss.mainTabs}>
-                <Nav.Link eventKey="/Product">
+                <Nav.Link eventKey="/">
                     <AiFillProduct size={20} />
                     <p className='m-0 p-0'>My Account</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
-                <Nav.Link eventKey="/AdminTransactionHistory">
+                <Nav.Link eventKey="/">
                     <FaHistory size={20} />
                     <p className='m-0 p-0'>Profile</p>
                 </Nav.Link>
