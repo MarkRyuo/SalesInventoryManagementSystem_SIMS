@@ -47,7 +47,6 @@ export const DashboardPage = () => {
         };
 
         fetchAdminData();
-
         // Set the real-time date
         const updateDate = () => {
             const now = new Date();
