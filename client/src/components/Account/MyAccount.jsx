@@ -1,9 +1,8 @@
-import { MainLayout } from "../../layout/MainLayout";
 
 function MyAccount() {
     return (
         <div>
-            
+            My Account Page
         </div>
     )
 }
