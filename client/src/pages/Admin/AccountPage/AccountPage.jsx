@@ -46,17 +46,17 @@ export const ProductPage = () => {
                 <div className="ProductContent">
                     {activeTab === '/MyAccount' && (
                         <div className="Product">
-                            <ProfileMode />
+                            <ProfileMode setActiveTab={setActiveTab}/>
                         </div>
                     )}
                     {activeTab === '/Profile' && (
                         <div className="Unknown">
-                            <ProfileComp />
+                            <ProfileComp setActiveTab={setActiveTab}/>
                         </div>
                     )}
                     {activeTab === '/StaffComp' && (
                         <div className="Unknown">
-                            <StaffComp />
+                            <StaffComp setActiveTab={setActiveTab }/>
                         </div>
                     )}
                     {activeTab === '/SetQrcode' && (

@@ -49,7 +49,7 @@ function ProfileMode({setActiveTab}) {
                                     <p className="fs-4 m-0">{adminData ? adminData.firstname : 'N/A'} {adminData ? adminData.lastname : 'N/A'}</p>
                                     <p className="fs-6 m-0">Administrator</p>
                                 </div>
-                                    <Button variant="outline-primary" onClick={() => setActiveTab('/MyAccount')}>
+                                    <Button variant="outline-primary" onClick={() => setActiveTab('/My')}>
                                         Edit User Profile
                                     </Button>
                             </div>
