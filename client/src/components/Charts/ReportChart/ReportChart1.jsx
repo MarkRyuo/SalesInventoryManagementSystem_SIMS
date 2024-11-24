@@ -138,7 +138,7 @@ function ReportChart1() {
         <div className={ReportChartcss.containerChart1}>
             <div className={ReportChartcss.containerText}>
                 <FaReact size={23} />
-                <p className='m-0 p-0'>Stock Overview</p>
+                <p className="m-0 p-0">Stock Overview</p>
             </div>
             <div className={ReportChartcss.contentChart}>
                 <p className="m-0 p-2">{`Total Stock: ${totalStock}`}</p>
@@ -146,20 +146,6 @@ function ReportChart1() {
             <div className="d-flex justify-content-between">
                 <Button variant="primary" onClick={() => setShowModal(true)}>
                     Filter by Date
-                </Button>
-                <Button
-                    variant="success"
-                    onClick={() => downloadPDF(filteredData)}
-                    disabled={filteredData.length === 0}
-                >
-                    Download PDF
-                </Button>
-                <Button
-                    variant="success"
-                    onClick={() => downloadXLSX(filteredData)}
-                    disabled={filteredData.length === 0}
-                >
-                    Download XLSX
                 </Button>
             </div>
 
@@ -186,8 +172,26 @@ function ReportChart1() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleFilter}>Filter</Button>
+                        <Button variant="primary" onClick={handleFilter} className="mt-3 w-100">
+                            Filter
+                        </Button>
                     </Form>
+                    <div className="d-flex justify-content-between mt-4">
+                        <Button
+                            variant="success"
+                            onClick={() => downloadPDF(filteredData)}
+                            disabled={filteredData.length === 0}
+                        >
+                            Download PDF
+                        </Button>
+                        <Button
+                            variant="success"
+                            onClick={() => downloadXLSX(filteredData)}
+                            disabled={filteredData.length === 0}
+                        >
+                            Download XLSX
+                        </Button>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
