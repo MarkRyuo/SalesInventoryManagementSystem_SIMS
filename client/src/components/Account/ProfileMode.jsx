@@ -41,7 +41,7 @@ function ProfileMode() {
                         <p className="fs-4">Loading...</p>
                     </div>
                 ) : (
-                    <div>
+                    <div style={{border: '1px solid'}}>
                         <div className={ProfileModeScss.contentMain}>
                             <Image src="/Reyes_Electronics_LogoBg.png" roundedCircle />
                             <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
