@@ -59,6 +59,7 @@ function ProfileMode() {
                             <div style={{ borderRadius: 20, padding: 20, boxShadow: '1px 4px 5px #E1E4E4' }}>
                                 <div>
                                     <p>FirstName: <span>{adminData ? adminData.firstname : 'N/A'}</span></p>
+                                    <Button>Edit</Button>
                                 </div>
                                 <p>FirstName: <span>{adminData ? adminData.firstname : 'N/A'}</span></p>
                                 <p>LastName: <span>{adminData ? adminData.lastname : 'N/A'}</span></p>
