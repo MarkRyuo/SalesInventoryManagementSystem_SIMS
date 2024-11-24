@@ -161,4 +161,9 @@
     overflow: auto;
     display: flex;
     flex-direction: column;
+
+    canvas {
+        display: inline-flex;
+        width: 1200px;
+    }
 }

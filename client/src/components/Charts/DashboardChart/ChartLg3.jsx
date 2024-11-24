@@ -133,7 +133,7 @@ function ChartLg3() {
                 <button onClick={() => handleRangeChange('year')}>Year</button>
             </div>
             {/* Render the Line chart here */}
-            <Line data={chartData} options={chartOptions} />
+            <Line data={chartData} options={chartOptions}/>
         </div>
     );
 }
