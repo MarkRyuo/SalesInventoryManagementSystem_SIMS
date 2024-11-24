@@ -15,13 +15,11 @@
         text-align: center;
     }
 
-    div:first-child {
-        select {
-            height: 40px;
-            font-size: 1rem;
-            border: 0px;
-            background-color: var(--bgChart1);
-        }
+    select {
+        height: 40px;
+        font-size: 1rem;
+        border: 0px;
+        background-color: var(--bgChart1);
     }
 
 

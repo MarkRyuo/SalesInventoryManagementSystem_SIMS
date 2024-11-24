@@ -29,14 +29,13 @@ function Chart1() {
     return (
         <div className={Chartcss.containerChart1}>
             <h5>Stock Quantity</h5>
-            <div>
-                <select onChange={(e) => handleTimeRangeChange(e.target.value)} value={timeRange}>
-                    <option value="Today">Today</option>
-                    <option value="Week">Week</option>
-                    <option value="Month">Month</option>
-                    <option value="Year">Year</option>
-                </select>
-            </div>
+
+            <select onChange={(e) => handleTimeRangeChange(e.target.value)} value={timeRange}>
+                <option value="Today">Today</option>
+                <option value="Week">Week</option>
+                <option value="Month">Month</option>
+                <option value="Year">Year</option>
+            </select>
             <div className={Chartcss.contentChart1}>
                 <p>{quantity}</p>
                 <p>From the running {timeRange.toLowerCase()}</p>
