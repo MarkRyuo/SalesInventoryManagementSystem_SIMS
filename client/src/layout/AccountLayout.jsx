@@ -9,7 +9,7 @@ export const AccountLayout = ({ children }) => {
     return (
         <Container fluid className={AccountLayoutscss.AccountLayoutContainer}>
             <NavDashboard />
-            <Container fluid='lg' className='p-0'>
+            <Container fluid='lg' className={AccountLayoutscss.accountContainer}>
                 <div>
                     <Sidebar />
                 </div>
