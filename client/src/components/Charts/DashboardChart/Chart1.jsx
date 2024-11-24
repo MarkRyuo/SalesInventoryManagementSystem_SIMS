@@ -28,6 +28,7 @@ function Chart1() {
 
     return (
         <div className={Chartcss.containerChart1}>
+            {/* <p>From the running {timeRange.toLowerCase()}</p> */}
             <h5>Stock Quantity</h5>
 
             <div className={Chartcss.contentChart1}>
