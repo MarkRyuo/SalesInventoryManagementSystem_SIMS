@@ -8,8 +8,8 @@ import { Container } from "react-bootstrap";
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
 import StaffProductPagescss from './StaffProductPage.module.scss' ;
-import ReOrdering from './ReOrdering';
-import SetQrcode from './SetQrcode';
+import ReOrdering from '../../Admin/ProductPage/ReOrdering';
+import SetQrcode from '../../Admin/ProductPage/SetQrcode';
 import { LiaQrcodeSolid } from "react-icons/lia";
 
 // eslint-disable-next-line react/prop-types
