@@ -92,10 +92,14 @@ const router = createBrowserRouter([
     element: <SalesReportPage /> ,
   },
 
-  
+
   { //? Product for Admin
     path: "MyAccount",
     element: <MyAccount /> ,
+  },
+  { //? Product for Admin
+    path: "AccountPage",
+    element: <MyAccount />,
   },
 
   //! Forgot Password
