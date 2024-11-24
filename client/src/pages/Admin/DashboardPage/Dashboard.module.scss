@@ -1,0 +1,16 @@
+
+
+.mainTopComponent {
+    border: 1px solid red;
+    padding: 0;
+    margin: 0;
+
+    .componentHeroCard {
+        border: 1px solid green;
+        padding: 10px;
+
+        .credentialDashboard {
+            border: 1px solid blue;
+        }
+    }
+}
