@@ -9,7 +9,11 @@ const Sidebar = () => {
                 </Link>
 
                 <Link to={"/"}>
-                    
+                    Profiles
+                </Link>
+
+                <Link to={"/"}>
+                    Create Account
                 </Link>
             </div>
         </div>
