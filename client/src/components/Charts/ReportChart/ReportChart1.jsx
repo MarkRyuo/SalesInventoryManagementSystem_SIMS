@@ -143,8 +143,8 @@ function ReportChart1() {
             </div>
                 
             <Button variant="" onClick={() => setShowModal(true)}>
-                    Filter by Date
-                </Button>
+                Filter by Date
+            </Button>
 
             {/* Modal for date filtering */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
