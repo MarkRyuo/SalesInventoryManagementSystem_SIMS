@@ -4,44 +4,34 @@
 }
 
 
+/* ?Chart 1 */
 .containerChart1 {
+    border: 1px solid; 
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 15px 20px;
+    height: auto;
+    width: 280px;
+    flex-shrink: 0;
     display: flex;
-    // border: 1px solid;
     flex-direction: column;
-    padding: 20px;
-    background-color: var(--bgChart1);
-    width: 300px;
-    height: 150px;
 
     h5 {
-        text-align: center;
-    }
-
-    select {
-        height: 40px;
         font-size: 1rem;
-        border: 0px;
-        background-color: var(--bgChart1);
-        text-align: center;
     }
-
 
     .contentChart1 {
-        text-align: center;
         p {
             font-size: 2rem;
         }
-    }   
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
 }
 
-
-
-
-
-
-
-
-/* ?Chart 1 */
 
 /* ?Chart 2 */
 .containerChart2 {
@@ -50,9 +40,25 @@
     border-radius: 10px;
     padding: 15px 20px;
     height: auto;
-    // box-shadow: 1px 1px 3px var(--chartShadow);
-    width: 350px;
+    width: 280px;
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .contentChart2 {
+        p {
+            font-size: 2rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
 
 }
 
