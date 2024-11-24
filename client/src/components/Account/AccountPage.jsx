@@ -1,10 +1,13 @@
+import Sidebar from "./SideBar";
 
 function AccountPage() {
     return (
         <div>
             <div>
-                <Side
+                <Sidebar />
             </div>
+
+            
         </div>
     )
 }
