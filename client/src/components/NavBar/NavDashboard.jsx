@@ -2,7 +2,6 @@ import { Container, Navbar, Button, Offcanvas, Image, Modal, Spinner } from 'rea
 import { useState } from 'react';
 import Navbars from './Navbar.module.scss';
 import { Buttons } from './Buttons';
-import AccountDropdown from './AccountDropdown';
 
 //* Icons
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -31,7 +30,7 @@ export const NavDashboard = () => {
         { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-1", path: "/DashboardPage" },
         { icon: <MdOutlineInventory2 />, btnName: "Inventory", id: "b-2", path: "/ProductPage" },
         { icon: <TbReportAnalytics />, btnName: "Report", id: "b-3", path: "/ReportPage" },
-        { icon: <VscAccount />, btnName: "Account", id: "b-4", path: "/Accou" },
+        { icon: <VscAccount />, btnName: "Account", id: "b-4", path: "/AccountPage" },
     ]);
 
     //* Handle logout with confirmation and loading state
