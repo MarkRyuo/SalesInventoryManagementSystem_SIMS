@@ -4,7 +4,6 @@ import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { fetchLowStockData } from "../../../services/SalesReports/LowStockService";
 import "jspdf-autotable";
-import { FaReact } from "react-icons/fa";
 import ReportChartcss from './ReportChart.module.scss';
 
 function LowStockReport() {
