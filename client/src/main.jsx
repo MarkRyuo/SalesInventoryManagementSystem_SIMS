@@ -90,6 +90,10 @@ const router = createBrowserRouter([
     path: "AccountPage",
     element: <AccountPage/>,
   },
+  { //? Product for Admin
+    path: "ProfileComp",
+    element: <ProfileComp /> ,
+  },
 
   //! Forgot Password
   { //? ForgotPasswordMode for Admin
