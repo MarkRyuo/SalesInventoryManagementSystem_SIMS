@@ -140,7 +140,7 @@ const ProfileComp = () => {
 
     return (
         <Form className={ProfileCompScss.contentAccount}>
-            <p className='fs-4'>My Details</p>
+            <h1 className='fs-2'>My Details</h1>
             <p style={{ borderBottom: "1px solid gray", padding: "20px 10px" }}>Personal Information</p>
             <Row style={{ width: "100%", margin: 0, padding: 0 }}>
                 <Col lg={6}>
