@@ -1,5 +1,6 @@
 import MyAccountScss from './AccountComp.module.scss' ;
 import { Button } from 'react-bootstrap';
+
 function MyAccount() {
     return (
         <div className={MyAccountScss.MyAccountContainer}>
@@ -15,7 +16,7 @@ function MyAccount() {
                             <img src='' />
                             <h1>Admin Name</h1>
                         </div>
-                        <Button></Button>
+                        <Button variant=''></Button>
                     </div>
                     <div>
 
