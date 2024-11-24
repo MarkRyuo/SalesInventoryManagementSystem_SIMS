@@ -6,10 +6,12 @@
 
 .containerChart1 {
     display: flex;
-    border: 1px solid;
+    // border: 1px solid;
     flex-direction: column;
     padding: 20px;
     background-color: var(--bgChart1);
+    width: 300px;
+    height: 150px;
 
     h5 {
         text-align: center;
@@ -20,6 +22,7 @@
         font-size: 1rem;
         border: 0px;
         background-color: var(--bgChart1);
+        text-align: center;
     }
 
 
