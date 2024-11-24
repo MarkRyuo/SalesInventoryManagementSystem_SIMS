@@ -67,7 +67,6 @@ function LowStockReport() {
         <div>
             {/* Low Stock Overview */}
             <div className={ReportChartcss.containerChart4}>
-                    <FaReact size={23} />
                     <p className="m-0 p-0">Low Stock Overview</p>
                 <div className={ReportChartcss.contentChart}>
                     <p className="m-0 p-2">{lowStockData.length}</p> {/* Dynamic low stock count */}
