@@ -9,7 +9,9 @@ function MyAccount() {
                     {/* Image */}
                 </div>
 
-                div
+                <div>
+                    
+                </div>
             </div>
         </div>
     )
