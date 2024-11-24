@@ -97,11 +97,6 @@ const router = createBrowserRouter([
     path: "MyAccount",
     element: <MyAccount /> ,
   },
-  { //? Product for Admin
-    path: "AccountLayout",
-    element: <AccountLayout /> ,
-  },
-
   //! Forgot Password
   { //? ForgotPasswordMode for Admin
     path: "ForgotPasswordMode",
