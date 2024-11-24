@@ -55,9 +55,9 @@ function Chart4() {
     }, []);
 
     return (
-        <div className={Chartcss.containerChart3}>
+        <div className={Chartcss.containerChart4}>
             <h5>Low Stock Products</h5>
-            <div className={Chartcss.contentChart5}>
+            <div className={Chartcss.contentChart4}>
                 <p>{lowStockCount}</p>
             </div>
         </div>
