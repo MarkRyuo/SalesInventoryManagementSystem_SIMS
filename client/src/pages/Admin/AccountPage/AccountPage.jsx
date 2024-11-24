@@ -35,7 +35,6 @@ function ProductNavbarTabs({ setActiveTab }) {
     );
 }
 
-
 export const ProductPage = () => {
     const [activeTab, setActiveTab] = useState('/MyAccount');
 
