@@ -103,10 +103,10 @@ function SalesReportQuantitySold() {
     return (
         <div className={ReportChartcss.containerChart3}>
             {/* Report Header */}
-            <h1 className="m-0 pb-1">Quantity Sold</h1>
+            <h1 className="m-0 pb-2">Quantity Sold</h1>
             {/* Report Summary */}
             <p className="m-0">{`Total Quantity Sold: ${totalQuantity}`}</p>
-            <p className="m-0">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
+            <p className="m-0 ">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
             {/* Filter Button */}
             <Button variant="" onClick={() => setShowModal(true)}>
                 Filter by Date
