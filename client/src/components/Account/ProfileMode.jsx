@@ -1,11 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { Image, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { db } from '../../services/firebase'; // Adjust the path according to your project structure
 import { doc, getDoc } from "firebase/firestore";
 import ProfileModeScss from './AccountComp.module.scss';
 
-function ProfileMode() {
+function ProfileMode({setActiveTab}) {
     const [adminData, setAdminData] = useState(null);
     const [loading, setLoading] = useState(true);
     const adminId = localStorage.getItem('adminId'); // Retrieve the adminId from localStorage
@@ -49,7 +49,9 @@ function ProfileMode() {
                                     <p className="fs-4 m-0">{adminData ? adminData.firstname : 'N/A'} {adminData ? adminData.lastname : 'N/A'}</p>
                                     <p className="fs-6 m-0">Administrator</p>
                                 </div>
-                                <Button as={Link} to={'/MyProfile'} variant="outline-primary">Edit User Profile</Button>
+                                    <Button variant="outline-primary" onClick={() => setActiveTab('/MyAccount')}>
+                                        Edit User Profile
+                                    </Button>
                             </div>
                         </div>
 

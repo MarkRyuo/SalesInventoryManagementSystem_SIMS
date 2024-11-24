@@ -14,32 +14,27 @@ function ProductNavbarTabs({ setActiveTab }) {
     return (
         <Nav variant="tabs" onSelect={setActiveTab} className={AccountPagescss.NavContainer}>
             <Nav.Item className={AccountPagescss.mainTabs}>
-                <Nav.Link eventKey="/MyAccount">
+                <Nav.Link eventKey="/MyAccount" onClick={() => setActiveTab('/MyAccount')}>
                     <AiFillProduct size={20} />
                     <p className='m-0 p-0'>My Account</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={AccountPagescss.mainTabs}>
-                <Nav.Link eventKey="/Profile">
+                <Nav.Link eventKey="/Profile" onClick={() => setActiveTab('/Profile')}>
                     <FaHistory size={20} />
                     <p className='m-0 p-0'>Profile</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={AccountPagescss.mainTabs}>
-                <Nav.Link eventKey="/StaffComp">
+                <Nav.Link eventKey="/StaffComp" onClick={() => setActiveTab('/StaffComp')}>
                     <PiHandArrowUpBold size={20} />
                     <p className='m-0 p-0'>Staff Account</p>
                 </Nav.Link>
             </Nav.Item>
-            {/* <Nav.Item className={AccountPagescss.mainTabs}>
-                <Nav.Link eventKey="/SetQrcode">
-                    <LiaQrcodeSolid size={20} />
-                    <p className='m-0 p-0'>Set Qrcode</p>
-                </Nav.Link>
-            </Nav.Item> */}
         </Nav>
     );
 }
+
 
 export const ProductPage = () => {
     const [activeTab, setActiveTab] = useState('/MyAccount');
