@@ -1,125 +1,44 @@
 
 
 
-.contentChart {
-    // border: 1px solid;
-    text-align: center;
-    box-sizing: border-box;
-    
-    p:first-child {
-        font-size: 1.7rem;
-    }
 
-    p{
-        font-size: 0.9rem;
-    }
-
-    @media (max-width: 700px) {
-        p:first-child {
-            font-size: 1.7rem;
-        }
-
-        p {
-            font-size: 0.9rem;
-        }
-    }
-
-}
-
-.containerText {
-    // border: 1px solid;
-    width: auto;
+.containerChart1 {
     display: flex;
-    padding: 5px ;
-    gap: 5px;
-
-    p {
-        font-size: 0.9rem;
-    }
+    border: 1px solid;
 }
+
+
+
+
+
+
+
 
 /* ?Chart 1 */
 
-.containerChart1 {
-    // border: 1px solid;
-    box-sizing: border-box;
-    border-radius: 10px;
-    //! Top&Bottom / Left&Right
-    padding: 20px;
-    height: auto;
-    background-color: var(--chart1Color);
-    width: 300px;
-    flex-shrink: 0;
-
-    @media (max-width: 1200px) {
-        width: 300px;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 900px) {
-        width: 80%;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 700px) {
-        width: 90%;
-        padding: 5px 10px;
-    }
-}
-
 /* ?Chart 2 */
 .containerChart2 {
-    /* border: 1px solid; */
+    border: 1px solid; 
     box-sizing: border-box;
     border-radius: 10px;
     padding: 15px 20px;
     height: auto;
-    background-color: var(--chart2Color);
     // box-shadow: 1px 1px 3px var(--chartShadow);
     width: 350px;
     flex-shrink: 0;
 
-    @media (max-width: 1200px) {
-        width: 300px;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 900px) {
-        width: 80%;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 700px) {
-        width: 90%;
-        padding: 5px 10px;
-    }
 }
 
 /* ?Chart 3 */
 .containerChart3 {
-    /* border: 1px solid; */
+    border: 1px solid;
     border-radius: 10px;
     padding: 15px 20px;
     height: auto;
-    background-color: var(--char3Color);
     // box-shadow: 1px 1px 3px var(--chartShadow);
     width: 350px;
     flex-shrink: 0;
 
-    @media (max-width: 1200px) {
-        width: 300px;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 900px) {
-        width: 80%;
-        padding: 5px 10px;
-    }
-
-    @media (max-width: 700px) {
-        width: 90%;
-        padding: 5px 10px;
-    }
 }
 
 /* !Warning This is for ChartLg */

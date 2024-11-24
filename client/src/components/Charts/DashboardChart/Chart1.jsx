@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { FaReact } from 'react-icons/fa';
 import Chartcss from './Charts.module.scss';
 import { getProductQuantityHistory, filterQuantityByRange } from '../../../services/Fetching/StockInServices'; // Import the functions
 
@@ -29,10 +28,7 @@ function Chart1() {
 
     return (
         <div className={Chartcss.containerChart1}>
-            <div className={Chartcss.containerText}>
-                <FaReact size={25} />
-                <p>Stock Quantity</p>
-            </div>
+            <h5>Stock Quantity</h5>
             <div className={Chartcss.contentChart}>
                 <p>{quantity}</p>
                 <p>From the running {timeRange.toLowerCase()}</p>
