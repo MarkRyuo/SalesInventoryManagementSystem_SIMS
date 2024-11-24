@@ -136,10 +136,15 @@
 
     .activityItem {
         border: 1px solid;
-
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 10px;
 
         .activityDetails {
             border: 1px solid;
+            display: flex;
+            padding: 10px;
         }
     }
 
