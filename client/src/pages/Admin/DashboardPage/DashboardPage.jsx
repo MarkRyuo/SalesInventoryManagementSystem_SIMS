@@ -75,13 +75,13 @@ export const DashboardPage = () => {
         <MainLayout>
             <div className={DashboardCss.mainTopComponent}>
                 <div className={DashboardCss.componentHeroCard}>
+                    <h1>Dashboard</h1>
                     {isLoading ? (
                         <div className={DashboardCss.loadingContainer}>
                             <p>Loading admin Dashboard</p>
                         </div>
                     ) : (
                         <div className={DashboardCss.credentialDashboard}>
-                            <h1>Dashboard</h1>
                             <Image
                                 src="/Reyes_Electronics_LogoBg.png"
                                 roundedCircle
