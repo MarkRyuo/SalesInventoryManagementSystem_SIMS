@@ -168,10 +168,6 @@ const router = createBrowserRouter([
     path: "PosSuccess",
     element: <PosSuccess />, //* POS: Product Success View 
   },
-  {
-    path: "StaffTransactionHistory",
-    element: <StaffTransactionHistory />, //* POS: Transaction History View 
-  },
 
 ]);
 
