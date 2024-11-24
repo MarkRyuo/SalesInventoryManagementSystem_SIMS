@@ -7,9 +7,15 @@
 
     .componentHeroCard {
         border: 1px solid green;
+        border-radius: 15px;
 
         .credentialDashboard {
             border: 1px solid blue;
+            width: auto;
+            display: flex;
+            img {
+                width: 100px;
+            }
         }
     }
 }
