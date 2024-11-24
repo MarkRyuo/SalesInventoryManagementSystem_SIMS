@@ -3,7 +3,7 @@ import { Image, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { db } from '../../services/firebase'; // Adjust the path according to your project structure
 import { doc, getDoc } from "firebase/firestore";
-import ProfileModeScss from './AccountComp.module.scss'
+import ProfileModeScss from './AccountComp.module.scss' ;
 
 function ProfileMode() {
     const [adminData, setAdminData] = useState(null);
@@ -34,7 +34,7 @@ function ProfileMode() {
     }, [adminId]);
 
     return (
-        <div style={{ marginTop: 100, boxShadow: '2px 5px 5px #E1E4E4 ', borderRadius: 15, width: '100%', minWidth: 400 }} className={}>
+        <div style={{ marginTop: 100, boxShadow: '2px 5px 5px #E1E4E4 ', borderRadius: 15, width: '100%', minWidth: 400 }} className={ProfileModeScss.containerProfile}>
             <div className="content">
                 {loading ? (
                     <div style={{ textAlign: 'center', padding: '50px' }}>
