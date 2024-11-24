@@ -106,8 +106,8 @@ function SalesReportQuantitySold() {
             {/* Report Header */}
             <h1 className="m-0 p-0">Sales Report: Quantity Sold</h1>
             {/* Report Summary */}
-            <p className="m-0 p">{`Total Quantity Sold: ${totalQuantity}`}</p>
-            <p className="m-0 ">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
+            <p className="m-0">{`Total Quantity Sold: ${totalQuantity}`}</p>
+            <p className="m-0">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
             {/* Filter Button */}
             <Button variant="" onClick={() => setShowModal(true)}>
                 Filter by Date
