@@ -81,6 +81,7 @@ export const DashboardPage = () => {
                         </div>
                     ) : (
                         <div className={DashboardCss.credentialDashboard}>
+                            <h1>Dashboard</h1>
                             <Image
                                 src="/Reyes_Electronics_LogoBg.png"
                                 roundedCircle
