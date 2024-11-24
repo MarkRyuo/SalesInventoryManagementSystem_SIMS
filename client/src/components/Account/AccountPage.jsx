@@ -2,7 +2,9 @@
 function AccountPage() {
     return (
         <div>
-            
+            <div>
+                <Side
+            </div>
         </div>
     )
 }
