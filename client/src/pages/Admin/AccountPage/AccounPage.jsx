@@ -17,11 +17,11 @@ import { LiaQrcodeSolid } from "react-icons/lia";
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
     return (
-        <Nav justify variant="tabs" defaultActiveKey="/Product" className="" onSelect={setActiveTab}>
+        <Nav justify variant="tabs" defaultActiveKey="/MyAccount" className="" onSelect={setActiveTab}>
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/Product">
                     <AiFillProduct size={20} />
-                    <p className='m-0 p-0'>My Account </p>
+                    <p className='m-0 p-0'>My Account</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
