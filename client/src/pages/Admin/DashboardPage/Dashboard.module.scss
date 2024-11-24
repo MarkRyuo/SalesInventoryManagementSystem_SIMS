@@ -51,8 +51,13 @@
 .chartContainer {
     border: 1px solid red;
     height: auto;
+    padding: 10px;
 
     .smallContainer {
-        
+        border: 1px solid green;
+
+        div:first-child {
+            display: flex;
+        }
     }
 }
