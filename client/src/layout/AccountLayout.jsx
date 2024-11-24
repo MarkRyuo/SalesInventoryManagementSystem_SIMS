@@ -13,7 +13,7 @@ export const AccountLayout = ({ children }) => {
                 <div className={AccountLayoutscss.SideBar}>
                     <Sidebar />
                 </div>
-                <div>
+                <div className={AccountLayoutscss.Childss}>
                     {children}
                 </div>
             </Container>
