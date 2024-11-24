@@ -28,21 +28,29 @@ export const fetchSalesReportData = async (startDate, endDate) => {
                 ) {
                     // Loop through all items in the transaction
                     transaction.items.forEach(item => {
+                        const totalAmount = parseFloat(item.totalAmount) || 0;
                         filteredData.push({
                             productName: item.productName,
                             totalQuantity: item.quantity,
-                            price: parseFloat(item.price),
-                            discount: parseFloat(transaction.discount),
-                            tax: parseFloat(transaction.tax),
-                            total: parseFloat(item.totalAmount),
+                            price: parseFloat(item.price) || 0,
+                            discount: parseFloat(transaction.discount) || 0,
+                            tax: parseFloat(transaction.tax) || 0,
+                            total: totalAmount,
                         });
 
-                        // Update total quantities and amounts
                         totalQty += item.quantity;
-                        totalRev += parseFloat(item.totalAmount);
-                        totalDisc += parseFloat(transaction.discount);
-                        totalTax += parseFloat(transaction.tax);
+                        totalRev += totalAmount; // Make sure it's correctly parsed
+                        totalDisc += parseFloat(transaction.discount) || 0;
+                        totalTax += parseFloat(transaction.tax) || 0;
                     });
+
+                    // Calculate net revenue only after the loop
+                    netRev = totalRev - totalDisc + totalTax;
+
+                    console.log("Total Revenue:", totalRev);
+                    console.log("Total Discount:", totalDisc);
+                    console.log("Total Tax:", totalTax);
+                    console.log("Net Revenue:", netRev);
                 }
             });
 
