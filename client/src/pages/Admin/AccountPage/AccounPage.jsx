@@ -5,6 +5,7 @@ import { AiFillProduct } from "react-icons/ai";
 import { Container } from "react-bootstrap";
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
+import AccountPagescss from './'
 
 import { LiaQrcodeSolid } from "react-icons/lia";
 import MyAccount from '../../../components/Account/MyAccount';
