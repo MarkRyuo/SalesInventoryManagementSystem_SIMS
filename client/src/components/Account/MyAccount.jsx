@@ -1,8 +1,8 @@
-import MyAccountScss from './AccountComp.module.scss'
+import MyAccountScss from './AccountComp.module.scss' ;
 
 function MyAccount() {
     return (
-        <div>
+        <div className={MyAccountScss.MyAccountContainer}>
             <div>
 
             </div>
