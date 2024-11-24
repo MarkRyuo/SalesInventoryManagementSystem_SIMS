@@ -7,6 +7,7 @@ function AccountPage() {
             <div className="AccountMainComponent">
                 <Sidebar />
             </div>
+            
         </MainLayout>
     )
 }
