@@ -65,7 +65,6 @@ export const ProductPage = () => {
                     )}
                     {activeTab === '/ReOrdering' && (
                         <div className="Unknown">
-                            <ReOrdering />
                         </div>
                     )}
                     {activeTab === '/SetQrcode' && (
