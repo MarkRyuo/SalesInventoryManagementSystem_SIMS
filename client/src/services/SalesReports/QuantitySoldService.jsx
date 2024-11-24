@@ -16,6 +16,7 @@ export const fetchSalesReportData = async (startDate, endDate) => {
         if (snapshot.exists()) {
             const transactions = snapshot.val();
 
+            // Loop through all transactions to filter by date range and calculate totals
             Object.keys(transactions).forEach((transactionId) => {
                 const transaction = transactions[transactionId];
                 const transactionDate = new Date(transaction.date);
@@ -25,6 +26,7 @@ export const fetchSalesReportData = async (startDate, endDate) => {
                     (!startDate || transactionDate >= new Date(startDate)) &&
                     (!endDate || transactionDate <= new Date(endDate))
                 ) {
+                    // Loop through all items in the transaction
                     transaction.items.forEach(item => {
                         filteredData.push({
                             productName: item.productName,
@@ -35,6 +37,7 @@ export const fetchSalesReportData = async (startDate, endDate) => {
                             total: parseFloat(item.totalAmount),
                         });
 
+                        // Update total quantities and amounts
                         totalQty += item.quantity;
                         totalRev += parseFloat(item.totalAmount);
                         totalDisc += parseFloat(transaction.discount);
@@ -43,7 +46,9 @@ export const fetchSalesReportData = async (startDate, endDate) => {
                 }
             });
 
+            // Calculate net revenue (Total Revenue - Discount + Tax)
             netRev = totalRev - totalDisc + totalTax;
+
             return {
                 filteredData,
                 totalQuantity: totalQty,
@@ -57,6 +62,7 @@ export const fetchSalesReportData = async (startDate, endDate) => {
         console.error("Error fetching data:", error);
     }
 
+    // Return default values in case of error or empty data
     return {
         filteredData,
         totalQuantity: 0,

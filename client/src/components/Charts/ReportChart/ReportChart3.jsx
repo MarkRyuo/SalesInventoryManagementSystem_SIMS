@@ -4,7 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import ReportChartcss from './ReportChart.module.scss';
-import { fetchSalesReportData } from './SalesReportQuantitySoldFetcher';
+import { fetchSalesReportData } from '../../../services/SalesReports/QuantitySoldService';
 import "jspdf-autotable"; // For better table handling (optional but recommended)
 
 function SalesReportQuantitySold() {
@@ -17,6 +17,14 @@ function SalesReportQuantitySold() {
     const [totalDiscount, setTotalDiscount] = useState(0);
     const [totalTax, setTotalTax] = useState(0);
     const [netRevenue, setNetRevenue] = useState(0);
+
+    // Function to format numbers as Peso (₱)
+    const formatPeso = (value) => {
+        return new Intl.NumberFormat('en-PH', {
+            style: 'currency',
+            currency: 'PHP',
+        }).format(value);
+    };
 
     // Handle filtering
     const handleFilter = async () => {
@@ -46,10 +54,10 @@ function SalesReportQuantitySold() {
         const tableData = filteredData.map((entry) => [
             entry.productName,
             entry.totalQuantity.toString(),
-            `₱${entry.price.toFixed(2)}`,
+            formatPeso(entry.price),
             entry.discount.toFixed(2),
             entry.tax.toFixed(2),
-            `₱${entry.total.toFixed(2)}`,
+            formatPeso(entry.total),
         ]);
 
         doc.autoTable({
@@ -60,10 +68,10 @@ function SalesReportQuantitySold() {
 
         const totalY = doc.previousAutoTable.finalY + 10;
         doc.text(`Total Quantity Sold: ${totalQuantity}`, 10, totalY);
-        doc.text(`Total Revenue: ₱${totalRevenue.toFixed(2)}`, 10, totalY + 10);
-        doc.text(`Discounts Applied: ₱${totalDiscount.toFixed(2)}`, 10, totalY + 20);
-        doc.text(`Tax Collected: ₱${totalTax.toFixed(2)}`, 10, totalY + 30);
-        doc.text(`Net Revenue: ₱${netRevenue.toFixed(2)}`, 10, totalY + 40);
+        doc.text(`Total Revenue: ${formatPeso(totalRevenue)}`, 10, totalY + 10);
+        doc.text(`Discounts Applied: ${formatPeso(totalDiscount)}`, 10, totalY + 20);
+        doc.text(`Tax Collected: ${formatPeso(totalTax)}`, 10, totalY + 30);
+        doc.text(`Net Revenue: ${formatPeso(netRevenue)}`, 10, totalY + 40);
 
         doc.save("sales_report_quantity_sold.pdf");
     };
@@ -73,18 +81,18 @@ function SalesReportQuantitySold() {
         const formattedData = filteredData.map((entry) => ({
             ProductName: entry.productName,
             TotalQuantity: entry.totalQuantity,
-            Price: `₱${entry.price.toFixed(2)}`,
+            Price: formatPeso(entry.price),
             Discount: entry.discount.toFixed(2),
             Tax: entry.tax.toFixed(2),
-            Total: `₱${entry.total.toFixed(2)}`,
+            Total: formatPeso(entry.total),
         }));
 
         formattedData.push({
             TotalQuantitySold: totalQuantity,
-            TotalRevenue: `₱${totalRevenue.toFixed(2)}`,
-            DiscountsApplied: `₱${totalDiscount.toFixed(2)}`,
-            TaxCollected: `₱${totalTax.toFixed(2)}`,
-            NetRevenue: `₱${netRevenue.toFixed(2)}`,
+            TotalRevenue: formatPeso(totalRevenue),
+            DiscountsApplied: formatPeso(totalDiscount),
+            TaxCollected: formatPeso(totalTax),
+            NetRevenue: formatPeso(netRevenue),
         });
 
         const ws = XLSX.utils.json_to_sheet(formattedData);
@@ -104,7 +112,7 @@ function SalesReportQuantitySold() {
             {/* Report Summary */}
             <div className={ReportChartcss.contentChart}>
                 <p className="m-0 p-2">{`Total Quantity Sold: ${totalQuantity}`}</p>
-                <p className="m-0 pb-2">{`Total Revenue: ₱${totalRevenue.toFixed(2)}`}</p>
+                <p className="m-0 pb-2">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
             </div>
 
             {/* Filter and Action Buttons */}
