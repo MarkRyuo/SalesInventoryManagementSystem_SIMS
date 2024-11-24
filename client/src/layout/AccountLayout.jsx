@@ -1,15 +1,16 @@
-import Sidebar from "../components/Account/SideBar";
-import { MainLayout } from "./MainLayout";
+/* eslint-disable react/prop-types */
+import { NavDashboard } from "../components/NavBar/NavDashboard"
+import { Container } from "react-bootstrap"
+import MainLayoutscss from './MainLayout.module.scss'
 
-function AccountPage() {
+export const AccountLayout = ({ children }) => {
+
     return (
-        <MainLayout>
-            <div className="AccountMainComponent">
-                <Sidebar />
-            </div>
-            
-        </MainLayout>
+        <Container fluid className={MainLayoutscss.mainLayoutContainer}>
+            <NavDashboard />
+            <Container fluid='lg' className='p-0'>
+                {children}
+            </Container>
+        </Container>
     )
 }
-
-export default AccountPage ;
