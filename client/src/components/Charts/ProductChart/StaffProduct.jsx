@@ -102,11 +102,6 @@ function ProductChart() {
         }
     };
 
-    const openModal = (product) => {
-        setEditProduct(product);
-        setShowModal(true);
-    };
-
     const closeModal = () => {
         setShowModal(false);
         setEditProduct(null);
@@ -269,15 +264,6 @@ function ProductChart() {
                                                         <p className="m-0 p-0">Quantity: {product.quantity}</p>
                                                         <p>Price: ₱{product.price}</p>
                                                     </div>
-                                                </div>
-                                                <div>
-                                                    <Button
-                                                        variant=""
-                                                        onClick={() => openModal(product)}
-                                                        className="me-2"
-                                                    >
-                                                        <LuFileEdit size={20}/>
-                                                    </Button>
                                                 </div>
                                             </div>
                                         );
