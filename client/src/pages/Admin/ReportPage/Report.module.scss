@@ -3,14 +3,14 @@
 /* * Reportcss */
 
 .reportMain {
-    border: 1px solid red;
+    // border: 1px solid red;
     margin: 0;
     padding: 0;
     height: auto;
     width: 100%;
 
     .reportTitle {
-        border: 1px solid green;
+        // border: 1px solid green;
         margin-bottom: 5px;
         h5 {
             padding: 20px 10px;
@@ -21,7 +21,7 @@
 
     .containerReportSmall {
         border: 1px solid;
-        border-radius: ;
+        border-radius: 15px;
         background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
         width: 100%;
         padding: 10px;
