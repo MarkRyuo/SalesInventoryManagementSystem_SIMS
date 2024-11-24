@@ -7,8 +7,7 @@ import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
 
 import ProductPagescss from './ProductPage.module.scss';
-import ReOrdering from './ReOrdering';
-import SetQrcode from './SetQrcode';
+
 import { LiaQrcodeSolid } from "react-icons/lia";
 import MyAccount from '../../../components/Account/MyAccount';
 
@@ -70,7 +69,7 @@ export const ProductPage = () => {
                     )}
                     {activeTab === '/SetQrcode' && (
                         <div className="Unknown">
-                            <SetQrcode />
+
                         </div>
                     )}
                 </div>
