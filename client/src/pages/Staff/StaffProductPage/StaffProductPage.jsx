@@ -6,7 +6,7 @@ import { AiFillProduct } from "react-icons/ai";
 import Product from '../../../components/Charts/ProductChart/Product';
 import { Container } from "react-bootstrap";
 import { FaHistory } from "react-icons/fa";
-import { PiHandArrowUpBold } from "react-icons/pi";
+// import { PiHandArrowUpBold } from "react-icons/pi";
 import StaffProductPagescss from './StaffProductPage.module.scss' ;
 import ReOrdering from '../../Admin/ProductPage/ReOrdering';
 import SetQrcode from '../../Admin/ProductPage/SetQrcode';
@@ -28,12 +28,12 @@ function ProductNavbarTabs({ setActiveTab }) {
                     <p className='m-0 p-0'>Transaction History</p>
                 </Nav.Link>
             </Nav.Item>
-            <Nav.Item className={StaffProductPagescss.mainTabs}>
+            {/* <Nav.Item className={StaffProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/ReOrdering">
                     <PiHandArrowUpBold size={20} />
                     <p className='m-0 p-0'>Re Ordering</p>
                 </Nav.Link>
-            </Nav.Item>
+            </Nav.Item> */}
             <Nav.Item className={StaffProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/SetQrcode">
                     <LiaQrcodeSolid size={20}/>
