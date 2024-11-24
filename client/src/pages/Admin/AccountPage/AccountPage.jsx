@@ -49,7 +49,7 @@ export const ProductPage = () => {
                             <ProfileMode setActiveTab={setActiveTab}/>
                         </div>
                     )}
-                    {activeTab === '/Profile' && (
+                    {activeTab === '/ProfileComp' && (
                         <div className="Unknown">
                             <ProfileComp setActiveTab={setActiveTab}/>
                         </div>
