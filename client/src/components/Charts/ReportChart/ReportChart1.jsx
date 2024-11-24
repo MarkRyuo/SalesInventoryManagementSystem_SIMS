@@ -1,96 +1,172 @@
-import { FaReact } from "react-icons/fa";
-import ReportChartcss from './ReportChart.module.scss';
 import { useEffect, useState } from 'react';
-import { fetchAddedQuantityHistory } from '../../../services/ProductService'; // Adjust path
-import { Modal, Button, Form } from "react-bootstrap";
-import jsPDF from "jspdf";
-import * as XLSX from "xlsx";
+import { FaReact } from 'react-icons/fa';
+import { Modal, Button, Form } from 'react-bootstrap';
+import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
+import ReportChartcss from './ReportChart.module.scss';
+import { fetchStockInOverview, fetchStockInByDate } from '../../../services/SalesReports/StockInReportService';  // Import the helpers
+import 'jspdf-autotable';  // Import jsPDF auto-table for table handling
 
 function ReportChart1() {
-    const [stockInTotal, setStockInTotal] = useState(0);
-    const [filter, setFilter] = useState("today");
-    const [data, setData] = useState([]);
-    const [showDownloadModal, setShowDownloadModal] = useState(false);
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    const [totalStock, setTotalStock] = useState(0);
+    const [showModal, setShowModal] = useState(false);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [filteredData, setFilteredData] = useState([]);
 
-    // Helper functions for filtering
-    const isSameDay = (date1, date2) => date1.toDateString() === date2.toDateString();
-
-    const isWithinLastNDays = (date, now, n) => {
-        const diff = now - date; // Difference in milliseconds
-        return diff >= 0 && diff <= n * 24 * 60 * 60 * 1000; // Check if within the last `n` days
-    };
-
-    const isWithinRange = (date, start, end) => date >= new Date(start) && date <= new Date(end);
-
+    // Fetch total stock when component mounts
     useEffect(() => {
-        fetchAddedQuantityHistory((fetchedData) => {
-            setData(fetchedData || []);
-            const now = new Date();
-            const filteredTotal = fetchedData.reduce((total, entry) => {
-                const entryDate = new Date(entry.date);
-                if (filter === "today" && isSameDay(entryDate, now)) return total + entry.quantity;
-                if (filter === "7days" && isWithinLastNDays(entryDate, now, 7)) return total + entry.quantity;
-                if (filter === "month" && entryDate.getMonth() === now.getMonth()) return total + entry.quantity;
-                if (filter === "year" && entryDate.getFullYear() === now.getFullYear()) return total + entry.quantity;
-                return total;
-            }, 0);
-            setStockInTotal(filteredTotal);
-        });
-    }, [filter]);
+        const fetchData = async () => {
+            try {
+                const stock = await fetchStockInOverview();
+                setTotalStock(stock);  // Set the total stock
+            } catch (error) {
+                console.error("Error fetching total stock:", error);
+            }
+        };
+        fetchData();
+    }, []);
 
-    const downloadPDF = () => {
-        const filteredData = data.filter((entry) => isWithinRange(new Date(entry.date), startDate, endDate));
+    // Handle the filter action
+    const handleFilter = async () => {
+        try {
+            const data = await fetchStockInByDate(startDate, endDate);
+            setFilteredData(data); // Store the filtered data
+        } catch (error) {
+            console.error("Error filtering data:", error);
+        }
+    };
+
+    // Download PDF function with detailed product info
+    const downloadPDF = (data) => {
         const doc = new jsPDF();
-        doc.text("Stock-In Report", 10, 10);
-        filteredData.forEach((entry, i) => {
-            doc.text(`${i + 1}. Date: ${entry.date}, Quantity: ${entry.quantity}`, 10, 20 + i * 10);
+
+        // Title for the document
+        doc.setFontSize(12);
+        doc.text('Filtered Stock In Data', 10, 10);
+
+        // Create table headers and data
+        const tableHeaders = ['No.', 'Product Name', 'Barcode', 'SKU', 'Date', 'Quantity', 'Price'];
+        const tableData = data.map((entry, index) => [
+            (index + 1).toString(),
+            entry.productName,
+            entry.barcode,
+            entry.sku,
+            entry.addedQuantityHistory.date,
+            entry.addedQuantityHistory.quantity.toString(),
+            entry.price,
+        ]);
+
+        // Use jsPDF autoTable plugin to generate the table
+        doc.autoTable({
+            head: [tableHeaders],
+            body: tableData,
+            startY: 20,  // Starting Y position
+            theme: 'grid',  // Table theme
+            columnStyles: {
+                0: { cellWidth: 10 },  // Column 1 (No.)
+                1: { cellWidth: 50 },  // Column 2 (Product Name)
+                2: { cellWidth: 30 },  // Column 3 (Barcode)
+                3: { cellWidth: 30 },  // Column 4 (SKU)
+                4: { cellWidth: 25 },  // Column 5 (Date)
+                5: { cellWidth: 20 },  // Column 6 (Quantity)
+                6: { cellWidth: 25 },  // Column 7 (Price)
+            },
+            margin: { top: 20 },  // Set the top margin for table
         });
-        doc.save("Stock-In-Report.pdf");
+
+        // Save the document
+        doc.save('stock_in_report.pdf');
     };
 
-    const downloadExcel = () => {
-        const filteredData = data.filter((entry) => isWithinRange(new Date(entry.date), startDate, endDate));
-        const worksheet = XLSX.utils.json_to_sheet(filteredData);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Stock-In Data");
-        XLSX.writeFile(workbook, "Stock-In-Report.xlsx");
+
+    // Download XLSX function with detailed product info
+
+    const downloadXLSX = (data) => {
+        // Format the data
+        const formattedData = data.map(entry => ({
+            ProductName: entry.productName,
+            Barcode: entry.barcode,
+            SKU: entry.sku,
+            Date: entry.addedQuantityHistory.date,
+            Quantity: entry.addedQuantityHistory.quantity,
+            Price: entry.price
+        }));
+
+        // Create a new workbook
+        const wb = XLSX.utils.book_new();
+
+        // Create worksheet from the formatted data
+        const ws = XLSX.utils.json_to_sheet(formattedData);
+
+        // Set column widths for better formatting
+        ws['!cols'] = [
+            { width: 20 },  // Product Name
+            { width: 15 },  // Barcode
+            { width: 10 },  // SKU
+            { width: 15 },  // Date
+            { width: 10 },  // Quantity
+            { width: 15 },  // Price
+        ];
+
+        // Add header style
+        Object.keys(ws).forEach((cellRef) => {
+            if (cellRef.includes('1')) {  // This is where the header row is
+                ws[cellRef].s = {
+                    font: { bold: true },        // Make header text bold
+                    alignment: { horizontal: 'center' },  // Center align
+                    fill: { patternType: 'solid', fgColor: { rgb: 'FFFF00' } }, // Yellow background color
+                    border: {
+                        top: { style: 'thin', color: { rgb: '000000' } },
+                        bottom: { style: 'thin', color: { rgb: '000000' } },
+                        left: { style: 'thin', color: { rgb: '000000' } },
+                        right: { style: 'thin', color: { rgb: '000000' } }
+                    },
+                };
+            }
+        });
+
+        // Add the sheet to the workbook
+        XLSX.utils.book_append_sheet(wb, ws, 'Stock In Data');
+
+        // Write the Excel file
+        XLSX.writeFile(wb, 'stock_in_report.xlsx');
     };
+
 
     return (
         <div className={ReportChartcss.containerChart1}>
             <div className={ReportChartcss.containerText}>
-                <FaReact size={25} />
-                <p className='m-0 p-0'>Stock In Overview</p>
+                <FaReact size={23} />
+                <p className='m-0 p-0'>Stock Overview</p>
             </div>
             <div className={ReportChartcss.contentChart}>
-                <p className='m-0'>{stockInTotal}</p>
-                <p className='m-2'>
-                    {filter === "today" && "From today"}
-                    {filter === "7days" && "From the last 7 days"}
-                    {filter === "month" && "From this month"}
-                    {filter === "year" && "From this year"}
-                </p>
-                <select
-                    className="form-select w-auto"
-                    value={filter}
-                    onChange={(e) => setFilter(e.target.value)}
+                <p className="m-0 p-2">{`Total Stock: ${totalStock}`}</p>
+            </div>
+            <div className="d-flex justify-content-between">
+                <Button variant="primary" onClick={() => setShowModal(true)}>
+                    Filter by Date
+                </Button>
+                <Button
+                    variant="success"
+                    onClick={() => downloadPDF(filteredData)}
+                    disabled={filteredData.length === 0}
                 >
-                    <option value="today">Today</option>
-                    <option value="7days">Last 7 Days</option>
-                    <option value="month">This Month</option>
-                    <option value="year">This Year</option>
-                </select>
-                <Button variant="primary" onClick={() => setShowDownloadModal(true)}>
-                    Download Report
+                    Download PDF
+                </Button>
+                <Button
+                    variant="success"
+                    onClick={() => downloadXLSX(filteredData)}
+                    disabled={filteredData.length === 0}
+                >
+                    Download XLSX
                 </Button>
             </div>
 
-            {/* Modal for selecting date range */}
-            <Modal show={showDownloadModal} onHide={() => setShowDownloadModal(false)}>
+            {/* Modal for date filtering */}
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Download Stock-In Report</Modal.Title>
+                    <Modal.Title>Filter Stock In by Date</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -110,17 +186,12 @@ function ReportChart1() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
+                        <Button variant="primary" onClick={handleFilter}>Filter</Button>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowDownloadModal(false)}>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
                         Close
-                    </Button>
-                    <Button variant="success" onClick={downloadExcel}>
-                        Download Excel
-                    </Button>
-                    <Button variant="danger" onClick={downloadPDF}>
-                        Download PDF
                     </Button>
                 </Modal.Footer>
             </Modal>

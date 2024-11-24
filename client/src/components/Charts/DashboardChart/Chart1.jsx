@@ -1,84 +1,46 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { FaReact } from 'react-icons/fa';
 import Chartcss from './Charts.module.scss';
-import { FaReact } from "react-icons/fa";
-import { fetchAddedQuantityHistory } from '../../../services/ProductService'; // Adjust path
+import { getProductQuantityHistory, filterQuantityByRange } from '../../../services/Fetching/StockInServices'; // Import the functions
 
+// Chart1 Small component to display quantity data for the selected time range
 function Chart1() {
-    const [stockInTotal, setStockInTotal] = useState(0);
-    const [filter, setFilter] = useState("today"); // Default filter is 'today'
+    const [quantity, setQuantity] = useState(0);
+    const [timeRange, setTimeRange] = useState('Today'); // Default to 'Today'
 
-    // Helper functions for filtering
-    const isSameDay = (date1, date2) => {
-        return date1.toDateString() === date2.toDateString();
+    const handleTimeRangeChange = (range) => {
+        setTimeRange(range);
     };
 
-    const isWithinLastNDays = (date, now, n) => {
-        const diff = now - date;
-        return diff >= 0 && diff <= n * 24 * 60 * 60 * 1000;
-    };
-
-    // Fetch data from Firebase on component mount
     useEffect(() => {
-        fetchAddedQuantityHistory((data) => {
-            if (data && data.length > 0) {
-                console.log("Fetched data:", data); // Debugging: Log data fetched from Firebase
-
-                // Get current date and time for comparison
-                const now = new Date();
-
-                // Filter data based on the selected filter
-                const filteredTotal = data.reduce((total, entry) => {
-                    const entryDate = new Date(entry.date); // Assuming `date` exists in each entry
-
-                    if (filter === "today" && isSameDay(entryDate, now)) {
-                        return total + entry.quantity;
-                    } else if (filter === "7days" && isWithinLastNDays(entryDate, now, 7)) {
-                        return total + entry.quantity;
-                    } else if (filter === "month" && entryDate.getMonth() === now.getMonth() &&
-                        entryDate.getFullYear() === now.getFullYear()) {
-                        return total + entry.quantity;
-                    } else if (filter === "year" && entryDate.getFullYear() === now.getFullYear()) {
-                        return total + entry.quantity;
-                    }
-
-                    return total;
-                }, 0);
-
-                console.log("Filtered Total:", filteredTotal); // Debugging: Log the filtered total
-                setStockInTotal(filteredTotal);
-            } else {
-                setStockInTotal(0); // No data available
+        const fetchQuantity = async () => {
+            try {
+                const quantityHistories = await getProductQuantityHistory();
+                // Filter the quantity histories by selected time range
+                const totalQuantity = filterQuantityByRange(quantityHistories, timeRange);
+                setQuantity(totalQuantity);
+            } catch (error) {
+                console.error('Error fetching quantity:', error);
             }
-        });
-    }, [filter]); // Re-run effect when filter changes
+        };
+
+        fetchQuantity();
+    }, [timeRange]); // Re-fetch data if timeRange changes
 
     return (
         <div className={Chartcss.containerChart1}>
             <div className={Chartcss.containerText}>
                 <FaReact size={25} />
-                <p className='m-0 p-0'>Stock In Overview</p>
+                <p>Stock Quantity</p>
             </div>
             <div className={Chartcss.contentChart}>
-                <div className={Chartcss.contentChart}>
-                    <p className='m-0'>{stockInTotal}</p>
-                    <p className='m-2'>
-                        {filter === "today" && "From today"}
-                        {filter === "7days" && "From the last 7 days"}
-                        {filter === "month" && "From this month"}
-                        {filter === "year" && "From this year"}
-                    </p>
-                    <div className="d-flex justify-content-center mb-2">
-                        <select
-                            className="form-select w-auto"
-                            value={filter}
-                            onChange={(e) => setFilter(e.target.value)}
-                        >
-                            <option value="today">Today</option>
-                            <option value="7days">Last 7 Days</option>
-                            <option value="month">This Month</option>
-                            <option value="year">This Year</option>
-                        </select>
-                    </div>
+                <p>{quantity}</p>
+                <p>From the running {timeRange.toLowerCase()}</p>
+                <div>
+                    <button onClick={() => handleTimeRangeChange('Today')}>Today</button>
+                    <button onClick={() => handleTimeRangeChange('Week')}>Week</button>
+                    <button onClick={() => handleTimeRangeChange('Month')}>Month</button>
+                    <button onClick={() => handleTimeRangeChange('Year')}>Year</button>
                 </div>
             </div>
         </div>
