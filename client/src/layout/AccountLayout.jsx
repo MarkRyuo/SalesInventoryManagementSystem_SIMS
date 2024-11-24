@@ -1,5 +1,5 @@
-import Sidebar from "./SideBar";
-import { MainLayout } from "../../layout/MainLayout";
+import Sidebar from "../components/Account/SideBar";
+import { MainLayout } from "./MainLayout";
 
 function AccountPage() {
     return (
