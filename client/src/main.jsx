@@ -36,7 +36,7 @@ import SetQrcode from './pages/Admin/ProductPage/SetQrcode.jsx' ;
 import ReportPage from './pages/Admin/ReportPage/ReportPage.jsx';
 import SalesReportPage from './components/SalesRepotPages/SalesReportPage.jsx';
 import MyAccount from './components/Account/MyAccount.jsx';
-import AccountPage from './layout/AccountPage.jsx';
+import AccountPage from './layout/AccountLayout.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -99,8 +99,8 @@ const router = createBrowserRouter([
     element: <MyAccount /> ,
   },
   { //? Product for Admin
-    path: "AccountPage",
-    element: <AccountPage /> ,
+    path: "AccountLayout",
+    element: <AccountLayout /> ,
   },
 
   //! Forgot Password
