@@ -36,6 +36,7 @@ import ReportPage from './pages/Admin/ReportPage/ReportPage.jsx';
 import AccountPage from './pages/Admin/AccountPage/AccountPage.jsx'
 import ProfileComp from './components/Account/ProfileComp.jsx';
 import StaffProductPage from './pages/Staff/StaffProductPage/StaffProductPage.jsx'
+import StaffProduct from './components/Charts/ProductChart/StaffProduct.jsx'
 
 const router = createBrowserRouter([
   { //? ROOT
