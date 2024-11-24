@@ -89,7 +89,7 @@ function ChartLg3() {
                 label: 'Total Quantity',
                 data: salesData.totalQuantity, // Quantity data
                 borderColor: 'rgba(205, 195, 255, 1)',
-                backgroundColor: 'rgba(205, 195, 255, 0.2)',
+                backgroundColor: 'rgb(205, 195, 255, 0.2)',
                 fill: true,
                 tension: 0.4, // Smooth lines
             }
@@ -117,7 +117,9 @@ function ChartLg3() {
                     label: (context) => {
                         const label = context.dataset.label || '';
                         const value = context.raw;
-                        return `${label}: ₱${value.toLocaleString()}`;
+                        return label.includes('Sales')
+                            ? `${label}: ₱${value.toLocaleString()}`
+                            : `${label}: ${value.toLocaleString()}`;
                     },
                 },
             },
