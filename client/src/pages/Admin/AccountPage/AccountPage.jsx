@@ -20,7 +20,7 @@ function ProductNavbarTabs({ setActiveTab }) {
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={AccountPagescss.mainTabs}>
-                <Nav.Link eventKey="/Profile" onClick={() => setActiveTab('/Profile')}>
+                <Nav.Link eventKey="/ProfileComp" onClick={() => setActiveTab('/ProfileComp')}>
                     <FaHistory size={20} />
                     <p className='m-0 p-0'>Profile</p>
                 </Nav.Link>
