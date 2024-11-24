@@ -32,12 +32,12 @@ function ProductNavbarTabs({ setActiveTab }) {
                     <p className='m-0 p-0'>Staff Account</p>
                 </Nav.Link>
             </Nav.Item>
-            <Nav.Item className={AccountPagescss.mainTabs}>
+            {/* <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/SetQrcode">
                     <LiaQrcodeSolid size={20} />
                     <p className='m-0 p-0'>Set Qrcode</p>
                 </Nav.Link>
-            </Nav.Item>
+            </Nav.Item> */}
         </Nav>
     );
 }
