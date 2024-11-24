@@ -29,7 +29,7 @@ function Chart3() {
         <div className={Chartcss.containerChart3}>
             <h5 className='m-0 p-0'>Quantity Sold</h5>
 
-            <div className={Chartcss.contentChart}>
+            <div className={Chartcss.contentChart3}>
                 <p className='m-0'>{loading ? "Loading..." : quantitySold}</p>
                 <div className={Chartcss.dropdown}>
                     <select
