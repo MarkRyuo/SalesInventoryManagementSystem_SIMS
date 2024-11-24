@@ -56,11 +56,8 @@ function Chart4() {
 
     return (
         <div className={Chartcss.containerChart3}>
-            <div className={Chartcss.containerText}>
-                <FaReact size={25} />
-                <p>Low Stock Products</p>
-            </div>
-            <div className={Chartcss.contentChart}>
+            <h5>Low Stock Products</h5>
+            <div className={Chartcss.contentChart5}>
                 <p>{lowStockCount}</p>
             </div>
         </div>
