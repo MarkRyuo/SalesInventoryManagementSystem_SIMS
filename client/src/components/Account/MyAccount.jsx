@@ -1,4 +1,4 @@
-import Sidebar from './Sidebar'; // Import Sidebar component
+import Sidebar from './SideBar'; // Import Sidebar component
 
 const MyAccount = () => {
     return (
