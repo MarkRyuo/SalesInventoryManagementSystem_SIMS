@@ -9,6 +9,7 @@ import AccountPagescss from './AccountPage.module.scss';
 import { LiaQrcodeSolid } from "react-icons/lia";
 import MyAccount from '../../../components/Account/MyAccount';
 import StaffComp from '../../../components/Account/StaffComp';
+import ProfileComp from '../../../components/Account/ProfileComp';
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
     return (
@@ -56,7 +57,7 @@ export const ProductPage = () => {
                     )}
                     {activeTab === '/Profile' && (
                         <div className="Unknown">
-                            {/* Add content for Profile */}
+                            <ProfileComp />
                         </div>
                     )}
                     {activeTab === '/StaffComp' && (
