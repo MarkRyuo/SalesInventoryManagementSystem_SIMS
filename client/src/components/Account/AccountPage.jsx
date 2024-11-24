@@ -6,8 +6,6 @@ function AccountPage() {
             <div>
                 <Sidebar />
             </div>
-
-            
         </div>
     )
 }
