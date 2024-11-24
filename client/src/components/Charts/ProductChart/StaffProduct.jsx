@@ -5,7 +5,6 @@ import { getAllProducts, getCategories } from "../../../services/ProductService"
 import SetCategory from "../../../pages/Admin/ProductPage/SetCategory";
 import SetDiscounts from "../../../pages/Admin/ProductPage/SetDiscounts";
 import SetTax from "../../../pages/Admin/ProductPage/SetTax";
-import { LuFileEdit } from "react-icons/lu";
 import { editProductInDatabase, deleteProduct } from '../../../services/ProductService';
 import { FaProductHunt } from "react-icons/fa";
 
