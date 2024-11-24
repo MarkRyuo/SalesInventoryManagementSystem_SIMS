@@ -104,7 +104,6 @@ function SalesReportQuantitySold() {
     return (
         <div className={ReportChartcss.containerChart3}>
             {/* Report Header */}
-                <FaReact size={23} />
                 <p className="m-0 p-0">Sales Report: Quantity Sold</p>
 
             {/* Report Summary */}
