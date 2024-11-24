@@ -27,10 +27,7 @@ function Chart3() {
 
     return (
         <div className={Chartcss.containerChart3}>
-            <div className={Chartcss.containerText}>
-                <FaReact size={25} />
-                <p className='m-0 p-0'>Quantity Sold</p>
-            </div>
+            <h5 className='m-0 p-0'>Quantity Sold</h5>
 
             <div className={Chartcss.contentChart}>
                 <p className='m-0'>{loading ? "Loading..." : quantitySold}</p>
