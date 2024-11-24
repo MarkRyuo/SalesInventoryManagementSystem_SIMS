@@ -42,9 +42,6 @@ function ProfileMode() {
                     </div>
                 ) : (
                     <div style={{border: '1px solid', padding: '10px'}}>
-                        <div style={{border: '1px solid'}}>
-                            <img src="/Img1.jpg"/> 
-                        </div>
                         <div className={ProfileModeScss.contentMain}>
                             <Image src="/Reyes_Electronics_LogoBg.png" roundedCircle />
                             <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
