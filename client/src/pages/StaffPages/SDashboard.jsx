@@ -1,6 +1,6 @@
 import MainStaffLayout from "../../layout/MainStaffLayout";
 import { Image } from "react-bootstrap";
-import SDashboardCss from './SDashboard.module.css';
+import SDashboardCss from './SDashboard.module.scss';
 import { useState, useEffect } from "react";
 import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons";
 import { TiDocumentAdd } from "react-icons/ti";
