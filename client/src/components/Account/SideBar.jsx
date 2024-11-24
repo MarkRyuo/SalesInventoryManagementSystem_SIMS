@@ -5,7 +5,11 @@ const Sidebar = () => {
         <div>
             <div>
                 <Link to={"/"}>
-                    My Profle
+                    My Profile
+                </Link>
+
+                <Link to={"/"}>
+                    
                 </Link>
             </div>
         </div>
