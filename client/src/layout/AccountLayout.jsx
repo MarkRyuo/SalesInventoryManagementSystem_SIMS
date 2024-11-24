@@ -16,3 +16,5 @@ export const AccountLayout = ({ children }) => {
         </Container>
     )
 }
+
+export default AccountLayout ;
