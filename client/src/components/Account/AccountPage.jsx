@@ -4,7 +4,7 @@ import { MainLayout } from "../../layout/MainLayout";
 function AccountPage() {
     return (
         <MainLayout>
-            <div className="AccounMainComponent">
+            <div className="AccountMainComponent">
                 <Sidebar />
             </div>
         </MainLayout>
