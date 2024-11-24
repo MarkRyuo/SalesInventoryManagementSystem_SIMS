@@ -4,7 +4,7 @@ function MyAccount() {
     return (
         <div className={MyAccountScss.MyAccountContainer}>
             <div>
-
+                
             </div>
         </div>
     )
