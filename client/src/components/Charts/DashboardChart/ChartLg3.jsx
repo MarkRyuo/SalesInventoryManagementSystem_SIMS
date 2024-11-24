@@ -100,6 +100,14 @@ function ChartLg3() {
     const chartOptions = {
         responsive: true,
         scales: {
+            x: {
+                ticks: {
+                    autoSkip: true, // Skip some labels if needed
+                    maxRotation: 0, // Keep labels horizontal
+                    minRotation: 0, // No rotation
+                    padding: 10, // Add space between labels
+                },
+            },
             y: {
                 beginAtZero: true,
                 title: {
@@ -126,8 +134,13 @@ function ChartLg3() {
         },
     };
 
+
+
+
     return (
         <div className={Chartcss.containerChartLg3}>
+            {/* Render the Line chart here */}
+            <Line data={chartData} options={chartOptions}/>
             <div className={Chartcss.rangeButtons}>
                 <select onChange={(e) => handleRangeChange(e.target.value)} defaultValue="today">
                     <option value="today">Today</option>
@@ -136,9 +149,6 @@ function ChartLg3() {
                     <option value="year">Year</option>
                 </select>
             </div>
-
-            {/* Render the Line chart here */}
-            <Line data={chartData} options={chartOptions}/>
         </div>
     );
 }

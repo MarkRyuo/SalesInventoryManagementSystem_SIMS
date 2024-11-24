@@ -49,7 +49,7 @@
 
 
 .chartContainer {
-    border: 1px solid red;
+    // border: 1px solid red;
     height: auto;
     
     .smallContainer {
@@ -76,6 +76,10 @@
                 flex-direction: column;
                 // border: 1px solid;
                 gap: 10px;
+            }
+
+            canvas {
+                border: 1px solid;
             }
         }
     }
