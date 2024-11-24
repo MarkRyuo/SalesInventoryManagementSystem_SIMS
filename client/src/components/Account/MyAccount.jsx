@@ -16,7 +16,7 @@ function MyAccount() {
                             <img src='' />
                             <h1>Admin Name</h1>
                         </div>
-                        <Button variant=''></Button>
+                        <Button variant=''>Edit User Profile</Button>
                     </div>
                     <div>
 
