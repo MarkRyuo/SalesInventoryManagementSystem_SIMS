@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import MainStaffLayout from '../../../layout/MainStaffLayout';
 import { AiFillProduct } from "react-icons/ai";
-import Product from '../../../components/Charts/ProductChart/Product';
+import StaffProduct from '../../../components/Charts/ProductChart/StaffProduct';
 import { Container } from "react-bootstrap";
 import { FaHistory } from "react-icons/fa";
 // import { PiHandArrowUpBold } from "react-icons/pi";
