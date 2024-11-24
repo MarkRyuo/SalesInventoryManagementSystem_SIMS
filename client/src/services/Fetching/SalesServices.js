@@ -8,21 +8,26 @@ const isTransactionInRange = (transactionDate, range) => {
 
     switch (range) {
         case 'today':
+            // For today, check if the transaction's date matches today's date (ignoring time)
             return transactionTime.toDateString() === now.toDateString();
         case 'week':
-            // Create a copy of `now` to avoid modifying the original date
+            // Calculate the start of the current week (Sunday)
             const startOfWeek = new Date(now);
-            startOfWeek.setDate(now.getDate() - now.getDay()); // Set to the start of the week (Sunday)
+            startOfWeek.setDate(now.getDate() - now.getDay()); // Set to Sunday
+            startOfWeek.setHours(0, 0, 0, 0); // Reset time to 00:00
 
-            // Calculate the end of the week (Saturday, 6 days after Sunday)
+            // Calculate the end of the week (Saturday)
             const endOfWeek = new Date(startOfWeek);
-            endOfWeek.setDate(startOfWeek.getDate() + 6);
+            endOfWeek.setDate(startOfWeek.getDate() + 6); // Saturday
+            endOfWeek.setHours(23, 59, 59, 999); // Set to the last millisecond of Saturday
 
-            // Check if the transaction time is within the week range
+            // Check if the transaction date is within the range of this week
             return transactionTime >= startOfWeek && transactionTime <= endOfWeek;
         case 'month':
+            // Check if the transaction is in the current month and year
             return transactionTime.getMonth() === now.getMonth() && transactionTime.getFullYear() === now.getFullYear();
         case 'year':
+            // Check if the transaction is in the current year
             return transactionTime.getFullYear() === now.getFullYear();
         default:
             return false;

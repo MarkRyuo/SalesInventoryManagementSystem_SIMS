@@ -10,7 +10,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 function ChartLg3() {
     const [salesData, setSalesData] = useState({ totalQuantity: [], totalSales: [], dates: [] });
-    const [selectedRange, setSelectedRange] = useState('month');  // Default to 'month'
+    const [selectedRange, setSelectedRange] = useState('today');  // Default to 'month'
 
     useEffect(() => {
         const fetchData = async () => {
@@ -129,11 +129,14 @@ function ChartLg3() {
     return (
         <div className={Chartcss.containerChartLg3}>
             <div className={Chartcss.rangeButtons}>
-                <button onClick={() => handleRangeChange('today')}>Today</button>
-                <button onClick={() => handleRangeChange('week')}>Week</button>
-                <button onClick={() => handleRangeChange('month')}>Month</button>
-                <button onClick={() => handleRangeChange('year')}>Year</button>
+                <select onChange={(e) => handleRangeChange(e.target.value)} defaultValue="today">
+                    <option value="today">Today</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
+                </select>
             </div>
+
             {/* Render the Line chart here */}
             <Line data={chartData} options={chartOptions}/>
         </div>
