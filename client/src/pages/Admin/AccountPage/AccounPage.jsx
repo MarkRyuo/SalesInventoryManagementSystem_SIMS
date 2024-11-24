@@ -12,7 +12,7 @@ import ProfileComp from '../../../components/Account/ProfileComp';
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
     return (
-        <Nav variant="tabs" onSelect={setActiveTab}>
+        <Nav variant="tabs" onSelect={setActiveTab} className={AccountPagescss.NavContainer}>
             <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/MyAccount">
                     <AiFillProduct size={20} />
