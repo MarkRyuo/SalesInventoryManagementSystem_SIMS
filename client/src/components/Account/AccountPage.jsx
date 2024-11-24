@@ -2,11 +2,11 @@ import Sidebar from "./SideBar";
 
 function AccountPage() {
     return (
-        <div>
+        <MainLayout>
             <div>
                 <Sidebar />
             </div>
-        </div>
+        </MainLayout>
     )
 }
 
