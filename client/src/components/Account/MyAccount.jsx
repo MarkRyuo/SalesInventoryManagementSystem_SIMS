@@ -1,9 +1,9 @@
 
 function MyAccount() {
     return (
-        <div>
+        <Main>
             
-        </div>
+        </Main>
     )
 }
 
