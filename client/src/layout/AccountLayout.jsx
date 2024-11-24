@@ -11,7 +11,9 @@ export const AccountLayout = ({ children }) => {
             <NavDashboard />
             <Container fluid='lg' className='p-0'>
                 <Sidebar />
-                {children}
+                <div>
+                    {children}
+                </div>
             </Container>
         </Container>
     )
