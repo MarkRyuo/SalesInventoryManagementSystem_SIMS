@@ -4,8 +4,8 @@ const Sidebar = () => {
     return (
         <div>
             <div>
-                <Link to={}>
-
+                <Link to={"/"}>
+                    My Profle
                 </Link>
             </div>
         </div>
