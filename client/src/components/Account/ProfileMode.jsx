@@ -43,7 +43,7 @@ function ProfileMode() {
                 ) : (
                     <div>
                         <div className={ProfileModeScss.contentMain}>
-                            <Image style={{ width: 80, marginRight: 10, height: 80 }} src="/Reyes_Electronics_LogoBg.png" roundedCircle />
+                            <Image src="/Reyes_Electronics_LogoBg.png" roundedCircle />
                             <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
                                 <div style={{ display: "flex", flexDirection: 'column' }}>
                                     <p className="fs-4 m-0">{adminData ? adminData.firstname : 'N/A'} {adminData ? adminData.lastname : 'N/A'}</p>
