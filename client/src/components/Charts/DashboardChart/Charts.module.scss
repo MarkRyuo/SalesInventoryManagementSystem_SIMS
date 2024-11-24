@@ -127,7 +127,7 @@
 
 .containerChartLg1 {
     width: 80%;
-    height: 580px;
+    height: 590px;
     background-color: rgba(146, 227, 182, 0.945);
     border-radius: 10px;
     box-shadow: 1px 5px 3px var(--chartShadow);
@@ -167,5 +167,6 @@
     display: flex;
     flex-direction: row;
     border-radius: 10px;
+    gap: 20px;
 
 }
