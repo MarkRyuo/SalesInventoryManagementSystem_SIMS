@@ -91,6 +91,8 @@ const router = createBrowserRouter([
     path: "SalesReportPage",
     element: <SalesReportPage /> ,
   },
+
+  
   { //? Product for Admin
     path: "MyAccount",
     element: <MyAccount /> ,
