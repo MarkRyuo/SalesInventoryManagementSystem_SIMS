@@ -134,17 +134,6 @@
     box-shadow: 1px 1px 3px var(--chartShadow);
     overflow: auto;
 
-    .activityItem {
-    margin-bottom: 1rem;
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-    .activityItem p {
-    color: #4CAF50;  // You can customize the colors
-    }
 }
 
 .containerChartLg2 {
