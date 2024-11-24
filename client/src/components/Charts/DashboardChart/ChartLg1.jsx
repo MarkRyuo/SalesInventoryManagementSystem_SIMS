@@ -68,10 +68,7 @@ function ChartLg1() {
             {activityToday.length > 0 ? (
                 <div className={Chartcss.activityList}>
                     {activityToday.map((activity, index) => (
-                        <div
-                            key={index}
-                            className={`${Chartcss.activityItem} ${activity.type === 'Added' ? Chartcss.added : Chartcss.removed}`}
-                        >
+                        <div key={index} className={`${Chartcss.activityItem} ${activity.type === 'Added' ? Chartcss.added : Chartcss.removed}`}>
                             <span className={Chartcss.icon}><LiaProductHunt size={25} /></span>
                             <div className={Chartcss.activityDetails}>
                                 <p className="fs-5 m-0">{activity.productName}</p>
