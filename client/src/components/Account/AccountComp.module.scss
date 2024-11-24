@@ -11,12 +11,13 @@
 
 
 .containerProfile {
-
+    border: 1px solid;
     box-shadow: 1px 4px 1px rgb(180, 180, 180);
     border-radius: 15px;
     width: 100%;
 
     .contentMain {
+        border: 1px solid;
         display: flex;
         padding: 15px;
 
