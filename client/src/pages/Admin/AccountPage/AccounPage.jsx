@@ -6,7 +6,6 @@ import { Container } from "react-bootstrap";
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
 
-import ProductPagescss from './ProductPage.module.scss';
 import { LiaQrcodeSolid } from "react-icons/lia";
 import MyAccount from '../../../components/Account/MyAccount';
 
@@ -15,7 +14,7 @@ import MyAccount from '../../../components/Account/MyAccount';
 function ProductNavbarTabs({ setActiveTab }) {
     return (
         <Nav justify variant="tabs" defaultActiveKey="/MyAccount" className="" onSelect={setActiveTab}>
-            <Nav.Item className={ProductPagescss.mainTabs}>
+            <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/">
                     <AiFillProduct size={20} />
                     <p className='m-0 p-0'>My Account</p>
