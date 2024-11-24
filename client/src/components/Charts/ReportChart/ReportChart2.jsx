@@ -87,12 +87,6 @@ function ReportChart2() {
                 <Button variant="primary" onClick={() => setShowModal(true)}>
                     Filter by Date
                 </Button>
-                <Button variant="success" onClick={downloadPDF} disabled={filteredTransactions.length === 0}>
-                    Download PDF
-                </Button>
-                <Button variant="success" onClick={downloadXLSX} disabled={filteredTransactions.length === 0}>
-                    Download XLSX
-                </Button>
             </div>
 
             {/* Modal for date filtering */}
@@ -118,10 +112,26 @@ function ReportChart2() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleFilter}>
+                        <Button variant="primary" onClick={handleFilter} className="mt-3 w-100">
                             Filter
                         </Button>
                     </Form>
+                    <div className="d-flex justify-content-between mt-4">
+                        <Button
+                            variant="success"
+                            onClick={downloadPDF}
+                            disabled={filteredTransactions.length === 0}
+                        >
+                            Download PDF
+                        </Button>
+                        <Button
+                            variant="success"
+                            onClick={downloadXLSX}
+                            disabled={filteredTransactions.length === 0}
+                        >
+                            Download XLSX
+                        </Button>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
@@ -130,6 +140,7 @@ function ReportChart2() {
                 </Modal.Footer>
             </Modal>
         </div>
+
     );
 }
 
