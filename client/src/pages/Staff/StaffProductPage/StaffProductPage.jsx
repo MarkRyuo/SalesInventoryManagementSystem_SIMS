@@ -54,7 +54,7 @@ export const ProductPage = () => {
                 <div className="ProductContent">
                     {activeTab === '/Product' && (
                         <div className="Product">
-                            <Product />
+                            <StaffProduct /> 
                         </div>
                     )}
                     {activeTab === '/AdminTransactionHistory' && (
