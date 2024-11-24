@@ -33,7 +33,7 @@ function ProductNavbarTabs({ setActiveTab }) {
                     <p className='m-0 p-0'></p>
                 </Nav.Link>
             </Nav.Item>
-            <Nav.Item className={ProductPagescss.mainTabs}>
+            <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/">
                     <LiaQrcodeSolid size={20} />
                     <p className='m-0 p-0'>Set Qrcode</p>
@@ -48,7 +48,7 @@ export const ProductPage = () => {
 
     return (
         <MainLayout>
-            <Container className={ProductPagescss.Products}>
+            <Container className={AccountPagescss.MyAccount}>
                 <ProductNavbarTabs setActiveTab={setActiveTab} />
                 <div className="ProductContent">
                     {activeTab === '/' && (
