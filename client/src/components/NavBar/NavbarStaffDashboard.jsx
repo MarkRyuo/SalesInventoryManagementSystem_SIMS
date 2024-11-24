@@ -10,7 +10,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { AiOutlineProduct } from "react-icons/ai";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import { FaHistory } from "react-icons/fa";
+import { MdInventory } from "react-icons/md";
 
 function NavbarStaffDashboard() {
     const [show, setShow] = useState(false);
@@ -26,7 +26,7 @@ function NavbarStaffDashboard() {
     const [buttons] = useState([
         { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-6", path: "/SDashboard" },
         { icon: <AiOutlineProduct />, btnName: "Account", id: "b-7", path: "/StaffAccountMode" },
-        { icon: <FaHistory />, btnName: "Inventory", id: "b-8", path: "/" },
+        { icon: <MdInventory />, btnName: "Inventory", id: "b-8", path: "/" },
         { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/AccountPage" },
         { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" }
     ]);
