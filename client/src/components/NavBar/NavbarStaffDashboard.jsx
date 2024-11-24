@@ -11,6 +11,8 @@ import { AiOutlineProduct } from "react-icons/ai";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { MdInventory } from "react-icons/md";
+import { TiDocumentAdd } from "react-icons/ti";
+
 
 function NavbarStaffDashboard() {
     const [show, setShow] = useState(false);
@@ -28,7 +30,9 @@ function NavbarStaffDashboard() {
         { icon: <AiOutlineProduct />, btnName: "Account", id: "b-7", path: "/StaffAccountMode" },
         { icon: <MdInventory />, btnName: "Inventory", id: "b-8", path: "/" },
         { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/AccountPage" },
-        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" }
+        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" },
+        { icon: <TiDocumentAdd />, btnName: "Add New Product", id: "b-11", path: "/AddNewAssets" },
+        { icon: <BiScan />, btnName: "Point of Sale", id: "b-12", path: "/ScanAsset" },
     ]);
 
     // Handle logout process
@@ -80,6 +84,7 @@ function NavbarStaffDashboard() {
                             <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-8")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-11")} />
                         </div>
                         <div style={{ height: "150px" }}>
                             <Button
