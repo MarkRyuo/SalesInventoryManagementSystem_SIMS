@@ -80,16 +80,16 @@ function ChartLg3() {
             {
                 label: 'Total Sales (₱)',
                 data: salesData.totalSales, // Sales data
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(170, 201, 255, 1)',
+                backgroundColor: 'rgba(170, 201, 255,0.2)',
                 fill: true,
                 tension: 0.4, // Smooth lines
             },
             {
                 label: 'Total Quantity',
                 data: salesData.totalQuantity, // Quantity data
-                borderColor: 'rgba(153, 102, 255, 1)',
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(205, 195, 255, 1)',
+                backgroundColor: 'rgba(205, 195, 255, 0.2)',
                 fill: true,
                 tension: 0.4, // Smooth lines
             }
