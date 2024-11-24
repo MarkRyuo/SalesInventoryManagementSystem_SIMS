@@ -21,13 +21,13 @@ function ProductNavbarTabs({ setActiveTab }) {
                     <p className='m-0 p-0'>My Account</p>
                 </Nav.Link>
             </Nav.Item>
-            <Nav.Item className={Account.mainTabs}>
+            <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/">
                     <FaHistory size={20} />
                     <p className='m-0 p-0'>Profile</p>
                 </Nav.Link>
             </Nav.Item>
-            <Nav.Item className={ProductPagescss.mainTabs}>
+            <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/">
                     <PiHandArrowUpBold size={20} />
                     <p className='m-0 p-0'></p>
