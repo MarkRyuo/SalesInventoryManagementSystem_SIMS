@@ -63,11 +63,20 @@
         div:first-child {
             display: flex;
         }
+        
+        .largeContainer {
+            border: 1px solid;
+            display: flex;
+            width: auto;
+            padding: 10px;
+            .divLG {
+                width: auto;
+                display: flex;
+                flex-direction: column;
+                border: 1px solid;
+                gap: 10px;
+            }
+        }
     }
 
-    .largeContainer {
-        display: flex;
-        width: auto;
-        padding: 10px;
-    }
 }

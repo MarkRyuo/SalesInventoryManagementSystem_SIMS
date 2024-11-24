@@ -110,12 +110,13 @@ export const DashboardPage = () => {
                             <Chart3 />
                             <Chart4 />
                         </div>
-                        <ChartLg3 />
-                    </div>
-
-                    <div className={DashboardCss.largeContainer}>
-                        <ChartLg2 />
-                        <ChartLg1 />
+                        <div className={DashboardCss.largeContainer}>
+                            <div className={DashboardCss.divLG}>
+                                <ChartLg3 />
+                                <ChartLg2 />
+                            </div>
+                            <ChartLg1 />
+                        </div>
                     </div>
 
                 </div>
