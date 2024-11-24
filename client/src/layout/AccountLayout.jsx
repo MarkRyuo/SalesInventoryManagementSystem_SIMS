@@ -7,7 +7,7 @@ import Sidebar from "../components/Account/SideBar"
 export const AccountLayout = ({ children }) => {
 
     return (
-        <Container fluid className={AccountLayoutscss.AccountLayoutLayoutContainer}>
+        <Container fluid className={AccountLayoutscss.AccountLayoutContainer}>
             <NavDashboard />
             <Container fluid='lg' className='p-0'>
                 <Sidebar />
