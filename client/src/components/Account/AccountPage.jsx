@@ -1,4 +1,5 @@
 import Sidebar from "./SideBar";
+import { MainLayout } from "../../layout/MainLayout";
 
 function AccountPage() {
     return (
