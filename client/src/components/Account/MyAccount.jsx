@@ -11,7 +11,8 @@ function MyAccount() {
 
                 <div>
                     <div>
-                        <img />
+                        <img src=''/>
+                        <h1></h1>
                     </div>
                     <div>
 
