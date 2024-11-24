@@ -141,11 +141,10 @@ function ReportChart1() {
             <div className={ReportChartcss.contentChart}>
                 <p className="m-0 p-2">{`Total Stock: ${totalStock}`}</p>
             </div>
-            <div className="d-flex justify-content-between">
-                <Button variant="" onClick={() => setShowModal(true)}>
+                
+            <Button variant="" onClick={() => setShowModal(true)}>
                     Filter by Date
                 </Button>
-            </div>
 
             {/* Modal for date filtering */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
