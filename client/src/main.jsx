@@ -147,7 +147,7 @@ const router = createBrowserRouter([
   },
   {
     path: "StaffProduct",
-    element: <StaffProductPage />,
+    element: <StaffProduct/>,
   },
 
   //? Staff Comps 
