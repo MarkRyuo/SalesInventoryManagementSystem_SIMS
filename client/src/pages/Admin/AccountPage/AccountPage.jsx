@@ -59,7 +59,7 @@ export const ProductPage = () => {
                             <StaffComp setActiveTab={setActiveTab}/>
                         </div>
                     )}
-                    {activeTab === '/SetQrcode' && (
+                    {activeTab === '/' && (
                         <div className="Unknown">
                         </div>
                     )}
