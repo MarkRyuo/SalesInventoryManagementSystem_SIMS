@@ -68,8 +68,8 @@ function LowStockReport() {
             {/* Low Stock Overview */}
             <div className={ReportChartcss.containerChart4}>
                 <h1 className="m-0 p-0">Low Stock Overview</h1>
-                <p className="m-0 p-2">{lowStockData.length}</p> {/* Dynamic low stock count */}
-                <p className="m-0 pb-2">From {startDate} to {endDate}</p> {/* Dynamic date range */}
+                <p className="m-0 ">{lowStockData.length}</p> {/* Dynamic low stock count */}
+                <p className="m-0">From {startDate} to {endDate}</p> {/* Dynamic date range */}
                 {/* Filter Button */}
                 <Button variant="" onClick={() => setShowModal(true)}>
                     Filter by Date
