@@ -11,4 +11,9 @@
 .accountContainer {
     border: 1px solid red;
     height: 100vh;
+    display: flex;
+
+    div:first-child {
+        border: 1px solid green;
+    }
 }
