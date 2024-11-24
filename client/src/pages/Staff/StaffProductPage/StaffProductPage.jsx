@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { MainStaffLayout } from "../../../layout/MainStaffLayout";
+import MainStaffLayout from '../../../layout/MainStaffLayout';
 import { AiFillProduct } from "react-icons/ai";
 import Product from '../../../components/Charts/ProductChart/Product';
 import { Container } from "react-bootstrap";
