@@ -126,35 +126,22 @@
 /* !Warning This is for ChartLg */
 
 .containerChartLg1 {
-    width: 100%;
+    width: 80%;
     height: 580px;
-    background-color: var(--BgColor);
+    background-color: rgba(146, 227, 182, 0.945);
     border-radius: 10px;
-    box-shadow: 1px 1px 3px var(--chartShadow);
+    box-shadow: 1px 5px 3px var(--chartShadow);
     overflow: auto;
 
 }
 
 .containerChartLg2 {
     // border: 1px solid;
-    width: 750px;
-    height: 300px;
-    /*! Change this in auto if chart-lg is coded*/
-    background-color: var(--BgColor);
-    border-radius: 10px;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.containerChartLg3 {
-    // border: 1px solid rgb(130, 238, 144);
     padding: 10px;
     width: 100%;
     height: 300px;
     /*! Change this in auto if chart-lg is coded*/
-    box-shadow: 1px 1px 3px var(--chartShadow);
+    box-shadow: 1px 5px 3px var(--chartShadow);
     // border-radius: 20px;
     overflow: auto;
     display: flex;
@@ -162,6 +149,22 @@
     display: flex;
     flex-direction: row;
     border-radius: 10px;
-    gap: 20px;
-    
+    justify-content: center;
+}
+
+.containerChartLg3 {
+    // border: 1px solid rgb(130, 238, 144);
+    padding: 10px;
+    width: 720px;
+    height: 300px;
+    /*! Change this in auto if chart-lg is coded*/
+    box-shadow: 1px 5px 3px var(--chartShadow);
+    // border-radius: 20px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+
 }
