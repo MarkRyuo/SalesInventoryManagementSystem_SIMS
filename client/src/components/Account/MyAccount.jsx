@@ -2,7 +2,9 @@ import { MainLayout } from "../../layout/MainLayout";
 
 function MyAccount() {
     return (
-        
+        <div>
+            
+        </div>
     )
 }
 
