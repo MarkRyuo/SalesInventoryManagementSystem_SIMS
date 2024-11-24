@@ -7,7 +7,7 @@ import MainStaffLayoutScss from './MainLayout.module.scss' ;
 
 function MainStaffLayout({children}) {
     return (
-        <Container fluid style={{ margin: "0px", padding: "0px" }} className={}>
+        <Container fluid style={{ margin: "0px", padding: "0px" }} className={MainStaffLayoutScss.mainLayoutStaff}>
 
             <div className="Staff-container">
                 <NavbarStaffDashboard />
