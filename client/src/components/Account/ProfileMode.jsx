@@ -41,7 +41,7 @@ function ProfileMode() {
                         <p className="fs-4">Loading...</p>
                     </div>
                 ) : (
-                    <>
+                    <div className={ProfileModeScss.content}>
                         <div style={{ display: "flex", padding: 15 }}>
                             <Image style={{ width: 80, marginRight: 10, height: 80 }} src="/Reyes_Electronics_LogoBg.png" roundedCircle />
                             <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
@@ -63,7 +63,7 @@ function ProfileMode() {
                                 <p>Username: <span>{adminData ? adminData.username : 'N/A'}</span></p>
                             </div>
                         </div>
-                    </>
+                    </div>
                 )}
             </div>
         </div>
