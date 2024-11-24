@@ -75,10 +75,7 @@ function ReportChart2() {
 
     return (
         <div className={ReportChartcss.containerChart2}>
-            <div className={ReportChartcss.containerText}>
-                <FaReact size={23} />
                 <p className="m-0 p-0">Total Sales</p>
-            </div>
             <div className={ReportChartcss.contentChart}>
                 <p className="m-0 p-2">{`₱${totalSales.toFixed(2)}`}</p>
                 <p className="m-0 pb-2">Filtered by date range</p>
