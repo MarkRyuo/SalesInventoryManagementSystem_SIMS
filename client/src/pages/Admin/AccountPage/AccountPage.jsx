@@ -60,7 +60,7 @@ export const ProductPage = () => {
                         </div>
                     )}
                     {activeTab === '/' && (
-                        <div className="Unknown">
+                        <div>
                         </div>
                     )}
                 </div>
