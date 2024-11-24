@@ -106,7 +106,7 @@ function SalesReportQuantitySold() {
             {/* Report Header */}
             <div className={ReportChartcss.containerText}>
                 <FaReact size={23} />
-                <p className='m-0 p-0'>Sales Report: Quantity Sold</p>
+                <p className="m-0 p-0">Sales Report: Quantity Sold</p>
             </div>
 
             {/* Report Summary */}
@@ -115,16 +115,10 @@ function SalesReportQuantitySold() {
                 <p className="m-0 pb-2">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
             </div>
 
-            {/* Filter and Action Buttons */}
+            {/* Filter Button */}
             <div className="d-flex justify-content-between">
                 <Button variant="primary" onClick={() => setShowModal(true)}>
                     Filter by Date
-                </Button>
-                <Button variant="success" onClick={downloadPDF} disabled={filteredData.length === 0}>
-                    Download PDF
-                </Button>
-                <Button variant="success" onClick={downloadXLSX} disabled={filteredData.length === 0}>
-                    Download XLSX
                 </Button>
             </div>
 
@@ -151,10 +145,27 @@ function SalesReportQuantitySold() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleFilter}>
+                        <Button variant="primary" onClick={handleFilter} className="mt-3 w-100">
                             Filter
                         </Button>
                     </Form>
+                    {/* Action Buttons */}
+                    <div className="d-flex justify-content-between mt-4">
+                        <Button
+                            variant="success"
+                            onClick={downloadPDF}
+                            disabled={filteredData.length === 0}
+                        >
+                            Download PDF
+                        </Button>
+                        <Button
+                            variant="success"
+                            onClick={downloadXLSX}
+                            disabled={filteredData.length === 0}
+                        >
+                            Download XLSX
+                        </Button>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
@@ -163,6 +174,7 @@ function SalesReportQuantitySold() {
                 </Modal.Footer>
             </Modal>
         </div>
+
     );
 }
 
