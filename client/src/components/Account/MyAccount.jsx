@@ -6,8 +6,10 @@ function MyAccount() {
 
             <div>
                 <div>
-                    
+                    {/* Image */}
                 </div>
+
+                div
             </div>
         </div>
     )
