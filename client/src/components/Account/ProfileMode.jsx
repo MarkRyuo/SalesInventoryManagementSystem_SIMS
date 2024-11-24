@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Image, Button } from "react-bootstrap";
-import { MainLayout } from "../../layout/MainLayout";
 import { Link } from "react-router-dom";
 import { db } from '../../services/firebase'; // Adjust the path according to your project structure
 import { doc, getDoc } from "firebase/firestore";
@@ -49,7 +48,7 @@ function ProfileMode() {
                                     <p className="fs-4 m-0">{adminData ? adminData.firstname : 'N/A'} {adminData ? adminData.lastname : 'N/A'}</p>
                                     <p className="fs-6 m-0">Administrator</p>
                                 </div>
-                                <Button as={Link} to={'/MyProfile'} variant="outline-primary">Edit Profile</Button>
+                                <Button as={Link} to={'/MyProfile'} variant="outline-primary">Edit User Profile</Button>
                             </div>
                         </div>
 
