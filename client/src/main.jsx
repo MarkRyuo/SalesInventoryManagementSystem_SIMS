@@ -27,7 +27,6 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx'
 
 //! Done 
 import ProductPage from './pages/Admin/ProductPage/ProductPage.jsx';
-import StaffTransactionHistory from './pages/Staff/StaffTransactionHistory/StaffTransactionHistory.jsx';
 import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/AdminTransactionHistory.jsx';
 import Product from './components/Charts/ProductChart/Product.jsx' ;
 import DashboardPage from '../src/pages/Admin/DashboardPage/DashboardPage.jsx';
