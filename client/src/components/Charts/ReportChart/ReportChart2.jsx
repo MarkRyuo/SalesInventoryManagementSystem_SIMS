@@ -75,16 +75,12 @@ function ReportChart2() {
 
     return (
         <div className={ReportChartcss.containerChart2}>
-            <p className="m-0 p-0">Total Sales</p>
-            <div className={ReportChartcss.contentChart}>
-                <p className="m-0 p-2">{`₱${totalSales.toFixed(2)}`}</p>
-                <p className="m-0 pb-2">Filtered by date range</p>
-            </div>
-            <div className="d-flex justify-content-between">
-                <Button variant="primary" onClick={() => setShowModal(true)}>
-                    Filter by Date
-                </Button>
-            </div>
+            <h1 className="m-0 p-0">Total Sales</h1>
+            <p className="m-0 p-2">{`₱${totalSales.toFixed(2)}`}</p>
+            <p className="m-0 pb-2">Filtered by date range</p>
+            <Button variant="primary" onClick={() => setShowModal(true)}>
+                Filter by Date
+            </Button>
 
             {/* Modal for date filtering */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
