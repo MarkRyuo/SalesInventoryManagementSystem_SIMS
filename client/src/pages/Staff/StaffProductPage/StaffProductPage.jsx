@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { MainLayout } from "../../../layout/MainLayout";
@@ -12,7 +13,6 @@ import ProductPagescss from './ProductPage.module.scss' ;
 import ReOrdering from './ReOrdering';
 import SetQrcode from './SetQrcode';
 import { LiaQrcodeSolid } from "react-icons/lia";
-
 
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
