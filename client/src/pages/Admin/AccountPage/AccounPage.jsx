@@ -21,13 +21,13 @@ function ProductNavbarTabs({ setActiveTab }) {
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/Product">
                     <AiFillProduct size={20} />
-                    <p className='m-0 p-0'>My </p>
+                    <p className='m-0 p-0'>My Account </p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
                 <Nav.Link eventKey="/AdminTransactionHistory">
                     <FaHistory size={20} />
-                    <p className='m-0 p-0'>Transaction History</p>
+                    <p className='m-0 p-0'>Profile</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
