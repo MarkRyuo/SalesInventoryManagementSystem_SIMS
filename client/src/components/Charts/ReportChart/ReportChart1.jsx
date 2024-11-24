@@ -136,9 +136,8 @@ function ReportChart1() {
 
     return (
         <div className={ReportChartcss.containerChart1}>
-            <div className={ReportChartcss.containerText1}>
-                <h1 className="m-0 p-0">Stock Overview</h1>
-            </div>
+                
+            <h1 className="m-0 p-0">Stock Overview</h1>
             <div className={ReportChartcss.contentChart}>
                 <p className="m-0 p-2">{`Total Stock: ${totalStock}`}</p>
             </div>
