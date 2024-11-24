@@ -19,7 +19,7 @@ function MyAccount() {
                         <Button variant=''>Edit User Profile</Button>
                     </div>
                     <div>
-
+                        
                     </div>
                 </div>
             </div>

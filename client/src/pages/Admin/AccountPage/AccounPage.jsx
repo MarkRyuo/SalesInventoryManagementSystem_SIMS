@@ -51,7 +51,7 @@ export const ProductPage = () => {
                 <div className="ProductContent">
                     {activeTab === '/MyAccount' && (
                         <div className="Product">
-                            <MyAccount />
+                            <Profi
                         </div>
                     )}
                     {activeTab === '/Profile' && (
