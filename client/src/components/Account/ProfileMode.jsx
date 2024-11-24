@@ -34,7 +34,7 @@ function ProfileMode() {
     }, [adminId]);
 
     return (
-        <div style={{ marginTop: 100, boxShadow: '2px 5px 5px #E1E4E4 ', borderRadius: 15, width: '100%', minWidth: 400 }} className={ProfileModeScss.containerProfile}>
+    <div className={ProfileModeScss.container}>
             <div className="content">
                 {loading ? (
                     <div style={{ textAlign: 'center', padding: '50px' }}>
