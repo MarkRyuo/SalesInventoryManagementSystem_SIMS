@@ -8,7 +8,6 @@ import { Container } from "react-bootstrap";
 import AdminTransactionHistory from '../AdminTransactionHistory/AdminTransactionHistory'
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
-
 import ProductPagescss from './ProductPage.module.scss' ;
 import ReOrdering from './ReOrdering';
 import SetQrcode from './SetQrcode';
