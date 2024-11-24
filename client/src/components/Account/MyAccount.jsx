@@ -1,9 +1,10 @@
+import { MainLayout } from "../../layout/MainLayout";
 
 function MyAccount() {
     return (
-        <Main>
+        <MainLayout>
             
-        </Main>
+        </MainLayout>
     )
 }
 
