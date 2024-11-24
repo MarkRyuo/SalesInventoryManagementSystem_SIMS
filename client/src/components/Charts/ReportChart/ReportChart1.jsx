@@ -136,8 +136,8 @@ function ReportChart1() {
     return (
         <div className={ReportChartcss.containerChart1}>
                 
-            <h1 className="m-0 p-0">Stock Overview</h1>
-            <p className="m-0 p-0"><span>Total Stock: </span>{`${totalStock}`}</p>    
+            <h1 className="m-0 p-0">StockIn Overview</h1>
+            <p className="m-0 p-0">{`${totalStock}`}</p>    
             <Button variant="" onClick={() => setShowModal(true)}>
                 Filter by Date
             </Button>
