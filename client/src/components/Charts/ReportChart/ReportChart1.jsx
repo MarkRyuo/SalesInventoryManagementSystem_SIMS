@@ -165,9 +165,24 @@ function ReportChart1() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleFilter} className="mt-3 w-100">
-                            Filter
-                        </Button>
+                        <div className="d-flex justify-content-between mt-3">
+                            <Button
+                                variant="primary"
+                                onClick={handleFilter}
+                            >
+                                Filter
+                            </Button>
+                            <Button
+                                variant="warning"
+                                onClick={() => {
+                                    setStartDate('');
+                                    setEndDate('');
+                                    setFilteredData([]); // Clear filtered data
+                                }}
+                            >
+                                Clear
+                            </Button>
+                        </div>
                     </Form>
                     <div className="d-flex justify-content-between mt-4">
                         <Button
@@ -192,6 +207,7 @@ function ReportChart1() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
     );
 }
