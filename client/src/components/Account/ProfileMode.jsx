@@ -57,6 +57,9 @@ function ProfileMode() {
                             <p className="fs-4">Personal Information</p>
                             <hr />
                             <div style={{ borderRadius: 20, padding: 20, boxShadow: '1px 4px 5px #E1E4E4' }}>
+                                <div>
+                                    <p>FirstName: <span>{adminData ? adminData.firstname : 'N/A'}</span></p>
+                                </div>
                                 <p>FirstName: <span>{adminData ? adminData.firstname : 'N/A'}</span></p>
                                 <p>LastName: <span>{adminData ? adminData.lastname : 'N/A'}</span></p>
                                 <p>Gender: <span>{adminData ? adminData.gender : 'N/A'}</span></p>
