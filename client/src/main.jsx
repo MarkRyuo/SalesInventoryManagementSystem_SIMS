@@ -35,6 +35,7 @@ import SetQrcode from './pages/Admin/ProductPage/SetQrcode.jsx' ;
 import ReportPage from './pages/Admin/ReportPage/ReportPage.jsx';
 import AccountPage from './pages/Admin/AccountPage/AccountPage.jsx'
 import ProfileComp from './components/Account/ProfileComp.jsx';
+import StaffAccountPage from './pages/Staff/StaffProductPage/StaffProductPage.jsx'
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -139,6 +140,10 @@ const router = createBrowserRouter([
   {
     path: "SearchAssets",
     element: <SearchAsset />,
+  },
+  {
+    path: "StaffProductPage",
+    element: <StaffProductPage /> ,
   },
 
   //? Staff Comps 
