@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { MainLayout } from "../../../layout/MainLayout";
+import { MainStaffLayout } from "../../../layout/MainStaffLayout";
 import { AiFillProduct } from "react-icons/ai";
 import Product from '../../../components/Charts/ProductChart/Product';
 import { Container } from "react-bootstrap";
@@ -48,7 +48,7 @@ export const ProductPage = () => {
     const [activeTab, setActiveTab] = useState('/Product');
 
     return (
-        <MainLayout>
+        <MainStaffLayout>
             <Container className={StaffProductPagescss.Products}>
                 <ProductNavbarTabs setActiveTab={setActiveTab} />
                 <div className="ProductContent">
@@ -74,7 +74,7 @@ export const ProductPage = () => {
                     )}
                 </div>
             </Container>
-        </MainLayout>
+        </MainStaffLayout>
     );
 };
 
