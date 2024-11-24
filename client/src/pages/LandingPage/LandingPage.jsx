@@ -5,6 +5,7 @@ import { CiGlobe } from "react-icons/ci";
 import AboutCard from "./LandingPageCards/AboutCard";
 import Footer from "./LandingPageCards/Footer";
 import LogInCardPage from "./LandingPageCards/LogInCardPage";
+import { TbLogin2 } from "react-icons/tb";
 
 function LandingPage() {
 
@@ -22,6 +23,9 @@ function LandingPage() {
                                 <p className="mb-3">Elevate Your Experience with Top-Tier Electronic Products.</p>
                                 <Button variant='' href="#footer" id="btn" className={LandingPagecss.Btn}>
                                     <span><CiGlobe /></span> Explore
+                                </Button>
+                                <Button variant='' href="#" id="btn" className={LandingPagecss.Btn}>
+                                    <span><TbLogin2 /></span> Login
                                 </Button>
                             </div>
 
@@ -42,7 +46,7 @@ function LandingPage() {
                         <AboutCard />
                     </div>
 
-                    <div className={LandingPagecss.LogInMainContainer}>
+                    <div className={LandingPagecss.LogInMainContainer} id="Login">
                         {/* Login */}
                         <LogInCardPage />
                     </div>
