@@ -24,7 +24,7 @@ function LandingPage() {
                                 <Button variant='' href="#footer" id="btn" className={LandingPagecss.Btn}>
                                     <span><CiGlobe /></span> Explore
                                 </Button>
-                                <Button variant='' href="Logins" id="btn" className={LandingPagecss.Btn}>
+                                <Button variant='' href="#Logins" id="btn" className={LandingPagecss.Btn}>
                                     <span><TbLogin2 /></span> Login
                                 </Button>
                             </div>
