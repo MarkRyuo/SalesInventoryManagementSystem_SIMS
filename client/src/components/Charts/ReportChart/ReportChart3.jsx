@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FaReact } from "react-icons/fa";
 import { Modal, Button, Form } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
@@ -104,7 +103,7 @@ function SalesReportQuantitySold() {
     return (
         <div className={ReportChartcss.containerChart3}>
             {/* Report Header */}
-            <h1 className="m-0 p-0">Sales Report: Quantity Sold</h1>
+            <h1 className="m-0 p-0">Quantity Sold</h1>
             {/* Report Summary */}
             <p className="m-0">{`Total Quantity Sold: ${totalQuantity}`}</p>
             <p className="m-0">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
