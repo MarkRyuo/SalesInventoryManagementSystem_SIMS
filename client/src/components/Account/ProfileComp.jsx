@@ -4,7 +4,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';  // Import bcryptjs for password hashing
-
+import ProfileCompScss from './AccountComp.module.scss'
 
 const ProfileComp = () => {
     const navigate = useNavigate();
@@ -139,7 +139,7 @@ const ProfileComp = () => {
     };
 
     return (
-        <Form>
+        <Form className={}>
             <Row style={{ width: "100%", margin: 0, padding: 0 }}>
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="firstname">
