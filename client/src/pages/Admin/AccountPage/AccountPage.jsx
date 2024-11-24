@@ -50,12 +50,12 @@ export const ProductPage = () => {
                         </div>
                     )}
                     {activeTab === '/ProfileComp' && (
-                        <div c>
+                        <div>
                             <ProfileComp setActiveTab={setActiveTab}/>
                         </div>
                     )}
                     {activeTab === '/StaffComp' && (
-                        <div className="Unknown">
+                        <div>
                             <StaffComp setActiveTab={setActiveTab}/>
                         </div>
                     )}
