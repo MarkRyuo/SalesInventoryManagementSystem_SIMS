@@ -8,8 +8,7 @@ import { PiHandArrowUpBold } from "react-icons/pi";
 import AccountPagescss from './AccountPage.module.scss';
 import { LiaQrcodeSolid } from "react-icons/lia";
 import MyAccount from '../../../components/Account/MyAccount';
-import StaffAccount from '../../StaffAccount';
-
+import StaffComp from '../../../components/Account/StaffComp';
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
     return (
@@ -62,7 +61,7 @@ export const ProductPage = () => {
                     )}
                     {activeTab === '/StaffComp' && (
                         <div className="Unknown">
-                            <StaffAccount />
+                            <StaffComp />
                         </div>
                     )}
                     {activeTab === '/SetQrcode' && (
