@@ -134,7 +134,14 @@
     overflow: auto;
     padding: 10px;
 
-    
+    .activityItem {
+        border: 1px solid;
+
+
+        .activityDetails {
+            border: 1px solid;
+        }
+    }
 
 
 
