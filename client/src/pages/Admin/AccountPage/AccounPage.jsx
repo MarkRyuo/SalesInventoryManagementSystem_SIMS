@@ -31,7 +31,7 @@ function ProductNavbarTabs({ setActiveTab }) {
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={ProductPagescss.mainTabs}>
-                <Nav.Link eventKey="/ReOrdering">
+                <Nav.Link eventKey="/">
                     <PiHandArrowUpBold size={20} />
                     <p className='m-0 p-0'></p>
                 </Nav.Link>
