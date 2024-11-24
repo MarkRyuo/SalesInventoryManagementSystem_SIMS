@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getDatabase, ref, get } from "firebase/database";
 import Chartcss from './Charts.module.scss';
-import { FaReact } from "react-icons/fa";
 
 function Chart4() {
     const [lowStockCount, setLowStockCount] = useState(0);

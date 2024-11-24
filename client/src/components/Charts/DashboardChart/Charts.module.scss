@@ -1,12 +1,14 @@
 
 :root {
-    --bgChart1: #CDC3FF ;
+    --bgChart1: #cdc3ff ;
+    --bgChart2: #AAC9FF ;
+    --bgColor: #afafaf ;
 }
 
 
 /* ?Chart 1 */
 .containerChart1 {
-    border: 1px solid; 
+    // border: 1px solid; 
     box-sizing: border-box;
     padding: 15px 20px;
     height: auto;
@@ -14,6 +16,7 @@
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
+    background-color: var(--bgChart1);
 
     h5 {
         font-size: 1rem;
@@ -34,7 +37,7 @@
 
 /* ?Chart 2 */
 .containerChart2 {
-    border: 1px solid; 
+    // border: 1px solid; 
     box-sizing: border-box;
     padding: 15px 20px;
     height: auto;
@@ -42,6 +45,7 @@
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
+    background-color: var(--bgChart2);
 
     h5 {
         font-size: 1rem;
@@ -62,7 +66,7 @@
 
 /* ?Chart 3 */
 .containerChart3 {
-    border: 1px solid; 
+    border: 1px solid #8d8d8d; 
     box-sizing: border-box;
     padding: 15px 20px;
     height: auto;
@@ -90,6 +94,7 @@
 
 /* ?Chart 3 */
 .containerChart4 {
+    border: 1px solid #8d8d8d; 
     border: 1px solid; 
     box-sizing: border-box;
     padding: 15px 20px;
