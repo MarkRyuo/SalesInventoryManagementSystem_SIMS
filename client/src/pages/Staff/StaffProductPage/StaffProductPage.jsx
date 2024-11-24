@@ -7,7 +7,7 @@ import Product from '../../../components/Charts/ProductChart/Product';
 import { Container } from "react-bootstrap";
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
-import StaffProductPagescss from './ProductPage.module.scss' ;
+import StaffProductPagescss from './StaffProductPage.module.scss' ;
 import ReOrdering from './ReOrdering';
 import SetQrcode from './SetQrcode';
 import { LiaQrcodeSolid } from "react-icons/lia";
@@ -59,7 +59,7 @@ export const ProductPage = () => {
                     )}
                     {activeTab === '/AdminTransactionHistory' && (
                         <div className="Unknown">
-                            <AdminTransactionHistory />
+
                         </div>
                     )}
                     {activeTab === '/ReOrdering' && (
