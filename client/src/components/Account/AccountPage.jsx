@@ -2,9 +2,9 @@
 function AccountPage() {
     return (
         <div>
-
+            
         </div>
     )
 }
 
-export default AccountPage
+export default AccountPage ;
