@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
-import { fetchTotalSales } from './path/to/your/fetchFunction'; // Adjust the path accordingly
+import { fetchTotalSales } from './Service/TotalSales'; // Adjust the path accordingly
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx';
