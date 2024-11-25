@@ -31,7 +31,7 @@ function StaffNavBar({ backBtn }) {
                             <Button
                                 as={Link}
                                 to={Backbtn.pathTransaction}
-                                variant='light'
+                                variant=''
                                 className='fs-5'
                             >
                                 {Backbtn.Title}
