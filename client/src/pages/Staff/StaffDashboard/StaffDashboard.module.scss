@@ -250,7 +250,7 @@
         border-radius: 15px;
         padding: 15px;
         display: flex;
-        gap: 0px;
+        gap: 10px;
         flex-direction: column;
         div:first-child {
             display: flex;
@@ -260,17 +260,10 @@
             border: 1px solid;
             margin-top:10px;
             width: auto;
-            gap: 10px;
+            
 
             .buttonsHeroCard {
-                // border: 1px solid;
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-                width: 500px;
-                height: 400px;
-                gap: 20px;
-                justify-content: center;
+                display: none;
             }
 
             .divLG {
