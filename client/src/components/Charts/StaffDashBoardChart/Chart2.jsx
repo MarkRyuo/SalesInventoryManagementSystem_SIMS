@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import StaffChartcss from './Charts.module.scss';
+import StaffChartcss from './StaffCharts.module.scss';
 import { fetchTotalSales } from '../../../services/Fetching/TransactionServices'; // Ensure correct import path
 
 //* Chart2 Small
