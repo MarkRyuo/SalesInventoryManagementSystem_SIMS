@@ -118,7 +118,7 @@ function StockInReports() {
     return (
         <MainLayout>
             <div className="stock-in-reports">
-                <h1>Stock In Reports</h1>
+                <h1>Low Stock Reports</h1>
                 <div className="filter-section">
                     <Form>
                         <Form.Group>
