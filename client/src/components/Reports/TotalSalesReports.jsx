@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { fetchTotalSales } from './Service/TotalSales'; // Adjust the path accordingly
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import XLSX from 'xlsx';
+import * as XLSX from 'xlsx';  // Update this line
 import MainLayout from '../../layout/MainLayout'
 
 function TotalSalesReports() {
@@ -134,7 +134,6 @@ function TotalSalesReports() {
                 </div>
             </div>
         </MainLayout>
-
     );
 }
 
