@@ -46,39 +46,25 @@ function TotalSalesReports() {
         // Create a worksheet from the filtered data
         const ws = XLSX.utils.json_to_sheet(filteredData);
 
-        // Add header styling
-        const header = ws['!rows'] = [
-            { hpt: 30 }, // Set height of header row
-        ];
+        // Style header cells (bold font, centered text)
+        const headerCells = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1'];
+        headerCells.forEach(cell => {
+            if (ws[cell]) {
+                ws[cell].s = { font: { bold: true } };  // Make text bold
+            }
+        });
 
-        // Style header cells (bold font)
-        ws['A1'].s = { font: { bold: true } };
-        ws['B1'].s = { font: { bold: true } };
-        ws['C1'].s = { font: { bold: true } };
-        ws['D1'].s = { font: { bold: true } };
-        ws['E1'].s = { font: { bold: true } };
-        ws['F1'].s = { font: { bold: true } };
-
-        // Adding the totals in the last row
+        // Add total row at the bottom in vertical format
         const totals = [
-            '',
-            'Total Quantity Sold',
-            totalQuantitySold,
-            '',
-            'Total Revenue',
-            `₱${totalRevenue.toFixed(2)}`,
-            '',
-            'Total Discount',
-            `₱${totalDiscount.toFixed(2)}`,
-            '',
-            'Total Tax',
-            `₱${totalTax.toFixed(2)}`,
-            '',
-            'Net Revenue',
-            `₱${netRevenue.toFixed(2)}`,
+            ['Total Quantity Sold', totalQuantitySold],
+            ['Total Revenue', `₱${totalRevenue.toFixed(2)}`],
+            ['Total Discount', `₱${totalDiscount.toFixed(2)}`],
+            ['Total Tax', `₱${totalTax.toFixed(2)}`],
+            ['Net Revenue', `₱${netRevenue.toFixed(2)}`],
         ];
 
-        XLSX.utils.sheet_add_aoa(ws, [totals], { origin: -1 }); // Add totals at the bottom
+        // Append totals to the sheet, starting at the row below the last data row
+        XLSX.utils.sheet_add_aoa(ws, totals, { origin: -1 });
 
         // Create a new workbook
         const wb = XLSX.utils.book_new();
@@ -94,6 +80,8 @@ function TotalSalesReports() {
         link.download = 'sales_report.xlsx';
         link.click();
     };
+
+
 
 
     // Handle PDF file download
