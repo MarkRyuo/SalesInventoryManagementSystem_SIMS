@@ -255,7 +255,7 @@ function Checkout() {
                             {/* Displaying Change */}
                             {paymentAmount && paymentAmount >= total && (
                                 <div className="mt-2">
-                                    <strong>Change: </strong>₱{change.toFixed(2)}
+                                    <strong className="fs-6 fw-medium">Change: </strong>₱{change.toFixed(2)}
                                 </div>
                             )}
 
