@@ -71,7 +71,7 @@ function SDashboard() {
                                     <span className="fw-semibold">Hello, </span> <span>{getTitle(staffName.gender)} {staffName.firstname} {staffName.lastname}</span>
                                 </h4>
                                 <p className="m-0">REYES ELECTRONICS.</p>
-                                <p>{currentDate}</p>
+                                <p className="m-0">{currentDate}</p>
                             </div>
                         </div>
                     )}
