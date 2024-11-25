@@ -38,6 +38,7 @@ import ProfileComp from './components/Account/ProfileComp.jsx';
 import StaffProductPage from './pages/Staff/StaffProductPage/StaffProductPage.jsx'
 import StaffProduct from './components/Charts/ProductChart/StaffProduct.jsx'
 import LowStockReports from './components/Reports/LowStockReports.jsx';
+import StockInReports from './components/Reports/StockInReports.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -183,6 +184,10 @@ const router = createBrowserRouter([
   {
     path: "LowStockReports",
     element: <LowStockReports /> , 
+  },
+  {
+    path: "StockInReports",
+    element: <StockInReports /> ,
   },
 
 ]);
