@@ -1,5 +1,4 @@
 
-
 function TotalSales() {
     return (
         <div>
@@ -8,4 +7,4 @@ function TotalSales() {
     )
 }
 
-export default TotalSales
+export default TotalSales ;
