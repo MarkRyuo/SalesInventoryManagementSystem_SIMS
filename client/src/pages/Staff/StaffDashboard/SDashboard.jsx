@@ -3,7 +3,7 @@ import { Image } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { db } from "../../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import StaffDashboardScss from '../Staff/StaffDashboard/StaffDashboard.module.scss';
+import StaffDashboardScss from './StaffDashboard.module.scss';
 import { MdSpaceDashboard } from "react-icons/md";
 import StaffButtons from "../../../components/StaffPortal/StaffButtons/StaffButtons";
 import { TiDocumentAdd } from "react-icons/ti";
