@@ -80,7 +80,7 @@ export const NavDashboard = () => {
                         <div className={Navbars.buttonsList}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
+                            {/* <Buttons buttons={buttons.filter((button) => button.id === "b-3")} /> */}
                             <Buttons buttons={buttons.filter((button) => button.id === "b-4")} />
                             <DropdownReports />
                         </div>
