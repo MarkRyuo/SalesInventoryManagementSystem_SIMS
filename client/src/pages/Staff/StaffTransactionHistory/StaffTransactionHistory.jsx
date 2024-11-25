@@ -164,7 +164,7 @@ function AdminTransactionHistory() {
                 <ListGroup variant="flush">
                     {filteredOrders.length > 0 ? (
                         filteredOrders.map((order) => (
-                            <ListGroup.Item key={order.id} className={AdminTransactionScss.ListGroupItem}>
+                            <ListGroup.Item key={order.id} className={StaffTransactionScss.ListGroupItem}>
                                 <div>
                                     <h5 className="p-0 mb-2">Order ID: {order.id}</h5>
                                     <p className="p-0 m-0">Order Date: {order.date}</p>
