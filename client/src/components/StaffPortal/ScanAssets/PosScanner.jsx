@@ -181,7 +181,7 @@ function PosScanner() {
     };
 
     const handleCheckout = () => {
-        navigate('/StaffProductPage', { state: { scannedItems } });
+        navigate('/ScanAssetsMode', { state: { scannedItems } });
     };
 
     return (
