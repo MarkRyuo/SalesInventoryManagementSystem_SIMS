@@ -189,6 +189,10 @@ const router = createBrowserRouter([
     path: "StockInReports",
     element: <StockInReports /> ,
   },
+  {
+    path: "TotalSalesReports",
+    element: <StockInReports />,
+  },
 
 ]);
 
