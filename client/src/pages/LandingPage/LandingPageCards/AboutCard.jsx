@@ -15,8 +15,7 @@ function AboutCard() {
                     <div>
                         <h5>Reyes Electronics Storefront</h5>
                         <p>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the cards content.
+                            The exterior shot of Reyes Electronics with the signage of his store and entrance.  The picture shows a busy retail place full of goods in stock.
                         </p>
                     </div>
                 </div>
@@ -26,7 +25,7 @@ function AboutCard() {
                         <img src="/img4.jpg" />
                     </div>
                     <div>
-                        <h5>Card Title</h5>
+                        <h5>Electronics section</h5>
                         <p>
                             Some quick example text to build on the card title and make up the
                             bulk of the cards content.
