@@ -27,8 +27,7 @@ function AboutCard() {
                     <div>
                         <h5>Electronics section</h5>
                         <p>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the cards content.
+                            An interior shot of Reyes Electronics with an aisle or section full of different electronic components.  The shelves are packed full which means good variety in the inventory.
                         </p>
                     </div>
                 </div>
@@ -38,7 +37,7 @@ function AboutCard() {
                         <img src="/img3.jpg" />
                     </div>
                     <div>
-                        <h5>Card Title</h5>
+                        <h5>Diverse Inventory</h5>
                         <p>
                             Some quick example text to build on the card title and make up the
                             bulk of the cards content.
