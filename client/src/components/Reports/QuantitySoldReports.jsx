@@ -18,4 +18,4 @@ function QuantitySoldReports() {
     )
 }
 
-export default QuantitySold;
+export default QuantitySoldReports;
