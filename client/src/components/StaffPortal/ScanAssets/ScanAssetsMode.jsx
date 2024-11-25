@@ -134,9 +134,10 @@ function Checkout() {
                     <h1>Checkout</h1>
                 </Container>
             </div>
+
             <Container fluid='lg' className="mt-3">
                 {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-                <Row>
+                <Row className={ScanProductModeScss.checkOutRow}>
                     <Col>
                         <h4>Your Order</h4>
                         <p>Date: {currentDate}</p>
