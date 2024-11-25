@@ -1,13 +1,13 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { Link } from 'react-router-dom';
 
 function DropdownReports() {
     return (
         <DropdownButton id="dropdown-basic-button" title="Reports" variant=''>
-            <Dropdown.Item href="/StockInReports">Stock In Report</Dropdown.Item>
-            <Dropdown.Item href="/LowStockReports">Low Stock Report</Dropdown.Item>
-            <Dropdown.Item href="/TotalSalesReports">Total Sales Report</Dropdown.Item>
-            <Dropdown.Item href="/QuantitySoldReports">Quantity Sold Report</Dropdown.Item>
+            <Link to={"/StockInReports"}>Stock In Report</Link>
+            <Link href="/LowStockReports">Low Stock Report</Link>
+            <Link href="/TotalSalesReports">Total Sales Report</Link>
         </DropdownButton>
     )
 }
