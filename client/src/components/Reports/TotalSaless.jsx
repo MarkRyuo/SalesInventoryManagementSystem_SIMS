@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { fetchTotalSales } from './TotalSaless';  // Adjust the import path
+import { fetchTotalSales } from './Service/TotalSalesservices';  // Adjust the import path
 import { saveAs } from 'file-saver';  // For XLSX export
 import * as XLSX from 'xlsx';
 import { jsPDF } from 'jspdf';
