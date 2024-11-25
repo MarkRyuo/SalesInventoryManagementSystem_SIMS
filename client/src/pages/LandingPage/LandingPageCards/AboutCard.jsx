@@ -39,8 +39,7 @@ function AboutCard() {
                     <div>
                         <h5>Diverse Inventory</h5>
                         <p>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the cards content.
+                            This interior shot of Reyes Electronics shows them the range in their products.  The picture indicates that there are several pieces of electronics and components available,
                         </p>
                     </div>
                 </div>
