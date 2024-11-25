@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Chartcss from './Charts.module.scss';
+import StaffChartcss from './StaffCharts.module.scss';
 import { getDatabase, ref, onValue } from "firebase/database";
 import { LiaProductHunt } from 'react-icons/lia';
 
