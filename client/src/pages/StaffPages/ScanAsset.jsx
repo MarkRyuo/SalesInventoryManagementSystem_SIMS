@@ -10,7 +10,7 @@ function ScanAsset() {
         {
             btnIcon: <IoMdArrowBack size={20} />,
             path: "/SDashboard",
-            Title: "Transaction History",
+            Title: "Inventory",
             pathTransaction: "/StaffProductPage",
             id: 1
         }
