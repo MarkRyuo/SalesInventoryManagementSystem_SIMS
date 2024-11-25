@@ -11,6 +11,7 @@ function TotalSalesReports() {
     const [endDate, setEndDate] = useState('');
     const [filteredTransactions, setFilteredTransactions] = useState([]);
     const [totalSales, setTotalSales] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);  // Add loading state
 
     const handleDateChange = async () => {
         if (!startDate || !endDate) {
@@ -18,62 +19,101 @@ function TotalSalesReports() {
             return;
         }
 
+        setIsLoading(true);  // Start loading
         const { filteredTransactions, totalSales } = await fetchTotalSales(startDate, endDate);
         setFilteredTransactions(filteredTransactions);
         setTotalSales(totalSales);
+        setIsLoading(false);  // Stop loading
     };
 
     const formatPeso = (amount) => {
         return `₱${parseFloat(amount).toFixed(2)}`;
     };
 
+    const calculateTotals = () => {
+        let totalQuantity = 0;
+        let totalRevenue = 0;
+        let totalDiscount = 0;
+        let totalTax = 0;
+
+        // Calculate totals based on the filtered transactions
+        filteredTransactions.forEach(transaction => {
+            totalQuantity += transaction.totalQuantity;
+            totalRevenue += parseFloat(transaction.total) || 0;  // Ensure total is a number
+            totalDiscount += parseFloat(transaction.discount) || 0;  // Assuming the discount is in the transaction
+            totalTax += parseFloat(transaction.tax) || 0;  // Ensure tax is a number
+        });
+
+        const netRevenue = totalRevenue - totalDiscount - totalTax;
+        return { totalQuantity, totalRevenue, totalDiscount, totalTax, netRevenue };
+    };
+
+
     const downloadPDF = () => {
+        const { totalQuantity, totalRevenue, totalDiscount, totalTax, netRevenue } = calculateTotals();
+
         const doc = new jsPDF();
         doc.setFontSize(12);
-        doc.text("Sales Report - Total Sales", 10, 10);
+        doc.text("Sales Report - Quantity Sold", 10, 10);
 
-        const tableData = filteredTransactions.map((entry) => [
-            entry.id,
-            entry.customerName,
-            entry.discountPercentage.toString(),
-            formatPeso(entry.paymentAmount),
-            formatPeso(entry.tax),
-            entry.totalQuantity.toString(),
-            formatPeso(entry.total),
-        ]);
+        const tableData = filteredTransactions.map((entry) => {
+            const item = entry.items[0] || {};  // Assuming the first item in the array is what we need
+            return [
+                item.productName || 'N/A',  // Access productName from the first item
+                entry.totalQuantity.toString() || '0',
+                formatPeso(item.price) || '₱0.00',  // Access price from the first item
+                (Number(entry.discount) || 0).toFixed(2),
+                (Number(entry.tax) || 0).toFixed(2),
+                formatPeso(entry.total) || '₱0.00',
+            ];
+        });
 
         doc.autoTable({
-            head: [["Transaction ID", "Customer Name", "Discount", "Amount", "Tax", "Total Quantity", "Total"]],
+            head: [["Product Name", "Total Quantity", "Price", "Discount", "Tax", "Total"]],
             body: tableData,
             startY: 20,
         });
 
         const totalY = doc.previousAutoTable.finalY + 10;
-        doc.text(`Total Sales: ${formatPeso(totalSales)}`, 10, totalY);
+        doc.text(`Total Quantity Sold: ${totalQuantity}`, 10, totalY);
+        doc.text(`Total Revenue: ${formatPeso(totalRevenue)}`, 10, totalY + 10);
+        doc.text(`Discounts Applied: ${formatPeso(totalDiscount)}`, 10, totalY + 20);
+        doc.text(`Tax Collected: ${formatPeso(totalTax)}`, 10, totalY + 30);
+        doc.text(`Net Revenue: ${formatPeso(netRevenue)}`, 10, totalY + 40);
 
-        doc.save("sales_report_total_sales.pdf");
+        doc.save("sales_report_quantity_sold.pdf");
     };
 
     const downloadXLSX = () => {
-        const formattedData = filteredTransactions.map((entry) => ({
-            TransactionID: entry.id,
-            CustomerName: entry.customerName,
-            Discount: entry.discountPercentage,
-            Amount: formatPeso(entry.paymentAmount),
-            Tax: formatPeso(entry.tax),
-            TotalQuantity: entry.totalQuantity,
-            Total: formatPeso(entry.total),
-        }));
+        const { totalQuantity, totalRevenue, totalDiscount, totalTax, netRevenue } = calculateTotals();
+
+        const formattedData = filteredTransactions.map((entry) => {
+            const item = entry.items[0] || {};  // Assuming the first item in the array is what we need
+            return {
+                ProductName: item.productName || 'N/A',  // Access productName from the first item
+                TotalQuantity: entry.totalQuantity || 0,
+                Price: formatPeso(item.price) || '₱0.00',  // Access price from the first item
+                Discount: (Number(entry.discount) || 0).toFixed(2),
+                Tax: (Number(entry.tax) || 0).toFixed(2),
+                Total: formatPeso(entry.total) || '₱0.00',
+            };
+        });
 
         formattedData.push({
-            TotalSales: formatPeso(totalSales),
+            TotalQuantitySold: totalQuantity,
+            TotalRevenue: formatPeso(totalRevenue),
+            DiscountsApplied: formatPeso(totalDiscount),
+            TaxCollected: formatPeso(totalTax),
+            NetRevenue: formatPeso(netRevenue),
         });
 
         const ws = XLSX.utils.json_to_sheet(formattedData);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "Sales Report");
-        XLSX.writeFile(wb, "sales_report_total_sales.xlsx");
+        XLSX.writeFile(wb, "sales_report_quantity_sold.xlsx");
     };
+
+
 
     return (
         <MainLayout>
@@ -93,53 +133,56 @@ function TotalSalesReports() {
                         onChange={(e) => setEndDate(e.target.value)}
                         placeholder="End Date"
                     />
-                    <Button onClick={handleDateChange}>Filter</Button>
+                    <Button onClick={handleDateChange} disabled={isLoading}>Filter</Button>
                 </div>
 
                 <div>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Transaction ID</th>
-                                <th>Customer Name</th>
-                                <th>Discount</th>
-                                <th>Amount</th>
-                                <th>Tax</th>
-                                <th>Total Quantity</th>
-                                <th>Total</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredTransactions.length > 0 ? (
-                                filteredTransactions.map((transaction) => (
-                                    <tr key={transaction.id}>
-                                        <td>{transaction.id}</td>
-                                        <td>{transaction.customerName}</td>
-                                        <td>{transaction.discountPercentage}%</td>
-                                        <td>{formatPeso(transaction.paymentAmount)}</td>
-                                        <td>{formatPeso(transaction.tax)}</td>
-                                        <td>{transaction.totalQuantity}</td>
-                                        <td>{formatPeso(transaction.total)}</td>
-                                        <td>{new Date(transaction.date).toLocaleDateString()}</td>
-                                    </tr>
-                                ))
-                            ) : (
+                    {isLoading ? (
+                        <p>Loading data...</p>
+                    ) : (
+                        <Table striped bordered hover>
+                            <thead>
                                 <tr>
-                                    <td colSpan="8" className="text-center">
-                                        No transactions available. Please apply a filter.
-                                    </td>
+                                    <th>Transaction ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Discount</th>
+                                    <th>Amount</th>
+                                    <th>Tax</th>
+                                    <th>Total Quantity</th>
+                                    <th>Total</th>
+                                    <th>Date</th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </Table>
+                            </thead>
+                            <tbody>
+                                {filteredTransactions.length > 0 ? (
+                                    filteredTransactions.map((transaction) => (
+                                        <tr key={transaction.id}>
+                                            <td>{transaction.id}</td>
+                                            <td>{transaction.customerName}</td>
+                                            <td>{(Number(transaction.discountPercentage) || 0).toFixed(2)}%</td>
+                                            <td>{formatPeso(transaction.paymentAmount)}</td>
+                                            <td>{(Number(transaction.tax) || 0).toFixed(2)}</td>
+                                            <td>{transaction.totalQuantity}</td>
+                                            <td>{formatPeso(transaction.total)}</td>
+                                            <td>{new Date(transaction.date).toLocaleDateString()}</td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="8" className="text-center">
+                                            No transactions available. Please apply a filter.
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </Table>
+                    )}
                 </div>
 
                 {filteredTransactions.length > 0 && (
                     <div>
                         <h3>Total Sales: {formatPeso(totalSales)}</h3>
 
-                        {/* Dropdown for downloading options */}
                         <Dropdown>
                             <Dropdown.Toggle variant="primary" id="dropdown-custom-components">
                                 Download Report
