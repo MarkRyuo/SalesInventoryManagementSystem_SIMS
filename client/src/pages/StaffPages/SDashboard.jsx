@@ -11,6 +11,7 @@ function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
     const [currentDate, setCurrentDate] = useState("");
     const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         // Fetch staff details from Firestore
@@ -77,8 +78,29 @@ function SDashboard() {
                     )}
                 </div>
             </div>
-
             
+            {!isLoading && (
+                <div className={StaffDashboardScss.chartContainer}>
+
+                    <div className={StaffDashboardScss.smallContainer}>
+                        <div>
+                            <Chart1 />
+                            <Chart2 />
+                            <Chart3 />
+                            <Chart4 />
+                        </div>
+                        <div className={StaffDashboardScss.largeContainer}>
+                            <div className={DashboardCss.divLG}>
+                                <ChartLg3 />
+                                <ChartLg2 />
+                            </div>
+                            <ChartLg1 />
+                        </div>
+                    </div>
+
+                </div>
+            )}
+
         </MainStaffLayout>
     );
 }
