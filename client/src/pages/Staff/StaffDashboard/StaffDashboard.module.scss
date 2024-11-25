@@ -254,6 +254,7 @@
         flex-direction: column;
         div:first-child {
             display: flex;
+            flex-direction: column;
         }
         
         .largeContainer {
