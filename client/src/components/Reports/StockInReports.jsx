@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchLowStockData } from "./services"; // Update import path
+import { fetchLowStockData } from "./Service/LowStock"; // Update import path
 import { Button, Table, Form } from "react-bootstrap"; // Assuming you're using React-Bootstrap
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
