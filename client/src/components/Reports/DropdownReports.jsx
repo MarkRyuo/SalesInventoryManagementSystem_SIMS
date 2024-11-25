@@ -6,8 +6,8 @@ function DropdownReports() {
     return (
         <DropdownButton id="dropdown-basic-button" title="Reports" variant=''>
             <Link to={"/StockInReports"}>Stock In Report</Link>
-            <Link href="/LowStockReports">Low Stock Report</Link>
-            <Link href="/TotalSalesReports">Total Sales Report</Link>
+            <Link to={"/LowStockReports"}>Low Stock Report</Link>
+            <Link to={"/TotalSalesReports">Total Sales Report</Link>
         </DropdownButton>
     )
 }
