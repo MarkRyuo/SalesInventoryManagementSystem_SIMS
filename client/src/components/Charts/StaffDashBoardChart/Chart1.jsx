@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Chartcss from './Charts.module.scss';
+import StaffChartcss from './Charts.module.scss';
 import { getProductQuantityHistory, filterQuantityByRange } from '../../../services/Fetching/StockInServices'; // Import the functions
 
 // Chart1 Small component to display quantity data for the selected time range
@@ -27,13 +27,13 @@ function Chart1() {
     }, [timeRange]); // Re-fetch data if timeRange changes
 
     return (
-        <div className={Chartcss.containerChart1}>
+        <div className={StaffChartcss.containerChart1}>
             {/* <p>From the running {timeRange.toLowerCase()}</p> */}
             <h5>Stock In</h5>
-            <div className={Chartcss.contentChart1}>
+            <div className={StaffChartcss.contentChart1}>
                 <p>{quantity}</p>
             </div>
-            <div className={Chartcss.rangeSelector}>
+            <div className={StaffChartcss.rangeSelector}>
                 <select onChange={(e) => handleTimeRangeChange(e.target.value)} value={timeRange} className='form-select'>
                     <option value="Today">Today</option>
                     <option value="Week">Week</option>
