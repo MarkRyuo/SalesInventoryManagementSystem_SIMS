@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { fetchStockInByDate } from "./Service/StockIn"; // Import the helper function for fetching stock
 import { Button, Table, Form } from "react-bootstrap";
@@ -60,7 +61,6 @@ function StockInReports() {
         <MainLayout>
             <div>
                 <h1>Stock In Report</h1>
-
                 {/* Date Range Filter */}
                 <div>
                     <Form>
