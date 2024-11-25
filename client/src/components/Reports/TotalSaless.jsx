@@ -3,6 +3,7 @@ import { fetchTotalSales } from './path-to-your-service';  // Adjust the import 
 import { saveAs } from 'file-saver';  // For XLSX export
 import * as XLSX from 'xlsx';
 import { jsPDF } from 'jspdf';
+import { MainLayout } from '../../layout/MainLayout';
 
 function TotalSaless() {
     const [startDate, setStartDate] = useState('');
@@ -53,6 +54,9 @@ function TotalSaless() {
     };
 
     return (
+        <MainLayout>
+            
+        </MainLayout>
         <div>
             <h1>Total Sales</h1>
 
