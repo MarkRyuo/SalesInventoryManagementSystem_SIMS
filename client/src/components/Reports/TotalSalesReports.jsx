@@ -141,7 +141,9 @@ function TotalSalesReports() {
 
     return (
 
-        <MainLayout
+        <MainLayout>
+            
+        </MainLayout>
 
         <div>
             <div>
