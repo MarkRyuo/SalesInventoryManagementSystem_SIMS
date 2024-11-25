@@ -1,10 +1,10 @@
 
 function TotalSalesReports() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+
+        </div>
+    )
 }
 
-export default TotalSalesReports
+export default TotalSalesReports;
