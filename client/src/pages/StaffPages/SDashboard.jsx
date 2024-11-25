@@ -1,9 +1,9 @@
 import MainStaffLayout from "../../layout/MainStaffLayout";
 import { Image } from "react-bootstrap";
-import SDashboardCss from './SDashboard.module.scss';
 import { useState, useEffect } from "react";
 import { db } from "../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import StaffDashboardScss from '../Staff/StaffDashboard/StaffDashboard.module.scss'
 
 function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
@@ -50,7 +50,7 @@ function SDashboard() {
 
     return (
         <MainStaffLayout>
-            <div className={SDashboardCss.mainComponent}>
+            <div className={SDashboardCss.mainTopComponent}>
                 {loading ? (
                     // Display a loading indicator while data is being fetched
                     <div className={SDashboardCss.loadingContainer}>
