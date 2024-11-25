@@ -2,6 +2,7 @@ import { Container, Navbar, Row, Col, Button, Table, Alert, Form } from "react-b
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateProductQuantity, fetchAllDiscounts, fetchAllTaxes, saveTransactionHistory } from '../../../services/ProductService';
 import { useState, useEffect } from 'react';
+import ScanProductModeScss from './PosScanner.module.scss' ;
 
 function Checkout() {
     const location = useLocation();
@@ -127,7 +128,7 @@ function Checkout() {
 
 
     return (
-        <Container fluid className="m-0 p-0">
+        <Container fluid  className={ScanProductModeScss.MainComponent}>
             <Navbar className="bg-light shadow-sm">
                 <Container>
                     <Navbar.Brand className="fs-4">Checkout</Navbar.Brand>
