@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ReportChartcss from './ReportChart.module.scss';
-import { fetchSalesData } from '../path/to/your/fetchingFunction'; // Updated path to the new fetching function
+import { fetchSalesData } from '../../../services/SalesReports/SalesQuantity'; // Updated path to the new fetching function
 import * as XLSX from 'xlsx'; // For XLSX generation
 import jsPDF from 'jspdf'; // For PDF generation
 
