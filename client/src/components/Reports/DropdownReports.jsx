@@ -1,14 +1,25 @@
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+
 
 function DropdownReports() {
     return (
-        <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-            <Dropdown.Item href="">Stock In Report</Dropdown.Item>
-            <Dropdown.Item href="">Low Stock Report</Dropdown.Item>
-            <Dropdown.Item href="">Total Sales Report</Dropdown.Item>
-            <Dropdown.Item href="">Quantity Sold Report</Dropdown.Item>
-        </DropdownButton>
+        <div className="dropdown">
+            <button
+                className="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                Dropdown button
+            </button>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a className="dropdown-item" href="#">Stock In Report</a></li>
+                <li><a className="dropdown-item" href="#">Low Stock Report</a></li>
+                <li><a className="dropdown-item" href="#">Total Sales Report</a></li>
+                <li><a className="dropdown-item" href="#">Quantity Sold Report</a></li>
+            </ul>
+        </div>
+
     )
 }
 export default DropdownReports ;
