@@ -11,6 +11,7 @@ import StaffProductPagescss from './StaffProductPage.module.scss' ;
 import ReOrdering from '../../Admin/ProductPage/ReOrdering';
 import SetQrcode from '../../Admin/ProductPage/SetQrcode';
 import { LiaQrcodeSolid } from "react-icons/lia";
+import StaffTransactionHistory from '../StaffTransactionHistory/StaffTransactionHistory'
 
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
