@@ -7,7 +7,10 @@ function StockInReports() {
                 {/* Filtering Date Start to End Note: if the same date filtered, filtered that of course*/}
             </div>
 
-            <div></div>
+            <div>
+                {/* Table */}
+                {/* Table the filtered */}
+            </div>
         </div>
     )
 }
