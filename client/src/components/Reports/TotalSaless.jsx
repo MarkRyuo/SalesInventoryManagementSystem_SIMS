@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { fetchTotalSales } from '../Service/TotalSaless';  // Adjust the import path
+import { fetchTotalSales } from './TotalSaless';  // Adjust the import path
 import { saveAs } from 'file-saver';  // For XLSX export
 import * as XLSX from 'xlsx';
 import { jsPDF } from 'jspdf';
-import { MainLayout } from '../../../layout/MainLayout';
+import { MainLayout } from '../../layout/MainLayout';
 
 function TotalSaless() {
     const [startDate, setStartDate] = useState('');
