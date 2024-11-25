@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';  // Importing the jspdf-autotable plugin
 import { fetchTransactions } from './Service/TotalSales'; // Import the fetch function
+import { MainLayout } from '../../layout/MainLayout'
 
 function TotalSalesReports() {
     const [transactionData, setTransactionData] = useState([]);
@@ -142,89 +143,88 @@ function TotalSalesReports() {
     return (
 
         <MainLayout>
-            
-        </MainLayout>
-
-        <div>
             <div>
-                <h1>Total Sales</h1>
-                {/* Date Picker Inputs */}
                 <div>
-                    <input
-                        type="date"
-                        onChange={(e) => setStartDate(e.target.value)}
-                        placeholder="Start Date"
-                    />
-                    <input
-                        type="date"
-                        onChange={(e) => setEndDate(e.target.value)}
-                        placeholder="End Date"
-                    />
-                    <Button onClick={filterData}>Filter</Button>
+                    <h1>Total Sales</h1>
+                    {/* Date Picker Inputs */}
+                    <div>
+                        <input
+                            type="date"
+                            onChange={(e) => setStartDate(e.target.value)}
+                            placeholder="Start Date"
+                        />
+                        <input
+                            type="date"
+                            onChange={(e) => setEndDate(e.target.value)}
+                            placeholder="End Date"
+                        />
+                        <Button onClick={filterData}>Filter</Button>
+                    </div>
+
+                    {/* Dropdown for file download */}
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            Download Report
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={downloadXlsx}>Download as XLSX</Dropdown.Item>
+                            <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </div>
 
-                {/* Dropdown for file download */}
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Download Report
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={downloadXlsx}>Download as XLSX</Dropdown.Item>
-                        <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-            </div>
-
-            <div>
-                <Table striped bordered hover responsive>
-                    <thead>
-                        <tr>
-                            <th>Transaction ID</th>
-                            <th>Date</th>
-                            <th>Total Quantity</th>
-                            <th>Discount</th>
-                            <th>Tax</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredData.map(transaction => (
-                            <tr key={transaction.transactionId}>
-                                <td>{transaction.transactionId}</td>
-                                <td>{format(new Date(transaction.date), 'MMM dd, yyyy, h:mm a')}</td>
-                                <td>{transaction.totalQuantity}</td>
-                                <td>{`₱${transaction.discount}`}</td>
-                                <td>{`₱${transaction.tax}`}</td>
-                                <td>{`₱${transaction.total}`}</td>
+                <div>
+                    <Table striped bordered hover responsive>
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Date</th>
+                                <th>Total Quantity</th>
+                                <th>Discount</th>
+                                <th>Tax</th>
+                                <th>Total</th>
                             </tr>
-                        ))}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colSpan="2">Total Quantity Sold</td>
-                            <td>{totalQuantitySold}</td>
-                        </tr>
-                        <tr>
-                            <td colSpan="2">Total Revenue</td>
-                            <td>{`₱${totalRevenue.toFixed(2)}`}</td>
-                        </tr>
-                        <tr>
-                            <td colSpan="2">Discounts Applied</td>
-                            <td>{`₱${totalDiscount.toFixed(2)}`}</td>
-                        </tr>
-                        <tr>
-                            <td colSpan="2">Tax Collected</td>
-                            <td>{`₱${totalTax.toFixed(2)}`}</td>
-                        </tr>
-                        <tr>
-                            <td colSpan="2">Net Revenue</td>
-                            <td>{`₱${netRevenue.toFixed(2)}`}</td>
-                        </tr>
-                    </tfoot>
-                </Table>
+                        </thead>
+                        <tbody>
+                            {filteredData.map(transaction => (
+                                <tr key={transaction.transactionId}>
+                                    <td>{transaction.transactionId}</td>
+                                    <td>{format(new Date(transaction.date), 'MMM dd, yyyy, h:mm a')}</td>
+                                    <td>{transaction.totalQuantity}</td>
+                                    <td>{`₱${transaction.discount}`}</td>
+                                    <td>{`₱${transaction.tax}`}</td>
+                                    <td>{`₱${transaction.total}`}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colSpan="2">Total Quantity Sold</td>
+                                <td>{totalQuantitySold}</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="2">Total Revenue</td>
+                                <td>{`₱${totalRevenue.toFixed(2)}`}</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="2">Discounts Applied</td>
+                                <td>{`₱${totalDiscount.toFixed(2)}`}</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="2">Tax Collected</td>
+                                <td>{`₱${totalTax.toFixed(2)}`}</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="2">Net Revenue</td>
+                                <td>{`₱${netRevenue.toFixed(2)}`}</td>
+                            </tr>
+                        </tfoot>
+                    </Table>
+                </div>
             </div>
-        </div>
+        </MainLayout>
+
     );
 }
 
