@@ -49,7 +49,7 @@ function LogInCardPage() {
                             />
                         </div>
                         <div>
-                            <p>Password*</p>
+                            <p className='m-0'>Password*</p>
                             <div style={{ position: 'relative' }}>
                                 <input
                                     type={isPasswordVisible ? 'text' : 'password'}
