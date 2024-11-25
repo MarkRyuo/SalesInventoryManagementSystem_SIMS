@@ -11,10 +11,10 @@ import { BiScan } from "react-icons/bi";
 
 //? Charts
 import StaffChart1 from '../../../components/Charts/StaffDashBoardChart/StaffChart1'
-import Chart2 from '../../../components/Charts/DashboardChart/Chart2';
-import Chart3 from '../../../components/Charts/DashboardChart/Chart3';
-import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
-import Chart4 from '../../../components/Charts/DashboardChart/Chart4';
+import StaffChart2 from '../../../components/Charts/StaffDashBoardChart/StaffChart2';
+import StaffChart3 from '../../../components/Charts/StaffDashBoardChart/StaffChart3';
+import StaffChartLg1 from '../../../components/Charts/StaffDashBoardChart/StaffChartLg1';
+import StaffChart4 from '../../../components/Charts/StaffDashBoardChart/StaffChart4';
 
 function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
@@ -106,16 +106,16 @@ function SDashboard() {
                     <div className={StaffDashboardScss.smallContainer}>
                         <div>
                             <StaffChart1 />
-                            <Chart2 />
-                            <Chart3 />
-                            <Chart4 />
+                            <StaffChart2 />
+                            <StaffChart3 />
+                            <StaffChart4 />
                         </div>
                         <div className={StaffDashboardScss.largeContainer}>
                             <div className={StaffDashboardScss.buttonsHeroCard}>
                                 <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
                                 <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
                             </div>
-                            <ChartLg1 />
+                            <StaffChartLg1 />
                         </div>
                     </div>
                 </div>
