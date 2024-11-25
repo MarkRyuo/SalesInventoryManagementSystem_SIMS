@@ -76,7 +76,7 @@ function SDashboard() {
         <MainStaffLayout>
             <div className={StaffDashboardScss.mainTopComponent}>
                 <div className={StaffDashboardScss.componentHeroCard}>
-                    <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0' />Dashboard</h1>
+                    <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0 d-none d-md-block' />Dashboard</h1>
                     {loading ? (
                         // Display a loading indicator while data is being fetched
                         <div className={StaffDashboardScss.loadingContainer}>
