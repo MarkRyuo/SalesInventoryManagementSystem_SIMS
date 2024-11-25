@@ -191,7 +191,7 @@ const router = createBrowserRouter([
   },
   {
     path: "TotalSalesReports",
-    element: <StockInReports />,
+    element: <TotalSalesReports /> ,
   },
 
 ]);
