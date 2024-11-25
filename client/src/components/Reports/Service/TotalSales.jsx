@@ -8,7 +8,10 @@ function TotalSales() {
                 {/* Dropdown Button to download toi different files (Pdf and xlsx) */}
             </div>
 
-            { */}
+            <div>
+                {/* Table */}
+                {/* Filtering date and view in the table */}
+            </div>
         </div>
     )
 }
