@@ -4,6 +4,7 @@ import { fetchTotalSales } from './Service/TotalSales'; // Adjust the path accor
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import XLSX from 'xlsx';
+import MainLayout from '../../layout/MainLayout'
 
 function TotalSalesReports() {
     const [startDate, setStartDate] = useState('');
@@ -76,65 +77,64 @@ function TotalSalesReports() {
 
     return (
         <MainLayout>
-            
+            <div>
+                <h1>Total Sales</h1>
+
+                <div>
+                    <input
+                        type="date"
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                        placeholder="Start Date"
+                    />
+                    <input
+                        type="date"
+                        value={endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
+                        placeholder="End Date"
+                    />
+                    <button onClick={handleDateChange}>Filter</button>
+                </div>
+
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Customer Name</th>
+                                <th>Discount</th>
+                                <th>Amount</th>
+                                <th>Tax</th>
+                                <th>Total Quantity</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredTransactions.map((transaction) => (
+                                <tr key={transaction.id}>
+                                    <td>{transaction.id}</td>
+                                    <td>{transaction.customerName}</td>
+                                    <td>{transaction.discountPercentage}%</td>
+                                    <td>{formatPeso(transaction.paymentAmount)}</td>
+                                    <td>{formatPeso(transaction.tax)}</td>
+                                    <td>{transaction.totalQuantity}</td>
+                                    <td>{formatPeso(transaction.total)}</td>
+                                    <td>{new Date(transaction.date).toLocaleDateString()}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <h3>Total Sales: {formatPeso(totalSales)}</h3>
+                    <button onClick={downloadPDF}>Download PDF</button>
+                    <button onClick={downloadXLSX}>Download XLSX</button>
+                </div>
+            </div>
         </MainLayout>
 
-        <div>
-            <h1>Total Sales</h1>
-
-            <div>
-                <input
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    placeholder="Start Date"
-                />
-                <input
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    placeholder="End Date"
-                />
-                <button onClick={handleDateChange}>Filter</button>
-            </div>
-
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Transaction ID</th>
-                            <th>Customer Name</th>
-                            <th>Discount</th>
-                            <th>Amount</th>
-                            <th>Tax</th>
-                            <th>Total Quantity</th>
-                            <th>Total</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredTransactions.map((transaction) => (
-                            <tr key={transaction.id}>
-                                <td>{transaction.id}</td>
-                                <td>{transaction.customerName}</td>
-                                <td>{transaction.discountPercentage}%</td>
-                                <td>{formatPeso(transaction.paymentAmount)}</td>
-                                <td>{formatPeso(transaction.tax)}</td>
-                                <td>{transaction.totalQuantity}</td>
-                                <td>{formatPeso(transaction.total)}</td>
-                                <td>{new Date(transaction.date).toLocaleDateString()}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-            <div>
-                <h3>Total Sales: {formatPeso(totalSales)}</h3>
-                <button onClick={downloadPDF}>Download PDF</button>
-                <button onClick={downloadXLSX}>Download XLSX</button>
-            </div>
-        </div>
     );
 }
 
