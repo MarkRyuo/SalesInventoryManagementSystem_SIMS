@@ -111,10 +111,6 @@ function SDashboard() {
                             <Chart4 />
                         </div>
                         <div className={StaffDashboardScss.largeContainer}>
-                            {/* <div className={StaffDashboardScss.divLG}>
-                                <ChartLg3 />
-                                <ChartLg2 />
-                            </div> */}
                             <div className={StaffDashboardScss.buttonsHeroCard}>
                                 <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
                                 <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
