@@ -1,11 +1,11 @@
-import React from 'react'
+
 
 function TotalSalesReports() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+
+        </div>
+    )
 }
 
-export default TotalSalesReports
+export default TotalSalesReports;
