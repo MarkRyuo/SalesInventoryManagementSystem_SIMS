@@ -1,4 +1,4 @@
-
+import { MainLayout } from '../../layout/MainLayout'
 
 
 function QuantitySoldReports() {
@@ -18,7 +18,6 @@ function QuantitySoldReports() {
                 </div>
 
             </div>
-
         </MainLayout>
 
     )
