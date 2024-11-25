@@ -8,10 +8,12 @@ function StockInReports() {
             </div>
             {/* Filter Date */}
             
-            {/* Table */}
-            {/* Table contains of filtered Stock in Reports */}
+            <div>
+                {/* Table */}
+                {/* Table contains of filtered Stock in Reports */}
+            </div>
     </div>
     )
 }
 
-export default StockInReports
+export default StockInReports ;
