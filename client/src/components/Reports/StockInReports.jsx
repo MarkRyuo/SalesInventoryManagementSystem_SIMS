@@ -2,7 +2,9 @@
 function StockInReports() {
     return (
         <div>
-            <div></div>
+            <div>
+                
+            </div>
         </div>
     )
 }
