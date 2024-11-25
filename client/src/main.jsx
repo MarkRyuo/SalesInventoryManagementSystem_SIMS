@@ -37,7 +37,7 @@ import AccountPage from './pages/Admin/AccountPage/AccountPage.jsx'
 import ProfileComp from './components/Account/ProfileComp.jsx';
 import StaffProductPage from './pages/Staff/StaffProductPage/StaffProductPage.jsx'
 import StaffProduct from './components/Charts/ProductChart/StaffProduct.jsx'
-import LowStockReport from './components/Charts/ReportChart/ReportChart4.jsx';
+import LowStockReports from './components/Reports/LowStockReports.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -182,7 +182,7 @@ const router = createBrowserRouter([
 
   {
     path: "LowStockReports",
-    element: <LowStockReport /> , 
+    element: <LowStockReports /> , 
   },
 
 ]);
