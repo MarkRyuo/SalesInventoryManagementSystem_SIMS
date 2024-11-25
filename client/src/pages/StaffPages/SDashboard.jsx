@@ -54,29 +54,28 @@ function SDashboard() {
         <MainStaffLayout>
             <div className={StaffDashboardScss.mainTopComponent}>
                 <div className={StaffDashboardScss.componentHeroCard}>
-
-                </div>
-                <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0' />Dashboard</h1>
-                {loading ? (
-                    // Display a loading indicator while data is being fetched
-                    <div className={StaffDashboardScss.loadingContainer}>
-                        <p>Loading staff Dashboard...</p>
-                    </div>
-                ) : (
-                    <div className={StaffDashboardScss.credentialDashboard}>
-                        <Image
-                            src="/Reyes_Electronics_LogoBg.png"
-                            roundedCircle
-                        />
-                        <div>
-                            <h4 className="m-0">
-                                <span className="fw-semibold">Hello, </span> <span>{getTitle(staffName.gender)} {staffName.firstname} {staffName.lastname}</span>
-                            </h4>
-                            <p className="m-0">REYES ELECTRONICS.</p>
-                            <p>{currentDate}</p>
+                    <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0' />Dashboard</h1>
+                    {loading ? (
+                        // Display a loading indicator while data is being fetched
+                        <div className={StaffDashboardScss.loadingContainer}>
+                            <p>Loading staff Dashboard...</p>
                         </div>
-                    </div>
-                )}
+                    ) : (
+                        <div className={StaffDashboardScss.credentialDashboard}>
+                            <Image
+                                src="/Reyes_Electronics_LogoBg.png"
+                                roundedCircle
+                            />
+                            <div>
+                                <h4 className="m-0">
+                                    <span className="fw-semibold">Hello, </span> <span>{getTitle(staffName.gender)} {staffName.firstname} {staffName.lastname}</span>
+                                </h4>
+                                <p className="m-0">REYES ELECTRONICS.</p>
+                                <p>{currentDate}</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
         </MainStaffLayout>
     );
