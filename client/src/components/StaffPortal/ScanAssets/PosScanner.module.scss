@@ -73,4 +73,15 @@
     height: auto;
     margin: 0;
     padding: 0;
+
+    .navBar {
+        border: 1px solid;
+        height: auto;
+
+        h1 {
+            font-size: 1.5rem;
+            padding: 10px;
+
+        }
+    }
 }

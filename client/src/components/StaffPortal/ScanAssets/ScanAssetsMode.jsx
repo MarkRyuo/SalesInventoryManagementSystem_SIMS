@@ -129,9 +129,11 @@ function Checkout() {
 
     return (
         <Container fluid  className={ScanProductModeScss.MainComponent}>
-            <Container>
-                <h1>Checkout</h1>
-            </Container>
+            <div className={ScanProductModeScss.navBar}>
+                <Container>
+                    <h1>Checkout</h1>
+                </Container>
+            </div>
             <Container fluid='lg' className="mt-3">
                 {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
                 <Row>
