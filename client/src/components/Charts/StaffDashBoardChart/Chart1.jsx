@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import StaffChartcss from './Charts.module.scss';
+import StaffChartcss from './StaffCharts.module.scss';
 import { getProductQuantityHistory, filterQuantityByRange } from '../../../services/Fetching/StockInServices'; // Import the functions
 
 // Chart1 Small component to display quantity data for the selected time range
