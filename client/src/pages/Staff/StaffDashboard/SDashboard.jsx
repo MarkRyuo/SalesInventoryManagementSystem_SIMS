@@ -105,7 +105,7 @@ function SDashboard() {
                 <div className={StaffDashboardScss.chartContainer}>
                     <div className={StaffDashboardScss.smallContainer}>
                         <div>
-                            <Chart1 />
+                            <StaffChart1 />
                             <Chart2 />
                             <Chart3 />
                             <Chart4 />
