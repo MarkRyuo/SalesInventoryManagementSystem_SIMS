@@ -447,7 +447,7 @@
     .containerChart1 {
     // border: 1px solid; 
     padding: 15px 20px;
-    height: auto;
+    height: 150px;
     width: 100%;
     flex-shrink: 0;
     display: flex;
@@ -462,10 +462,12 @@
     .contentChart1 {
         p {
             font-size: 1.8rem;
+            margin: 0px;
         }
     }
 
     select {
+
         width: 100%;
         font-size: 0.9rem;
     }
@@ -477,7 +479,7 @@
     // border: 1px solid; 
     box-sizing: border-box;
     padding: 15px 20px;
-    height: auto;
+    height: 150px;
     width: 100%;
     flex-shrink: 0;
     display: flex;
