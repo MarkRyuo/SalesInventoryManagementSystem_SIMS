@@ -39,7 +39,7 @@ function LogInCardPage() {
                         <h2>Welcome</h2>
                         {error && <p style={{ color: 'red' }}>{error}</p>}
                         <div>
-                            <Form.Label>Username*</Form.Label>
+                            <p>Username*</p>
                             <input
                                 type="text"
                                 placeholder="Enter your username"
@@ -49,7 +49,7 @@ function LogInCardPage() {
                             />
                         </div>
                         <div>
-                            <Form.Label>Password*</Form.Label>
+                            <p>Password*</p>
                             <div style={{ position: 'relative' }}>
                                 <input
                                     type={isPasswordVisible ? 'text' : 'password'}
