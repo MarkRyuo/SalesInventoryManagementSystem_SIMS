@@ -149,6 +149,10 @@ function Checkout() {
                                 value={customerName}
                                 onChange={(e) => setCustomerName(e.target.value)}
                                 required
+                                style={{
+                                    width: '100%',
+                                    maxWidth: 500
+                                }}
                             />
                         </Form.Group>
 
@@ -159,6 +163,10 @@ function Checkout() {
                                 size="sm"
                                 value={selectedDiscount}
                                 onChange={(e) => handleDiscountChange(e.target.value)}
+                                style={{
+                                    width: '100%',
+                                    maxWidth: '500px'
+                                }}
                             >
                                 <option value={0}>No Discount</option>
                                 {availableDiscounts.map((discount) => (
