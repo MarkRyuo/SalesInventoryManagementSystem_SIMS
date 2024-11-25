@@ -53,7 +53,7 @@ export const ProductPage = () => {
             <Container className={StaffProductPagescss.Products}>
                 <ProductNavbarTabs setActiveTab={setActiveTab} />
                 <div className="ProductContent">
-                    {activeTab === '/Product' && (
+                    {activeTab === '/StaffProduct' && (
                         <div className="Product">
                             <StaffProduct /> 
                         </div>
