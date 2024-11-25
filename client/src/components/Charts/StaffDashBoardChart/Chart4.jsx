@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getDatabase, ref, get } from "firebase/database";
-import Chartcss from './Charts.module.scss';
+import StaffChartcss from './StaffCharts.module.scss';
 
 function Chart4() {
     const [lowStockCount, setLowStockCount] = useState(0);
@@ -54,9 +54,9 @@ function Chart4() {
     }, []);
 
     return (
-        <div className={Chartcss.containerChart4}>
+        <div className={StaffChartcss.containerChart4}>
             <h5>Low Stock Products</h5>
-            <div className={Chartcss.contentChart4}>
+            <div className={StaffChartcss.contentChart4}>
                 <p>{lowStockCount}</p>
             </div>
         </div>
