@@ -66,6 +66,13 @@ function TotalSalesReports() {
         }
     };
 
+    // Calculate totals
+    const totalQuantitySold = filteredData.reduce((acc, item) => acc + item.totalQuantity, 0);
+    const totalRevenue = filteredData.reduce((acc, item) => acc + parseFloat(item.total), 0);
+    const totalDiscount = filteredData.reduce((acc, item) => acc + parseFloat(item.discount), 0);
+    const totalTax = filteredData.reduce((acc, item) => acc + parseFloat(item.tax), 0);
+    const netRevenue = totalRevenue - totalDiscount + totalTax;
+
     return (
         <div>
             <div>
@@ -124,11 +131,24 @@ function TotalSalesReports() {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colSpan="2">Totals</td>
-                            <td>{filteredData.reduce((acc, item) => acc + item.totalQuantity, 0)}</td>
-                            <td>{`₱${filteredData.reduce((acc, item) => acc + parseFloat(item.discount), 0).toFixed(2)}`}</td>
-                            <td>{`₱${filteredData.reduce((acc, item) => acc + parseFloat(item.tax), 0).toFixed(2)}`}</td>
-                            <td>{`₱${filteredData.reduce((acc, item) => acc + parseFloat(item.total), 0).toFixed(2)}`}</td>
+                            <td colSpan="2">Total Quantity Sold</td>
+                            <td>{totalQuantitySold}</td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2">Total Revenue</td>
+                            <td>{`₱${totalRevenue.toFixed(2)}`}</td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2">Discounts Applied</td>
+                            <td>{`₱${totalDiscount.toFixed(2)}`}</td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2">Tax Collected</td>
+                            <td>{`₱${totalTax.toFixed(2)}`}</td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2">Net Revenue</td>
+                            <td>{`₱${netRevenue.toFixed(2)}`}</td>
                         </tr>
                     </tfoot>
                 </Table>
