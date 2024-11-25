@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchStockInByDate } from "./stockHelpers"; // Import the helper function for fetching stock
+import { fetchStockInByDate } from "./Service/StockIn"; // Import the helper function for fetching stock
 import { Button, Table, Form } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
