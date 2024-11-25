@@ -2,7 +2,6 @@ import MainStaffLayout from "../../layout/MainStaffLayout";
 import { Image } from "react-bootstrap";
 import SDashboardCss from './SDashboard.module.scss';
 import { useState, useEffect } from "react";
-import { getAllProducts} from "../../services/ProductService"; // Import your product service
 import { db } from "../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -32,59 +31,12 @@ function SDashboard() {
             }
         };
 
-        // Fetch products added today and existing products with updated quantity
-        const fetchProductsAddedOrUpdatedToday = async () => {
-            try {
-                const products = await getAllProducts(); // Fetch all products
-                const today = new Date();
-                const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
-                const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
-                const formattedToday = localTime.toISOString().split('T')[0];
 
-                console.log("Formatted Today:", formattedToday);
-
-                // Filter products based on `dateAdded` or `quantityHistory`
-                const productsToday = products.filter(product => {
-                    const dateAdded = product.dateAdded && String(product.dateAdded).split('T')[0];
-                    const isAddedToday = dateAdded === formattedToday;
-
-                    const isUpdatedToday = product.quantityHistory?.some(entry => {
-                        const entryDate = String(entry.date).split('T')[0]; // Ensure consistent format
-                        return entryDate === formattedToday;
-                    });
-
-                    return isAddedToday || isUpdatedToday;
-                });
-
-                const mappedProductsToday = productsToday.map(product => {
-                    let quantity = product.quantity;
-
-                    // Locate today's quantity entry in quantity history
-                    const todayEntry = product.quantityHistory?.find(entry => {
-                        const entryDate = String(entry.date).split('T')[0];
-                        return entryDate === formattedToday;
-                    });
-                    if (todayEntry) {
-                        quantity = todayEntry.quantity;
-                    }
-
-                    return {
-                        ...product,
-                        quantity,
-                    };
-                });
-
-                setProductsToday(mappedProductsToday);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        };
 
 
 
         // Fetch staff details and products on component mount
         fetchStaffDetails();
-        fetchProductsAddedOrUpdatedToday();
 
         // Set the current date
         const today = new Date();
