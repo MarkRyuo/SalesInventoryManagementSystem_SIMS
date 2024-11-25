@@ -6,7 +6,7 @@ import { Buttons } from './Buttons';
 //* Icons
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdSpaceDashboard } from "react-icons/md";
-import { TbReportAnalytics } from "react-icons/tb";
+import { TbBackground, TbReportAnalytics } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { MdOutlineInventory2 } from "react-icons/md";
@@ -66,7 +66,7 @@ export const NavDashboard = () => {
             </Navbar>
 
             {/* Off-canvas function */}
-            <Offcanvas show={show} onHide={handleClose} style={{ width: 320 }}>
+            <Offcanvas show={show} onHide={handleClose} style={{ width: 320, }}>
                 <Offcanvas.Header closeButton className={Navbars.offCanvasHeader}>
                     <Offcanvas.Title>
                         <Image width={40} className='me-2'

@@ -44,7 +44,6 @@
 }
 
 
-
 .btnOffcanvas {
     margin-right: 15px;
 }
@@ -61,6 +60,7 @@
     margin-top: 30px;
     display: flex;
     flex-direction: column;
+    background: radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
 
     /* border: 1px solid red ; */
     height: 700px;
