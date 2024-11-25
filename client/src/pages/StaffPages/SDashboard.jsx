@@ -139,36 +139,6 @@ function SDashboard() {
                                 <p>{currentDate}</p>
                             </div>
                         </div>
-
-                        <div className={SDashboardCss.containerHeroCard}>
-                            <p className="fs-5 m-0 ps-4">Services</p>
-                            <div className={SDashboardCss.buttonsHeroCard}>
-                                <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
-                                <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
-                                <StaffButtons buttons={buttons.filter(button => button.id === 3)} />
-                            </div>
-                        </div>
-
-                            <div className={SDashboardCss.containerCardProduct}>
-                                <p className="fs-6 m-0 ps-4">Products Added or Updated Today</p>
-                                <div className={SDashboardCss.contentCardProduct}>
-                                    {productsToday.length > 0 ? (
-                                        <CardProduct
-                                            cardProduct={productsToday.map(product => ({
-                                                productIcon: <LiaProductHunt size={25} />,
-                                                productName: product.productName,
-                                                productValue: `${product.sku}`,
-                                                price: `${product.price}`, // Add the price here
-                                                Quantity: `${product.quantity}`,
-                                                id: product.barcode
-                                            }))}
-                                        />
-                                    ) : (
-                                        <p>No products added or updated today.</p>
-                                    )}
-                                </div>
-                            </div>
-
                     </>
                 )}
             </div>
