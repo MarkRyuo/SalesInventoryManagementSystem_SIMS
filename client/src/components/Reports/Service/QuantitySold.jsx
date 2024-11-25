@@ -1,11 +1,10 @@
-import React from 'react'
 
 function QuantitySold() {
-  return (
-    <div>
-      
-    </div>
-  )
+    return (
+        <div>
+
+        </div>
+    )
 }
 
-export default QuantitySold
+export default QuantitySold ;
