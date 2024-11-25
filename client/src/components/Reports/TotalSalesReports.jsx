@@ -54,7 +54,11 @@ function TotalSalesReports() {
 
         const doc = new jsPDF();
         doc.setFontSize(12);
-        doc.text("Sales Report - Quantity Sold", 10, 10);
+        doc.text("Sales Report - Total Sales", 10, 10);
+
+        // Add the date range to the PDF
+        const dateRange = `From: ${startDate} To: ${endDate}`;
+        doc.text(dateRange, 10, 20);
 
         const tableData = filteredTransactions.map((entry) => {
             const item = entry.items[0] || {};  // Assuming the first item in the array is what we need
@@ -71,7 +75,7 @@ function TotalSalesReports() {
         doc.autoTable({
             head: [["Product Name", "Total Quantity", "Price", "Discount", "Tax", "Total"]],
             body: tableData,
-            startY: 20,
+            startY: 30,
         });
 
         const totalY = doc.previousAutoTable.finalY + 10;
@@ -81,8 +85,9 @@ function TotalSalesReports() {
         doc.text(`Tax Collected: ${formatPeso(totalTax)}`, 10, totalY + 30);
         doc.text(`Net Revenue: ${formatPeso(netRevenue)}`, 10, totalY + 40);
 
-        doc.save("sales_report_quantity_sold.pdf");
+        doc.save(`sales_report_quantity_sold_${startDate}_to_${endDate}.pdf`);
     };
+
 
     const downloadXLSX = () => {
         const { totalQuantity, totalRevenue, totalDiscount, totalTax, netRevenue } = calculateTotals();
@@ -107,11 +112,16 @@ function TotalSalesReports() {
             NetRevenue: formatPeso(netRevenue),
         });
 
-        const ws = XLSX.utils.json_to_sheet(formattedData);
+        // Include the date range as the first row in the sheet
+        const dateRangeRow = [`Date Range: From ${startDate} to ${endDate}`];
+        const ws = XLSX.utils.json_to_sheet(formattedData, { header: ["ProductName", "TotalQuantity", "Price", "Discount", "Tax", "Total"] });
+        XLSX.utils.sheet_add_aoa(ws, [dateRangeRow], { origin: 'A1' });
+
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "Sales Report");
-        XLSX.writeFile(wb, "sales_report_quantity_sold.xlsx");
+        XLSX.writeFile(wb, `sales_report_quantity_sold_${startDate}_to_${endDate}.xlsx`);
     };
+
 
 
 
