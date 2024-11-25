@@ -23,7 +23,7 @@ function ProductNavbarTabs({ setActiveTab }) {
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={StaffProductPagescss.mainTabs}>
-                <Nav.Link eventKey="/AdminTransactionHistory">
+                <Nav.Link eventKey="/StaffTransactionHistory">
                     <FaHistory size={20}/>
                     <p className='m-0 p-0'>Transaction History</p>
                 </Nav.Link>
@@ -57,9 +57,9 @@ export const ProductPage = () => {
                             <StaffProduct /> 
                         </div>
                     )}
-                    {activeTab === '/AdminTransactionHistory' && (
+                    {activeTab === '/StaffTransactionHistory' && (
                         <div className="Unknown">
-
+                            <StaffTransactionHistory />
                         </div>
                     )}
                     {activeTab === '/ReOrdering' && (
