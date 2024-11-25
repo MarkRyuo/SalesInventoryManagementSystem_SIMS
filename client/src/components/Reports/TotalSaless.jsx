@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 function TotalSaless() {
     return (
@@ -8,4 +8,4 @@ function TotalSaless() {
     )
 }
 
-export default TotalSaless
+export default TotalSaless ;
