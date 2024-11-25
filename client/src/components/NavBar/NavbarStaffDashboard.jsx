@@ -31,7 +31,7 @@ function NavbarStaffDashboard() {
         { icon: <AiOutlineProduct />, btnName: "Account", id: "b-7", path: "/StaffAccountMode" },
         { icon: <MdInventory />, btnName: "Inventory", id: "b-8", path: "/StaffProductPage" },
         { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/AccountPage" },
-        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" },
+        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/" },
         { icon: <TiDocumentAdd />, btnName: "Add New Product", id: "b-11", path: "/AddNewAssets" },
         { icon: <BiScan />, btnName: "Point of Sale", id: "b-12", path: "/ScanAsset" },
     ]);
