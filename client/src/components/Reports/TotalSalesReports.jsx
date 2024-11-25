@@ -85,7 +85,7 @@ function TotalSalesReports() {
         doc.text(`Tax Collected: ${formatPeso(totalTax)}`, 10, totalY + 30);
         doc.text(`Net Revenue: ${formatPeso(netRevenue)}`, 10, totalY + 40);
 
-        doc.save(`sales_report_quantity_sold_${startDate}_to_${endDate}.pdf`);
+        doc.save(`SalesReport${startDate}_to_${endDate}.pdf`);
     };
 
 
@@ -119,7 +119,7 @@ function TotalSalesReports() {
 
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "Sales Report");
-        XLSX.writeFile(wb, `sales_report_quantity_sold_${startDate}_to_${endDate}.xlsx`);
+        XLSX.writeFile(wb, `SalesReport${startDate}_to_${endDate}.xlsx`);
     };
 
 
