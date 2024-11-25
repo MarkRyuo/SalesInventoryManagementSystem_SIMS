@@ -4,7 +4,7 @@ import { fetchTotalSales } from './Service/TotalSales'; // Adjust the path accor
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';  // Update this line
-import MainLayout from '../../layout/MainLayout'
+import { MainLayout } from '../../layout/MainLayout'
 
 function TotalSalesReports() {
     const [startDate, setStartDate] = useState('');
