@@ -3,7 +3,7 @@ import { Image } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { db } from "../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import StaffDashboardScss from '../Staff/StaffDashboard/StaffDashboard.module.scss' ;
+import StaffDashboardScss from '../Staff/StaffDashboard/StaffDashboard.module.scss';
 
 function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
@@ -57,22 +57,19 @@ function SDashboard() {
                         <p>Loading staff Dashboard...</p>
                     </div>
                 ) : (
-                    <>
-                        <div className={StaffDashboardScss.credentialDashboard}>
-                            <Image
-                                src="/Reyes_Electronics_LogoBg.png"
-                                roundedCircle
-                            />
-                            <div>
-                                <p className="fs-4 m-0">
-                                    <span className="fw-semibold">Hello, </span>
-                                    <span>{getTitle(staffName.gender)} {staffName.firstname} {staffName.lastname}</span>
-                                </p>
-                                <p className="m-0">REYES ELECTRONICS.</p>
-                                <p>{currentDate}</p>
-                            </div>
+                    <div className={StaffDashboardScss.credentialDashboard}>
+                        <Image
+                            src="/Reyes_Electronics_LogoBg.png"
+                            roundedCircle
+                        />
+                        <div>
+                            <h4 className="fs-4 m-0">
+                                <span className="fw-semibold">Hello, </span> <span>{getTitle(staffName.gender)} {staffName.firstname} {staffName.lastname}</span>
+                            </h4>
+                            <p className="m-0">REYES ELECTRONICS.</p>
+                            <p>{currentDate}</p>
                         </div>
-                    </>
+                    </div>
                 )}
             </div>
         </MainStaffLayout>
