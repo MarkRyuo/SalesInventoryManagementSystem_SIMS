@@ -11,7 +11,6 @@ function SDashboard() {
     const [currentDate, setCurrentDate] = useState("");
     const [loading, setLoading] = useState(true);
 
-
     useEffect(() => {
         // Fetch staff details from Firestore
         const fetchStaffDetails = async () => {
