@@ -244,6 +244,124 @@
 }
 }
 
+@media (max-width: 700px) {
+    .containerChart1 {
+    // border: 1px solid; 
+    padding: 15px 20px;
+    height: auto;
+    width: 170px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bgChart1);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 5px;
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .contentChart1 {
+        p {
+            font-size: 1.8rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+}
+
+
+/* ?Chart 2 */
+.containerChart2 {
+    // border: 1px solid; 
+    box-sizing: border-box;
+    padding: 15px 20px;
+    height: auto;
+    width: 200px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bgChart2);
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .contentChart2 {
+        p {
+            font-size: 1.8rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+}
+
+/* ?Chart 3 */
+.containerChart3 {
+    box-sizing: border-box;
+    padding: 15px 20px;
+    height: auto;
+    width: 170px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bgChart3);
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .contentChart3 {
+        p {
+            font-size: 1.8rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+}
+
+/* ?Chart 3 */
+.containerChart4 {
+    border: 1px solid #8d8d8d; 
+    box-sizing: border-box;
+    padding: 15px 20px;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 5px;
+    border-left: none;
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .contentChart4 {
+        p {
+            font-size: 2.3rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+}
+}
+
 /* !Warning This is for ChartLg */
 
 .containerChartLg1 {
