@@ -236,7 +236,7 @@ function Checkout() {
                                     <td>₱{subtotal.toFixed(2)}</td>
                                 </tr>
                                 <tr>
-                                    <td colSpan="3" className="text-end"><strong>Discount ({discountPercentage}%):</strong></td>
+                                    <td colSpan="3" className="text-end"><strong>Discount:</strong></td>
                                     <td>-₱{discountAmount.toFixed(2)}</td>
                                 </tr>
                                 <tr>
