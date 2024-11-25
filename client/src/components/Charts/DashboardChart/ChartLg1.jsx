@@ -10,10 +10,13 @@ function ChartLg1() {
         const db = getDatabase();
         const productsRef = ref(db, 'products');
 
-        const today = new Date();
-        const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
-        const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
-        const formattedToday = localTime.toISOString().split('T')[0];
+        // Helper function to format today's date
+        const getFormattedToday = () => {
+            const today = new Date();
+            const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
+            const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
+            return localTime.toISOString().split('T')[0];
+        };
 
         // Listen for live updates
         const unsubscribe = onValue(productsRef, (snapshot) => {
@@ -23,8 +26,9 @@ function ChartLg1() {
                 return;
             }
 
-            // Collect all today's activities (added and deducted)
+            const formattedToday = getFormattedToday();
             const activities = [];
+
             Object.keys(products).forEach(key => {
                 const product = products[key];
 
@@ -62,6 +66,24 @@ function ChartLg1() {
         return () => unsubscribe();
     }, []);
 
+    useEffect(() => {
+        // Reset the activity data at midnight
+        const resetAtMidnight = () => {
+            const now = new Date();
+            const nextMidnight = new Date(now);
+            nextMidnight.setHours(24, 0, 0, 0); // Set time to next midnight
+            const timeout = nextMidnight.getTime() - now.getTime(); // Calculate time until midnight
+
+            setTimeout(() => {
+                setActivityToday([]); // Reset activities at midnight
+                resetAtMidnight(); // Set the next reset
+            }, timeout);
+        };
+
+        resetAtMidnight(); // Initiate the midnight reset
+
+    }, []);
+
     return (
         <div className={Chartcss.containerChartLg1}>
             <p className="m-0 ps-4">Products Activities Today</p>
@@ -85,7 +107,6 @@ function ChartLg1() {
                 <p className="m-0 p-0">No activities recorded today.</p>
             )}
         </div>
-
     );
 }
 
