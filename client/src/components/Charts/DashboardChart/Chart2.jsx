@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Chartcss from './Charts.module.scss';
-import { FaReact } from "react-icons/fa";
 import { fetchTotalSales } from '../../../services/Fetching/TransactionServices'; // Ensure correct import path
 
 //* Chart2 Small
@@ -31,20 +30,20 @@ function Chart2() {
 
     return (
         <div className={Chartcss.containerChart2}>
-            <div className={Chartcss.containerText}>
-                <FaReact size={25} />
-                <p>Total Sales</p>
-            </div>
-            <div className={Chartcss.contentChart}>
+            <h5>Total Sales</h5>
+            <div className={Chartcss.contentChart2}>
                 <p>{totalSales.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}</p> {/* Display total sales formatted */}
-                <p>From the {selectedRange}</p> {/* Display selected range */}
+                {/* <p>From the {selectedRange}</p> */}
             </div>
-            <div className={Chartcss.rangeButtons}>
-                <button onClick={() => handleRangeChange('today')}>Today</button>
-                <button onClick={() => handleRangeChange('week')}>Week</button>
-                <button onClick={() => handleRangeChange('month')}>Month</button>
-                <button onClick={() => handleRangeChange('year')}>Year</button>
+            <div className={Chartcss.rangeSelector}>
+                <select onChange={(e) => handleRangeChange(e.target.value)} defaultValue="today" className='form-select'>
+                    <option value="today">Today</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
+                </select>
             </div>
+
         </div>
     );
 }

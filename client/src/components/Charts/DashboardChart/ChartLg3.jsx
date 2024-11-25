@@ -10,7 +10,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 function ChartLg3() {
     const [salesData, setSalesData] = useState({ totalQuantity: [], totalSales: [], dates: [] });
-    const [selectedRange, setSelectedRange] = useState('month');  // Default to 'month'
+    const [selectedRange, setSelectedRange] = useState('today');  // Default to 'month'
 
     useEffect(() => {
         const fetchData = async () => {
@@ -80,16 +80,16 @@ function ChartLg3() {
             {
                 label: 'Total Sales (₱)',
                 data: salesData.totalSales, // Sales data
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(170, 201, 255, 1)',
+                backgroundColor: 'rgba(170, 201, 255,0.2)',
                 fill: true,
                 tension: 0.4, // Smooth lines
             },
             {
                 label: 'Total Quantity',
                 data: salesData.totalQuantity, // Quantity data
-                borderColor: 'rgba(153, 102, 255, 1)',
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(205, 195, 255, 1)',
+                backgroundColor: 'rgb(205, 195, 255, 0.2)',
                 fill: true,
                 tension: 0.4, // Smooth lines
             }
@@ -100,6 +100,14 @@ function ChartLg3() {
     const chartOptions = {
         responsive: true,
         scales: {
+            x: {
+                ticks: {
+                    autoSkip: true, // Skip some labels if needed
+                    maxRotation: 0, // Keep labels horizontal
+                    minRotation: 0, // No rotation
+                    padding: 10, // Add space between labels
+                },
+            },
             y: {
                 beginAtZero: true,
                 title: {
@@ -117,23 +125,30 @@ function ChartLg3() {
                     label: (context) => {
                         const label = context.dataset.label || '';
                         const value = context.raw;
-                        return `${label}: ₱${value.toLocaleString()}`;
+                        return label.includes('Sales')
+                            ? `${label}: ₱${value.toLocaleString()}`
+                            : `${label}: ${value.toLocaleString()}`;
                     },
                 },
             },
         },
     };
 
+
+
+
     return (
         <div className={Chartcss.containerChartLg3}>
-            <div className={Chartcss.rangeButtons}>
-                <button onClick={() => handleRangeChange('today')}>Today</button>
-                <button onClick={() => handleRangeChange('week')}>Week</button>
-                <button onClick={() => handleRangeChange('month')}>Month</button>
-                <button onClick={() => handleRangeChange('year')}>Year</button>
-            </div>
             {/* Render the Line chart here */}
-            <Line data={chartData} options={chartOptions} />
+            <Line data={chartData} options={chartOptions}/>
+            <div className={Chartcss.rangeButtons}>
+                <select onChange={(e) => handleRangeChange(e.target.value)} defaultValue="today" className='form-select'>
+                    <option value="today">Today</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
+                </select>
+            </div>
         </div>
     );
 }

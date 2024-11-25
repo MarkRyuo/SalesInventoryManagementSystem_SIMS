@@ -64,44 +64,28 @@ function ChartLg1() {
 
     return (
         <div className={Chartcss.containerChartLg1}>
-            <p className="fs-6 m-0 ps-4">Products Activities Today</p>
+            <p className="m-0 ps-4">Products Activities Today</p>
             {activityToday.length > 0 ? (
-                <div
-                    style={{
-                        display: 'flex',
-                        gap: '10px',
-                        overflowX: 'auto',
-                        alignItems: 'flex-start',
-                        flexWrap: 'wrap',
-                    }}
-                >
+                <div className={Chartcss.activityList}>
                     {activityToday.map((activity, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                width: 'auto',
-                                padding: 20,
-                                boxShadow: '1px 1px 5px #e2dfdf',
-                                borderRadius: 15,
-                                flexShrink: 0,
-                                borderLeft: activity.type === 'Added' ? '2px solid #92E3B8' : '2px solid #F28C8C',
-                                boxSizing: "border-box",
-                            }}
-                        >
-                            <span><LiaProductHunt size={25} /></span>
-                            <p className="fs-5 m-0">{activity.productName}</p>
-                            <p className="fs-6 m-0">SKU: {activity.sku}</p>
-                            <p className="fs-6 m-0">Price: {activity.price}</p>
-                            <p className={`fs-6 m-0 ${activity.type === 'Added' ? 'text-success' : 'text-danger'}`}>
-                                {activity.type} Today: {activity.quantity}
-                            </p>
+                        <div key={index} className={`${Chartcss.activityItem} ${activity.type === 'Added' ? Chartcss.added : Chartcss.removed}`}>
+                            <span className={Chartcss.icon}></span>
+                            <div className={Chartcss.activityDetails}>
+                                <h1 className="m-0"><LiaProductHunt size={25} />{activity.productName} </h1>
+                                <p className="m-0">SKU: {activity.sku} </p>
+                                <p className="m-0">Price: {activity.price} </p>
+                                <p className={`m-0 ${activity.type === 'Added' ? 'text-success' : 'text-danger'}`}>
+                                    {activity.type} Today: {activity.quantity}
+                                </p>
+                            </div>
                         </div>
                     ))}
                 </div>
             ) : (
-                <p>No activities recorded today.</p>
+                <p className="m-0 p-0">No activities recorded today.</p>
             )}
         </div>
+
     );
 }
 

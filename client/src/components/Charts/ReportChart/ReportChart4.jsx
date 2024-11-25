@@ -4,7 +4,6 @@ import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { fetchLowStockData } from "../../../services/SalesReports/LowStockService";
 import "jspdf-autotable";
-import { FaReact } from "react-icons/fa";
 import ReportChartcss from './ReportChart.module.scss';
 
 function LowStockReport() {
@@ -65,38 +64,16 @@ function LowStockReport() {
 
     return (
         <div>
-            {/* Filter Button */}
-            <Button variant="primary" onClick={() => setShowModal(true)}>
-                Filter by Date
-            </Button>
-
-            {/* Report Stats */}
+            {/* Low Stock Overview */}
             <div className={ReportChartcss.containerChart4}>
-                <div className={ReportChartcss.containerText}>
-                    <FaReact size={23} />
-                    <p className="m-0 p-0">Low Stock Overview</p>
-                </div>
-                <div className={ReportChartcss.contentChart}>
-                    <p className="m-0 p-2">{lowStockData.length}</p> {/* Dynamic low stock count */}
-                    <p className="m-0 pb-2">From {startDate} to {endDate}</p> {/* Dynamic date range */}
-                </div>
+                <h1 className="m-0 p-0">Low Stock Overview</h1>
+                <h3 className="m-0">{lowStockData.length}</h3> {/* Dynamic low stock count */}
+                <p className="m-0">From {startDate} to {endDate}</p> {/* Dynamic date range */}
+                {/* Filter Button */}
+                <Button variant="" onClick={() => setShowModal(true)}>
+                    Filter by Date
+                </Button>
             </div>
-
-            {/* Download Buttons */}
-            <Button
-                variant="success"
-                onClick={downloadPDF}
-                disabled={lowStockData.length === 0}
-            >
-                Download PDF
-            </Button>
-            <Button
-                variant="success"
-                onClick={downloadXLSX}
-                disabled={lowStockData.length === 0}
-            >
-                Download XLSX
-            </Button>
 
             {/* Modal for Date Filtering */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
@@ -121,10 +98,39 @@ function LowStockReport() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleFilter}>
-                            Filter
-                        </Button>
+                        <div className="d-flex justify-content-between mt-3">
+                            <Button variant="primary" onClick={handleFilter}>
+                                Filter
+                            </Button>
+                            <Button
+                                variant="warning"
+                                onClick={() => {
+                                    setStartDate('');
+                                    setEndDate('');
+                                    setLowStockData([]);
+                                }}
+                            >
+                                Clear
+                            </Button>
+                        </div>
                     </Form>
+                    {/* Download Buttons */}
+                    <div className="d-flex justify-content-between mt-4">
+                        <Button
+                            variant="success"
+                            onClick={downloadPDF}
+                            disabled={lowStockData.length === 0}
+                        >
+                            Download PDF
+                        </Button>
+                        <Button
+                            variant="success"
+                            onClick={downloadXLSX}
+                            disabled={lowStockData.length === 0}
+                        >
+                            Download XLSX
+                        </Button>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
@@ -132,7 +138,9 @@ function LowStockReport() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
+
     );
 }
 

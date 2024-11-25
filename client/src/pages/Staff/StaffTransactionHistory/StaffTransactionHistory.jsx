@@ -1,17 +1,21 @@
-import { Container, Row, Col, Table, Button, Modal } from "react-bootstrap";
+import { Container, Button, Modal, ListGroup, Row, Col, Form } from "react-bootstrap";
 import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import QRious from 'qrious';
-import { Link } from "react-router-dom";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { FaEye, FaDownload} from "react-icons/fa";
+import StaffTransactionScss from './StaffTransactionHistory.module.scss' ;
+import { FaSave } from "react-icons/fa";
+import { FaTruckRampBox } from "react-icons/fa6";
 
-function StaffTransactionHistory() {
+function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const db = getDatabase();
-    const qrRef = useRef(null); // Ref for the QR code canvas
+    const qrRef = useRef(null);
+    const [filterDate, setFilterDate] = useState('');
+    const [filterCustomer, setFilterCustomer] = useState('');
 
     useEffect(() => {
         const historyRef = ref(db, 'TransactionHistory/');
@@ -24,71 +28,74 @@ function StaffTransactionHistory() {
                 tax: parseFloat(value.tax) || 0,
                 discount: parseFloat(value.discount) || 0,
                 total: parseFloat(value.total) || 0,
+                // Format the date if it's a timestamp
+                date: value.date ? new Date(value.date).toLocaleDateString() : 'N/A', // Format the date
                 items: value.items.map(item => ({
                     ...item,
-                    price: parseFloat(item.price) || 0 // Convert price to number
+                    price: parseFloat(item.price) || 0
                 }))
             }));
             setOrderHistory(formattedHistory);
         });
     }, [db]);
 
+    const filteredOrders = orderHistory.filter(order => {
+        const orderDate = order.date;
+        const parsedFilterDate = filterDate ? new Date(filterDate).toLocaleDateString() : '';
+
+        return (
+            (filterDate ? orderDate.includes(parsedFilterDate) : true) &&
+            (filterCustomer ? order.customerName.toLowerCase().includes(filterCustomer.toLowerCase()) : true)
+        );
+    });
+
     useEffect(() => {
         if (selectedOrder && qrRef.current) {
             new QRious({
                 element: qrRef.current,
-                value: `http://localhost:5173/order/${selectedOrder.id}` // Adjust this URL based on your routing
+                value: `https://us-central1-your-project-id.cloudfunctions.net/api/downloadOrder?id=${selectedOrder.id}`, // Updated to Firebase Function URL
+                size: 256,
             });
-        }
-    }, [selectedOrder]); // Re-generate QR code when selectedOrder changes
 
+        }
+    }, [selectedOrder]);
+    
     const handleDownloadOrder = async (order) => {
         const doc = new jsPDF();
 
         // Title
-        doc.setFontSize(20);
-        doc.text('Receipt', 105, 10, { align: 'center' });
+        doc.setFontSize(22);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Receipt', 105, 20, { align: 'center' });
 
         // Order details
         doc.setFontSize(12);
-        doc.text(`Order Date: ${order.date}`, 10, 30);
-        doc.text(`Sold To: ${order.customerName}`, 10, 40);
-        doc.text(`Subtotal: ₱${order.subtotal.toFixed(2)}`, 10, 50);
-        doc.text(`Tax (12%): ₱${order.tax.toFixed(2)}`, 10, 60);
-        doc.text(`Discount: -₱${order.discount.toFixed(2)}`, 10, 70);
-        doc.text(`Total Amount: ₱${order.total.toFixed(2)}`, 10, 80);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Order Date: ${order.date}`, 10, 40);
+        doc.text(`Sold To: ${order.customerName}`, 10, 50);
+        doc.text(`Order ID: ${order.id}`, 10, 60);
 
-        // Adding a line
-        doc.line(10, 85, 200, 85);
-
-        // Table header
+        // Pricing Breakdown using Unicode for Peso Symbol
+        doc.text(`Subtotal: \u20B1${order.subtotal.toFixed(2)}`, 10, 70);
+        doc.text(`Tax (12%): \u20B1${order.tax.toFixed(2)}`, 10, 80);
+        doc.text(`Discount: -\u20B1${order.discount.toFixed(2)}`, 10, 90);
         doc.setFontSize(14);
-        doc.text('Product Description', 10, 90);
-        doc.text('Quantity', 140, 90);
-        doc.text('Unit Price', 160, 90);
-        doc.text('Amount', 180, 90);
-        doc.line(10, 92, 200, 92);
+        doc.setFont('helvetica', 'bold');
+        doc.text(`Total Amount: \u20B1${order.total.toFixed(2)}`, 10, 110);
 
-        // Adding items to the receipt
-        order.items.forEach((item, index) => {
-            const yPosition = 100 + (index * 10);
-            const description = `${item.productName}, Size: ${item.size || 'N/A'}, Color: ${item.color || 'N/A'}, Voltage: ${item.voltage || 'N/A'}, Watt: ${item.watt || 'N/A'}`;
-            doc.text(description, 10, yPosition);
-            doc.text(item.quantity.toString(), 140, yPosition);
-            const price = parseFloat(item.price);
-            const amount = price * item.quantity;
-            doc.text(`₱${!isNaN(price) ? price.toFixed(2) : '0.00'}`, 160, yPosition);
-            doc.text(`₱${!isNaN(amount) ? amount.toFixed(2) : '0.00'}`, 180, yPosition);
-        });
-
-        // QR Code handling
+        // QR Code
         const qrCanvas = qrRef.current;
         if (qrCanvas) {
             const qrDataUrl = qrCanvas.toDataURL("image/png");
-            doc.addImage(qrDataUrl, 'PNG', 10, 110 + (order.items.length * 10), 50, 50); // Adjust position and size as needed
+            doc.addImage(qrDataUrl, 'PNG', 150, 60, 50, 50);
         }
 
-        // Save the PDF
+        // Footer Message
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'italic');
+        doc.text('Thank you for your purchase!', 105, 150, { align: 'center' });
+
+        // Save as PDF
         doc.save(`Order_${order.id}.pdf`);
     };
 
@@ -103,87 +110,124 @@ function StaffTransactionHistory() {
     };
 
     return (
-        <Container fluid className="m-0 p-0">
-            <div className="bg-light shadow-sm" style={{ padding: 15, boxSizing: "border-box" }}>
-                <Container style={{ display: "flex" }}>
-                    <Button as={Link} to="/SDashboard" variant="light">
-                        <IoMdArrowRoundBack size={20} />
-                    </Button>
-                    <div className="fs-5 pt-1 ps-4">Transaction History</div>
-                </Container>
-            </div>
-            <Container fluid='lg' className="mt-3">
-                <Row>
-                    <Col>
-                        <h4>Your Saved Orders</h4>
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Total Amount</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {orderHistory.length > 0 ? (
-                                    orderHistory.map((order) => (
-                                        <tr key={order.id}>
-                                            <td>{order.date}</td>
-                                            <td>₱{order.total.toFixed(2)}</td>
-                                            <td>
-                                                <Button variant="info" onClick={() => handleShowModal(order)}>View</Button>
-                                                <Button variant="primary" onClick={() => handleDownloadOrder(order)}>Download</Button>
-                                            </td>
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan="3" className="text-center">No saved orders</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </Table>
+        <Container fluid className={StaffTransactionScss.transactionMainContainer}>
+            <h4><FaSave size={25}/>Your Saved Orders</h4>
+            <div className={StaffTransactionScss.containerFilter}>
+                <Row className="m-2 mt-3">
+                    <Col md={6} sm={12} className="mb-2">
+                        <Form.Control
+                            type="date"
+                            placeholder="Filter by Date"
+                            value={filterDate}
+                            onChange={(e) => setFilterDate(e.target.value)}
+                            className="bg-info"
+                        />
+                    </Col>
+                    <Col md={6} sm={12} className="mb-2">
+                        <Form.Control
+                            type="text"
+                            placeholder="Filter by Customer Name"
+                            value={filterCustomer}
+                            onChange={(e) => setFilterCustomer(e.target.value)}
+                        />
                     </Col>
                 </Row>
-            </Container>
+            </div>
 
-            {/* Modal for viewing order details */}
-            <Modal show={showModal} onHide={handleCloseModal}>
+            <div className={StaffTransactionScss.transactionchildContainer} >
+
+                {/* Mapped Order List */}
+                <ListGroup variant="flush">
+                    {filteredOrders.length > 0 ? (
+                        filteredOrders.map((order) => (
+                            <ListGroup.Item key={order.id} className={StaffTransactionScss.ListGroupItem}>
+                                <div>
+                                    <h5 className="p-0 mb-2">Order ID: {order.id}</h5>
+                                    <p className="p-0 m-0">Order Date: {order.date}</p>
+                                    <p className="p-0 m-0">Customer Name: {order.customerName}</p>
+                                    <p className="p-0 m-0">Total: ₱{order.total.toFixed(2)}</p>
+                                </div>
+                                <div>
+                                    <Button
+                                        variant="outline-info"
+                                        size="sm"
+                                        className="me-2"
+                                        onClick={() => handleShowModal(order)}
+                                    >
+                                        <FaEye size={15}/>
+                                    </Button>
+                                    <Button
+                                        variant="outline-primary"
+                                        size="sm"
+                                        className="me-2"
+                                        onClick={() => handleDownloadOrder(order)}
+                                    >
+                                        <FaDownload size={15}/>
+                                    </Button>
+                                </div>
+                            </ListGroup.Item>
+                        ))
+                    ) : (
+                        <ListGroup.Item className="text-center">No saved orders</ListGroup.Item>
+                    )}
+                </ListGroup>
+            </div>
+
+            {/* Updated Modal for viewing order details */}
+            <Modal show={showModal} onHide={handleCloseModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered >
                 <Modal.Header closeButton>
-                    <Modal.Title>Order Details</Modal.Title>
+                    <Modal.Title><FaTruckRampBox size={20} className="me-2"/>Order Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {selectedOrder && (
-                        <>
-                            <h5>Order Date: {selectedOrder.date}</h5>
-                            <h6>Sold To: {selectedOrder.customerName}</h6>
-                            <h6>Subtotal: ₱{selectedOrder.subtotal.toFixed(2)}</h6>
-                            <h6>Tax (12%): ₱{selectedOrder.tax.toFixed(2)}</h6>
-                            <h6>Discount: -₱{selectedOrder.discount.toFixed(2)}</h6>
-                            <h6>Total Amount: ₱{selectedOrder.total.toFixed(2)}</h6>
-                            <h6>Items:</h6>
-                            <ul>
+                        <Container>
+                            {/* Order Summary Section */}
+                            <h5 className="mb-2 text-primary">Order Summary</h5>
+                            <ListGroup variant="flush" style={{height: 150, overflow: 'auto'}}>
+                                <ListGroup.Item><strong>Order Date:</strong> {selectedOrder.date}</ListGroup.Item>
+                                <ListGroup.Item><strong>Customer Name:</strong> {selectedOrder.customerName}</ListGroup.Item>
+                                <ListGroup.Item><strong>Subtotal:</strong> ₱{selectedOrder.subtotal.toFixed(2)}</ListGroup.Item>
+                                <ListGroup.Item><strong>Tax:</strong> {selectedOrder.tax.toFixed(2)}%</ListGroup.Item>
+                                <ListGroup.Item><strong>Discount:</strong> {selectedOrder.discount.toFixed(2)}%</ListGroup.Item>
+                                <ListGroup.Item><strong>Total Amount:</strong> <strong>₱{selectedOrder.total.toFixed(2)}</strong></ListGroup.Item>
+                            </ListGroup>
+
+                            {/* Items Section */}
+                            <h5 className="mt-3 text-primary">Items</h5>
+                            <ListGroup variant="flush" style={{height: '100px', overflow: 'auto'}}>
                                 {selectedOrder.items.map((item, index) => {
                                     const price = parseFloat(item.price);
                                     const total = price * item.quantity;
                                     return (
-                                        <li key={index}>
-                                            {item.productName}, Size: {item.size || 'N/A'}, Color: {item.color || 'N/A'}, Voltage: {item.voltage || 'N/A'}, Watt: {item.watt || 'N/A'} - Quantity: {item.quantity}, Unit Price: ₱{!isNaN(price) ? price.toFixed(2) : 'N/A'}, Total: ₱{!isNaN(total) ? total.toFixed(2) : 'N/A'}
-                                        </li>
+                                        <ListGroup.Item key={index}>
+                                            <div className="d-flex justify-content-between">
+                                                <p><strong>Product:</strong> {item.productName}</p>
+                                                <p><strong>Quantity:</strong> {item.quantity}</p>
+                                            </div>
+                                            <div className="d-flex justify-content-between">
+                                                <p><strong>Unit Price:</strong> ₱{price.toFixed(2)}</p>
+                                                <p><strong>Total:</strong> ₱{total.toFixed(2)}</p>
+                                            </div>
+                                        </ListGroup.Item>
                                     );
                                 })}
-                            </ul>
-                            <h6>Download Receipt QR Code:</h6>
-                            <canvas ref={qrRef} />
-                        </>
+                            </ListGroup>
+
+                            {/* QR Code Section */}
+                            <h5 className="mt-4 text-primary">Download Receipt QR Code</h5>
+                            <div className="d-flex justify-content-center">
+                                <canvas ref={qrRef} style={{ maxWidth: "100%", height: "auto" }} />
+                            </div>
+                        </Container>
                     )}
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="bg-light">
                     <Button variant="secondary" onClick={handleCloseModal}>Close</Button>
                 </Modal.Footer>
             </Modal>
+
+
         </Container>
     );
 }
-
-export default StaffTransactionHistory;
+export default AdminTransactionHistory;

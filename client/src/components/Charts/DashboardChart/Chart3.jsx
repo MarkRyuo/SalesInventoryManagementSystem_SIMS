@@ -1,5 +1,4 @@
 import Chartcss from './Charts.module.scss';
-import { FaReact } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { fetchQuantitySoldByRange } from '../../../services/ProductService'; // Import the new service
 
@@ -27,14 +26,10 @@ function Chart3() {
 
     return (
         <div className={Chartcss.containerChart3}>
-            <div className={Chartcss.containerText}>
-                <FaReact size={25} />
-                <p className='m-0 p-0'>Quantity Sold</p>
-            </div>
-
-            <div className={Chartcss.contentChart}>
-                <p className='m-0'>{loading ? "Loading..." : quantitySold}</p>
-                <div className={Chartcss.dropdown}>
+            <h5>Quantity Sold</h5>
+            <div className={Chartcss.contentChart3}>
+                <p>{loading ? "Loading..." : quantitySold}</p>
+                <div>
                     <select
                         className="form-select"
                         value={timeRange}

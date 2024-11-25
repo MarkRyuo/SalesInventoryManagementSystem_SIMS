@@ -4,9 +4,10 @@
 
 .reportMain {
     // border: 1px solid red;
+    margin: 0;
+    padding: 0;
     height: auto;
     width: 100%;
-    padding: 0;
 
     .reportTitle {
         // border: 1px solid green;
@@ -20,6 +21,8 @@
 
     .containerReportSmall {
         // border: 1px solid;
+        box-shadow: 1px 4px 1px #d1d1d1;
+        border-radius: 15px;
         width: 100%;
         padding: 10px;
         display: flex;
@@ -34,6 +37,7 @@
         display: flex;
         justify-content: space-between;
         height: auto;
+        margin-top: 10px;
     }
 }
 
@@ -61,6 +65,7 @@
     }
 
     .containerReportLarge {
+        margin-top: 10px;
         padding: 10px;
         // border: 1px solid;
         display: flex;

@@ -2,7 +2,6 @@ import { Container, Navbar, Button, Offcanvas, Image, Modal, Spinner } from 'rea
 import { useState } from 'react';
 import Navbars from './Navbar.module.scss';
 import { Buttons } from './Buttons';
-import AccountDropdown from './AccountDropdown';
 
 //* Icons
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -81,7 +80,7 @@ export const NavDashboard = () => {
                             <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
-                            <AccountDropdown />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-4")} />
                         </div>
                         <div style={{ height: "150px" }}>
                             <Button

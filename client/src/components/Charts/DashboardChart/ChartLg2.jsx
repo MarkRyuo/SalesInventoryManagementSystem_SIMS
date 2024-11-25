@@ -64,13 +64,16 @@ function ChartLg2() {
 
     return (
         <div className={Chartcss.containerChartLg2}>
-            <div className={Chartcss.rangeButtons}>
-                <button onClick={() => handleRangeChange("today")}>Today</button>
-                <button onClick={() => handleRangeChange("week")}>Week</button>
-                <button onClick={() => handleRangeChange("month")}>Month</button>
-                <button onClick={() => handleRangeChange("year")}>Year</button>
-            </div>
+
             <Line data={chartData} options={chartOptions} />
+            <div className={Chartcss.rangeButtons}>
+                <select onChange={(e) => handleRangeChange(e.target.value)} className="form-select">
+                    <option value="today">Today</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
+                </select>
+            </div>
         </div>
     );
 }

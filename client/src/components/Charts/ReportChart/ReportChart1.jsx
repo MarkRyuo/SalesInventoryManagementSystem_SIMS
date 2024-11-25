@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { FaReact } from 'react-icons/fa';
 import { Modal, Button, Form } from 'react-bootstrap';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
@@ -136,32 +135,12 @@ function ReportChart1() {
 
     return (
         <div className={ReportChartcss.containerChart1}>
-            <div className={ReportChartcss.containerText}>
-                <FaReact size={23} />
-                <p className='m-0 p-0'>Stock Overview</p>
-            </div>
-            <div className={ReportChartcss.contentChart}>
-                <p className="m-0 p-2">{`Total Stock: ${totalStock}`}</p>
-            </div>
-            <div className="d-flex justify-content-between">
-                <Button variant="primary" onClick={() => setShowModal(true)}>
-                    Filter by Date
-                </Button>
-                <Button
-                    variant="success"
-                    onClick={() => downloadPDF(filteredData)}
-                    disabled={filteredData.length === 0}
-                >
-                    Download PDF
-                </Button>
-                <Button
-                    variant="success"
-                    onClick={() => downloadXLSX(filteredData)}
-                    disabled={filteredData.length === 0}
-                >
-                    Download XLSX
-                </Button>
-            </div>
+                
+            <h1 className="m-0 p-0">Stock In Overview</h1>
+            <p className="my-2 p-0">{`${totalStock}`}</p>    
+            <Button variant="" onClick={() => setShowModal(true)}>
+                Filter by Date
+            </Button>
 
             {/* Modal for date filtering */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
@@ -186,8 +165,41 @@ function ReportChart1() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleFilter}>Filter</Button>
+                        <div className="d-flex justify-content-between mt-3">
+                            <Button
+                                variant="primary"
+                                onClick={handleFilter}
+                            >
+                                Filter
+                            </Button>
+                            <Button
+                                variant="warning"
+                                onClick={() => {
+                                    setStartDate('');
+                                    setEndDate('');
+                                    setFilteredData([]); // Clear filtered data
+                                }}
+                            >
+                                Clear
+                            </Button>
+                        </div>
                     </Form>
+                    <div className="d-flex justify-content-between mt-4">
+                        <Button
+                            variant="success"
+                            onClick={() => downloadPDF(filteredData)}
+                            disabled={filteredData.length === 0}
+                        >
+                            Download PDF
+                        </Button>
+                        <Button
+                            variant="success"
+                            onClick={() => downloadXLSX(filteredData)}
+                            disabled={filteredData.length === 0}
+                        >
+                            Download XLSX
+                        </Button>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
@@ -195,6 +207,7 @@ function ReportChart1() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
     );
 }

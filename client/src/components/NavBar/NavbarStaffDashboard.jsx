@@ -10,7 +10,10 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { AiOutlineProduct } from "react-icons/ai";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import { FaHistory } from "react-icons/fa";
+import { MdInventory } from "react-icons/md";
+import { TiDocumentAdd } from "react-icons/ti";
+import { BiScan } from "react-icons/bi";
+
 
 function NavbarStaffDashboard() {
     const [show, setShow] = useState(false);
@@ -26,9 +29,11 @@ function NavbarStaffDashboard() {
     const [buttons] = useState([
         { icon: <MdSpaceDashboard />, btnName: "Dashboard", id: "b-6", path: "/SDashboard" },
         { icon: <AiOutlineProduct />, btnName: "Account", id: "b-7", path: "/StaffAccountMode" },
-        { icon: <FaHistory />, btnName: "TransactionHistory", id: "b-8", path: "/StaffTransactionHistory" },
+        { icon: <MdInventory />, btnName: "Inventory", id: "b-8", path: "/StaffProductPage" },
         { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/AccountPage" },
-        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" }
+        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" },
+        { icon: <TiDocumentAdd />, btnName: "Add New Product", id: "b-11", path: "/AddNewAssets" },
+        { icon: <BiScan />, btnName: "Point of Sale", id: "b-12", path: "/ScanAsset" },
     ]);
 
     // Handle logout process
@@ -54,7 +59,7 @@ function NavbarStaffDashboard() {
 
     return (
         <Container fluid style={{ margin: "0px", padding: "0px" }}>
-            <Navbar className={Navbars.navDashboard}>
+            <Navbar className={Navbars.navStaffDashboard}>
                 <Container>
                     <Navbar.Brand>
                         <Button variant="" className={Navbars.btnOffcanvas} onClick={handleShow}>
@@ -80,6 +85,8 @@ function NavbarStaffDashboard() {
                             <Buttons buttons={buttons.filter((button) => button.id === "b-6")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-7")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-8")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-11")} />
+                            <Buttons buttons={buttons.filter((button) => button.id === "b-12")} />
                         </div>
                         <div style={{ height: "150px" }}>
                             <Button

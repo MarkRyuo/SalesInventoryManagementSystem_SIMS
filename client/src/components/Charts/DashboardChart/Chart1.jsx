@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { FaReact } from 'react-icons/fa';
 import Chartcss from './Charts.module.scss';
 import { getProductQuantityHistory, filterQuantityByRange } from '../../../services/Fetching/StockInServices'; // Import the functions
 
@@ -29,21 +28,21 @@ function Chart1() {
 
     return (
         <div className={Chartcss.containerChart1}>
-            <div className={Chartcss.containerText}>
-                <FaReact size={25} />
-                <p>Stock Quantity</p>
-            </div>
-            <div className={Chartcss.contentChart}>
+            {/* <p>From the running {timeRange.toLowerCase()}</p> */}
+            <h5>Stock Quantity</h5>
+            <div className={Chartcss.contentChart1}>
                 <p>{quantity}</p>
-                <p>From the running {timeRange.toLowerCase()}</p>
-                <div>
-                    <button onClick={() => handleTimeRangeChange('Today')}>Today</button>
-                    <button onClick={() => handleTimeRangeChange('Week')}>Week</button>
-                    <button onClick={() => handleTimeRangeChange('Month')}>Month</button>
-                    <button onClick={() => handleTimeRangeChange('Year')}>Year</button>
-                </div>
+            </div>
+            <div className={Chartcss.rangeSelector}>
+                <select onChange={(e) => handleTimeRangeChange(e.target.value)} value={timeRange} className='form-select'>
+                    <option value="Today">Today</option>
+                    <option value="Week">Week</option>
+                    <option value="Month">Month</option>
+                    <option value="Year">Year</option>
+                </select>
             </div>
         </div>
+
     );
 }
 

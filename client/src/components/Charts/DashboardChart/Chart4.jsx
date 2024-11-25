@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getDatabase, ref, get } from "firebase/database";
 import Chartcss from './Charts.module.scss';
-import { FaReact } from "react-icons/fa";
 
 function Chart4() {
     const [lowStockCount, setLowStockCount] = useState(0);
@@ -55,12 +54,9 @@ function Chart4() {
     }, []);
 
     return (
-        <div className={Chartcss.containerChart3}>
-            <div className={Chartcss.containerText}>
-                <FaReact size={25} />
-                <p>Low Stock Products</p>
-            </div>
-            <div className={Chartcss.contentChart}>
+        <div className={Chartcss.containerChart4}>
+            <h5>Low Stock Products</h5>
+            <div className={Chartcss.contentChart4}>
                 <p>{lowStockCount}</p>
             </div>
         </div>

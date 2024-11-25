@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FaReact } from "react-icons/fa";
 import { Modal, Button, Form } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
@@ -104,29 +103,14 @@ function SalesReportQuantitySold() {
     return (
         <div className={ReportChartcss.containerChart3}>
             {/* Report Header */}
-            <div className={ReportChartcss.containerText}>
-                <FaReact size={23} />
-                <p className='m-0 p-0'>Sales Report: Quantity Sold</p>
-            </div>
-
+            <h1 className="m-0 pb-2">Quantity Sold</h1>
             {/* Report Summary */}
-            <div className={ReportChartcss.contentChart}>
-                <p className="m-0 p-2">{`Total Quantity Sold: ${totalQuantity}`}</p>
-                <p className="m-0 pb-2">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
-            </div>
-
-            {/* Filter and Action Buttons */}
-            <div className="d-flex justify-content-between">
-                <Button variant="primary" onClick={() => setShowModal(true)}>
-                    Filter by Date
-                </Button>
-                <Button variant="success" onClick={downloadPDF} disabled={filteredData.length === 0}>
-                    Download PDF
-                </Button>
-                <Button variant="success" onClick={downloadXLSX} disabled={filteredData.length === 0}>
-                    Download XLSX
-                </Button>
-            </div>
+            <p className="m-0">{`Total Quantity Sold: ${totalQuantity}`}</p>
+            <p className="m-0">{`Total Revenue: ${formatPeso(totalRevenue)}`}</p>
+            {/* Filter Button */}
+            <Button variant="" onClick={() => setShowModal(true)}>
+                Filter by Date
+            </Button>
 
             {/* Modal for Date Filtering */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
@@ -151,10 +135,44 @@ function SalesReportQuantitySold() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleFilter}>
-                            Filter
-                        </Button>
+                        <div className="d-flex justify-content-between mt-3">
+                            <Button variant="primary" onClick={handleFilter}>
+                                Filter
+                            </Button>
+                            <Button
+                                variant="warning"
+                                onClick={() => {
+                                    setStartDate('');
+                                    setEndDate('');
+                                    setFilteredData([]);
+                                    setTotalQuantity(0);
+                                    setTotalRevenue(0);
+                                    setTotalDiscount(0);
+                                    setTotalTax(0);
+                                    setNetRevenue(0);
+                                }}
+                            >
+                                Clear
+                            </Button>
+                        </div>
                     </Form>
+                    {/* Action Buttons */}
+                    <div className="d-flex justify-content-between mt-4">
+                        <Button
+                            variant="success"
+                            onClick={downloadPDF}
+                            disabled={filteredData.length === 0}
+                        >
+                            Download PDF
+                        </Button>
+                        <Button
+                            variant="success"
+                            onClick={downloadXLSX}
+                            disabled={filteredData.length === 0}
+                        >
+                            Download XLSX
+                        </Button>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
@@ -162,7 +180,9 @@ function SalesReportQuantitySold() {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
         </div>
+
     );
 }
 

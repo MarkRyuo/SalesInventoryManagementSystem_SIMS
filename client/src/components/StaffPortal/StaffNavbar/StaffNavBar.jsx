@@ -1,17 +1,16 @@
 /* eslint-disable react/prop-types */
 import { Button, Container, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import StaffNavBarScss from './StaffNavbar.module.scss' ;
+;
 function StaffNavBar({ backBtn }) {
 
     return (
         <Container fluid className='m-0 p-0'>
-            <Navbar
-                className="bg-body-tertiary m-0"
-                style={{
-                    boxShadow: "1px 1px 4px #E1E4E4 ",
-                }}>
+            <Navbar className={StaffNavBarScss.ContainerNav}>
+
                 {backBtn.map((Backbtn) => (
-                    <Container key={Backbtn.id}>
+                    <Container key={Backbtn.id} className={StaffNavBarScss.contentNav}>
                         <Navbar.Brand style={{
                             display: 'flex',
                             justifyContent: 'space-between',
@@ -20,7 +19,7 @@ function StaffNavBar({ backBtn }) {
                             <Button
                                 as={Link}
                                 to={Backbtn.path}
-                                variant='light'
+                                variant=''
                             >
                                 {Backbtn.btnIcon}
                             </Button>
@@ -28,7 +27,7 @@ function StaffNavBar({ backBtn }) {
                             <Button
                                 as={Link}
                                 to={Backbtn.pathTransaction}
-                                variant='light'
+                                variant=''
                                 className='fs-5'
                             >
                                 {Backbtn.Title}

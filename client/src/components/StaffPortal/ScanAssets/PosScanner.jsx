@@ -185,7 +185,7 @@ function PosScanner() {
     };
 
     return (
-        <Container fluid className="m-0 p-0">
+        <Container fluid className="m-0 p-0" style={{ height: '100vh', background: " radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg' className="p-0">
                 <div className={PosScannerscss.PosscannerMessage}>
@@ -206,7 +206,7 @@ function PosScanner() {
                     )}
                 </div>
                 <div className={PosScannerscss.Posscannermain}>
-                    <Card className="m-0 p-0">
+                    <Card className="m-0 p-0 border-0" style={{background: " radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
                         <Button variant="secondary" onClick={handleCameraToggle} disabled={videoDevices.length < 2} className="mt-3">
                             <FaCameraRotate size={20} className="me-2" />
                             Switch to {isUsingBackCamera ? "Front" : "Back"} Camera

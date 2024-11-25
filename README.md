@@ -11,7 +11,10 @@
 
 ## Changelog
 
-### v8.1.1-beta (Latest)
+### v8.2 (Latest)
+- Design
+
+### v8.1.1-beta
 - Dashboard Update
 
 ### v8.0.6

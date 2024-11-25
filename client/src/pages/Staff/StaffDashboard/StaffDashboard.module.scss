@@ -66,10 +66,22 @@
         
         .largeContainer {
             // border: 1px solid;
-            margin-top: 10px;
+            margin-top:10px;
             display: flex;
             width: auto;
             gap: 10px;
+
+            .buttonsHeroCard {
+                // border: 1px solid;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                width: 500px;
+                height: 400px;
+                gap: 20px;
+                justify-content: center;
+            }
+
             .divLG {
                 width: auto;
                 display: flex;

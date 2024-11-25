@@ -13,6 +13,8 @@ import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
 import ChartLg2 from '../../../components/Charts/DashboardChart/ChartLg2';
 import ChartLg3 from '../../../components/Charts/DashboardChart/ChartLg3';
 import Chart4 from '../../../components/Charts/DashboardChart/Chart4';
+import { MdSpaceDashboard } from "react-icons/md";
+
 
 export const DashboardPage = () => {
     const [adminName, setAdminName] = useState('');
@@ -47,7 +49,6 @@ export const DashboardPage = () => {
         };
 
         fetchAdminData();
-
         // Set the real-time date
         const updateDate = () => {
             const now = new Date();
@@ -76,6 +77,7 @@ export const DashboardPage = () => {
         <MainLayout>
             <div className={DashboardCss.mainTopComponent}>
                 <div className={DashboardCss.componentHeroCard}>
+                    <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0' />Dashboard</h1>
                     {isLoading ? (
                         <div className={DashboardCss.loadingContainer}>
                             <p>Loading admin Dashboard</p>
@@ -102,17 +104,18 @@ export const DashboardPage = () => {
                 <div className={DashboardCss.chartContainer}>
 
                     <div className={DashboardCss.smallContainer}>
-                        <Chart1 />
-                        <Chart2 />
-                        <Chart3 />
-                        <Chart4 />
-                    </div>
-
-                    <div className={DashboardCss.largeContainer}>
-                            <ChartLg3 />
                         <div>
+                            <Chart1 />
+                            <Chart2 />
+                            <Chart3 />
+                            <Chart4 />
+                        </div>
+                        <div className={DashboardCss.largeContainer}>
+                            <div className={DashboardCss.divLG}>
+                                <ChartLg3 />
+                                <ChartLg2 />
+                            </div>
                             <ChartLg1 />
-                            <ChartLg2 />
                         </div>
                     </div>
 

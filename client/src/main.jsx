@@ -27,14 +27,16 @@ import LoginPage from './pages/LoginPage/LoginPage.jsx'
 
 //! Done 
 import ProductPage from './pages/Admin/ProductPage/ProductPage.jsx';
-import StaffTransactionHistory from './pages/Staff/StaffTransactionHistory/StaffTransactionHistory.jsx';
 import AdminTransactionHistory from './pages/Admin/AdminTransactionHistory/AdminTransactionHistory.jsx';
 import Product from './components/Charts/ProductChart/Product.jsx' ;
 import DashboardPage from '../src/pages/Admin/DashboardPage/DashboardPage.jsx';
 import ReOrdering from './pages/Admin/ProductPage/ReOrdering.jsx';
 import SetQrcode from './pages/Admin/ProductPage/SetQrcode.jsx' ;
 import ReportPage from './pages/Admin/ReportPage/ReportPage.jsx';
-import SalesReportPage from './components/SalesRepotPages/SalesReportPage.jsx';
+import AccountPage from './pages/Admin/AccountPage/AccountPage.jsx'
+import ProfileComp from './components/Account/ProfileComp.jsx';
+import StaffProductPage from './pages/Staff/StaffProductPage/StaffProductPage.jsx'
+import StaffProduct from './components/Charts/ProductChart/StaffProduct.jsx'
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -87,8 +89,12 @@ const router = createBrowserRouter([
     element: <SetQrcode /> ,
   },
   { //? Product for Admin
-    path: "SalesReportPage",
-    element: <SalesReportPage /> ,
+    path: "AccountPage",
+    element: <AccountPage/>,
+  },
+  { //? Product for Admin
+    path: "ProfileComp",
+    element: <ProfileComp /> ,
   },
 
   //! Forgot Password
@@ -136,6 +142,14 @@ const router = createBrowserRouter([
     path: "SearchAssets",
     element: <SearchAsset />,
   },
+  {
+    path: "StaffProductPage",
+    element: <StaffProductPage /> ,
+  },
+  {
+    path: "StaffProduct",
+    element: <StaffProduct/>,
+  },
 
   //? Staff Comps 
   {
@@ -162,10 +176,6 @@ const router = createBrowserRouter([
   {
     path: "PosSuccess",
     element: <PosSuccess />, //* POS: Product Success View 
-  },
-  {
-    path: "StaffTransactionHistory",
-    element: <StaffTransactionHistory />, //* POS: Transaction History View 
   },
 
 ]);
