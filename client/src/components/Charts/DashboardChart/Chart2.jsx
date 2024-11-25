@@ -30,7 +30,7 @@ function Chart2() {
 
     return (
         <div className={Chartcss.containerChart2}>
-            <h5>Total Sales</h5>
+            <h5>Total Revenue</h5>
             <div className={Chartcss.contentChart2}>
                 <p>{totalSales.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}</p> {/* Display total sales formatted */}
                 {/* <p>From the {selectedRange}</p> */}
