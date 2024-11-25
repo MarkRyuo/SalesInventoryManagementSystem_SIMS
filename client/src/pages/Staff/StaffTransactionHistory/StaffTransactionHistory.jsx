@@ -4,7 +4,7 @@ import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import QRious from 'qrious';
 import { FaEye, FaDownload, FaTrash } from "react-icons/fa";
-import AdminTransactionScss from './AdminTransactionHistory.module.scss';
+import StaffTransactionScss from './StaffTransactionHistory.module.scss' ;
 import { FaSave } from "react-icons/fa";
 import { FaTruckRampBox } from "react-icons/fa6";
 
@@ -134,9 +134,9 @@ function AdminTransactionHistory() {
     };
 
     return (
-        <Container fluid className={AdminTransactionScss.transactionMainContainer}>
+        <Container fluid className={StaffTransactionScss.transactionMainContainer}>
             <h4><FaSave size={25}/>Your Saved Orders</h4>
-            <div className={AdminTransactionScss.containerFilter}>
+            <div className={StaffTransactionScss.containerFilter}>
                 <Row className="m-2 mt-3">
                     <Col md={6} sm={12} className="mb-2">
                         <Form.Control
@@ -158,7 +158,7 @@ function AdminTransactionHistory() {
                 </Row>
             </div>
 
-            <div className={AdminTransactionScss.transactionchildContainer} >
+            <div className={StaffTransactionScss.transactionchildContainer} >
 
                 {/* Mapped Order List */}
                 <ListGroup variant="flush">
