@@ -7,11 +7,7 @@ function StaffNavBar({ backBtn }) {
 
     return (
         <Container fluid className='m-0 p-0'>
-            <Navbar
-                className={StaffNavBarScss.ContainerNav}
-                style={{
-                    boxShadow: "1px 1px 4px #E1E4E4 ",
-                }}>
+            <Navbar className={StaffNavBarScss.ContainerNav}>
 
                 {backBtn.map((Backbtn) => (
                     <Container key={Backbtn.id} className={StaffNavBarScss.contentNav}>
