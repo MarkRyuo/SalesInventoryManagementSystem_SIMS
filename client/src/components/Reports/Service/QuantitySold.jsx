@@ -4,7 +4,7 @@ function QuantitySold() {
         <div>
 
         <div>
-            <h1></h1>
+            <h1>Quantity Sold</h1>
         </div>
 
         </div>
