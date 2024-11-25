@@ -21,11 +21,13 @@ function StockInReports() {
     const fetchFilteredData = async () => {
         try {
             const data = await fetchStockInByDate(startDate, endDate);
+            console.log(data); // Log data to inspect the response
             setFilteredData(data);
         } catch (error) {
             console.error("Error fetching stock data:", error);
         }
     };
+
 
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
