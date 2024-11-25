@@ -43,11 +43,51 @@ function TotalSalesReports() {
 
     // Handle XLSX file download
     const downloadXlsx = () => {
+        // Create a worksheet from the filtered data
         const ws = XLSX.utils.json_to_sheet(filteredData);
+
+        // Add header styling
+        const header = ws['!rows'] = [
+            { hpt: 30 }, // Set height of header row
+        ];
+
+        // Style header cells (bold font)
+        ws['A1'].s = { font: { bold: true } };
+        ws['B1'].s = { font: { bold: true } };
+        ws['C1'].s = { font: { bold: true } };
+        ws['D1'].s = { font: { bold: true } };
+        ws['E1'].s = { font: { bold: true } };
+        ws['F1'].s = { font: { bold: true } };
+
+        // Adding the totals in the last row
+        const totals = [
+            '',
+            'Total Quantity Sold',
+            totalQuantitySold,
+            '',
+            'Total Revenue',
+            `₱${totalRevenue.toFixed(2)}`,
+            '',
+            'Total Discount',
+            `₱${totalDiscount.toFixed(2)}`,
+            '',
+            'Total Tax',
+            `₱${totalTax.toFixed(2)}`,
+            '',
+            'Net Revenue',
+            `₱${netRevenue.toFixed(2)}`,
+        ];
+
+        XLSX.utils.sheet_add_aoa(ws, [totals], { origin: -1 }); // Add totals at the bottom
+
+        // Create a new workbook
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Sales Report');
+
+        // Write the workbook to an array (XLSX format)
         const xlsxData = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-        // Save the XLSX file logic
+
+        // Save the XLSX file
         const blob = new Blob([xlsxData], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
@@ -55,9 +95,18 @@ function TotalSalesReports() {
         link.click();
     };
 
+
     // Handle PDF file download
     const downloadPdf = () => {
         const doc = new jsPDF();
+
+        // Title and Date Range
+        doc.setFontSize(16);
+        doc.text('Total Sales Report', 14, 20);
+        doc.setFontSize(10);
+        doc.text(`From: ${startDate} To: ${endDate}`, 14, 30);
+
+        // Table with custom styles
         doc.autoTable({
             head: [['Transaction ID', 'Date', 'Total Quantity', 'Discount', 'Tax', 'Total']],
             body: filteredData.map(transaction => [
@@ -68,9 +117,32 @@ function TotalSalesReports() {
                 `₱${transaction.tax}`,
                 `₱${transaction.total}`,
             ]),
+            startY: 40,
+            theme: 'grid', // Adds a grid style to the table
+            headStyles: {
+                fillColor: [255, 0, 0], // Red header
+                textColor: [255, 255, 255], // White text
+                fontStyle: 'bold',
+            },
+            bodyStyles: {
+                textColor: [0, 0, 0], // Black text
+            },
+            alternateRowStyles: {
+                fillColor: [245, 245, 245], // Light gray for alternating rows
+            },
         });
+
+        // Footer with totals
+        doc.text(`Total Quantity Sold: ${totalQuantitySold}`, 14, doc.lastAutoTable.finalY + 10);
+        doc.text(`Total Revenue: ₱${totalRevenue.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 15);
+        doc.text(`Total Discounts: ₱${totalDiscount.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 20);
+        doc.text(`Total Tax: ₱${totalTax.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 25);
+        doc.text(`Net Revenue: ₱${netRevenue.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 30);
+
+        // Save the PDF
         doc.save('sales_report.pdf');
     };
+
 
     // Calculate totals
     const totalQuantitySold = filteredData.reduce((acc, item) => acc + item.totalQuantity, 0);
