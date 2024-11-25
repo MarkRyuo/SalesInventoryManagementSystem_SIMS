@@ -1,141 +1,137 @@
 import { useState, useEffect } from 'react';
-import { Table, Button, Dropdown, DropdownButton } from 'react-bootstrap';
-import firebase from 'firebase/app';
-import 'firebase/database';
-import { jsPDF } from 'jspdf';
+import { Table, Dropdown, Button } from 'react-bootstrap';
+import { format } from 'date-fns'; // for date formatting
+import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import jsPDF from 'jspdf';
+import { fetchTransactions } from './Service/TotalSales'; // Import the fetch function
 
 function TotalSalesReports() {
-    const [transactions, setTransactions] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
+    const [transactionData, setTransactionData] = useState([]);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [totalQuantity, setTotalQuantity] = useState(0);
-    const [totalRevenue, setTotalRevenue] = useState(0);
-    const [totalDiscounts, setTotalDiscounts] = useState(0);
-    const [totalTax, setTotalTax] = useState(0);
-    const [netRevenue, setNetRevenue] = useState(0);
+    const [filteredData, setFilteredData] = useState([]);
 
+    // Fetch data from Firebase on component mount
     useEffect(() => {
-        // Fetch data from Firebase
-        firebase.database().ref('TransactionHistory').on('value', (snapshot) => {
-            const data = snapshot.val();
-            const transactionsArray = [];
-            for (let id in data) {
-                transactionsArray.push({ id, ...data[id] });
-            }
-            setTransactions(transactionsArray);
-        });
+        const getData = async () => {
+            const data = await fetchTransactions();
+            setTransactionData(data);
+        };
+        getData();
     }, []);
 
+    // Format date as timestamp for comparison
+    const convertToTimestamp = (dateString) => {
+        const date = new Date(dateString);
+        return date.getTime();
+    };
+
+    // Filter the data based on start and end dates
     const filterData = () => {
-        const filtered = transactions.filter((transaction) => {
-            const transactionDate = new Date(transaction.date);
-            const start = new Date(startDate);
-            const end = new Date(endDate);
-            return transactionDate >= start && transactionDate <= end;
-        });
-
-        setFilteredData(filtered);
-        calculateTotals(filtered);
+        if (startDate && endDate) {
+            const filtered = transactionData.filter(transaction => {
+                const transactionDate = convertToTimestamp(transaction.date);
+                return (
+                    transactionDate >= convertToTimestamp(startDate) &&
+                    transactionDate <= convertToTimestamp(endDate)
+                );
+            });
+            setFilteredData(filtered);
+        }
     };
 
-    const calculateTotals = (data) => {
-        let qty = 0;
-        let revenue = 0;
-        let discounts = 0;
-        let tax = 0;
-        let net = 0;
-
-        data.forEach((transaction) => {
-            qty += parseInt(transaction.totalQuantity);
-            revenue += parseFloat(transaction.total);
-            discounts += parseFloat(transaction.discount);
-            tax += parseFloat(transaction.tax);
-            net += (parseFloat(transaction.total) - parseFloat(transaction.discount) + parseFloat(transaction.tax));
-        });
-
-        setTotalQuantity(qty);
-        setTotalRevenue(revenue);
-        setTotalDiscounts(discounts);
-        setTotalTax(tax);
-        setNetRevenue(net);
-    };
-
-    const handleDownload = (format) => {
-        if (format === 'pdf') {
+    // Handle file download (XLSX or PDF)
+    const handleDownload = (type) => {
+        if (type === 'xlsx') {
+            const ws = XLSX.utils.json_to_sheet(filteredData);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Sales Report');
+            const xlsxData = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+            saveAs(new Blob([xlsxData]), 'sales_report.xlsx');
+        } else if (type === 'pdf') {
             const doc = new jsPDF();
             doc.autoTable({
                 head: [['Transaction ID', 'Date', 'Total Quantity', 'Discount', 'Tax', 'Total']],
-                body: filteredData.map((item) => [
-                    item.id,
-                    item.date,
-                    item.totalQuantity,
-                    item.discount,
-                    item.tax,
-                    item.total,
+                body: filteredData.map(transaction => [
+                    transaction.transactionId,
+                    transaction.date,
+                    transaction.totalQuantity,
+                    `₱${transaction.discount}`,
+                    `₱${transaction.tax}`,
+                    `₱${transaction.total}`,
                 ]),
             });
-            doc.save('sales-report.pdf');
-        } else if (format === 'xlsx') {
-            const worksheet = XLSX.utils.json_to_sheet(filteredData);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'Sales Report');
-            XLSX.writeFile(workbook, 'sales-report.xlsx');
+            doc.save('sales_report.pdf');
         }
     };
 
     return (
         <div>
-            <h1>Total Sales</h1>
+            <div>
+                <h1>Total Sales</h1>
+                {/* Date Picker Inputs */}
+                <div>
+                    <input
+                        type="date"
+                        onChange={(e) => setStartDate(e.target.value)}
+                        placeholder="Start Date"
+                    />
+                    <input
+                        type="date"
+                        onChange={(e) => setEndDate(e.target.value)}
+                        placeholder="End Date"
+                    />
+                    <Button onClick={filterData}>Filter</Button>
+                </div>
 
-            <div className="mb-4">
-                <label>Start Date:</label>
-                <input type="date" onChange={(e) => setStartDate(e.target.value)} />
-                <label>End Date:</label>
-                <input type="date" onChange={(e) => setEndDate(e.target.value)} />
-                <Button onClick={filterData}>Filter</Button>
+                {/* Dropdown for file download */}
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Download Report
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => handleDownload('xlsx')}>Download as XLSX</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleDownload('pdf')}>Download as PDF</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
-
-            <div className="mb-4">
-                <DropdownButton id="dropdown-basic-button" title="Download Report">
-                    <Dropdown.Item onClick={() => handleDownload('pdf')}>Download PDF</Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleDownload('xlsx')}>Download XLSX</Dropdown.Item>
-                </DropdownButton>
-            </div>
-
-            <Table striped bordered hover responsive>
-                <thead>
-                    <tr>
-                        <th>Transaction ID</th>
-                        <th>Date</th>
-                        <th>Total Quantity</th>
-                        <th>Discount</th>
-                        <th>Tax</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredData.map((transaction) => (
-                        <tr key={transaction.id}>
-                            <td>{transaction.id}</td>
-                            <td>{transaction.date}</td>
-                            <td>{transaction.totalQuantity}</td>
-                            <td>{transaction.discount}</td>
-                            <td>{transaction.tax}</td>
-                            <td>{transaction.total}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
 
             <div>
-                <h4>Report Summary</h4>
-                <p>Total Quantity Sold: {totalQuantity}</p>
-                <p>Total Revenue: ₱{totalRevenue.toFixed(2)}</p>
-                <p>Discounts Applied: ₱{totalDiscounts.toFixed(2)}</p>
-                <p>Tax Collected: ₱{totalTax.toFixed(2)}</p>
-                <p>Net Revenue: ₱{netRevenue.toFixed(2)}</p>
+                <Table striped bordered hover responsive>
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Date</th>
+                            <th>Total Quantity</th>
+                            <th>Discount</th>
+                            <th>Tax</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredData.map(transaction => (
+                            <tr key={transaction.transactionId}>
+                                <td>{transaction.transactionId}</td>
+                                <td>{format(new Date(transaction.date), 'MMM dd, yyyy, h:mm a')}</td>
+                                <td>{transaction.totalQuantity}</td>
+                                <td>{`₱${transaction.discount}`}</td>
+                                <td>{`₱${transaction.tax}`}</td>
+                                <td>{`₱${transaction.total}`}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan="2">Totals</td>
+                            <td>{filteredData.reduce((acc, item) => acc + item.totalQuantity, 0)}</td>
+                            <td>{`₱${filteredData.reduce((acc, item) => acc + parseFloat(item.discount), 0).toFixed(2)}`}</td>
+                            <td>{`₱${filteredData.reduce((acc, item) => acc + parseFloat(item.tax), 0).toFixed(2)}`}</td>
+                            <td>{`₱${filteredData.reduce((acc, item) => acc + parseFloat(item.total), 0).toFixed(2)}`}</td>
+                        </tr>
+                    </tfoot>
+                </Table>
             </div>
         </div>
     );

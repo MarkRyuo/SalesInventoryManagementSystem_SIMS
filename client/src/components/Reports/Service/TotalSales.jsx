@@ -1,38 +1,33 @@
-import { getDatabase, ref, get, query, orderByChild } from "firebase/database";
+import { getDatabase, ref, get } from 'firebase/database';
 
-export function fetchTotalSalesReport(startDate, endDate) {
+// Fetch transactions from Firebase
+export const fetchTransactions = async () => {
     const db = getDatabase();
-    const transactionsRef = ref(db, 'TransactionHistory');
+    const transactionRef = ref(db, 'TransactionHistory');
 
-    const formattedStartDate = new Date(startDate).getTime(); // Convert to timestamp
-    const formattedEndDate = new Date(endDate).getTime(); // Convert to timestamp
+    try {
+        const snapshot = await get(transactionRef);
+        if (snapshot.exists()) {
+            const transactions = snapshot.val();
+            // Transform the data to match the format used in your table
+            return Object.keys(transactions).map(key => {
+                const transaction = transactions[key];
 
-    const salesQuery = query(transactionsRef, orderByChild("date"));
-
-    return get(salesQuery)
-        .then(snapshot => {
-            if (snapshot.exists()) {
-                const data = snapshot.val();
-
-                // Filter dates manually
-                const filteredData = Object.entries(data).filter(([id, details]) => {
-                    const transactionDate = new Date(details.date).getTime();
-                    return transactionDate >= formattedStartDate && transactionDate <= formattedEndDate;
-                });
-
-                return filteredData.map(([id, details]) => ({
-                    id, // TransactionHistory key
-                    date: details.date,
-                    totalQuantity: details.totalQuantity,
-                    discount: details.discount,
-                    tax: details.tax,
-                    total: details.total,
-                }));
-            }
-            return [];
-        })
-        .catch(error => {
-            console.error("Error fetching transactions:", error);
-            throw error;
-        });
-}
+                // Ensure each field is properly parsed as a number
+                return {
+                    transactionId: key, // The key itself is the transaction ID
+                    date: transaction.date,
+                    totalQuantity: Number(transaction.totalQuantity) || 0,  // Parse as number, default to 0 if invalid
+                    discount: Number(transaction.discount) || 0,  // Parse as number, default to 0 if invalid
+                    tax: Number(transaction.tax) || 0,  // Parse as number, default to 0 if invalid
+                    total: Number(transaction.total) || 0,  // Parse as number, default to 0 if invalid
+                };
+            });
+        } else {
+            return []; // If no data is found
+        }
+    } catch (error) {
+        console.error('Error fetching transaction data:', error);
+        return [];
+    }
+};
