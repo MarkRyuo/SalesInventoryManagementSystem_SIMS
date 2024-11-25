@@ -2,13 +2,7 @@ import MainStaffLayout from "../../layout/MainStaffLayout";
 import { Image } from "react-bootstrap";
 import SDashboardCss from './SDashboard.module.scss';
 import { useState, useEffect } from "react";
-import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons";
-import { TiDocumentAdd } from "react-icons/ti";
-import { BiScan } from "react-icons/bi";
-import { MdOutlineManageSearch } from "react-icons/md";
 import { getAllProducts} from "../../services/ProductService"; // Import your product service
-import CardProduct from "../../components/StaffPortal/Cards/CardProduct";
-import { LiaProductHunt } from 'react-icons/lia'; // Ensure this is correctly imported
 import { db } from "../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -16,13 +10,7 @@ function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
     const [currentDate, setCurrentDate] = useState("");
     const [loading, setLoading] = useState(true);
-    const [productsToday, setProductsToday] = useState([]);
 
-    const [buttons] = useState([
-        { btnName: "Add New Product", btnIcon: <TiDocumentAdd size={60} />, path: "/AddNewAssets", id: 1 },
-        { btnName: "Point of Sale", btnIcon: <BiScan size={60} />, path: "/ScanAsset", id: 2 },
-        { btnName: "Search Products", btnIcon: <MdOutlineManageSearch size={60} />, path: "/SearchAssets", id: 3 },
-    ]);
 
     useEffect(() => {
         // Fetch staff details from Firestore
