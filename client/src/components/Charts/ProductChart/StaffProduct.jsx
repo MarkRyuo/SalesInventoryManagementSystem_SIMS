@@ -8,7 +8,6 @@ import SetTax from "../../../pages/Admin/ProductPage/SetTax";
 import { editProductInDatabase, deleteProduct } from '../../../services/ProductService';
 import { FaProductHunt } from "react-icons/fa";
 
-
 function ProductChart() {
     const [searchTerm, setSearchTerm] = useState("");
     const [products, setProducts] = useState([]);
