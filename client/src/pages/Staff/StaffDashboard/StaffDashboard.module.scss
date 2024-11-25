@@ -259,7 +259,9 @@
         .largeContainer {
             border: 1px solid;
             margin-top:10px;
-            width: auto;            
+            display: flex;
+            justify-content:center;
+            width: auto; 
             
 
             .buttonsHeroCard {
