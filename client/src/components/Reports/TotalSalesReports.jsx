@@ -140,6 +140,9 @@ function TotalSalesReports() {
     const netRevenue = totalRevenue - totalDiscount + totalTax;
 
     return (
+
+        <MainLayout
+
         <div>
             <div>
                 <h1>Total Sales</h1>
