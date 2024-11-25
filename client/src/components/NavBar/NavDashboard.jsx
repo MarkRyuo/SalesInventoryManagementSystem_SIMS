@@ -10,6 +10,7 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { MdOutlineInventory2 } from "react-icons/md";
+import DropdownReports from '../Reports/DropdownReports';
 
 export const NavDashboard = () => {
     const [show, setShow] = useState(false);
@@ -81,6 +82,7 @@ export const NavDashboard = () => {
                             <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-4")} />
+                            <DropdownReports />
                         </div>
                         <div style={{ height: "150px" }}>
                             <Button
