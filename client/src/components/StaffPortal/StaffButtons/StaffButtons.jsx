@@ -32,20 +32,12 @@ function StaffButtons({ buttons }) {
         };
 
         // Apply responsive styles
-        if (windowWidth < 768) {
+        if (windowWidth < 700) {
             style = {
                 ...style,
-                width: 200,
-                height: 100,
-                padding: 20,
+                display: 'none'
             };
-        } else if (windowWidth >= 768 && windowWidth < 1024) {
-            style = {
-                ...style,
-                width: 220,
-                height: 110,
-            };
-        }
+        } 
 
         return style;
     };
