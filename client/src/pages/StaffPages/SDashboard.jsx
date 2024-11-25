@@ -5,20 +5,28 @@ import { db } from "../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import StaffDashboardScss from '../Staff/StaffDashboard/StaffDashboard.module.scss';
 import { MdSpaceDashboard } from "react-icons/md";
+import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons";
+import { TiDocumentAdd } from "react-icons/ti";
+import { BiScan } from "react-icons/bi";
 
 //? Charts
 import Chart1 from '../../components/Charts/DashboardChart/Chart1';
 import Chart2 from '../../components/Charts/DashboardChart/Chart2';
 import Chart3 from '../../components/Charts/DashboardChart/Chart3';
 import ChartLg1 from '../../components/Charts/DashboardChart/ChartLg1';
-import ChartLg2 from '../../components/Charts/DashboardChart/ChartLg2';
-import ChartLg3 from '../../components/Charts/DashboardChart/ChartLg3';
+// import ChartLg2 from '../../components/Charts/DashboardChart/ChartLg2';
+// import ChartLg3 from '../../components/Charts/DashboardChart/ChartLg3';
 import Chart4 from '../../components/Charts/DashboardChart/Chart4';
 
 function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
     const [currentDate, setCurrentDate] = useState("");
     const [loading, setLoading] = useState(true);
+
+    const [buttons] = useState([
+        { btnName: "Add New Product", btnIcon: <TiDocumentAdd size={60} />, path: "/AddNewAssets", id: 1 },
+        { btnName: "Point of Sale", btnIcon: <BiScan size={60} />, path: "/ScanAsset", id: 2 },
+    ]);
 
     useEffect(() => {
         // Fetch staff details from Firestore
