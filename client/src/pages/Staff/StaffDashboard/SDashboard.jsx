@@ -10,7 +10,7 @@ import { TiDocumentAdd } from "react-icons/ti";
 import { BiScan } from "react-icons/bi";
 
 //? Charts
-import Chart1 from '../../../components/Charts/DashboardChart/Chart1';
+import StaffChart1 from '../../../components/Charts/StaffDashBoardChart/StaffChart1'
 import Chart2 from '../../../components/Charts/DashboardChart/Chart2';
 import Chart3 from '../../../components/Charts/DashboardChart/Chart3';
 import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
