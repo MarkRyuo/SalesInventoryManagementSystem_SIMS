@@ -30,7 +30,7 @@
     
 
     .aboutCards {
-        // border: 1px solid red;
+        border: 1px solid red;
         width: 100%;
         height: auto;
         display: flex;
@@ -127,6 +127,82 @@
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
+                }
+            }
+
+            div:last-child {
+                display: flex;
+                flex-direction: column;
+                // border: 1px solid green;
+                justify-content: center;
+                
+                h5 {
+                    text-align: left;
+                    margin-left: 10px;
+                    font-size: 1.3rem;
+                }
+
+                p {
+                    margin-left: 10px;
+                    text-align: left;
+                    font-size: 0.9rem;
+                }
+            }
+        }
+
+    }
+}
+}
+
+@media (max-width: 600px) {
+    .parentAboutus {
+    // border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 10px;
+    padding: 0px;
+
+    h1 {
+        margin-top: 35px;
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    h2 {
+        width: 80vw;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    .aboutCards {
+        border: 1px solid red;
+        width: 100%;
+        height: 700px;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+
+        .card {
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            width: 100%;
+            height: 200px;
+            
+            div:first-child {
+                // border: 1px solid red;
+                width: 100%;
+                height: auto;
+
+                img {
+                    display: none;
                 }
             }
 
