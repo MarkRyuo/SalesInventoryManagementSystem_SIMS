@@ -11,7 +11,10 @@
 
 ## Changelog
 
-### v8.2 (Latest)
+### v8.3-beta (Latest)
+- Update All Design 
+
+### v8.2
 - Design
 
 ### v8.1.1-beta
