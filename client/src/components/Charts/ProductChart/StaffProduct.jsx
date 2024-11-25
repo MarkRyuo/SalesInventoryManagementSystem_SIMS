@@ -81,7 +81,6 @@ function ProductChart() {
         }
     
         const lowStockThreshold = instockthreshold / 4; // 1/4th of instockthreshold
-    
         // Check for Out of Stock (quantity is 0)
         if (quantity === 0) {
             return { text: "Out of Stock", color: "red" };
