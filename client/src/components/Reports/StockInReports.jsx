@@ -4,7 +4,10 @@ function StockInReports() {
         <div>
             <h1>Stock In Reports</h1>
             {/* Filter Date */}
-        </div>
+            
+            {/* Table */}
+            {/* Table contains of filtered Stock in Reports */}
+    </div>
     )
 }
 
