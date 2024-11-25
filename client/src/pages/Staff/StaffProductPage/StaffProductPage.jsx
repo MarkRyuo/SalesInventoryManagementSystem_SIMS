@@ -46,7 +46,7 @@ function ProductNavbarTabs({ setActiveTab }) {
 }
 
 export const ProductPage = () => {
-    const [activeTab, setActiveTab] = useState('/Product');
+    const [activeTab, setActiveTab] = useState('/StaffProduct');
 
     return (
         <MainStaffLayout>
