@@ -1,4 +1,4 @@
-import { Container, Navbar, Row, Col, Button, Table, Alert, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Table, Alert, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateProductQuantity, fetchAllDiscounts, fetchAllTaxes, saveTransactionHistory } from '../../../services/ProductService';
 import { useState, useEffect } from 'react';
