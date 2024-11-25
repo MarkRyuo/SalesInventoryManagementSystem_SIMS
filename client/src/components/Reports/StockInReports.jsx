@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { fetchLowStockData } from "./Service/LowStock"; // Update import path
-import { Button, Table, Form } from "react-bootstrap"; // Assuming you're using React-Bootstrap
+import { fetchLowStockData } from "./Service/LowStock";
+import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import { MainLayout } from "../../layout/MainLayout";
@@ -38,6 +38,15 @@ function StockInReports() {
         XLSX.writeFile(workbook, "LowStockReport.xlsx");
     };
 
+    // Handle dropdown selection
+    const handleDownload = (format) => {
+        if (format === "PDF") {
+            downloadPDF();
+        } else if (format === "XLSX") {
+            downloadXLSX();
+        }
+    };
+
     return (
         <MainLayout>
             <div>
@@ -61,7 +70,9 @@ function StockInReports() {
                             />
                         </Form.Group>
                     </Form>
-                    <Button onClick={handleFilter} className="mt-3">Filter</Button>
+                    <Button onClick={handleFilter} className="mt-3">
+                        Filter
+                    </Button>
                 </div>
 
                 <div className="table-section mt-4">
@@ -94,10 +105,17 @@ function StockInReports() {
                 </div>
 
                 <div className="download-buttons mt-3">
-                    <Button onClick={downloadPDF} className="me-2">
-                        Download PDF
-                    </Button>
-                    <Button onClick={downloadXLSX}>Download XLSX</Button>
+                    <DropdownButton
+                        id="dropdown-basic-button"
+                        title="Download Format"
+                    >
+                        <Dropdown.Item onClick={() => handleDownload("PDF")}>
+                            PDF
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleDownload("XLSX")}>
+                            XLSX
+                        </Dropdown.Item>
+                    </DropdownButton>
                 </div>
             </div>
         </MainLayout>
