@@ -63,7 +63,7 @@ function SDashboard() {
                             roundedCircle
                         />
                         <div>
-                            <h4 className="fs-4 m-0">
+                            <h4 className="m-0">
                                 <span className="fw-semibold">Hello, </span> <span>{getTitle(staffName.gender)} {staffName.firstname} {staffName.lastname}</span>
                             </h4>
                             <p className="m-0">REYES ELECTRONICS.</p>
