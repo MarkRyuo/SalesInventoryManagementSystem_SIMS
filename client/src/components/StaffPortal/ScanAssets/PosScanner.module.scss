@@ -94,4 +94,23 @@
             padding: 5px 0px;
         }
     }
+
+    table {
+        thead {
+            border: 1px solid;
+
+            tr th {
+                width: 20px;
+                text-align: center;
+            }
+
+            tr th:first-child {
+                width: 500px;
+            }
+        }
+    }
+
+    button {
+        margin: 20px;
+    }
 }

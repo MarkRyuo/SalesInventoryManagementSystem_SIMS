@@ -153,7 +153,7 @@ function Checkout() {
                         </Form.Group>
 
                         {/* Discount Dropdown */}
-                        <Form.Group className="mt-3">
+                        <Form.Group className="mt-2">
                             <Form.Label>Discount:</Form.Label>
                             <Form.Select
                                 size="sm"
@@ -170,7 +170,7 @@ function Checkout() {
                         </Form.Group>
 
                         {/* Global Tax Dropdown */}
-                        <Form.Group className="mt-3">
+                        <Form.Group className="mt-2">
                             <Form.Label>Tax Rate:</Form.Label>
                             <Form.Select
                                 size="sm"
@@ -187,7 +187,7 @@ function Checkout() {
                         </Form.Group>
 
                         {/* Payment Amount */}
-                        <Form.Group className="mt-3">
+                        <Form.Group className="mt-2">
                             <Form.Label>Amount Paid:</Form.Label>
                             <Form.Control
                                 type="number"
@@ -199,7 +199,7 @@ function Checkout() {
 
                         {/* Displaying Change */}
                         {paymentAmount && paymentAmount >= total && (
-                            <div className="mt-3">
+                            <div className="mt-2">
                                 <strong>Change: </strong>₱{change.toFixed(2)}
                             </div>
                         )}
@@ -208,7 +208,7 @@ function Checkout() {
                             <thead>
                                 <tr>
                                     <th>Description</th>
-                                    <th>Quantity</th>
+                                    <th>Qty</th>
                                     <th>Unit Price</th>
                                     <th>Amount</th>
                                 </tr>
