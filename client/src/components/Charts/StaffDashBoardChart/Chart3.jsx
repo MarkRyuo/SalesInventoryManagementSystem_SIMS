@@ -25,9 +25,9 @@ function Chart3() {
     }, [timeRange]); // Re-fetch sales data whenever timeRange changes
 
     return (
-        <div className={Chartcss.containerChart3}>
+        <div className={StaffChartcss.containerChart3}>
             <h5>Quantity Sold</h5>
-            <div className={Chartcss.contentChart3}>
+            <div className={StaffChartcss.contentChart3}>
                 <p>{loading ? "Loading..." : quantitySold}</p>
                 <div>
                     <select
