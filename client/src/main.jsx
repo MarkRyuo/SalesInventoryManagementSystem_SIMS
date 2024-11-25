@@ -37,6 +37,7 @@ import AccountPage from './pages/Admin/AccountPage/AccountPage.jsx'
 import ProfileComp from './components/Account/ProfileComp.jsx';
 import StaffProductPage from './pages/Staff/StaffProductPage/StaffProductPage.jsx'
 import StaffProduct from './components/Charts/ProductChart/StaffProduct.jsx'
+import StockInReports from './components/Reports/StockInReports.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -176,6 +177,12 @@ const router = createBrowserRouter([
   {
     path: "PosSuccess",
     element: <PosSuccess />, //* POS: Product Success View 
+  },
+
+
+  {
+    path: "StockInReports",
+    element: <StockInReports /> , 
   },
 
 ]);
