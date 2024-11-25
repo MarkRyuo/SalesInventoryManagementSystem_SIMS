@@ -14,7 +14,7 @@ function StaffNavBar({ backBtn }) {
                 }}>
 
                 {backBtn.map((Backbtn) => (
-                    <Container key={Backbtn.id}>
+                    <Container key={Backbtn.id} className={StaffNavBarScss.contentNav}>
                         <Navbar.Brand style={{
                             display: 'flex',
                             justifyContent: 'space-between',
