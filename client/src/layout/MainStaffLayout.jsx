@@ -11,7 +11,7 @@ function MainStaffLayout({children}) {
 
             <div className="Staff-container" style={{ height: '100vh'}}>
                 <NavbarStaffDashboard />
-                <Container fluid='lg' className="p-0 mt-5"> {/**Content */}
+                <Container fluid='lg' className="p-0"> {/**Content */}
                     {children}
                 </Container>
             </div>
