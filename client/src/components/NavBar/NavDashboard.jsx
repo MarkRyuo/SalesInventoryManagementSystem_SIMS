@@ -66,7 +66,7 @@ export const NavDashboard = () => {
             </Navbar>
 
             {/* Off-canvas function */}
-            <Offcanvas show={show} onHide={handleClose} style={{ width: 320, Background:"radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)"}}>
+            <Offcanvas show={show} onHide={handleClose} style={{ width: 320, background: "radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
                 <Offcanvas.Header closeButton className={Navbars.offCanvasHeader}>
                     <Offcanvas.Title>
                         <Image width={40} className='me-2'
