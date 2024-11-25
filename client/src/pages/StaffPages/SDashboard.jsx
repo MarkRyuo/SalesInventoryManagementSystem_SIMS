@@ -30,11 +30,6 @@ function SDashboard() {
                 setLoading(false); // Set loading to false once data is fetched
             }
         };
-
-
-
-
-
         // Fetch staff details and products on component mount
         fetchStaffDetails();
 
