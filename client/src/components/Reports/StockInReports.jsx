@@ -4,7 +4,7 @@ function StockInReports() {
         <div>
             <div>
                 <h1>Stock In Reports</h1>
-                
+                {/* Dropdown of file formats (PDF, XLSL )  */}
             </div>
             {/* Filter Date */}
             
