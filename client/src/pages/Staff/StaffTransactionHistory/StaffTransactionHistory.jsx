@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import QRious from 'qrious';
-import { FaEye, FaDownload, FaTrash } from "react-icons/fa";
+import { FaEye, FaDownload} from "react-icons/fa";
 import StaffTransactionScss from './StaffTransactionHistory.module.scss' ;
 import { FaSave } from "react-icons/fa";
 import { FaTruckRampBox } from "react-icons/fa6";
