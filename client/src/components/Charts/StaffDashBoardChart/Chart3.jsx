@@ -1,4 +1,4 @@
-import Chartcss from './Charts.module.scss';
+import StaffChartcss from './StaffCharts.module.scss';
 import { useState, useEffect } from "react";
 import { fetchQuantitySoldByRange } from '../../../services/ProductService'; // Import the new service
 
