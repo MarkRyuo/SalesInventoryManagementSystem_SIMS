@@ -1,7 +1,7 @@
 import { Container, Button, Modal, ListGroup, Row, Col, Form } from "react-bootstrap";
 import { useEffect, useState, useRef } from "react";
 import jsPDF from 'jspdf';
-import { getDatabase, ref, onValue, remove } from 'firebase/database';
+import { getDatabase, ref, onValue } from 'firebase/database';
 import QRious from 'qrious';
 import { FaEye, FaDownload, FaTrash } from "react-icons/fa";
 import StaffTransactionScss from './StaffTransactionHistory.module.scss' ;
@@ -11,7 +11,6 @@ import { FaTruckRampBox } from "react-icons/fa6";
 function AdminTransactionHistory() {
     const [orderHistory, setOrderHistory] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false); // State for delete confirmation modal
     const [selectedOrder, setSelectedOrder] = useState(null);
     const db = getDatabase();
     const qrRef = useRef(null);
@@ -100,12 +99,6 @@ function AdminTransactionHistory() {
         doc.save(`Order_${order.id}.pdf`);
     };
 
-    const handleDeleteOrder = (id) => {
-        const orderRef = ref(db, `TransactionHistory/${id}`);
-        remove(orderRef);
-        setShowDeleteModal(false); // Close the delete confirmation modal after deleting
-    };
-
     const handleShowModal = (order) => {
         setSelectedOrder(order);
         setShowModal(true);
@@ -114,23 +107,6 @@ function AdminTransactionHistory() {
     const handleCloseModal = () => {
         setShowModal(false);
         setSelectedOrder(null);
-    };
-
-    // Show the delete confirmation modal
-    const handleShowDeleteModal = (order) => {
-        setSelectedOrder(order);
-        setShowDeleteModal(true);
-    };
-
-    // Close the delete confirmation modal without deleting
-    const handleCloseDeleteModal = () => {
-        setShowDeleteModal(false);
-        setSelectedOrder(null);
-    };
-
-    // Get a list of product names for the warning message
-    const getProductNames = (order) => {
-        return order.items.map(item => item.productName).join(", ");
     };
 
     return (
@@ -187,13 +163,6 @@ function AdminTransactionHistory() {
                                         onClick={() => handleDownloadOrder(order)}
                                     >
                                         <FaDownload size={15}/>
-                                    </Button>
-                                    <Button
-                                        variant="outline-danger"
-                                        size="sm"
-                                        onClick={() => handleShowDeleteModal(order)}
-                                    >
-                                        <FaTrash size={15}/>
                                     </Button>
                                 </div>
                             </ListGroup.Item>
@@ -257,25 +226,6 @@ function AdminTransactionHistory() {
                 </Modal.Footer>
             </Modal>
 
-            {/* Delete Confirmation Modal */}
-            <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered >
-                <Modal.Header closeButton className="bg-danger text-white">
-                    <Modal.Title>Delete Order</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p className="text-danger font-weight-bold">
-                        Warning: Deleting these products is permanent and cannot be undone!
-                    </p>
-                    <p className="font-weight-bold text-danger">
-                        {selectedOrder ? getProductNames(selectedOrder) : ''}
-                    </p>
-                    <p>Delete this order permanently?</p>
-                </Modal.Body>
-                <Modal.Footer className="bg-light">
-                    <Button variant="secondary" onClick={handleCloseDeleteModal}>Cancel</Button>
-                    <Button variant="danger" onClick={() => handleDeleteOrder(selectedOrder.id)}>Delete</Button>
-                </Modal.Footer>
-            </Modal>
 
         </Container>
     );
