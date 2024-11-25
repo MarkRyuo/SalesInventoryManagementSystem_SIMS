@@ -6,7 +6,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { MainLayout } from "../../layout/MainLayout";
 
-function StockInReports() {
+function LowStockReports() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [lowStockData, setLowStockData] = useState([]);
@@ -194,4 +194,4 @@ function StockInReports() {
     );
 }
 
-export default StockInReports;
+export default LowStockReports;
