@@ -3,6 +3,7 @@ import { fetchLowStockData } from "./Service/LowStock";
 import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
+import "jspdf-autotable";
 import { MainLayout } from "../../layout/MainLayout";
 
 function StockInReports() {
@@ -16,40 +17,107 @@ function StockInReports() {
         setLowStockData(data);
     };
 
-    // Handle PDF download
+    // Download PDF function
     const downloadPDF = () => {
         const doc = new jsPDF();
-        doc.text("Low Stock Report", 20, 10);
-        lowStockData.forEach((item, index) => {
-            doc.text(
-                `${index + 1}. ${item.productName} - ${item.quantity} (Low Stock)`,
-                10,
-                20 + index * 10
-            );
+        doc.setFontSize(12);
+
+        // Add title and date range
+        doc.text("Filtered Stock In Data", 10, 10);
+        doc.text(`Date Range: ${startDate || "N/A"} to ${endDate || "N/A"}`, 10, 20);
+
+        const tableHeaders = [
+            "No.",
+            "Product Name",
+            "SKU",
+            "Barcode",
+            "Quantity",
+            "Threshold",
+            "Status",
+            "Date",
+        ];
+
+        const tableData = lowStockData.map((entry, index) => [
+            index + 1,
+            entry.productName,
+            entry.sku,
+            entry.barcode,
+            entry.quantity,
+            entry.instockthreshold,
+            entry.status,
+            entry.date,
+        ]);
+
+        doc.autoTable({
+            head: [tableHeaders],
+            body: tableData,
+            startY: 30,
+            theme: "grid",
+            margin: { top: 20 },
         });
-        doc.save("LowStockReport.pdf");
+
+        const fileName = `LowStockReport_${startDate || "start"}_${endDate || "end"}.pdf`;
+        doc.save(fileName);
     };
 
-    // Handle XLSX download
+
+    // Download XLSX function
     const downloadXLSX = () => {
-        const worksheet = XLSX.utils.json_to_sheet(lowStockData);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Low Stock Report");
-        XLSX.writeFile(workbook, "LowStockReport.xlsx");
+        const formattedData = lowStockData.map((entry) => ({
+            ProductName: entry.productName,
+            SKU: entry.sku,
+            Barcode: entry.barcode,
+            Quantity: entry.quantity,
+            Threshold: entry.instockthreshold,
+            Status: entry.status,
+            Date: entry.date,
+        }));
+
+        const wb = XLSX.utils.book_new();
+
+        // Add date range to the top row
+        const dateRange = [
+            { A: `Date Range: ${startDate || "N/A"} to ${endDate || "N/A"}` },
+        ];
+        const header = [
+            ["Product Name", "SKU", "Barcode", "Quantity", "Threshold", "Status", "Date"],
+        ];
+        const data = formattedData.map((entry) =>
+            Object.values(entry)
+        );
+
+        // Combine date range, header, and data
+        const sheetData = [...dateRange, [], ...header, ...data];
+
+        const ws = XLSX.utils.aoa_to_sheet(sheetData);
+
+        // Adjust column widths
+        ws["!cols"] = [
+            { width: 25 },
+            { width: 15 },
+            { width: 15 },
+            { width: 10 },
+            { width: 15 },
+            { width: 20 },
+            { width: 20 },
+        ];
+
+        XLSX.utils.book_append_sheet(wb, ws, "Stock In Data");
+
+        const fileName = `LowStockReport_${startDate || "start"}_${endDate || "end"}.xlsx`;
+        XLSX.writeFile(wb, fileName);
     };
 
-    // Handle dropdown selection
+
+
     const handleDownload = (format) => {
-        if (format === "PDF") {
-            downloadPDF();
-        } else if (format === "XLSX") {
-            downloadXLSX();
-        }
+        if (format === "PDF") downloadPDF();
+        else if (format === "XLSX") downloadXLSX();
     };
 
     return (
         <MainLayout>
-            <div>
+            <div className="stock-in-reports">
                 <h1>Stock In Reports</h1>
                 <div className="filter-section">
                     <Form>
@@ -75,35 +143,39 @@ function StockInReports() {
                     </Button>
                 </div>
 
+                {/* Scrollable Table */}
                 <div className="table-section mt-4">
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Product Name</th>
-                                <th>SKU</th>
-                                <th>Barcode</th>
-                                <th>Quantity</th>
-                                <th>Threshold</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {lowStockData.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.productName}</td>
-                                    <td>{item.sku}</td>
-                                    <td>{item.barcode}</td>
-                                    <td>{item.quantity}</td>
-                                    <td>{item.instockthreshold}</td>
-                                    <td>{item.status}</td>
-                                    <td>{item.date}</td>
+                    <div className="table-container">
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>SKU</th>
+                                    <th>Barcode</th>
+                                    <th>Quantity</th>
+                                    <th>Threshold</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
+                            </thead>
+                            <tbody>
+                                {lowStockData.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.productName}</td>
+                                        <td>{item.sku}</td>
+                                        <td>{item.barcode}</td>
+                                        <td>{item.quantity}</td>
+                                        <td>{item.instockthreshold}</td>
+                                        <td>{item.status}</td>
+                                        <td>{item.date}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    </div>
                 </div>
 
+                {/* Download Buttons */}
                 <div className="download-buttons mt-3">
                     <DropdownButton
                         id="dropdown-basic-button"
