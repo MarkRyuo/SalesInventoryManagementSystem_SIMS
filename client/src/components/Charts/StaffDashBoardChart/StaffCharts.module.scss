@@ -130,11 +130,10 @@
 @media (max-width: 1000px) {
     .containerChart1 {
     // border: 1px solid; 
-    box-sizing: border-box;
     padding: 15px 20px;
     height: auto;
-    width: 280px;
-    flex-shrink: 0;
+    width: 10px;
+    flex-shrink: 1;
     display: flex;
     flex-direction: column;
     background-color: var(--bgChart1);
