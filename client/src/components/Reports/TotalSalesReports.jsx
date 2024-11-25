@@ -75,6 +75,8 @@ function TotalSalesReports() {
     }, [startDate, endDate]);
 
     return (
+        <MainLayout
+
         <div>
             <h1>Total Sales</h1>
 
