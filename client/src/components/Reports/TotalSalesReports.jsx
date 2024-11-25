@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Table, Dropdown, Button } from 'react-bootstrap';
 import { format } from 'date-fns'; // for date formatting
-import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
+import 'jspdf-autotable';  // Importing the jspdf-autotable plugin
 import { fetchTransactions } from './Service/TotalSales'; // Import the fetch function
 
 function TotalSalesReports() {
@@ -41,29 +41,35 @@ function TotalSalesReports() {
         }
     };
 
-    // Handle file download (XLSX or PDF)
-    const handleDownload = (type) => {
-        if (type === 'xlsx') {
-            const ws = XLSX.utils.json_to_sheet(filteredData);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, 'Sales Report');
-            const xlsxData = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-            saveAs(new Blob([xlsxData]), 'sales_report.xlsx');
-        } else if (type === 'pdf') {
-            const doc = new jsPDF();
-            doc.autoTable({
-                head: [['Transaction ID', 'Date', 'Total Quantity', 'Discount', 'Tax', 'Total']],
-                body: filteredData.map(transaction => [
-                    transaction.transactionId,
-                    transaction.date,
-                    transaction.totalQuantity,
-                    `₱${transaction.discount}`,
-                    `₱${transaction.tax}`,
-                    `₱${transaction.total}`,
-                ]),
-            });
-            doc.save('sales_report.pdf');
-        }
+    // Handle XLSX file download
+    const downloadXlsx = () => {
+        const ws = XLSX.utils.json_to_sheet(filteredData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sales Report');
+        const xlsxData = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        // Save the XLSX file logic
+        const blob = new Blob([xlsxData], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'sales_report.xlsx';
+        link.click();
+    };
+
+    // Handle PDF file download
+    const downloadPdf = () => {
+        const doc = new jsPDF();
+        doc.autoTable({
+            head: [['Transaction ID', 'Date', 'Total Quantity', 'Discount', 'Tax', 'Total']],
+            body: filteredData.map(transaction => [
+                transaction.transactionId,
+                transaction.date,
+                transaction.totalQuantity,
+                `₱${transaction.discount}`,
+                `₱${transaction.tax}`,
+                `₱${transaction.total}`,
+            ]),
+        });
+        doc.save('sales_report.pdf');
     };
 
     // Calculate totals
@@ -99,8 +105,8 @@ function TotalSalesReports() {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => handleDownload('xlsx')}>Download as XLSX</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleDownload('pdf')}>Download as PDF</Dropdown.Item>
+                        <Dropdown.Item onClick={downloadXlsx}>Download as XLSX</Dropdown.Item>
+                        <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
