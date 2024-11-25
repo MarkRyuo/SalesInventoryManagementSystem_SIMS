@@ -9,7 +9,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 function ChartLg3() {
-    const [salesData, setSalesData] = useState({ totalQuantity: [], totalSales: [], dates: [] });
+    const [salesData, setSalesData] = useState({ totalSales: [], dates: [] });
     const [selectedRange, setSelectedRange] = useState('today');  // Default to 'month'
 
     useEffect(() => {
@@ -84,14 +84,6 @@ function ChartLg3() {
                 backgroundColor: 'rgba(170, 201, 255,0.2)',
                 fill: true,
                 tension: 0.4, // Smooth lines
-            },
-            {
-                label: 'Total Quantity',
-                data: salesData.totalQuantity, // Quantity data
-                borderColor: 'rgba(205, 195, 255, 1)',
-                backgroundColor: 'rgb(205, 195, 255, 0.2)',
-                fill: true,
-                tension: 0.4, // Smooth lines
             }
         ],
     };
@@ -112,7 +104,7 @@ function ChartLg3() {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'Amount (₱) and Quantity',
+                    text: 'Amount (₱)', // Change Y-axis label to reflect only sales
                 },
             },
         },
@@ -125,22 +117,17 @@ function ChartLg3() {
                     label: (context) => {
                         const label = context.dataset.label || '';
                         const value = context.raw;
-                        return label.includes('Sales')
-                            ? `${label}: ₱${value.toLocaleString()}`
-                            : `${label}: ${value.toLocaleString()}`;
+                        return `${label}: ₱${value.toLocaleString()}`;
                     },
                 },
             },
         },
     };
 
-
-
-
     return (
         <div className={Chartcss.containerChartLg3}>
             {/* Render the Line chart here */}
-            <Line data={chartData} options={chartOptions}/>
+            <Line data={chartData} options={chartOptions} />
             <div className={Chartcss.rangeButtons}>
                 <select onChange={(e) => handleRangeChange(e.target.value)} defaultValue="today" className='form-select'>
                     <option value="today">Today</option>
