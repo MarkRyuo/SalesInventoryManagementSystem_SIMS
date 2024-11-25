@@ -128,11 +128,11 @@
 
 @media (max-width: 1000px) {
     .containerChart1 {
-    border: 1px solid; 
+    // border: 1px solid; 
     padding: 15px 20px;
     height: auto;
-    width: 200px;
-    flex-shrink: 1;
+    width: 170px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     background-color: var(--bgChart1);
@@ -162,7 +162,7 @@
     box-sizing: border-box;
     padding: 15px 20px;
     height: auto;
-    width: 280px;
+    width: 200px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -190,7 +190,7 @@
     box-sizing: border-box;
     padding: 15px 20px;
     height: auto;
-    width: 280px;
+    width: 170px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
