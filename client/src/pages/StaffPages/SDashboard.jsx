@@ -3,7 +3,7 @@ import { Image } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { db } from "../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import StaffDashboardScss from '../Staff/StaffDashboard/StaffDashboard.module.scss'
+import StaffDashboardScss from '../Staff/StaffDashboard/StaffDashboard.module.scss' ;
 
 function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
@@ -50,19 +50,18 @@ function SDashboard() {
 
     return (
         <MainStaffLayout>
-            <div className={SDashboardCss.mainTopComponent}>
+            <div className={StaffDashboardScss.mainTopComponent}>
                 {loading ? (
                     // Display a loading indicator while data is being fetched
-                    <div className={SDashboardCss.loadingContainer}>
+                    <div className={StaffDashboardScss.loadingContainer}>
                         <p>Loading staff Dashboard...</p>
                     </div>
                 ) : (
                     <>
-                        <div className={SDashboardCss.componentHeroCard}>
+                        <div className={StaffDashboardScss.credentialDashboard}>
                             <Image
                                 src="/Reyes_Electronics_LogoBg.png"
                                 roundedCircle
-                                style={{ width: '100%', maxWidth: '100px', height: '100px' }}
                             />
                             <div>
                                 <p className="fs-4 m-0">
