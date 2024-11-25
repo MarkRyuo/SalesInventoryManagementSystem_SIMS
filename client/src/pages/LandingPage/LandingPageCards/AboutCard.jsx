@@ -13,7 +13,7 @@ function AboutCard() {
                         <img src="/Img1.jpg" />
                     </div>
                     <div>
-                        <h5>Card Title</h5>
+                        <h5>Reyes Electronics Storefront</h5>
                         <p>
                             Some quick example text to build on the card title and make up the
                             bulk of the cards content.
