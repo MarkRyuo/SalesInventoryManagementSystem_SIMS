@@ -250,7 +250,7 @@
         border-radius: 15px;
         padding: 15px;
         display: flex;
-        gap: 10px;
+        gap: 0px;
         flex-direction: column;
         div:first-child {
             display: flex;
@@ -259,7 +259,6 @@
         .largeContainer {
             border: 1px solid;
             margin-top:10px;
-            display: flex;
             width: auto;
             gap: 10px;
 
