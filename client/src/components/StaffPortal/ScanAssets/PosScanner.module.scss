@@ -76,7 +76,7 @@
     padding: 0;
 
     .navBar {
-        border: 1px solid;
+        // border: 1px solid;
         height: auto;
 
         h1 {
@@ -123,4 +123,9 @@
     button {
         margin: 20px 0px;
     }
+}
+
+
+@media (max-width: 500px) {
+    
 }

@@ -165,7 +165,7 @@ function Checkout() {
                                 onChange={(e) => handleDiscountChange(e.target.value)}
                                 style={{
                                     width: '100%',
-                                    maxWidth: '500px'
+                                    maxWidth: '200px'
                                 }}
                             >
                                 <option value={0}>No Discount</option>
@@ -184,6 +184,10 @@ function Checkout() {
                                 size="sm"
                                 value={selectedTaxRate}
                                 onChange={(e) => handleGlobalTaxChange(e.target.value)}
+                                style={{
+                                    width: '100%',
+                                    maxWidth: '200px'
+                                }}
                             >
                                 <option value={0}>No Tax</option>
                                 {availableTaxes.map(tax => (
@@ -192,25 +196,22 @@ function Checkout() {
                                     </option>
                                 ))}
                             </Form.Select>
-                        </Form.Group>
 
-                        {/* Payment Amount */}
-                        <Form.Group className="mt-2">
-                            <Form.Label>Amount Paid:</Form.Label>
-                            <Form.Control
-                                type="number"
-                                placeholder="Enter payment amount"
-                                value={paymentAmount}
-                                onChange={handlePaymentChange}
-                            />
+                            {/* Payment Amount */}
+                            <Form.Group className="mt-2">
+                                <Form.Label>Amount Paid:</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    placeholder="Enter payment amount"
+                                    value={paymentAmount}
+                                    onChange={handlePaymentChange}
+                                    style={{
+                                        width: '100%',
+                                        maxWidth: '200px'
+                                    }}
+                                />
+                            </Form.Group>
                         </Form.Group>
-
-                        {/* Displaying Change */}
-                        {paymentAmount && paymentAmount >= total && (
-                            <div className="mt-2">
-                                <strong>Change: </strong>₱{change.toFixed(2)}
-                            </div>
-                        )}
 
                         <Table striped bordered hover className="mt-3">
                             <thead>
@@ -251,8 +252,15 @@ function Checkout() {
                                     <td>₱{total.toFixed(2)}</td>
                                 </tr>
                             </tbody>
-                        </Table>
+                            {/* Displaying Change */}
+                            {paymentAmount && paymentAmount >= total && (
+                                <div className="mt-2">
+                                    <strong>Change: </strong>₱{change.toFixed(2)}
+                                </div>
+                            )}
 
+                        </Table>
+                            
                         <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
                     </Col>
                 </Row>
