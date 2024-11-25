@@ -1,13 +1,13 @@
 
 
 .mainTopComponent {
-    // border: 1px solid red;
+    border: 1px solid red;
     margin: 0;
     // padding: 10px;
     padding-bottom: 20px;
 
     .componentHeroCard {
-        // border: 1px solid green;
+        border: 1px solid green;
         margin-top: 10px;
         border-radius: 15px;
 
@@ -92,4 +92,10 @@
         }
     }
 
+}
+
+
+
+@media (max-width: 1300) {
+    
 }
