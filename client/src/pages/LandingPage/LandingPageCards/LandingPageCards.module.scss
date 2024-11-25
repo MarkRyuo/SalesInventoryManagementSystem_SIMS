@@ -425,18 +425,14 @@
         border: 1px solid red;
         width: auto;
         padding: 0px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
 
         .LoginForm {
             display: flex;
             flex-direction: column;
-            // border: 1px solid;
+            border: 1px solid;
             border-radius: 10px;
             box-shadow: 2px 2px 4px #d7d8d8;
-            padding: 70px;
+            padding: 45px;
             height: auto;
             width: auto;
             gap: 20px;
@@ -445,10 +441,9 @@
             form {
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
                 h2 {
                     color: #302F2F;
-                    font-size: 2rem;
+                    font-size: 1.7rem;
                     font-weight: 500;
                     text-align: center;
                     padding: 20px;
@@ -459,11 +454,11 @@
                     padding: 8px 0px;
                     input {
                         padding: 10px;
-                        height: 45px;
+                        height: 40px;
                         width: 400px;
                     }
                     p {
-                        font-size: 1rem;
+                        font-size: 0.9rem;
                     }
                 } 
 
@@ -474,6 +469,7 @@
                 text-decoration: none;
                 color: #6b6b6b;
                 padding: 15px 10px;
+                font-size: 1rem;
             }
 
             button {
