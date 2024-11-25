@@ -136,8 +136,6 @@ function ProductChart() {
         }
     };
 
-
-
     const handleDeleteProduct = async () => {
         try {
             if (editProduct) {
