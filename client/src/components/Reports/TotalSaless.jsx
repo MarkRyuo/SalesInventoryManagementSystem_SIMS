@@ -3,7 +3,7 @@
 function TotalSaless() {
     return (
         <div>
-
+        
         </div>
     )
 }
