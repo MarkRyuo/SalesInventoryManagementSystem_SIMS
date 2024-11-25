@@ -23,7 +23,7 @@ function StaffNavBar({ backBtn }) {
                             <Button
                                 as={Link}
                                 to={Backbtn.path}
-                                variant='l'
+                                variant=''
                             >
                                 {Backbtn.btnIcon}
                             </Button>
