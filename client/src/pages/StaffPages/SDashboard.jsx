@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { db } from "../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import StaffDashboardScss from '../Staff/StaffDashboard/StaffDashboard.module.scss';
+import { MdSpaceDashboard } from "react-icons/md";
+
 
 function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
@@ -51,6 +53,10 @@ function SDashboard() {
     return (
         <MainStaffLayout>
             <div className={StaffDashboardScss.mainTopComponent}>
+                <div className={StaffDashboardScss.componentHeroCard}>
+
+                </div>
+                <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0' />Dashboard</h1>
                 {loading ? (
                     // Display a loading indicator while data is being fetched
                     <div className={StaffDashboardScss.loadingContainer}>
