@@ -5,9 +5,9 @@ function DropdownReports() {
     return (
         <DropdownButton id="dropdown-basic-button" title="Dropdown button">
             <Dropdown.Item href="">Stock In</Dropdown.Item>
+            <Dropdown.Item href="">Low Stock Report</Dropdown.Item>
             <Dropdown.Item href="">Total Sales Report</Dropdown.Item>
             <Dropdown.Item href="">Quantity Sold Report</Dropdown.Item>
-            <Dropdown.Item href="">Low Stock Report</Dropdown.Item>
         </DropdownButton>
     )
 }
