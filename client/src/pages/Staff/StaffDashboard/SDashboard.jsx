@@ -1,22 +1,22 @@
-import MainStaffLayout from "../../layout/MainStaffLayout";
+import MainStaffLayout from "../../../layout/MainStaffLayout";
 import { Image } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { db } from "../../services/firebase";
+import { db } from "../../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import StaffDashboardScss from '../Staff/StaffDashboard/StaffDashboard.module.scss';
 import { MdSpaceDashboard } from "react-icons/md";
-import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons";
+import StaffButtons from "../../../components/StaffPortal/StaffButtons/StaffButtons";
 import { TiDocumentAdd } from "react-icons/ti";
 import { BiScan } from "react-icons/bi";
 
 //? Charts
-import Chart1 from '../../components/Charts/DashboardChart/Chart1';
-import Chart2 from '../../components/Charts/DashboardChart/Chart2';
-import Chart3 from '../../components/Charts/DashboardChart/Chart3';
-import ChartLg1 from '../../components/Charts/DashboardChart/ChartLg1';
+import Chart1 from '../../../components/Charts/DashboardChart/Chart1';
+import Chart2 from '../../../components/Charts/DashboardChart/Chart2';
+import Chart3 from '../../../components/Charts/DashboardChart/Chart3';
+import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
 // import ChartLg2 from '../../components/Charts/DashboardChart/ChartLg2';
 // import ChartLg3 from '../../components/Charts/DashboardChart/ChartLg3';
-import Chart4 from '../../components/Charts/DashboardChart/Chart4';
+import Chart4 from '../../../components/Charts/DashboardChart/Chart4';
 
 function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });

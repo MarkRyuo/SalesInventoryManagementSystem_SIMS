@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 //? Pages Import
 import StaffAccount from './pages/StaffAccount.jsx'
 import MyProfile from './pages/MyProfile.jsx';
-import SDashboard from './pages/StaffPages/SDashboard.jsx';
+import SDashboard from './pages/Staff/StaffDashboard/SDashboard';
 import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
 import AddNewAssets from './pages/StaffPages/AddNewAssets.jsx';
 import NewAssets from './components/StaffPortal/AddNewAssets/NewAssets.jsx';
