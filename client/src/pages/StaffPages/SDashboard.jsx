@@ -19,13 +19,18 @@ function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
     const [currentDate, setCurrentDate] = useState("");
     const [loading, setLoading] = useState(true);
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         // Fetch staff details from Firestore
         const fetchStaffDetails = async () => {
             try {
                 const staffId = localStorage.getItem('staffId');
+                if (!staffId) {
+                    console.error("Staff ID not found in localStorage.");
+                    setLoading(false);
+                    return;
+                }
+
                 const docRef = doc(db, "staffs", staffId);
                 const docSnap = await getDoc(docRef);
 
@@ -38,10 +43,10 @@ function SDashboard() {
             } catch (error) {
                 console.error("Error fetching staff data:", error);
             } finally {
-                setLoading(false); // Set loading to false once data is fetched
+                setLoading(false); // Stop loading when data fetch is complete
             }
         };
-        // Fetch staff details and products on component mount
+
         fetchStaffDetails();
 
         // Set the current date
@@ -56,7 +61,9 @@ function SDashboard() {
 
     // Determine the title based on the gender
     const getTitle = (gender) => {
-        return gender === "male" ? "Mr." : "Ms.";
+        if (gender?.toLowerCase() === "male") return "Mr.";
+        if (gender?.toLowerCase() === "female") return "Ms.";
+        return ""; // Default title for unspecified gender
     };
 
     return (
@@ -77,7 +84,8 @@ function SDashboard() {
                             />
                             <div>
                                 <h4 className="m-0">
-                                    <span className="fw-semibold">Hello, </span> <span>{getTitle(staffName.gender)} {staffName.firstname} {staffName.lastname}</span>
+                                    <span className="fw-semibold">Hello, </span>
+                                    <span>{getTitle(staffName.gender)} {staffName.firstname} {staffName.lastname}</span>
                                 </h4>
                                 <p className="m-0">REYES ELECTRONICS.</p>
                                 <p className="m-0">{currentDate}</p>
@@ -86,10 +94,9 @@ function SDashboard() {
                     )}
                 </div>
             </div>
-            
-            {!isLoading && (
-                <div className={StaffDashboardScss.chartContainer}>
 
+            {!loading && (
+                <div className={StaffDashboardScss.chartContainer}>
                     <div className={StaffDashboardScss.smallContainer}>
                         <div>
                             <Chart1 />
@@ -98,17 +105,15 @@ function SDashboard() {
                             <Chart4 />
                         </div>
                         <div className={StaffDashboardScss.largeContainer}>
-                            <div className={StaffDashboardScss.divLG}>
+                            {/* <div className={StaffDashboardScss.divLG}>
                                 <ChartLg3 />
                                 <ChartLg2 />
-                            </div>
+                            </div> */}
                             <ChartLg1 />
                         </div>
                     </div>
-
                 </div>
             )}
-
         </MainStaffLayout>
     );
 }
