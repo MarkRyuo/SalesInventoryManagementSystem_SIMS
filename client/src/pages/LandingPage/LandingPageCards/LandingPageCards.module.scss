@@ -238,7 +238,7 @@
 
 .LogInContainer {
     box-sizing: border-box;
-    border: 5px solid green;
+    // border: 5px solid green;
     height: 100vh;
     display: flex;
 
@@ -415,26 +415,28 @@
     .LogInContainer {
     box-sizing: border-box;
     height: 100vh;
-    display: flex;
+    display: inline;
     
     .LoginText {
         display: none;
     }
 
     .LoginFormContainer {
-        border: 1px solid red;
+        // border: 1px solid red;
         width: auto;
         padding: 0px;
+        height: 100vh;
 
         .LoginForm {
             display: flex;
             flex-direction: column;
-            border: 1px solid;
+            align-items: center;
+            // border: 1px solid;
             border-radius: 10px;
             box-shadow: 2px 2px 4px #d7d8d8;
             padding: 45px;
             height: auto;
-            width: auto;
+            width: 100%;
             gap: 20px;
             justify-content: center;
 
@@ -455,7 +457,7 @@
                     input {
                         padding: 10px;
                         height: 40px;
-                        width: 400px;
+                        width: 330px;
                     }
                     p {
                         font-size: 0.9rem;
