@@ -39,6 +39,7 @@ import StaffProductPage from './pages/Staff/StaffProductPage/StaffProductPage.js
 import StaffProduct from './components/Charts/ProductChart/StaffProduct.jsx'
 import LowStockReports from './components/Reports/LowStockReports.jsx';
 import StockInReports from './components/Reports/StockInReports.jsx';
+import TotalSaless from './components/Reports/TotalSaless.jsx';
 
 const router = createBrowserRouter([
   { //? ROOT
