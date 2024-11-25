@@ -6,6 +6,7 @@ function TotalSaless() {
             <div>
                 <h1>Total Sales</h1>
                 {/* filtering date start to end  */}
+                {/* Download using (PDF and XLSX) */}
             </div>
 
             <div>
