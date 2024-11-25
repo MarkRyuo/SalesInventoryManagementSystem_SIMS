@@ -5,6 +5,7 @@ function QuantitySold() {
 
         <div>
             <h1>Quantity Sold</h1>
+            {/* Filter date (Start to End) */}
         </div>
 
         </div>
