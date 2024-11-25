@@ -3,6 +3,7 @@ import { fetchStockInByDate } from "./Service/StockIn"; // Import the helper fun
 import { Button, Table, Form } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
+import { MainLayout } from "../../layout/MainLayout";
 
 function StockInReports() {
     const [startDate, setStartDate] = useState("");
@@ -56,68 +57,70 @@ function StockInReports() {
     };
 
     return (
-        <div>
-            <h1>Stock In Report</h1>
-
-            {/* Date Range Filter */}
+        <MainLayout>
             <div>
-                <Form>
-                    <Form.Group controlId="startDate">
-                        <Form.Label>Start Date</Form.Label>
-                        <Form.Control
-                            type="date"
-                            value={startDate}
-                            onChange={(e) => setStartDate(e.target.value)}
-                        />
-                    </Form.Group>
+                <h1>Stock In Report</h1>
 
-                    <Form.Group controlId="endDate">
-                        <Form.Label>End Date</Form.Label>
-                        <Form.Control
-                            type="date"
-                            value={endDate}
-                            onChange={(e) => setEndDate(e.target.value)}
-                        />
-                    </Form.Group>
+                {/* Date Range Filter */}
+                <div>
+                    <Form>
+                        <Form.Group controlId="startDate">
+                            <Form.Label>Start Date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                value={startDate}
+                                onChange={(e) => setStartDate(e.target.value)}
+                            />
+                        </Form.Group>
 
-                    <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
-                </Form>
-            </div>
+                        <Form.Group controlId="endDate">
+                            <Form.Label>End Date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                value={endDate}
+                                onChange={(e) => setEndDate(e.target.value)}
+                            />
+                        </Form.Group>
 
-            {/* Table Display */}
-            <div className="mt-4">
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>Product ID</th>
-                            <th>Product Name</th>
-                            <th>SKU</th>
-                            <th>Barcode</th>
-                            <th>Quantity</th>
-                            <th>Date Added</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredData.map((item, index) => (
-                            <tr key={index}>
-                                <td>{item.productId}</td>
-                                <td>{item.productName}</td>
-                                <td>{item.sku}</td>
-                                <td>{item.barcode}</td>
-                                <td>{item.addedQuantityHistory.quantity}</td>
-                                <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
+                        <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
+                    </Form>
+                </div>
+
+                {/* Table Display */}
+                <div className="mt-4">
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Product Name</th>
+                                <th>SKU</th>
+                                <th>Barcode</th>
+                                <th>Quantity</th>
+                                <th>Date Added</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </Table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {filteredData.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.productId}</td>
+                                    <td>{item.productName}</td>
+                                    <td>{item.sku}</td>
+                                    <td>{item.barcode}</td>
+                                    <td>{item.addedQuantityHistory.quantity}</td>
+                                    <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
 
-            {/* Download Buttons */}
-            <div className="mt-4">
-                <Button variant="success" onClick={handleDownloadPDF}>Download PDF</Button>
-                <Button variant="info" onClick={handleDownloadXLSX} className="ml-2">Download XLSX</Button>
+                {/* Download Buttons */}
+                <div className="mt-4">
+                    <Button variant="success" onClick={handleDownloadPDF}>Download PDF</Button>
+                    <Button variant="info" onClick={handleDownloadXLSX} className="ml-2">Download XLSX</Button>
+                </div>
             </div>
-        </div>
+        </MainLayout>
     );
 }
 
