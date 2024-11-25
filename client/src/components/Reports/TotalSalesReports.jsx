@@ -1,5 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
-import { fetchTotalSales } from './path/to/your/fetchFunction'; // adjust path accordingly
+import { fetchTotalSales } from './path/to/your/fetchFunction'; // Adjust the path accordingly
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import XLSX from 'xlsx';
 
 function TotalSalesReports() {
     const [startDate, setStartDate] = useState('');
@@ -13,9 +17,56 @@ function TotalSalesReports() {
         setTotalSales(totalSales);
     };
 
-    const handleDownload = (format) => {
-        // Add functionality to download the report in PDF or XLSX format
-        // You can use libraries like jsPDF for PDF or xlsx for XLSX generation
+    const formatPeso = (amount) => {
+        return `₱${parseFloat(amount).toFixed(2)}`;
+    };
+
+    const downloadPDF = () => {
+        const doc = new jsPDF();
+        doc.setFontSize(12);
+        doc.text("Sales Report - Total Sales", 10, 10);
+
+        const tableData = filteredTransactions.map((entry) => [
+            entry.id,
+            entry.customerName,
+            entry.discountPercentage.toString(),
+            formatPeso(entry.paymentAmount),
+            formatPeso(entry.tax),
+            entry.totalQuantity.toString(),
+            formatPeso(entry.total),
+        ]);
+
+        doc.autoTable({
+            head: [["Transaction ID", "Customer Name", "Discount", "Amount", "Tax", "Total Quantity", "Total"]],
+            body: tableData,
+            startY: 20,
+        });
+
+        const totalY = doc.previousAutoTable.finalY + 10;
+        doc.text(`Total Sales: ${formatPeso(totalSales)}`, 10, totalY);
+
+        doc.save("sales_report_total_sales.pdf");
+    };
+
+    const downloadXLSX = () => {
+        const formattedData = filteredTransactions.map((entry) => ({
+            TransactionID: entry.id,
+            CustomerName: entry.customerName,
+            Discount: entry.discountPercentage,
+            Amount: formatPeso(entry.paymentAmount),
+            Tax: formatPeso(entry.tax),
+            TotalQuantity: entry.totalQuantity,
+            Total: formatPeso(entry.total),
+        }));
+
+        formattedData.push({
+            TotalSales: formatPeso(totalSales),
+        });
+
+        const ws = XLSX.utils.json_to_sheet(formattedData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Sales Report");
+        XLSX.writeFile(wb, "sales_report_total_sales.xlsx");
     };
 
     useEffect(() => {
@@ -63,10 +114,10 @@ function TotalSalesReports() {
                                 <td>{transaction.id}</td>
                                 <td>{transaction.customerName}</td>
                                 <td>{transaction.discountPercentage}%</td>
-                                <td>{transaction.paymentAmount}</td>
-                                <td>{transaction.tax}</td>
+                                <td>{formatPeso(transaction.paymentAmount)}</td>
+                                <td>{formatPeso(transaction.tax)}</td>
                                 <td>{transaction.totalQuantity}</td>
-                                <td>{transaction.total}</td>
+                                <td>{formatPeso(transaction.total)}</td>
                                 <td>{new Date(transaction.date).toLocaleDateString()}</td>
                             </tr>
                         ))}
@@ -75,9 +126,9 @@ function TotalSalesReports() {
             </div>
 
             <div>
-                <h3>Total Sales: {totalSales}</h3>
-                <button onClick={() => handleDownload('pdf')}>Download PDF</button>
-                <button onClick={() => handleDownload('xlsx')}>Download XLSX</button>
+                <h3>Total Sales: {formatPeso(totalSales)}</h3>
+                <button onClick={downloadPDF}>Download PDF</button>
+                <button onClick={downloadXLSX}>Download XLSX</button>
             </div>
         </div>
     );
