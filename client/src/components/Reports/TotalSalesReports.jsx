@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import fetchTotalSalesReport from './fetchTotalSalesReport';
+import { fetchTotalSalesReport } from './Service/TotalSales';
 
 function TotalSalesReports() {
     const [startDate, setStartDate] = useState('');

@@ -1,6 +1,6 @@
 import { getDatabase, ref, get, query, orderByChild, startAt, endAt } from "firebase/database";
 
-async function fetchTotalSalesReport(startDate, endDate) {
+export function fetchTotalSalesReport(startDate, endDate) {
     const db = getDatabase();
     const transactionsRef = ref(db, 'TransactionHistory');
 
@@ -9,8 +9,7 @@ async function fetchTotalSalesReport(startDate, endDate) {
 
     const salesQuery = query(transactionsRef, orderByChild("date"), startAt(formattedStartDate), endAt(formattedEndDate));
 
-    try {
-        const snapshot = await get(salesQuery);
+    return get(salesQuery).then(snapshot => {
         if (snapshot.exists()) {
             const data = snapshot.val();
             return Object.entries(data).map(([id, details]) => ({
@@ -23,8 +22,8 @@ async function fetchTotalSalesReport(startDate, endDate) {
             }));
         }
         return [];
-    } catch (error) {
+    }).catch(error => {
         console.error("Error fetching transactions:", error);
         throw error;
-    }
+    });
 }
