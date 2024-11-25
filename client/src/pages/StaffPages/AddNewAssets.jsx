@@ -15,7 +15,7 @@ function AddNewAssets() {
     ]);
 
     return (
-        <Container fluid className="p-0">
+        <Container fluid className="p-0" style={{border: '1px solid', height: '100vh'}}>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid="md" className="mt-4 p-0">
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", minWidth: 380 }}>
