@@ -1,0 +1,208 @@
+
+:root {
+    --bgChart1: rgb(205, 195, 255) ;
+    --bgChart2: rgb(170, 201, 255) ;
+    --bgColor: #afafaf ;
+    --bgChart3: #92E3B8 ;
+}
+
+
+/* ?Chart 1 */
+.containerChart1 {
+    // border: 1px solid; 
+    box-sizing: border-box;
+    padding: 15px 20px;
+    height: auto;
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bgChart1);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 5px;
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .contentChart1 {
+        p {
+            font-size: 2rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+}
+
+
+/* ?Chart 2 */
+.containerChart2 {
+    // border: 1px solid; 
+    box-sizing: border-box;
+    padding: 15px 20px;
+    height: auto;
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bgChart2);
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .contentChart2 {
+        p {
+            font-size: 2rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+}
+
+/* ?Chart 3 */
+.containerChart3 {
+    box-sizing: border-box;
+    padding: 15px 20px;
+    height: auto;
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bgChart3);
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .contentChart3 {
+        p {
+            font-size: 2rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+}
+
+/* ?Chart 3 */
+.containerChart4 {
+    border: 1px solid #8d8d8d; 
+    box-sizing: border-box;
+    padding: 15px 20px;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 5px;
+    border-left: none;
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .contentChart4 {
+        p {
+            font-size: 3rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+}
+
+/* !Warning This is for ChartLg */
+
+.containerChartLg1 {
+    width: 80%;
+    height: 590px;
+    // background-color: rgba(146, 227, 182, 0.945);
+    border-radius: 10px;
+    box-shadow: 1px 5px 3px var(--chartShadow);
+    overflow: auto;
+    padding: 10px;
+
+    .activityList {
+        margin-top: 10px;
+        // border: 1px solid;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        height: auto;
+        
+        .activityItem {
+            border: 1px solid #b1b1b1;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            border-radius: 10px;
+    
+            .activityDetails {
+                // border: 1px solid;
+                display: flex;
+                flex-direction: column;
+
+                h1 {
+                    font-size: 1.1rem;
+                }
+
+                p {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+
+
+
+
+}
+
+.containerChartLg2 {
+    // border: 1px solid;
+    padding: 10px;
+    width: 100%;
+    height: 300px;
+    /*! Change this in auto if chart-lg is coded*/
+    box-shadow: 1px 5px 3px var(--chartShadow);
+    // border-radius: 20px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.containerChartLg3 {
+    // border: 1px solid rgb(130, 238, 144);
+    padding: 10px;
+    width: 720px;
+    height: 300px;
+    /*! Change this in auto if chart-lg is coded*/
+    box-shadow: 1px 5px 3px var(--chartShadow);
+    // border-radius: 20px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    gap: 20px;
+
+}
