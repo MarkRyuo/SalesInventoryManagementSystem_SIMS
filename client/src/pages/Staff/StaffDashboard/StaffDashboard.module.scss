@@ -54,14 +54,13 @@
     
     .smallContainer {
         background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-        border: 1px solid;
+        // border: 1px solid #dbdbdb;
         border-radius: 15px;
         padding: 15px;
         display: flex;
         gap: 10px;
         flex-direction: column;
         div:first-child {
-            border: 1px solid;
             display: flex;
         }
         
