@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { fetchStockInByDate } from "./Service/StockIn"; // Import the helper function for fetching stock
-import { Button, Table, Form } from "react-bootstrap";
+import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { MainLayout } from "../../layout/MainLayout";
@@ -16,6 +15,7 @@ function StockInReports() {
         if (startDate && endDate) {
             fetchFilteredData();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [startDate, endDate]);
 
     const fetchFilteredData = async () => {
@@ -29,7 +29,16 @@ function StockInReports() {
 
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
+
+        // Add the report title and date range
+        doc.setFontSize(16);
+        doc.text("Stock In Report", 14, 20);
+        doc.setFontSize(12);
+        doc.text(`Date Range: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`, 14, 30);
+
+        // Create the table with the data
         doc.autoTable({
+            startY: 40,
             head: [['Product ID', 'Product Name', 'SKU', 'Barcode', 'Quantity', 'Date Added']],
             body: filteredData.map(item => [
                 item.productId,
@@ -40,20 +49,33 @@ function StockInReports() {
                 new Date(item.addedQuantityHistory.date).toLocaleDateString(),
             ]),
         });
+
+        // Save the PDF
         doc.save('stock-in-report.pdf');
     };
 
     const handleDownloadXLSX = () => {
-        const worksheet = XLSX.utils.json_to_sheet(filteredData.map(item => ({
+        // Prepare data for the XLSX file
+        const reportData = filteredData.map(item => ({
             ProductID: item.productId,
             ProductName: item.productName,
             SKU: item.sku,
             Barcode: item.barcode,
             Quantity: item.addedQuantityHistory.quantity,
             DateAdded: new Date(item.addedQuantityHistory.date).toLocaleDateString(),
-        })));
+        }));
+
+        // Add title and date range to the worksheet
+        const title = `Stock In Report (Date Range: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()})`;
+        const worksheet = XLSX.utils.json_to_sheet(reportData);
+
+        // Add title as the first row
+        const wsTitle = XLSX.utils.aoa_to_sheet([[title]]);
         const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, wsTitle, "Report Title");
         XLSX.utils.book_append_sheet(workbook, worksheet, "Stock In Report");
+
+        // Write the file
         XLSX.writeFile(workbook, "stock-in-report.xlsx");
     };
 
@@ -114,10 +136,12 @@ function StockInReports() {
                     </Table>
                 </div>
 
-                {/* Download Buttons */}
+                {/* Dropdown for Download Options */}
                 <div className="mt-4">
-                    <Button variant="success" onClick={handleDownloadPDF}>Download PDF</Button>
-                    <Button variant="info" onClick={handleDownloadXLSX} className="ml-2">Download XLSX</Button>
+                    <DropdownButton variant="secondary" title="Download Report" id="download-dropdown">
+                        <Dropdown.Item as="button" onClick={handleDownloadPDF}>Download PDF</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={handleDownloadXLSX}>Download XLSX</Dropdown.Item>
+                    </DropdownButton>
                 </div>
             </div>
         </MainLayout>
