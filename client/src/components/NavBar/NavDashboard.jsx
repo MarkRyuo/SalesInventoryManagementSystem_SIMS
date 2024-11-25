@@ -6,7 +6,7 @@ import { Buttons } from './Buttons';
 //* Icons
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdSpaceDashboard } from "react-icons/md";
-import { TbBackground, TbReportAnalytics } from "react-icons/tb";
+import { TbReportAnalytics } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { MdOutlineInventory2 } from "react-icons/md";
