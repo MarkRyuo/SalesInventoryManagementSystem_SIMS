@@ -7,7 +7,7 @@ function DropdownReports() {
             <Dropdown.Item href="/StockInReports">Stock In Report</Dropdown.Item>
             <Dropdown.Item href="/LowStockReports">Low Stock Report</Dropdown.Item>
             <Dropdown.Item href="/TotalSalesReports">Total Sales Report</Dropdown.Item>
-            <Dropdown.Item href="#">Quantity Sold Report</Dropdown.Item>
+            <Dropdown.Item href="/QuantitySoldReports">Quantity Sold Report</Dropdown.Item>
         </DropdownButton>
     )
 }
