@@ -1,10 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { fetchTotalSales } from './Service/TotalSales'; // Adjust the path accordingly
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';  // Update this line
-import { MainLayout } from '../../layout/MainLayout'
+import { MainLayout } from '../../layout/MainLayout';
+import { Table, Button, Dropdown } from 'react-bootstrap'; // Import Dropdown from React-Bootstrap
 
 function TotalSalesReports() {
     const [startDate, setStartDate] = useState('');
@@ -13,6 +13,11 @@ function TotalSalesReports() {
     const [totalSales, setTotalSales] = useState(0);
 
     const handleDateChange = async () => {
+        if (!startDate || !endDate) {
+            alert("Please select both start and end dates.");
+            return;
+        }
+
         const { filteredTransactions, totalSales } = await fetchTotalSales(startDate, endDate);
         setFilteredTransactions(filteredTransactions);
         setTotalSales(totalSales);
@@ -70,11 +75,6 @@ function TotalSalesReports() {
         XLSX.writeFile(wb, "sales_report_total_sales.xlsx");
     };
 
-    useEffect(() => {
-        // Fetch sales data when component mounts or date changes
-        handleDateChange();
-    }, [startDate, endDate]);
-
     return (
         <MainLayout>
             <div>
@@ -93,11 +93,11 @@ function TotalSalesReports() {
                         onChange={(e) => setEndDate(e.target.value)}
                         placeholder="End Date"
                     />
-                    <button onClick={handleDateChange}>Filter</button>
+                    <Button onClick={handleDateChange}>Filter</Button>
                 </div>
 
                 <div>
-                    <table>
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
                                 <th>Transaction ID</th>
@@ -111,27 +111,51 @@ function TotalSalesReports() {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredTransactions.map((transaction) => (
-                                <tr key={transaction.id}>
-                                    <td>{transaction.id}</td>
-                                    <td>{transaction.customerName}</td>
-                                    <td>{transaction.discountPercentage}%</td>
-                                    <td>{formatPeso(transaction.paymentAmount)}</td>
-                                    <td>{formatPeso(transaction.tax)}</td>
-                                    <td>{transaction.totalQuantity}</td>
-                                    <td>{formatPeso(transaction.total)}</td>
-                                    <td>{new Date(transaction.date).toLocaleDateString()}</td>
+                            {filteredTransactions.length > 0 ? (
+                                filteredTransactions.map((transaction) => (
+                                    <tr key={transaction.id}>
+                                        <td>{transaction.id}</td>
+                                        <td>{transaction.customerName}</td>
+                                        <td>{transaction.discountPercentage}%</td>
+                                        <td>{formatPeso(transaction.paymentAmount)}</td>
+                                        <td>{formatPeso(transaction.tax)}</td>
+                                        <td>{transaction.totalQuantity}</td>
+                                        <td>{formatPeso(transaction.total)}</td>
+                                        <td>{new Date(transaction.date).toLocaleDateString()}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="8" className="text-center">
+                                        No transactions available. Please apply a filter.
+                                    </td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
-                    </table>
+                    </Table>
                 </div>
 
-                <div>
-                    <h3>Total Sales: {formatPeso(totalSales)}</h3>
-                    <button onClick={downloadPDF}>Download PDF</button>
-                    <button onClick={downloadXLSX}>Download XLSX</button>
-                </div>
+                {filteredTransactions.length > 0 && (
+                    <div>
+                        <h3>Total Sales: {formatPeso(totalSales)}</h3>
+
+                        {/* Dropdown for downloading options */}
+                        <Dropdown>
+                            <Dropdown.Toggle variant="primary" id="dropdown-custom-components">
+                                Download Report
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item as="button" onClick={downloadPDF}>
+                                    Download PDF
+                                </Dropdown.Item>
+                                <Dropdown.Item as="button" onClick={downloadXLSX}>
+                                    Download XLSX
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+                )}
             </div>
         </MainLayout>
     );
