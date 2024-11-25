@@ -4,11 +4,11 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 function DropdownReports() {
     return (
         <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            <Dropdown.Item href="">Stock In</Dropdown.Item>
+            <Dropdown.Item href="">Total Sales Report</Dropdown.Item>
+            <Dropdown.Item href="">Quantity Sold Report</Dropdown.Item>
+            <Dropdown.Item href="">Low Stock Report</Dropdown.Item>
         </DropdownButton>
     )
 }
-
 export default DropdownReports ;
