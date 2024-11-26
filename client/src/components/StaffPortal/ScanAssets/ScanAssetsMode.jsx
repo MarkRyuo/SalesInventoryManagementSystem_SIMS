@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { updateProductQuantity, fetchAllDiscounts, fetchAllTaxes, saveTransactionHistory } from '../../../services/ProductService';
 import { useState, useEffect } from 'react';
 import ScanProductModeScss from './PosScanner.module.scss' ;
+import { IoBagCheckOutline } from "react-icons/io5";
 
 function Checkout() {
     const location = useLocation();
@@ -131,7 +132,7 @@ function Checkout() {
         <Container fluid  className={ScanProductModeScss.MainComponent}>
             <div className={ScanProductModeScss.navBar}>
                 <Container>
-                    <h1>Checkout</h1>
+                    <h1> <IoBagCheckOutline size={25}/>Checkout</h1>
                 </Container>
             </div>
 

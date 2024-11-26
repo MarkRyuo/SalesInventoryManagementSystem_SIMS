@@ -119,6 +119,8 @@
             }
         }
         .btns { 
+            display: flex;
+            justify-content: flex-end;
             button {
                 margin: 20px 0px;
             }
