@@ -181,21 +181,21 @@ function AdminTransactionHistory() {
             {/* Updated Modal for viewing order details */}
             <Modal show={showModal} onHide={handleCloseModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered >
                 <Modal.Header closeButton>
-                    <Modal.Title><FaTruckRampBox size={20} className="me-2"/>Order Details</Modal.Title>
+                    <Modal.Title><FaTruckRampBox size={20} className="me-2" />Order Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {selectedOrder && (
                         <Container>
                             <h5 className="mb-2 text-primary">Order Summary</h5>
                             <ListGroup variant="flush" style={{ height: 150, overflow: 'auto' }}>
-                                <ListGroup.Item><strong>Order Date:</strong> {selectedOrder.date}</ListGroup.Item>
-                                <ListGroup.Item><strong>Customer Name:</strong> {selectedOrder.customerName}</ListGroup.Item>
-                                <ListGroup.Item><strong>Subtotal:</strong> ₱{selectedOrder.subtotal.toFixed(2)}</ListGroup.Item>
-                                <ListGroup.Item><strong>Tax:</strong> {selectedOrder.tax.toFixed(2)}%</ListGroup.Item>
-                                <ListGroup.Item><strong>Discount:</strong> {selectedOrder.discount.toFixed(2)}%</ListGroup.Item>
-                                <ListGroup.Item><strong>Payment Amount:</strong> ₱{parseFloat(selectedOrder.paymentAmount).toFixed(2)}</ListGroup.Item> {/* Added */}
-                                <ListGroup.Item><strong>Change:</strong> ₱{parseFloat(selectedOrder.change).toFixed(2)}</ListGroup.Item> {/* Added */}
-                                <ListGroup.Item><strong>Total Amount:</strong> <strong>₱{selectedOrder.total.toFixed(2)}</strong></ListGroup.Item>
+                                <ListGroup.Item>Order Date: {selectedOrder.date}</ListGroup.Item>
+                                <ListGroup.Item>Customer Name: {selectedOrder.customerName}</ListGroup.Item>
+                                <ListGroup.Item>Subtotal: ₱{selectedOrder.subtotal.toFixed(2)}</ListGroup.Item>
+                                <ListGroup.Item>Tax:{selectedOrder.tax.toFixed(2)}%</ListGroup.Item>
+                                <ListGroup.Item>Discount: {selectedOrder.discount.toFixed(2)}%</ListGroup.Item>
+                                <ListGroup.Item>Payment Amount: ₱{parseFloat(selectedOrder.paymentAmount).toFixed(2)}</ListGroup.Item> {/* Added */}
+                                <ListGroup.Item>Change: ₱{parseFloat(selectedOrder.change).toFixed(2)}</ListGroup.Item> {/* Added */}
+                                <ListGroup.Item>Total Amount: ₱{selectedOrder.total.toFixed(2)}</ListGroup.Item>
                             </ListGroup>
 
                             <h5 className="mt-3 text-primary">Items</h5>
@@ -206,12 +206,12 @@ function AdminTransactionHistory() {
                                     return (
                                         <ListGroup.Item key={index}>
                                             <div className="d-flex justify-content-between">
-                                                <p><strong>Product:</strong> {item.productName}</p>
-                                                <p><strong>Quantity:</strong> {item.quantity}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Product: {item.productName}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Quantity: {item.quantity}</p>
                                             </div>
                                             <div className="d-flex justify-content-between">
-                                                <p><strong>Unit Price:</strong> ₱{price.toFixed(2)}</p>
-                                                <p><strong>Total:</strong> ₱{total.toFixed(2)}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Unit Price: ₱{price.toFixed(2)}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Total: ₱{total.toFixed(2)}</p>
                                             </div>
                                         </ListGroup.Item>
                                     );
