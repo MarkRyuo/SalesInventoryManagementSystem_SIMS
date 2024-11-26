@@ -55,7 +55,7 @@ function StaffAccountMode() {
                             <Image src="/Reyes_Electronics_LogoBg.png" roundedCircle />
                             <div className={StaffAccountScss.contentTitle}>
                                 <div style={{ display: "flex", flexDirection: 'column' }}>
-                                    <p className="m-0">{staffData?.firstname} {staffData?.lastname}</p>
+                                    <h1 className="m-0">{staffData?.firstname} {staffData?.lastname}</h1>
                                     <p className="m-0">REYES ELECTRONICS Staff</p>
                                 </div>
                                 <p style={{ color: staffData?.active ? 'green' : 'red' }}>
