@@ -38,10 +38,8 @@
             // border: 1px solid;
             height: 60vh;
             thead {
-                tr {
-                    border: 1px solid;
-                }
                 tr th {
+                    border: 1px solid;
                     background-color: #AAC9FF;
                     height: 30px;
                 }
@@ -49,6 +47,12 @@
             tbody {
                 tr td {
                     border: 1px solid;
+                }
+            }
+
+            tfoot {
+                tr td {
+                    background-color: #AAC9FF;
                 }
             }
         }

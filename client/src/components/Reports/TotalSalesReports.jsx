@@ -206,23 +206,23 @@ function TotalSalesReports() {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colSpan="2">Total Quantity Sold</td>
+                                <td colSpan="1">Total Quantity Sold</td>
                                 <td>{totalQuantitySold}</td>
                             </tr>
                             <tr>
-                                <td colSpan="2">Total Revenue</td>
+                                <td colSpan="1">Total Revenue</td>
                                 <td>{`₱${totalRevenue.toFixed(2)}`}</td>
                             </tr>
                             <tr>
-                                <td colSpan="2">Discounts Applied</td>
+                                <td colSpan="1">Discounts Applied</td>
                                 <td>{`₱${totalDiscount.toFixed(2)}`}</td>
                             </tr>
                             <tr>
-                                <td colSpan="2">Tax Collected</td>
+                                <td colSpan="1">Tax Collected</td>
                                 <td>{`₱${totalTax.toFixed(2)}`}</td>
                             </tr>
                             <tr>
-                                <td colSpan="2">Net Revenue</td>
+                                <td colSpan="1">Net Revenue</td>
                                 <td>{`₱${netRevenue.toFixed(2)}`}</td>
                             </tr>
                         </tfoot>
