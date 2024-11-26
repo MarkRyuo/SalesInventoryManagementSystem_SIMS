@@ -32,17 +32,21 @@
     }
 
     .TableContainer {
-        border: 1px solid;
         padding: 10px;
-
+        border: 1px solid;
         table {
-            border: 1px solid;
+            // border: 1px solid;
             height: 60vh;
             thead {
-                border: 1px solid;
+                tr th {
+                    border: 1px solid;
+                    height: 30px;
+                }
             }
             tbody {
-                height: 70vh;
+                tr td {
+                    border: 1px solid;
+                }
             }
         }
 

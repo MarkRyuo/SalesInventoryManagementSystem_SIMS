@@ -184,12 +184,12 @@ function TotalSalesReports() {
                     <Table striped bordered hover responsive> {/* striped bordered hover responsive  */}
                         <thead>
                             <tr>
-                                <th style={{width: 160}}>Transaction ID</th>
+                                <th>Transaction ID</th>
                                 <th>Date</th>
-                                <th style={{width: 120}}>Total Qty.</th>
-                                <th style={{width: 120}}>Discount</th>
-                                <th style={{width: 120}}>Tax</th>
-                                <th style={{width: 120}}>Total</th>
+                                <th>Total Qty.</th>
+                                <th>Discount</th>
+                                <th>Tax</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
