@@ -146,6 +146,18 @@ function TotalSalesReports() {
         <MainLayout>
             <div className={TotalSalesReportScss.Mcontainer}>
                 <h1>Total Sales</h1>
+                {/* Dropdown for file download */}
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Download Report
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={downloadXlsx}>Download as XLSX</Dropdown.Item>
+                        <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                
                 {/* Date Picker Inputs */}
                 <div className={TotalSalesReportScss.DatePicker}>
                     <div>
@@ -165,20 +177,8 @@ function TotalSalesReports() {
                         />
                     </div>
                 </div>
-                
+
                 <Button onClick={filterData}>Filter</Button>
-
-                {/* Dropdown for file download */}
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Download Report
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={downloadXlsx}>Download as XLSX</Dropdown.Item>
-                        <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
 
                 <div>
                     <Table> {/* striped bordered hover responsive  */}
