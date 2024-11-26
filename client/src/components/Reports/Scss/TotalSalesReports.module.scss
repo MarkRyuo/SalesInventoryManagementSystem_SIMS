@@ -80,7 +80,8 @@
     .Mcontainer {
 
     h1 {
-        font-size: 2rem;
+        font-size: 1.7rem;
+        padding-left: 10px;
         background: radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
 
     }
@@ -156,7 +157,8 @@
     .Mcontainer {
 
     h1 {
-        font-size: 2rem;
+        font-size: 1.4rem;
+        padding-left: 10px;
         background: radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
 
     }
@@ -170,7 +172,7 @@
 
 
         input {
-            width: 200px;
+            width: 150px;
             height: 35px;
             border-radius: 5px;
         }
@@ -183,6 +185,7 @@
     
     button {
         margin: 10px;
+        font-size: 0.9rem;
     }
 
     .DropDown {
