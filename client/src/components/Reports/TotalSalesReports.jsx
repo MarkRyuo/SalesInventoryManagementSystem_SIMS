@@ -144,7 +144,7 @@ function TotalSalesReports() {
     return (
 
         <MainLayout>
-            <div>
+            <div className={TotalSalesReportScss.Mcontainer}>
                 <div>
                     <h1>Total Sales</h1>
                     {/* Date Picker Inputs */}
