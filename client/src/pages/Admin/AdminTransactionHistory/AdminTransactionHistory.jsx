@@ -242,7 +242,7 @@ function AdminTransactionHistory() {
                                                 <p>Quantity: {item.quantity}</p>
                                             </div>
                                             <div className="d-flex justify-content-between">
-                                                <p><strong>Unit Price:</strong> ₱{price.toFixed(2)}</p>
+                                                <p>Unit Price: ₱{price.toFixed(2)}</p>
                                                 <p><strong>Total:</strong> ₱{total.toFixed(2)}</p>
                                             </div>
                                         </ListGroup.Item>
