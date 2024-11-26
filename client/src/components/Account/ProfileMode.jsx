@@ -56,8 +56,8 @@ function ProfileMode({setActiveTab}) {
                             </div>
                         </div>
 
-                        <div style={{ padding: 20 }}>
-                            <p className="fs-4">Personal Information</p>
+                        <div className={ProfileModeScss.contentBottom}>
+                            <h3>Personal Information</h3>
                             <hr />
                             <div style={{ borderRadius: 20, padding: 20, boxShadow: '1px 4px 5px #E1E4E4' }}>
                                 <p>FirstName: <span>{adminData ? adminData.firstname : 'N/A'}</span></p>
