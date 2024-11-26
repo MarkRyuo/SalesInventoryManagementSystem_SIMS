@@ -220,16 +220,16 @@ function ReOrdering() {
                             <Table bordered hover responsive>
                                 <thead className="bg-light">
                                     <tr>
-                                        <th>Product Name</th>
-                                        <th>SKU</th>
-                                        <th>Quantity</th>
+                                        <th style={{fontSize: '0.9rem', fontWeight: 500}}>Product Name</th>
+                                        <th style={{ fontSize: '0.9rem', fontWeight: 500 }}>SKU</th>
+                                        <th style={{ fontSize: '0.9rem', fontWeight: 500 }}>Quantity</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {reorderList.map((product, index) => (
                                         <tr key={product.barcode}>
-                                            <td className="fs-6">{product.productName}</td>
-                                            <td className="fs-6">{product.sku}</td>
+                                            <td style={{ fontSize: '0.9rem'}}>{product.productName}</td>
+                                            <td style={{ fontSize: '0.9rem'}}>{product.sku}</td>
                                             <td>
                                                 <div className="d-flex justify-content-center">
                                                     <input
