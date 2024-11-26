@@ -38,8 +38,11 @@
             // border: 1px solid;
             height: 60vh;
             thead {
-                tr th {
+                tr {
                     border: 1px solid;
+                }
+                tr th {
+                    background-color: #AAC9FF;
                     height: 30px;
                 }
             }

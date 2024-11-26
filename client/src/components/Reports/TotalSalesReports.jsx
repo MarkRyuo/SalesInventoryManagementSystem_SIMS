@@ -181,7 +181,7 @@ function TotalSalesReports() {
                 <Button onClick={filterData}>Filter Date</Button>
 
                 <div className={TotalSalesReportScss.TableContainer}>
-                    <Table striped bordered hover responsive> {/* striped bordered hover responsive  */}
+                    <Table striped bordered hover responsive>
                         <thead>
                             <tr>
                                 <th>Transaction ID</th>
@@ -227,6 +227,7 @@ function TotalSalesReports() {
                             </tr>
                         </tfoot>
                     </Table>
+
                 </div>
             </div>
         </MainLayout>
