@@ -279,7 +279,6 @@ function ReOrdering() {
                         >
                             Clear List
                         </Button>
-                        <Button variant="secondary" onClick={handleCloseModals}>Close</Button>
                         <Button variant="success" onClick={handleSaveOrderToFirebase}>Save Order</Button>
                     </Modal.Footer>
                 </Modal>
