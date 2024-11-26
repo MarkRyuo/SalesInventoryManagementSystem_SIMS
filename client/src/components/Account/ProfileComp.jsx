@@ -145,7 +145,7 @@ const ProfileComp = () => {
             <Row className={ProfileCompScss.RowContainer}>
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="firstname">
-                        <Form.Label>First Name</Form.Label>
+                        <Form.Label>FIRST NAME</Form.Label>
                         <Form.Control
                             type="text"
                             name="firstname"
