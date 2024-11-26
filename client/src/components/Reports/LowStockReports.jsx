@@ -120,6 +120,20 @@ function LowStockReports() {
         <MainLayout>
             <div className={LowStockReportScss.Maincomponent}>
                 <h1>Low Stock Report</h1>
+                {/* Download Buttons */}
+                <div className={LowStockReportScss.DropDown}>
+                    <DropdownButton
+                        id="dropdown-basic-button"
+                        title="Download Format"
+                    >
+                        <Dropdown.Item onClick={() => handleDownload("PDF")}>
+                            PDF
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleDownload("XLSX")}>
+                            XLSX
+                        </Dropdown.Item>
+                    </DropdownButton>
+                </div>
                 <div className={LowStockReportScss.formContent}>
                     <Form>
                         <Form.Group>
@@ -174,21 +188,6 @@ function LowStockReports() {
                             </tbody>
                         </Table>
                     </div>
-                </div>
-
-                {/* Download Buttons */}
-                <div className="download-buttons mt-3">
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Download Format"
-                    >
-                        <Dropdown.Item onClick={() => handleDownload("PDF")}>
-                            PDF
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleDownload("XLSX")}>
-                            XLSX
-                        </Dropdown.Item>
-                    </DropdownButton>
                 </div>
             </div>
         </MainLayout>
