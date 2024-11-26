@@ -147,7 +147,7 @@ function TotalSalesReports() {
             <div className={TotalSalesReportScss.Mcontainer}>
                 <h1>Total Sales</h1>
                 {/* Dropdown for file download */}
-                <Dropdown>
+                <Dropdown className={TotalSalesReportScss.DropDown}>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                         Download Report
                     </Dropdown.Toggle>
@@ -157,7 +157,7 @@ function TotalSalesReports() {
                         <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-                
+
                 {/* Date Picker Inputs */}
                 <div className={TotalSalesReportScss.DatePicker}>
                     <div>
