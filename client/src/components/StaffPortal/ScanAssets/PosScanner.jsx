@@ -6,6 +6,7 @@ import { BrowserMultiFormatReader } from "@zxing/library";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fetchProductByBarcode } from '../../../services/ProductService';
 import PosScannerscss from './PosScanner.module.scss';
+
 function PosScanner() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ function PosScanner() {
     const videoRef = useRef(null);
     const scanningInProgress = useRef(false); // Flag to manage scanning state
     const [selectedDeviceId, setSelectedDeviceId] = useState(null); // Camera device ID
-    const [videoDevices, setVideoDevices] = useState([]); // Store available video devices
+    const [setVideoDevices] = useState([]); // Store available video devices
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -139,7 +140,7 @@ function PosScanner() {
         return () => {
             codeReader.reset(); // Ensure to reset the reader when unmounting
         };
-    }, [handleScan, isLoading, selectedDeviceId]);
+    }, [handleScan, isLoading, selectedDeviceId, setVideoDevices]);
 
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });
