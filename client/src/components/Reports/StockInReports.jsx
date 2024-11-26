@@ -4,6 +4,7 @@ import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { MainLayout } from "../../layout/MainLayout";
+import StockInReportsScss from './Scss/StockInReports.module.scss'
 
 function StockInReports() {
     const [startDate, setStartDate] = useState("");
@@ -83,10 +84,17 @@ function StockInReports() {
 
     return (
         <MainLayout>
-            <div>
+            <div className={StockInReportsScss.Maincomponent}>
                 <h1>Stock In Report</h1>
+                {/* Dropdown for Download Options */}
+                <div className={StockInReportsScss.DropDown}>
+                    <DropdownButton variant="success" title="Download" id="download-dropdown">
+                        <Dropdown.Item as="button" onClick={handleDownloadPDF}>PDF</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={handleDownloadXLSX}>XLSX</Dropdown.Item>
+                    </DropdownButton>
+                </div>
                 {/* Date Range Filter */}
-                <div>
+                <div className={StockInReportsScss.formContent}>
                     <Form>
                         <Form.Group controlId="startDate">
                             <Form.Label>Start Date</Form.Label>
@@ -106,12 +114,14 @@ function StockInReports() {
                             />
                         </Form.Group>
 
-                        <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
                     </Form>
+                    <div style={{paddingleft: 10}}>
+                        <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
+                    </div>
                 </div>
 
                 {/* Table Display */}
-                <div className="mt-4">
+                <div className={StockInReportsScss.tables}>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
@@ -136,14 +146,6 @@ function StockInReports() {
                             ))}
                         </tbody>
                     </Table>
-                </div>
-
-                {/* Dropdown for Download Options */}
-                <div className="mt-4">
-                    <DropdownButton variant="secondary" title="Download Report" id="download-dropdown">
-                        <Dropdown.Item as="button" onClick={handleDownloadPDF}>Download PDF</Dropdown.Item>
-                        <Dropdown.Item as="button" onClick={handleDownloadXLSX}>Download XLSX</Dropdown.Item>
-                    </DropdownButton>
                 </div>
             </div>
         </MainLayout>

@@ -133,7 +133,6 @@ export const NavDashboard = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <p className="text-center">You have successfully logged out.</p>
-                    <p className="text-center text-muted">Redirecting to the login page...</p>
                 </Modal.Body>
             </Modal>
         </main>

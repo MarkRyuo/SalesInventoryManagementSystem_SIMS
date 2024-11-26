@@ -19,7 +19,7 @@ function AdminTransactionHistory() {
 
     useEffect(() => {
         const historyRef = ref(db, 'TransactionHistory/');
-        onValue(historyRef, (snapshot) => {
+        const unsubscribe = onValue(historyRef, (snapshot) => {
             const data = snapshot.val() || {};
             const formattedHistory = Object.entries(data).map(([key, value]) => ({
                 ...value,
@@ -28,15 +28,18 @@ function AdminTransactionHistory() {
                 tax: parseFloat(value.tax) || 0,
                 discount: parseFloat(value.discount) || 0,
                 total: parseFloat(value.total) || 0,
-                // Format the date if it's a timestamp
-                date: value.date ? new Date(value.date).toLocaleDateString() : 'N/A', // Format the date
+                date: value.date ? new Date(value.date).toLocaleDateString() : 'N/A',
                 items: value.items.map(item => ({
                     ...item,
                     price: parseFloat(item.price) || 0
                 }))
             }));
+            // Sort orders by date in descending order
+            formattedHistory.sort((a, b) => new Date(b.date) - new Date(a.date));
             setOrderHistory(formattedHistory);
         });
+
+        return () => unsubscribe(); // Cleanup listener
     }, [db]);
 
     const filteredOrders = orderHistory.filter(order => {
@@ -75,13 +78,15 @@ function AdminTransactionHistory() {
         doc.text(`Sold To: ${order.customerName}`, 10, 50);
         doc.text(`Order ID: ${order.id}`, 10, 60);
 
-        // Pricing Breakdown using Unicode for Peso Symbol
+        // Pricing Breakdown
         doc.text(`Subtotal: \u20B1${order.subtotal.toFixed(2)}`, 10, 70);
         doc.text(`Tax (12%): \u20B1${order.tax.toFixed(2)}`, 10, 80);
         doc.text(`Discount: -\u20B1${order.discount.toFixed(2)}`, 10, 90);
+        doc.text(`Payment Amount: \u20B1${parseFloat(order.paymentAmount).toFixed(2)}`, 10, 100); // Added
+        doc.text(`Change: \u20B1${parseFloat(order.change).toFixed(2)}`, 10, 110); // Added
         doc.setFontSize(14);
         doc.setFont('helvetica', 'bold');
-        doc.text(`Total Amount: \u20B1${order.total.toFixed(2)}`, 10, 110);
+        doc.text(`Total Amount: \u20B1${order.total.toFixed(2)}`, 10, 120);
 
         // QR Code
         const qrCanvas = qrRef.current;
@@ -90,7 +95,7 @@ function AdminTransactionHistory() {
             doc.addImage(qrDataUrl, 'PNG', 150, 60, 50, 50);
         }
 
-        // Footer Message
+        // Footer
         doc.setFontSize(10);
         doc.setFont('helvetica', 'italic');
         doc.text('Thank you for your purchase!', 105, 150, { align: 'center' });
@@ -176,44 +181,43 @@ function AdminTransactionHistory() {
             {/* Updated Modal for viewing order details */}
             <Modal show={showModal} onHide={handleCloseModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered >
                 <Modal.Header closeButton>
-                    <Modal.Title><FaTruckRampBox size={20} className="me-2"/>Order Details</Modal.Title>
+                    <Modal.Title><FaTruckRampBox size={20} className="me-2" />Order Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {selectedOrder && (
                         <Container>
-                            {/* Order Summary Section */}
                             <h5 className="mb-2 text-primary">Order Summary</h5>
-                            <ListGroup variant="flush" style={{height: 150, overflow: 'auto'}}>
-                                <ListGroup.Item><strong>Order Date:</strong> {selectedOrder.date}</ListGroup.Item>
-                                <ListGroup.Item><strong>Customer Name:</strong> {selectedOrder.customerName}</ListGroup.Item>
-                                <ListGroup.Item><strong>Subtotal:</strong> ₱{selectedOrder.subtotal.toFixed(2)}</ListGroup.Item>
-                                <ListGroup.Item><strong>Tax:</strong> {selectedOrder.tax.toFixed(2)}%</ListGroup.Item>
-                                <ListGroup.Item><strong>Discount:</strong> {selectedOrder.discount.toFixed(2)}%</ListGroup.Item>
-                                <ListGroup.Item><strong>Total Amount:</strong> <strong>₱{selectedOrder.total.toFixed(2)}</strong></ListGroup.Item>
+                            <ListGroup variant="flush" style={{ height: 150, overflow: 'auto' }}>
+                                <ListGroup.Item>Order Date: {selectedOrder.date}</ListGroup.Item>
+                                <ListGroup.Item>Customer Name: {selectedOrder.customerName}</ListGroup.Item>
+                                <ListGroup.Item>Subtotal: ₱{selectedOrder.subtotal.toFixed(2)}</ListGroup.Item>
+                                <ListGroup.Item>Tax:{selectedOrder.tax.toFixed(2)}%</ListGroup.Item>
+                                <ListGroup.Item>Discount: {selectedOrder.discount.toFixed(2)}%</ListGroup.Item>
+                                <ListGroup.Item>Payment Amount: ₱{parseFloat(selectedOrder.paymentAmount).toFixed(2)}</ListGroup.Item> {/* Added */}
+                                <ListGroup.Item>Change: ₱{parseFloat(selectedOrder.change).toFixed(2)}</ListGroup.Item> {/* Added */}
+                                <ListGroup.Item>Total Amount: ₱{selectedOrder.total.toFixed(2)}</ListGroup.Item>
                             </ListGroup>
 
-                            {/* Items Section */}
                             <h5 className="mt-3 text-primary">Items</h5>
-                            <ListGroup variant="flush" style={{height: '100px', overflow: 'auto'}}>
+                            <ListGroup variant="flush" style={{ height: '100px', overflow: 'auto' }}>
                                 {selectedOrder.items.map((item, index) => {
                                     const price = parseFloat(item.price);
                                     const total = price * item.quantity;
                                     return (
                                         <ListGroup.Item key={index}>
                                             <div className="d-flex justify-content-between">
-                                                <p><strong>Product:</strong> {item.productName}</p>
-                                                <p><strong>Quantity:</strong> {item.quantity}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Product: {item.productName}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Quantity: {item.quantity}</p>
                                             </div>
                                             <div className="d-flex justify-content-between">
-                                                <p><strong>Unit Price:</strong> ₱{price.toFixed(2)}</p>
-                                                <p><strong>Total:</strong> ₱{total.toFixed(2)}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Unit Price: ₱{price.toFixed(2)}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Total: ₱{total.toFixed(2)}</p>
                                             </div>
                                         </ListGroup.Item>
                                     );
                                 })}
                             </ListGroup>
 
-                            {/* QR Code Section */}
                             <h5 className="mt-4 text-primary">Download Receipt QR Code</h5>
                             <div className="d-flex justify-content-center">
                                 <canvas ref={qrRef} style={{ maxWidth: "100%", height: "auto" }} />

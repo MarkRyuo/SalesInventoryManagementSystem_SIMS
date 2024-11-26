@@ -140,12 +140,12 @@ const ProfileComp = () => {
 
     return (
         <Form className={ProfileCompScss.contentAccount}>
-            <h1 className='fs-2'>My Details</h1>
-            <p style={{ borderBottom: "1px solid gray", padding: "20px 10px", fontSize: '1.5rem' }}>Personal Information</p>
-            <Row style={{ width: "100%", margin: 0, padding: 0 }}>
+            <h1>My Details</h1>
+            <h2>Personal Information</h2>
+            <Row className={ProfileCompScss.RowContainer}>
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="firstname">
-                        <Form.Label>FIRST NAME</Form.Label>
+                        <Form.Label>First Name</Form.Label>
                         <Form.Control
                             type="text"
                             name="firstname"
@@ -157,7 +157,7 @@ const ProfileComp = () => {
                 </Col>
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="lastname">
-                        <Form.Label>LAST NAME</Form.Label>
+                        <Form.Label>Last Name</Form.Label>
                         <Form.Control
                             type="text"
                             name="lastname"
@@ -168,7 +168,7 @@ const ProfileComp = () => {
                     </Form.Group>
                 </Col>
             </Row>
-            <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
+            <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "12px" }}>
                 <Form.Control
                     aria-label="Text input with dropdown button"
                     placeholder={userData.gender || 'Select Gender'}
@@ -189,7 +189,7 @@ const ProfileComp = () => {
                 </DropdownButton>
             </InputGroup>
 
-            <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+            <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                     type="text"
@@ -200,7 +200,7 @@ const ProfileComp = () => {
                 />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="password" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+            <Form.Group className="mb-3" controlId="password" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                     type="password"

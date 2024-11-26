@@ -1,33 +1,34 @@
 import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { MainLayout } from "../../../layout/MainLayout";
-import { AiFillProduct } from "react-icons/ai";
 import { Container } from "react-bootstrap";
-import { FaHistory } from "react-icons/fa";
-import { PiHandArrowUpBold } from "react-icons/pi";
 import AccountPagescss from './AccountPage.module.scss';
 import StaffComp from '../../../components/Account/StaffComp';
 import ProfileMode from '../../../components/Account/ProfileMode';
 import ProfileComp from '../../../components/Account/ProfileComp';
+
+import { MdManageAccounts } from "react-icons/md";
+import { MdSupervisorAccount } from "react-icons/md";
+import { MdAccountCircle } from "react-icons/md";
 // eslint-disable-next-line react/prop-types
 function ProductNavbarTabs({ setActiveTab }) {
     return (
         <Nav variant="tabs" onSelect={setActiveTab} className={AccountPagescss.NavContainer}>
             <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/MyAccount" onClick={() => setActiveTab('/MyAccount')}>
-                    <AiFillProduct size={20} />
+                    <MdAccountCircle size={20}/>                    
                     <p className='m-0 p-0'>My Account</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/ProfileComp" onClick={() => setActiveTab('/ProfileComp')}>
-                    <FaHistory size={20} />
+                    <MdManageAccounts size={20}/>
                     <p className='m-0 p-0'>Profile</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/StaffComp" onClick={() => setActiveTab('/StaffComp')}>
-                    <PiHandArrowUpBold size={20} />
+                    <MdSupervisorAccount size={20}/>
                     <p className='m-0 p-0'>Staff Account</p>
                 </Nav.Link>
             </Nav.Item>

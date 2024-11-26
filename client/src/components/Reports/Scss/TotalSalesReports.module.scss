@@ -1,0 +1,231 @@
+
+
+.Mcontainer {
+
+    h1 {
+        font-size: 2rem;
+        background: radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+
+    }
+
+    .DatePicker {
+        // border: 1px solid;
+        display: flex;
+        gap: 15px;
+        padding: 10px;
+        background: radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+
+
+        input {
+            width: 200px;
+            height: 35px;
+            border-radius: 5px;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+    } //! Date Picker End
+    
+    button {
+        margin: 10px;
+    }
+
+    .DropDown {
+        text-align: end;
+    }
+
+    .TableContainer {
+        padding: 10px;
+        border-radius: 10px;
+        background: radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+        height: 60vh;
+        overflow: auto;
+        table {
+            min-width: 420px;
+            border: 1px solid #6d6d6d;
+            thead {
+                tr th {
+                    border: 1px solid;
+                    background-color: #AAC9FF;
+                    height: 30px;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                }
+            }
+            tbody {
+                tr td {
+                    font-size: 1rem;
+                    border: 1px solid #6d6d6d;
+                }
+            }
+
+            tfoot {
+                tr td {
+                    font-size: 1rem;
+                    background-color: transparent;
+                }
+            }
+        }
+
+    }
+
+
+    
+} //! End Mcontainer
+
+
+@media (max-width: 800px) {
+    .Mcontainer {
+
+    h1 {
+        font-size: 1.7rem;
+        padding-left: 10px;
+        background: radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+
+    }
+
+    .DatePicker {
+        // border: 1px solid;
+        display: flex;
+        gap: 15px;
+        padding: 10px;
+        background: radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+
+
+        input {
+            width: 200px;
+            height: 35px;
+            border-radius: 5px;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+    } //! Date Picker End
+    
+    button {
+        margin: 10px;
+    }
+
+    .DropDown {
+        text-align: end;
+    }
+
+    .TableContainer {
+        padding: 10px;
+        border-radius: 10px;
+        background: radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+        height: 60vh;
+        overflow: auto;
+        table {
+            border: 1px solid #6d6d6d;
+            thead {
+                tr th {
+                    border: 1px solid #6d6d6d;
+                    background-color: #AAC9FF;
+                    height: 30px;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                }
+            }
+            tbody {
+                tr td {
+                    font-size: 0.8rem;
+                    border: 1px solid;
+                }
+            }
+
+            tfoot {
+                tr td {
+                    font-size: 0.9rem;
+                    background-color: transparent;
+                }
+            }
+        }
+
+    }
+
+
+    
+}
+}
+
+@media (max-width: 500px) {
+    .Mcontainer {
+
+    h1 {
+        font-size: 1.4rem;
+        padding-left: 10px;
+        background: radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+
+    }
+
+    .DatePicker {
+        // border: 1px solid;
+        display: flex;
+        gap: 15px;
+        padding: 10px;
+        background: radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+
+
+        input {
+            width: 150px;
+            height: 35px;
+            border-radius: 5px;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+    } //! Date Picker End
+    
+    button {
+        margin: 10px;
+        font-size: 0.9rem;
+    }
+
+    .DropDown {
+        text-align: end;
+    }
+
+    .TableContainer {
+        padding: 10px;
+        border-radius: 10px;
+        background: radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+        height: 60vh;
+        overflow: auto;
+        table {
+            border: 1px solid #6d6d6d;
+            thead {
+                tr th {
+                    background-color: #AAC9FF;
+                    height: 30px;
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                }
+            }
+            tbody {
+                tr td {
+                    font-size: 0.7rem;
+                    border: 1px solid;
+                }
+            }
+
+            tfoot {
+                tr td {
+                    font-size: 0.8rem;
+                    background-color: transparent;
+                }
+            }
+        }
+
+    }
+
+
+    
+}
+}

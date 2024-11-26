@@ -4,6 +4,7 @@ import { Image, Button } from "react-bootstrap";
 import { db } from '../../services/firebase'; // Adjust the path according to your project structure
 import { doc, getDoc } from "firebase/firestore";
 import ProfileModeScss from './AccountComp.module.scss';
+import { FaEdit } from "react-icons/fa";
 
 function ProfileMode({setActiveTab}) {
     const [adminData, setAdminData] = useState(null);
@@ -38,7 +39,7 @@ function ProfileMode({setActiveTab}) {
             <div className="content">
                 {loading ? (
                     <div style={{ textAlign: 'center', padding: '50px' }}>
-                        <p className="fs-4">Loading...</p>
+                        <p className="fs-5">Loading...</p>
                     </div>
                 ) : (
                     <div>
@@ -46,17 +47,17 @@ function ProfileMode({setActiveTab}) {
                             <Image src="/Reyes_Electronics_LogoBg.png" roundedCircle />
                             <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
                                 <div style={{ display: "flex", flexDirection: 'column' }}>
-                                    <p className="fs-4 m-0">{adminData ? adminData.firstname : 'N/A'} {adminData ? adminData.lastname : 'N/A'}</p>
-                                    <p className="fs-6 m-0">Administrator</p>
+                                    <h2 className="m-0">{adminData ? adminData.firstname : 'N/A'} {adminData ? adminData.lastname : 'N/A'}</h2>
+                                    <p className="m-0">Administrator</p>
                                 </div>
                                     <Button variant="outline-primary" onClick={() => setActiveTab('/ProfileComp')}>
-                                        Edit User Profile
+                                        <FaEdit size={20}/>
                                     </Button>
                             </div>
                         </div>
 
-                        <div style={{ padding: 20 }}>
-                            <p className="fs-4">Personal Information</p>
+                        <div className={ProfileModeScss.contentBottom}>
+                            <h3>Personal Information</h3>
                             <hr />
                             <div style={{ borderRadius: 20, padding: 20, boxShadow: '1px 4px 5px #E1E4E4' }}>
                                 <p>FirstName: <span>{adminData ? adminData.firstname : 'N/A'}</span></p>

@@ -1,15 +1,33 @@
 
-
-.mainTabs {
-    // border: 1px solid;
-    a {
-        display: flex;
-        gap: 10px;
+.NavContainer {
+    padding: 0;
+    .mainTabs {
+        // border: 1px solid;
+        a {
+            display: flex;
+            gap: 10px;
+        }
+    
+        p {
+            font-size: 1rem;
+        }
+    
+        @media (max-width: 500px) {
+            p {
+                font-size: 0.7rem;
+            }
+        }
     }
+
 }
+
 
 
 .NavContainer {
     // border: 1px solid;
     margin: 30px 0px;
+}
+
+.MyAccount {
+    padding: 0;
 }

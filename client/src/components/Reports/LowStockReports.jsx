@@ -5,6 +5,7 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { MainLayout } from "../../layout/MainLayout";
+import LowStockReportScss from './Scss/LowStockReports.module.scss'
 
 function LowStockReports() {
     const [startDate, setStartDate] = useState("");
@@ -117,9 +118,24 @@ function LowStockReports() {
 
     return (
         <MainLayout>
-            <div className="stock-in-reports">
+            <div className={LowStockReportScss.Maincomponent}>
                 <h1>Low Stock Report</h1>
-                <div className="filter-section">
+                {/* Download Buttons */}
+                <div className={LowStockReportScss.DropDown}>
+                    <DropdownButton
+                        id="dropdown-basic-button"
+                        title="Download"
+                        variant="success"
+                    >
+                        <Dropdown.Item onClick={() => handleDownload("PDF")}>
+                            PDF
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleDownload("XLSX")}>
+                            XLSX
+                        </Dropdown.Item>
+                    </DropdownButton>
+                </div>
+                <div className={LowStockReportScss.formContent}>
                     <Form>
                         <Form.Group>
                             <Form.Label>Start Date</Form.Label>
@@ -138,56 +154,41 @@ function LowStockReports() {
                             />
                         </Form.Group>
                     </Form>
-                    <Button onClick={handleFilter} className="mt-3">
-                        Filter
-                    </Button>
-                </div>
-
-                {/* Scrollable Table */}
-                <div className="table-section mt-4">
-                    <div className="table-container">
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>SKU</th>
-                                    <th>Barcode</th>
-                                    <th>Quantity</th>
-                                    <th>Threshold</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {lowStockData.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.productName}</td>
-                                        <td>{item.sku}</td>
-                                        <td>{item.barcode}</td>
-                                        <td>{item.quantity}</td>
-                                        <td>{item.instockthreshold}</td>
-                                        <td>{item.status}</td>
-                                        <td>{item.date}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
+                    <div style={{ paddingLeft: 10 }}>
+                        <Button onClick={handleFilter} className="mt-3">
+                            Filter
+                        </Button>
                     </div>
                 </div>
 
-                {/* Download Buttons */}
-                <div className="download-buttons mt-3">
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Download Format"
-                    >
-                        <Dropdown.Item onClick={() => handleDownload("PDF")}>
-                            PDF
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleDownload("XLSX")}>
-                            XLSX
-                        </Dropdown.Item>
-                    </DropdownButton>
+                {/* Scrollable Table */}
+                <div className={LowStockReportScss.tables}>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>SKU</th>
+                                <th>Barcode</th>
+                                <th>Quantity</th>
+                                <th>Threshold</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {lowStockData.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.productName}</td>
+                                    <td>{item.sku}</td>
+                                    <td>{item.barcode}</td>
+                                    <td>{item.quantity}</td>
+                                    <td>{item.instockthreshold}</td>
+                                    <td>{item.status}</td>
+                                    <td>{item.date}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
                 </div>
             </div>
         </MainLayout>

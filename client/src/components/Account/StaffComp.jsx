@@ -3,6 +3,9 @@ import { Button, Form, FloatingLabel, Table, Row, Col } from 'react-bootstrap';
 import { db } from '../../services/firebase'; // Update path as needed
 import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import bcrypt from 'bcryptjs'; // Add this import
+import StaffCompScss from './AccountComp.module.scss' ;
+import { FaEdit } from "react-icons/fa";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 
 const StaffComp = () => {
@@ -253,26 +256,26 @@ const StaffComp = () => {
                 </Form>
             </Col>
 
-            <Col style={{ width: "auto" }} lg={4} md={12} sm={12}>
-                <p className='fs-4'>Staff list Preview</p>
+            <Col lg={4} md={12} sm={12} className={StaffCompScss.ColStaffComp}>
+                <h1>Staff list Preview</h1>
                 <Table striped bordered hover responsive>
                     <thead>
                         <tr>
-                            <th className='lead fs-6'>First Name</th>
-                            <th className='lead fs-6'>Last Name</th>
-                            <th className='lead fs-6'>Gender</th>
-                            <th className='lead fs-6'>Username</th>
-                            <th className='lead fs-6'>Active</th>
-                            <th className='lead fs-6'>Actions</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>Username</th>
+                            <th>Active</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {staffList.map(staff => (
                             <tr key={staff.id}>
-                                <td className='lead fs-6'>{staff.firstname}</td>
-                                <td className='lead fs-6'>{staff.lastname}</td>
-                                <td className='lead fs-6'>{staff.gender}</td>
-                                <td className='lead fs-6'>{staff.username}</td>
+                                <td>{staff.firstname}</td>
+                                <td>{staff.lastname}</td>
+                                <td>{staff.gender}</td>
+                                <td>{staff.username}</td>
                                 <td>
                                     <Form.Check
                                         type="switch"
@@ -280,9 +283,9 @@ const StaffComp = () => {
                                         onChange={() => handleToggleActive(staff)}
                                     />
                                 </td>
-                                <td>
-                                    <Button variant="warning" className='mx-3' onClick={() => handleEditStaff(staff)}>Edit</Button>
-                                    <Button variant="outline-danger" onClick={() => handleDeleteStaff(staff.id)}>Delete</Button>
+                                <td style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
+                                    <Button variant="warning"  onClick={() => handleEditStaff(staff)}><FaEdit /></Button>
+                                    <Button variant="outline-danger" onClick={() => handleDeleteStaff(staff.id)}><FaRegTrashAlt /></Button>
                                 </td>
                             </tr>
                         ))}

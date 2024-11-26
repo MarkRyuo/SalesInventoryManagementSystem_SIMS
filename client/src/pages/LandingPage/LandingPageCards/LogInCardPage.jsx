@@ -5,6 +5,7 @@ import unifiedLogin from '../../../services/UnifiedLogIn'; // The combined login
 import LogInCardPagecss from './LandingPageCards.module.scss';
 import { FaRegEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 function LogInCardPage() {
     const [username, setUsername] = useState("");
@@ -78,7 +79,7 @@ function LogInCardPage() {
                         </Button>
                     </form>
 
-                    <a href="#">Forgot Password?</a>
+                    <Link to={"/ForgotPasswordMode"}>Forgot Password?</Link>
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';  // Importing the jspdf-autotable plugin
 import { fetchTransactions } from './Service/TotalSales'; // Import the fetch function
 import { MainLayout } from '../../layout/MainLayout'
+import TotalSalesReportScss from './Scss/TotalSalesReports.module.scss';
 
 function TotalSalesReports() {
     const [transactionData, setTransactionData] = useState([]);
@@ -143,45 +144,50 @@ function TotalSalesReports() {
     return (
 
         <MainLayout>
-            <div>
-                <div>
-                    <h1>Total Sales</h1>
-                    {/* Date Picker Inputs */}
+            <div className={TotalSalesReportScss.Mcontainer}>
+                <h1>Total Sales</h1>
+                {/* Dropdown for file download */}
+                <Dropdown className={TotalSalesReportScss.DropDown}>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Download
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={downloadXlsx}>XLSX</Dropdown.Item>
+                        <Dropdown.Item onClick={downloadPdf}>PDF</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+
+                {/* Date Picker Inputs */}
+                <div className={TotalSalesReportScss.DatePicker}>
                     <div>
+                        <p className='m-0 p-0'>Start Date:</p>
                         <input
                             type="date"
                             onChange={(e) => setStartDate(e.target.value)}
                             placeholder="Start Date"
                         />
+                    </div>
+                    <div>
+                        <p className='m-0 p-0'>End Date: </p>
                         <input
                             type="date"
                             onChange={(e) => setEndDate(e.target.value)}
                             placeholder="End Date"
                         />
-                        <Button onClick={filterData}>Filter</Button>
                     </div>
-
-                    {/* Dropdown for file download */}
-                    <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Download Report
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick={downloadXlsx}>Download as XLSX</Dropdown.Item>
-                            <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
                 </div>
 
-                <div>
+                <Button onClick={filterData}>Filter Date</Button>
+
+                <div className={TotalSalesReportScss.TableContainer}>
                     <Table striped bordered hover responsive>
                         <thead>
                             <tr>
                                 <th>Transaction ID</th>
-                                <th>Date</th>
-                                <th>Total Quantity</th>
-                                <th>Discount</th>
+                                <th>Date/Time</th>
+                                <th>Qty.</th>
+                                <th>Disc</th>
                                 <th>Tax</th>
                                 <th>Total</th>
                             </tr>
@@ -200,27 +206,28 @@ function TotalSalesReports() {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colSpan="2">Total Quantity Sold</td>
+                                <td colSpan="1">Total Quantity Sold</td>
                                 <td>{totalQuantitySold}</td>
                             </tr>
                             <tr>
-                                <td colSpan="2">Total Revenue</td>
+                                <td colSpan="1">Total Revenue</td>
                                 <td>{`₱${totalRevenue.toFixed(2)}`}</td>
                             </tr>
                             <tr>
-                                <td colSpan="2">Discounts Applied</td>
+                                <td colSpan="1">Discounts Applied</td>
                                 <td>{`₱${totalDiscount.toFixed(2)}`}</td>
                             </tr>
                             <tr>
-                                <td colSpan="2">Tax Collected</td>
+                                <td colSpan="1">Tax Collected</td>
                                 <td>{`₱${totalTax.toFixed(2)}`}</td>
                             </tr>
                             <tr>
-                                <td colSpan="2">Net Revenue</td>
+                                <td colSpan="1">Net Revenue</td>
                                 <td>{`₱${netRevenue.toFixed(2)}`}</td>
                             </tr>
                         </tfoot>
                     </Table>
+
                 </div>
             </div>
         </MainLayout>

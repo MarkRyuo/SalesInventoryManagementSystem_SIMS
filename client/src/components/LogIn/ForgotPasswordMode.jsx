@@ -78,7 +78,7 @@ function ForgotPasswordMode() {
             <Container fluid='lg' className={ResetModecss.containerMode}>
                 <div className={ResetModecss.containerContent}>
                     <div>
-                        <Button variant="link" onClick={() => navigate('/LoginPage')} size='lg' className='p-0'>
+                        <Button variant="link" onClick={() => navigate('/')} size='lg' className='p-0'>
                             <FaArrowLeft size={25} /> 
                         </Button>
                     </div>
