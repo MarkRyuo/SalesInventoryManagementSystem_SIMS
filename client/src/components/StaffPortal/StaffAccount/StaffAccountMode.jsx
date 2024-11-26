@@ -65,7 +65,7 @@ function StaffAccountMode() {
                         </div>
 
                         <div className={StaffAccountScss.PersonalInfo}>
-                            <p className="fs-4">Personal Information</p>
+                            <h>Personal Information</h>
                             <hr />
                             <div style={{ borderRadius: 20, padding: 20, boxShadow: '1px 4px 5px #E1E4E4' }}>
                                 <p>FirstName: <span>{staffData?.firstname || 'N/A'}</span></p>
