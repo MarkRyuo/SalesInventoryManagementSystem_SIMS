@@ -4,7 +4,7 @@ import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { MainLayout } from "../../layout/MainLayout";
-import StockInReports from './Scss/StockInReports.module.scss'
+import StockInReportsScss from './Scss/StockInReports.module.scss'
 
 function StockInReports() {
     const [startDate, setStartDate] = useState("");
