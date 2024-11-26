@@ -90,7 +90,7 @@ function StockInReports() {
                 <div>
                     <DropdownButton variant="secondary" title="Download Report" id="download-dropdown">
                         <Dropdown.Item as="button" onClick={handleDownloadPDF}>PDF</Dropdown.Item>
-                        <Dropdown.Item as="button" onClick={handleDownloadXLSX}>Download XLSX</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={handleDownloadXLSX}>XLSX</Dropdown.Item>
                     </DropdownButton>
                 </div>
                 {/* Date Range Filter */}
