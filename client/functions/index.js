@@ -68,5 +68,3 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
     });
 });
 
-
-
