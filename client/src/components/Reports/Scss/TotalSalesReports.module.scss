@@ -12,7 +12,7 @@
         gap: 15px;
 
         input {
-            width: 300px;
+            width: 200px;
             height: 35px;
             border-radius: 5px;
         }
@@ -36,10 +36,11 @@
         border: 1px solid;
         border-radius: 10px;
         background: radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
-
+        border: 1px solid;
+        height: 60vh;
+        overflow: auto;
         table {
-            // border: 1px solid;
-            height: 60vh;
+            border: 1px solid;
             thead {
                 tr th {
                     border: 1px solid;
@@ -55,7 +56,7 @@
 
             tfoot {
                 tr td {
-                    background-color: #AAC9FF;
+                    background-color: transparent;
                 }
             }
         }
