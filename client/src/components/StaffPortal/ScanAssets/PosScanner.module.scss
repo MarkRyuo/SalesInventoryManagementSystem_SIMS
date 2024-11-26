@@ -153,42 +153,44 @@
             font-size: 1.7rem;
             padding: 5px 0px;
         }
-    }
-
-    table {
-        thead {
-            // border: 1px solid;
-
-            tr th {
-                font-size: 0.8rem;
-                font-weight: 500;
-                background-color: #AAC9FF;
-                width: 20px;
-                text-align: center;
-            }
-
-            tr th:first-child {
-                width: 450px;
-            }
-        }
-
-        tbody {
-            tr td:first-child {
+        table {
+            thead {
                 // border: 1px solid;
-                overflow: hidden;  
-                text-overflow: ellipsis;
-                font-size: 0.8rem;
+    
+                tr th {
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    background-color: #AAC9FF;
+                    width: 20px;
+                    text-align: center;
+                }
+    
+                tr th:first-child {
+                    width: 450px;
+                }
             }
-
-            tr td {
-                font-size: 1rem;
+    
+            tbody {
+                tr td:first-child {
+                    // border: 1px solid;
+                    overflow: hidden;  
+                    text-overflow: ellipsis;
+                    font-size: 0.8rem;
+                }
+    
+                tr td {
+                    font-size: 1rem;
+                }
             }
         }
+        .btns {
+            display: flex;
+            justify-content: flex-end;
+        }
     }
+
 
     
-    button {
-        margin: 5px 0px;
-    }
 }
+
 }

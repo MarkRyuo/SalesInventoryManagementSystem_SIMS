@@ -260,9 +260,10 @@ function Checkout() {
                             )}
 
                         </Table>
-                        <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
-                            
                     </Col>
+                    <div className={ScanProductModeScss.btns}>
+                        <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
+                    </div>
                 </Row>
             </Container>
         </Container>
