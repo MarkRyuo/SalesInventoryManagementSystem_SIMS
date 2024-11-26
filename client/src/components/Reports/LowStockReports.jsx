@@ -125,6 +125,7 @@ function LowStockReports() {
                     <DropdownButton
                         id="dropdown-basic-button"
                         title="Download"
+                        variant="success"
                     >
                         <Dropdown.Item onClick={() => handleDownload("PDF")}>
                             PDF
