@@ -132,7 +132,7 @@ function NewAssets() {
     ]);
 
     return (
-        <Container fluid className='m-0 p-0'>
+        <Container fluid className='m-0 p-0'   style={{ background: "radial-gradient(1300px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%)" }}>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
                 <Row style={{ boxSizing: 'border-box', padding: 20, height: '80vh', paddingTop: 25 }}>
