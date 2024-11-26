@@ -165,6 +165,7 @@ function TotalSalesReports() {
                         />
                     </div>
                 </div>
+                
                 <Button onClick={filterData}>Filter</Button>
 
                 {/* Dropdown for file download */}
