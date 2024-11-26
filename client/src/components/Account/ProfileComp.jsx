@@ -157,7 +157,7 @@ const ProfileComp = () => {
                 </Col>
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="lastname">
-                        <Form.Label>LAST NAME</Form.Label>
+                        <Form.Label>Last Name</Form.Label>
                         <Form.Control
                             type="text"
                             name="lastname"
