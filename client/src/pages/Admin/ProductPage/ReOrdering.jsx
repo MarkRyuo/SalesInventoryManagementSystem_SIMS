@@ -69,6 +69,11 @@ function ReOrdering() {
     };
 
     const handleSaveOrderToFirebase = async () => {
+        if (reorderList.length === 0) {
+            alert("The reorder list is empty! Please add products before saving.");
+            return;
+        }
+
         try {
             const orderId = `order-${Date.now()}`;
             const orderDate = new Date().toISOString();
@@ -88,6 +93,7 @@ function ReOrdering() {
 
             await saveOrderToFirebase(orderData);
             alert("Order saved successfully to Firebase!");
+
             // Update reordered products state after saving
             const reorderedProductBarcodes = new Set(orderDetails.map((product) => product.barcode));
             setReorderedProducts((prevSet) => {
@@ -112,6 +118,7 @@ function ReOrdering() {
             alert("Error saving order!");
         }
     };
+
 
     // Filter out reordered products from the list
     const filteredReorderingProducts = reorderingProducts.filter((product) => !reorderedProducts.has(product.barcode));
@@ -206,7 +213,7 @@ function ReOrdering() {
                 {/* Reorder List Modal */}
                 <Modal show={showReorderModal} onHide={handleCloseModals} centered>
                     <Modal.Header closeButton>
-                        <Modal.Title><FaTruckRampBox size={20} className="me-2"/>Reorder List</Modal.Title>
+                        <Modal.Title><FaTruckRampBox size={20} className="me-2" />Reorder List</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {reorderList.length > 0 ? (
@@ -263,10 +270,20 @@ function ReOrdering() {
                         )}
                     </Modal.Body>
                     <Modal.Footer className="bg-light">
+                        <Button
+                            variant="danger"
+                            onClick={() => {
+                                setReorderList([]);
+                                localStorage.removeItem("reorderList");
+                            }}
+                        >
+                            Clear List
+                        </Button>
                         <Button variant="secondary" onClick={handleCloseModals}>Close</Button>
                         <Button variant="success" onClick={handleSaveOrderToFirebase}>Save Order</Button>
                     </Modal.Footer>
                 </Modal>
+
 
             </main>
         </Container>
