@@ -124,7 +124,7 @@ function LowStockReports() {
                 <div className={LowStockReportScss.DropDown}>
                     <DropdownButton
                         id="dropdown-basic-button"
-                        title="Download Format"
+                        title="Download"
                     >
                         <Dropdown.Item onClick={() => handleDownload("PDF")}>
                             PDF
@@ -153,9 +153,11 @@ function LowStockReports() {
                             />
                         </Form.Group>
                     </Form>
-                    <Button onClick={handleFilter} className="mt-3">
-                        Filter
-                    </Button>
+                    <div style={{padding: 10}}>
+                        <Button onClick={handleFilter} className="mt-3">
+                            Filter
+                        </Button>
+                    </div>
                 </div>
 
                 {/* Scrollable Table */}
