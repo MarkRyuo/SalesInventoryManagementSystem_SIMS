@@ -238,12 +238,12 @@ function AdminTransactionHistory() {
                                     return (
                                         <ListGroup.Item key={index}>
                                             <div className="d-flex justify-content-between">
-                                                <p>Product: {item.productName}</p>
-                                                <p>Quantity: {item.quantity}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Product: {item.productName}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Quantity: {item.quantity}</p>
                                             </div>
                                             <div className="d-flex justify-content-between">
-                                                <p>Unit Price: ₱{price.toFixed(2)}</p>
-                                                <p>Total: ₱{total.toFixed(2)}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Unit Price: ₱{price.toFixed(2)}</p>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500 }}>Total: ₱{total.toFixed(2)}</p>
                                             </div>
                                         </ListGroup.Item>
                                     );
