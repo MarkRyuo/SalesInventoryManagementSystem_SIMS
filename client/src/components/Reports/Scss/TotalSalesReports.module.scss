@@ -9,12 +9,12 @@
     .DatePicker {
         // border: 1px solid;
         display: flex;
-        flex-direction: column;
         gap: 15px;
 
         input {
             width: 300px;
             height: 35px;
+            border-radius: 5px;
         }
 
         p {
@@ -34,6 +34,9 @@
     .TableContainer {
         padding: 10px;
         border: 1px solid;
+        border-radius: 10px;
+        background: radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+
         table {
             // border: 1px solid;
             height: 60vh;
