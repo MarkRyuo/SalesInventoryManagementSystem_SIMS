@@ -39,7 +39,7 @@ function ProfileMode({setActiveTab}) {
             <div className="content">
                 {loading ? (
                     <div style={{ textAlign: 'center', padding: '50px' }}>
-                        <p className="fs-4">Loading...</p>
+                        <p className="fs-5">Loading...</p>
                     </div>
                 ) : (
                     <div>
@@ -47,8 +47,8 @@ function ProfileMode({setActiveTab}) {
                             <Image src="/Reyes_Electronics_LogoBg.png" roundedCircle />
                             <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
                                 <div style={{ display: "flex", flexDirection: 'column' }}>
-                                    <p className="fs-4 m-0">{adminData ? adminData.firstname : 'N/A'} {adminData ? adminData.lastname : 'N/A'}</p>
-                                    <p className="fs-6 m-0">Administrator</p>
+                                    <h2 className="m-0">{adminData ? adminData.firstname : 'N/A'} {adminData ? adminData.lastname : 'N/A'}</h2>
+                                    <p className="m-0">Administrator</p>
                                 </div>
                                     <Button variant="outline-primary" onClick={() => setActiveTab('/ProfileComp')}>
                                         <FaEdit size={20}/>
