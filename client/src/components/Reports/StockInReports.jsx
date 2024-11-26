@@ -115,13 +115,13 @@ function StockInReports() {
                         </Form.Group>
 
                     </Form>
-                    <div>
+                    <div style={{padding: 10}}>
                         <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
                     </div>
                 </div>
 
                 {/* Table Display */}
-                <div className="mt-4">
+                <div className={StockInReportsScss.tables}>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
