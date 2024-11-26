@@ -87,8 +87,8 @@ function StockInReports() {
             <div className={StockInReportsScss.Maincomponent}>
                 <h1>Stock In Report</h1>
                 {/* Dropdown for Download Options */}
-                <div>
-                    <DropdownButton variant="secondary" title="Download Report" id="download-dropdown">
+                <div className={StockInReportsScss.DropDown}>
+                    <DropdownButton variant="success" title="Download" id="download-dropdown">
                         <Dropdown.Item as="button" onClick={handleDownloadPDF}>PDF</Dropdown.Item>
                         <Dropdown.Item as="button" onClick={handleDownloadXLSX}>XLSX</Dropdown.Item>
                     </DropdownButton>
@@ -115,7 +115,9 @@ function StockInReports() {
                         </Form.Group>
 
                     </Form>
-                    <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
+                    <div>
+                        <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
+                    </div>
                 </div>
 
                 {/* Table Display */}
