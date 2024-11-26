@@ -146,6 +146,8 @@
         flex-direction: column;
         div:first-child {
             display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         
         .largeContainer {
