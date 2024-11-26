@@ -16,19 +16,19 @@ function ProductNavbarTabs({ setActiveTab }) {
         <Nav variant="tabs" onSelect={setActiveTab} className={AccountPagescss.NavContainer}>
             <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/MyAccount" onClick={() => setActiveTab('/MyAccount')}>
-                    <MdAccountCircle size={25}/>                    
+                    <MdAccountCircle size={20}/>                    
                     <p className='m-0 p-0'>My Account</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/ProfileComp" onClick={() => setActiveTab('/ProfileComp')}>
-                    <MdManageAccounts size={25}/>
+                    <MdManageAccounts size={20}/>
                     <p className='m-0 p-0'>Profile</p>
                 </Nav.Link>
             </Nav.Item>
             <Nav.Item className={AccountPagescss.mainTabs}>
                 <Nav.Link eventKey="/StaffComp" onClick={() => setActiveTab('/StaffComp')}>
-                    <MdSupervisorAccount size={25}/>
+                    <MdSupervisorAccount size={20}/>
                     <p className='m-0 p-0'>Staff Account</p>
                 </Nav.Link>
             </Nav.Item>
