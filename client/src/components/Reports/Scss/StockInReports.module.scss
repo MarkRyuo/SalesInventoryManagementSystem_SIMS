@@ -2,7 +2,7 @@
 
 
 .Maincomponent {
-    border: 1px solid red;
+    // border: 1px solid red;
     height: auto;
     padding: 15px;
 
@@ -27,8 +27,25 @@
         text-align: end;
     }
 
-    .tabless {
-        margin-top: 10px;
+    .tables {
+        width: 100%;
+        margin-top: 15px;
+        border: 1px solid;
+        padding: 15px;
+        border-radius: 15px;
+
+        thead {
+            tr th {
+                font-size: 1rem;
+                font-weight: 400;
+            }
+        }
+
+        tbody {
+            tr td {
+                font-size: 0.9rem;
+            }
+        }
     }
 
 }
