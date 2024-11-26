@@ -115,7 +115,7 @@ function StockInReports() {
                         </Form.Group>
 
                     </Form>
-                    <div style={{padding: 10}}>
+                    <div style={{paddingleft: 10}}>
                         <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
                     </div>
                 </div>

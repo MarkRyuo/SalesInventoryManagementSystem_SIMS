@@ -83,7 +83,14 @@
         form {
             gap: 20px;
             display: flex;
+            input {
+                width: 155px;
+            }
         }
+    }
+
+    button {
+        font-size: 0.9rem;
     }
 
     .DropDown {
