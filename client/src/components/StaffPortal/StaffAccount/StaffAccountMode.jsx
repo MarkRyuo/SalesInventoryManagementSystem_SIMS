@@ -41,16 +41,16 @@ function StaffAccountMode() {
 
     return (
         <MainStaffLayout>
-            <div style={{ marginTop: 100, boxShadow: '2px 5px 5px #E1E4E4', borderRadius: 15, width: '100%', minWidth: 400 }} className={StaffAccountScss.MainComponent}>
+            <div className={StaffAccountScss.MainComponent}>
                 {loading ? (
                     // Display a spinner or loading message while data is being fetched
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '300px' }}>
-                        <Spinner animation="border" role="status">
+                        <Spinner animation="grow" variant="success" role="status">
                             <span className="visually-hidden">Loading...</span>
                         </Spinner>
                     </div>
                 ) : (
-                    <div className="content">
+                    <div className={StaffAccountScss.content}>
                         <div style={{ display: "flex", padding: 10 }}>
                             <Image
                                 style={{ width: 80, marginRight: 10, height: 80 }}
