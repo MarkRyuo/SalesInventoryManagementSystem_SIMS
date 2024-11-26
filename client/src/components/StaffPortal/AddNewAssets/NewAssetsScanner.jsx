@@ -19,6 +19,7 @@ function NewAssetsScanner() {
     const [videoFade, setVideoFade] = useState(true);
     const [guideFade, setGuideFade] = useState(true);
     const navigate = useNavigate();
+
     //! Camera Switching (Front and Back Trigger)
     const [videoDevices, setVideoDevices] = useState([]);
     const [selectedDeviceId, setSelectedDeviceId] = useState(null);
@@ -43,6 +44,7 @@ function NewAssetsScanner() {
                     if (result && scanning) {
                         const barcode = result.text;
 
+                        // Prevent duplicate barcode scans
                         if (barcode !== lastScannedBarcode) {
                             setLastScannedBarcode(barcode);
                             setScanning(false);
@@ -65,6 +67,7 @@ function NewAssetsScanner() {
                                     navigate('/NewAssets', { state: { barcode: barcode } });
                                 }
 
+                                // Reset scanning state after processing
                                 setTimeout(() => {
                                     setIsProcessing(false);
                                     setFadeOut(true);
@@ -75,7 +78,7 @@ function NewAssetsScanner() {
                                         setVideoFade(true);
                                         setGuideFade(true);
                                         setScanning(true);
-                                        startScanner(selectedDeviceId); // Restart scanning
+                                        startScanner(selectedDeviceId); // Restart scanning after processing
                                     }, 1000);
                                 }, 2000);
 
@@ -123,15 +126,14 @@ function NewAssetsScanner() {
             const currentIndex = videoDevices.findIndex(device => device.deviceId === selectedDeviceId);
             const nextIndex = (currentIndex + 1) % videoDevices.length;
             const nextDeviceId = videoDevices[nextIndex].deviceId;
-            // Stop the current video stream and reset the scanner
+            // Switch the camera, stop scanning momentarily, and restart it
             setSelectedDeviceId(nextDeviceId);
-            setScanning(false); // stop scanning momentarily
+            setScanning(false); // Stop scanning
             setTimeout(() => {
-                setScanning(true); // restart scanning after camera switch
+                setScanning(true); // Restart scanning after camera switch
             }, 300);
         }
     };
-
 
     return (
         <Container fluid className='m-0 p-0' style={{ height: '100vh', background: " radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
@@ -148,13 +150,13 @@ function NewAssetsScanner() {
                             <div>
                                 {error && (
                                     <Alert variant="danger"
-                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out'}}>
+                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
                                         Error: {error}
                                     </Alert>
                                 )}
                                 {message && (
                                     <Alert variant="success"
-                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out'}}>
+                                        style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
                                         {message}
                                     </Alert>
                                 )}
@@ -177,7 +179,10 @@ function NewAssetsScanner() {
                             />
                             <video
                                 ref={videoRef}
-                                style={{ display: isProcessing ? 'none' : 'block', opacity: videoFade ? 1 : 0, transition: 'opacity 1s ease-in-out'
+                                style={{
+                                    display: isProcessing ? 'none' : 'block',
+                                    opacity: videoFade ? 1 : 0,
+                                    transition: 'opacity 1s ease-in-out'
                                 }}
                             />
                         </div>
