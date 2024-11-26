@@ -6,6 +6,7 @@ import { LuDownload } from "react-icons/lu";
 import { GrView } from "react-icons/gr";
 import { FaTruckRampBox } from "react-icons/fa6";
 import SavedOrderDetailsScss from './SCSS/SavedOrder.module.scss' ;
+import { FaTrash } from "react-icons/fa6";
 
 function SavedOrderDetails() {
     const [savedOrders, setSavedOrders] = useState([]);
@@ -158,28 +159,30 @@ function SavedOrderDetails() {
                                                             ? `${order.products.length} Product(s)`
                                                             : "No products"}
                                                     </td>
-                                                    <td> 
+                                                    <td className={SavedOrderDetailsScss.ActionBtns}> 
                                                         <Button
                                                             variant=""
                                                             onClick={() => toggleShowMore(order.id)}
                                                             aria-expanded={expandedOrders[order.id]}
                                                             className="p-0"
                                                         >
-                                                            {expandedOrders[order.id] ? "Hide" : "Show More"}{" "}
+                                                            {expandedOrders[order.id] ? "Hide" : "Show"}{" "}
                                                         </Button>
                                                         <Button
-                                                            variant="light"
+                                                            variant="info"
                                                             onClick={() => downloadPDF(order)}
                                                             className="ml-2 p-0"
+                                                            style={{width: 40}}
                                                         >
-                                                            <LuDownload size={20} />
+                                                            <LuDownload/>
                                                         </Button>
                                                         <Button
                                                             variant="danger"
                                                             onClick={() => handleDeleteOrder(order.id)}
                                                             className="ml-2 p-0"
+                                                            style={{width: 40}}
                                                         >
-                                                            Delete
+                                                            <FaTrash />
                                                         </Button>
                                                     </td>
                                                 </tr>

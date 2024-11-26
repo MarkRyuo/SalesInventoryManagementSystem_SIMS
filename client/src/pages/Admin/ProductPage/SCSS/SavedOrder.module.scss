@@ -1,1 +1,34 @@
 // ! Modal View Saved Orders
+
+
+.tables {
+    width: 100%;
+    min-width: 500px;
+    thead {
+        tr th {
+            background-color: #AAC9FF;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+    }
+
+    tbody {
+        tr td {
+            font-size: 0.9rem;
+        }
+
+        button {
+            font-size: 0.9rem;
+        }
+
+        .ActionBtns {
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                border-radius: 0px;
+            }
+        }
+    }
+}
