@@ -185,9 +185,9 @@ function TotalSalesReports() {
                         <thead>
                             <tr>
                                 <th>Transaction ID</th>
-                                <th>Date</th>
-                                <th>Total Qty.</th>
-                                <th>Discount</th>
+                                <th>Date/Time</th>
+                                <th>Qty.</th>
+                                <th>Disc</th>
                                 <th>Tax</th>
                                 <th>Total</th>
                             </tr>
