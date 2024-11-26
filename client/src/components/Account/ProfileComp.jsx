@@ -168,7 +168,7 @@ const ProfileComp = () => {
                     </Form.Group>
                 </Col>
             </Row>
-            <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "11px" }}>
+            <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "12px" }}>
                 <Form.Control
                     aria-label="Text input with dropdown button"
                     placeholder={userData.gender || 'Select Gender'}
@@ -189,7 +189,7 @@ const ProfileComp = () => {
                 </DropdownButton>
             </InputGroup>
 
-            <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+            <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                     type="text"
@@ -200,7 +200,7 @@ const ProfileComp = () => {
                 />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="password" style={{ width: "100%", maxWidth: "500px", paddingLeft: 10 }}>
+            <Form.Group className="mb-3" controlId="password" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                     type="password"
