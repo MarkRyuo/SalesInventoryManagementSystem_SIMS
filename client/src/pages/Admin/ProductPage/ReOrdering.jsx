@@ -253,7 +253,7 @@ function ReOrdering() {
                                                         style={{
                                                             width: "80px",
                                                             padding: "5px",
-                                                            fontSize: "1rem",
+                                                            fontSize: "0.9rem",
                                                             borderRadius: "5px",
                                                             borderColor: "#ccc",
                                                             textAlign: "center",
