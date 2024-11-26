@@ -158,8 +158,8 @@ function TotalSalesReports() {
                             onChange={(e) => setEndDate(e.target.value)}
                             placeholder="End Date"
                         />
-                        <Button onClick={filterData}>Filter</Button>
                     </div>
+                    <Button onClick={filterData}>Filter</Button>
 
                     {/* Dropdown for file download */}
                     <Dropdown>
