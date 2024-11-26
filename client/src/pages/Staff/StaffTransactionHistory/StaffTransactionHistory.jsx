@@ -56,7 +56,7 @@ function AdminTransactionHistory() {
         if (selectedOrder && qrRef.current) {
             new QRious({
                 element: qrRef.current,
-                value: `https://us-central1-your-project-id.cloudfunctions.net/api/downloadOrder?id=${selectedOrder.id}`, // Updated to Firebase Function URL
+                value: `https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/downloadOrder?id=${selectedOrder.id}`, // Updated to Firebase Function URL
                 size: 256,
             });
 
