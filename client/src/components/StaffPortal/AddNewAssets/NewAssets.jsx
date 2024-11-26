@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { addNewProduct, addCategory, getCategoriesNewAssets } from '../../../services/ProductService';
 import { FaBoxOpen } from "react-icons/fa";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
+import NewProductScss from './NewProduct.module.scss'
 
 
 
