@@ -86,6 +86,13 @@ function StockInReports() {
         <MainLayout>
             <div className={StockInReportsScss.Maincomponent}>
                 <h1>Stock In Report</h1>
+                {/* Dropdown for Download Options */}
+                <div>
+                    <DropdownButton variant="secondary" title="Download Report" id="download-dropdown">
+                        <Dropdown.Item as="button" onClick={handleDownloadPDF}>PDF</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={handleDownloadXLSX}>Download XLSX</Dropdown.Item>
+                    </DropdownButton>
+                </div>
                 {/* Date Range Filter */}
                 <div className={StockInReportsScss.formContent}>
                     <Form>
@@ -137,14 +144,6 @@ function StockInReports() {
                             ))}
                         </tbody>
                     </Table>
-                </div>
-
-                {/* Dropdown for Download Options */}
-                <div className="mt-4">
-                    <DropdownButton variant="secondary" title="Download Report" id="download-dropdown">
-                        <Dropdown.Item as="button" onClick={handleDownloadPDF}>Download PDF</Dropdown.Item>
-                        <Dropdown.Item as="button" onClick={handleDownloadXLSX}>Download XLSX</Dropdown.Item>
-                    </DropdownButton>
                 </div>
             </div>
         </MainLayout>
