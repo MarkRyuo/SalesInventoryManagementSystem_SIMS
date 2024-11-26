@@ -3,7 +3,7 @@ import MainStaffLayout from "../../../layout/MainStaffLayout";
 import { Image, Spinner } from "react-bootstrap";
 import { db } from '../../../services/firebase'; // Import your Firebase configuration
 import { doc, getDoc } from "firebase/firestore";
-import StaffAccountScss from './StaffAccount.module.scss'
+import StaffAccountScss from './StaffAccount.module.scss' ;
 
 function StaffAccountMode() {
     const [staffData, setStaffData] = useState(null);
