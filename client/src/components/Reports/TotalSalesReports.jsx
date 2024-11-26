@@ -149,7 +149,7 @@ function TotalSalesReports() {
                 {/* Date Picker Inputs */}
                 <div className={TotalSalesReportScss.DatePicker}>
                     <div>
-                        <p className='m-0 p-0'>Start</p>
+                        <p className='m-0 p-0'>Start Date:</p>
                         <input
                             type="date"
                             onChange={(e) => setStartDate(e.target.value)}
@@ -157,7 +157,7 @@ function TotalSalesReports() {
                         />
                     </div>
                     <div>
-                        <p className='m-0 p-0'>End</p>
+                        <p className='m-0 p-0'>End Date: </p>
                         <input
                             type="date"
                             onChange={(e) => setEndDate(e.target.value)}
