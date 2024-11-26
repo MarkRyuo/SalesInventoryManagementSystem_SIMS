@@ -21,41 +21,52 @@ const logger = require("firebase-functions/logger");
 // Example download route handler
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const jsPDF = require('jspdf');
-const { storage } = require('firebase-admin');
-const express = require('express');
-const cors = require('cors');
+const cors = require('cors')({ origin: true });
+const { jsPDF } = require("jspdf");
+const qr = require('qrcode'); // For QR code generation
+
 admin.initializeApp();
 
-const app = express();
-app.use(cors({ origin: true }));
+// Function to handle the download
+exports.downloadOrder = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+        const orderId = req.query.id;
 
-app.get('/downloadOrder', async (req, res) => {
-    const orderId = req.query.id;
+        if (!orderId) {
+            return res.status(400).send('Order ID is required');
+        }
 
-    // Fetch order details from Firebase Database
-    const orderRef = admin.database().ref(`TransactionHistory/${orderId}`);
-    const snapshot = await orderRef.once('value');
-    const order = snapshot.val();
+        try {
+            // Fetch the order from Firebase
+            const orderSnapshot = await admin.database().ref(`TransactionHistory/${orderId}`).once('value');
+            const order = orderSnapshot.val();
 
-    if (order) {
-        // Generate the PDF
-        const doc = new jsPDF();
-        doc.text('Order Details', 10, 10);
-        doc.text(`Order ID: ${order.id}`, 10, 20);
-        doc.text(`Customer: ${order.customerName}`, 10, 30);
-        // Add other order details to the PDF as needed
+            if (!order) {
+                return res.status(404).send('Order not found');
+            }
 
-        // Return the PDF as a response
-        const pdfBuffer = doc.output('arraybuffer');
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `attachment; filename=Order_${orderId}.pdf`);
-        res.send(Buffer.from(pdfBuffer));
-    } else {
-        res.status(404).send('Order not found');
-    }
+            // Generate PDF (you can adjust the content here)
+            const doc = new jsPDF();
+            doc.text(`Order ID: ${orderId}`, 10, 10);
+            doc.text(`Customer Name: ${order.customerName}`, 10, 20);
+            doc.text(`Total Amount: ₱${order.total}`, 10, 30);
+
+            // Generate QR code (you can customize it as per your needs)
+            const qrCodeData = await qr.toDataURL(`https://us-central1-your-project-id.cloudfunctions.net/api/downloadOrder?id=${orderId}`);
+            doc.addImage(qrCodeData, 'PNG', 150, 10, 50, 50);
+
+            // Send PDF to the client
+            const pdfOutput = doc.output('arraybuffer');
+            res.set('Content-Type', 'application/pdf');
+            res.set('Content-Disposition', 'attachment; filename=order_receipt.pdf');
+            res.send(Buffer.from(pdfOutput));
+
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+            res.status(500).send('Error generating PDF');
+        }
+    });
 });
 
-exports.api = functions.https.onRequest(app);
 
 
