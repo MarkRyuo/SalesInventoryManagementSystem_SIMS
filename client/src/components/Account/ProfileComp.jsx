@@ -142,7 +142,7 @@ const ProfileComp = () => {
         <Form className={ProfileCompScss.contentAccount}>
             <h1>My Details</h1>
             <h2>Personal Information</h2>
-            <Row style={{ width: "100%", margin: 0, padding: 0 }}>
+            <Row className={ProfileCompScss.RowContainer}>
                 <Col lg={6}>
                     <Form.Group className="mb-3" controlId="firstname">
                         <Form.Label>FIRST NAME</Form.Label>
