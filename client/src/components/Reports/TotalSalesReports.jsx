@@ -145,7 +145,6 @@ function TotalSalesReports() {
 
         <MainLayout>
             <div className={TotalSalesReportScss.Mcontainer}>
-                <div>
                     <h1>Total Sales</h1>
                     {/* Date Picker Inputs */}
                     <div>
@@ -173,7 +172,6 @@ function TotalSalesReports() {
                             <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-                </div>
 
                 <div>
                     <Table striped bordered hover responsive>
