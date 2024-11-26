@@ -149,12 +149,12 @@ function TotalSalesReports() {
                 {/* Dropdown for file download */}
                 <Dropdown className={TotalSalesReportScss.DropDown}>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Download Report
+                        Download
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={downloadXlsx}>Download as XLSX</Dropdown.Item>
-                        <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
+                        <Dropdown.Item onClick={downloadXlsx}>XLSX</Dropdown.Item>
+                        <Dropdown.Item onClick={downloadPdf}>PDF</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
 
@@ -178,7 +178,7 @@ function TotalSalesReports() {
                     </div>
                 </div>
 
-                <Button onClick={filterData}>Filter</Button>
+                <Button onClick={filterData}>Filter Date</Button>
 
                 <div>
                     <Table> {/* striped bordered hover responsive  */}
