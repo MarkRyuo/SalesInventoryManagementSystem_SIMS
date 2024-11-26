@@ -16,6 +16,13 @@
             width: 100px;
             height: 100px;
         }
+
+        @media (max-width: 600px) {
+            img {
+                width: 80px;
+                height: 80px;
+            }
+        }
     }
 }
 

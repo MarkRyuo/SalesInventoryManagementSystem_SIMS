@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { MainLayout } from "../../../layout/MainLayout";
 import { Container } from "react-bootstrap";
-import { PiHandArrowUpBold } from "react-icons/pi";
 import AccountPagescss from './AccountPage.module.scss';
 import StaffComp from '../../../components/Account/StaffComp';
 import ProfileMode from '../../../components/Account/ProfileMode';
