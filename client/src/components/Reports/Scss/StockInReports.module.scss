@@ -1,0 +1,21 @@
+
+
+
+.Maincomponent {
+    border: 1px solid red;
+    height: auto;
+    padding: 15px;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    .formContent {
+        border: 1px solid green;
+        form {
+            display: flex;
+        }
+    }
+
+}

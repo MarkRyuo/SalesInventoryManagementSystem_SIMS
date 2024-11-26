@@ -87,7 +87,7 @@ function StockInReports() {
             <div className={StockInReportsScss.Maincomponent}>
                 <h1>Stock In Report</h1>
                 {/* Date Range Filter */}
-                <div>
+                <div className={StockInReportsScss.formContent}>
                     <Form>
                         <Form.Group controlId="startDate">
                             <Form.Label>Start Date</Form.Label>
@@ -107,8 +107,8 @@ function StockInReports() {
                             />
                         </Form.Group>
 
-                        <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
                     </Form>
+                    <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
                 </div>
 
                 {/* Table Display */}
