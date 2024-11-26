@@ -283,7 +283,7 @@ const StaffComp = () => {
                                         onChange={() => handleToggleActive(staff)}
                                     />
                                 </td>
-                                <td style={{border: '1px solid', display: 'flex', flexDirection: 'column', gap: '10px'}}>
+                                <td style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
                                     <Button variant="warning"  onClick={() => handleEditStaff(staff)}><FaEdit /></Button>
                                     <Button variant="outline-danger" onClick={() => handleDeleteStaff(staff.id)}><FaRegTrashAlt /></Button>
                                 </td>
