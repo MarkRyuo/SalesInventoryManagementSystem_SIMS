@@ -20,7 +20,7 @@ function AdminTransactionHistory() {
 
     useEffect(() => {
         const historyRef = ref(db, 'TransactionHistory/');
-        onValue(historyRef, (snapshot) => {
+        const unsubscribe = onValue(historyRef, (snapshot) => {
             const data = snapshot.val() || {};
             const formattedHistory = Object.entries(data).map(([key, value]) => ({
                 ...value,
@@ -29,16 +29,20 @@ function AdminTransactionHistory() {
                 tax: parseFloat(value.tax) || 0,
                 discount: parseFloat(value.discount) || 0,
                 total: parseFloat(value.total) || 0,
-                // Format the date if it's a timestamp
-                date: value.date ? new Date(value.date).toLocaleDateString() : 'N/A', // Format the date
+                date: value.date ? new Date(value.date).toLocaleDateString() : 'N/A',
                 items: value.items.map(item => ({
                     ...item,
                     price: parseFloat(item.price) || 0
                 }))
             }));
+            // Sort orders by date in descending order
+            formattedHistory.sort((a, b) => new Date(b.date) - new Date(a.date));
             setOrderHistory(formattedHistory);
         });
+
+        return () => unsubscribe(); // Cleanup listener
     }, [db]);
+
 
     const filteredOrders = orderHistory.filter(order => {
         const orderDate = order.date;
