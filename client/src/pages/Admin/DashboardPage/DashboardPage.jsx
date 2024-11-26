@@ -77,7 +77,7 @@ export const DashboardPage = () => {
         <MainLayout>
             <div className={DashboardCss.mainTopComponent}>
                 <div className={DashboardCss.componentHeroCard}>
-                    <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0' />Dashboard</h1>
+                    <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0 d-none d-md-block' />Dashboard</h1>
                     {isLoading ? (
                         <div className={DashboardCss.loadingContainer}>
                             <p>Loading admin Dashboard</p>
