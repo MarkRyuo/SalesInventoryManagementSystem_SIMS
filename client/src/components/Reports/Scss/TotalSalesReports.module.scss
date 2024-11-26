@@ -33,11 +33,16 @@
 
     .TableContainer {
         border: 1px solid;
+        padding: 10px;
 
         table {
             border: 1px solid;
+            height: 60vh;
             thead {
                 border: 1px solid;
+            }
+            tbody {
+                height: 70vh;
             }
         }
 
