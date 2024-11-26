@@ -50,7 +50,7 @@ function StaffAccountMode() {
                     </div>
                 ) : (
                     <div className="content">
-                        <div style={{ display: "flex", padding: 15 }}>
+                        <div style={{ display: "flex", padding: 10 }}>
                             <Image
                                 style={{ width: 80, marginRight: 10, height: 80 }}
                                 src="/Reyes_Electronics_LogoBg.png"
