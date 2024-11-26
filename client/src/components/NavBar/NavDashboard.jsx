@@ -11,7 +11,6 @@ import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { MdOutlineInventory2 } from "react-icons/md";
 import DropdownReports from '../Reports/DropdownReports';
-import { CheckCircle } from 'react-icons/fa'; // Import an icon library for a success icon
 
 export const NavDashboard = () => {
     const [show, setShow] = useState(false);
@@ -128,24 +127,12 @@ export const NavDashboard = () => {
             </Modal>
 
             {/* Success Modal */}
-            <Modal
-                show={showSuccessModal}
-                onHide={handleCloseSuccessModal}
-                centered
-                animation={true} // Adding smooth animation
-                className="success-modal" // Custom class for additional styling
-            >
+            <Modal show={showSuccessModal} onHide={handleCloseSuccessModal} centered>
                 <Modal.Header closeButton className="bg-success text-white">
-                    <Modal.Title>
-                        <CheckCircle className="mr-2" /> Logout Successful
-                    </Modal.Title>
+                    <Modal.Title>Logout Successful</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="text-center">
-                    <p className="lead">You have successfully logged out.</p>
-                    <p className="text-muted">Redirecting to the login page...</p>
-                    <Button variant="success" onClick={handleCloseSuccessModal} className="mt-3">
-                        Close
-                    </Button>
+                <Modal.Body>
+                    <p className="text-center">You have successfully logged out.</p>
                 </Modal.Body>
             </Modal>
         </main>
