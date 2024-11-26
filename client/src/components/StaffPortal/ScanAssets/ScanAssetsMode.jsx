@@ -1,7 +1,9 @@
-import { Container, Navbar, Row, Col, Button, Table, Alert, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Table, Alert, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateProductQuantity, fetchAllDiscounts, fetchAllTaxes, saveTransactionHistory } from '../../../services/ProductService';
 import { useState, useEffect } from 'react';
+import ScanProductModeScss from './PosScanner.module.scss' ;
+import { IoBagCheckOutline } from "react-icons/io5";
 
 function Checkout() {
     const location = useLocation();
@@ -127,15 +129,16 @@ function Checkout() {
 
 
     return (
-        <Container fluid className="m-0 p-0">
-            <Navbar className="bg-light shadow-sm">
+        <Container fluid  className={ScanProductModeScss.MainComponent}>
+            <div className={ScanProductModeScss.navBar}>
                 <Container>
-                    <Navbar.Brand className="fs-4">Checkout</Navbar.Brand>
+                    <h1> <IoBagCheckOutline size={25}/>Checkout</h1>
                 </Container>
-            </Navbar>
+            </div>
+
             <Container fluid='lg' className="mt-3">
                 {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
-                <Row>
+                <Row className={ScanProductModeScss.checkOutRow}>
                     <Col>
                         <h4>Your Order</h4>
                         <p>Date: {currentDate}</p>
@@ -147,16 +150,24 @@ function Checkout() {
                                 value={customerName}
                                 onChange={(e) => setCustomerName(e.target.value)}
                                 required
+                                style={{
+                                    width: '100%',
+                                    maxWidth: 500
+                                }}
                             />
                         </Form.Group>
 
                         {/* Discount Dropdown */}
-                        <Form.Group className="mt-3">
+                        <Form.Group className="mt-2">
                             <Form.Label>Discount:</Form.Label>
                             <Form.Select
                                 size="sm"
                                 value={selectedDiscount}
                                 onChange={(e) => handleDiscountChange(e.target.value)}
+                                style={{
+                                    width: '100%',
+                                    maxWidth: '200px'
+                                }}
                             >
                                 <option value={0}>No Discount</option>
                                 {availableDiscounts.map((discount) => (
@@ -168,12 +179,16 @@ function Checkout() {
                         </Form.Group>
 
                         {/* Global Tax Dropdown */}
-                        <Form.Group className="mt-3">
+                        <Form.Group className="mt-2">
                             <Form.Label>Tax Rate:</Form.Label>
                             <Form.Select
                                 size="sm"
                                 value={selectedTaxRate}
                                 onChange={(e) => handleGlobalTaxChange(e.target.value)}
+                                style={{
+                                    width: '100%',
+                                    maxWidth: '200px'
+                                }}
                             >
                                 <option value={0}>No Tax</option>
                                 {availableTaxes.map(tax => (
@@ -182,31 +197,28 @@ function Checkout() {
                                     </option>
                                 ))}
                             </Form.Select>
-                        </Form.Group>
 
-                        {/* Payment Amount */}
-                        <Form.Group className="mt-3">
-                            <Form.Label>Amount Paid:</Form.Label>
-                            <Form.Control
-                                type="number"
-                                placeholder="Enter payment amount"
-                                value={paymentAmount}
-                                onChange={handlePaymentChange}
-                            />
+                            {/* Payment Amount */}
+                            <Form.Group className="mt-2">
+                                <Form.Label>Amount Paid:</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    placeholder="Enter payment amount"
+                                    value={paymentAmount}
+                                    onChange={handlePaymentChange}
+                                    style={{
+                                        width: '100%',
+                                        maxWidth: '200px'
+                                    }}
+                                />
+                            </Form.Group>
                         </Form.Group>
-
-                        {/* Displaying Change */}
-                        {paymentAmount && paymentAmount >= total && (
-                            <div className="mt-3">
-                                <strong>Change: </strong>₱{change.toFixed(2)}
-                            </div>
-                        )}
 
                         <Table striped bordered hover className="mt-3">
                             <thead>
                                 <tr>
                                     <th>Description</th>
-                                    <th>Quantity</th>
+                                    <th>Qty</th>
                                     <th>Unit Price</th>
                                     <th>Amount</th>
                                 </tr>
@@ -225,7 +237,7 @@ function Checkout() {
                                     <td>₱{subtotal.toFixed(2)}</td>
                                 </tr>
                                 <tr>
-                                    <td colSpan="3" className="text-end"><strong>Discount ({discountPercentage}%):</strong></td>
+                                    <td colSpan="3" className="text-end"><strong>Discount:</strong></td>
                                     <td>-₱{discountAmount.toFixed(2)}</td>
                                 </tr>
                                 <tr>
@@ -241,10 +253,18 @@ function Checkout() {
                                     <td>₱{total.toFixed(2)}</td>
                                 </tr>
                             </tbody>
-                        </Table>
+                            {/* Displaying Change */}
+                            {paymentAmount && paymentAmount >= total && (
+                                <div className="mt-2">
+                                    <strong className="fs-6 fw-medium">Change: </strong>₱{change.toFixed(2)}
+                                </div>
+                            )}
 
-                        <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
+                        </Table>
                     </Col>
+                    <div className={ScanProductModeScss.btns}>
+                        <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
+                    </div>
                 </Row>
             </Container>
         </Container>

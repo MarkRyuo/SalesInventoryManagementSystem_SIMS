@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Button, Form } from "react-bootstrap";
+import { Button} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import unifiedLogin from '../../../services/UnifiedLogIn'; // The combined login function
 import LogInCardPagecss from './LandingPageCards.module.scss';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // You need to install react-icons
+import { FaRegEye } from "react-icons/fa6";
+import { FaEyeSlash } from "react-icons/fa6";
 
 function LogInCardPage() {
     const [username, setUsername] = useState("");
@@ -39,7 +40,7 @@ function LogInCardPage() {
                         <h2>Welcome</h2>
                         {error && <p style={{ color: 'red' }}>{error}</p>}
                         <div>
-                            <Form.Label>Username*</Form.Label>
+                            <p className='mb-2'>Username*</p>
                             <input
                                 type="text"
                                 placeholder="Enter your username"
@@ -49,7 +50,7 @@ function LogInCardPage() {
                             />
                         </div>
                         <div>
-                            <Form.Label>Password*</Form.Label>
+                            <p className='m-0'>Password*</p>
                             <div style={{ position: 'relative' }}>
                                 <input
                                     type={isPasswordVisible ? 'text' : 'password'}
@@ -68,7 +69,7 @@ function LogInCardPage() {
                                         cursor: 'pointer',
                                     }}
                                 >
-                                    {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                                    {isPasswordVisible ? <FaRegEye size={20}/> : <FaEyeSlash size={20}/>}
                                 </span>
                             </div>
                         </div>

@@ -13,10 +13,9 @@ function AboutCard() {
                         <img src="/Img1.jpg" />
                     </div>
                     <div>
-                        <h5>Card Title</h5>
+                        <h5>Reyes Electronics Storefront</h5>
                         <p>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the cards content.
+                            The exterior shot of Reyes Electronics with the signage of his store and entrance.  The picture shows a busy retail place full of goods in stock.
                         </p>
                     </div>
                 </div>
@@ -26,10 +25,9 @@ function AboutCard() {
                         <img src="/img4.jpg" />
                     </div>
                     <div>
-                        <h5>Card Title</h5>
+                        <h5>Electronics section</h5>
                         <p>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the cards content.
+                            An interior shot of Reyes Electronics with an aisle or section full of different electronic components.  The shelves are packed full which means good variety in the inventory.
                         </p>
                     </div>
                 </div>
@@ -39,10 +37,9 @@ function AboutCard() {
                         <img src="/img3.jpg" />
                     </div>
                     <div>
-                        <h5>Card Title</h5>
+                        <h5>Diverse Inventory</h5>
                         <p>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the cards content.
+                            This interior shot of Reyes Electronics shows them the range in their products.  The picture indicates that there are several pieces of electronics and components available.
                         </p>
                     </div>
                 </div>

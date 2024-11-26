@@ -80,7 +80,6 @@ function ReportChart1() {
 
 
     // Download XLSX function with detailed product info
-
     const downloadXLSX = (data) => {
         // Format the data
         const formattedData = data.map(entry => ({

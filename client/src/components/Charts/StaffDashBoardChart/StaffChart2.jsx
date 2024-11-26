@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Chartcss from './Charts.module.scss';
+import StaffChartcss from './StaffCharts.module.scss';
 import { fetchTotalSales } from '../../../services/Fetching/TransactionServices'; // Ensure correct import path
 
 //* Chart2 Small
@@ -29,13 +29,13 @@ function Chart2() {
     };
 
     return (
-        <div className={Chartcss.containerChart2}>
+        <div className={StaffChartcss.containerChart2}>
             <h5>Total Revenue</h5>
-            <div className={Chartcss.contentChart2}>
+            <div className={StaffChartcss.contentChart2}>
                 <p>{totalSales.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}</p> {/* Display total sales formatted */}
                 {/* <p>From the {selectedRange}</p> */}
             </div>
-            <div className={Chartcss.rangeSelector}>
+            <div className={StaffChartcss.rangeSelector}>
                 <select onChange={(e) => handleRangeChange(e.target.value)} defaultValue="today" className='form-select'>
                     <option value="today">Today</option>
                     <option value="week">Week</option>

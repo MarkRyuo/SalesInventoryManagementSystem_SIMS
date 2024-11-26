@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Chartcss from './Charts.module.scss';
+import StaffChartcss from './StaffCharts.module.scss';
 import { getDatabase, ref, onValue } from "firebase/database";
 import { LiaProductHunt } from 'react-icons/lia';
 
@@ -85,14 +85,14 @@ function ChartLg1() {
     }, []);
 
     return (
-        <div className={Chartcss.containerChartLg1}>
+        <div className={StaffChartcss.containerChartLg1}>
             <p className="m-0 ps-4">Products Activities Today</p>
             {activityToday.length > 0 ? (
-                <div className={Chartcss.activityList}>
+                <div className={StaffChartcss.activityList}>
                     {activityToday.map((activity, index) => (
-                        <div key={index} className={`${Chartcss.activityItem} ${activity.type === 'Added' ? Chartcss.added : Chartcss.removed}`}>
-                            <span className={Chartcss.icon}></span>
-                            <div className={Chartcss.activityDetails}>
+                        <div key={index} className={`${StaffChartcss.activityItem} ${activity.type === 'Added' ? StaffChartcss.added : StaffChartcss.removed}`}>
+                            <span className={StaffChartcss.icon}></span>
+                            <div className={StaffChartcss.activityDetails}>
                                 <h1 className="m-0"><LiaProductHunt size={25} />{activity.productName} </h1>
                                 <p className="m-0">SKU: {activity.sku} </p>
                                 <p className="m-0">Price: {activity.price} </p>

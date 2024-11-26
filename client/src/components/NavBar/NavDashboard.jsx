@@ -10,6 +10,7 @@ import { TbReportAnalytics } from "react-icons/tb";
 import { VscAccount } from "react-icons/vsc";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { MdOutlineInventory2 } from "react-icons/md";
+import DropdownReports from '../Reports/DropdownReports';
 
 export const NavDashboard = () => {
     const [show, setShow] = useState(false);
@@ -65,7 +66,7 @@ export const NavDashboard = () => {
             </Navbar>
 
             {/* Off-canvas function */}
-            <Offcanvas show={show} onHide={handleClose} style={{ width: 320 }}>
+            <Offcanvas show={show} onHide={handleClose} style={{ width: 320, background: "radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
                 <Offcanvas.Header closeButton className={Navbars.offCanvasHeader}>
                     <Offcanvas.Title>
                         <Image width={40} className='me-2'
@@ -79,8 +80,9 @@ export const NavDashboard = () => {
                         <div className={Navbars.buttonsList}>
                             <Buttons buttons={buttons.filter((button) => button.id === "b-1")} />
                             <Buttons buttons={buttons.filter((button) => button.id === "b-2")} />
-                            <Buttons buttons={buttons.filter((button) => button.id === "b-3")} />
+                            {/* <Buttons buttons={buttons.filter((button) => button.id === "b-3")} /> */}
                             <Buttons buttons={buttons.filter((button) => button.id === "b-4")} />
+                            <DropdownReports />
                         </div>
                         <div style={{ height: "150px" }}>
                             <Button

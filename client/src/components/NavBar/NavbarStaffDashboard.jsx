@@ -31,7 +31,7 @@ function NavbarStaffDashboard() {
         { icon: <AiOutlineProduct />, btnName: "Account", id: "b-7", path: "/StaffAccountMode" },
         { icon: <MdInventory />, btnName: "Inventory", id: "b-8", path: "/StaffProductPage" },
         { icon: <VscAccount />, btnName: "Account", id: "b-9", path: "/AccountPage" },
-        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/SLogin" },
+        { icon: <RiLogoutCircleLine />, btnName: "Logout", id: "b-10", path: "/" },
         { icon: <TiDocumentAdd />, btnName: "Add New Product", id: "b-11", path: "/AddNewAssets" },
         { icon: <BiScan />, btnName: "Point of Sale", id: "b-12", path: "/ScanAsset" },
     ]);
@@ -71,7 +71,7 @@ function NavbarStaffDashboard() {
             </Navbar>
 
             {/* Off-canvas function */}
-            <Offcanvas show={show} onHide={handleClose} style={{ width: 320 }}>
+            <Offcanvas show={show} onHide={handleClose} style={{ width: 320, background: "radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
                 <Offcanvas.Header closeButton className={Navbars.offCanvasHeader}>
                     <Offcanvas.Title>
                         <Image width={40} className='me-2' src="/Reyes_Electronics_LogoBg.png" rounded />

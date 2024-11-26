@@ -1,22 +1,20 @@
-import MainStaffLayout from "../../layout/MainStaffLayout";
+import MainStaffLayout from "../../../layout/MainStaffLayout";
 import { Image } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { db } from "../../services/firebase";
+import { db } from "../../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import StaffDashboardScss from '../Staff/StaffDashboard/StaffDashboard.module.scss';
+import StaffDashboardScss from './StaffDashboard.module.scss';
 import { MdSpaceDashboard } from "react-icons/md";
-import StaffButtons from "../../components/StaffPortal/StaffButtons/StaffButtons";
+import StaffButtons from "../../../components/StaffPortal/StaffButtons/StaffButtons";
 import { TiDocumentAdd } from "react-icons/ti";
 import { BiScan } from "react-icons/bi";
 
 //? Charts
-import Chart1 from '../../components/Charts/DashboardChart/Chart1';
-import Chart2 from '../../components/Charts/DashboardChart/Chart2';
-import Chart3 from '../../components/Charts/DashboardChart/Chart3';
-import ChartLg1 from '../../components/Charts/DashboardChart/ChartLg1';
-// import ChartLg2 from '../../components/Charts/DashboardChart/ChartLg2';
-// import ChartLg3 from '../../components/Charts/DashboardChart/ChartLg3';
-import Chart4 from '../../components/Charts/DashboardChart/Chart4';
+import StaffChart1 from '../../../components/Charts/StaffDashBoardChart/StaffChart1'
+import StaffChart2 from '../../../components/Charts/StaffDashBoardChart/StaffChart2';
+import StaffChart3 from '../../../components/Charts/StaffDashBoardChart/StaffChart3';
+import StaffChartLg1 from '../../../components/Charts/StaffDashBoardChart/StaffChartLg1';
+import StaffChart4 from '../../../components/Charts/StaffDashBoardChart/StaffChart4';
 
 function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
@@ -78,7 +76,7 @@ function SDashboard() {
         <MainStaffLayout>
             <div className={StaffDashboardScss.mainTopComponent}>
                 <div className={StaffDashboardScss.componentHeroCard}>
-                    <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0' />Dashboard</h1>
+                    <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0 d-none d-md-block' />Dashboard</h1>
                     {loading ? (
                         // Display a loading indicator while data is being fetched
                         <div className={StaffDashboardScss.loadingContainer}>
@@ -107,21 +105,17 @@ function SDashboard() {
                 <div className={StaffDashboardScss.chartContainer}>
                     <div className={StaffDashboardScss.smallContainer}>
                         <div>
-                            <Chart1 />
-                            <Chart2 />
-                            <Chart3 />
-                            <Chart4 />
+                            <StaffChart1 />
+                            <StaffChart2 />
+                            <StaffChart3 />
+                            <StaffChart4 />
                         </div>
                         <div className={StaffDashboardScss.largeContainer}>
-                            {/* <div className={StaffDashboardScss.divLG}>
-                                <ChartLg3 />
-                                <ChartLg2 />
-                            </div> */}
                             <div className={StaffDashboardScss.buttonsHeroCard}>
                                 <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
                                 <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
                             </div>
-                            <ChartLg1 />
+                            <StaffChartLg1 />
                         </div>
                     </div>
                 </div>

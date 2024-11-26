@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { addNewProduct, addCategory, getCategoriesNewAssets } from '../../../services/ProductService';
+import { addNewProduct, getCategoriesNewAssets } from '../../../services/ProductService';
 import { FaBoxOpen } from "react-icons/fa";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
 
@@ -22,8 +22,6 @@ function NewAssets() {
     const [quantity, setQuantity] = useState(1);
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
-    const [newCategory, setNewCategory] = useState('');
-    const [isAddingNewCategory, setIsAddingNewCategory] = useState(false);
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -61,24 +59,6 @@ function NewAssets() {
 
     const handleCategoryChange = (e) => {
         setCategory(e.target.value);
-    };
-
-    const handleAddNewCategoryClick = () => {
-        setIsAddingNewCategory(true);
-    };
-
-    const handleSaveNewCategory = async () => {
-        if (newCategory) {
-            try {
-                await addCategory(newCategory);
-                setCategories([...categories, newCategory]);
-                setCategory(newCategory);
-                setNewCategory('');
-                setIsAddingNewCategory(false);
-            } catch (error) {
-                setError(error.message);
-            }
-        }
     };
 
     const handleDone = async () => {
@@ -132,7 +112,7 @@ function NewAssets() {
     ]);
 
     return (
-        <Container fluid className='m-0 p-0'>
+        <Container fluid className='m-0 p-0'   style={{ background: "radial-gradient(1300px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%)"}}>
             <StaffNavBar backBtn={backBtn.filter(Backbtn => Backbtn.id === 1)} />
             <Container fluid='lg'>
                 <Row style={{ boxSizing: 'border-box', padding: 20, height: '80vh', paddingTop: 25 }}>
@@ -291,26 +271,13 @@ function NewAssets() {
                                                 <option key={index} value={cat}>{cat}</option>  // Just use 'cat' here, which is a category name
                                             ))}
                                         </Form.Control>
-                                        {!category && <small className="text-danger mx-2">Please select a category.</small>}
-                                        <Button variant="link" onClick={handleAddNewCategoryClick} className='m-0 p-0'>+ Add New Category</Button>
-                                    </Form.Group>
+                                        {!category && <small className="text-danger mx-2">Please select a category.</small>}                                    </Form.Group>
 
-                                    {isAddingNewCategory && (
-                                        <Form.Group controlId="newCategory" className="mt-3">
-                                            <p className='m-0'>New Category</p>
-                                            <Form.Control
-                                                type="text"
-                                                placeholder="Enter new category (e.g., Electronics)"
-                                                value={newCategory}
-                                                onChange={(e) => setNewCategory(e.target.value)}
-                                            />
-                                            <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
-                                        </Form.Group>
-                                    )}
-
-                                    <Button variant="success" className="my-3 px-5" onClick={handleDone}>Done</Button>
                                 </Col>
                             </Col>
+                            <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                                <Button variant="success" className="my-4 px-5" onClick={handleDone}>Done</Button>
+                            </div>
                         </Row>
                     </Col>
                 </Row>

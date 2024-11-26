@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 //? Pages Import
 import StaffAccount from './pages/StaffAccount.jsx'
 import MyProfile from './pages/MyProfile.jsx';
-import SDashboard from './pages/StaffPages/SDashboard.jsx';
+import SDashboard from './pages/Staff/StaffDashboard/SDashboard';
 import SStaffAccount from './pages/StaffPages/SStaffAccount.jsx';
 import AddNewAssets from './pages/StaffPages/AddNewAssets.jsx';
 import NewAssets from './components/StaffPortal/AddNewAssets/NewAssets.jsx';
@@ -37,6 +37,10 @@ import AccountPage from './pages/Admin/AccountPage/AccountPage.jsx'
 import ProfileComp from './components/Account/ProfileComp.jsx';
 import StaffProductPage from './pages/Staff/StaffProductPage/StaffProductPage.jsx'
 import StaffProduct from './components/Charts/ProductChart/StaffProduct.jsx'
+import LowStockReports from './components/Reports/LowStockReports.jsx';
+import StockInReports from './components/Reports/StockInReports.jsx';
+import TotalSalesReports from './components/Reports/TotalSalesReports.jsx'
+
 
 const router = createBrowserRouter([
   { //? ROOT
@@ -176,6 +180,20 @@ const router = createBrowserRouter([
   {
     path: "PosSuccess",
     element: <PosSuccess />, //* POS: Product Success View 
+  },
+
+
+  {
+    path: "LowStockReports",
+    element: <LowStockReports /> , 
+  },
+  {
+    path: "StockInReports",
+    element: <StockInReports /> ,
+  },
+  {
+    path: "TotalSalesReports",
+    element: <TotalSalesReports /> ,
   },
 
 ]);

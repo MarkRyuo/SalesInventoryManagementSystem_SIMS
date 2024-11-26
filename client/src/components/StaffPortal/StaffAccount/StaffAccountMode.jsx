@@ -3,6 +3,7 @@ import MainStaffLayout from "../../../layout/MainStaffLayout";
 import { Image, Spinner } from "react-bootstrap";
 import { db } from '../../../services/firebase'; // Import your Firebase configuration
 import { doc, getDoc } from "firebase/firestore";
+import StaffAccountScss from './StaffAccount.module.scss';
 
 function StaffAccountMode() {
     const [staffData, setStaffData] = useState(null);
@@ -40,26 +41,22 @@ function StaffAccountMode() {
 
     return (
         <MainStaffLayout>
-            <div style={{ marginTop: 100, boxShadow: '2px 5px 5px #E1E4E4', borderRadius: 15, width: '100%', minWidth: 400 }}>
+            <div className={StaffAccountScss.MainComponent}>
                 {loading ? (
                     // Display a spinner or loading message while data is being fetched
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '300px' }}>
-                        <Spinner animation="border" role="status">
+                        <Spinner animation="grow" variant="success" role="status">
                             <span className="visually-hidden">Loading...</span>
                         </Spinner>
                     </div>
                 ) : (
-                    <div className="content">
-                        <div style={{ display: "flex", padding: 15 }}>
-                            <Image
-                                style={{ width: 80, marginRight: 10, height: 80 }}
-                                src="/Reyes_Electronics_LogoBg.png"
-                                roundedCircle
-                            />
-                            <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
+                    <div className={StaffAccountScss.Mcontent}>
+                        <div className={StaffAccountScss.content}>
+                            <Image src="/Reyes_Electronics_LogoBg.png" roundedCircle />
+                            <div className={StaffAccountScss.contentTitle}>
                                 <div style={{ display: "flex", flexDirection: 'column' }}>
-                                    <p className="fs-4 m-0">{staffData?.firstname} {staffData?.lastname}</p>
-                                    <p className="fs-6 m-0">REYES ELECTRONICS Staff</p>
+                                    <h1 className="m-0">{staffData?.firstname} {staffData?.lastname}</h1>
+                                    <p className="m-0">REYES ELECTRONICS Staff</p>
                                 </div>
                                 <p style={{ color: staffData?.active ? 'green' : 'red' }}>
                                     {staffData?.active ? '● Active' : '● Inactive'}
@@ -67,8 +64,8 @@ function StaffAccountMode() {
                             </div>
                         </div>
 
-                        <div style={{ padding: 20 }}>
-                            <p className="fs-4">Personal Information</p>
+                        <div className={StaffAccountScss.PersonalInfo}>
+                            <h2>Personal Information</h2>
                             <hr />
                             <div style={{ borderRadius: 20, padding: 20, boxShadow: '1px 4px 5px #E1E4E4' }}>
                                 <p>FirstName: <span>{staffData?.firstname || 'N/A'}</span></p>

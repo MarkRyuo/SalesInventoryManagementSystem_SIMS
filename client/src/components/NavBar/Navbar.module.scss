@@ -26,11 +26,7 @@
 
 
 /* *NavDashboard.jsx & StaffNavDashboard */
-
 .navDashboard {
-    // border-bottom: 1px solid var(--navBorder);
-    /* border: 1px solid red; */
-    background-color: #ffff;
     padding: 5px;
     position: sticky;
     top: 0;
@@ -39,9 +35,6 @@
 }
 
 .navStaffDashboard {
-    // border-bottom: 1px solid var(--navBorder);
-    // border: 1px solid red;
-    background-color: #ffff;
     padding: 5px;
     position: sticky;
     top: 0;
@@ -49,7 +42,6 @@
     background: radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
     height: 75px;
 }
-
 
 
 .btnOffcanvas {
@@ -68,7 +60,6 @@
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-
     /* border: 1px solid red ; */
     height: 700px;
     justify-content: space-between;
