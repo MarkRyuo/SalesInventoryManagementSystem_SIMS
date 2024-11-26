@@ -5,6 +5,7 @@ import jsPDF from "jspdf";
 import { LuDownload } from "react-icons/lu";
 import { GrView } from "react-icons/gr";
 import { FaTruckRampBox } from "react-icons/fa6";
+import SavedOrderDetailsScss from './SCSS/SavedOrder.module.scss' ;
 
 function SavedOrderDetails() {
     const [savedOrders, setSavedOrders] = useState([]);
@@ -157,9 +158,9 @@ function SavedOrderDetails() {
                                                             ? `${order.products.length} Product(s)`
                                                             : "No products"}
                                                     </td>
-                                                    <td>
+                                                    <td> 
                                                         <Button
-                                                            variant="light"
+                                                            variant=""
                                                             onClick={() => toggleShowMore(order.id)}
                                                             aria-expanded={expandedOrders[order.id]}
                                                             className="p-0"
