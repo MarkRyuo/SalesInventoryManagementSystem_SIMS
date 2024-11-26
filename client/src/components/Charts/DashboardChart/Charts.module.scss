@@ -573,7 +573,7 @@
 }
 
 .containerChartLg2 {
-    // border: 1px solid;
+    border: 1px solid;
     padding: 10px;
     width: 100%;
     height: 300px;
@@ -584,9 +584,10 @@
     display: flex;
     flex-direction: column;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     border-radius: 10px;
     justify-content: center;
+
 }
 
 .containerChartLg3 {
