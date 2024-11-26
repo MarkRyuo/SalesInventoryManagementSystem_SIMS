@@ -4,6 +4,8 @@ import { db } from '../../services/firebase'; // Update path as needed
 import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import bcrypt from 'bcryptjs'; // Add this import
 import StaffCompScss from './AccountComp.module.scss' ;
+import { FaEdit } from "react-icons/fa";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 
 const StaffComp = () => {
@@ -282,8 +284,8 @@ const StaffComp = () => {
                                     />
                                 </td>
                                 <td>
-                                    <Button variant="warning" className='mx-3' onClick={() => handleEditStaff(staff)}>Edit</Button>
-                                    <Button variant="outline-danger" onClick={() => handleDeleteStaff(staff.id)}>Delete</Button>
+                                    <Button variant="warning" className='mx-3' onClick={() => handleEditStaff(staff)}><FaEdit /></Button>
+                                    <Button variant="outline-danger" onClick={() => handleDeleteStaff(staff.id)}><FaRegTrashAlt /></Button>
                                 </td>
                             </tr>
                         ))}
