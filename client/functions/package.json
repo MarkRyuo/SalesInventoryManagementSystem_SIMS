@@ -18,7 +18,8 @@
     "firebase-admin": "^12.7.0",
     "firebase-functions": "^6.1.1",
     "jspdf": "^2.5.2",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "qrious": "^4.0.2"
   },
   "devDependencies": {
     "eslint": "^8.15.0",

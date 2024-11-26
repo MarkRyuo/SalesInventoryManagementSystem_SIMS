@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable max-len */
 
 const {onRequest} = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
@@ -21,6 +23,7 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
 
     try {
       // Fetch the order from Firebase
+      // eslint-disable-next-line max-len
       const orderSnapshot = await admin.database().ref(`TransactionHistory/${orderId}`).once("value");
       const order = orderSnapshot.val();
 
@@ -29,14 +32,39 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       }
 
       // Generate PDF (you can adjust the content here)
+      // eslint-disable-next-line new-cap
       const doc = new jsPDF();
-      doc.text(`Order ID: ${orderId}`, 10, 10);
-      doc.text(`Customer Name: ${order.customerName}`, 10, 20);
-      doc.text(`Total Amount: ₱${order.total}`, 10, 30);
+
+      // Title
+      doc.setFontSize(22);
+      doc.setFont("helvetica", "bold");
+      doc.text("Receipt", 105, 20, {align: "center"});
+
+      // Order Details
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "normal");
+      doc.text(`Order Date: ${order.date}`, 10, 40);
+      doc.text(`Sold To: ${order.customerName}`, 10, 50);
+      doc.text(`Order ID: ${orderId}`, 10, 60);
+
+      // Pricing Breakdown
+      doc.text(`Subtotal: \u20B1${order.subtotal.toFixed(2)}`, 10, 70);
+      doc.text(`Tax: \u20B1${order.tax.toFixed(2)}`, 10, 80);
+      doc.text(`Discount: -\u20B1${order.discount.toFixed(2)}`, 10, 90);
+      doc.text(`Payment Amount: \u20B1${parseFloat(order.paymentAmount).toFixed(2)}`, 10, 100);
+      doc.text(`Change: \u20B1${parseFloat(order.change).toFixed(2)}`, 10, 110);
+      doc.setFontSize(14);
+      doc.setFont("helvetica", "bold");
+      doc.text(`Total Amount: \u20B1${order.total.toFixed(2)}`, 10, 120);
 
       // Generate QR code (you can customize it as per your needs)
       const qrCodeData = await qr.toDataURL(`https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/downloadOrder?id=${orderId}`);
       doc.addImage(qrCodeData, "PNG", 150, 10, 50, 50);
+
+    // Footer
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "italic");
+    doc.text("Thank you for your purchase!", 105, 150, {align: "center"});
 
       // Send PDF to the client
       const pdfOutput = doc.output("arraybuffer");
