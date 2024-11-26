@@ -12,7 +12,7 @@
 ## Changelog
 
 ### v8.4-beta (Latest)
-- Scanner 
+- Both Scanner Logic Change
 
 ### v8.3-beta
 - Update All Design 
