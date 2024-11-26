@@ -19,11 +19,46 @@ const ProfileComp = () => {
         answers: {}
     });
     const [isEditing, setIsEditing] = useState(false);
+    const [showRecovery, setShowRecovery] = useState(false);
+    const [answerVisibility, setAnswerVisibility] = useState({});
     const adminId = localStorage.getItem('adminId');
+
+    const availableQuestions = [
+        "In which city was your first business located?",
+        "What year did you start your business?",
+        "What is the name of your first school?",
+        "What is your favorite color?",
+        "What city were you born in?"
+    ];
+
+    const handleGenderSelect = (eventKey) => {
+        setUserData({ ...userData, gender: eventKey });
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUserData({ ...userData, [name]: value });
+    };
+
+    const handleAnswerChange = (question, answer) => {
+        setUserData((prevData) => ({
+            ...prevData,
+            answers: {
+                ...prevData.answers,
+                [question]: answer,
+            },
+        }));
+        setAnswerVisibility((prevVisibility) => ({
+            ...prevVisibility,
+            [question]: false
+        }));
+    };
+
+    const toggleAnswerVisibility = (question) => {
+        setAnswerVisibility((prevVisibility) => ({
+            ...prevVisibility,
+            [question]: !prevVisibility[question]
+        }));
     };
 
     useEffect(() => {
@@ -77,9 +112,24 @@ const ProfileComp = () => {
 
             alert("Profile updated successfully.");
             setIsEditing(false);
+            setShowRecovery(false);
+            setAnswerVisibility({});
         } catch (error) {
             console.error("Error updating profile:", error);
             alert(`Failed to update profile: ${error.message}`);
+        }
+    };
+
+    const handleAddQuestion = (question) => {
+        if (!userData.recoveryQuestions.includes(question) && userData.recoveryQuestions.length < 3) {
+            setUserData((prevData) => ({
+                ...prevData,
+                recoveryQuestions: [...prevData.recoveryQuestions, question],
+            }));
+            setAnswerVisibility((prevVisibility) => ({
+                ...prevVisibility,
+                [question]: false
+            }));
         }
     };
 
@@ -136,13 +186,14 @@ const ProfileComp = () => {
                     title="Dropdown"
                     id="input-group-dropdown-2"
                     align="end"
-                    onSelect={(eventKey) => setUserData({ ...userData, gender: eventKey })}
+                    onSelect={handleGenderSelect}
                     disabled={!isEditing}
                 >
                     <Dropdown.Item eventKey="Male">Male</Dropdown.Item>
                     <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
                 </DropdownButton>
             </InputGroup>
+
             <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
@@ -153,6 +204,7 @@ const ProfileComp = () => {
                     disabled={!isEditing}
                 />
             </Form.Group>
+
             <Form.Group className="mb-3" controlId="password" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
@@ -163,6 +215,57 @@ const ProfileComp = () => {
                     disabled={!isEditing}
                 />
             </Form.Group>
+
+            {isEditing && (
+                <>
+                    <Button
+                        variant="link"
+                        onClick={() => setShowRecovery(!showRecovery)}
+                        style={{ padding: 0 }}
+                    >
+                        {showRecovery ? "Hide Recovery Questions" : "Show Recovery Questions"}
+                    </Button>
+
+                    {showRecovery && (
+                        <>
+                            <h4>Select Recovery Questions</h4>
+                            <DropdownButton
+                                variant="outline-secondary"
+                                title="Choose a Recovery Question"
+                                id="recovery-question-dropdown"
+                                onSelect={handleAddQuestion}
+                                disabled={userData.recoveryQuestions.length >= 3}
+                            >
+                                {availableQuestions.map((question) => (
+                                    <Dropdown.Item key={question} eventKey={question}>
+                                        {question}
+                                    </Dropdown.Item>
+                                ))}
+                            </DropdownButton>
+
+                            {userData.recoveryQuestions.map((question) => (
+                                <Form.Group key={question} className="mb-3" style={{ position: "relative" }}>
+                                    <Form.Label>Your Answer for: {question}</Form.Label>
+                                    <Form.Control
+                                        type={answerVisibility[question] ? "text" : "password"}
+                                        value={userData.answers[question] || ''}
+                                        onChange={(e) => handleAnswerChange(question, e.target.value)}
+                                        readOnly={!isEditing}
+                                    />
+                                    <Button
+                                        variant="link"
+                                        onClick={() => toggleAnswerVisibility(question)}
+                                        style={{ padding: 0 }}
+                                    >
+                                        {answerVisibility[question] ? "Hide Answer" : "Show Answer"}
+                                    </Button>
+                                </Form.Group>
+                            ))}
+                        </>
+                    )}
+                </>
+            )}
+
             <div className='mt-3'>
                 <Button
                     variant='primary'
