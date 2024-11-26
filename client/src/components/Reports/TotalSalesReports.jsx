@@ -181,15 +181,15 @@ function TotalSalesReports() {
                 <Button onClick={filterData}>Filter Date</Button>
 
                 <div className={TotalSalesReportScss.TableContainer}>
-                    <Table> {/* striped bordered hover responsive  */}
+                    <Table striped bordered hover responsive> {/* striped bordered hover responsive  */}
                         <thead>
                             <tr>
-                                <th>Transaction ID</th>
+                                <th style={{width: 160}}>Transaction ID</th>
                                 <th>Date</th>
-                                <th>Total Quantity</th>
-                                <th>Discount</th>
-                                <th>Tax</th>
-                                <th>Total</th>
+                                <th style={{width: 120}}>Total Qty.</th>
+                                <th style={{width: 120}}>Discount</th>
+                                <th style={{width: 120}}>Tax</th>
+                                <th style={{width: 120}}>Total</th>
                             </tr>
                         </thead>
                         <tbody>
