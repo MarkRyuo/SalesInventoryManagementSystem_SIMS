@@ -6,6 +6,7 @@ import { BrowserMultiFormatReader } from "@zxing/library";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fetchProductByBarcode } from '../../../services/ProductService';
 import PosScannerscss from './PosScanner.module.scss';
+import { FaCameraRotate } from "react-icons/fa6";
 
 function PosScanner() {
     const location = useLocation();
@@ -24,7 +25,8 @@ function PosScanner() {
     const videoRef = useRef(null);
     const scanningInProgress = useRef(false); // Flag to manage scanning state
     const [selectedDeviceId, setSelectedDeviceId] = useState(null); // Camera device ID
-    const [setVideoDevices] = useState([]); // Store available video devices
+    const [isUsingBackCamera, setIsUsingBackCamera] = useState(true); // Default to back camera
+    const [videoDevices, setVideoDevices] = useState([]); // Store available video devices
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -100,6 +102,11 @@ function PosScanner() {
         }
     }, [isLoading]);
 
+
+    
+
+
+
     // Store the timestamp of the last scan
     const lastScanTime = useRef(0);
 
@@ -120,17 +127,14 @@ function PosScanner() {
         codeReader.listVideoInputDevices().then((videoInputDevices) => {
             setVideoDevices(videoInputDevices);
 
-            if (videoInputDevices.length > 1) {
-                // If there are two or more cameras, use the back camera
-                const backCamera = videoInputDevices.find(device => device.label.toLowerCase().includes("back"));
-                setSelectedDeviceId(backCamera?.deviceId || videoInputDevices[0].deviceId); // Default to first camera
-            } else {
-                // If only one camera is available (laptops), use the front camera
-                const frontCamera = videoInputDevices.find(device => device.label.toLowerCase().includes("front"));
-                setSelectedDeviceId(frontCamera?.deviceId || videoInputDevices[0].deviceId); // Default to first camera
-            }
+            const defaultDevice = videoInputDevices.find(device => device.label.toLowerCase().includes("back")) || videoInputDevices[0];
+            setSelectedDeviceId(defaultDevice?.deviceId);
 
-            startDecoding(selectedDeviceId);
+            if (defaultDevice) {
+                startDecoding(defaultDevice.deviceId);
+            } else {
+                setErrorMessages(['No camera found.']);
+            }
 
             setCameraLoading(false);
         }).catch((error) => {
@@ -140,7 +144,41 @@ function PosScanner() {
         return () => {
             codeReader.reset(); // Ensure to reset the reader when unmounting
         };
-    }, [handleScan, isLoading, selectedDeviceId, setVideoDevices]);
+    }, [handleScan, isLoading, selectedDeviceId]);
+
+    const handleCameraToggle = () => {
+        if (videoDevices.length < 2) {
+            setErrorMessages(["Only one camera available. Cannot switch."]);
+            return;
+        }
+
+        const newCamera = isUsingBackCamera
+            ? videoDevices.find(device => device.label.toLowerCase().includes("front")) // Front camera
+            : videoDevices.find(device => device.label.toLowerCase().includes("back")); // Back camera
+
+        if (newCamera) {
+            setSelectedDeviceId(newCamera.deviceId);
+            setIsUsingBackCamera(!isUsingBackCamera); // Toggle camera state
+            setCameraLoading(true); // Indicate camera switching
+
+            // Reset the video stream
+            const codeReader = new BrowserMultiFormatReader();
+            codeReader.reset(); // Reset the reader to stop the current video stream
+
+            // Start the new camera stream after switching
+            setTimeout(() => {
+                codeReader.decodeFromVideoDevice(newCamera.deviceId, videoRef.current, (result, error) => {
+                    if (result) {
+                        handleScan(result.getText());
+                    }
+                    if (error && !isLoading) {
+                        console.error("Scanning error: ", error);
+                    }
+                });
+                setCameraLoading(false); // Camera switching done
+            }, 500); // Delay to allow camera reset to complete
+        }
+    };
 
     const handleCheckout = () => {
         navigate('/ScanAssetsMode', { state: { scannedItems } });
@@ -168,7 +206,11 @@ function PosScanner() {
                     )}
                 </div>
                 <div className={PosScannerscss.Posscannermain}>
-                    <Card className="m-0 p-0 border-0" style={{ background: " radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
+                    <Card className="m-0 p-0 border-0" style={{background: " radial-gradient(800px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
+                        <Button variant="secondary" onClick={handleCameraToggle} disabled={videoDevices.length < 2} className="mt-3">
+                            <FaCameraRotate size={20} className="me-2" />
+                            Switch to {isUsingBackCamera ? "Front" : "Back"} Camera
+                        </Button>
 
                         {isLoading && <Spinner animation="border" variant="info" />}
                         <div style={{
