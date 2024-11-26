@@ -157,7 +157,7 @@ function TotalSalesReports() {
                         />
                     </div>
                     <div>
-                        <p>End</p>
+                        <p className='m-0 p-0'>End</p>
                         <input
                             type="date"
                             onChange={(e) => setEndDate(e.target.value)}
