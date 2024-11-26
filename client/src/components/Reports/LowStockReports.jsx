@@ -118,9 +118,9 @@ function LowStockReports() {
 
     return (
         <MainLayout>
-            <div className="stock-in-reports">
+            <div className={LowStockReportScss.Maincomponent}>
                 <h1>Low Stock Report</h1>
-                <div className="filter-section">
+                <div className={LowStockReportScss.formContent}>
                     <Form>
                         <Form.Group>
                             <Form.Label>Start Date</Form.Label>
