@@ -4,6 +4,7 @@ import { Image, Button } from "react-bootstrap";
 import { db } from '../../services/firebase'; // Adjust the path according to your project structure
 import { doc, getDoc } from "firebase/firestore";
 import ProfileModeScss from './AccountComp.module.scss';
+import { FaEdit } from "react-icons/fa";
 
 function ProfileMode({setActiveTab}) {
     const [adminData, setAdminData] = useState(null);
@@ -50,7 +51,7 @@ function ProfileMode({setActiveTab}) {
                                     <p className="fs-6 m-0">Administrator</p>
                                 </div>
                                     <Button variant="outline-primary" onClick={() => setActiveTab('/ProfileComp')}>
-                                        Edit User Profile
+                                        <FaEdit size={20}/>
                                     </Button>
                             </div>
                         </div>
