@@ -174,7 +174,7 @@ function TotalSalesReports() {
                     </Dropdown>
 
                 <div>
-                    <Table striped bordered hover responsive>
+                    <Table> {/* striped bordered hover responsive  */}
                         <thead>
                             <tr>
                                 <th>Transaction ID</th>
