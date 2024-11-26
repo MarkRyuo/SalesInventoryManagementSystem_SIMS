@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { addNewProduct, addCategory, getCategoriesNewAssets } from '../../../services/ProductService';
 import { FaBoxOpen } from "react-icons/fa";
 import StaffNavBar from "../../StaffPortal/StaffNavbar/StaffNavBar";
-import NewProductScss from './NewProduct.module.scss'
+import NewProductScss from './NewProduct.module.scss' ;
 
 
 
@@ -308,10 +308,11 @@ function NewAssets() {
                                             <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
                                         </Form.Group>
                                     )}
-
-                                    <Button variant="success" className="my-3 px-5" onClick={handleDone}>Done</Button>
                                 </Col>
                             </Col>
+                            <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                                <Button variant="success" className="my-3 px-5" onClick={handleDone}>Done</Button>
+                            </div>
                         </Row>
                     </Col>
                 </Row>
