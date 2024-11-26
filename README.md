@@ -11,7 +11,10 @@
 
 ## Changelog
 
-### v8.3-beta (Latest)
+### v8.4-beta (Latest)
+- Scanner 
+
+### v8.3-beta
 - Update All Design 
 
 ### v8.2
