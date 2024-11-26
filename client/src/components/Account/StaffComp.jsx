@@ -272,10 +272,10 @@ const StaffComp = () => {
                     <tbody>
                         {staffList.map(staff => (
                             <tr key={staff.id}>
-                                <td className='lead fs-6'>{staff.firstname}</td>
-                                <td className='lead fs-6'>{staff.lastname}</td>
-                                <td className='lead fs-6'>{staff.gender}</td>
-                                <td className='lead fs-6'>{staff.username}</td>
+                                <td>{staff.firstname}</td>
+                                <td>{staff.lastname}</td>
+                                <td>{staff.gender}</td>
+                                <td>{staff.username}</td>
                                 <td>
                                     <Form.Check
                                         type="switch"
@@ -283,8 +283,8 @@ const StaffComp = () => {
                                         onChange={() => handleToggleActive(staff)}
                                     />
                                 </td>
-                                <td>
-                                    <Button variant="warning" className='mx-3' onClick={() => handleEditStaff(staff)}><FaEdit /></Button>
+                                <td style={{border: '1px solid', display: 'flex', flexDirection: 'column', gap: '10px'}}>
+                                    <Button variant="warning"  onClick={() => handleEditStaff(staff)}><FaEdit /></Button>
                                     <Button variant="outline-danger" onClick={() => handleDeleteStaff(staff.id)}><FaRegTrashAlt /></Button>
                                 </td>
                             </tr>
