@@ -135,6 +135,11 @@
     overflow: auto;
     padding: 10px;
 
+    p {
+        font-size: 1.1rem;
+        padding-left: 10px;
+    }
+
     .activityList {
         margin-top: 10px;
         // border: 1px solid;
@@ -536,6 +541,10 @@
     overflow: auto;
     padding: 10px;
 
+    p {
+        font-size: 0.9rem;
+    }
+
     .activityList {
         margin-top: 10px;
         // border: 1px solid;
@@ -557,11 +566,11 @@
                 flex-direction: column;
 
                 h1 {
-                    font-size: 1.1rem;
+                    font-size: 1rem;
                 }
 
                 p {
-                    font-size: 0.9rem;
+                    font-size: 0.8rem;
                 }
             }
         }
