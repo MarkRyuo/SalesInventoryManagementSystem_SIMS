@@ -84,7 +84,7 @@ function StockInReports() {
 
     return (
         <MainLayout>
-            <div>
+            <div className={StockInReportsScss.Maincomponent}>
                 <h1>Stock In Report</h1>
                 {/* Date Range Filter */}
                 <div>
