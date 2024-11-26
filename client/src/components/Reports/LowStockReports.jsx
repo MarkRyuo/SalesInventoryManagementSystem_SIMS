@@ -5,6 +5,7 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { MainLayout } from "../../layout/MainLayout";
+import LowStockReportScss from './Scss/LowStockReports.module.scss'
 
 function LowStockReports() {
     const [startDate, setStartDate] = useState("");
