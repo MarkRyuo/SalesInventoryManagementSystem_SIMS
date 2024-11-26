@@ -18,7 +18,6 @@ const logger = require("firebase-functions/logger");
 //   response.send("Hello from Firebase!");
 // });
 
-// Example download route handler
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const cors = require('cors')({ origin: true });
@@ -67,4 +66,3 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
         }
     });
 });
-
