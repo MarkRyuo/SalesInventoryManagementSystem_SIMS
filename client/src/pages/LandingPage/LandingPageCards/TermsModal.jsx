@@ -4,11 +4,25 @@ import { Modal, Button } from "react-bootstrap";
 
 const TermsModal = ({ show, handleClose }) => {
     return (
-        <Modal show={show} onHide={handleClose} size="lg">
+        <Modal
+            show={show}
+            onHide={handleClose}
+            size="lg"
+            centered
+            style={{
+                maxWidth: "100%", // Ensures the modal width is responsive
+            }}
+            dialogClassName="terms-modal"
+        >
             <Modal.Header closeButton>
                 <Modal.Title>Acceptance of Terms</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body
+                style={{
+                    maxHeight: "50vh", // Limits the modal height to 70% of the viewport height
+                    overflowY: "auto", // Enables scrolling if content exceeds maxHeight
+                }}
+            >
                 <h5>By accessing and using the REYES ELECTRONICS website, you acknowledge and accept to be bound by these terms and conditions...</h5>
 
                 <p>
