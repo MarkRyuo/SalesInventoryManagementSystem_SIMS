@@ -23,8 +23,6 @@ function NewAssets() {
     const [quantity, setQuantity] = useState(1);
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
-    const [newCategory, setNewCategory] = useState('');
-    const [isAddingNewCategory, setIsAddingNewCategory] = useState(false);
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
