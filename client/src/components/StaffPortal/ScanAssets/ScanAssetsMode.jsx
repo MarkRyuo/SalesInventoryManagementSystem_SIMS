@@ -258,10 +258,12 @@ function Checkout() {
                                     <strong className="fs-6 fw-medium">Change: </strong>₱{change.toFixed(2)}
                                 </div>
                             )}
+                            <div className={ScanProductModeScss.btns}>
+                                <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
+                            </div>
 
                         </Table>
                             
-                        <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
                     </Col>
                 </Row>
             </Container>
