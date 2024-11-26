@@ -9,9 +9,9 @@
     .DatePicker {
         border: 1px solid;
         display: flex;
-        
+        flex-direction: column;
         input {
-
+            width: 200px;
         }
 
     }
