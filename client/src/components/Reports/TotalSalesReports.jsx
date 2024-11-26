@@ -180,7 +180,7 @@ function TotalSalesReports() {
 
                 <Button onClick={filterData}>Filter Date</Button>
 
-                <div>
+                <div className={TotalSalesReportScss.TableContainer}>
                     <Table> {/* striped bordered hover responsive  */}
                         <thead>
                             <tr>
