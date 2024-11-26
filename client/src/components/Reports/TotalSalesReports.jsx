@@ -156,12 +156,14 @@ function TotalSalesReports() {
                             placeholder="Start Date"
                         />
                     </div>
-                    <p>End</p>
-                    <input
-                        type="date"
-                        onChange={(e) => setEndDate(e.target.value)}
-                        placeholder="End Date"
-                    />
+                    <div>
+                        <p>End</p>
+                        <input
+                            type="date"
+                            onChange={(e) => setEndDate(e.target.value)}
+                            placeholder="End Date"
+                        />
+                    </div>
                 </div>
                 <Button onClick={filterData}>Filter</Button>
 
