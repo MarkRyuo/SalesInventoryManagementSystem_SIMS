@@ -154,7 +154,7 @@ function LowStockReports() {
                             />
                         </Form.Group>
                     </Form>
-                    <div style={{ padding: 10 }}>
+                    <div style={{ paddingLeft: 10 }}>
                         <Button onClick={handleFilter} className="mt-3">
                             Filter
                         </Button>
