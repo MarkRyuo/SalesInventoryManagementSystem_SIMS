@@ -13,6 +13,7 @@
 
 ### v8.4-beta (Latest)
 - Both Scanner Logic Change
+- Admin Dashboard Update
 
 ### v8.3-beta
 - Update All Design 
