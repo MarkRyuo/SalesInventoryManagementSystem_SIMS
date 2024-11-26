@@ -64,24 +64,6 @@ function NewAssets() {
         setCategory(e.target.value);
     };
 
-    const handleAddNewCategoryClick = () => {
-        setIsAddingNewCategory(true);
-    };
-
-    const handleSaveNewCategory = async () => {
-        if (newCategory) {
-            try {
-                await addCategory(newCategory);
-                setCategories([...categories, newCategory]);
-                setCategory(newCategory);
-                setNewCategory('');
-                setIsAddingNewCategory(false);
-            } catch (error) {
-                setError(error.message);
-            }
-        }
-    };
-
     const handleDone = async () => {
         // Validate all required fields
         if (!productName || !category || !quantity || !price) {
@@ -292,26 +274,12 @@ function NewAssets() {
                                                 <option key={index} value={cat}>{cat}</option>  // Just use 'cat' here, which is a category name
                                             ))}
                                         </Form.Control>
-                                        {!category && <small className="text-danger mx-2">Please select a category.</small>}
-                                        <Button variant="link" onClick={handleAddNewCategoryClick} className='m-0 p-0'>+ Add New Category</Button>
-                                    </Form.Group>
+                                        {!category && <small className="text-danger mx-2">Please select a category.</small>}                                    </Form.Group>
 
-                                    {isAddingNewCategory && (
-                                        <Form.Group controlId="newCategory" className="mt-3">
-                                            <p className='m-0'>New Category</p>
-                                            <Form.Control
-                                                type="text"
-                                                placeholder="Enter new category (e.g., Electronics)"
-                                                value={newCategory}
-                                                onChange={(e) => setNewCategory(e.target.value)}
-                                            />
-                                            <Button variant="primary" onClick={handleSaveNewCategory} className="mt-2">Save Category</Button>
-                                        </Form.Group>
-                                    )}
                                 </Col>
                             </Col>
                             <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                                <Button variant="success" className="my-3 px-5" onClick={handleDone}>Done</Button>
+                                <Button variant="success" className="my-4 px-5" onClick={handleDone}>Done</Button>
                             </div>
                         </Row>
                     </Col>
