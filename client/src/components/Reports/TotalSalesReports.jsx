@@ -6,7 +6,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';  // Importing the jspdf-autotable plugin
 import { fetchTransactions } from './Service/TotalSales'; // Import the fetch function
 import { MainLayout } from '../../layout/MainLayout'
-import TotalSalesReportScss from './Scss/TotalSalesReports.module.scss' ;
+import TotalSalesReportScss from './Scss/TotalSalesReports.module.scss';
 
 function TotalSalesReports() {
     const [transactionData, setTransactionData] = useState([]);
@@ -145,33 +145,37 @@ function TotalSalesReports() {
 
         <MainLayout>
             <div className={TotalSalesReportScss.Mcontainer}>
-                    <h1>Total Sales</h1>
-                    {/* Date Picker Inputs */}
-                    <div className={TotalSalesReportScss.DatePicker}>
+                <h1>Total Sales</h1>
+                {/* Date Picker Inputs */}
+                <div className={TotalSalesReportScss.DatePicker}>
+                    <div>
+                        <p className='m-0 p-0'>Start</p>
                         <input
                             type="date"
                             onChange={(e) => setStartDate(e.target.value)}
                             placeholder="Start Date"
                         />
-                        <input
-                            type="date"
-                            onChange={(e) => setEndDate(e.target.value)}
-                            placeholder="End Date"
-                        />
                     </div>
-                    <Button onClick={filterData}>Filter</Button>
+                    <p>End</p>
+                    <input
+                        type="date"
+                        onChange={(e) => setEndDate(e.target.value)}
+                        placeholder="End Date"
+                    />
+                </div>
+                <Button onClick={filterData}>Filter</Button>
 
-                    {/* Dropdown for file download */}
-                    <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Download Report
-                        </Dropdown.Toggle>
+                {/* Dropdown for file download */}
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Download Report
+                    </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick={downloadXlsx}>Download as XLSX</Dropdown.Item>
-                            <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={downloadXlsx}>Download as XLSX</Dropdown.Item>
+                        <Dropdown.Item onClick={downloadPdf}>Download as PDF</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
 
                 <div>
                     <Table> {/* striped bordered hover responsive  */}
