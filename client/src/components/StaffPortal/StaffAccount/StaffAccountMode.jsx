@@ -64,7 +64,7 @@ function StaffAccountMode() {
                             </div>
                         </div>
 
-                        <div style={{ padding: 20 }}>
+                        <div className={StaffAccountScss.}>
                             <p className="fs-4">Personal Information</p>
                             <hr />
                             <div style={{ borderRadius: 20, padding: 20, boxShadow: '1px 4px 5px #E1E4E4' }}>
