@@ -3,7 +3,7 @@ import MainStaffLayout from "../../../layout/MainStaffLayout";
 import { Image, Spinner } from "react-bootstrap";
 import { db } from '../../../services/firebase'; // Import your Firebase configuration
 import { doc, getDoc } from "firebase/firestore";
-import StaffAccountScss from './StaffAccount.module.scss' ;
+import StaffAccountScss from './StaffAccount.module.scss';
 
 function StaffAccountMode() {
     const [staffData, setStaffData] = useState(null);
@@ -50,17 +50,13 @@ function StaffAccountMode() {
                         </Spinner>
                     </div>
                 ) : (
-                    <div className={StaffAccountScss.content}>
-                        <div style={{ display: "flex", padding: 10 }}>
-                            <Image
-                                style={{ width: 80, marginRight: 10, height: 80 }}
-                                src="/Reyes_Electronics_LogoBg.png"
-                                roundedCircle
-                            />
-                            <div style={{ display: 'flex', width: '100%', justifyContent: "space-between", alignItems: "center" }}>
+                    <div className={StaffAccountScss.Mcontent}>
+                        <div className={StaffAccountScss.content}>
+                            <Image src="/Reyes_Electronics_LogoBg.png" roundedCircle />
+                            <div className={StaffAccountScss.contentTitle}>
                                 <div style={{ display: "flex", flexDirection: 'column' }}>
-                                    <p className="fs-4 m-0">{staffData?.firstname} {staffData?.lastname}</p>
-                                    <p className="fs-6 m-0">REYES ELECTRONICS Staff</p>
+                                    <p className="m-0">{staffData?.firstname} {staffData?.lastname}</p>
+                                    <p className="m-0">REYES ELECTRONICS Staff</p>
                                 </div>
                                 <p style={{ color: staffData?.active ? 'green' : 'red' }}>
                                     {staffData?.active ? '● Active' : '● Inactive'}
