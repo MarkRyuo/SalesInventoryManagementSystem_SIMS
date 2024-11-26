@@ -153,7 +153,7 @@ function LowStockReports() {
                             />
                         </Form.Group>
                     </Form>
-                    <div style={{padding: 10}}>
+                    <div style={{ padding: 10 }}>
                         <Button onClick={handleFilter} className="mt-3">
                             Filter
                         </Button>
@@ -161,35 +161,33 @@ function LowStockReports() {
                 </div>
 
                 {/* Scrollable Table */}
-                <div className="table-section mt-4">
-                    <div className="table-container">
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>SKU</th>
-                                    <th>Barcode</th>
-                                    <th>Quantity</th>
-                                    <th>Threshold</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
+                <div className={LowStockReportScss.tables}>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>SKU</th>
+                                <th>Barcode</th>
+                                <th>Quantity</th>
+                                <th>Threshold</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {lowStockData.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.productName}</td>
+                                    <td>{item.sku}</td>
+                                    <td>{item.barcode}</td>
+                                    <td>{item.quantity}</td>
+                                    <td>{item.instockthreshold}</td>
+                                    <td>{item.status}</td>
+                                    <td>{item.date}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {lowStockData.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.productName}</td>
-                                        <td>{item.sku}</td>
-                                        <td>{item.barcode}</td>
-                                        <td>{item.quantity}</td>
-                                        <td>{item.instockthreshold}</td>
-                                        <td>{item.status}</td>
-                                        <td>{item.date}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                    </div>
+                            ))}
+                        </tbody>
+                    </Table>
                 </div>
             </div>
         </MainLayout>
