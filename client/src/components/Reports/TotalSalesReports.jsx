@@ -6,6 +6,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';  // Importing the jspdf-autotable plugin
 import { fetchTransactions } from './Service/TotalSales'; // Import the fetch function
 import { MainLayout } from '../../layout/MainLayout'
+import TotalSalesReportScss from './Scss/TotalSalesReports.module.scss' ;
 
 function TotalSalesReports() {
     const [transactionData, setTransactionData] = useState([]);
