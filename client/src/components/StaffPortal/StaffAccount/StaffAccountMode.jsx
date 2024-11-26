@@ -41,7 +41,7 @@ function StaffAccountMode() {
 
     return (
         <MainStaffLayout>
-            <div style={{ marginTop: 100, boxShadow: '2px 5px 5px #E1E4E4', borderRadius: 15, width: '100%', minWidth: 400 }}>
+            <div style={{ marginTop: 100, boxShadow: '2px 5px 5px #E1E4E4', borderRadius: 15, width: '100%', minWidth: 400 }} className={StaffAccountScss.MainComponent}>
                 {loading ? (
                     // Display a spinner or loading message while data is being fetched
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '300px' }}>
