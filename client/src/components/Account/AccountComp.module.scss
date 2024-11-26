@@ -112,5 +112,20 @@
 
 
 .ColStaffComp {
-    
+    width: auto;
+
+    h1 {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+
+    table {
+        border: 1px solid;
+
+        thead {
+            tr th {
+                
+            }
+        }
+    }
 }
