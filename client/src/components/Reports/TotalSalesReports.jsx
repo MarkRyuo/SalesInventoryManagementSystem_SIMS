@@ -147,7 +147,7 @@ function TotalSalesReports() {
             <div className={TotalSalesReportScss.Mcontainer}>
                     <h1>Total Sales</h1>
                     {/* Date Picker Inputs */}
-                    <div>
+                    <div className={TotalSalesReportScss.DatePicker}>
                         <input
                             type="date"
                             onChange={(e) => setStartDate(e.target.value)}
