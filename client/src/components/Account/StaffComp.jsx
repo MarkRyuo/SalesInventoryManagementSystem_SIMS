@@ -254,7 +254,7 @@ const StaffComp = () => {
                 </Form>
             </Col>
 
-            <Col style={{ width: "auto" }} lg={4} md={12} sm={12}>
+            <Col style={{ width: "auto" }} lg={4} md={12} sm={12} className={StaffCompScss.ColStaffComp}>
                 <p className='fs-4'>Staff list Preview</p>
                 <Table striped bordered hover responsive>
                     <thead>
