@@ -138,7 +138,7 @@ function SavedOrderDetails() {
                     ) : (
                         <div>
                             {savedOrders.length > 0 ? (
-                                <Table bordered hover responsive>
+                                <Table bordered hover responsive className={SavedOrderDetailsScss.tables}>
                                     <thead className="table-primary">
                                         <tr>
                                             <th>Order ID</th>
