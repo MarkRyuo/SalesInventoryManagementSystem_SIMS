@@ -258,9 +258,9 @@ function Checkout() {
                                     <strong className="fs-6 fw-medium">Change: </strong>₱{change.toFixed(2)}
                                 </div>
                             )}
-                            
-                            <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
+
                         </Table>
+                        <Button variant="success" onClick={handleCheckout}>Finalize Checkout</Button>
                             
                     </Col>
                 </Row>
