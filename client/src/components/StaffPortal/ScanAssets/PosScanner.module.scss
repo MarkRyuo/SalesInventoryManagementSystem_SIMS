@@ -93,37 +93,35 @@
             font-size: 1.7rem;
             padding: 5px 0px;
         }
-    }
-
-    table {
-        width: 100%;
-        thead {
-            // border: 1px solid;
-
-            tr th {
-                font-size: 1rem;
-                font-weight: 500;
-                background-color: #AAC9FF;
-                width: 20px;
-                text-align: center;
+        table {
+            width: 100%;
+            thead {
+                // border: 1px solid;
+    
+                tr th {
+                    font-size: 1rem;
+                    font-weight: 500;
+                    background-color: #AAC9FF;
+                    width: 20px;
+                    text-align: center;
+                }
+    
+                tr th:first-child {
+                    width: 500px;
+                }
             }
-
-            tr th:first-child {
-                width: 500px;
+    
+            tbody {
+    
+                tr td {
+                    font-size: 1rem;
+                }
             }
         }
-
-        tbody {
-
-            tr td {
-                font-size: 1rem;
+        .btns { 
+            button {
+                margin: 20px 0px;
             }
-        }
-    }
-
-    .btns {
-        button {
-            margin: 20px 0px;
         }
     }
 }
