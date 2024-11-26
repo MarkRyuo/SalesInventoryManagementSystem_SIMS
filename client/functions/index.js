@@ -51,7 +51,7 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
             doc.text(`Total Amount: ₱${order.total}`, 10, 30);
 
             // Generate QR code (you can customize it as per your needs)
-            const qrCodeData = await qr.toDataURL(`https://us-central1-your-project-id.cloudfunctions.net/api/downloadOrder?id=${orderId}`);
+            const qrCodeData = await qr.toDataURL(`https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/downloadOrder?id=${orderId}`);
             doc.addImage(qrCodeData, 'PNG', 150, 10, 50, 50);
 
             // Send PDF to the client

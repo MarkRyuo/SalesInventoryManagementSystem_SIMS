@@ -26,7 +26,11 @@
       {
         "source": "**",
         "destination": "/index.html"
-      }
+      }, 
+      {
+        "source": "/downloadOrder",
+        "function": "downloadOrder"
+    }
     ]
   }
 }
