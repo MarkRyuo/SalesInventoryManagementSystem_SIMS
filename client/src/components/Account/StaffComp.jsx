@@ -3,6 +3,7 @@ import { Button, Form, FloatingLabel, Table, Row, Col } from 'react-bootstrap';
 import { db } from '../../services/firebase'; // Update path as needed
 import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import bcrypt from 'bcryptjs'; // Add this import
+import StaffCompScss from './AccountComp.module.scss' ;
 
 
 const StaffComp = () => {
