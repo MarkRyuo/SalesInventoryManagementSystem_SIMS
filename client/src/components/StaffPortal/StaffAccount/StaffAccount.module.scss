@@ -52,5 +52,51 @@
 
 
 @media (max-width: 500px) {
-    
+    .MainComponent {
+    margin-top: 100px;
+    box-shadow: 1px 5px 1px #E1E4E4;
+    border-radius: 15px;
+    width: 100%;
+
+    .Mcontent {
+
+        .content {
+            display: flex;
+            padding: 10px;
+
+            img {
+                width: 70px;
+                height: 70px;
+                margin-right: 10px;
+            }
+
+            .contentTitle {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                align-items: center;
+
+                h1 {
+                    font-size: 1.2rem;
+                }
+                p {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+
+    .PersonalInfo {
+        padding: 20px;
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+
+        p {
+            font-size: 1.1rem;
+        }
+    }
+}
 }
