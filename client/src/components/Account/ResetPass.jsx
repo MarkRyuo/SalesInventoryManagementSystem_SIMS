@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
@@ -100,7 +101,7 @@ const ResetPass = () => {
             <Row className={ResetPassScss.rowContainer}>
                 <Col xs={12} md={8} lg={5} className={ResetPassScss.colContainer}>
                     <h2 className="mb-4 text-center">Forgot Password</h2>
-                    <p className='fs-6'>Enter your Phone Number and well send you a OTP to reset your password.</p>
+                    <p className='fs-6'>Enter your Phone Number and we'll send you a OTP to reset your password.</p>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">{success}</Alert>}
                     <Form>
