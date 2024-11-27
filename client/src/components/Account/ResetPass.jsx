@@ -5,6 +5,8 @@ import { collection, query, where, getDocs, updateDoc } from "firebase/firestore
 import { db } from "../../services/firebase"; // Ensure this points to your Firebase config
 import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
 import ResetPassScss from './ResetPass.module.scss' ;
+import { Link } from 'react-router-dom'
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ResetPass = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -97,7 +99,7 @@ const ResetPass = () => {
         <Container fluid style={{ background: "radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
             <Row className={ResetPassScss.rowContainer}>
                 <Col xs={12} md={8} lg={5} className={ResetPassScss.colContainer}>
-                    <h2 className="mb-4 text-center">Reset Password</h2>
+                    <Button as={Link} to={"/"}><IoMdArrowRoundBack /></Button>                    <h2 className="mb-4 text-center">Reset Password</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">{success}</Alert>}
                     <Form>
