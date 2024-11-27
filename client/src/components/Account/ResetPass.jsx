@@ -4,6 +4,7 @@ import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { collection, query, where, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../services/firebase"; // Ensure this points to your Firebase config
 import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
+import ResetPassScss from './ResetPass.module.scss' ;
 
 const ResetPass = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
