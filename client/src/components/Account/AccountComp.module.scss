@@ -567,18 +567,13 @@
 //! large 
 @media (max-width: 1200px) {
     .mainContainer {
-    // border: 1px solid;
-    height: auto;
-    padding: 20px;
+    padding: 15px;
 
     button {
         font-size: 1rem;
     }
 
     .contentStaff {
-        border-radius: 10px;
-        box-shadow: 1px 3px 1px #c9c8c8;
-        width: 100%;
         padding: 15px;
         margin-bottom: 20px;
         p {
@@ -599,8 +594,7 @@
     }
 
     .StaffList {
-        height: auto;
-        padding: 20px;
+        padding: 15px;
         border-radius: 10px;
         box-shadow: 1px 3px 1px #c9c8c8;
 
@@ -619,7 +613,7 @@
                 align-items: center;
                 justify-content: center;
                 padding: 15px 0px;
-                width: 400px;
+                width: 350px;
                 justify-content: space-between;
             }
 
@@ -627,25 +621,187 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                width: 230px;
+                width: 220px;
             }
         }
     }
 
-}
+    }
 }
 
 //! Laptops 
 @media (max-width: 992px) {
+    .mainContainer {
+    padding: 10px;
+
+    button {
+        font-size: 1rem;
+    }
+
+    .contentStaff {
+        padding: 15px;
+        margin-bottom: 20px;
+        p {
+            font-size: 1.1rem;
+        }
     
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+    
+            input {
+                height: 35px;
+            }
+        }
+
+    }
+
+    .StaffList {
+        padding: 10px;
+
+        h4 {
+            font-size: 1.4rem;
+        }
+
+        .Detailss {
+            .textx {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 0px;
+                width: 300px;
+                justify-content: space-between;
+                font-size: 0.9rem;
+            }
+
+            .DetailsBtn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 220px;
+            }
+        }
+    }
+
+    }
 }
 
 //! Tablets 
 @media (max-width: 768px) {
+    .mainContainer {
+    padding: 0;
+
+    button {
+        font-size: 0.9rem;
+    }
+
+    .contentStaff {
+        padding: 15px;
+        margin-bottom: 20px;
+        p {
+            font-size: 1rem;
+        }
     
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+    
+            input {
+                height: 30px;
+            }
+        }
+
+    }
+
+    .StaffList {
+        padding: 10px;
+
+        h4 {
+            font-size: 1.4rem;
+        }
+
+        .Detailss {
+            .textx {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 0px;
+                width: 200px;
+                justify-content: space-between;
+                font-size: 0.9rem;
+            }
+
+            .DetailsBtn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 200px;
+            }
+        }
+    }
+
+    }
 } 
 
 //! Phones 
 @media (max-width: 600px) {
+    .mainContainer {
+    padding: 0;
+
+    button {
+        font-size: 0.8rem;
+    }
+
+    .contentStaff {
+        padding: 10px;
+        margin-bottom: 20px;
+        p {
+            font-size: 0.9rem;
+        }
     
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+    
+            input {
+                height: 30px;
+            }
+        }
+
+    }
+
+    .StaffList {
+        padding: 10px;
+
+        h4 {
+            font-size: 1.2rem;
+        }
+
+        .Detailss {
+            .textx {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 0px;
+                width: 200px;
+                justify-content: space-between;
+                font-size: 0.9rem;
+            }
+
+            .DetailsBtn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 180px;
+            }
+        }
+    }
+
+    }
 }
