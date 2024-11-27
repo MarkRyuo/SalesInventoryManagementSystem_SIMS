@@ -19,6 +19,10 @@
         width: 800px;
         border: 1px solid;
         h1 {
+            background: radial-gradient(circle at 10% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
+            background-clip: text;            /* Standard syntax */
+            -webkit-background-clip: text;
+            color: transparent;
             font-size: 4rem;
         }
     }
