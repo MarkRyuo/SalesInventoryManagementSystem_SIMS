@@ -79,7 +79,7 @@ function LogInCardPage() {
                         </Button>
                     </form>
 
-                    <Link to={"/ForgotPasswordMode"}>Forgot Password?</Link>
+                    <Link to={"/ResetPass"}>Forgot Password?</Link>
                 </div>
             </div>
         </div>
