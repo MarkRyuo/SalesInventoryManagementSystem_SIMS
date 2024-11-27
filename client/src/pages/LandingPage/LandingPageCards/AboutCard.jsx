@@ -1,16 +1,18 @@
-import AboutCardscss from './LandingPageCards.module.scss';
+import AboutCardscss from './SCSS/AboutUs.module.scss';
 import { FcAbout } from "react-icons/fc";
 
 function AboutCard() {
+    
     return (
         <div className={AboutCardscss.parentAboutus}> {/* Parent */}
             <h1 className='mb-4'>About Us <FcAbout size={20} className='ms-1' /></h1>
             <p>REYES ELECTRONICS is a leading provider of high-quality electronics</p>
             <h2>&quot;With years of industry experience, REYES ELECTRONICS has built a reputation for providing high-quality products and services.&quot;</h2>
+            
             <div className={AboutCardscss.aboutCards}>
                 <div className={AboutCardscss.card}>
                     <div>
-                        <img src="/Img1.jpg" />
+                        {/* <img src="/Img1.jpg" /> */}
                     </div>
                     <div>
                         <h5>Reyes Electronics Storefront</h5>
@@ -22,7 +24,7 @@ function AboutCard() {
 
                 <div className={AboutCardscss.card}>
                     <div>
-                        <img src="/img4.jpg" />
+                        {/* <img src="/img4.jpg" /> */}
                     </div>
                     <div>
                         <h5>Electronics section</h5>
@@ -34,7 +36,7 @@ function AboutCard() {
 
                 <div className={AboutCardscss.card}>
                     <div>
-                        <img src="/img3.jpg" />
+                        {/* <img src="/img3.jpg" /> */}
                     </div>
                     <div>
                         <h5>Diverse Inventory</h5>
