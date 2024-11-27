@@ -24,7 +24,7 @@ const TermsModal = ({ show, handleClose }) => {
                 }}
             >
                 <h5>By accessing and using the REYES ELECTRONICS website, you acknowledge and accept to be bound by these terms and conditions...</h5>
-
+                <br/>
                 <p>
                     <strong>Modifications:</strong> REYES ELECTRONICS reserves the right to modify these terms and conditions at any time without prior notice. Your continued use of the website after changes are made will be deemed as your acceptance of the updated terms.
                 </p>
