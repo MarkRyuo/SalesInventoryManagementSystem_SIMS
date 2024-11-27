@@ -41,7 +41,7 @@ function LogInCardPage() {
                     <h2>Welcome</h2>
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                     <div>
-                        <p className='mb-2'>Username*</p>
+                        <p className='m-0'>Username*</p>
                         <input
                             type="text"
                             placeholder="Enter your username"
