@@ -3,7 +3,10 @@
 .heroSection {
     border: 4px solid;
     display: flex;
-    
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+
     .HeroButtons {
         border: 1px solid;
         .btnExplore {
