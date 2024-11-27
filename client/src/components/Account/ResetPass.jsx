@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
+import { collection, query, where, getDocs, updateDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig"; // Ensure this points to your Firebase config
+import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
 
 const ResetPass = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -60,20 +63,31 @@ const ResetPass = () => {
             setError('Password is required');
             return;
         }
+
         try {
-            const response = await fetch('https://<your-backend-url>/resetPassword', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phoneNumber, newPassword }),
-            });
-            const result = await response.json();
-            if (response.ok) {
-                setSuccess('Password reset successfully!');
-                setError('');
-            } else {
-                setError(result.error);
+            // Hash the new password using bcrypt before saving it
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+            // Query Firestore for the admin with the matching phone number
+            const adminsCollection = collection(db, 'admins');
+            const q = query(adminsCollection, where('phoneNumber', '==', phoneNumber));
+            const querySnapshot = await getDocs(q);
+
+            if (querySnapshot.empty) {
+                setError('Phone number not found');
+                return;
             }
+
+            // Update the password for the matched document
+            querySnapshot.forEach(async (doc) => {
+                const adminRef = doc.ref;
+                await updateDoc(adminRef, { password: hashedPassword });
+            });
+
+            setSuccess('Password reset successfully!');
+            setError('');
         } catch (error) {
+            console.error('Error resetting password:', error);
             setError('Error resetting password.');
         }
     };
