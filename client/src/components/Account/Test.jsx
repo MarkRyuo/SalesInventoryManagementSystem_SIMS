@@ -21,14 +21,9 @@ const ProfileComp = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [showRecovery, setShowRecovery] = useState(false);
     const [answerVisibility, setAnswerVisibility] = useState({});
-    const adminId = localStorage.getItem('adminId');
     const [otp, setOtp] = useState(""); // New state for OTP input
     const [otpSent, setOtpSent] = useState(false); // Track if OTP is sent
-
-    const validatePhoneNumber = (number) => {
-        const regex = /^[+]?[0-9]{10,12}$/;  // Adjust as needed for country-specific formats
-        return regex.test(number);
-    };
+    const adminId = localStorage.getItem('adminId');
 
     const availableQuestions = [
         "In which city was your first business located?",
@@ -142,11 +137,6 @@ const ProfileComp = () => {
 
     // Send OTP request to backend
     const handleSendOtp = async () => {
-        if (!validatePhoneNumber(userData.phoneNumber)) {
-            alert('Invalid phone number');
-            return;
-        }
-
         try {
             const response = await fetch('https://<your-firebase-functions-url>/sendOtp', {
                 method: 'POST',
@@ -166,6 +156,7 @@ const ProfileComp = () => {
         }
     };
 
+    // Verify OTP request to backend
     const handleVerifyOtp = async () => {
         try {
             const response = await fetch('https://<your-firebase-functions-url>/verifyOtp', {
@@ -231,24 +222,25 @@ const ProfileComp = () => {
                 disabled={otpSent || !isEditing}>
                 Send OTP
             </Button>
+
             {otpSent && (
-                <>
-                    <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
-                        <Form.Label>Enter OTP</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="otp"
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Button
-                        variant="primary"
-                        onClick={handleVerifyOtp}
-                        disabled={!otp}>
-                        Verify OTP
-                    </Button>
-                </>
+                <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
+                    <Form.Label>Enter OTP</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="otp"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                    />
+                </Form.Group>
+            )}
+
+            {otpSent && (
+                <Button
+                    variant="primary"
+                    onClick={handleVerifyOtp}>
+                    Verify OTP
+                </Button>
             )}
 
             <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "12px" }}>
@@ -272,77 +264,7 @@ const ProfileComp = () => {
                 </DropdownButton>
             </InputGroup>
 
-            <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                    type="text"
-                    name="username"
-                    value={userData.username}
-                    onChange={handleInputChange}
-                    disabled={!isEditing}
-                />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="password" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    name="password"
-                    value={userData.password}
-                    onChange={handleInputChange}
-                    disabled={!isEditing}
-                />
-            </Form.Group>
-
-            {isEditing && (
-                <>
-                    <Button
-                        variant="link"
-                        onClick={() => setShowRecovery(!showRecovery)}
-                        style={{ padding: 0 }}
-                    >
-                        {showRecovery ? "Hide Recovery Questions" : "Show Recovery Questions"}
-                    </Button>
-
-                    {showRecovery && (
-                        <>
-                            <h4>Select Recovery Questions</h4>
-                            <DropdownButton
-                                variant="outline-secondary"
-                                title="Choose a Recovery Question"
-                                id="recovery-question-dropdown"
-                                onSelect={handleAddQuestion}
-                                disabled={userData.recoveryQuestions.length >= 3}
-                            >
-                                {availableQuestions.map((question) => (
-                                    <Dropdown.Item key={question} eventKey={question}>
-                                        {question}
-                                    </Dropdown.Item>
-                                ))}
-                            </DropdownButton>
-
-                            {userData.recoveryQuestions.map((question) => (
-                                <Form.Group key={question} className="mb-3" style={{ position: "relative" }}>
-                                    <Form.Label>Your Answer for: {question}</Form.Label>
-                                    <Form.Control
-                                        type={answerVisibility[question] ? "text" : "password"}
-                                        value={userData.answers[question] || ''}
-                                        onChange={(e) => handleAnswerChange(question, e.target.value)}
-                                        readOnly={!isEditing}
-                                    />
-                                    <Button
-                                        variant="link"
-                                        onClick={() => toggleAnswerVisibility(question)}
-                                        style={{ padding: 0 }}
-                                    >
-                                        {answerVisibility[question] ? "Hide Answer" : "Show Answer"}
-                                    </Button>
-                                </Form.Group>
-                            ))}
-                        </>
-                    )}
-                </>
-            )}
+            {/* Rest of your form code */}
 
             <div className='mt-3'>
                 <Button
