@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { collection, query, where, getDocs, updateDoc } from "firebase/firestore";
-import { db } from "./firebaseConfig"; // Ensure this points to your Firebase config
+import { db } from "../../services/firebase"; // Ensure this points to your Firebase config
 import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
 
 const ResetPass = () => {
