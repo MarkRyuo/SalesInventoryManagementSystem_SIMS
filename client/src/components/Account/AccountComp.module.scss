@@ -129,7 +129,17 @@
         display: flex;
         border: 1px solid;
 
-        
+        input {
+            height: 45px;
+        }
+
+        .FirstName {
+            width: 500px;
+        }
+
+        .LastName {
+            
+        }
 
     }
 }

@@ -190,7 +190,7 @@ const ProfileComp = () => {
             <h1>My Details</h1>
             <h2>Personal Information</h2>
             <div className={ProfileCompScss.RowContainer}>
-            
+                <Form.Group controlId="firstname">
                     <Form.Label>First Name</Form.Label>
                     <Form.Control
                         type="text"
@@ -198,7 +198,9 @@ const ProfileComp = () => {
                         value={userData.firstname}
                         onChange={handleInputChange}
                         disabled={!isEditing}
+                        className={ProfileCompScss.FirstName}
                     />
+                </Form.Group>
 
                 <Form.Group className="mb-3" controlId="lastname">
                     <Form.Label>Last Name</Form.Label>
@@ -208,6 +210,7 @@ const ProfileComp = () => {
                         value={userData.lastname}
                         onChange={handleInputChange}
                         disabled={!isEditing}
+                        className={ProfileCompScss.LastName}
                     />
                 </Form.Group>
             </div>
