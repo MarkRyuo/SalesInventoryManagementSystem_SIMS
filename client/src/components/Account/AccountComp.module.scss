@@ -147,10 +147,6 @@
         width: 500px;
     }
 
-    .Password {
-        width: 500px;
-    }
-
     .Gender {
         height: 45px;
         margin: 20px 0px;
@@ -171,5 +167,10 @@
         button {
             margin: 10px 0px;
         }
+    }
+
+    .Password {
+        margin: 0px 10px;
+        width: 500px;
     }
 }

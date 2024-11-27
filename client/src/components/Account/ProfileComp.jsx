@@ -271,7 +271,7 @@ const ProfileComp = () => {
             </div>
 
             <Form.Group className="password" controlId="password">
-                <Form.Label>Password</Form.Label>
+                <Form.Label className='ms-2'>Password</Form.Label>
                 <Form.Control
                     type="password"
                     name="password"
