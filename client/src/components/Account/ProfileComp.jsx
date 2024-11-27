@@ -352,9 +352,9 @@ const ProfileComp = () => {
                 </>
             )}
 
-            <div className='mt-3'>
+            <div className={ProfileCompScss.buttonss}>
                 <Button
-                    variant='primary'
+                    variant='info'
                     className='ms-2'
                     onClick={() => setIsEditing(true)}
                     disabled={isEditing}>
