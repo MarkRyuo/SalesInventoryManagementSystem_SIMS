@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Button, Form, FloatingLabel, Table, Row, Col } from 'react-bootstrap';
+import { Button, Form, FloatingLabel, Row, Col } from 'react-bootstrap';
 import { db } from '../../services/firebase'; // Update path as needed
-import { addDoc, collection, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, updateDoc, onSnapshot } from 'firebase/firestore';
 import bcrypt from 'bcryptjs'; // Add this import
-import StaffCompScss from './AccountComp.module.scss' ;
+import StaffCompScss from './AccountComp.module.scss';
 import { FaEdit } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -76,13 +76,11 @@ const StaffComp = () => {
 
             // Clear form and refresh staff list
             clearForm();
-            fetchStaff();
         } catch (error) {
             console.error('Error adding/updating staff:', error);
             alert('Error processing staff. Please try again.');
         }
     };
-
 
     const clearForm = () => {
         setFirstname('');
@@ -102,18 +100,18 @@ const StaffComp = () => {
         setSpecialCharRequirement(false);
     };
 
-    const fetchStaff = async () => {
-        try {
-            const staffCollection = collection(db, 'staffs');
-            const snapshot = await getDocs(staffCollection);
+    const fetchStaff = () => {
+        // Listen for real-time updates from Firestore
+        const staffCollection = collection(db, 'staffs');
+        onSnapshot(staffCollection, (snapshot) => {
             const staffData = snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
             }));
-            setStaffList(staffData);
-        } catch (error) {
+            setStaffList(staffData); // Update staff list in state
+        }, (error) => {
             console.error('Error fetching staff:', error);
-        }
+        });
     };
 
     const handleEditStaff = (staff) => {
@@ -136,7 +134,6 @@ const StaffComp = () => {
                 const staffDoc = doc(db, 'staffs', staffId);
                 await deleteDoc(staffDoc);
                 alert('Staff member deleted successfully!');
-                fetchStaff();
             } catch (error) {
                 console.error('Error deleting staff:', error);
                 alert('Error deleting staff. Please try again.');
@@ -148,7 +145,6 @@ const StaffComp = () => {
         try {
             const staffDoc = doc(db, 'staffs', staff.id);
             await updateDoc(staffDoc, { active: !staff.active }); // Toggle the active status
-            fetchStaff(); // Refresh the staff list after updating
         } catch (error) {
             console.error('Error updating staff active status:', error);
             alert('Error updating status. Please try again.');
@@ -156,7 +152,7 @@ const StaffComp = () => {
     };
 
     useEffect(() => {
-        fetchStaff(); // Fetch staff on component mount
+        fetchStaff(); // Fetch staff on component mount and listen for changes
     }, []);
 
     return (
@@ -234,63 +230,62 @@ const StaffComp = () => {
                                 {numberRequirement ? '✓ At least one number' : '✗ At least one number'}
                             </p>
                             <p className={specialCharRequirement ? 'text-success' : 'text-danger'}>
-                                {specialCharRequirement ? '✓ At least one special character (e.g., !@#$%^&*)' : '✗ At least one special character (e.g., !@#$%^&*)'}
+                                {specialCharRequirement ? '✓ At least one special character' : '✗ At least one special character'}
                             </p>
                         </>
                     )}
 
-                    <Form.Check
-                        type="switch"
-                        id="activeSwitch"
-                        label="Active Account"
-                        checked={active}
-                        onChange={(e) => setActive(e.target.checked)}
-                    />
-
-                    <Button variant="primary" type="submit" className='mt-3'>
-                        {editingStaffId ? 'Update Staff' : 'Add Staff'}
-                    </Button>
-                    <Button variant="secondary" className="ms-2 mt-3" onClick={clearForm}>
-                        Clear
-                    </Button>
+                    <div className="d-flex gap-3 mb-3">
+                        <Button
+                            variant={editingStaffId ? 'warning' : 'primary'}
+                            type="submit"
+                        >
+                            {editingStaffId ? 'Update Staff' : 'Add Staff'}
+                        </Button>
+                        <Button variant="secondary" onClick={clearForm}>Clear</Button>
+                    </div>
                 </Form>
             </Col>
 
-            <Col lg={4} md={12} sm={12} className={StaffCompScss.ColStaffComp}>
-                <h1>Staff list Preview</h1>
-                <Table striped bordered hover responsive>
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Gender</th>
-                            <th>Username</th>
-                            <th>Active</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {staffList.map(staff => (
-                            <tr key={staff.id}>
-                                <td>{staff.firstname}</td>
-                                <td>{staff.lastname}</td>
-                                <td>{staff.gender}</td>
-                                <td>{staff.username}</td>
-                                <td>
-                                    <Form.Check
-                                        type="switch"
-                                        checked={staff.active}
-                                        onChange={() => handleToggleActive(staff)}
-                                    />
-                                </td>
-                                <td style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
-                                    <Button variant="warning"  onClick={() => handleEditStaff(staff)}><FaEdit /></Button>
-                                    <Button variant="outline-danger" onClick={() => handleDeleteStaff(staff.id)}><FaRegTrashAlt /></Button>
-                                </td>
-                            </tr>
+            <Col className='p-0' lg={6} md={12} sm={12}>
+                <div className="d-flex gap-3 flex-column">
+                    <h4>Staff List</h4>
+                    <div className={`${StaffCompScss.scrollableList} overflow-auto`} style={{ maxHeight: '50vh' }}>
+                        {staffList.length === 0 && <p>No staff members found</p>}
+                        {staffList.map((staff) => (
+                            <div key={staff.id} className="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p className="m-0"><strong>{staff.firstname} {staff.lastname}</strong></p>
+                                    <p className="m-0">{staff.username}</p>
+                                    <p className="m-0">{staff.active ? 'Active' : 'Inactive'}</p>
+                                </div>
+
+                                <div className="d-flex gap-2">
+                                    <Button
+                                        variant="warning"
+                                        onClick={() => handleEditStaff(staff)}
+                                    >
+                                        <FaEdit />
+                                    </Button>
+
+                                    <Button
+                                        variant={staff.active ? 'danger' : 'success'}
+                                        onClick={() => handleToggleActive(staff)}
+                                    >
+                                        {staff.active ? 'Deactivate' : 'Activate'}
+                                    </Button>
+
+                                    <Button
+                                        variant="danger"
+                                        onClick={() => handleDeleteStaff(staff.id)}
+                                    >
+                                        <FaRegTrashAlt />
+                                    </Button>
+                                </div>
+                            </div>
                         ))}
-                    </tbody>
-                </Table>
+                    </div>
+                </div>
             </Col>
         </Row>
     );

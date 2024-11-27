@@ -67,47 +67,6 @@
 }
 
 
-.ColStaffComp {
-    width: auto;
-
-    h1 {
-        font-size: 1.5rem;
-        font-weight: 500;
-    }
-
-    table {
-        // border: 1px solid;
-
-        thead {
-            tr th {
-                font-size: 1rem;
-                font-weight: 500;
-            }
-        }
-
-        tbody {
-            tr td {
-                font-size: 0.9rem;
-            }
-        }
-    }
-
-    @media (max-width: 600px) {
-        h1 {
-            font-size: 1.2rem;
-        }
-
-        table {
-        
-            thead {
-                tr th {
-                    font-size: 0.7rem;
-                }
-            }
-        }
-    }
-}
-
 
 .contentAccount {
     height: auto;
@@ -490,5 +449,48 @@
         margin: 10px 0px ;
         padding: 10px 0px;
     }
+    }
+}
+
+
+
+.ColStaffComp {
+    width: auto;
+
+    h1 {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+
+    table {
+        // border: 1px solid;
+
+        thead {
+            tr th {
+                font-size: 1rem;
+                font-weight: 500;
+            }
+        }
+
+        tbody {
+            tr td {
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 1.2rem;
+        }
+
+        table {
+        
+            thead {
+                tr th {
+                    font-size: 0.7rem;
+                }
+            }
+        }
     }
 }
