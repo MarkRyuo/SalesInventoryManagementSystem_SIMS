@@ -190,6 +190,7 @@ const ProfileComp = () => {
             <h1>My Details</h1>
             <h2>Personal Information</h2>
             <div className={ProfileCompScss.RowContainer}>
+
                 <div>
                     <Form.Group className="mb-3" controlId="firstname">
                         <Form.Label>First Name</Form.Label>
@@ -201,8 +202,7 @@ const ProfileComp = () => {
                             disabled={!isEditing}
                         />
                     </Form.Group>
-                </div>
-                <div>
+
                     <Form.Group className="mb-3" controlId="lastname">
                         <Form.Label>Last Name</Form.Label>
                         <Form.Control
@@ -214,8 +214,10 @@ const ProfileComp = () => {
                         />
                     </Form.Group>
                 </div>
+                
             </div>
-            <Form.Group className="mb-3" controlId="phoneNumber" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
+            
+            <Form.Group className="mb-3" controlId="phoneNumber">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                     type="text"
@@ -225,6 +227,7 @@ const ProfileComp = () => {
                     disabled={!isEditing}
                 />
             </Form.Group>
+
             <Button
                 className='m-3 mt-0'
                 variant="primary"
@@ -232,6 +235,7 @@ const ProfileComp = () => {
                 disabled={otpSent || !isEditing}>
                 Send OTP
             </Button>
+            
             {otpSent && (
                 <>
                     <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
