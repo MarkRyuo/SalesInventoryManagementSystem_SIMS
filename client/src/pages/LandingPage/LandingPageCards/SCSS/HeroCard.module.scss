@@ -1,27 +1,52 @@
 
 
 .heroSection {
-    border: 4px solid;
+    // border: 4px solid;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px;
+    height: auto;
+    gap: 30px;
 
     h1 {
-        font-size: 3rem;
+        font-family: "Poppins", sans-serif;
+        font-style: normal;
+        font-size: 4rem;
+        background: radial-gradient(circle at 10% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
+        background-clip: text;            /* Standard syntax */
+        -webkit-background-clip: text;    /* WebKit syntax for older browsers */
+        color: transparent;
+        font-weight: 600;
     }
     h3 {
         font-size: 1.5rem;
+        font-weight: 400;
     }
 
-    .HeroButtons {
+    .btnExplore {
+        font-size: 1.5rem;
+        padding: 10px 20;
         border: 1px solid;
-        .btnExplore {
-
-        }
-
-        .btnLogin {
-
-        }
+        border-radius: 10px;
     }
+}
+
+//! large 
+@media (max-width: 1200px) {
+    
+}
+
+//! Laptops 
+@media (max-width: 992px) {
+    
+}
+
+//! Tablets 
+@media (max-width: 768px) {
+    
+} 
+
+//! Phones 
+@media screen (max-width: 600px) {
+    
 }
