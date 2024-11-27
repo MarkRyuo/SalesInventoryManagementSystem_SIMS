@@ -1,0 +1,92 @@
+
+
+.LogInContainer {
+    box-sizing: border-box;
+    // border: 5px solid green;
+    height: 100vh;
+    display: flex;
+
+    .LoginText {
+        width: 50vw;
+        // border: 1px solid;
+        display: inline-flex;
+        align-items: center;
+        padding: 10px;
+        
+        h1 {
+            font-size: 4.5rem;
+            padding: 0px 50px;
+            background: radial-gradient(circle at 30% 50%, rgb(221, 49, 49) 20%, rgb(119, 0, 0) 90%);
+            background-clip: text;            /* Standard syntax */
+            -webkit-background-clip: text;    /* WebKit syntax for older browsers */
+            color: transparent;
+        }
+    }
+
+    .LoginFormContainer {
+        // border: 1px solid;
+        width: 50vw;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .LoginForm {
+            display: flex;
+            flex-direction: column;
+            // border: 1px solid;
+            border-radius: 10px;
+            box-shadow: 2px 2px 4px #d7d8d8;
+            padding: 70px;
+            height: auto;
+            width: auto;
+            gap: 20px;
+            justify-content: center;
+
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                h2 {
+                    color: #302F2F;
+                    font-size: 2.3rem;
+                    font-weight: 500;
+                    text-align: center;
+                    padding: 20px;
+                }
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 8px 0px;
+                    input {
+                        padding: 10px;
+                        height: 45px;
+                        width: 400px;
+                    }
+                } 
+
+            }
+
+            a {
+                text-align: center;
+                text-decoration: none;
+                color: #6b6b6b;
+                padding: 15px 10px;
+            }
+
+            button {
+                background-color: #92E3B8;
+                // border: 1px solid;
+                border-radius: 0px;
+                padding: 9px 0px;
+            }
+
+            button:hover {
+                background-color: #ffffff;
+                border: 1px solid;
+            }
+        }
+    }
+
+}

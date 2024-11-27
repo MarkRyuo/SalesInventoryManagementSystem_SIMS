@@ -6,7 +6,7 @@ import LogInCardPagecss from './LandingPageCards.module.scss';
 import { FaRegEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-import LoginPageCardScss from './SCSS/'
+import LoginPageCardScss from './SCSS/LoginPageCard.module.scss' ;
 
 function LogInCardPage() {
     const [username, setUsername] = useState("");
@@ -31,7 +31,7 @@ function LogInCardPage() {
     };
 
     return (
-        <div className={LogInCardPagecss.LogInContainer}>
+        <div className={LoginPageCardScss.LogInContainer}>
             <div className={LogInCardPagecss.LoginText}>
                 <h1>Manage your entire Inventory in a single System</h1>
             </div>
