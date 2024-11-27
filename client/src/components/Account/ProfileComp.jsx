@@ -228,59 +228,7 @@ const ProfileComp = () => {
                 />
             </Form.Group>
 
-            <Form.Group className="password" controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    name="password"
-                    value={userData.password}
-                    onChange={handleInputChange}
-                    disabled={!isEditing}
-                    className={ProfileCompScss.Password}
-                />
-            </Form.Group>
-
-            <div>
-                <Form.Group className="PhoneNumber" controlId="phoneNumber">
-                    <Form.Label>Phone Number</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="phoneNumber"
-                        value={userData.phoneNumber}
-                        onChange={handleInputChange}
-                        disabled={!isEditing}
-                    />
-                </Form.Group>
-
-                <Button
-                    variant=""
-                    onClick={handleSendOtp}
-                    disabled={otpSent || !isEditing}>
-                    Send OTP
-                </Button>
-            </div>
-            
-            {otpSent && (
-                <>
-                    <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
-                        <Form.Label>Enter OTP</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="otp"
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Button
-                        variant="primary"
-                        onClick={handleVerifyOtp}
-                        disabled={!otp}>
-                        Verify OTP
-                    </Button>
-                </>
-            )}
-
-            <InputGroup className="mb-3" style={{ width: "100%", maxWidth: "500px", paddingLeft: "12px" }}>
+            <InputGroup className={ProfileCompScss.Gender}>
                 <Form.Control
                     aria-label="Text input with dropdown button"
                     placeholder={userData.gender || 'Select Gender'}
@@ -300,6 +248,59 @@ const ProfileComp = () => {
                     <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
                 </DropdownButton>
             </InputGroup>
+
+            <div className={ProfileCompScss.OTPcontainer}>
+                <Form.Group className="PhoneNumber" controlId="phoneNumber">
+                    <Form.Label>Phone Number</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="phoneNumber"
+                        value={userData.phoneNumber}
+                        onChange={handleInputChange}
+                        disabled={!isEditing}
+                        className={ProfileCompScss.PhoneNumber}
+                    />
+                </Form.Group>
+
+                <Button
+                    variant=""
+                    onClick={handleSendOtp}
+                    disabled={otpSent || !isEditing}>
+                    Send OTP
+                </Button>
+            </div>
+
+            <Form.Group className="password" controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                    type="password"
+                    name="password"
+                    value={userData.password}
+                    onChange={handleInputChange}
+                    disabled={!isEditing}
+                    className={ProfileCompScss.Password}
+                />
+            </Form.Group>
+
+            {otpSent && (
+                <>
+                    <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
+                        <Form.Label>Enter OTP</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="otp"
+                            value={otp}
+                            onChange={(e) => setOtp(e.target.value)}
+                        />
+                    </Form.Group>
+                    <Button
+                        variant="primary"
+                        onClick={handleVerifyOtp}
+                        disabled={!otp}>
+                        Verify OTP
+                    </Button>
+                </>
+            )}
 
             {isEditing && (
                 <>
