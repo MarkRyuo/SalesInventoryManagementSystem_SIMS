@@ -22,6 +22,10 @@ function LandingPage() {
                 <div className={LandingPageScss.loginCard}>
                     <LoginCardPage />
                 </div>
+
+                <div className={LandingPageScss.footerCard}>
+                    <FooterCard>
+                </div>
             </Container>
         </Container>
     )
