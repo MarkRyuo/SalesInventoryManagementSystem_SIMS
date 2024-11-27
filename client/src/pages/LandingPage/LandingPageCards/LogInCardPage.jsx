@@ -32,11 +32,11 @@ function LogInCardPage() {
 
     return (
         <div className={LoginPageCardScss.LogInContainer}>
-            <div className={LogInCardPagecss.LoginText}>
+            <div className={LoginPageCardScss.LoginText}>
                 <h1>Manage your entire Inventory in a single System</h1>
             </div>
 
-            <div className={LogInCardPagecss.LoginFormContainer}>
+            <div className={LoginPageCardScss.LoginFormContainer}>
                 <div className={LogInCardPagecss.LoginForm}>
                     <form onSubmit={handleLogin}>
                         <h2>Welcome</h2>
