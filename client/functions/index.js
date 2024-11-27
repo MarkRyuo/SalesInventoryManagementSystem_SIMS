@@ -1,7 +1,9 @@
 /* eslint-disable indent */
 /* eslint-disable max-len */
 
+// eslint-disable-next-line no-unused-vars
 const {onRequest} = require("firebase-functions/v2/https");
+// eslint-disable-next-line no-unused-vars
 const logger = require("firebase-functions/logger");
 
 const functions = require("firebase-functions");
@@ -36,44 +38,59 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       // eslint-disable-next-line new-cap
       const doc = new jsPDF();
 
-      // Header - Store Info and Title
-      doc.setFontSize(18);
-      doc.setFont("helvetica", "bold");
-      doc.text("Reyes Electronics", 105, 20, {align: "center"}); // Store name in center
-
-      doc.setFontSize(22);
-      doc.text("Receipt", 105, 30, {align: "center"}); // Receipt Title
-
-      // Order Details Section
-      doc.setFontSize(12);
+      // Title and Store Info
       doc.setFont("helvetica", "normal");
+      doc.setFontSize(12);
+      doc.text("REYES ELECTRONIC SHOP", 10, 20);
+      doc.setFontSize(10);
+      doc.text("JP Rizal St. Población Barangay 4, 4217 Lipa City Batangas Philippines", 10, 30);
+      doc.text("RAMIL P. REYES - PROP.", 10, 40);
+
+      // Order Date and Customer Info
+      doc.setFontSize(12);
       doc.text(`Order Date: ${order.date}`, 10, 50);
       doc.text(`Sold To: ${order.customerName}`, 10, 60);
-      doc.text(`Order ID: ${orderId}`, 10, 70);
 
-      // Pricing Breakdown Section
-      doc.text(`Subtotal: \u20B1${order.subtotal.toFixed(2)}`, 10, 80);
-      doc.text(`Tax: \u20B1${order.tax.toFixed(2)}`, 10, 90);
-      doc.text(`Discount: -\u20B1${order.discount.toFixed(2)}`, 10, 100);
-      doc.text(`Payment Amount: \u20B1${parseFloat(order.paymentAmount).toFixed(2)}`, 10, 110);
-      doc.text(`Change: \u20B1${parseFloat(order.change).toFixed(2)}`, 10, 120);
+      // Separator Line
+      doc.line(10, 65, 200, 65);
+
+      // Product Table Header
+      let yPosition = 75;
+      doc.setFontSize(10);
+      doc.text("Product Name", 10, yPosition);
+      doc.text("Qty", 100, yPosition, {align: "center"});
+      doc.text("Price", 140, yPosition, {align: "right"});
+      doc.text("Amount", 180, yPosition, {align: "right"});
+
+      // Product Items Loop
+      yPosition += 10;
+      order.items.forEach((item) => {
+        doc.text(item.productName, 10, yPosition);
+        doc.text(item.quantity.toString(), 100, yPosition, {align: "center"});
+        doc.text(`₱${parseFloat(item.price).toFixed(2)}`, 140, yPosition, {align: "right"});
+        doc.text(`₱${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, {align: "right"});
+        yPosition += 10;
+      });
+
+      // Separator Line for Totals
+      doc.line(10, yPosition, 200, yPosition);
+
+      // Totals
+      yPosition += 10;
+      doc.text(`Subtotal: ₱${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
+      doc.text(`Tax: ₱${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
+      doc.text(`Discount: -₱${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
+      doc.text(`Payment Amount: ₱${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
+      doc.text(`Change: ₱${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
 
       doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
-      doc.text(`Total Amount: \u20B1${order.total.toFixed(2)}`, 10, 130);
+      doc.text(`Total Amount: ₱${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
 
-      // Items List - Displaying product items
-      doc.setFontSize(12);
-      let yPosition = 140; // Start y position for items listing
-      order.items.forEach((item) => {
-        doc.text(`${item.productName} - ${item.quantity} x \u20B1${item.price.toFixed(2)}`, 10, yPosition);
-        yPosition += 10; // Increment y position for each item
-      });
-
-      // Footer - Thank you message and QR code
+      // Footer (Thank You Message)
       doc.setFontSize(10);
       doc.setFont("helvetica", "italic");
-      doc.text("Thank you for your purchase!", 105, yPosition + 20, {align: "center"});
+      doc.text("Thank you for your purchase!", 105, yPosition + 80, {align: "center"});
 
       // Generate QR code (you can customize it as per your needs)
       const qrCodeData = await qr.toDataURL(`https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/downloadOrder?id=${orderId}`);
@@ -143,7 +160,7 @@ exports.verifyOtp = functions.https.onRequest(async (req, res) => {
     const storedOtp = otpDoc.data().otp;
 
     if (otp === storedOtp) {
-      res.status(200).json({message: "OTP verified successfully" });
+      res.status(200).json({message: "OTP verified successfully"});
     } else {
       res.status(400).json({error: "Invalid OTP"});
     }
