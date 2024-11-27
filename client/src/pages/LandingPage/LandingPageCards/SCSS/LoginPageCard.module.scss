@@ -28,6 +28,7 @@
         flex-direction: column;
 
         form {
+            border-radius: 15px;
             border: 1px solid;
             display: flex;
             flex-direction: column;
@@ -36,7 +37,18 @@
             justify-content: center;
             align-items: center;
             h2 {
+                padding: 20px;
                 font-size: 2rem;
+            }
+
+            input {
+                height: 35px;
+                padding: 10px;
+            }
+
+            p {
+                font-size: 1rem;
+                padding: 5px 0px;
             }
         }
     }
