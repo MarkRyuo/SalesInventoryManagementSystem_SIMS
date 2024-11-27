@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Form, FloatingLabel, Container} from 'react-bootstrap';
+import { Button, Form, FloatingLabel, Container } from 'react-bootstrap';
 import { db } from '../../services/firebase'; // Update path as needed
 import { addDoc, collection, deleteDoc, doc, updateDoc, onSnapshot } from 'firebase/firestore';
 import bcrypt from 'bcryptjs'; // Add this import
@@ -157,7 +157,7 @@ const StaffComp = () => {
 
     return (
         <Container className={StaffCompScss.mainContainer}>
-            <div>
+            <div className={StaffCompScss.contentStaff}>
                 <p><span className='fw-semibold'>Reminder: </span>Please ensure that all staff details are accurately filled before saving.</p>
                 <Form onSubmit={handleAddStaff} >
                     <FloatingLabel controlId="floatingFirstname" label="First Name">
@@ -240,52 +240,51 @@ const StaffComp = () => {
                         <Button
                             variant={editingStaffId ? 'warning' : 'primary'}
                             type="submit"
+                            style={{ width: 100 }}
                         >
-                            {editingStaffId ? 'Update Staff' : 'Add Staff'}
+                            {editingStaffId ? 'Update Staff' : 'Add'}
                         </Button>
-                        <Button variant="secondary" onClick={clearForm}>Clear</Button>
+                        <Button variant="" onClick={clearForm} style={{ border: '1px solid' }}>Clear</Button>
                     </div>
                 </Form>
             </div>
 
-            <div>
-                <div className="d-flex gap-3 flex-column">
-                    <h4>Staff List</h4>
-                    <div className={`${StaffCompScss.scrollableList} overflow-auto`} style={{ maxHeight: '50vh' }}>
-                        {staffList.length === 0 && <p>No staff members found</p>}
-                        {staffList.map((staff) => (
-                            <div key={staff.id} className="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <p className="m-0"><strong>{staff.firstname} {staff.lastname}</strong></p>
-                                    <p className="m-0">{staff.username}</p>
-                                    <p className="m-0">{staff.active ? 'Active' : 'Inactive'}</p>
-                                </div>
-
-                                <div className="d-flex gap-2">
-                                    <Button
-                                        variant="warning"
-                                        onClick={() => handleEditStaff(staff)}
-                                    >
-                                        <FaEdit />
-                                    </Button>
-
-                                    <Button
-                                        variant={staff.active ? 'danger' : 'success'}
-                                        onClick={() => handleToggleActive(staff)}
-                                    >
-                                        {staff.active ? 'Deactivate' : 'Activate'}
-                                    </Button>
-
-                                    <Button
-                                        variant="danger"
-                                        onClick={() => handleDeleteStaff(staff.id)}
-                                    >
-                                        <FaRegTrashAlt />
-                                    </Button>
-                                </div>
+            <div className={StaffCompScss.StaffList}>
+                <h4>Staff List</h4>
+                <div className={`${StaffCompScss.scrollableList} overflow-auto`} style={{ maxHeight: '50vh' }}>
+                    {staffList.length === 0 && <p>No staff members found</p>}
+                    {staffList.map((staff) => (
+                        <div key={staff.id} className={StaffCompScss.Detailss}>
+                            <div className={StaffCompScss.textx}>
+                                <p className="m-0"><strong>{staff.firstname} {staff.lastname}</strong></p>
+                                <p className="m-0">{staff.username}</p>
+                                <p className="m-0">{staff.active ? 'Active' : 'Inactive'}</p>
                             </div>
-                        ))}
-                    </div>
+
+                            <div className="d-flex gap-2">
+                                <Button
+                                    variant="info"
+                                    onClick={() => handleEditStaff(staff)}
+                                >
+                                    <FaEdit />
+                                </Button>
+
+                                <Button
+                                    variant={staff.active ? 'danger' : 'success'}
+                                    onClick={() => handleToggleActive(staff)}
+                                >
+                                    {staff.active ? 'Deactivate' : 'Activate'}
+                                </Button>
+
+                                <Button
+                                    variant="danger"
+                                    onClick={() => handleDeleteStaff(staff.id)}
+                                >
+                                    <FaRegTrashAlt />
+                                </Button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </Container>

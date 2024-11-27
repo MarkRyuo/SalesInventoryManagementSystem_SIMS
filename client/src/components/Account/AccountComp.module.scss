@@ -501,16 +501,55 @@
     height: auto;
     padding: 20px;
 
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        
-        padding: 20px;
+    .contentStaff {
+        border-radius: 10px;
+        box-shadow: 1px 3px 1px #c9c8c8;
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        p {
+            font-size: 1.1rem;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+    
+            input {
+                height: 40px;
+            }
+        }
 
-        input {
-            height: 50px;
+    }
+
+    .StaffList {
+        height: auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 1px 3px 1px #c9c8c8;
+
+        h4 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid;
+            padding: 10px 0px;
+        }
+
+        .Detailss {
+            display: flex;
+            justify-content: space-between ;
+            .textx {
+                border: 1px solid;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 0px;
+                width: 400px;
+                justify-content: space-between;
+            }
         }
     }
+
 }
 
