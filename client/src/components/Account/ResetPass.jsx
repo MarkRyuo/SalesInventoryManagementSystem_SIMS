@@ -5,7 +5,7 @@ import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { collection, query, where, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../services/firebase"; // Ensure this points to your Firebase config
 import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
-import ResetPassScss from './ResetPass.module.scss' ;
+import ResetPassScss from './ResetPass.module.scss';
 import { Link } from 'react-router-dom'
 import { IoArrowBack } from "react-icons/io5";
 import { PiShieldWarningFill } from "react-icons/pi";
@@ -15,6 +15,7 @@ const ResetPass = () => {
     const [otp, setOtp] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [otpSent, setOtpSent] = useState(false);
+    const [otpVerified, setOtpVerified] = useState(false); // State for OTP verification
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -55,6 +56,7 @@ const ResetPass = () => {
             if (response.ok) {
                 setSuccess('OTP verified successfully!');
                 setError('');
+                setOtpVerified(true); // OTP verified, now show the new password input
             } else {
                 setError(result.error);
             }
@@ -101,7 +103,7 @@ const ResetPass = () => {
         <Container fluid style={{ background: "radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
             <Row className={ResetPassScss.rowContainer}>
                 <Col xs={12} md={8} lg={4} className={ResetPassScss.colContainer}>
-                    <div><PiShieldWarningFill size={70}/></div>
+                    <div><PiShieldWarningFill size={70} /></div>
                     <h2 className="mb-2 text-center">Forgot Password</h2>
                     <p className='fs-6 m-0 text-center'>Enter your Phone Number and we'll send you a OTP to reset your password.</p>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -114,7 +116,7 @@ const ResetPass = () => {
                                 placeholder="Enter your phone number"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
-                                disabled={otpSent}
+                                disabled={otpSent || otpVerified}
                             />
                         </Form.Group>
 
@@ -124,7 +126,7 @@ const ResetPass = () => {
                             </Button>
                         )}
 
-                        {otpSent && (
+                        {otpSent && !otpVerified && (
                             <>
                                 <Form.Group controlId="otp" className="mb-3 mt-4">
                                     <Form.Label>Enter OTP</Form.Label>
@@ -138,7 +140,11 @@ const ResetPass = () => {
                                 <Button variant="primary" onClick={handleVerifyOtp} className="w-100 mb-3">
                                     Verify OTP
                                 </Button>
+                            </>
+                        )}
 
+                        {otpSent && otpVerified && (
+                            <>
                                 <Form.Group controlId="newPassword" className="mb-3">
                                     <Form.Label>New Password</Form.Label>
                                     <Form.Control
