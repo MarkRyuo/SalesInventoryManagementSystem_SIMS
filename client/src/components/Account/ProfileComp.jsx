@@ -216,7 +216,7 @@ const ProfileComp = () => {
             </div>
 
 
-            <Form.Group className="" controlId="username">
+            <Form.Group controlId="username">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                     type="text"
@@ -224,6 +224,7 @@ const ProfileComp = () => {
                     value={userData.username}
                     onChange={handleInputChange}
                     disabled={!isEditing}
+                    className={ProfileCompScss.UserName}
                 />
             </Form.Group>
 
@@ -235,27 +236,30 @@ const ProfileComp = () => {
                     value={userData.password}
                     onChange={handleInputChange}
                     disabled={!isEditing}
+                    className={ProfileCompScss.Password}
                 />
             </Form.Group>
 
-            <Form.Group className="PhoneNumber" controlId="phoneNumber">
-                <Form.Label>Phone Number</Form.Label>
-                <Form.Control
-                    type="text"
-                    name="phoneNumber"
-                    value={userData.phoneNumber}
-                    onChange={handleInputChange}
-                    disabled={!isEditing}
-                />
-            </Form.Group>
+            <div>
+                <Form.Group className="PhoneNumber" controlId="phoneNumber">
+                    <Form.Label>Phone Number</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="phoneNumber"
+                        value={userData.phoneNumber}
+                        onChange={handleInputChange}
+                        disabled={!isEditing}
+                    />
+                </Form.Group>
 
-            <Button
-                variant=""
-                onClick={handleSendOtp}
-                disabled={otpSent || !isEditing}>
-                Send OTP
-            </Button>
-
+                <Button
+                    variant=""
+                    onClick={handleSendOtp}
+                    disabled={otpSent || !isEditing}>
+                    Send OTP
+                </Button>
+            </div>
+            
             {otpSent && (
                 <>
                     <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>

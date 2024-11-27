@@ -127,7 +127,7 @@
 
     .RowContainer {
         display: flex;
-        border: 1px solid;
+        // border: 1px solid;
         gap: 15px;
 
         input {
@@ -141,6 +141,13 @@
         .LastName {
             width: 500px;
         }
+    }
 
+    .UserName {
+        width: 500px;
+    }
+
+    .Password {
+        width: 500px;
     }
 }
