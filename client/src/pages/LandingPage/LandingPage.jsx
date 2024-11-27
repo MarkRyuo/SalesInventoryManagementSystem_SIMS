@@ -2,7 +2,7 @@ import { Container} from "react-bootstrap"
 import NavBars from "./NavBars"
 import LandingPageScss from './LandingPage.module.scss';
 import HeroCard from './LandingPageCards/HeroCard';
-
+import AboutCard from './LandingPageCards/AboutCard' ;
 
 function LandingPage() {
 
@@ -14,7 +14,7 @@ function LandingPage() {
                     <HeroCard />
                 </div>
 
-                <div>
+                <div className={LandingPageScss.aboutCard}>
                     <AboutCard />
                 </div>
             </Container>
