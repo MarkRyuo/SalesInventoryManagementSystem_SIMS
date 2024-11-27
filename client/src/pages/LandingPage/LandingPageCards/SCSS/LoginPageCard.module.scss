@@ -38,14 +38,15 @@
             box-shadow: 1px 3px 1px var(--buttonColor);
             display: flex;
             flex-direction: column;
-            width: 400px;
-            height: 500px;
+            width: 450px;
+            height: 550px;
             justify-content: center;
             align-items: center;
             gap: 10px;
             h2 {
                 padding: 20px;
                 font-size: 2rem;
+                color: var(--textColor);
             }
 
             input {
@@ -61,7 +62,7 @@
             button {
                 margin-top: 5px;
                 width: 150px;
-                border: 1px solid;
+                border: 1px solid var(--textColor);
                 border-radius: 0;
             }
 
