@@ -69,10 +69,158 @@
 
 
 .contentAccount {
-    // border: 1px solid ;
-    width: 100%;
     height: auto;
-    padding: 25px;
+    padding: 20px;
+
+    h1 {
+        font-size: 2rem;
+        background: radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        padding: 20px;
+        border-bottom: 1px solid;
+        border-color: #5a5a5a;
+    }
+
+    .RowContainer {
+        display: flex;
+        // border: 1px solid;
+        gap: 15px;
+
+        input {
+            height: 45px;
+        }
+
+        .FirstName {
+            width: 500px;
+        }
+
+        .LastName {
+            width: 500px;
+        }
+    }
+
+    .UserName {
+        width: 500px;
+    }
+
+    .Gender {
+        height: 45px;
+        margin: 20px 0px;
+        width: 500px;
+    }
+
+    .OTPcontainer {
+        border-top: 1px solid #5a5a5a;
+        height: auto;
+        margin-top: 30px;
+        padding: 10px;
+
+        .PhoneNumber {
+            width: 450px;
+        }
+
+
+        button {
+            margin: 10px 0px;
+        }
+    }
+
+    .Password {
+        margin: 0px 10px;
+        width: 500px;
+    }
+
+    .buttonss {
+        margin: 10px 0px ;
+        padding: 10px 0px;
+    }
+}
+
+//? Profile Comp
+//! large 
+@media (max-width: 1200px) {
+    .contentAccount {
+    height: auto;
+    padding: 15px;
+
+    h1 {
+        font-size: 2rem;
+        background: radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        padding: 20px;
+        border-bottom: 1px solid;
+        border-color: #5a5a5a;
+    }
+
+    .RowContainer {
+        display: flex;
+        // border: 1px solid;
+        gap: 15px;
+
+        input {
+            height: 45px;
+        }
+
+        .FirstName {
+            width: 450px;
+        }
+
+        .LastName {
+            width: 450px;
+        }
+    }
+
+    .UserName {
+        width: 450px;
+    }
+
+    .Gender {
+        height: 45px;
+        margin: 20px 0px;
+        width: 450px;
+    }
+
+    .OTPcontainer {
+        border-top: 1px solid #5a5a5a;
+        height: auto;
+        margin-top: 30px;
+        padding: 10px;
+
+        .PhoneNumber {
+            width: 440px;
+        }
+
+
+        button {
+            margin: 10px 0px;
+        }
+    }
+
+    .Password {
+        margin: 0px 10px;
+        width: 440px;
+    }
+
+    .buttonss {
+        margin: 10px 0px ;
+        padding: 10px 0px;
+    }
+    }
+}
+
+//! Laptops 
+@media (max-width: 992px) {
+    .contentAccount {
+    height: auto;
+    padding: 0px;
 
     h1 {
         font-size: 2rem;
@@ -80,32 +228,227 @@
 
     h2 {
         font-size: 1.3rem;
-        font-weight: 400;
-        padding: 20px 5px;
-        border-bottom: 1px solid rgb(187, 187, 187);
+        padding: 20px;
+        border-bottom: 1px solid;
+        border-color: #5a5a5a;
     }
 
     .RowContainer {
-        margin: 0;
-        padding: 0;
+        display: flex;
+        // border: 1px solid;
+        gap: 15px;
+
+        input {
+            height: 45px;
+        }
+
+        .FirstName {
+            width: 350px;
+        }
+
+        .LastName {
+            width: 350px;
+        }
     }
 
-    @media (max-width: 600px) {
-        h1 {
-            font-size: 1.7rem;
-        }
-        h2 {
-            font-size: 1.1rem;
+    .UserName {
+        width: 350px;
+    }
+
+    .Gender {
+        height: 45px;
+        margin: 20px 0px;
+        width: 350px;
+    }
+
+    .OTPcontainer {
+        border-top: 1px solid #5a5a5a;
+        height: auto;
+        margin-top: 30px;
+        padding: 10px;
+
+        .PhoneNumber {
+            width: 350px;
         }
 
-        label {
-            font-size: 0.9rem;
+
+        button {
+            margin: 10px 0px;
         }
+    }
+
+    .Password {
+        margin: 0px 10px;
+        width: 350px;
+    }
+
+    .buttonss {
+        margin: 10px 0px ;
+        padding: 10px 0px;
+    }
+    }
+}
+
+//! Tablets 
+@media (max-width: 768px) {
+    .contentAccount {
+    height: auto;
+    padding: 0px;
+
+    button {
+        font-size: 0.9rem;
+    }
+        
+    label {
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        padding: 20px;
+        border-bottom: 1px solid;
+        border-color: #5a5a5a;
+    }
+
+    .RowContainer {
+        display: flex;
+        // border: 1px solid;
+        gap: 15px;
 
         input {
             height: 40px;
-            padding-left: 10px;
         }
+
+        .FirstName {
+            width: 250px;
+        }
+
+        .LastName {
+            width: 250px;
+        }
+    }
+
+    .UserName {
+        width: 250px;
+    }
+
+    .Gender {
+        height: 45px;
+        margin: 20px 0px;
+        width: 250px;
+    }
+
+    .OTPcontainer {
+        border-top: 1px solid #5a5a5a;
+        height: auto;
+        margin-top: 30px;
+        padding: 10px;
+
+        .PhoneNumber {
+            width: 250px;
+        }
+
+
+        button {
+            margin: 10px 0px;
+        }
+    }
+
+    .Password {
+        margin: 0px 10px;
+        width: 240px;
+    }
+
+    .buttonss {
+        margin: 10px 0px ;
+        padding: 10px 0px;
+    }
+    }
+} 
+
+//! Phones 
+@media (max-width: 600px) {
+    .contentAccount {
+    height: auto;
+    padding: 20px;
+
+    button {
+        font-size: 0.9rem;
+    }
+        
+    label {
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+        padding: 20px;
+        border-bottom: 1px solid;
+        border-color: #5a5a5a;
+    }
+
+    .RowContainer {
+        display: flex;
+        flex-direction: column;
+        // border: 1px solid;
+        gap: 15px;
+
+        input {
+            height: 40px;
+        }
+
+        .FirstName {
+            width: 100%;
+        }
+
+        .LastName {
+            width: 100%;
+        }
+    }
+
+    .UserName {
+        width: 100%;
+    }
+
+    .Gender {
+        height: 40px;
+        margin: 20px 0px;
+        width: 100%;
+    }
+
+    .OTPcontainer {
+        border-top: 1px solid #5a5a5a;
+        height: auto;
+        margin-top: 30px;
+        padding: 10px;
+
+        .PhoneNumber {
+            width: 100%;
+        }
+
+
+        button {
+            margin: 10px 0px;
+        }
+    }
+
+    .Password {
+        margin: 0px 10px;
+        width: 100%;
+    }
+
+    .buttonss {
+        margin: 10px 0px ;
+        padding: 10px 0px;
+    }
     }
 }
 
@@ -149,5 +492,316 @@
                 }
             }
         }
+    }
+}
+
+
+.mainContainer {
+    // border: 1px solid;
+    height: auto;
+    padding: 20px;
+
+    button {
+        font-size: 1rem;
+    }
+
+    .contentStaff {
+        border-radius: 10px;
+        box-shadow: 1px 3px 1px #c9c8c8;
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        p {
+            font-size: 1.1rem;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+    
+            input {
+                height: 40px;
+            }
+        }
+
+    }
+
+    .StaffList {
+        height: auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 1px 3px 1px #c9c8c8;
+
+        h4 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid;
+            padding: 10px 0px;
+        }
+
+        .Detailss {
+            display: flex;
+            justify-content: space-between ;
+
+            .textx {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 0px;
+                width: 400px;
+                justify-content: space-between;
+            }
+
+            .DetailsBtn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 230px;
+            }
+        }
+    }
+
+}
+
+//! large 
+@media (max-width: 1200px) {
+    .mainContainer {
+    padding: 15px;
+
+    button {
+        font-size: 1rem;
+    }
+
+    .contentStaff {
+        padding: 15px;
+        margin-bottom: 20px;
+        p {
+            font-size: 1.1rem;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+    
+            input {
+                height: 40px;
+            }
+        }
+
+    }
+
+    .StaffList {
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 1px 3px 1px #c9c8c8;
+
+        h4 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid;
+            padding: 10px 0px;
+        }
+
+        .Detailss {
+            display: flex;
+            justify-content: space-between ;
+
+            .textx {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 0px;
+                width: 350px;
+                justify-content: space-between;
+            }
+
+            .DetailsBtn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 220px;
+            }
+        }
+    }
+
+    }
+}
+
+//! Laptops 
+@media (max-width: 992px) {
+    .mainContainer {
+    padding: 10px;
+
+    button {
+        font-size: 1rem;
+    }
+
+    .contentStaff {
+        padding: 15px;
+        margin-bottom: 20px;
+        p {
+            font-size: 1.1rem;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+    
+            input {
+                height: 35px;
+            }
+        }
+
+    }
+
+    .StaffList {
+        padding: 10px;
+
+        h4 {
+            font-size: 1.4rem;
+        }
+
+        .Detailss {
+            .textx {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 0px;
+                width: 300px;
+                justify-content: space-between;
+                font-size: 0.9rem;
+            }
+
+            .DetailsBtn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 220px;
+            }
+        }
+    }
+
+    }
+}
+
+//! Tablets 
+@media (max-width: 768px) {
+    .mainContainer {
+    padding: 0;
+
+    button {
+        font-size: 0.9rem;
+    }
+
+    .contentStaff {
+        padding: 15px;
+        margin-bottom: 20px;
+        p {
+            font-size: 1rem;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+    
+            input {
+                height: 30px;
+            }
+        }
+
+    }
+
+    .StaffList {
+        padding: 10px;
+
+        h4 {
+            font-size: 1.4rem;
+        }
+
+        .Detailss {
+            .textx {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 0px;
+                width: 200px;
+                justify-content: space-between;
+                font-size: 0.9rem;
+            }
+
+            .DetailsBtn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 200px;
+            }
+        }
+    }
+
+    }
+} 
+
+//! Phones 
+@media (max-width: 600px) {
+    .mainContainer {
+    padding: 0;
+
+    button {
+        font-size: 0.8rem;
+    }
+
+    .contentStaff {
+        padding: 10px;
+        margin-bottom: 20px;
+        p {
+            font-size: 0.9rem;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+    
+            input {
+                height: 30px;
+            }
+        }
+
+    }
+
+    .StaffList {
+        padding: 10px;
+
+        h4 {
+            font-size: 1.2rem;
+        }
+
+        .Detailss {
+            .textx {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 0px;
+                width: 200px;
+                justify-content: space-between;
+                font-size: 0.9rem;
+            }
+
+            .DetailsBtn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 180px;
+            }
+        }
+    }
+
     }
 }

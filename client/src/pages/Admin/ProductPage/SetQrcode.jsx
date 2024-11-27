@@ -67,33 +67,40 @@ function ViewQrCode() {
 
     const generatePDF = () => {
         const doc = new jsPDF();
-        let yOffset = 10;
+        let yOffset = 20; // Starting vertical position
+        const xOffsetImage = 20; // Horizontal position for QR code image
+        const xOffsetText = 60; // Horizontal position for text
+        const rowHeight = 40; // Space between rows
 
         selectedQrcodes.forEach((qr, index) => {
             const img = new Image();
             img.src = qr.qrcodeBase64;
-            doc.addImage(img, 'PNG', 10, yOffset, 30, 30);
-            yOffset += 35;
 
-            doc.text(`QR Code #${index + 1}:`, 50, yOffset);
-            yOffset += 10;
+            // Add QR code image
+            doc.addImage(img, 'PNG', xOffsetImage, yOffset, 30, 30);
 
-            doc.text(qr.productName || 'No Product Name', 50, yOffset);
-            yOffset += 10;
+            // Add QR code number and product name
+            doc.text(`QR Code #${index + 1}`, xOffsetText, yOffset + 10);
+            doc.text(qr.productName || 'No Product Name', xOffsetText, yOffset + 20);
 
+            // Move to the next row
+            yOffset += rowHeight;
+
+            // Add a new page if the content exceeds page height
             if (yOffset > 270) {
                 doc.addPage();
-                yOffset = 10;
+                yOffset = 20; // Reset vertical position
             }
         });
 
         // Save the generated PDF
         doc.save('qr-codes.pdf');
 
-        // After printing, clear the selected QR codes
+        // Clear selected QR codes and close the modal
         setSelectedQrcodes([]);
-        setShowPrintModal(false); // Close the print modal
+        setShowPrintModal(false);
     };
+
 
     const sortedQrCodes = [
         ...qrCodes.filter(qr => !productNames[qr.id]),

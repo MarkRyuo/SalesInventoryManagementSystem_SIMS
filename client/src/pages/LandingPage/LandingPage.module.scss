@@ -1,139 +1,54 @@
 
 //! Hero Section
 
-.main {
+body {
     scroll-behavior: smooth;
 }
 
-.heroContainer {
+.MainContainer {
+    margin: 0;
+    padding: 0;
+    height: auto;
     background: radial-gradient(1000px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 100%);
-    height: 93vh;
-    box-shadow: 2px 2px 3px linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-
-    @media (max-width: 500px ) {
-        height: 100vh;
-        // border: 1px solid red;
-    }
 }
 
-.partners {
-    // border: 1px solid;
-    display: flex;
-    justify-content: space-evenly;
-    position: absolute;
-    top: 87%;
-    left: 15%;
-    width: 70vw;
-    img {
-        width: 90px;;
-        height: 50px ;
-        opacity: 60%;
-    }
 
-    @media (max-width: 700px) {
-        left: 0%;
-        width: 100%;
-
-        img {
-            width: 50px;
-            height: 35px;
-        }
-    }
-}
-
-.heroSection {
-    // border: 1px solid red;
+.heroCard {
+    height: 100vh;
+    padding: 10px;
+    // border: 5px solid red;
     display: flex;
     justify-content: center;
-    gap: 50px;
-    height: 50vh;
-    box-sizing: border-box;
-    padding-top: 8vh;
-    position: relative;
+    align-items: center;
 
-    @media (max-width: 500px) {
-        padding-top: 0vh;
-        height: 100%;
-    }
-
-    div.heroText {
-        // border: 1px solid;
-        padding: 20px;
-        width: 500px;
-        height: 600px;
-        align-content: center ;
-        box-sizing: border-box;
-        color: #4b4b4b;
-
-        p {
-            font-size: 1.3rem;
-        }
-
-        p:first-child {
-            font-size: 2.8rem;
-            font-family: "Poppins", sans-serif;
-            font-weight: 600;
-            color: #4b4b4b;
-        }
-        p span:first-child {
-            background: radial-gradient(circle at 10% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
-            background-clip: text;            /* Standard syntax */
-            -webkit-background-clip: text;    /* WebKit syntax for older browsers */
-            color: transparent;
-        }
-        
-        .Btn {
-            // border: 1px solid;
-            font-size: 1.3rem;
-            color: #4b4b4b;
-            border: 1px solid;
-            margin-right: 15px;
-            transition: border-width 2s;
-            
-        }
-
-        .Btn:Hover {
-            border-width: 2px;
-            border-style: solid;
-            border-image: linear-gradient(to right, rgb(221, 49, 49), rgb(119, 0, 0)) 1;
-        }
-
-        
-        
-        @media (max-width: 700px){
-            height: 700px;
-            p:first-child {
-                font-size: 2rem;
-            }
-            p {
-                font-size: 1rem;
-            }
-
-            .Btn {
-                font-size: 1.1rem;
-            }
-        }
-
-    }
-    div.heroImage {
-        box-sizing: border-box;
-        width: 600px;
-        height: 60vh;
-        text-align: center;
-        padding-top: 50px;
-        img {
-            opacity: 90%;
-            width: 80%;
-            margin: 0px 20px;
-        }
-        
-        @media (max-width: 1000px) {
-            display: none;
-        }
+    @media (max-width: 600) {
+        max-height: 100vh;
     }
 }
 
-//! End of Hero Section 
+
+.aboutCard {
+    height: auto;
+    // border: 5px solid green;
+}
+
+
+.loginCard {
+    // border: 3px solid red;
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.footerCard {
+    // border: 3px solid green;
+    height: auto;
+}
+
+
+
+
 
 //? Navbar 
 
@@ -151,7 +66,7 @@
         .logoNav {
             // border: 1px solid;
             width: auto;
-            display: none;
+            margin-right: 10px;
             img {
                 width: 45px;
             }
@@ -161,28 +76,10 @@
     @media (max-width: 600px) {
         div:first-child {
             .logoNav {
-                margin-right: 10px;
-                display: block;
+                display: none;
             }
         }
     }
-}
-
-
-//! About Card
-.AboutCard {
-    width: auto;
-    height: auto;
-}
-
-
-
-//! Login in LandingPage|| LogInCardPagecss
-
-.LogInMainContainer {
-    box-sizing: border-box;
-    height: 100vh;
-    // border: 5px solid red;
 }
 
 

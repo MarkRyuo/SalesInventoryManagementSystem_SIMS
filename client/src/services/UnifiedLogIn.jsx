@@ -36,6 +36,9 @@ const unifiedLogin = async (username, password, navigate) => {
                 loginAttempts: 0,
             });
 
+            // Alert for successful login
+            alert("Login successful! Welcome Admin.");
+
             // Redirect Admin to Dashboard
             localStorage.setItem('adminId', adminDoc.id);
             navigate("/DashboardPage");
@@ -74,6 +77,9 @@ const unifiedLogin = async (username, password, navigate) => {
             if (!active) {
                 throw new Error("Your account is inactive. Please contact Admin.");
             }
+
+            // Alert for successful login
+            alert("Login successful! Welcome Staff.");
 
             // Redirect Staff to Dashboard
             localStorage.setItem('staffId', staffDoc.id);

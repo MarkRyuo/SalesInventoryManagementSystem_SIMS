@@ -14,8 +14,14 @@
   },
   "main": "index.js",
   "dependencies": {
-    "firebase-admin": "^12.1.0",
-    "firebase-functions": "^5.0.0"
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "firebase-admin": "^12.7.0",
+    "firebase-functions": "^6.1.1",
+    "jspdf": "^2.5.2",
+    "qrcode": "^1.5.4",
+    "qrious": "^4.0.2",
+    "twilio": "^5.3.6"
   },
   "devDependencies": {
     "eslint": "^8.15.0",

@@ -11,7 +11,12 @@
 
 ## Changelog
 
-### v8.4-beta (Latest)
+### v8.5-beta (Latest)
+- Deployment of firebase function
+- Add Phone Number to Admin
+- Landing Pages
+
+### v8.4-beta
 - Both Scanner Logic Change
 - Admin Dashboard Update
 

@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Button} from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import unifiedLogin from '../../../services/UnifiedLogIn'; // The combined login function
-import LogInCardPagecss from './LandingPageCards.module.scss';
 import { FaRegEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
+import LoginPageCardScss from './SCSS/LoginPageCard.module.scss';
 
 function LogInCardPage() {
     const [username, setUsername] = useState("");
@@ -13,6 +13,7 @@ function LogInCardPage() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [fadeOut, setFadeOut] = useState(false);
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
@@ -21,66 +22,85 @@ function LogInCardPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
         setError(""); // Clear previous errors
+        setFadeOut(false); // Reset fade-out effect
 
         try {
             await unifiedLogin(username, password, navigate);
+            // Clear input fields after success
+            setUsername("");
+            setPassword("");
         } catch (err) {
             setError(err.message); // Display error message
+            setTimeout(() => setFadeOut(true), 1500); // Trigger fade-out after 1.5s
+            setTimeout(() => {
+                setError(""); // Clear error after 2s
+                setFadeOut(false); // Reset fade-out state
+            }, 2000);
         }
     };
 
+
     return (
-        <div className={LogInCardPagecss.LogInContainer}>
-            <div className={LogInCardPagecss.LoginText}>
+        <div className={LoginPageCardScss.LogInContainer}>
+            <div className={LoginPageCardScss.LoginText}>
                 <h1>Manage your entire Inventory in a single System</h1>
             </div>
 
-            <div className={LogInCardPagecss.LoginFormContainer}>
-                <div className={LogInCardPagecss.LoginForm}>
-                    <form onSubmit={handleLogin}>
-                        <h2>Welcome</h2>
-                        {error && <p style={{ color: 'red' }}>{error}</p>}
-                        <div>
-                            <p className='mb-2'>Username*</p>
+            <div className={LoginPageCardScss.LoginFormContainer}>
+                <form onSubmit={handleLogin}>
+                    <h2>Welcome</h2>
+                    {error && (
+                        <Alert
+                            variant="danger"
+                            className={`${fadeOut ? LoginPageCardScss.fadeOut : ""}`}
+                        >
+                            {error}
+                        </Alert>
+                    )}
+                    <div>
+                        <p className='m-0'>Username*</p>
+                        <input
+                            type="text"
+                            placeholder="Enter your username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <p className='m-0'>Password*</p>
+                        <div style={{ position: 'relative' }}>
                             <input
-                                type="text"
-                                placeholder="Enter your username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                type={isPasswordVisible ? 'text' : 'password'}
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
+                            <span
+                                onClick={togglePasswordVisibility}
+                                style={{
+                                    position: 'absolute',
+                                    right: '40px',
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                {isPasswordVisible ? <FaRegEye size={20} /> : <FaEyeSlash size={20} />}
+                            </span>
                         </div>
-                        <div>
-                            <p className='m-0'>Password*</p>
-                            <div style={{ position: 'relative' }}>
-                                <input
-                                    type={isPasswordVisible ? 'text' : 'password'}
-                                    placeholder="Enter your password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                />
-                                <span
-                                    onClick={togglePasswordVisibility}
-                                    style={{
-                                        position: 'absolute',
-                                        right: '40px',
-                                        top: '50%',
-                                        transform: 'translateY(-50%)',
-                                        cursor: 'pointer',
-                                    }}
-                                >
-                                    {isPasswordVisible ? <FaRegEye size={20}/> : <FaEyeSlash size={20}/>}
-                                </span>
-                            </div>
-                        </div>
-                        <Button variant='' type='submit' onSubmit={handleLogin} className={LogInCardPagecss.LoginButton}>
-                            Login
-                        </Button>
-                    </form>
-
-                    <Link to={"/ForgotPasswordMode"}>Forgot Password?</Link>
-                </div>
+                    </div>
+                    <Button
+                        variant=''
+                        type='submit'
+                        onSubmit={handleLogin}
+                        className={LoginPageCardScss.LoginButton}
+                    >
+                        Login
+                    </Button>
+                    <Link to={"/ResetPass"}>Forgot Password?</Link>
+                </form>
             </div>
         </div>
     );
