@@ -22,9 +22,10 @@
     align-items: center;
 
     @media (max-width: 600) {
-        height: auto;
+        max-height: 100vh;
     }
 }
+
 
 .aboutCard {
     height: auto;
