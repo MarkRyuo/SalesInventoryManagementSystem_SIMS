@@ -216,8 +216,30 @@ const ProfileComp = () => {
                 </div>
                 
             </div>
+
+            <Form.Group className="" controlId="username">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                    type="text"
+                    name="username"
+                    value={userData.username}
+                    onChange={handleInputChange}
+                    disabled={!isEditing}
+                />
+            </Form.Group>
+
+            <Form.Group className="password" controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                    type="password"
+                    name="password"
+                    value={userData.password}
+                    onChange={handleInputChange}
+                    disabled={!isEditing}
+                />
+            </Form.Group>
             
-            <Form.Group className="mb-3" controlId="phoneNumber">
+            <Form.Group className="PhoneNumber" controlId="phoneNumber">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                     type="text"
@@ -229,13 +251,12 @@ const ProfileComp = () => {
             </Form.Group>
 
             <Button
-                className='m-3 mt-0'
-                variant="primary"
+                variant=""
                 onClick={handleSendOtp}
                 disabled={otpSent || !isEditing}>
                 Send OTP
             </Button>
-            
+
             {otpSent && (
                 <>
                     <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
@@ -276,28 +297,6 @@ const ProfileComp = () => {
                     <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
                 </DropdownButton>
             </InputGroup>
-
-            <Form.Group className="mb-3" controlId="username" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                    type="text"
-                    name="username"
-                    value={userData.username}
-                    onChange={handleInputChange}
-                    disabled={!isEditing}
-                />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="password" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    name="password"
-                    value={userData.password}
-                    onChange={handleInputChange}
-                    disabled={!isEditing}
-                />
-            </Form.Group>
 
             {isEditing && (
                 <>

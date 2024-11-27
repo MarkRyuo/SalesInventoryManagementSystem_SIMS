@@ -67,50 +67,6 @@
 }
 
 
-
-.contentAccount {
-    // border: 1px solid ;
-    width: 100%;
-    height: auto;
-    padding: 25px;
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.3rem;
-        font-weight: 400;
-        padding: 20px 5px;
-        border-bottom: 1px solid rgb(187, 187, 187);
-    }
-
-    .RowContainer {
-        margin: 0;
-        padding: 0;
-    }
-
-    @media (max-width: 600px) {
-        h1 {
-            font-size: 1.7rem;
-        }
-        h2 {
-            font-size: 1.1rem;
-        }
-
-        label {
-            font-size: 0.9rem;
-        }
-
-        input {
-            height: 40px;
-            padding-left: 10px;
-        }
-    }
-}
-
-
-
 .ColStaffComp {
     width: auto;
 
@@ -151,3 +107,5 @@
         }
     }
 }
+
+
