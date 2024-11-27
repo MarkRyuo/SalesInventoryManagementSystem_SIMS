@@ -14,6 +14,7 @@ function LogInCardPage() {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const navigate = useNavigate();
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [fadeOut, setFadeOut] = useState(false);
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
@@ -22,12 +23,15 @@ function LogInCardPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
         setError(""); // Clear previous errors
+        setFadeOut(false); // Reset fade-out effect
 
         try {
             await unifiedLogin(username, password, navigate);
             setShowSuccessModal(true); // Show success modal
         } catch (err) {
             setError(err.message); // Display error message
+            setTimeout(() => setFadeOut(true), 1500); // Trigger fade-out after 1.5s
+            setTimeout(() => setError(""), 2000); // Clear error after 2s
         }
     };
 
@@ -40,7 +44,14 @@ function LogInCardPage() {
             <div className={LoginPageCardScss.LoginFormContainer}>
                 <form onSubmit={handleLogin}>
                     <h2>Welcome</h2>
-                    {error && <Alert variant="danger">{error}</Alert>}
+                    {error && (
+                        <Alert
+                            variant="danger"
+                            className={`${fadeOut ? LoginPageCardScss.fadeOut : ""}`}
+                        >
+                            {error}
+                        </Alert>
+                    )}
                     <div>
                         <p className='m-0'>Username*</p>
                         <input
