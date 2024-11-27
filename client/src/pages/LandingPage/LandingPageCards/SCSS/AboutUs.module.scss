@@ -36,10 +36,10 @@
 
             .cardImage {
                 border: 1px solid;
-                width: 400px;
+                width: 100%;
 
                 img {
-                    width: 100% ;
+                    object-fit: fill;
                 }
             }
 
