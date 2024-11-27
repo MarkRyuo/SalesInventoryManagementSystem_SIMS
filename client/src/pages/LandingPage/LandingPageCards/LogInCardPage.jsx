@@ -28,12 +28,20 @@ function LogInCardPage() {
         try {
             await unifiedLogin(username, password, navigate);
             setShowSuccessModal(true); // Show success modal
+
+            // Clear input fields after success
+            setUsername("");
+            setPassword("");
         } catch (err) {
             setError(err.message); // Display error message
             setTimeout(() => setFadeOut(true), 1500); // Trigger fade-out after 1.5s
-            setTimeout(() => setError(""), 2000); // Clear error after 2s
+            setTimeout(() => {
+                setError(""); // Clear error after 2s
+                setFadeOut(false); // Reset fade-out state
+            }, 2000);
         }
     };
+
 
     return (
         <div className={LoginPageCardScss.LogInContainer}>
