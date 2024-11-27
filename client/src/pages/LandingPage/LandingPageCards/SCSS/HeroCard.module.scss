@@ -29,11 +29,35 @@
         border: 1px solid;
         border-radius: 10px;
     }
+
+    .btnExplore:hover {
+        
+    }
 }
 
 //! large 
 @media (max-width: 1200px) {
-    
+    .heroSection {
+    align-items: center;
+    height: auto;
+    gap: 25px;
+
+    h1 {
+        font-size: 3rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+
+    .btnExplore {
+        font-size: 1.3rem;
+        padding: 10px 20;
+        border: 1px solid;
+        border-radius: 10px;
+    }
+}
+
 }
 
 //! Laptops 
@@ -47,6 +71,6 @@
 } 
 
 //! Phones 
-@media screen (max-width: 600px) {
+@media (max-width: 600px) {
     
 }
