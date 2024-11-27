@@ -15,5 +15,10 @@
         justify-content: center;
         align-items: center;
         box-shadow: 1px 3px 1px #8aaa98;
+        gap: 15px;
+
+        h2 {
+            font-size: 2rem;
+        }
     }
 }
