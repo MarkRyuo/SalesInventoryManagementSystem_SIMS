@@ -40,6 +40,7 @@ import StaffProduct from './components/Charts/ProductChart/StaffProduct.jsx'
 import LowStockReports from './components/Reports/LowStockReports.jsx';
 import StockInReports from './components/Reports/StockInReports.jsx';
 import TotalSalesReports from './components/Reports/TotalSalesReports.jsx'
+import ResetPass from './components/Account/ResetPass.jsx'
 
 
 const router = createBrowserRouter([
@@ -194,6 +195,11 @@ const router = createBrowserRouter([
   {
     path: "TotalSalesReports",
     element: <TotalSalesReports /> ,
+  },
+
+  {
+    path: "ResetPass",
+    element: <ResetPass /> ,
   },
 
 ]);
