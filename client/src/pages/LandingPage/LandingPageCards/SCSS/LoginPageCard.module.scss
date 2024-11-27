@@ -3,20 +3,41 @@
 
 .LogInContainer {
     border: 1px solid;
+    width: 100%;
     display: flex;
     padding: 10px;
     height: 700px;
     justify-content: center;
     align-items: center;
-    
-    .LoginText {
 
+    .LoginText {
+        width: 800px;
+        border: 1px solid;
         h1 {
             font-size: 4rem;
         }
     }
 
     .LoginFormContainer {
+        width: 800px;
         border: 1px solid;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        form {
+            border: 1px solid;
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            height: 500px;
+            justify-content: center;
+            align-items: center;
+            h2 {
+                font-size: 2rem;
+            }
+        }
     }
 }

@@ -77,9 +77,9 @@ function LogInCardPage() {
                     <Button variant='' type='submit' onSubmit={handleLogin} className={LogInCardPagecss.LoginButton}>
                         Login
                     </Button>
+                    <Link to={"/ResetPass"}>Forgot Password?</Link>
                 </form>
 
-                <Link to={"/ResetPass"}>Forgot Password?</Link>
             </div>
         </div>
     );
