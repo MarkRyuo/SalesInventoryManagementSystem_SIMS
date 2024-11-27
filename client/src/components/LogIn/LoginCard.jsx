@@ -122,7 +122,7 @@ export const LoginCard = () => {
                         cursor: 'pointer',
                     }}
                 >
-                    {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                    {isPasswordVisible ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
                 </span>
             </FloatingLabel>
 
