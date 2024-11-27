@@ -21,25 +21,15 @@ function LogInCardPage() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError("");
+        setError(""); // Clear previous errors
 
         try {
-            const role = await unifiedLogin(username, password);
+            await unifiedLogin(username, password, navigate);
             setShowSuccessModal(true); // Show success modal
-
-            // Navigate after modal is dismissed
-            setTimeout(() => {
-                if (role === "admin") {
-                    navigate("/DashboardPage");
-                } else if (role === "staff") {
-                    navigate("/SDashboard");
-                }
-            }, 1000); // Adjust timing as needed
         } catch (err) {
-            setError(err.message);
+            setError(err.message); // Display error message
         }
     };
-
 
     return (
         <div className={LoginPageCardScss.LogInContainer}>
