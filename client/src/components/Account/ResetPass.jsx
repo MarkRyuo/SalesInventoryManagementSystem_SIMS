@@ -26,7 +26,7 @@ const ResetPass = () => {
             return;
         }
         try {
-            const response = await fetch('https://<your-firebase-functions-url>/sendOtp', {
+            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/sendOtp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phoneNumber }),
