@@ -6,7 +6,7 @@ import { db } from "../../services/firebase"; // Ensure this points to your Fire
 import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
 import ResetPassScss from './ResetPass.module.scss' ;
 import { Link } from 'react-router-dom'
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoArrowBack } from "react-icons/io5";
 
 const ResetPass = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -99,7 +99,8 @@ const ResetPass = () => {
         <Container fluid style={{ background: "radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
             <Row className={ResetPassScss.rowContainer}>
                 <Col xs={12} md={8} lg={5} className={ResetPassScss.colContainer}>
-                    <Button as={Link} to={"/"} className='w-100 d-flex' variant=''><IoMdArrowRoundBack size={30}/></Button>                    <h2 className="mb-4 text-center">Reset Password</h2>
+                    <h2 className="mb-4 text-center">Forgot Password</h2>
+                    <p className='fs-6'>Enter your Phone Number and well send you a OTP to reset your password.</p>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">{success}</Alert>}
                     <Form>
@@ -119,6 +120,7 @@ const ResetPass = () => {
                                 Send OTP
                             </Button>
                         )}
+                        <Link to={"/"} style={{ textDecoration: 'none', color: '#130e01' }}><IoArrowBack />Back to Login</Link>
 
                         {otpSent && (
                             <>
