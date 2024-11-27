@@ -7,7 +7,7 @@
 
 
 .LogInContainer {
-    border: 1px solid;
+    // border: 1px solid;
     width: 100%;
     display: flex;
     padding: 10px;
@@ -32,7 +32,7 @@
         justify-content: center;
         flex-direction: column;
 
-        
+
         form {
             border-radius: 15px;
             border: 1px solid;
@@ -63,6 +63,10 @@
                 width: 150px;
                 border: 1px solid;
                 border-radius: 0;
+            }
+
+            button:hover {
+                background-color: var(--buttonColor);
             }
 
             a {
