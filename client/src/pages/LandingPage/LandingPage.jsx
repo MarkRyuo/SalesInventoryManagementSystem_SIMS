@@ -10,8 +10,12 @@ function LandingPage() {
         <Container fluid className="m-0 p-0" id="home">
             <NavBars />
             <Container fluid className={LandingPageScss.MainContainer}>
-                <div>
+                <div className={LandingPageScss.heroCard}>
                     <HeroCard />
+                </div>
+
+                <div>
+                    <AboutCard />
                 </div>
             </Container>
         </Container>

@@ -10,9 +10,13 @@
     padding: 0;
     height: auto;
     background: radial-gradient(1000px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 100%);
-
 }
 
+
+.heroCard {
+    height: 100vh;
+    border: 5px solid red;
+}
 
 
 //? Navbar 
