@@ -8,6 +8,8 @@ import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
 import ResetPassScss from './ResetPass.module.scss' ;
 import { Link } from 'react-router-dom'
 import { IoArrowBack } from "react-icons/io5";
+import { PiShieldWarningThin } from "react-icons/pi";
+import { PiShieldWarningFill } from "react-icons/pi";
 
 const ResetPass = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -99,9 +101,10 @@ const ResetPass = () => {
     return (
         <Container fluid style={{ background: "radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
             <Row className={ResetPassScss.rowContainer}>
-                <Col xs={12} md={8} lg={5} className={ResetPassScss.colContainer}>
-                    <h2 className="mb-4 text-center">Forgot Password</h2>
-                    <p className='fs-6'>Enter your Phone Number and we'll send you a OTP to reset your password.</p>
+                <Col xs={12} md={8} lg={4} className={ResetPassScss.colContainer}>
+                    <div><PiShieldWarningFill size={70}/></div>
+                    <h2 className="mb-2 text-center">Forgot Password</h2>
+                    <p className='fs-6 m-0 text-center'>Enter your Phone Number and we'll send you a OTP to reset your password.</p>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">{success}</Alert>}
                     <Form>
@@ -121,7 +124,6 @@ const ResetPass = () => {
                                 Send OTP
                             </Button>
                         )}
-                        <Link to={"/"} style={{ textDecoration: 'none', color: '#130e01' }}><IoArrowBack />Back to Login</Link>
 
                         {otpSent && (
                             <>
@@ -153,6 +155,7 @@ const ResetPass = () => {
                             </>
                         )}
                     </Form>
+                    <Link to={"/"} style={{ textDecoration: 'none', color: '#130e01' }}><IoArrowBack />Back to Login</Link>
                 </Col>
             </Row>
         </Container>
