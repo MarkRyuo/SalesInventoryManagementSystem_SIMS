@@ -14,17 +14,20 @@
         margin-top: 15px;
         padding: 15px;
         text-align: center;
+        color: var(--textColor);
     }
 
     h3 {
         padding: 10px;
         text-align: center;
         font-size: 1.2rem;
+        color: var(--textColor);
     }
 
     h2 {
         text-align: center;
         font-size: 1.5rem;
+        color: var(--textColor);
     }
 
     .aboutCards {
@@ -63,6 +66,7 @@
                 }
                 p {
                     font-size: 1rem;
+                    color: var(--textColor);
                 }
             }
         }
