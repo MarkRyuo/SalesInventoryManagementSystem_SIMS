@@ -110,8 +110,6 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
 
 // Initialize Firebase Admin SDK
 // Twilio Phone Number Api
-admin.initializeApp();
-
 // Replace with your Twilio credentials
 const accountSid = "AC498aada106ec5351f44aa2cc33d22dd2";
 const authToken = "822891c4c2b634a8ef58b620d5571c5b";
