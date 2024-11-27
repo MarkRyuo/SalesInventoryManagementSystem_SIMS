@@ -1,5 +1,9 @@
 
 
+:root {
+    --textColor: #302F2F ;
+}
+
 
 .LogInContainer {
     border: 1px solid;
@@ -50,6 +54,17 @@
             p {
                 font-size: 1rem;
                 padding: 5px 0px;
+            }
+
+            button {
+                width: 150px;
+                border: 1px solid;
+            }
+
+            a {
+                font-size: 1rem;
+                text-decoration: none;
+                color: ;
             }
         }
     }
