@@ -190,32 +190,28 @@ const ProfileComp = () => {
             <h1>My Details</h1>
             <h2>Personal Information</h2>
             <div className={ProfileCompScss.RowContainer}>
+            
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="firstname"
+                        value={userData.firstname}
+                        onChange={handleInputChange}
+                        disabled={!isEditing}
+                    />
 
-                <div>
-                    <Form.Group className="mb-3" controlId="firstname">
-                        <Form.Label>First Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="firstname"
-                            value={userData.firstname}
-                            onChange={handleInputChange}
-                            disabled={!isEditing}
-                        />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="lastname">
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="lastname"
-                            value={userData.lastname}
-                            onChange={handleInputChange}
-                            disabled={!isEditing}
-                        />
-                    </Form.Group>
-                </div>
-                
+                <Form.Group className="mb-3" controlId="lastname">
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="lastname"
+                        value={userData.lastname}
+                        onChange={handleInputChange}
+                        disabled={!isEditing}
+                    />
+                </Form.Group>
             </div>
+
 
             <Form.Group className="" controlId="username">
                 <Form.Label>Username</Form.Label>
@@ -238,7 +234,7 @@ const ProfileComp = () => {
                     disabled={!isEditing}
                 />
             </Form.Group>
-            
+
             <Form.Group className="PhoneNumber" controlId="phoneNumber">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
