@@ -8,11 +8,12 @@
     align-items: center;
 
     .colContainer {
-        border: 1px solid;
+        border-radius: 15px;
         height: 500px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        box-shadow: 1px 3px 1px #8aaa98;
     }
 }
