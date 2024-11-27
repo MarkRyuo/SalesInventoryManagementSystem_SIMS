@@ -261,7 +261,7 @@ const StaffComp = () => {
                                 <p className="m-0">{staff.active ? 'Active' : 'Inactive'}</p>
                             </div>
 
-                            <div className="d-flex gap-2">
+                            <div className={StaffCompScss.DetailsBtn}>
                                 <Button
                                     variant="info"
                                     onClick={() => handleEditStaff(staff)}
