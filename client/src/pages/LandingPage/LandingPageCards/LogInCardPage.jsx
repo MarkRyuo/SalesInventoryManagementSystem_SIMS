@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from "react-bootstrap";
+import { Button, Modal, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import unifiedLogin from '../../../services/UnifiedLogIn'; // The combined login function
 import { FaRegEye } from "react-icons/fa6";
@@ -11,6 +11,7 @@ function LogInCardPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const navigate = useNavigate();
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -20,14 +21,25 @@ function LogInCardPage() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError(""); // Clear previous errors
+        setError("");
 
         try {
-            await unifiedLogin(username, password, navigate);
+            const role = await unifiedLogin(username, password);
+            setShowSuccessModal(true); // Show success modal
+
+            // Navigate after modal is dismissed
+            setTimeout(() => {
+                if (role === "admin") {
+                    navigate("/DashboardPage");
+                } else if (role === "staff") {
+                    navigate("/SDashboard");
+                }
+            }, 1000); // Adjust timing as needed
         } catch (err) {
-            setError(err.message); // Display error message
+            setError(err.message);
         }
     };
+
 
     return (
         <div className={LoginPageCardScss.LogInContainer}>
@@ -38,7 +50,7 @@ function LogInCardPage() {
             <div className={LoginPageCardScss.LoginFormContainer}>
                 <form onSubmit={handleLogin}>
                     <h2>Welcome</h2>
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    {error && <Alert variant="danger">{error}</Alert>}
                     <div>
                         <p className='m-0'>Username*</p>
                         <input
@@ -73,13 +85,32 @@ function LogInCardPage() {
                             </span>
                         </div>
                     </div>
-                    <Button variant='' type='submit' onSubmit={handleLogin} className={LoginPageCardScss.LoginButton}>
+                    <Button
+                        variant=''
+                        type='submit'
+                        onSubmit={handleLogin}
+                        className={LoginPageCardScss.LoginButton}
+                    >
                         Login
                     </Button>
                     <Link to={"/ResetPass"}>Forgot Password?</Link>
                 </form>
-
             </div>
+
+            {/* Success Modal */}
+            <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Login Successful</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Welcome back! You are now logged in.</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => setShowSuccessModal(false)}>
+                        Continue
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
