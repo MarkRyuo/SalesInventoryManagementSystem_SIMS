@@ -16,7 +16,7 @@ function LandingPage() {
                     <HeroCard />
                 </div>
 
-                <div className={LandingPageScss.aboutCard}>
+                <div className={LandingPageScss.aboutCard} id="Aboutus">
                     <AboutCard />
                 </div>
 
@@ -24,7 +24,7 @@ function LandingPage() {
                     <LoginCardPage />
                 </div>
 
-                <div className={LandingPageScss.footerCard}>
+                <div className={LandingPageScss.footerCard} id="footer">
                     <Footer />
                 </div>
             </Container>
