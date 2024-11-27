@@ -30,15 +30,14 @@
         justify-content: space-around;
 
         .card {
-            border: 1px solid;
             display: flex;
             flex-direction: column;
             width: 400px;
             height: 500px;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 1px 3px 1px #dbdbdb;
-            background-color: #AAC9FF;
+            box-shadow: 1px 3px 1px #97c0aa;
+
             .cardImage {
                 width: 100%;
 
@@ -54,6 +53,7 @@
                 h5 {
                     padding: 5px;
                     font-size: 1.5rem;
+                    color: #5a86d1;
                 }
                 p {
                     padding: 5px;
