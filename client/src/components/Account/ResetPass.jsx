@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-const ResetPassword = () => {
+const ResetPass = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [otp, setOtp] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -148,4 +148,4 @@ const ResetPassword = () => {
     );
 };
 
-export default ResetPassword;
+export default ResetPass;

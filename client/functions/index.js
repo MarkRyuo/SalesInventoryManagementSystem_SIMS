@@ -117,7 +117,6 @@ const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_TOKEN;
 const client = twilio(accountSid, authToken);
 
-
 // Cloud Function to send OTP
 exports.sendOtp = functions.https.onRequest(async (req, res) => {
   const {phoneNumber} = req.body; // Phone number from frontend
