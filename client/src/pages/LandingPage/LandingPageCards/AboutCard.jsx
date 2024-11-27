@@ -6,7 +6,7 @@ function AboutCard() {
     return (
         <div className={AboutCardscss.parentAboutUs}> {/* Parent */}
             <h1>About Us <FcAbout size={20} className='ms-1' /></h1>
-            <h5>REYES ELECTRONICS is a leading provider of high-quality electronics</h5>
+            <h3>REYES ELECTRONICS is a leading provider of high-quality electronics</h3>
             <h2>&quot;With years of industry experience, REYES ELECTRONICS has built a reputation for providing high-quality products and services.&quot;</h2>
             
             <div className={AboutCardscss.aboutCards}>
@@ -24,7 +24,7 @@ function AboutCard() {
 
                 <div className={AboutCardscss.card}>
                     <div className={AboutCardscss.cardImage}>
-                        {/* <img src="/img4.jpg" /> */}
+                        <img src="/img4.jpg" />
                     </div>
                     <div className={AboutCardscss.cardText}>
                         <h5>Electronics section</h5>
@@ -36,7 +36,7 @@ function AboutCard() {
 
                 <div className={AboutCardscss.card}>
                     <div className={AboutCardscss.cardImage}>
-                        {/* <img src="/img3.jpg" /> */}
+                        <img src="/img3.jpg" />
                     </div>
                     <div className={AboutCardscss.cardText}>
                         <h5>Diverse Inventory</h5>

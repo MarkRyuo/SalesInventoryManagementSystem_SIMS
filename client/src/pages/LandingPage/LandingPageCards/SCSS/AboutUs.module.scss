@@ -11,7 +11,7 @@
         text-align: center;
     }
 
-    h5 {
+    h3 {
         padding: 10px;
         text-align: center;
         font-size: 1.2rem;
@@ -27,27 +27,35 @@
         border: 1px solid;
         height: 700px;
         display: flex;
-
+        justify-content: space-around;
 
         .card {
             border: 1px solid;
             display: flex;
             flex-direction: column;
+            width: 400px;
+            height: 500px;
+            padding: 15px;
+            border-radius: 10px;
 
             .cardImage {
-                border: 1px solid;
                 width: 100%;
 
                 img {
+                    border-radius: 10px;
+                    width: 100%;
                     object-fit: fill;
                 }
             }
 
             .cardText {
+                overflow: hidden;
                 h5 {
-                    font-size: 2rem;
+                    padding: 5px;
+                    font-size: 1.5rem;
                 }
                 p {
+                    padding: 5px;
                     font-size: 1rem;
                 }
             }
