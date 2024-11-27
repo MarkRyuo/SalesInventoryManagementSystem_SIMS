@@ -8,7 +8,6 @@ import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
 import ResetPassScss from './ResetPass.module.scss' ;
 import { Link } from 'react-router-dom'
 import { IoArrowBack } from "react-icons/io5";
-import { PiShieldWarningThin } from "react-icons/pi";
 import { PiShieldWarningFill } from "react-icons/pi";
 
 const ResetPass = () => {
