@@ -26,6 +26,32 @@
         padding: 10px;
         border: 1px solid;
         height: 700px;
+        display: flex;
+
+
+        .card {
+            border: 1px solid;
+            display: flex;
+            flex-direction: column;
+
+            .cardImage {
+                border: 1px solid;
+                width: 200px;
+
+                img {
+                    width: 100% ;
+                }
+            }
+
+            .cardText {
+                h5 {
+                    font-size: 2rem;
+                }
+                p {
+                    font-size: 1rem;
+                }
+            }
+        }
     }
 
 }

@@ -11,10 +11,10 @@ function AboutCard() {
             
             <div className={AboutCardscss.aboutCards}>
                 <div className={AboutCardscss.card}>
-                    <div>
-                        {/* <img src="/Img1.jpg" /> */}
+                    <div className={AboutCardscss.cardImage}>
+                        <img src="/Img1.jpg" />
                     </div>
-                    <div>
+                    <div className={AboutCardscss.cardText}>
                         <h5>Reyes Electronics Storefront</h5>
                         <p>
                             The exterior shot of Reyes Electronics with the signage of his store and entrance.  The picture shows a busy retail place full of goods in stock.
@@ -23,10 +23,10 @@ function AboutCard() {
                 </div>
 
                 <div className={AboutCardscss.card}>
-                    <div>
+                    <div className={AboutCardscss.cardImage}>
                         {/* <img src="/img4.jpg" /> */}
                     </div>
-                    <div>
+                    <div className={AboutCardscss.cardText}>
                         <h5>Electronics section</h5>
                         <p>
                             An interior shot of Reyes Electronics with an aisle or section full of different electronic components.  The shelves are packed full which means good variety in the inventory.
@@ -35,10 +35,10 @@ function AboutCard() {
                 </div>
 
                 <div className={AboutCardscss.card}>
-                    <div>
+                    <div className={AboutCardscss.cardImage}>
                         {/* <img src="/img3.jpg" /> */}
                     </div>
-                    <div>
+                    <div className={AboutCardscss.cardText}>
                         <h5>Diverse Inventory</h5>
                         <p>
                             This interior shot of Reyes Electronics shows them the range in their products.  The picture indicates that there are several pieces of electronics and components available.
