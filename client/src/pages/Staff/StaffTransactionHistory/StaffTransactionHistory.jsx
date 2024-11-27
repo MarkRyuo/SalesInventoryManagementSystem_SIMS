@@ -69,36 +69,64 @@ function AdminTransactionHistory() {
         // Title
         doc.setFontSize(22);
         doc.setFont('helvetica', 'bold');
-        doc.text('Receipt', 105, 20, { align: 'center' });
-
-        // Order details
+        doc.text('REYES ELECTRONIC SHOP', 105, 20, { align: 'center' });
         doc.setFontSize(12);
-        doc.setFont('helvetica', 'normal');
-        doc.text(`Order Date: ${order.date}`, 10, 40);
-        doc.text(`Sold To: ${order.customerName}`, 10, 50);
-        doc.text(`Order ID: ${order.id}`, 10, 60);
+        doc.text('JP Rizal St. Población Barangay 4, 4217 Lipa City Batangas Philippines', 105, 30, { align: 'center' });
+        doc.text('RAMIL P. REYES - PROP.', 105, 40, { align: 'center' });
 
-        // Pricing Breakdown
-        doc.text(`Subtotal: \u20B1${order.subtotal.toFixed(2)}`, 10, 70);
-        doc.text(`Tax (12%): \u20B1${order.tax.toFixed(2)}`, 10, 80);
-        doc.text(`Discount: -\u20B1${order.discount.toFixed(2)}`, 10, 90);
-        doc.text(`Payment Amount: \u20B1${parseFloat(order.paymentAmount).toFixed(2)}`, 10, 100); // Added
-        doc.text(`Change: \u20B1${parseFloat(order.change).toFixed(2)}`, 10, 110); // Added
+        // Order Date
+        doc.setFontSize(12);
+        doc.text(`Order Date: ${order.date}`, 10, 50);
+
+        // Customer info
+        doc.text(`Sold To: ${order.customerName}`, 10, 60);
+
+        // Separator Line
+        doc.line(10, 65, 200, 65); // Draw line to separate items and total
+
+        // Product Table
+        let yPosition = 75;
+        doc.setFontSize(10);
+        doc.text("Product Name", 10, yPosition);
+        doc.text("Qty", 100, yPosition, { align: "center" });
+        doc.text("Price", 140, yPosition, { align: "right" });
+        doc.text("Amount", 180, yPosition, { align: "right" });
+
+        // Product list loop
+        yPosition += 10;
+        order.items.forEach(item => {
+            doc.text(item.productName, 10, yPosition);
+            doc.text(item.quantity.toString(), 100, yPosition, { align: "center" });
+            doc.text(`₱${parseFloat(item.price).toFixed(2)}`, 140, yPosition, { align: "right" });
+            doc.text(`₱${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, { align: "right" });
+            yPosition += 10;
+        });
+
+        // Separator Line for totals
+        doc.line(10, yPosition, 200, yPosition);
+
+        // Totals
+        yPosition += 10;
+        doc.text(`Subtotal: ₱${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
+        doc.text(`Tax: ₱${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
+        doc.text(`Discount: -₱${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
+        doc.text(`Payment Amount: ₱${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
+        doc.text(`Change: ₱${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
         doc.setFontSize(14);
         doc.setFont('helvetica', 'bold');
-        doc.text(`Total Amount: \u20B1${order.total.toFixed(2)}`, 10, 120);
+        doc.text(`Total Amount: ₱${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
 
         // QR Code
         const qrCanvas = qrRef.current;
         if (qrCanvas) {
             const qrDataUrl = qrCanvas.toDataURL("image/png");
-            doc.addImage(qrDataUrl, 'PNG', 150, 60, 50, 50);
+            doc.addImage(qrDataUrl, 'PNG', 150, yPosition + 20, 50, 50);
         }
 
         // Footer
         doc.setFontSize(10);
         doc.setFont('helvetica', 'italic');
-        doc.text('Thank you for your purchase!', 105, 150, { align: 'center' });
+        doc.text('Thank you for your purchase!', 105, yPosition + 80, { align: 'center' });
 
         // Save as PDF
         doc.save(`Order_${order.id}.pdf`);
