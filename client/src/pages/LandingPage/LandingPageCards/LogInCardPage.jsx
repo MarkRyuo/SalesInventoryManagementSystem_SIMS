@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import unifiedLogin from '../../../services/UnifiedLogIn'; // The combined login function
-import LogInCardPagecss from './LandingPageCards.module.scss';
 import { FaRegEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
@@ -74,7 +73,7 @@ function LogInCardPage() {
                             </span>
                         </div>
                     </div>
-                    <Button variant='' type='submit' onSubmit={handleLogin} className={LogInCardPagecss.LoginButton}>
+                    <Button variant='' type='submit' onSubmit={handleLogin} className={LoginPageCardScss.LoginButton}>
                         Login
                     </Button>
                     <Link to={"/ResetPass"}>Forgot Password?</Link>
