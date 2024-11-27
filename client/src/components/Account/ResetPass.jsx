@@ -99,7 +99,7 @@ const ResetPass = () => {
         <Container fluid style={{ background: "radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
             <Row className={ResetPassScss.rowContainer}>
                 <Col xs={12} md={8} lg={5} className={ResetPassScss.colContainer}>
-                    <Button as={Link} to={"/"}><IoMdArrowRoundBack /></Button>                    <h2 className="mb-4 text-center">Reset Password</h2>
+                    <Button as={Link} to={"/"} className='w-100 d-flex' variant=''><IoMdArrowRoundBack size={30}/></Button>                    <h2 className="mb-4 text-center">Reset Password</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">{success}</Alert>}
                     <Form>
