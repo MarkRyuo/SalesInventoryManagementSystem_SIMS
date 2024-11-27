@@ -16,6 +16,9 @@
 .heroCard {
     height: 100vh;
     border: 5px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .aboutCard {
