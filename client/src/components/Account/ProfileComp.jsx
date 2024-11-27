@@ -226,6 +226,7 @@ const ProfileComp = () => {
                 />
             </Form.Group>
             <Button
+                className='m-3 mt-0'
                 variant="primary"
                 onClick={handleSendOtp}
                 disabled={otpSent || !isEditing}>
