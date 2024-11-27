@@ -202,7 +202,7 @@ const ProfileComp = () => {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="lastname">
+                <Form.Group controlId="lastname">
                     <Form.Label>Last Name</Form.Label>
                     <Form.Control
                         type="text"
