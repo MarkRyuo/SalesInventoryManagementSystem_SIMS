@@ -158,9 +158,9 @@ const StaffComp = () => {
     return (
         <Container style={{ display: 'flex', width: "100%", margin: 0, justifyContent: "space-between" }}>
             <div>
-                <p className='m-0 p-0 ps-3 fw-light'><span className='fw-semibold'>Reminder: </span>Please ensure that all staff details are accurately filled before saving.</p>
+                <p><span className='fw-semibold'>Reminder: </span>Please ensure that all staff details are accurately filled before saving.</p>
                 <Form onSubmit={handleAddStaff} style={{ padding: "20px", width: '100%' }}>
-                    <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
+                    <FloatingLabel controlId="floatingFirstname" label="First Name">
                         <Form.Control
                             type="text"
                             placeholder="First Name"
@@ -169,7 +169,7 @@ const StaffComp = () => {
                         />
                     </FloatingLabel>
 
-                    <FloatingLabel controlId="floatingLastname" label="Last Name" className="mb-3">
+                    <FloatingLabel controlId="floatingLastname" label="Last Name">
                         <Form.Control
                             type="text"
                             placeholder="Last Name"
@@ -178,7 +178,7 @@ const StaffComp = () => {
                         />
                     </FloatingLabel>
 
-                    <FloatingLabel controlId="floatingGender" label="Gender" className="mb-3">
+                    <FloatingLabel controlId="floatingGender" label="Gender">
                         <Form.Select
                             value={gender}
                             onChange={(e) => setGender(e.target.value)}
@@ -190,7 +190,7 @@ const StaffComp = () => {
                         </Form.Select>
                     </FloatingLabel>
 
-                    <FloatingLabel controlId="floatingUsername" label="Username" className="mb-3">
+                    <FloatingLabel controlId="floatingUsername" label="Username">
                         <Form.Control
                             type="text"
                             placeholder="Username"
@@ -199,7 +199,7 @@ const StaffComp = () => {
                         />
                     </FloatingLabel>
 
-                    <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
+                    <FloatingLabel controlId="floatingPassword" label="Password">
                         <Form.Control
                             type="password"
                             placeholder="Password"
@@ -235,7 +235,7 @@ const StaffComp = () => {
                         </>
                     )}
 
-                    <div className="d-flex gap-3 mb-3">
+                    <div className="d-flex gap-3 my-3">
                         <Button
                             variant={editingStaffId ? 'warning' : 'primary'}
                             type="submit"
