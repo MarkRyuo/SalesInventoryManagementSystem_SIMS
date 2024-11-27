@@ -37,7 +37,7 @@ function LogInCardPage() {
             </div>
 
             <div className={LoginPageCardScss.LoginFormContainer}>
-                <div className={LogInCardPagecss.LoginForm}>
+                <div className={LoginPageCardScss.LoginForm}>
                     <form onSubmit={handleLogin}>
                         <h2>Welcome</h2>
                         {error && <p style={{ color: 'red' }}>{error}</p>}
