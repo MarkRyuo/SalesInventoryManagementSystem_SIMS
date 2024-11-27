@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Modal, Alert } from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import unifiedLogin from '../../../services/UnifiedLogIn'; // The combined login function
 import { FaRegEye } from "react-icons/fa6";
@@ -11,7 +11,6 @@ function LogInCardPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const navigate = useNavigate();
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [fadeOut, setFadeOut] = useState(false);
@@ -27,8 +26,6 @@ function LogInCardPage() {
 
         try {
             await unifiedLogin(username, password, navigate);
-            setShowSuccessModal(true); // Show success modal
-
             // Clear input fields after success
             setUsername("");
             setPassword("");
@@ -105,21 +102,6 @@ function LogInCardPage() {
                     <Link to={"/ResetPass"}>Forgot Password?</Link>
                 </form>
             </div>
-
-            {/* Success Modal */}
-            <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Login Successful</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p>Welcome back! You are now logged in.</p>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={() => setShowSuccessModal(false)}>
-                        Continue
-                    </Button>
-                </Modal.Footer>
-            </Modal>
         </div>
     );
 }
