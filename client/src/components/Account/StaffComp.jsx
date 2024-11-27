@@ -156,16 +156,17 @@ const StaffComp = () => {
     }, []);
 
     return (
-        <Container style={{ display: 'flex', width: "100%", margin: 0, justifyContent: "space-between" }}>
+        <Container className={StaffCompScss.mainContainer}>
             <div>
                 <p><span className='fw-semibold'>Reminder: </span>Please ensure that all staff details are accurately filled before saving.</p>
-                <Form onSubmit={handleAddStaff} style={{ padding: "20px", width: '100%' }}>
+                <Form onSubmit={handleAddStaff} >
                     <FloatingLabel controlId="floatingFirstname" label="First Name">
                         <Form.Control
                             type="text"
                             placeholder="First Name"
                             value={firstname}
                             onChange={(e) => setFirstname(e.target.value)}
+                            className={StaffCompScss.staffFirstName}
                         />
                     </FloatingLabel>
 
