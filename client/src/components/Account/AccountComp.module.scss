@@ -128,7 +128,8 @@
     .RowContainer {
         display: flex;
         border: 1px solid;
-
+        gap: 15px;
+        
         input {
             height: 45px;
         }
@@ -138,7 +139,7 @@
         }
 
         .LastName {
-            
+
         }
 
     }
