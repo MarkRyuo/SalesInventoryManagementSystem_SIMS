@@ -94,9 +94,9 @@ const ResetPass = () => {
     };
 
     return (
-        <Container className="">
+        <Container>
             <Row className={ResetPassScss.rowContainer}>
-                <Col xs={12} md={6} lg={5}>
+                <Col xs={12} md={6} lg={5} className={ResetPassScss.colContainer}>
                     <h2 className="mb-4 text-center">Reset Password</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">{success}</Alert>}

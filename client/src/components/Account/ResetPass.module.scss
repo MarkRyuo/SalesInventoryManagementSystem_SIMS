@@ -3,4 +3,16 @@
 .rowContainer {
     border: 1px solid;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .colContainer {
+        border: 1px solid;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
