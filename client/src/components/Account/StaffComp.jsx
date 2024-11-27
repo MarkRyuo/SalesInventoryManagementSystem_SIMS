@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Form, FloatingLabel, Container } from 'react-bootstrap';
+import { Button, Form, FloatingLabel} from 'react-bootstrap';
 import { db } from '../../services/firebase'; // Update path as needed
 import { addDoc, collection, deleteDoc, doc, updateDoc, onSnapshot } from 'firebase/firestore';
 import bcrypt from 'bcryptjs'; // Add this import
@@ -156,7 +156,7 @@ const StaffComp = () => {
     }, []);
 
     return (
-        <Container className={StaffCompScss.mainContainer}>
+        <div className={StaffCompScss.mainContainer}>
             <div className={StaffCompScss.contentStaff}>
                 <p><span className='fw-semibold'>Reminder: </span>Please ensure that all staff details are accurately filled before saving.</p>
                 <Form onSubmit={handleAddStaff} >
@@ -287,7 +287,7 @@ const StaffComp = () => {
                     ))}
                 </div>
             </div>
-        </Container>
+        </div>
     );
 };
 
