@@ -34,7 +34,7 @@
 
     .aboutCards {
         padding: 10px;
-        border: 1px solid;
+        // border: 1px solid;
         height: 600px;
         display: flex;
         justify-content: space-evenly;
@@ -254,14 +254,14 @@
         align-items:baseline;
         flex-direction: column;
         gap: 15px;
+
         .card {
             display: flex;
             flex-direction: row;
             width: 100%;
             height: auto;
-            padding: 15px;
-            border-radius: 10px;
             box-shadow: 1px 3px 1px #97c0aa;
+            gap: 10px;
 
             .cardImage {
                 width: 100%;
@@ -277,11 +277,11 @@
                 overflow: hidden;
                 h5 {
                     padding: 5px 0px;
-                    font-size: 1.4rem;
+                    font-size: 1.2rem;
                     color: #5a86d1;
                 }
                 p {
-                    font-size: 1rem;
+                    font-size: 0.9rem;
                     color: var(--textColor);
                 }
             }
@@ -293,5 +293,71 @@
 
 //! Phones 
 @media (max-width: 600px) {
-    
+    .parentAboutUs {
+    padding: 10px;
+    // border: 3px solid red;
+    height: auto;
+
+    h1 {
+        font-size: 1.4rem;
+        margin-top: 15px;
+        padding: 10px;
+    }
+
+    h3 {
+        padding: 10px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--textColor);
+    }
+
+    h2 {
+        padding: 5px;
+        text-align: center;
+        font-size: 1rem;
+        color: var(--textColor);
+    }
+
+    .aboutCards {
+        padding: 10px;
+        height: auto;
+        display: flex;
+        justify-content: baseline;
+        align-items:baseline;
+        flex-direction: column;
+        gap: 15px;
+
+        .card {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: auto;
+            box-shadow: 1px 3px 1px #97c0aa;
+            gap: 10px;
+
+            .cardImage {
+                display: none;
+                img {
+                    border-radius: 10px;
+                    width: 100%;
+                    object-fit: fill;
+                }
+            }
+
+            .cardText {
+                overflow: hidden;
+                h5 {
+                    padding: 5px 0px;
+                    font-size: 1.1rem;
+                    color: #5a86d1;
+                }
+                p {
+                    font-size: 0.8rem;
+                    color: var(--textColor);
+                }
+            }
+        }
+    }
+
+    }
 }
