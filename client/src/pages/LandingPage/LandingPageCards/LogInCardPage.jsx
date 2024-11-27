@@ -6,6 +6,7 @@ import LogInCardPagecss from './LandingPageCards.module.scss';
 import { FaRegEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
+import LoginPageCardScss from './SCSS/'
 
 function LogInCardPage() {
     const [username, setUsername] = useState("");
