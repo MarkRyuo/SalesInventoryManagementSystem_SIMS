@@ -3,12 +3,12 @@
 .LogInContainer {
     box-sizing: border-box;
     // border: 5px solid green;
-    height: 100vh;
+    height: auto;
     display: flex;
 
     .LoginText {
         width: 50vw;
-        // border: 1px solid;
+        border: 2px solid;
         display: inline-flex;
         align-items: center;
         padding: 10px;
@@ -24,7 +24,7 @@
     }
 
     .LoginFormContainer {
-        // border: 1px solid;
+        border: 3px solid;
         width: 50vw;
         padding: 20px;
         display: flex;
