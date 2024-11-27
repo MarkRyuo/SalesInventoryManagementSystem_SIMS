@@ -189,8 +189,8 @@ const ProfileComp = () => {
         <Form className={ProfileCompScss.contentAccount}>
             <h1>My Details</h1>
             <h2>Personal Information</h2>
-            <Row className={ProfileCompScss.RowContainer}>
-                <Col lg={6}>
+            <div className={ProfileCompScss.RowContainer}>
+                <div>
                     <Form.Group className="mb-3" controlId="firstname">
                         <Form.Label>First Name</Form.Label>
                         <Form.Control
@@ -201,8 +201,8 @@ const ProfileComp = () => {
                             disabled={!isEditing}
                         />
                     </Form.Group>
-                </Col>
-                <Col lg={6}>
+                </div>
+                <div>
                     <Form.Group className="mb-3" controlId="lastname">
                         <Form.Label>Last Name</Form.Label>
                         <Form.Control
@@ -213,8 +213,8 @@ const ProfileComp = () => {
                             disabled={!isEditing}
                         />
                     </Form.Group>
-                </Col>
-            </Row>
+                </div>
+            </div>
             <Form.Group className="mb-3" controlId="phoneNumber" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
