@@ -4,6 +4,7 @@ import LandingPageScss from './LandingPage.module.scss';
 import HeroCard from './LandingPageCards/HeroCard';
 import AboutCard from './LandingPageCards/AboutCard' ;
 import LoginCardPage from './LandingPageCards/LogInCardPage'
+import Footer from './LandingPageCards/'
 
 function LandingPage() {
 
@@ -24,7 +25,7 @@ function LandingPage() {
                 </div>
 
                 <div className={LandingPageScss.footerCard}>
-                    <FooterCard>
+                    <Footer />
                 </div>
             </Container>
         </Container>
