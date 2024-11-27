@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Form, FloatingLabel, Row, Col } from 'react-bootstrap';
+import { Button, Form, FloatingLabel, Container} from 'react-bootstrap';
 import { db } from '../../services/firebase'; // Update path as needed
 import { addDoc, collection, deleteDoc, doc, updateDoc, onSnapshot } from 'firebase/firestore';
 import bcrypt from 'bcryptjs'; // Add this import
@@ -156,8 +156,8 @@ const StaffComp = () => {
     }, []);
 
     return (
-        <Row style={{ display: 'flex', width: "100%", margin: 0, justifyContent: "space-between" }}>
-            <Col className='p-0' lg={5} md={12} sm={12}>
+        <Container style={{ display: 'flex', width: "100%", margin: 0, justifyContent: "space-between" }}>
+            <div>
                 <p className='m-0 p-0 ps-3 fw-light'><span className='fw-semibold'>Reminder: </span>Please ensure that all staff details are accurately filled before saving.</p>
                 <Form onSubmit={handleAddStaff} style={{ padding: "20px", width: '100%' }}>
                     <FloatingLabel controlId="floatingFirstname" label="First Name" className="mb-3">
@@ -245,9 +245,9 @@ const StaffComp = () => {
                         <Button variant="secondary" onClick={clearForm}>Clear</Button>
                     </div>
                 </Form>
-            </Col>
+            </div>
 
-            <Col className='p-0' lg={6} md={12} sm={12}>
+            <div>
                 <div className="d-flex gap-3 flex-column">
                     <h4>Staff List</h4>
                     <div className={`${StaffCompScss.scrollableList} overflow-auto`} style={{ maxHeight: '50vh' }}>
@@ -286,8 +286,8 @@ const StaffComp = () => {
                         ))}
                     </div>
                 </div>
-            </Col>
-        </Row>
+            </div>
+        </Container>
     );
 };
 
