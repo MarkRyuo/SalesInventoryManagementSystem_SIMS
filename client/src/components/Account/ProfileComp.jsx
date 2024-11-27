@@ -168,7 +168,7 @@ const ProfileComp = () => {
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/verifyOtp', {
+            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/sendOtp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ otp, phoneNumber: userData.phoneNumber }),

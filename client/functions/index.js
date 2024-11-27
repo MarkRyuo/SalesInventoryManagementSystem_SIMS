@@ -117,56 +117,57 @@ const accountSid = process.env.TWILIO_SID;
 const authToken = process.env.TWILIO_TOKEN;
 const client = twilio(accountSid, authToken);
 
-// Cloud Function to send OTP
-exports.sendOtp = functions.https.onRequest(async (req, res) => {
-  const {phoneNumber} = req.body; // Phone number from frontend
+exports.sendOtp = functions.https.onRequest((req, res) => {
+  cors(req, res, async () => { // Wrap logic in CORS handler
+    const {phoneNumber} = req.body;
 
-  try {
-    // Generate a random OTP (you can use any OTP generation method)
-    const otp = Math.floor(100000 + Math.random() * 900000); // Random 6-digit OTP
+    try {
+      const otp = Math.floor(100000 + Math.random() * 900000);
 
-    // Send OTP via Twilio SMS
-    const message = await client.messages.create({
-      body: `Your OTP is ${otp}`,
-      from: "+16812401352", // Your Twilio phone number
-      to: phoneNumber,
-    });
+      const message = await client.messages.create({
+        body: `Your OTP is ${otp}`,
+        from: "+16812401352",
+        to: phoneNumber,
+      });
 
-    // Optionally, you can store the OTP in Firestore temporarily
-    await admin.firestore().collection("otps").doc(phoneNumber).set({
-      otp: otp,
-      timestamp: admin.firestore.FieldValue.serverTimestamp(),
-    });
+      await admin.firestore().collection("otps").doc(phoneNumber).set({
+        otp: otp,
+        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      });
 
-    res.status(200).json({message: "OTP sent successfully", sid: message.sid});
-  } catch (error) {
-    console.error("Error sending OTP:", error);
-    res.status(500).json({error: "Failed to send OTP"});
-  }
+      res.status(200).json({message: "OTP sent successfully", sid: message.sid});
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      res.status(500).json({error: "Failed to send OTP"});
+    }
+  });
 });
+
 
 // Cloud Function to verify OTP
-exports.verifyOtp = functions.https.onRequest(async (req, res) => {
-  const {otp, phoneNumber} = req.body;
+exports.verifyOtp = functions.https.onRequest((req, res) => {
+  cors(req, res, async () => { // Add CORS handler
+    const {otp, phoneNumber} = req.body;
 
-  try {
-    // Retrieve OTP from Firestore for the given phone number
-    const otpDoc = await admin.firestore().collection("otps").doc(phoneNumber).get();
+    try {
+      const otpDoc = await admin.firestore().collection("otps").doc(phoneNumber).get();
 
-    if (!otpDoc.exists) {
-      return res.status(400).json({error: "Phone number not found"});
+      if (!otpDoc.exists) {
+        return res.status(400).json({error: "Phone number not found"});
+      }
+
+      const storedOtp = otpDoc.data().otp;
+
+      if (otp === storedOtp) {
+        res.status(200).json({message: "OTP verified successfully"});
+      } else {
+        res.status(400).json({error: "Invalid OTP"});
+      }
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      res.status(500).json({error: "Failed to verify OTP"});
     }
-
-    const storedOtp = otpDoc.data().otp;
-
-    if (otp === storedOtp) {
-      res.status(200).json({message: "OTP verified successfully"});
-    } else {
-      res.status(400).json({error: "Invalid OTP"});
-    }
-  } catch (error) {
-    console.error("Error verifying OTP:", error);
-    res.status(500).json({error: "Failed to verify OTP"});
-  }
+  });
 });
+
 
