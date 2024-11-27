@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Button} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import unifiedLogin from '../../../services/UnifiedLogIn'; // The combined login function
 import LogInCardPagecss from './LandingPageCards.module.scss';
 import { FaRegEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-import LoginPageCardScss from './SCSS/LoginPageCard.module.scss' ;
+import LoginPageCardScss from './SCSS/LoginPageCard.module.scss';
 
 function LogInCardPage() {
     const [username, setUsername] = useState("");
@@ -37,51 +37,49 @@ function LogInCardPage() {
             </div>
 
             <div className={LoginPageCardScss.LoginFormContainer}>
-                <div className={LoginPageCardScss.LoginForm}>
-                    <form onSubmit={handleLogin}>
-                        <h2>Welcome</h2>
-                        {error && <p style={{ color: 'red' }}>{error}</p>}
-                        <div>
-                            <p className='mb-2'>Username*</p>
+                <form onSubmit={handleLogin}>
+                    <h2>Welcome</h2>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    <div>
+                        <p className='mb-2'>Username*</p>
+                        <input
+                            type="text"
+                            placeholder="Enter your username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <p className='m-0'>Password*</p>
+                        <div style={{ position: 'relative' }}>
                             <input
-                                type="text"
-                                placeholder="Enter your username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                type={isPasswordVisible ? 'text' : 'password'}
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
+                            <span
+                                onClick={togglePasswordVisibility}
+                                style={{
+                                    position: 'absolute',
+                                    right: '40px',
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                {isPasswordVisible ? <FaRegEye size={20} /> : <FaEyeSlash size={20} />}
+                            </span>
                         </div>
-                        <div>
-                            <p className='m-0'>Password*</p>
-                            <div style={{ position: 'relative' }}>
-                                <input
-                                    type={isPasswordVisible ? 'text' : 'password'}
-                                    placeholder="Enter your password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                />
-                                <span
-                                    onClick={togglePasswordVisibility}
-                                    style={{
-                                        position: 'absolute',
-                                        right: '40px',
-                                        top: '50%',
-                                        transform: 'translateY(-50%)',
-                                        cursor: 'pointer',
-                                    }}
-                                >
-                                    {isPasswordVisible ? <FaRegEye size={20}/> : <FaEyeSlash size={20}/>}
-                                </span>
-                            </div>
-                        </div>
-                        <Button variant='' type='submit' onSubmit={handleLogin} className={LogInCardPagecss.LoginButton}>
-                            Login
-                        </Button>
-                    </form>
+                    </div>
+                    <Button variant='' type='submit' onSubmit={handleLogin} className={LogInCardPagecss.LoginButton}>
+                        Login
+                    </Button>
+                </form>
 
-                    <Link to={"/ResetPass"}>Forgot Password?</Link>
-                </div>
+                <Link to={"/ResetPass"}>Forgot Password?</Link>
             </div>
         </div>
     );

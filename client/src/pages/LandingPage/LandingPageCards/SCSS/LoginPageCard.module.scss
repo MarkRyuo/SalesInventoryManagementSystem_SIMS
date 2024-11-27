@@ -1,0 +1,21 @@
+
+
+
+.LogInContainer {
+    border: 1px solid;
+    display: flex;
+    padding: 10px;
+    height: 700px;
+    justify-content: center;
+    align-items: center;
+    .LoginText {
+
+        h1 {
+            font-size: 4rem;
+        }
+    }
+
+    .LoginFormContainer {
+        border: 1px solid;
+    }
+}
