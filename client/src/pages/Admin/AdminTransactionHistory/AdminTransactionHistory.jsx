@@ -68,25 +68,27 @@ function AdminTransactionHistory() {
     const handleDownloadOrder = async (order) => {
         const doc = new jsPDF();
 
-        // Title
-        doc.setFontSize(22);
-        doc.setFont('helvetica', 'bold');
-        doc.text('REYES ELECTRONIC SHOP', 105, 20, { align: 'center' });
-        doc.setFontSize(12);
-        doc.text('JP Rizal St. Población Barangay 4, 4217 Lipa City Batangas Philippines', 105, 30, { align: 'center' });
-        doc.text('RAMIL P. REYES - PROP.', 105, 40, { align: 'center' });
+        // Using default fonts like Helvetica (most fonts support ₱)
+        doc.setFont('helvetica', 'normal');  // Use Helvetica which supports the peso sign
 
-        // Order Date
+        // Title and Store Info (aligned to the left)
+        doc.setFontSize(12);
+        doc.text('REYES ELECTRONIC SHOP', 10, 20);  // Aligned to left
+        doc.setFontSize(10);
+        doc.text('JP Rizal St. Población Barangay 4, 4217 Lipa City Batangas Philippines', 10, 30);
+        doc.text('RAMIL P. REYES - PROP.', 10, 40);
+
+        // Order Date (aligned to the left)
         doc.setFontSize(12);
         doc.text(`Order Date: ${order.date}`, 10, 50);
 
-        // Customer info
+        // Customer info (aligned to the left)
         doc.text(`Sold To: ${order.customerName}`, 10, 60);
 
         // Separator Line
         doc.line(10, 65, 200, 65); // Draw line to separate items and total
 
-        // Product Table
+        // Product Table (aligned columns)
         let yPosition = 75;
         doc.setFontSize(10);
         doc.text("Product Name", 10, yPosition);
@@ -107,32 +109,36 @@ function AdminTransactionHistory() {
         // Separator Line for totals
         doc.line(10, yPosition, 200, yPosition);
 
-        // Totals
+        // Totals (aligned to the left)
         yPosition += 10;
         doc.text(`Subtotal: ₱${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
         doc.text(`Tax: ₱${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
         doc.text(`Discount: -₱${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
         doc.text(`Payment Amount: ₱${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
         doc.text(`Change: ₱${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
+
         doc.setFontSize(14);
         doc.setFont('helvetica', 'bold');
         doc.text(`Total Amount: ₱${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
 
-        // QR Code
+        // QR Code (aligned to the left)
         const qrCanvas = qrRef.current;
         if (qrCanvas) {
             const qrDataUrl = qrCanvas.toDataURL("image/png");
-            doc.addImage(qrDataUrl, 'PNG', 150, yPosition + 20, 50, 50);
+            doc.addImage(qrDataUrl, 'PNG', 150, yPosition + 20, 50, 50);  // Position QR code
         }
 
-        // Footer
+        // Footer (centered)
         doc.setFontSize(10);
         doc.setFont('helvetica', 'italic');
-        doc.text('Thank you for your purchase!', 105, yPosition + 80, { align: 'center' });
+        doc.text('Thank you for your purchase!', 105, yPosition + 80, { align: 'center' });  // Centered footer text
 
         // Save as PDF
         doc.save(`Order_${order.id}.pdf`);
     };
+
+
+
 
 
     const handleDeleteOrder = (id) => {
