@@ -176,6 +176,7 @@ const StaffComp = () => {
                             placeholder="Last Name"
                             value={lastname}
                             onChange={(e) => setLastname(e.target.value)}
+                            className={StaffCompScss.staffLastName}
                         />
                     </FloatingLabel>
 
@@ -183,6 +184,7 @@ const StaffComp = () => {
                         <Form.Select
                             value={gender}
                             onChange={(e) => setGender(e.target.value)}
+                            className={StaffCompScss.staffGender}
                         >
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
@@ -197,6 +199,7 @@ const StaffComp = () => {
                             placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            className={StaffCompScss.staffUsername}
                         />
                     </FloatingLabel>
 
@@ -211,6 +214,7 @@ const StaffComp = () => {
                                 setPassword(e.target.value);
                                 validatePassword(e.target.value); // Validate on change
                             }}
+                            className={StaffCompScss.staffPassword}
                         />
                     </FloatingLabel>
 
