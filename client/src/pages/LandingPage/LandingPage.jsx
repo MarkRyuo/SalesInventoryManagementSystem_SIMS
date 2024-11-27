@@ -3,8 +3,8 @@ import NavBars from "./NavBars"
 import LandingPageScss from './LandingPage.module.scss';
 import HeroCard from './LandingPageCards/HeroCard';
 import AboutCard from './LandingPageCards/AboutCard' ;
-import LoginCardPage from './LandingPageCards/LogInCardPage'
-import Footer from './LandingPageCards/'
+import LoginCardPage from './LandingPageCards/LogInCardPage' ;
+import Footer from './LandingPageCards/Footer' ;
 
 function LandingPage() {
 
