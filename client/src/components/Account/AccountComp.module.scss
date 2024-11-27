@@ -184,20 +184,311 @@
 //? Profile Comp
 //! large 
 @media (max-width: 1200px) {
-    
+    .contentAccount {
+    height: auto;
+    padding: 15px;
+
+    h1 {
+        font-size: 2rem;
+        background: radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%);
+
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        padding: 20px;
+        border-bottom: 1px solid;
+        border-color: #5a5a5a;
+    }
+
+    .RowContainer {
+        display: flex;
+        // border: 1px solid;
+        gap: 15px;
+
+        input {
+            height: 45px;
+        }
+
+        .FirstName {
+            width: 450px;
+        }
+
+        .LastName {
+            width: 450px;
+        }
+    }
+
+    .UserName {
+        width: 450px;
+    }
+
+    .Gender {
+        height: 45px;
+        margin: 20px 0px;
+        width: 450px;
+    }
+
+    .OTPcontainer {
+        border-top: 1px solid #5a5a5a;
+        height: auto;
+        margin-top: 30px;
+        padding: 10px;
+
+        .PhoneNumber {
+            width: 440px;
+        }
+
+
+        button {
+            margin: 10px 0px;
+        }
+    }
+
+    .Password {
+        margin: 0px 10px;
+        width: 440px;
+    }
+
+    .buttonss {
+        margin: 10px 0px ;
+        padding: 10px 0px;
+    }
+    }
 }
 
 //! Laptops 
 @media (max-width: 992px) {
-    
+    .contentAccount {
+    height: auto;
+    padding: 0px;
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        padding: 20px;
+        border-bottom: 1px solid;
+        border-color: #5a5a5a;
+    }
+
+    .RowContainer {
+        display: flex;
+        // border: 1px solid;
+        gap: 15px;
+
+        input {
+            height: 45px;
+        }
+
+        .FirstName {
+            width: 350px;
+        }
+
+        .LastName {
+            width: 350px;
+        }
+    }
+
+    .UserName {
+        width: 350px;
+    }
+
+    .Gender {
+        height: 45px;
+        margin: 20px 0px;
+        width: 350px;
+    }
+
+    .OTPcontainer {
+        border-top: 1px solid #5a5a5a;
+        height: auto;
+        margin-top: 30px;
+        padding: 10px;
+
+        .PhoneNumber {
+            width: 350px;
+        }
+
+
+        button {
+            margin: 10px 0px;
+        }
+    }
+
+    .Password {
+        margin: 0px 10px;
+        width: 350px;
+    }
+
+    .buttonss {
+        margin: 10px 0px ;
+        padding: 10px 0px;
+    }
+    }
 }
 
 //! Tablets 
 @media (max-width: 768px) {
-    
+    .contentAccount {
+    height: auto;
+    padding: 0px;
+
+    button {
+        font-size: 0.9rem;
+    }
+        
+    label {
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        padding: 20px;
+        border-bottom: 1px solid;
+        border-color: #5a5a5a;
+    }
+
+    .RowContainer {
+        display: flex;
+        // border: 1px solid;
+        gap: 15px;
+
+        input {
+            height: 40px;
+        }
+
+        .FirstName {
+            width: 250px;
+        }
+
+        .LastName {
+            width: 250px;
+        }
+    }
+
+    .UserName {
+        width: 250px;
+    }
+
+    .Gender {
+        height: 45px;
+        margin: 20px 0px;
+        width: 250px;
+    }
+
+    .OTPcontainer {
+        border-top: 1px solid #5a5a5a;
+        height: auto;
+        margin-top: 30px;
+        padding: 10px;
+
+        .PhoneNumber {
+            width: 250px;
+        }
+
+
+        button {
+            margin: 10px 0px;
+        }
+    }
+
+    .Password {
+        margin: 0px 10px;
+        width: 240px;
+    }
+
+    .buttonss {
+        margin: 10px 0px ;
+        padding: 10px 0px;
+    }
+    }
 } 
 
 //! Phones 
 @media (max-width: 600px) {
-    
+    .contentAccount {
+    height: auto;
+    padding: 20px;
+
+    button {
+        font-size: 0.9rem;
+    }
+        
+    label {
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: 1.3rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+        padding: 20px;
+        border-bottom: 1px solid;
+        border-color: #5a5a5a;
+    }
+
+    .RowContainer {
+        display: flex;
+        flex-direction: column;
+        // border: 1px solid;
+        gap: 15px;
+
+        input {
+            height: 40px;
+        }
+
+        .FirstName {
+            width: 100%;
+        }
+
+        .LastName {
+            width: 100%;
+        }
+    }
+
+    .UserName {
+        width: 100%;
+    }
+
+    .Gender {
+        height: 40px;
+        margin: 20px 0px;
+        width: 100%;
+    }
+
+    .OTPcontainer {
+        border-top: 1px solid #5a5a5a;
+        height: auto;
+        margin-top: 30px;
+        padding: 10px;
+
+        .PhoneNumber {
+            width: 100%;
+        }
+
+
+        button {
+            margin: 10px 0px;
+        }
+    }
+
+    .Password {
+        margin: 0px 10px;
+        width: 100%;
+    }
+
+    .buttonss {
+        margin: 10px 0px ;
+        padding: 10px 0px;
+    }
+    }
 }
