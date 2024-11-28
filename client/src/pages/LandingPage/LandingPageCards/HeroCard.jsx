@@ -1,6 +1,5 @@
 import { Button } from "react-bootstrap";
 import HeroCardScss from './SCSS/HeroCard.module.scss';
-import { GoGlobe } from "react-icons/go";
 
 function HeroCard() {
     return (
@@ -11,7 +10,7 @@ function HeroCard() {
             <h3>Elevate Your Experience with Top-Tier Electronic Products.</h3>
 
             <Button variant='' href="#footer" id="btn" className={HeroCardScss.btnExplore}>
-                Explore <GoGlobe/>
+                Contact us
             </Button>
         </div>
 
