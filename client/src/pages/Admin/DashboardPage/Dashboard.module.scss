@@ -182,6 +182,56 @@
     }
 }
 
-@media (max-width: 500px) {
-    
+@media (max-width: 532px) {
+    .smallContainer {
+        flex-direction: column;
+
+        div:first-child {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 5px;
+        }
+        
+        .largeContainer {
+            margin-top: 10px;
+            display: flex;
+            width: auto;
+            gap: 10px;
+
+            .divLG {
+                width: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    }
+}
+
+@media (max-width: 446px) {
+    .smallContainer {
+        flex-direction: column;
+
+        div:first-child {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 5px;
+        }
+        
+        .largeContainer {
+            margin-top: 10px;
+            display: flex;
+            width: auto;
+            gap: 10px;
+
+            .divLG {
+                width: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    }
 }

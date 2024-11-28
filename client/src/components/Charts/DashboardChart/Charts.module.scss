@@ -325,12 +325,12 @@
     border-radius: 0;
 
     h5 {
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 
     .contentChart1 {
         p {
-            font-size: 2rem;
+            font-size: 1.7rem;
         }
     }
 }
@@ -341,12 +341,12 @@
     max-width: 270px;
 
     h5 {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 
     .contentChart2 {
         p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
     }
 
@@ -364,12 +364,12 @@
     max-width: 280px;
 
     h5 {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 
     .contentChart3 {
         p {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
         }
     }
 
@@ -387,12 +387,103 @@
     max-width: 500px;
 
     h5 {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
     }
 
     .contentChart4 {
         p {
-            font-size: 2rem;
+            font-size: 1.7rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+}
+}
+
+@media (max-width: 532px) {
+        /* ?Chart 1 */
+.containerChart1 {
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+
+    h5 {
+        font-size: 0.8rem;
+    }
+
+    .contentChart1 {
+        p {
+            font-size: 1.7rem;
+        }
+    }
+}
+
+/* ?Chart 2 */
+.containerChart2 {
+    width: 100%;
+    max-width: 200px;
+
+    h5 {
+        font-size: 0.8rem;
+    }
+
+    .contentChart2 {
+        p {
+            font-size: 1.2rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+}
+
+/* ?Chart 3 */
+.containerChart3 {
+    height: auto;
+    width: 100%;
+    max-width: 200px;
+
+    h5 {
+        font-size: 0.8rem;
+    }
+
+    .contentChart3 {
+        p {
+            font-size: 1.3rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+}
+
+/* ?Chart 3 */
+.containerChart4 {
+    height: auto;
+    width: 100%;
+    border-left: 1px solid;
+    border-radius: 0;
+    max-width: 200px;
+
+    h5 {
+        font-size: 0.8rem;
+    }
+
+    .contentChart4 {
+        p {
+            font-size: 1.7rem;
         }
     }
 
