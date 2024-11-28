@@ -129,7 +129,8 @@
 
 .containerChartLg1 {
     border: 2px solid red;
-    width: 80%;
+    width: 100%;
+    max-width: 600px;
     height: 590px;
     border-radius: 10px;
     box-shadow: 1px 5px 3px var(--chartShadow);
@@ -143,7 +144,6 @@
 
     .activityList {
         margin-top: 10px;
-        // border: 1px solid;
         display: flex;
         flex-direction: column;
         gap: 5px;
@@ -181,6 +181,7 @@
     border: 2px solid green;
     padding: 10px;
     width: 100%;
+    max-width: 600px;
     height: 300px;
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 5px 3px var(--chartShadow);
@@ -197,7 +198,8 @@
 .containerChartLg3 {
     border: 2px solid blue;
     padding: 10px;
-    width: 720px;
+    width: 100%;
+    max-width: 600px;
     height: 300px;
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 5px 3px var(--chartShadow);
