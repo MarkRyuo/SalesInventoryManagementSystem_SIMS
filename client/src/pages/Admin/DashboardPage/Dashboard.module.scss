@@ -158,13 +158,12 @@
     }
 }
 
-@media (max-width: 630px) {
+@media (max-width: 640px) {
     .smallContainer {
         flex-direction: column;
 
         div:first-child {
             display: flex;
-            flex-wrap: wrap;
         }
         
         .largeContainer {
