@@ -201,6 +201,13 @@
     display: flex;
     border-radius: 10px;
     gap: 20px;
+    position: relative;
+
+    .rangeButtons {
+        position: absolute;
+        top: 0;
+        left: 80%;
+    }
 
 }
 
