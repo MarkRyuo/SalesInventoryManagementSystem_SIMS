@@ -6,6 +6,8 @@ import bcrypt from 'bcryptjs'; // Add this import
 import StaffCompScss from './AccountComp.module.scss';
 import { FaEdit } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 
 const StaffComp = () => {
@@ -19,6 +21,8 @@ const StaffComp = () => {
     const [editingStaffId, setEditingStaffId] = useState(null); // Track staff being edited
     const [errorMessage, setErrorMessage] = useState(''); // For error messages
     const [isPasswordFocused, setIsPasswordFocused] = useState(false); // Track password field focus
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false); // State for toggling visibility
+
 
     // Password requirement states
     const [lengthRequirement, setLengthRequirement] = useState(false);
@@ -204,19 +208,29 @@ const StaffComp = () => {
                     </FloatingLabel>
 
                     <FloatingLabel controlId="floatingPassword" label="Password">
-                        <Form.Control
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onFocus={() => setIsPasswordFocused(true)} // Set focus state to true
-                            onBlur={() => setIsPasswordFocused(false)} // Set focus state to false
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                                validatePassword(e.target.value); // Validate on change
-                            }}
-                            className={StaffCompScss.staffPassword}
-                        />
+                            <Form.Control
+                                type={isPasswordVisible ? 'text' : 'password'}
+                                placeholder="Password"
+                                value={password}
+                                onFocus={() => setIsPasswordFocused(true)}
+                                onBlur={() => setIsPasswordFocused(false)}
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                    validatePassword(e.target.value);
+                                }}
+                                className={`${StaffCompScss.staffPassword} d-flex align-items-center position-relative`}
+                            />
+                            <Button
+                                variant="light"
+                                className="position-absolute end-0 top-50 translate-middle-y me-2 border-0"
+                                onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                                style={{ boxShadow: 'none' }}
+                            >
+                            {isPasswordVisible ? <FaEye size={20}/> : <FaEyeSlash size={20}/>}
+                            </Button>
                     </FloatingLabel>
+
+
 
                     {errorMessage && <p className="text-danger">{errorMessage}</p>}
 
