@@ -11,6 +11,10 @@
 
 ## Changelog
 
+### vdeploy4 (Latest)
+- vDeploy4 
+
+
 ### v8.5-beta (Latest)
 - Deployment of firebase function
 - Add Phone Number to Admin
