@@ -59,6 +59,7 @@
         display: flex;
         gap: 10px;
         flex-direction: column;
+        
         div:first-child {
             display: flex;
         }
@@ -68,7 +69,7 @@
             display: flex;
             width: auto;
             gap: 10px;
-            
+
             .divLG {
                 width: auto;
                 display: flex;
