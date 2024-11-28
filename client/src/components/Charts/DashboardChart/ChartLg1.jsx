@@ -86,7 +86,7 @@ function ChartLg1() {
 
     return (
         <div className={Chartcss.containerChartLg1}>
-            <p className="m-0">Products Activities Today</p>
+            <p className="m-0">Products Log</p>
             {activityToday.length > 0 ? (
                 <div className={Chartcss.activityList}>
                     {activityToday.map((activity, index) => (

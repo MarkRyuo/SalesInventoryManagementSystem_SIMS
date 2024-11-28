@@ -766,3 +766,96 @@
 
 }
 }
+
+
+
+
+@media (max-width: 998px) {
+    .containerChartLg1 {
+    width: 100%;
+    height: 590px;
+    border-radius: 10px;
+    overflow: auto;
+    padding: 10px;
+
+    p {
+        font-size: 1.1rem;
+        padding-left: 10px;
+    }
+
+    .activityList {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        height: auto;
+        
+        .activityItem {
+            border: 1px solid #b1b1b1;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            border-radius: 10px;
+    
+            .activityDetails {
+                // border: 1px solid;
+                display: flex;
+                flex-direction: column;
+
+                h1 {
+                    font-size: 1.1rem;
+                }
+
+                p {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+
+
+
+
+}
+
+.containerChartLg2 {
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+
+    .rangeButtons {
+        position: absolute;
+        top: 10%;
+        left: 75%;
+
+        select {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+.containerChartLg3 {
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+    box-shadow: 1px 5px 3px var(--chartShadow);
+    overflow: auto;
+    display: flex;
+    border-radius: 10px;
+    gap: 20px;
+    position: relative;
+
+    .rangeButtons {
+        position: absolute;
+        top: 10%;
+        left: 75%;
+
+        select {
+            font-size: 0.9rem;
+        }
+    }
+
+}
+}
