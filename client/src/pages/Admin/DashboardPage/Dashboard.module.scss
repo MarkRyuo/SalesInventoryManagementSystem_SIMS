@@ -130,8 +130,6 @@
 
 
 
-
-
 .smallContainer {
         background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
         border-radius: 15px;
@@ -157,6 +155,36 @@
                 gap: 20px;
             }
         }
+}
+
+@media (max-width: 1080px) {
+    .smallContainer {
+        padding: 0px;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+
+        div:first-child {
+            display: flex;
+        }
+        
+        .largeContainer {
+            border: 1px solid;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            width: auto;
+            gap: 10px;
+
+            .divLG {
+                width: auto;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                gap: 20px;
+            }
+        }
+    }
 }
 
 @media (max-width: 998px) {
