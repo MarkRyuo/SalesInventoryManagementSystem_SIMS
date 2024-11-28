@@ -64,8 +64,6 @@ function ChartLg2() {
 
     return (
         <div className={Chartcss.containerChartLg2}>
-
-            <Line data={chartData} options={chartOptions} />
             <div className={Chartcss.rangeButtons}>
                 <select onChange={(e) => handleRangeChange(e.target.value)} className="form-select">
                     <option value="today">Today</option>
@@ -74,6 +72,7 @@ function ChartLg2() {
                     <option value="year">Year</option>
                 </select>
             </div>
+            <Line data={chartData} options={chartOptions} />
         </div>
     );
 }

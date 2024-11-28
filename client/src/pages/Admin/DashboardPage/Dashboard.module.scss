@@ -60,7 +60,7 @@
         }
         
         .largeContainer {
-            border: 3px solid;
+            border: 1px solid;
             margin-top: 10px;
             display: flex;
             width: auto;
@@ -69,6 +69,7 @@
                 width: auto;
                 display: flex;
                 flex-direction: column;
+                // border: 1px solid;
                 gap: 10px;
             }
         }
