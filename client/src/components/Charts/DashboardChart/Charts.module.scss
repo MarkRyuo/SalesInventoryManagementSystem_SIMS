@@ -125,7 +125,7 @@
 
 }
 
-/* !Warning This is for ChartLg */
+
 
 .containerChartLg1 {
     border: 2px solid red;
@@ -228,9 +228,178 @@
 
 
 @media (max-width: 998px) {
-    
+    /* ?Chart 1 */
+.containerChart1 {
+    width: 100%;
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+
+    h5 {
+        font-size: 0.9rem;
+    }
+
+    .contentChart1 {
+        p {
+            font-size: 2rem;
+        }
+    }
+}
+
+/* ?Chart 2 */
+.containerChart2 {
+    width: 100%;
+    max-width: 280px;
+
+    h5 {
+        font-size: 0.9rem;
+    }
+
+    .contentChart2 {
+        p {
+            font-size: 1.3rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+}
+
+/* ?Chart 3 */
+.containerChart3 {
+    height: auto;
+    width: 100%;
+    max-width: 280px;
+
+    h5 {
+        font-size: 0.9rem;
+    }
+
+    .contentChart3 {
+        p {
+            font-size: 1.4rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+}
+
+/* ?Chart 3 */
+.containerChart4 {
+    height: auto;
+    width: 100%;
+    max-width: 500px;
+
+    h5 {
+        font-size: 0.9rem;
+    }
+
+    .contentChart4 {
+        p {
+            font-size: 2rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+}
+
 }
 
 @media (max-width: 630px) {
-    
+        /* ?Chart 1 */
+.containerChart1 {
+    width: 100%;
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+
+    h5 {
+        font-size: 0.9rem;
+    }
+
+    .contentChart1 {
+        p {
+            font-size: 2rem;
+        }
+    }
+}
+
+/* ?Chart 2 */
+.containerChart2 {
+    width: 100%;
+    max-width: 280px;
+
+    h5 {
+        font-size: 0.9rem;
+    }
+
+    .contentChart2 {
+        p {
+            font-size: 1.3rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+}
+
+/* ?Chart 3 */
+.containerChart3 {
+    height: auto;
+    width: 100%;
+    max-width: 280px;
+
+    h5 {
+        font-size: 0.9rem;
+    }
+
+    .contentChart3 {
+        p {
+            font-size: 1.4rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+}
+
+/* ?Chart 3 */
+.containerChart4 {
+    height: auto;
+    width: 100%;
+    max-width: 500px;
+
+    h5 {
+        font-size: 0.9rem;
+    }
+
+    .contentChart4 {
+        p {
+            font-size: 2rem;
+        }
+    }
+
+    select {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+}
 }
