@@ -14,8 +14,7 @@
 ### vdeploy4 (Latest)
 - vDeploy4 
 
-
-### v8.5-beta (Latest)
+### v8.5-beta
 - Deployment of firebase function
 - Add Phone Number to Admin
 - Landing Pages
