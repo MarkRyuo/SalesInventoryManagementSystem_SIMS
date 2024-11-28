@@ -148,7 +148,7 @@ const ProfileComp = () => {
         }
 
         try {
-            const response = await fetch('https://<your-firebase-functions-url>/sendOtp', {
+            const response = await fetch('https://sendotp-hqnwrfpmoa-uc.a.run.app', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phoneNumber: userData.phoneNumber }),
@@ -168,7 +168,7 @@ const ProfileComp = () => {
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('https://<your-firebase-functions-url>/verifyOtp', {
+            const response = await fetch('https://verifyotp-hqnwrfpmoa-uc.a.run.app', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ otp, phoneNumber: userData.phoneNumber }),
