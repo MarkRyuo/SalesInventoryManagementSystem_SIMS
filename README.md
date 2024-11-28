@@ -11,7 +11,10 @@
 
 ## Changelog
 
-### vdeploy4 (Latest)
+### v8.5 (Latest)
+- Redesign
+
+### vdeploy4
 - vDeploy4 
 
 ### v8.5-beta
