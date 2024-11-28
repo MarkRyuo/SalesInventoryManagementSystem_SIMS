@@ -833,6 +833,11 @@
             font-size: 0.9rem;
         }
     }
+
+    canvas {
+        min-width: 200px;
+        min-height: 200px;
+    }
 }
 
 .containerChartLg3 {
