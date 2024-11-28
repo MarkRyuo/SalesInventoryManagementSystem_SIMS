@@ -9,7 +9,6 @@
 
 /* ?Chart 1 */
 .containerChart1 {
-    // border: 1px solid; 
     box-sizing: border-box;
     padding: 15px 20px;
     height: auto;
@@ -320,12 +319,13 @@
         /* ?Chart 1 */
 .containerChart1 {
     width: 100%;
-    max-width: 280px;
+    max-width: 250px;
     display: flex;
     flex-direction: column;
+    border-radius: 0;
 
     h5 {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .contentChart1 {
@@ -338,7 +338,7 @@
 /* ?Chart 2 */
 .containerChart2 {
     width: 100%;
-    max-width: 280px;
+    max-width: 250px;
 
     h5 {
         font-size: 0.9rem;

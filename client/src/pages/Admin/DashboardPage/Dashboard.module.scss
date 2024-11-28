@@ -44,14 +44,60 @@
 
 
 @media (max-width: 998px) {
-    
+    .mainTopComponent {
+
+    .componentHeroCard {
+        h1 {
+            font-size: 1.4rem;
+        }
+        .credentialDashboard {
+            margin-top: 30px;
+
+            img {
+                width: 80px;
+            }
+
+            div:last-child {
+
+                h4 {
+                    font-size: 1.2rem;
+                }
+                p {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+    } //! End 
 }
 
 @media (max-width: 630px) {
-    
+    .mainTopComponent {
+
+    .componentHeroCard {
+        h1 {
+            font-size: 1.3rem;
+        }
+        .credentialDashboard {
+            margin-top: 30px;
+
+            img {
+                width: 70px;
+            }
+
+            div:last-child {
+
+                h4 {
+                    font-size: 1.1rem;
+                }
+                p {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+    } //! End 
 }
-
-
 
 
 
@@ -83,4 +129,35 @@
                 gap: 20px;
             }
         }
-    }
+}
+
+@media (max-width: 998px) {
+    .smallContainer {
+        padding: 0px;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+
+        div:first-child {
+            display: flex;
+        }
+        
+        .largeContainer {
+            margin-top: 10px;
+            display: flex;
+            width: auto;
+            gap: 10px;
+
+            .divLG {
+                width: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+}
+}
+
+@media (max-width: 630px) {
+    
+}
