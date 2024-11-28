@@ -181,8 +181,8 @@
     border: 2px solid green;
     padding: 10px;
     width: 100%;
-    max-width: 800px;
-    height: 360px;
+    max-width: 600px;
+    height: 370px;
     /*! Change this in auto if chart-lg is coded*/
     box-shadow: 1px 5px 3px var(--chartShadow);
     display: flex;
@@ -196,7 +196,8 @@
     border: 2px solid blue;
     padding: 10px;
     width: 100%;
-    height: 300px;
+    max-width: 800px;
+    height: 370px;
     box-shadow: 1px 5px 3px var(--chartShadow);
     display: flex;
     flex-direction: column;

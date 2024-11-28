@@ -56,21 +56,15 @@
         }
         
         .largeContainer {
-            border: 1px solid;
-            margin-top: 10px;
             display: flex;
-            width: auto;
-            gap: 10px;
+            flex-wrap: wrap;
+            
             .divLG {
                 width: auto;
+                height: auto;
+                border: 1px solid;
                 display: flex;
                 flex-direction: column;
-                // border: 1px solid;
-                gap: 10px;
-            }
-            .divLS {
-                width: auto;
-                display: flex;
             }
         }
     }
