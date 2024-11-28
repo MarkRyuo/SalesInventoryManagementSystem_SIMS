@@ -113,7 +113,7 @@ export const DashboardPage = () => {
                                 <ChartLg3 />
                                 <ChartLg2 />
                             </div>
-                            <ChartLg1 />
+                                <ChartLg1 />
                         </div>
                     </div>
 
