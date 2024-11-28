@@ -178,12 +178,11 @@
 }
 
 .containerChartLg2 {
-    border: 2px solid green;
     padding: 10px;
     width: 100%;
-    max-width: 500px;
-    height: 370px;
+    height: 300px;
     box-shadow: 1px 5px 3px var(--chartShadow);
+    overflow: auto;
     display: flex;
     flex-direction: column;
     display: flex;
@@ -192,14 +191,14 @@
 }
 
 .containerChartLg3 {
-    border: 2px solid blue;
     padding: 10px;
-    width: 100%;
-    max-width: 500px;
-    height: 370px;
+    width: 720px;
+    height: 300px;
     box-shadow: 1px 5px 3px var(--chartShadow);
+    overflow: auto;
     display: flex;
     flex-direction: column;
+    display: flex;
     border-radius: 10px;
     gap: 20px;
 
