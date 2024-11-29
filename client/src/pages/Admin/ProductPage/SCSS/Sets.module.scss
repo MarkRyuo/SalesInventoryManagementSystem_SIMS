@@ -145,7 +145,7 @@
         }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 600px) {
         padding: 0px;
 
         .SetQrcodeContent {
@@ -156,24 +156,23 @@
             }
 
             h4{
-                width: 110px;
-                font-size: 0.9rem;
+                width: 90px;
+                font-size: 0.8rem;
             }
 
             p {
                 overflow-x: hidden;
-                width: 150px;
+                width: 120px;
                 font-size: 0.8rem;
                 button {
                     color: red;
                     font-size: 0.8rem;
-                    text-decoration: none;
                 }
             }
 
             .SetQrbtn {
-                width: 125px;
-                font-size: 0.9rem;
+                width: 100px;
+                font-size: 0.8rem;
             }
         }
     
