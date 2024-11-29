@@ -129,7 +129,7 @@ function LowStockReports() {
     return (
         <MainLayout>
             <div className={LowStockReportScss.Maincomponent}>
-                <h1>Stock Status Report</h1>
+                <h1>Low Stock Report</h1>
                 <div className={LowStockReportScss.DropDown}>
                     <DropdownButton variant="success" title="Download" id="download-dropdown">
                         <Dropdown.Item onClick={() => handleDownload("PDF")}>PDF</Dropdown.Item>
