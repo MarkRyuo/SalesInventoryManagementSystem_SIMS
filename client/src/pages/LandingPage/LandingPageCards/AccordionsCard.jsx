@@ -1,11 +1,11 @@
 import Accordion from 'react-bootstrap/Accordion';
 import Carousel from 'react-bootstrap/Carousel';
-import AccordionsCardScss from './SCSS/AccordionsCard.module.scss'
+import AccordionsCardScss from './SCSS/AccordionsCard.module.scss' ;
 
 
 function AccordionsCard() {
     return (
-        <div>
+        <div className={AccordionsCardScss.MainAccordion}>
             <div>
                 <Accordion>
                     <Accordion.Item eventKey="0">
