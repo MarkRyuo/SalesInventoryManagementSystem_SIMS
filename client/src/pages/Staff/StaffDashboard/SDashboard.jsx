@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { db } from "../../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import StaffDashboardScss from './StaffDashboard.module.scss';
-import { MdSpaceDashboard } from "react-icons/md";
 import StaffButtons from "../../../components/StaffPortal/StaffButtons/StaffButtons";
 import { TiDocumentAdd } from "react-icons/ti";
 import { BiScan } from "react-icons/bi";
@@ -79,8 +78,8 @@ function SDashboard() {
                     <h1>Dashboard</h1>
                     {loading ? (
                         // Display a loading indicator while data is being fetched
-                        <div className={StaffDashboardScss.loadingContainer}>
-                            <p>Loading staff Dashboard...</p>
+                        <div className="fs-4 text-center pt-5 mt-5">
+                            <p>Loading Staff Dashboard...</p>
                         </div>
                     ) : (
                         <div className={StaffDashboardScss.credentialDashboard}>
