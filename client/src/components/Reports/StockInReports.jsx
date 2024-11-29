@@ -190,6 +190,25 @@ function StockInReports() {
                     </div>
                 </div>
 
+                <div className="d-flex justify-content-start align-items-center mb-3">
+                    <Button
+                        variant="link"
+                        disabled={currentPage === 1}
+                        onClick={handlePreviousPage}
+                    >
+                        &#8592; {/* Left arrow */}
+                    </Button>
+                    <span className="mx-2"> Page {currentPage} of {totalPages} </span>
+                    <Button
+                        variant="link"
+                        disabled={currentPage === totalPages}
+                        onClick={handleNextPage}
+                    >
+                        &#8594; {/* Right arrow */}
+                    </Button>
+                </div>
+
+
                 <div className={StockInReportsScss.tables}>
                     {loading ? (
                         <div className="d-flex justify-content-center align-items-center mt-5">
@@ -219,28 +238,6 @@ function StockInReports() {
                                     </tr>
                                 ))}
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colSpan="6" style={{ textAlign: "center" }}>
-                                        {/* Pagination arrows inside the table footer row */}
-                                        <Button
-                                            variant="link"
-                                            disabled={currentPage === 1}
-                                            onClick={handlePreviousPage}
-                                        >
-                                            &#8592; {/* Left arrow for "Previous" */}
-                                        </Button>
-                                        <span> Page {currentPage} of {totalPages} </span>
-                                        <Button
-                                            variant="link"
-                                            disabled={currentPage === totalPages}
-                                            onClick={handleNextPage}
-                                        >
-                                            &#8594; {/* Right arrow for "Next" */}
-                                        </Button>
-                                    </td>
-                                </tr>
-                            </tfoot>
                         </Table>
                     )}
                 </div>
