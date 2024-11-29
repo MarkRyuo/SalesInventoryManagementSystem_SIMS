@@ -29,7 +29,7 @@ function AccordionsCard() {
             <div>
                 <Carousel fade>
                     <Carousel.Item>
-                        <img src='' alt=''/>
+                        <img src='/Img1.jpg' alt=''/>
                         <Carousel.Caption>
                             <h3>First slide label</h3>
                             <p>Some Text</p>
