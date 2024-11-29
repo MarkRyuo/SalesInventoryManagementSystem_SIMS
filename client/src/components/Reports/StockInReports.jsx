@@ -190,19 +190,21 @@ function StockInReports() {
                     </div>
                 </div>
 
-                <div className="d-flex justify-content-start align-items-center mb-3">
+                <div className="d-flex justify-content-start align-items-center my-2">
                     <Button
                         variant="link"
                         disabled={currentPage === 1}
                         onClick={handlePreviousPage}
+                        style={{fontSize: '0.9rem'}}
                     >
                         &#8592; {/* Left arrow */}
                     </Button>
-                    <span className="mx-2"> Page {currentPage} of {totalPages} </span>
+                    <span className="mx-2" style={{ fontSize: '0.9rem' }}> Page {currentPage} of {totalPages} </span>
                     <Button
                         variant="link"
                         disabled={currentPage === totalPages}
                         onClick={handleNextPage}
+                        style={{ fontSize: '0.9rem' }}
                     >
                         &#8594; {/* Right arrow */}
                     </Button>
