@@ -91,7 +91,7 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       // Footer (Thank You Message)
       doc.setFontSize(10);
       doc.setFont("helvetica", "italic");
-      doc.text("Thank you for your purchase!", 105, yPosition + 80, {align: "center"});
+      doc.text("This is not official receipt!", 105, yPosition + 80, {align: "center"});
 
       // Generate QR code (you can customize it as per your needs)
       const qrCodeData = await qr.toDataURL(`https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/downloadOrder?id=${orderId}`);
