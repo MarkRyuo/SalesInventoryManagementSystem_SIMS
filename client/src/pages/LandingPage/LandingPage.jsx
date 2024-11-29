@@ -25,7 +25,7 @@ function LandingPage() {
                 </div> */}
 
                 <div className={LandingPageScss.AccordionCard}>
-
+                    <AccordionsCard />
                 </div>
 
                 <div className={LandingPageScss.footerCard} id="footer">
