@@ -17,9 +17,9 @@ function AccordionsCard() {
 
     return (
         <div className={Accordionstyles.MainContent}>
-            <Accordion className={Accordionstyles.contentAc}>
+            <Accordion className={Accordionstyles.containerAc}>
                 {accordionItems.map((body, idx) => (
-                    <Accordion.Item key={idx} eventKey={idx.toString()} className={Accordionstyles.ContainerAc}>
+                    <Accordion.Item key={idx} eventKey={idx.toString()} className={Accordionstyles.ItemAc}>
                         <Accordion.Header>Accordion Item #{idx + 1}</Accordion.Header>
                         <Accordion.Body>{body}</Accordion.Body>
                     </Accordion.Item>
