@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchReorderingProducts, saveOrderToFirebase } from "../../../services/ProductService";
-import { Spinner, Button, Badge, Container, Modal, Table } from "react-bootstrap"; // Add Table here
+import { Spinner, Button, Badge, Modal, Table } from "react-bootstrap"; // Add Table here
 import SavedOrderDetails from "./SavedOrderDetails";
 import ReOrderingscss from './SCSS/ReOrdering.module.scss';
 import { FaTruckLoading } from "react-icons/fa";
