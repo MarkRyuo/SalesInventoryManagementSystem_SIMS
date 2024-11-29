@@ -54,7 +54,6 @@ function TotalSalesReports() {
     const downloadXlsx = () => {
         // Create a worksheet from the filtered data
         const ws = XLSX.utils.json_to_sheet(filteredData);
-
         // Style header cells (bold font, centered text)
         const headerCells = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1'];
         headerCells.forEach(cell => {
@@ -66,10 +65,10 @@ function TotalSalesReports() {
         // Add total row at the bottom in vertical format
         const totals = [
             ['Total Quantity Sold', totalQuantitySold],
-            ['Total Revenue', `₱${totalRevenue.toFixed(2)}`],
-            ['Total Discount', `₱${totalDiscount.toFixed(2)}`],
-            ['Total Tax', `₱${totalTax.toFixed(2)}`],
-            ['Net Revenue', `₱${netRevenue.toFixed(2)}`],
+            ['Total Revenue', `${totalRevenue.toFixed(2)}`],
+            ['Total Discount', `${totalDiscount.toFixed(2)}`],
+            ['Total Tax', `${totalTax.toFixed(2)}`],
+            ['Net Revenue', `${netRevenue.toFixed(2)}`],
         ];
 
         // Append totals to the sheet, starting at the row below the last data row
@@ -86,7 +85,7 @@ function TotalSalesReports() {
         const blob = new Blob([xlsxData], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'sales_report.xlsx';
+        link.download = `Sales_Report_${startDate || 'All'}_to_${endDate || 'All'}.xlsx`;
         link.click();
     };
 
@@ -137,7 +136,7 @@ function TotalSalesReports() {
         doc.text(`Net Revenue: ${netRevenue.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 30);
 
         // Save the PDF
-        doc.save('sales_report.pdf');
+        doc.save(`SalesReport_${startDate || 'All'}_to_${endDate || 'All'}.pdf`);
     };
 
 
