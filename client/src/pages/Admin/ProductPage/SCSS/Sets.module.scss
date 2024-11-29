@@ -104,13 +104,11 @@
 //! Set Qr-Code 
 
 .SetQrcodemain {
-    border: 1px solid red;
     padding: 10px;
     height: 600px;
     overflow: auto;
 
     .SetQrcodeContent {
-        border: 1px solid green;
         border-radius: 10px;
         box-shadow: 1px 1px 3px rgb(180, 179, 179);
         padding: 10px;
@@ -126,19 +124,17 @@
         }
 
         h4{
-            border: 1px solid;
             width: 110px;
             font-size: 0.9rem;
         }
 
         p {
-            border: 1px solid;
             overflow-x: hidden;
             width: 150px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             button {
                 color: red;
-                font-size: 0.9rem;
+                font-size: 0.8rem;
                 text-decoration: none;
             }
         }
