@@ -11,7 +11,10 @@
 
 ## Changelog
 
-### v8.5 (Latest)
+### v8.6 (Latest)
+- 90%
+
+### v8.5
 - Redesign
 
 ### vdeploy4
