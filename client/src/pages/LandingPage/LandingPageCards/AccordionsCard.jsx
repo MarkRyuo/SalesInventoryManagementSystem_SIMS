@@ -6,7 +6,7 @@ import AccordionsCardScss from './SCSS/AccordionsCard.module.scss' ;
 function AccordionsCard() {
     return (
         <div className={AccordionsCardScss.MainAccordion}>
-            <div className=''>
+            <div className={AccordionsCardScss.AccordionsContainer}>
                 <Accordion>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Accordion Item #1</Accordion.Header>
