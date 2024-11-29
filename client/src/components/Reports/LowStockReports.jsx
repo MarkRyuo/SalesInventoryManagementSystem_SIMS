@@ -5,7 +5,7 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { MainLayout } from "../../layout/MainLayout";
-import LowStockReportScss from './Scss/LowStockReports.module.scss'
+import LowStockReportScss from './Scss/LowStockReports.module.scss';
 
 function LowStockReports() {
     const [startDate, setStartDate] = useState("");
@@ -14,7 +14,6 @@ function LowStockReports() {
     const [currentPage, setCurrentPage] = useState(1);  // Current page
     const itemsPerPage = 10;  // Items per page
 
-    // Fetch all data on component mount
     useEffect(() => {
         const loadData = async () => {
             const data = await fetchLowStockData();  // Fetch all data initially
@@ -23,14 +22,11 @@ function LowStockReports() {
         loadData();
     }, []);
 
-    // Handle date filter
     const handleFilter = async () => {
         if (!startDate && !endDate) {
-            // If no dates are provided, fetch all data
             const data = await fetchLowStockData();
             setLowStockData(data);
         } else {
-            // If dates are provided, filter the data by date
             const data = await fetchLowStockData(startDate, endDate);
             setLowStockData(data);
         }
@@ -41,16 +37,13 @@ function LowStockReports() {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = lowStockData.slice(indexOfFirstItem, indexOfLastItem);
 
-    // Handle page change
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const totalPages = Math.ceil(lowStockData.length / itemsPerPage);
 
     // Download PDF function
     const downloadPDF = () => {
         const doc = new jsPDF();
         doc.setFontSize(12);
-
-        // Add title and date range
-        doc.text("Filtered Stock In Data", 10, 10);
+        doc.text("Low Stock Report", 10, 10);
         doc.text(`Date Range: ${startDate || "N/A"} to ${endDate || "N/A"}`, 10, 20);
 
         const tableHeaders = [
@@ -100,8 +93,6 @@ function LowStockReports() {
         }));
 
         const wb = XLSX.utils.book_new();
-
-        // Add date range to the top row
         const dateRange = [
             { A: `Date Range: ${startDate || "N/A"} to ${endDate || "N/A"}` },
         ];
@@ -112,12 +103,9 @@ function LowStockReports() {
             Object.values(entry)
         );
 
-        // Combine date range, header, and data
         const sheetData = [...dateRange, [], ...header, ...data];
 
         const ws = XLSX.utils.aoa_to_sheet(sheetData);
-
-        // Adjust column widths
         ws["!cols"] = [
             { width: 25 },
             { width: 15 },
@@ -128,8 +116,7 @@ function LowStockReports() {
             { width: 20 },
         ];
 
-        XLSX.utils.book_append_sheet(wb, ws, "Stock In Data");
-
+        XLSX.utils.book_append_sheet(wb, ws, "Low Stock Data");
         const fileName = `LowStockReport_${startDate || "start"}_${endDate || "end"}.xlsx`;
         XLSX.writeFile(wb, fileName);
     };
@@ -139,31 +126,19 @@ function LowStockReports() {
         else if (format === "XLSX") downloadXLSX();
     };
 
-    // Pagination: Calculate total pages
-    const totalPages = Math.ceil(lowStockData.length / itemsPerPage);
-
     return (
         <MainLayout>
             <div className={LowStockReportScss.Maincomponent}>
                 <h1>Low Stock Report</h1>
-                {/* Download Buttons */}
                 <div className={LowStockReportScss.DropDown}>
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Download"
-                        variant="success"
-                    >
-                        <Dropdown.Item onClick={() => handleDownload("PDF")}>
-                            PDF
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleDownload("XLSX")}>
-                            XLSX
-                        </Dropdown.Item>
+                    <DropdownButton variant="success" title="Download" id="download-dropdown">
+                        <Dropdown.Item onClick={() => handleDownload("PDF")}>PDF</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleDownload("XLSX")}>XLSX</Dropdown.Item>
                     </DropdownButton>
                 </div>
                 <div className={LowStockReportScss.formContent}>
                     <Form>
-                        <Form.Group>
+                        <Form.Group controlId="startDate">
                             <Form.Label>Start Date</Form.Label>
                             <Form.Control
                                 type="date"
@@ -171,7 +146,8 @@ function LowStockReports() {
                                 onChange={(e) => setStartDate(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group>
+
+                        <Form.Group controlId="endDate">
                             <Form.Label>End Date</Form.Label>
                             <Form.Control
                                 type="date"
@@ -180,14 +156,9 @@ function LowStockReports() {
                             />
                         </Form.Group>
                     </Form>
-                    <div style={{ paddingLeft: 10 }}>
-                        <Button onClick={handleFilter} className="mt-3">
-                            Filter
-                        </Button>
-                    </div>
+                    <Button variant="primary" onClick={handleFilter}>Filter</Button>
                 </div>
 
-                {/* Scrollable Table */}
                 <div className={LowStockReportScss.tables}>
                     <Table striped bordered hover>
                         <thead>
@@ -217,18 +188,24 @@ function LowStockReports() {
                     </Table>
                 </div>
 
-                {/* Pagination Controls */}
-                <div className="pagination">
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <Button
-                            key={index + 1}
-                            onClick={() => paginate(index + 1)}
-                            className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
-                        >
-                            {index + 1}
-                        </Button>
-                    ))}
+                <div className="pagination" style={{ textAlign: "center" }}>
+                    <Button
+                        variant="link"
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(currentPage - 1)} // Use setCurrentPage directly
+                    >
+                        &#8592; {/* Left arrow */}
+                    </Button>
+                    <span>Page {currentPage} of {totalPages}</span>
+                    <Button
+                        variant="link"
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage(currentPage + 1)} // Use setCurrentPage directly
+                    >
+                        &#8594; {/* Right arrow */}
+                    </Button>
                 </div>
+
             </div>
         </MainLayout>
     );
