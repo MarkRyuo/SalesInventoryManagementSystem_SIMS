@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchStockInByDate } from "./Service/StockIn"; // Import the helper function for fetching stock
+import { fetchStockInByDate, fetchAllStockIn } from "./Service/StockIn"; // Fetch all stock data
 import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
@@ -12,34 +12,44 @@ function StockInReports() {
     const [filteredData, setFilteredData] = useState([]);
 
     useEffect(() => {
-        // Initial fetch if dates are set
+        // Fetch all stock data initially
+        const fetchData = async () => {
+            try {
+                const data = await fetchAllStockIn();  // Fetch all stock data on component mount
+                setFilteredData(data);
+            } catch (error) {
+                console.error("Error fetching all stock data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        // If dates are set, apply filtering
         if (startDate && endDate) {
             fetchFilteredData();
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [startDate, endDate]);
 
     const fetchFilteredData = async () => {
         try {
             const data = await fetchStockInByDate(startDate, endDate);
-            console.log(data); // Log data to inspect the response
             setFilteredData(data);
         } catch (error) {
             console.error("Error fetching stock data:", error);
         }
     };
 
-
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
 
-        // Add the report title and date range
         doc.setFontSize(16);
         doc.text("Stock In Report", 14, 20);
         doc.setFontSize(12);
         doc.text(`Date Range: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`, 14, 30);
 
-        // Create the table with the data
         doc.autoTable({
             startY: 40,
             head: [['Product ID', 'Product Name', 'SKU', 'Barcode', 'Quantity', 'Date Added']],
@@ -53,12 +63,10 @@ function StockInReports() {
             ]),
         });
 
-        // Save the PDF
         doc.save('stock-in-report.pdf');
     };
 
     const handleDownloadXLSX = () => {
-        // Prepare data for the XLSX file
         const reportData = filteredData.map(item => ({
             ProductID: item.productId,
             ProductName: item.productName,
@@ -68,17 +76,14 @@ function StockInReports() {
             DateAdded: new Date(item.addedQuantityHistory.date).toLocaleDateString(),
         }));
 
-        // Add title and date range to the worksheet
         const title = `Stock In Report (Date Range: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()})`;
         const worksheet = XLSX.utils.json_to_sheet(reportData);
 
-        // Add title as the first row
         const wsTitle = XLSX.utils.aoa_to_sheet([[title]]);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, wsTitle, "Report Title");
         XLSX.utils.book_append_sheet(workbook, worksheet, "Stock In Report");
 
-        // Write the file
         XLSX.writeFile(workbook, "stock-in-report.xlsx");
     };
 
@@ -86,14 +91,12 @@ function StockInReports() {
         <MainLayout>
             <div className={StockInReportsScss.Maincomponent}>
                 <h1>Stock In Report</h1>
-                {/* Dropdown for Download Options */}
                 <div className={StockInReportsScss.DropDown}>
                     <DropdownButton variant="success" title="Download" id="download-dropdown">
                         <Dropdown.Item as="button" onClick={handleDownloadPDF}>PDF</Dropdown.Item>
                         <Dropdown.Item as="button" onClick={handleDownloadXLSX}>XLSX</Dropdown.Item>
                     </DropdownButton>
                 </div>
-                {/* Date Range Filter */}
                 <div className={StockInReportsScss.formContent}>
                     <Form>
                         <Form.Group controlId="startDate">
@@ -115,12 +118,11 @@ function StockInReports() {
                         </Form.Group>
 
                     </Form>
-                    <div style={{paddingleft: 10}}>
+                    <div style={{ paddingLeft: 10 }}>
                         <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
                     </div>
                 </div>
 
-                {/* Table Display */}
                 <div className={StockInReportsScss.tables}>
                     <Table striped bordered hover>
                         <thead>
