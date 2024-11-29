@@ -1,5 +1,5 @@
 import { Accordion, Carousel } from 'react-bootstrap';
-import styles from './SCSS/AccordionsCard.module.scss';
+import Accordionstyles from './SCSS/AccordionsCard.module.scss';
 
 function AccordionsCard() {
     const accordionItems = [
@@ -16,17 +16,17 @@ function AccordionsCard() {
     ];
 
     return (
-        <div className={styles.MainAccordion}>
-            <Accordion className={styles.AccordionsContainer} defaultActiveKey={['0']} alwaysOpen>
+        <div className={Accordionstyles.MainAccordion}>
+            <Accordion className={Accordionstyles.AccordionsContainer} defaultActiveKey={['0']} alwaysOpen>
                 {accordionItems.map((body, idx) => (
-                    <Accordion.Item key={idx} eventKey={idx.toString()} className={styles.ContainerAc}>
+                    <Accordion.Item key={idx} eventKey={idx.toString()} className={Accordionstyles.ContainerAc}>
                         <Accordion.Header>Accordion Item #{idx + 1}</Accordion.Header>
                         <Accordion.Body>{body}</Accordion.Body>
                     </Accordion.Item>
                 ))}
             </Accordion>
 
-            <Carousel fade className={styles.CarouselContainer}>
+            <Carousel fade className={Accordionstyles.CarouselContainer}>
                 {carouselItems.map((item, idx) => (
                     <Carousel.Item key={idx}>
                         <img src={item.src} alt='' />
