@@ -21,6 +21,11 @@ function TotalSalesReports() {
             setTransactionData(data);
             setFilteredData(data); // Set all data as default
         };
+
+        // Clear date inputs on reload
+        setStartDate('');
+        setEndDate('');
+
         getData();
     }, []);
 
