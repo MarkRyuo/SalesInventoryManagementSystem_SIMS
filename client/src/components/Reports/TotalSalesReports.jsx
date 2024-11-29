@@ -26,8 +26,13 @@ function TotalSalesReports() {
     // Format date as timestamp for comparison
     const convertToTimestamp = (dateString) => {
         const date = new Date(dateString);
+        if (isNaN(date.getTime())) {
+            console.error("Invalid date:", dateString);
+            return 0; // Handle invalid date
+        }
         return date.getTime();
     };
+
 
     // Filter the data based on start and end dates
     const filterData = () => {
