@@ -7,12 +7,16 @@ import 'jspdf-autotable';  // Importing the jspdf-autotable plugin
 import { fetchTransactions } from './Service/TotalSales'; // Import the fetch function
 import { MainLayout } from '../../layout/MainLayout'
 import TotalSalesReportScss from './Scss/TotalSalesReports.module.scss';
+import { Spinner } from 'react-bootstrap';
+
 
 function TotalSalesReports() {
     const [transactionData, setTransactionData] = useState([]);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [filteredData, setFilteredData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Loading state
+
 
     // Fetch data from Firebase on component mount
     useEffect(() => {
@@ -52,6 +56,19 @@ function TotalSalesReports() {
             setFilteredData(transactionData); // Reset to all data if no filter
         }
     };
+
+    useEffect(() => {
+        const getData = async () => {
+            setIsLoading(true); // Start loading
+            const data = await fetchTransactions();
+            setTransactionData(data);
+            setFilteredData(data); // Set all data as default
+            setIsLoading(false); // Stop loading once data is fetched
+        };
+
+        getData();
+    }, []);
+
 
 
 
@@ -105,7 +122,7 @@ function TotalSalesReports() {
         doc.setFontSize(16);
         doc.text('Total Sales Report', 14, 20);
         doc.setFontSize(10);
-        
+
         // If no startDate or endDate, display "All"
         const displayStartDate = startDate ? startDate : 'All';
         const displayEndDate = endDate ? endDate : 'All';
@@ -196,43 +213,49 @@ function TotalSalesReports() {
                 <Button onClick={filterData}>Filter Date</Button>
 
                 <div className={TotalSalesReportScss.TableContainer}>
-                    <Table striped bordered hover responsive>
-                        <thead>
-                            <tr>
-                                <th>Transaction ID</th>
-                                <th>Date/Time</th>
-                                <th>Qty.</th>
-                                <th>Disc</th>
-                                <th>Tax</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredData.map(transaction => (
-                                <tr key={transaction.transactionId}>
-                                    <td>{transaction.transactionId}</td>
-                                    <td>{format(new Date(transaction.date), 'MMM dd, yyyy, h:mm a')}</td>
-                                    <td>{transaction.totalQuantity}</td>
-                                    <td>{`₱${transaction.discount}`}</td>
-                                    <td>{`₱${transaction.tax}`}</td>
-                                    <td>{`₱${transaction.total}`}</td>
+                    {isLoading ? (
+                        <div className="d-flex justify-content-center mt-5">
+                            <Spinner animation="grow" variant="primary" />
+                        </div>
+                    ) : (
+                        <Table striped bordered hover responsive>
+                            <thead>
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Date/Time</th>
+                                    <th>Qty.</th>
+                                    <th>Disc</th>
+                                    <th>Tax</th>
+                                    <th>Total</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colSpan="2">Totals:</td>
-                                <td>{totalQuantitySold}</td>
-                                <td>{`₱${totalDiscount.toFixed(2)}`}</td>
-                                <td>{`₱${totalTax.toFixed(2)}`}</td>
-                                <td>{`₱${totalRevenue.toFixed(2)}`}</td>
-                            </tr>
-                            <tr>
-                                <td colSpan="5">Net Revenue</td>
-                                <td>{`₱${netRevenue.toFixed(2)}`}</td>
-                            </tr>
-                        </tfoot>
-                    </Table>
+                            </thead>
+                            <tbody>
+                                {filteredData.map(transaction => (
+                                    <tr key={transaction.transactionId}>
+                                        <td>{transaction.transactionId}</td>
+                                        <td>{format(new Date(transaction.date), 'MMM dd, yyyy, h:mm a')}</td>
+                                        <td>{transaction.totalQuantity}</td>
+                                        <td>{`₱${transaction.discount}`}</td>
+                                        <td>{`₱${transaction.tax}`}</td>
+                                        <td>{`₱${transaction.total}`}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colSpan="2">Totals:</td>
+                                    <td>{totalQuantitySold}</td>
+                                    <td>{`₱${totalDiscount.toFixed(2)}`}</td>
+                                    <td>{`₱${totalTax.toFixed(2)}`}</td>
+                                    <td>{`₱${totalRevenue.toFixed(2)}`}</td>
+                                </tr>
+                                <tr>
+                                    <td colSpan="5">Net Revenue</td>
+                                    <td>{`₱${netRevenue.toFixed(2)}`}</td>
+                                </tr>
+                            </tfoot>
+                        </Table>
+                    )}
 
                 </div>
             </div>
