@@ -8,6 +8,7 @@ import ProfileCompScss from './AccountComp.module.scss';
 
 const ProfileComp = () => {
     const navigate = useNavigate();
+
     const [userData, setUserData] = useState({
         firstname: "",
         lastname: "",
@@ -25,11 +26,6 @@ const ProfileComp = () => {
     const [showRecovery, setShowRecovery] = useState(false);
     const [answerVisibility, setAnswerVisibility] = useState({});
     const adminId = localStorage.getItem('adminId');
-
-    const validatePhoneNumber = (number) => {
-        const regex = /^[+]?[0-9]{10,12}$/;  // Adjust as needed for country-specific formats
-        return regex.test(number);
-    };
 
     const availableQuestions = [
         "In which city was your first business located?",
@@ -143,22 +139,22 @@ const ProfileComp = () => {
 
     // Send OTP request to backend
     const handleSendOtp = async () => {
-        if (!validatePhoneNumber(userData.phoneNumber)) {
-            alert('Invalid phone number');
+        if (!userData.email) {
+            alert('Please enter a valid email address');
             return;
         }
 
         try {
-            const response = await fetch('https://sendotp-hqnwrfpmoa-uc.a.run.app', {
+            const response = await fetch('https://your-backend/send-email-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phoneNumber: userData.phoneNumber }),
+                body: JSON.stringify({ email: userData.email }),
             });
 
             const result = await response.json();
             if (response.ok) {
                 setOtpSent(true);
-                alert('OTP sent!');
+                alert('OTP sent to your email!');
             } else {
                 alert(result.error);
             }
@@ -167,12 +163,13 @@ const ProfileComp = () => {
         }
     };
 
+
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('https://verifyotp-hqnwrfpmoa-uc.a.run.app', {
+            const response = await fetch('https://your-backend/verify-email-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ otp, phoneNumber: userData.phoneNumber }),
+                body: JSON.stringify({ email: userData.email, otp }),
             });
 
             const result = await response.json();
@@ -185,6 +182,7 @@ const ProfileComp = () => {
             console.error('Error verifying OTP:', error);
         }
     };
+
 
     return (
         <Form className={ProfileCompScss.contentAccount}>
@@ -251,17 +249,18 @@ const ProfileComp = () => {
             </InputGroup>
 
             <div className={ProfileCompScss.OTPcontainer}>
-                <Form.Group className="PhoneNumber" controlId="phoneNumber">
-                    <Form.Label>Phone Number</Form.Label>
+                <Form.Group className="email" controlId="email">
+                    <Form.Label>Email</Form.Label>
                     <Form.Control
-                        type="text"
-                        name="phoneNumber"
-                        value={userData.phoneNumber}
+                        type="email"
+                        name="email"
+                        value={userData.email}
                         onChange={handleInputChange}
                         disabled={!isEditing}
-                        className={ProfileCompScss.PhoneNumber}
+                        className={ProfileCompScss.Email}
                     />
                 </Form.Group>
+
 
                 <Button
                     variant=""
