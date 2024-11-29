@@ -12,10 +12,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         border: 1px solid;
+        padding: 10px;
         h1 {
+            padding: 10px;
             font-size: 3rem;
             font-weight: 300;
+            align-self: flex-start;
         }
 
         p {
