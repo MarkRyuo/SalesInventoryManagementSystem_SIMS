@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
-import StaffButtonsScss from './StaffButtons.module.scss'
+import StaffButtonsScss from './StaffButtons.module.scss' ;
 
 function StaffButtons({ buttons }) {
 
