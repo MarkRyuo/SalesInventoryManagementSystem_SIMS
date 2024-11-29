@@ -6,8 +6,8 @@ import AccordionsCardScss from './SCSS/AccordionsCard.module.scss';
 function AccordionsCard() {
     return (
         <div className={AccordionsCardScss.MainAccordion}>
-            <Accordion className={AccordionsCardScss.AccordionsContainer}>
-                <Accordion.Item eventKey="0" style={{border: '1px solid', width: '800px' }}>
+            <Accordion className={AccordionsCardScss.AccordionsContainer} defaultActiveKey={['0']} alwaysOpen>
+                <Accordion.Item eventKey="0">
                     <Accordion.Header>Accordion Item #1</Accordion.Header>
                     <Accordion.Body>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
