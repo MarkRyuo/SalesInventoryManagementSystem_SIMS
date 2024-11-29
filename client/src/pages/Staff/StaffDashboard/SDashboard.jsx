@@ -77,7 +77,6 @@ function SDashboard() {
                 <div className={StaffDashboardScss.componentHeroCard}>
                     <h1>Dashboard</h1>
                     {loading ? (
-                        // Display a loading indicator while data is being fetched
                         <div className="fs-4 text-center pt-5 mt-5">
                             <p>Loading Staff Dashboard...</p>
                         </div>
