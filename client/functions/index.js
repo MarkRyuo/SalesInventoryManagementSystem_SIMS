@@ -117,9 +117,6 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-// Allow CORS for all origins (or specify your frontend domain)
-app.use(cors());
-
 // Handle pre-flight OPTIONS requests
 app.options('*', cors());
 
