@@ -26,7 +26,7 @@ function AccordionsCard() {
                 ))}
             </Accordion>
 
-            <div>
+            <div className={Accordionstyles.ContainerAccor}>
                 <div className={Accordionstyles.containerCaro}>
                     <Carousel fade className={Accordionstyles.CarouselContainer}>
                         {carouselItems.map((item, idx) => (
@@ -40,7 +40,6 @@ function AccordionsCard() {
                         ))}
                     </Carousel>
                 </div>
-
             </div>
 
         </div>
