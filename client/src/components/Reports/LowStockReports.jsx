@@ -11,6 +11,8 @@ function LowStockReports() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [lowStockData, setLowStockData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);  // Current page
+    const itemsPerPage = 10;  // Items per page
 
     // Fetch all data on component mount
     useEffect(() => {
@@ -33,6 +35,14 @@ function LowStockReports() {
             setLowStockData(data);
         }
     };
+
+    // Pagination logic
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = lowStockData.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Handle page change
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     // Download PDF function
     const downloadPDF = () => {
@@ -76,7 +86,6 @@ function LowStockReports() {
         const fileName = `LowStockReport_${startDate || "start"}_${endDate || "end"}.pdf`;
         doc.save(fileName);
     };
-
 
     // Download XLSX function
     const downloadXLSX = () => {
@@ -129,6 +138,9 @@ function LowStockReports() {
         if (format === "PDF") downloadPDF();
         else if (format === "XLSX") downloadXLSX();
     };
+
+    // Pagination: Calculate total pages
+    const totalPages = Math.ceil(lowStockData.length / itemsPerPage);
 
     return (
         <MainLayout>
@@ -190,7 +202,7 @@ function LowStockReports() {
                             </tr>
                         </thead>
                         <tbody>
-                            {lowStockData.map((item, index) => (
+                            {currentItems.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.productName}</td>
                                     <td>{item.sku}</td>
@@ -203,6 +215,19 @@ function LowStockReports() {
                             ))}
                         </tbody>
                     </Table>
+                </div>
+
+                {/* Pagination Controls */}
+                <div className="pagination">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <Button
+                            key={index + 1}
+                            onClick={() => paginate(index + 1)}
+                            className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
+                        >
+                            {index + 1}
+                        </Button>
+                    ))}
                 </div>
             </div>
         </MainLayout>
