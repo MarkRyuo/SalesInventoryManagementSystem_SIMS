@@ -129,7 +129,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Send OTP endpoint
-app.post('/send-otp', async (req, res) => {
+app.post('/sends-otp', async (req, res) => {
   const { email } = req.body;
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   otps[email] = otp;
@@ -148,7 +148,7 @@ app.post('/send-otp', async (req, res) => {
 });
 
 // Verify OTP endpoint
-app.post('/verify-otp', (req, res) => {
+app.post('/verifys-otp', (req, res) => {
   const { email, otp } = req.body;
   if (otps[email] === otp) {
     delete otps[email];
