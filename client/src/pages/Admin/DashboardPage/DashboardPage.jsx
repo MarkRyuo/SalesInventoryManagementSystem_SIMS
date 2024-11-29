@@ -26,7 +26,7 @@ export const DashboardPage = () => {
             try {
                 const adminId = localStorage.getItem('adminId');
                 if (!adminId) {
-                    console.error('Admin ID not found in localStorage.');
+                    console.error('Admin ID not found');
                     return;
                 }
 
