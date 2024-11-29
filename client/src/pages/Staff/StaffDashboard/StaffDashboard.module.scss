@@ -145,11 +145,11 @@
             width: auto;
             gap: 10px;
 
-            .divLG {
-                width: auto;
+            .buttonsHeroCard {
                 display: flex;
+                align-items: center;
                 flex-direction: column;
-                gap: 20px;
+                gap: 10px;
             }
         }
 }
