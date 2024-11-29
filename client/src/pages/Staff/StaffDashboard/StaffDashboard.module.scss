@@ -149,12 +149,10 @@
                 display: flex;
                 align-items: center;
                 flex-direction: column;
-                border: 1px solid;
                 height: 350px;
                 justify-content: center;
                 gap: 20px;
-                width: 100%;
-                max-width: 500px;
+                width: 500px;
             }
         }
 }
@@ -177,11 +175,14 @@
             width: auto;
             gap: 10px;
 
-            .divLG {
-                width: auto;
+            .buttonsHeroCard {
                 display: flex;
+                align-items: center;
                 flex-direction: column;
+                height: 350px;
+                justify-content: center;
                 gap: 20px;
+                width: 100%;
             }
         }
     }
@@ -198,14 +199,17 @@
         .largeContainer {
             margin-top: 10px;
             display: flex;
+            flex-direction: column;
             width: auto;
             gap: 10px;
 
-            .divLG {
-                width: auto;
+            .buttonsHeroCard {
                 display: flex;
-                flex-direction: column;
-                gap: 20px;
+                align-items:center;
+                flex-direction: row;
+                height: auto;
+                justify-content:space-evenly;
+                gap: 0px;
             }
         }
     }
@@ -228,11 +232,13 @@
             width: auto;
             gap: 10px;
 
-            .divLG {
-                width: auto;
+            .buttonsHeroCard {
                 display: flex;
-                flex-direction: column;
-                gap: 20px;
+                align-items:center;
+                flex-direction: row;
+                height: auto;
+                justify-content:space-evenly;
+                gap: 0px;
             }
         }
     }
