@@ -136,10 +136,11 @@ const ResetPass = () => {
                                     <Form.Label>Enter OTP</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        placeholder="Enter the OTP sent to your phone"
+                                        placeholder="Enter the OTP sent to your email"
                                         value={otp}
                                         onChange={(e) => setOtp(e.target.value)}
                                     />
+
                                 </Form.Group>
                                 <Button variant="primary" onClick={handleVerifyOtp} className="w-100 mb-3">
                                     Verify OTP
