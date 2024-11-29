@@ -117,8 +117,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-// Handle pre-flight OPTIONS requests
-app.options('*', cors());
+// Configure CORS to allow requests from all origins (or specify specific origins)
+app.use(cors({ origin: true }));
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -166,4 +166,5 @@ app.post('/validate-otp', (req, res) => {
 
 // Firebase function to handle the Express app
 exports.api = functions.https.onRequest(app);
+
 
