@@ -51,7 +51,7 @@ export const ProductPage = () => {
 
     return (
         <MainLayout>
-            <Container className={ProductPagescss.Products}>
+            <div className={ProductPagescss.Products}>
                 <ProductNavbarTabs setActiveTab={setActiveTab} />
                 <div className="ProductContent">
                     {activeTab === '/Product' && (
@@ -75,7 +75,7 @@ export const ProductPage = () => {
                         </div>
                     )}
                 </div>
-            </Container>
+            </div>
         </MainLayout>
     );
 };
