@@ -145,7 +145,7 @@ const ProfileComp = () => {
         }
 
         try {
-            const response = await fetch(' https://api-hqnwrfpmoa-uc.a.run.app', {
+            const response = await fetch('https://api-hqnwrfpmoa-uc.a.run.app/generate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: userData.email }),
@@ -166,7 +166,7 @@ const ProfileComp = () => {
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch(' https://api-hqnwrfpmoa-uc.a.run.app', {
+            const response = await fetch('https://api-hqnwrfpmoa-uc.a.run.app/validate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: userData.email, otp }),
