@@ -42,16 +42,20 @@ function LowStockReports() {
     // Download PDF function
     const downloadPDF = () => {
         const doc = new jsPDF();
-        doc.setFontSize(12);
-        doc.text("Low Stock Report", 10, 10);
-        doc.text(`Date Range: ${startDate || "N/A"} to ${endDate || "N/A"}`, 10, 20);
+
+        // Title and Date Range Text
+        doc.setFontSize(16); // Larger font for the title
+        doc.text("Low Stock Report", 14, 15);
+
+        doc.setFontSize(10); // Set font size for the rest of the document
+        doc.text(`Date Range: ${new Date(startDate).toLocaleDateString()} to ${new Date(endDate).toLocaleDateString()}`, 14, 25);
 
         const tableHeaders = [
             "No.",
             "Product Name",
             "SKU",
             "Barcode",
-            "Quantity",
+            "Qty",
             "Threshold",
             "Status",
             "Date",
@@ -65,20 +69,39 @@ function LowStockReports() {
             entry.quantity,
             entry.instockthreshold,
             entry.status,
-            entry.date,
+            new Date(entry.date).toLocaleDateString(), // Format the date for readability
         ]);
 
+        // Adjusting table header font size and column width
         doc.autoTable({
+            startY: 35, // Adjust the starting Y position for the table
             head: [tableHeaders],
             body: tableData,
-            startY: 30,
-            theme: "grid",
-            margin: { top: 20 },
+            styles: {
+                fontSize: 8, // Smaller font for the table to fit the content
+                cellPadding: 3, // Padding for better readability
+                halign: 'center', // Horizontal center alignment
+                valign: 'middle', // Vertical middle alignment
+                overflow: 'linebreak', // Break long words into multiple lines if needed
+            },
+            columnStyles: {
+                0: { cellWidth: 12 },  // No. column width
+                1: { cellWidth: 40 },  // Product Name column width
+                2: { cellWidth: 25 },  // SKU column width
+                3: { cellWidth: 25 },  // Barcode column width
+                4: { cellWidth: 15 },  // Quantity column width
+                5: { cellWidth: 15 },  // Threshold column width
+                6: { cellWidth: 18 },  // Status column width
+                7: { cellWidth: 28 },  // Date column width
+            },
+            tableWidth: 'auto', // Auto-adjust table width to fit content
         });
 
         const fileName = `LowStockReport_${startDate || "start"}_${endDate || "end"}.pdf`;
         doc.save(fileName);
     };
+
+
 
     // Download XLSX function
     const downloadXLSX = () => {
