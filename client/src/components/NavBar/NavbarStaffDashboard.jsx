@@ -60,7 +60,7 @@ function NavbarStaffDashboard() {
     return (
         <Container fluid style={{ margin: "0px", padding: "0px" }}>
             <Navbar className={Navbars.navStaffDashboard}>
-                <Container>
+                <Container fluid='xxl'>
                     <Navbar.Brand>
                         <Button variant="" className={Navbars.btnOffcanvas} onClick={handleShow}>
                             <GiHamburgerMenu size={20} />

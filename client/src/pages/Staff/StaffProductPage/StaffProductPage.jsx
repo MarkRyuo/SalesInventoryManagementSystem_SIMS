@@ -4,7 +4,6 @@ import { Nav } from 'react-bootstrap';
 import MainStaffLayout from '../../../layout/MainStaffLayout';
 import { AiFillProduct } from "react-icons/ai";
 import StaffProduct from '../../../components/Charts/ProductChart/StaffProduct';
-import { Container } from "react-bootstrap";
 import { FaHistory } from "react-icons/fa";
 // import { PiHandArrowUpBold } from "react-icons/pi";
 import StaffProductPagescss from './StaffProductPage.module.scss' ;
@@ -50,7 +49,7 @@ export const ProductPage = () => {
 
     return (
         <MainStaffLayout>
-            <Container className={StaffProductPagescss.Products}>
+            <div className={StaffProductPagescss.Products}>
                 <ProductNavbarTabs setActiveTab={setActiveTab} />
                 <div className="ProductContent">
                     {activeTab === '/StaffProduct' && (
@@ -74,7 +73,7 @@ export const ProductPage = () => {
                         </div>
                     )}
                 </div>
-            </Container>
+            </div>
         </MainStaffLayout>
     );
 };

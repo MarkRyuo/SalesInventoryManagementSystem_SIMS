@@ -11,6 +11,8 @@
     @media (max-width: 800px) {
         font-size: 0.8rem;
         padding: 10px 15px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
     
     @media (max-width: 350px) {
@@ -41,6 +43,8 @@
     border-top-right-radius: 25px;
 
     @media (max-width: 800px) {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
         font-size: 0.8rem;
         padding: 11px 12px;
     }
@@ -78,6 +82,8 @@
     border-top-right-radius: 25px;
 
     @media (max-width: 800px) {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
         font-size: 0.8rem;
         padding: 11px 12px;
     }
@@ -104,125 +110,86 @@
 //! Set Qr-Code 
 
 .SetQrcodemain {
-    // border: 1px solid red;
     padding: 10px;
-    height: 500px;
+    height: 600px;
     overflow: auto;
 
     .SetQrcodeContent {
-        // border: 1px solid green;
         border-radius: 10px;
         box-shadow: 1px 1px 3px rgb(180, 179, 179);
         padding: 10px;
         margin: 5px;
         background-color: #ffffff;
+        display: flex;
+        justify-content: space-between ;
+        align-items: center;
 
-        div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            // border: 1px solid;
+        img {
+            width: 70px;
+            height: auto;
+        }
+
+        h4{
+            width: 110px;
+            font-size: 0.9rem;
+        }
+
+        p {
+            overflow-x: hidden;
+            width: 150px;
+            font-size: 0.8rem;
+            button {
+                color: red;
+                font-size: 0.8rem;
+                text-decoration: none;
+            }
+        }
+
+        .SetQrbtn {
+            width: 125px;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 600px) {
+        padding: 0px;
+
+        .SetQrcodeContent {
+
+            img {
+                width: 70px;
+                height: auto;
+            }
 
             h4{
-                font-size: 1rem;
+                width: 90px;
+                font-size: 0.8rem;
             }
-            
+
             p {
-                font-size: 0.9rem;
+                overflow-x: hidden;
+                width: 120px;
+                font-size: 0.8rem;
                 button {
                     color: red;
-                    font-size: 0.9rem;
-                    text-decoration: none;
+                    font-size: 0.8rem;
                 }
             }
 
-            img {
+            .SetQrbtn {
                 width: 100px;
-                height: auto;
-            }
-
-            div {
-                button {
-                    font-size: 0.9rem;
-                }
-            }
-        }
-    }
-
-    @media (max-width: 900px) {
-        padding: 0px;
-
-        .SetQrcodeContent {
-
-        div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            // border: 1px solid;
-
-            h4{
                 font-size: 0.8rem;
             }
-            
-            p {
-                font-size: 0.7rem;
-                button {
-                    font-size: 0.7rem;
-                    text-decoration: none;
-                }
-            }
-
-            img {
-                width: 50px;
-                height: auto;
-            }
-
-            div {
-                button {
-                    font-size: 0.7rem;
-                }
-            }
         }
-    }
+    
     }
     
-    @media (max-width: 400px) {
-        padding: 0px;
 
-        .SetQrcodeContent {
-            height: auto;
 
-        div {
-            align-items:center ;
-            flex-direction: column;
-            // border: 1px solid;
-            h4{
-                font-size: 0.8rem;
-            }
-            
-            p {
-                font-size: 0.7rem;
-                button {
-                    font-size: 0.7rem;
-                    text-decoration: none;
-                }
-            }
 
-            img {
-                width: 50px;
-                height: auto;
-            }
 
-            div {
-                // border: 1px solid;
-                button {
-                    font-size: 0.7rem;
-                }
-            }
-        }
-    }
-    }
 }//!End 
+
 
 .SetQrcodeBtn {
     margin-top: 10px;
@@ -231,7 +198,7 @@
     justify-content: space-evenly;
 
     button {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     button:first-child {

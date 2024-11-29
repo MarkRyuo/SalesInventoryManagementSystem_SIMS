@@ -13,13 +13,14 @@
     padding: 0px;
 
     h4 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         margin-left: 20px;
     }
 
     .containerFilter {
         // border: 1px solid;
         width: 100%;
+        max-width: 700px;
         height: auto;
         margin-bottom: 10px;
         margin-top: 10px;
@@ -53,7 +54,7 @@
         div:first-child {
             padding: 10px;
             h5 {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
         }
 

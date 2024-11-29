@@ -3,7 +3,6 @@ import { Nav } from 'react-bootstrap';
 import { MainLayout } from "../../../layout/MainLayout";
 import { AiFillProduct } from "react-icons/ai";
 import Product from '../../../components/Charts/ProductChart/Product';
-import { Container } from "react-bootstrap";
 import AdminTransactionHistory from '../AdminTransactionHistory/AdminTransactionHistory'
 import { FaHistory } from "react-icons/fa";
 import { PiHandArrowUpBold } from "react-icons/pi";
@@ -51,7 +50,7 @@ export const ProductPage = () => {
 
     return (
         <MainLayout>
-            <Container className={ProductPagescss.Products}>
+            <div className={ProductPagescss.Products}>
                 <ProductNavbarTabs setActiveTab={setActiveTab} />
                 <div className="ProductContent">
                     {activeTab === '/Product' && (
@@ -75,7 +74,7 @@ export const ProductPage = () => {
                         </div>
                     )}
                 </div>
-            </Container>
+            </div>
         </MainLayout>
     );
 };

@@ -1,3 +1,5 @@
+/* eslint-disable object-curly-spacing */
+/* eslint-disable quotes */
 /* eslint-disable indent */
 /* eslint-disable max-len */
 
@@ -11,7 +13,6 @@ const admin = require("firebase-admin");
 const cors = require("cors")({origin: true});
 const {jsPDF} = require("jspdf");
 const qr = require("qrcode"); // For QR code generation
-const twilio = require("twilio");
 
 admin.initializeApp();
 
@@ -67,8 +68,8 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       order.items.forEach((item) => {
         doc.text(item.productName, 10, yPosition);
         doc.text(item.quantity.toString(), 100, yPosition, {align: "center"});
-        doc.text(`₱${parseFloat(item.price).toFixed(2)}`, 140, yPosition, {align: "right"});
-        doc.text(`₱${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, {align: "right"});
+        doc.text(`${parseFloat(item.price).toFixed(2)}`, 140, yPosition, {align: "right"});
+        doc.text(`${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, {align: "right"});
         yPosition += 10;
       });
 
@@ -77,20 +78,20 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
 
       // Totals
       yPosition += 10;
-      doc.text(`Subtotal: ₱${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
-      doc.text(`Tax: ₱${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
-      doc.text(`Discount: -₱${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
-      doc.text(`Payment Amount: ₱${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
-      doc.text(`Change: ₱${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
+      doc.text(`Subtotal: ${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
+      doc.text(`Tax: ${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
+      doc.text(`Discount: -${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
+      doc.text(`Payment Amount: ${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
+      doc.text(`Change: ${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
 
       doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
-      doc.text(`Total Amount: ₱${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
+      doc.text(`Total Amount: ${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
 
       // Footer (Thank You Message)
       doc.setFontSize(10);
       doc.setFont("helvetica", "italic");
-      doc.text("Thank you for your purchase!", 105, yPosition + 80, {align: "center"});
+      doc.text("This is not official receipt!", 105, yPosition + 80, {align: "center"});
 
       // Generate QR code (you can customize it as per your needs)
       const qrCodeData = await qr.toDataURL(`https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/downloadOrder?id=${orderId}`);
@@ -108,66 +109,62 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
   });
 });
 
-// Initialize Firebase Admin SDK
-// Twilio Phone Number Api
-// Replace with your Twilio credentials
-require("dotenv").config();
 
-const accountSid = process.env.TWILIO_SID;
-const authToken = process.env.TWILIO_TOKEN;
-const client = twilio(accountSid, authToken);
+require('dotenv').config();
+const express = require('express');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
 
-exports.sendOtp = functions.https.onRequest((req, res) => {
-  cors(req, res, async () => { // Wrap logic in CORS handler
-    const {phoneNumber} = req.body;
+const app = express();
 
-    try {
-      const otp = Math.floor(100000 + Math.random() * 900000);
+// Configure CORS to allow requests from all origins (or specify specific origins)
+app.use(cors({ origin: true }));
 
-      const message = await client.messages.create({
-        body: `Your OTP is ${otp}`,
-        from: "+16812401352",
-        to: phoneNumber,
-      });
+// Body parser middleware
+app.use(bodyParser.json());
 
-      await admin.firestore().collection("otps").doc(phoneNumber).set({
-        otp: otp,
-        timestamp: admin.firestore.FieldValue.serverTimestamp(),
-      });
+const otps = {}; // Store OTPs temporarily
 
-      res.status(200).json({message: "OTP sent successfully", sid: message.sid});
-    } catch (error) {
-      console.error("Error sending OTP:", error);
-      res.status(500).json({error: "Failed to send OTP"});
-    }
-  });
+// Nodemailer transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
 });
 
+// Generate OTP endpoint
+app.post('/generate-otp', async (req, res) => {
+  const { email } = req.body;
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  otps[email] = otp;
 
-// Cloud Function to verify OTP
-exports.verifyOtp = functions.https.onRequest((req, res) => {
-  cors(req, res, async () => { // Add CORS handler
-    const {otp, phoneNumber} = req.body;
-
-    try {
-      const otpDoc = await admin.firestore().collection("otps").doc(phoneNumber).get();
-
-      if (!otpDoc.exists) {
-        return res.status(400).json({error: "Phone number not found"});
-      }
-
-      const storedOtp = otpDoc.data().otp;
-
-      if (otp === storedOtp) {
-        res.status(200).json({message: "OTP verified successfully"});
-      } else {
-        res.status(400).json({error: "Invalid OTP"});
-      }
-    } catch (error) {
-      console.error("Error verifying OTP:", error);
-      res.status(500).json({error: "Failed to verify OTP"});
-    }
-  });
+  try {
+    await transporter.sendMail({
+      from: 'salesinventorymanagementsystem@gmail.com', // Use your email address
+      to: email,
+      subject: 'Your OTP',
+      text: `Your OTP is ${otp}`,
+    });
+    res.status(200).send({ message: 'OTP sent' });
+  } catch (err) {
+    res.status(500).send({ error: 'Failed to send OTP' });
+  }
 });
+
+// Validate OTP endpoint
+app.post('/validate-otp', (req, res) => {
+  const { email, otp } = req.body;
+  if (otps[email] === otp) {
+    delete otps[email];
+    res.status(200).send({ message: 'OTP verified' });
+  } else {
+    res.status(400).send({ error: 'Invalid OTP' });
+  }
+});
+
+// Firebase function to handle the Express app
+exports.api = functions.https.onRequest(app);
 
 

@@ -1,48 +1,93 @@
 import { useState, useEffect } from "react";
-import { fetchStockInByDate } from "./Service/StockIn"; // Import the helper function for fetching stock
+import { fetchStockInByDate, fetchAllStockIn } from "./Service/StockIn"; // Fetch all stock data
 import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { MainLayout } from "../../layout/MainLayout";
-import StockInReportsScss from './Scss/StockInReports.module.scss'
+import StockInReportsScss from './Scss/StockInReports.module.scss';
+import { Spinner } from "react-bootstrap";
+
 
 function StockInReports() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [filteredData, setFilteredData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recordsPerPage] = useState(10); // Set 15 records per page
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // Initial fetch if dates are set
+        // Fetch all stock data initially
+        const fetchData = async () => {
+            try {
+                const data = await fetchAllStockIn();  // Fetch all stock data on component mount
+                setFilteredData(data);
+            } catch (error) {
+                console.error("Error fetching all stock data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        // If dates are set, apply filtering
         if (startDate && endDate) {
             fetchFilteredData();
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [startDate, endDate]);
 
     const fetchFilteredData = async () => {
+        if (!startDate || !endDate) {
+            // If either date is missing, return without fetching data
+            alert("Please select both start and end dates to filter.");
+            return;
+        }
+
+        setLoading(true); // Start loading
         try {
             const data = await fetchStockInByDate(startDate, endDate);
-            console.log(data); // Log data to inspect the response
             setFilteredData(data);
         } catch (error) {
             console.error("Error fetching stock data:", error);
+        } finally {
+            setLoading(false); // Stop loading once done
         }
     };
 
 
+    // Calculate current page data
+    const indexOfLastRecord = currentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+    const currentRecords = filteredData.slice(indexOfFirstRecord, indexOfLastRecord);
+
+    // Calculate total pages
+    const totalPages = Math.ceil(filteredData.length / recordsPerPage);
+
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
 
-        // Add the report title and date range
-        doc.setFontSize(16);
-        doc.text("Stock In Report", 14, 20);
-        doc.setFontSize(12);
-        doc.text(`Date Range: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`, 14, 30);
+        // H1 Style for "REYES ELECTRONICS"
+        doc.setFontSize(16); // Larger font for H1
+        doc.text("REYES ELECTRONICS", 14, 15);
 
-        // Create the table with the data
+        // Subheading for "Stock In Report"
+        doc.setFontSize(12);
+        doc.text("Stock In Report", 14, 25);
+
+        // Date Range
+        doc.setFontSize(9);
+        doc.text(
+            `Date Range: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`,
+            14,
+            35
+        );
+
+        // Table
         doc.autoTable({
-            startY: 40,
-            head: [['Product ID', 'Product Name', 'SKU', 'Barcode', 'Quantity', 'Date Added']],
+            startY: 45,
+            head: [['Product ID', 'Product Name', 'SKU', 'Barcode', 'Qty', 'Date Added']],
             body: filteredData.map(item => [
                 item.productId,
                 item.productName,
@@ -51,49 +96,68 @@ function StockInReports() {
                 item.addedQuantityHistory.quantity,
                 new Date(item.addedQuantityHistory.date).toLocaleDateString(),
             ]),
+            styles: { fontSize: 9 }, // Smaller font for table
+            columnStyles: {
+                0: { cellWidth: 30 },
+                1: { cellWidth: 40 },
+                2: { cellWidth: 25 },
+                3: { cellWidth: 30 },
+                4: { cellWidth: 15 },
+                5: { cellWidth: 30 },
+            },
         });
 
-        // Save the PDF
         doc.save('stock-in-report.pdf');
     };
 
+
+
+
+
     const handleDownloadXLSX = () => {
-        // Prepare data for the XLSX file
         const reportData = filteredData.map(item => ({
             ProductID: item.productId,
             ProductName: item.productName,
             SKU: item.sku,
             Barcode: item.barcode,
-            Quantity: item.addedQuantityHistory.quantity,
+            Qty: item.addedQuantityHistory.quantity,
             DateAdded: new Date(item.addedQuantityHistory.date).toLocaleDateString(),
         }));
 
-        // Add title and date range to the worksheet
         const title = `Stock In Report (Date Range: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()})`;
         const worksheet = XLSX.utils.json_to_sheet(reportData);
 
-        // Add title as the first row
         const wsTitle = XLSX.utils.aoa_to_sheet([[title]]);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, wsTitle, "Report Title");
         XLSX.utils.book_append_sheet(workbook, worksheet, "Stock In Report");
 
-        // Write the file
         XLSX.writeFile(workbook, "stock-in-report.xlsx");
+    };
+
+    // Pagination handlers
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
     };
 
     return (
         <MainLayout>
             <div className={StockInReportsScss.Maincomponent}>
                 <h1>Stock In Report</h1>
-                {/* Dropdown for Download Options */}
                 <div className={StockInReportsScss.DropDown}>
                     <DropdownButton variant="success" title="Download" id="download-dropdown">
                         <Dropdown.Item as="button" onClick={handleDownloadPDF}>PDF</Dropdown.Item>
                         <Dropdown.Item as="button" onClick={handleDownloadXLSX}>XLSX</Dropdown.Item>
                     </DropdownButton>
                 </div>
-                {/* Date Range Filter */}
                 <div className={StockInReportsScss.formContent}>
                     <Form>
                         <Form.Group controlId="startDate">
@@ -113,40 +177,73 @@ function StockInReports() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-
                     </Form>
-                    <div style={{paddingleft: 10}}>
-                        <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
+                    <div style={{ paddingLeft: 10 }}>
+                        <Button
+                            variant="primary"
+                            onClick={fetchFilteredData}
+                            disabled={!startDate || !endDate} // Disable if either date is missing
+                        >
+                            Filter
+                        </Button>
+
                     </div>
                 </div>
 
-                {/* Table Display */}
-                <div className={StockInReportsScss.tables}>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Product ID</th>
-                                <th>Product Name</th>
-                                <th>SKU</th>
-                                <th>Barcode</th>
-                                <th>Quantity</th>
-                                <th>Date Added</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredData.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.productId}</td>
-                                    <td>{item.productName}</td>
-                                    <td>{item.sku}</td>
-                                    <td>{item.barcode}</td>
-                                    <td>{item.addedQuantityHistory.quantity}</td>
-                                    <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
+                <div className="d-flex justify-content-start align-items-center my-2">
+                    <Button
+                        variant="link"
+                        disabled={currentPage === 1}
+                        onClick={handlePreviousPage}
+                        style={{fontSize: '0.9rem'}}
+                    >
+                        &#8592; {/* Left arrow */}
+                    </Button>
+                    <span className="mx-2" style={{ fontSize: '0.9rem' }}> Page {currentPage} of {totalPages} </span>
+                    <Button
+                        variant="link"
+                        disabled={currentPage === totalPages}
+                        onClick={handleNextPage}
+                        style={{ fontSize: '0.9rem' }}
+                    >
+                        &#8594; {/* Right arrow */}
+                    </Button>
                 </div>
+
+
+                <div className={StockInReportsScss.tables}>
+                    {loading ? (
+                        <div className="d-flex justify-content-center align-items-center mt-5">
+                            <Spinner animation="grow" variant="primary" />
+                        </div>
+                    ) : (
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>SKU</th>
+                                    <th>Barcode</th>
+                                    <th>Quantity</th>
+                                    <th>Date Added</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {currentRecords.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.productId}</td>
+                                        <td>{item.productName}</td>
+                                        <td>{item.sku}</td>
+                                        <td>{item.barcode}</td>
+                                        <td>{item.addedQuantityHistory.quantity}</td>
+                                        <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    )}
+                </div>
+
             </div>
         </MainLayout>
     );

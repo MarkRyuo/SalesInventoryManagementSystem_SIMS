@@ -1,123 +1,22 @@
 
 
 .mainTopComponent {
-    // border: 1px solid red;
     margin: 0;
-    // padding: 10px;
     padding-bottom: 20px;
 
     .componentHeroCard {
-        // border: 1px solid green;
-        margin-top: 10px;
-        border-radius: 15px;
-
-        h1 {
-            font-size: 2rem;
-            // border: 1px solid;
-            height: auto;
-            width: 200px;
-            // background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-            font-weight: 500;
-        }
-        .credentialDashboard {
-            margin-top: 30px;
-            // border: 1px solid rgb(150, 150, 150);
-            background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-            border-radius: 15px;
-            width: auto;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 30px;
-
-            img {
-                width: 100px;
-            }
-
-            div:last-child {
-
-                h4 {
-                    font-size: 1.5rem;
-                }
-                p {
-                    font-size: 1rem;
-                }
-            }
-        }
-    }
-} //! End 
-
-
-.chartContainer {
-    // border: 1px solid red;
-    height: auto;
-    
-    .smallContainer {
-        background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-        // border: 1px solid #dbdbdb;
-        border-radius: 15px;
-        padding: 15px;
-        display: flex;
-        gap: 10px;
-        flex-direction: column;
-        div:first-child {
-            display: flex;
-        }
-        
-        .largeContainer {
-            // border: 1px solid;
-            margin-top:10px;
-            display: flex;
-            width: auto;
-            gap: 10px;
-
-            .buttonsHeroCard {
-                // border: 1px solid;
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-                width: 500px;
-                height: 400px;
-                gap: 20px;
-                justify-content: center;
-            }
-
-            .divLG {
-                width: auto;
-                display: flex;
-                flex-direction: column;
-                // border: 1px solid;
-                gap: 10px;
-            }
-        }
-    }
-
-} //! End
-
-
-@media (max-width: 1000px) {
-    .mainTopComponent {
-    // border: 1px solid red;
-    margin: 0;
-    // padding: 10px;
-    padding-bottom: 20px;
-
-    .componentHeroCard {
-        // border: 1px solid green;
         margin-top: 10px;
         border-radius: 15px;
 
         h1 {
             font-size: 1.7rem;
-            // border: 1px solid;
             height: auto;
             width: 200px;
-            // background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
+            padding-left: 10px;
             font-weight: 500;
         }
         .credentialDashboard {
             margin-top: 30px;
-            // border: 1px solid rgb(150, 150, 150);
             background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
             border-radius: 15px;
             width: auto;
@@ -133,188 +32,7 @@
             div:last-child {
 
                 h4 {
-                    font-size: 1.4rem;
-                }
-                p {
-                    font-size: 1rem;
-                }
-            }
-        }
-    }
-} //! End 
-
-
-.chartContainer {
-    // border: 1px solid red;
-    height: auto;
-    
-    .smallContainer {
-        background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-        // border: 1px solid #dbdbdb;
-        border-radius: 15px;
-        padding: 15px;
-        display: flex;
-        gap: 10px;
-        flex-direction: column;
-        div:first-child {
-            display: flex;
-        }
-        
-        .largeContainer {
-            // border: 1px solid;
-            margin-top:10px;
-            display: flex;
-            width: auto;
-            gap: 10px;
-
-            .buttonsHeroCard {
-                // border: 1px solid;
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-                width: 500px;
-                height: 400px;
-                gap: 20px;
-                justify-content: center;
-            }
-
-            .divLG {
-                width: auto;
-                display: flex;
-                flex-direction: column;
-                // border: 1px solid;
-                gap: 10px;
-            }
-        }
-    }
-
-}
-}
-
-@media (max-width: 700px) {
-    .mainTopComponent {
-    // border: 1px solid red;
-    margin: 0;
-    // padding: 10px;
-    padding-bottom: 20px;
-
-    .componentHeroCard {
-        // border: 1px solid green;
-        margin-top: 10px;
-        border-radius: 15px;
-
-        h1 {
-            font-size: 1.7rem;
-            // border: 1px solid;
-            height: auto;
-            width: 200px;
-            // background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-            font-weight: 500;
-        }
-        .credentialDashboard {
-            margin-top: 30px;
-            // border: 1px solid rgb(150, 150, 150);
-            background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-            border-radius: 15px;
-            width: auto;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 30px;
-
-            img {
-                width: 90px;
-            }
-
-            div:last-child {
-
-                h4 {
-                    font-size: 1.4rem;
-                }
-                p {
-                    font-size: 1rem;
-                }
-            }
-        }
-    }
-} //! End 
-
-
-.chartContainer {
-    // border: 1px solid red;
-    height: auto;
-    
-    .smallContainer {
-        background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-        // border: 1px solid #dbdbdb;
-        border-radius: 15px;
-        padding: 15px;
-        display: flex;
-        gap: 10px;
-        flex-direction: column;
-        div:first-child {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .largeContainer {
-            // border: 1px solid;
-            margin-top:10px;
-            display: flex;
-            justify-content:center;
-            width: auto; 
-            
-
-            .buttonsHeroCard {
-                display: none;
-            }
-        }
-    }
-
-}
-}
-
-@media (max-width: 500px) {
-    .mainTopComponent {
-    // border: 1px solid red;
-    margin: 0;
-    // padding: 10px;
-    padding-bottom: 20px;
-
-    .componentHeroCard {
-        // border: 1px solid green;
-        margin-top: 10px;
-        border-radius: 15px;
-
-        h1 {
-            font-size: 1.5rem;
-            // border: 1px solid;
-            height: auto;
-            width: 200px;
-            padding: 10px;
-            // background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-            font-weight: 500;
-        }
-        .credentialDashboard {
-            margin-top: 15px;
-            // border: 1px solid rgb(150, 150, 150);
-            background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-            border-radius: 15px;
-            width: auto;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 0px;
-
-            img {
-                width: 80px;
-            }
-
-            div:last-child {
-
-                h4 {
-                    font-size: 1.3rem;
+                    font-size: 1.2rem;
                 }
                 p {
                     font-size: 0.9rem;
@@ -325,37 +43,230 @@
 } //! End 
 
 
-.chartContainer {
-    // border: 1px solid red;
-    height: auto;
-    
-    .smallContainer {
+@media (max-width: 998px) {
+    .mainTopComponent {
+
+    .componentHeroCard {
+        h1 {
+            font-size: 1.4rem;
+        }
+        .credentialDashboard {
+            margin-top: 30px;
+
+            img {
+                width: 80px;
+            }
+
+            div:last-child {
+
+                h4 {
+                    font-size: 1.2rem;
+                }
+                p {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+    } //! End 
+}
+
+@media (max-width: 630px) {
+    .mainTopComponent {
+
+    .componentHeroCard {
+        h1 {
+            font-size: 1.3rem;
+        }
+        .credentialDashboard {
+            margin-top: 30px;
+
+            img {
+                width: 70px;
+            }
+
+            div:last-child {
+
+                h4 {
+                    font-size: 1.1rem;
+                }
+                p {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+    } //! End 
+}
+
+@media (max-width: 532px) {
+    .mainTopComponent {
+
+    .componentHeroCard {
+        h1 {
+            font-size: 1.2rem;
+        }
+        .credentialDashboard {
+            margin-top: 30px;
+
+            img {
+                width: 60px;
+            }
+
+            div:last-child {
+
+                h4 {
+                    font-size: 1rem;
+                }
+                p {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+    } //! End 
+}
+
+.smallContainer {
         background: radial-gradient(788px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 50%);
-        // border: 1px solid #dbdbdb;
         border-radius: 15px;
         padding: 15px;
         display: flex;
         gap: 10px;
         flex-direction: column;
+
         div:first-child {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
         }
         
         .largeContainer {
-            // border: 1px solid;
-            margin-top:10px;
+            margin-top: 10px;
             display: flex;
-            justify-content:center;
-            width: auto; 
-            
+            width: auto;
+            gap: 10px;
 
             .buttonsHeroCard {
-                display: none;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                height: 350px;
+                justify-content: center;
+                gap: 20px;
+                width: 500px;
+            }
+        }
+}
+
+
+@media (max-width: 998px) {
+    .smallContainer {
+        padding: 0px;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+
+        div:first-child {
+            display: flex;
+        }
+        
+        .largeContainer {
+            margin-top: 10px;
+            display: flex;
+            width: auto;
+            gap: 10px;
+
+            .buttonsHeroCard {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                height: 350px;
+                justify-content: center;
+                gap: 20px;
+                width: 100%;
             }
         }
     }
-
 }
+
+@media (max-width: 640px) {
+    .smallContainer {
+        flex-direction: column;
+
+        div:first-child {
+            display: flex;
+        }
+        
+        .largeContainer {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            width: auto;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            .buttonsHeroCard {
+                display: flex;
+                align-items:center;
+                flex-direction: row;
+                height: auto;
+                justify-content:space-evenly;
+                gap: 0px;
+            }
+        }
+    }
+}
+
+@media (max-width: 532px) {
+    .smallContainer {
+        flex-direction: column;
+
+        div:first-child {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 5px;
+        }
+        
+        .largeContainer {
+            margin-top: 10px;
+            display: flex;
+            width: auto;
+            gap: 10px;
+
+            .buttonsHeroCard {
+                display: flex;
+                align-items:center;
+                flex-direction: row;
+                height: auto;
+                justify-content:space-evenly;
+                gap: 0px;
+            }
+        }
+    }
+}
+
+@media (max-width: 446px) {
+    .smallContainer {
+        flex-direction: column;
+
+        div:first-child {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .largeContainer {
+            margin-top: 10px;
+            display: flex;
+            width: auto;
+            gap: 10px;
+
+            .divLG {
+                width: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    }
 }

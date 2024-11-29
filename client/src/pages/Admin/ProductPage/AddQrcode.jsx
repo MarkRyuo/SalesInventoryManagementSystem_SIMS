@@ -8,25 +8,23 @@ function AddQrcode({ onClose, show }) {
     const [isSaving, setIsSaving] = useState(false); // Track saving state
     const [error, setError] = useState(null); // Track error state
     const canvasRef = useRef(null);
+    const [isGenerated, setIsGenerated] = useState(false); // Track if QR code is generated
+
 
     const generateQRCode = () => {
-        // Generate a fixed value QR code (for example, use a product ID or a unique identifier)
-        const qrcodeValue = `product-${Date.now()}`;  // Use timestamp or any unique value for QR code
-
-        setError(null); // Clear any previous error
+        setIsGenerated(false); // Reset before generating
         new QRCode({
             element: canvasRef.current,
-            value: qrcodeValue,  // Set the fixed value for the QR code
-            size: 200,  // Adjust the size as needed
+            value: `product-${Date.now()}`,  // Unique QR code value
+            size: 200,
         });
+        setIsGenerated(true); // Set as generated
     };
+
 
     const saveQRCode = async () => {
         setIsSaving(true); // Show saving modal
-        // Get the QR code as a Base64 string from the canvas
         const qrcodeBase64 = canvasRef.current.toDataURL(); // Converts the canvas content to Base64
-
-        // Generate a unique identifier for the QR code
         const qrcodeId = `qr-${Date.now()}`;  // Use the timestamp as a unique ID for this QR code
 
         try {
@@ -41,6 +39,9 @@ function AddQrcode({ onClose, show }) {
             // Save the Base64 string to the database
             await addQrcodeToDatabase(qrcodeId, qrcodeBase64);
             console.log('QR Code saved to database successfully!');
+
+            // Close the modal after successful save
+            onClose();
         } catch (error) {
             console.error('Error saving QR Code to database:', error);
             setError('Failed to save QR code.');
@@ -48,6 +49,7 @@ function AddQrcode({ onClose, show }) {
             setIsSaving(false); // Hide saving modal after operation is complete
         }
     };
+
 
     return (
         <>
@@ -63,17 +65,22 @@ function AddQrcode({ onClose, show }) {
                     <canvas ref={canvasRef} className="mt-3" />
 
                     <div>
-                        <Button variant="primary" onClick={generateQRCode} className="mt-3">
-                            Generate QR Code
+                        <Button variant="primary" onClick={generateQRCode} className="mt-3 mx-3">
+                            Generate
                         </Button>
-                        <Button variant="success" onClick={saveQRCode} className="mt-3 ml-2" disabled={isSaving}>
+                        <Button
+                            variant="success"
+                            onClick={saveQRCode}
+                            className="mt-3 mx-2"
+                            disabled={!isGenerated || isSaving}  // Disable Save if not generated or saving
+                        >
                             {isSaving ? (
                                 <>
                                     <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
                                     {' '}Saving...
                                 </>
                             ) : (
-                                'Save QR Code'
+                                'Save'
                             )}
                         </Button>
                     </div>

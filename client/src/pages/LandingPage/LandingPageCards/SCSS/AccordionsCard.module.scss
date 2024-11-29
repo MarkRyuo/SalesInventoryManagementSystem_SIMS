@@ -1,0 +1,163 @@
+
+
+.MainContent {
+    height: 700px;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    .FAQcontainer {
+        width: 500px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        h1 {
+            padding: 10px;
+            font-size: 3rem;
+            font-weight: 300;
+            align-self: flex-start;
+        }
+
+        p {
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .Imgs {
+            width: 90%;
+            align-self: flex-start;
+            img {
+                border-radius: 10px;
+                width: 100%;
+            }
+        }
+    } 
+
+    .AccoMain {
+        // border: 1px solid;
+        display: flex;
+        align-items: center;
+        width: 700px;
+
+        .containerAc {
+            width: 100%;
+        }
+
+        button {
+            font-size: 1.1rem;
+        }
+
+
+    }
+}
+
+
+@media (max-width: 998px) {
+    .MainContent {
+    height: 700px;
+    display: flex;
+    justify-content: space-evenly;
+    .FAQcontainer {
+        width: 500px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        h1 {
+            padding: 10px;
+            font-size: 2.7rem;
+            font-weight: 300;
+            align-self: flex-start;
+        }
+
+        p {
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .Imgs {
+            width: 100%;
+            align-self: flex-start;
+            img {
+                border-radius: 10px;
+                width: 90%;
+            }
+        }
+    } 
+
+    .AccoMain {
+        // border: 1px solid;
+        display: flex;
+        align-items: center;
+        width: 700px;
+
+        .containerAc {
+            width: 100%;
+        }
+
+        button {
+            font-size: 1.1rem;
+        }
+
+
+    }
+    }
+}
+
+@media (max-width: 600px) {
+    .MainContent {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    .FAQcontainer {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        h1 {
+            padding: 10px;
+            font-size: 2rem;
+            font-weight: 300;
+            align-self: flex-start;
+        }
+
+        p {
+            padding: 10px;
+            font-size: 0.8rem;
+        }
+
+        .Imgs {
+            width: 100%;
+            align-self: flex-start;
+            img {
+                border-radius: 10px;
+                width: 60%;
+            }
+        }
+    } 
+
+    .AccoMain {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .containerAc {
+            width: 100%;
+        }
+
+        button {
+            font-size: 0.8rem;
+        }
+
+
+    }
+    }
+}
+

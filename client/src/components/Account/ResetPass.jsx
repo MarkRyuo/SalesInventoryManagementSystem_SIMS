@@ -11,27 +11,30 @@ import { IoArrowBack } from "react-icons/io5";
 import { PiShieldWarningFill } from "react-icons/pi";
 
 const ResetPass = () => {
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [otpSent, setOtpSent] = useState(false);
     const [otpVerified, setOtpVerified] = useState(false); // State for OTP verification
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    
 
-    const validatePhoneNumber = (number) => /^[+]?[0-9]{10,12}$/.test(number);
+    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
 
     const handleSendOtp = async () => {
-        if (!validatePhoneNumber(phoneNumber)) {
-            setError('Invalid phone number');
+        if (!validateEmail(email)) {  // Use email validation instead of phone number validation
+            setError('Invalid email address');
             return;
         }
         try {
-            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/sendOtp', {
+            const response = await fetch(' https://api-hqnwrfpmoa-uc.a.run.app', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phoneNumber }),
+                body: JSON.stringify({ email }), // Use email here
             });
+
             const result = await response.json();
             if (response.ok) {
                 setOtpSent(true);
@@ -47,11 +50,12 @@ const ResetPass = () => {
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/sendOtp', {
+            const response = await fetch(' https://api-hqnwrfpmoa-uc.a.run.app', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ otp, phoneNumber }),
+                body: JSON.stringify({ otp, email }), // Use email here
             });
+
             const result = await response.json();
             if (response.ok) {
                 setSuccess('OTP verified successfully!');
@@ -77,7 +81,7 @@ const ResetPass = () => {
 
             // Query Firestore for the admin with the matching phone number
             const adminsCollection = collection(db, 'admins');
-            const q = query(adminsCollection, where('phoneNumber', '==', phoneNumber));
+            const q = query(adminsCollection, where('email', '==', email)); // Search by email
             const querySnapshot = await getDocs(q);
 
             if (querySnapshot.empty) {
@@ -105,17 +109,17 @@ const ResetPass = () => {
                 <Col xs={12} md={8} lg={4} className={ResetPassScss.colContainer}>
                     <div><PiShieldWarningFill size={70} /></div>
                     <h2 className="mb-2 text-center">Forgot Password</h2>
-                    <p className='fs-6 m-0 text-center'>Enter your Phone Number and we'll send you a OTP to reset your password.</p>
+                    <p className='fs-6 m-0 text-center'>Enter your Email and we'll send you a OTP to reset your password.</p>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">{success}</Alert>}
                     <Form>
-                        <Form.Group controlId="phoneNumber" className="mb-3">
-                            <Form.Label>Phone Number</Form.Label>
+                        <Form.Group controlId="email" className="mb-3">
+                            <Form.Label>Email</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="Enter your phone number"
-                                value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                type="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 disabled={otpSent || otpVerified}
                             />
                         </Form.Group>
@@ -132,10 +136,11 @@ const ResetPass = () => {
                                     <Form.Label>Enter OTP</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        placeholder="Enter the OTP sent to your phone"
+                                        placeholder="Enter the OTP sent to your email"
                                         value={otp}
                                         onChange={(e) => setOtp(e.target.value)}
                                     />
+
                                 </Form.Group>
                                 <Button variant="primary" onClick={handleVerifyOtp} className="w-100 mb-3">
                                     Verify OTP

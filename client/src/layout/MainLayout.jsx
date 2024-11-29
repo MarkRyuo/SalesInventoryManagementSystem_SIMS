@@ -8,7 +8,7 @@ export const MainLayout = ({children}) => {
     return (
         <Container fluid className={MainLayoutscss.mainLayoutContainer}>
             <NavDashboard />
-            <Container fluid='lg' className='p-0'>
+            <Container fluid='xxl' className='p-0'>
                 {children}
             </Container>
         </Container>

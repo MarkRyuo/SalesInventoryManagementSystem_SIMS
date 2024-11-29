@@ -13,7 +13,6 @@ import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
 import ChartLg2 from '../../../components/Charts/DashboardChart/ChartLg2';
 import ChartLg3 from '../../../components/Charts/DashboardChart/ChartLg3';
 import Chart4 from '../../../components/Charts/DashboardChart/Chart4';
-import { MdSpaceDashboard } from "react-icons/md";
 
 
 export const DashboardPage = () => {
@@ -27,7 +26,7 @@ export const DashboardPage = () => {
             try {
                 const adminId = localStorage.getItem('adminId');
                 if (!adminId) {
-                    console.error('Admin ID not found in localStorage.');
+                    console.error('Admin ID not found');
                     return;
                 }
 
@@ -77,7 +76,7 @@ export const DashboardPage = () => {
         <MainLayout>
             <div className={DashboardCss.mainTopComponent}>
                 <div className={DashboardCss.componentHeroCard}>
-                    <h1 className='d-flex'><MdSpaceDashboard size={25} className='mt-2 p-0 d-none d-md-block' />Dashboard</h1>
+                    <h1 className='d-flex'>Dashboard</h1>
                     {isLoading ? (
                         <div className={DashboardCss.loadingContainer}>
                             <p>Loading admin Dashboard</p>
@@ -101,7 +100,6 @@ export const DashboardPage = () => {
             </div>
 
             {!isLoading && (
-                <div className={DashboardCss.chartContainer}>
 
                     <div className={DashboardCss.smallContainer}>
                         <div>
@@ -115,11 +113,10 @@ export const DashboardPage = () => {
                                 <ChartLg3 />
                                 <ChartLg2 />
                             </div>
-                            <ChartLg1 />
+                                <ChartLg1 />
                         </div>
                     </div>
 
-                </div>
             )}
         </MainLayout>
     );
