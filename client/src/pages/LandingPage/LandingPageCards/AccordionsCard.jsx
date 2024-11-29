@@ -1,4 +1,4 @@
-import { Accordion, Carousel } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 import Accordionstyles from './SCSS/AccordionsCard.module.scss';
 
 function AccordionsCard() {
