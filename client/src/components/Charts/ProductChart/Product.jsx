@@ -244,7 +244,7 @@ function ProductChart() {
                         </DropdownButton>
                     </div>
                 </div>
-            </Row>git 
+            </Row>
 
             <div className={Productcss.containerProduct}>
                 <div className={Productcss.colProduct}>
