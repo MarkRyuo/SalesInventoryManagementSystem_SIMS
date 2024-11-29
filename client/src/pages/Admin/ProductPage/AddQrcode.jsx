@@ -63,17 +63,17 @@ function AddQrcode({ onClose, show }) {
                     <canvas ref={canvasRef} className="mt-3" />
 
                     <div>
-                        <Button variant="primary" onClick={generateQRCode} className="mt-3">
-                            Generate QR Code
+                        <Button variant="primary" onClick={generateQRCode} className="mt-3 mx-3">
+                            Generate
                         </Button>
-                        <Button variant="success" onClick={saveQRCode} className="mt-3 ml-2" disabled={isSaving}>
+                        <Button variant="success" onClick={saveQRCode} className="mt-3 mx-2" disabled={isSaving}>
                             {isSaving ? (
                                 <>
                                     <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
                                     {' '}Saving...
                                 </>
                             ) : (
-                                'Save QR Code'
+                                'Save'
                             )}
                         </Button>
                     </div>
