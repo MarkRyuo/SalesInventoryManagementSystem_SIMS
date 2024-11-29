@@ -1,4 +1,5 @@
 import Accordion from 'react-bootstrap/Accordion';
+import Carousel from 'react-bootstrap/Carousel';
 
 
 function Accordions() {
@@ -22,6 +23,32 @@ function Accordions() {
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
+            </div>
+
+            <div>
+                <Carousel fade>
+                    <Carousel.Item>
+                        <img src='' alt=''/>
+                        <Carousel.Caption>
+                            <h3>First slide label</h3>
+                            <p>Some Text</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img src='' alt='' />
+                        <Carousel.Caption>
+                            <h3>Second slide label</h3>
+                            <p>Some Text</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img src='' alt='' />
+                        <Carousel.Caption>
+                            <h3>Third slide label</h3>
+                            <p>Some Text</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                </Carousel>
             </div>
         </div>
     )
