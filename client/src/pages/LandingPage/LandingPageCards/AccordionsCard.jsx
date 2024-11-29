@@ -1,35 +1,33 @@
 import Accordion from 'react-bootstrap/Accordion';
 import Carousel from 'react-bootstrap/Carousel';
-import AccordionsCardScss from './SCSS/AccordionsCard.module.scss' ;
+import AccordionsCardScss from './SCSS/AccordionsCard.module.scss';
 
 
 function AccordionsCard() {
     return (
         <div className={AccordionsCardScss.MainAccordion}>
-            <div className={AccordionsCardScss.AccordionsContainer}>
-                <Accordion>
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header>Accordion Item #1</Accordion.Header>
-                        <Accordion.Body>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item eventKey="1">
-                        <Accordion.Header>Accordion Item #2</Accordion.Header>
-                        <Accordion.Body>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                            minim veniam.
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
-            </div>
+            <Accordion className={AccordionsCardScss.AccordionsContainer}>
+                <Accordion.Item eventKey="0">
+                    <Accordion.Header>Accordion Item #1</Accordion.Header>
+                    <Accordion.Body>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </Accordion.Body>
+                </Accordion.Item>
+                <Accordion.Item eventKey="1">
+                    <Accordion.Header>Accordion Item #2</Accordion.Header>
+                    <Accordion.Body>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                        minim veniam.
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
 
-            <div>
+
                 <Carousel fade>
                     <Carousel.Item>
-                        <img src='/Img1.jpg' alt=''/>
+                        <img src='/Img1.jpg' alt='' />
                         <Carousel.Caption>
                             <h3>First slide label</h3>
                             <p>Some Text</p>
@@ -50,7 +48,6 @@ function AccordionsCard() {
                         </Carousel.Caption>
                     </Carousel.Item>
                 </Carousel>
-            </div>
         </div>
     )
 }
