@@ -110,9 +110,9 @@ function TotalSalesReports() {
                 transaction.transactionId,
                 transaction.date,
                 transaction.totalQuantity,
-                `₱${transaction.discount}`,
-                `₱${transaction.tax}`,
-                `₱${transaction.total}`,
+                transaction.discount,
+                transaction.tax,
+                transaction.total,
             ]),
             startY: 40,
             theme: 'grid', // Adds a grid style to the table
