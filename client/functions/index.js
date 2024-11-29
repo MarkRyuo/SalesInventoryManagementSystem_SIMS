@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable indent */
 /* eslint-disable max-len */
 
@@ -112,6 +113,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 
+// Initialize Express app
 const app = express();
 app.use(bodyParser.json());
 
@@ -119,16 +121,16 @@ const otps = {}; // Store OTPs temporarily
 
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // or your email service
+  service: 'gmail', // Use your email service provider
   auth: {
-    user: 'your-email@gmail.com',
-    pass: 'your-email-password',
+    user: 'your-email@gmail.com', // Your email address
+    pass: 'your-email-password', // Your email password (consider using environment variables)
   },
 });
 
-// Send OTP
+// Send OTP endpoint
 app.post('/send-otp', (req, res) => {
-  const { email } = req.body;
+  const {email} = req.body;
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   otps[email] = otp;
 
@@ -139,21 +141,23 @@ app.post('/send-otp', (req, res) => {
     text: `Your OTP is ${otp}`,
   }, (err) => {
     if (err) {
-      return res.status(500).send({ error: 'Failed to send OTP' });
+      return res.status(500).send({error: 'Failed to send OTP'});
     }
-    res.status(200).send({ message: 'OTP sent' });
+    res.status(200).send({message: 'OTP sent'});
   });
 });
 
-// Verify OTP
+// Verify OTP endpoint
 app.post('/verify-otp', (req, res) => {
-  const { email, otp } = req.body;
+  const {email, otp} = req.body;
   if (otps[email] === otp) {
     delete otps[email];
-    res.status(200).send({ message: 'OTP verified' });
+    res.status(200).send({message: 'OTP verified'});
   } else {
-    res.status(400).send({ error: 'Invalid OTP' });
+    res.status(400).send({error: 'Invalid OTP'});
   }
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+// Firebase function to handle the Express app
+exports.api = functions.https.onRequest(app);
+
