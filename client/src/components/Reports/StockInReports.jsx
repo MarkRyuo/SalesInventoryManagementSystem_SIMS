@@ -16,7 +16,6 @@ function StockInReports() {
     const [recordsPerPage] = useState(10); // Set 15 records per page
     const [loading, setLoading] = useState(false);
 
-
     useEffect(() => {
         // Fetch all stock data initially
         const fetchData = async () => {
