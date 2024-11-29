@@ -41,7 +41,7 @@
 
     div:first-child {
         p:first-child {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             white-space: nowrap; /* Prevents text from wrapping */
             overflow: hidden;
             text-overflow: ellipsis; /* Adds ellipsis (...) if text overflows */
@@ -49,7 +49,7 @@
 
         span {
             margin-top: 8px;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .lastChild {
