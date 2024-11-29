@@ -111,12 +111,19 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
 
 
 require('dotenv').config();
-
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 
 const app = express();
+
+// Allow CORS for all origins (or specify your frontend domain)
+app.use(cors());
+
+// Handle pre-flight OPTIONS requests
+app.options('*', cors());
+
+// Body parser middleware
 app.use(bodyParser.json());
 
 const otps = {}; // Store OTPs temporarily
@@ -162,5 +169,4 @@ app.post('/validate-otp', (req, res) => {
 
 // Firebase function to handle the Express app
 exports.api = functions.https.onRequest(app);
-
 
