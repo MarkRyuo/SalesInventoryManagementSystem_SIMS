@@ -2,7 +2,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Carousel from 'react-bootstrap/Carousel';
 
 
-function Accordions() {
+function AccordionsCard() {
     return (
         <div>
             <div>
@@ -54,4 +54,4 @@ function Accordions() {
     )
 }
 
-export default Accordions;
+export default AccordionsCard;
