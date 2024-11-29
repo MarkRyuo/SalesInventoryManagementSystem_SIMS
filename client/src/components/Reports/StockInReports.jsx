@@ -4,12 +4,14 @@ import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { MainLayout } from "../../layout/MainLayout";
-import StockInReportsScss from './Scss/StockInReports.module.scss'
+import StockInReportsScss from './Scss/StockInReports.module.scss';
 
 function StockInReports() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [filteredData, setFilteredData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recordsPerPage] = useState(10); // Set 15 records per page
 
     useEffect(() => {
         // Fetch all stock data initially
@@ -41,6 +43,14 @@ function StockInReports() {
             console.error("Error fetching stock data:", error);
         }
     };
+
+    // Calculate current page data
+    const indexOfLastRecord = currentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+    const currentRecords = filteredData.slice(indexOfFirstRecord, indexOfLastRecord);
+
+    // Calculate total pages
+    const totalPages = Math.ceil(filteredData.length / recordsPerPage);
 
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
@@ -87,6 +97,19 @@ function StockInReports() {
         XLSX.writeFile(workbook, "stock-in-report.xlsx");
     };
 
+    // Pagination handlers
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
     return (
         <MainLayout>
             <div className={StockInReportsScss.Maincomponent}>
@@ -116,7 +139,6 @@ function StockInReports() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-
                     </Form>
                     <div style={{ paddingLeft: 10 }}>
                         <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
@@ -136,7 +158,7 @@ function StockInReports() {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredData.map((item, index) => (
+                            {currentRecords.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.productId}</td>
                                     <td>{item.productName}</td>
@@ -147,6 +169,28 @@ function StockInReports() {
                                 </tr>
                             ))}
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colSpan="6" style={{ textAlign: "center" }}>
+                                    {/* Pagination arrows inside the table footer row */}
+                                    <Button
+                                        variant="link"
+                                        disabled={currentPage === 1}
+                                        onClick={handlePreviousPage}
+                                    >
+                                        &#8592; {/* Left arrow for "Previous" */}
+                                    </Button>
+                                    <span> Page {currentPage} of {totalPages} </span>
+                                    <Button
+                                        variant="link"
+                                        disabled={currentPage === totalPages}
+                                        onClick={handleNextPage}
+                                    >
+                                        &#8594; {/* Right arrow for "Next" */}
+                                    </Button>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </Table>
                 </div>
             </div>
