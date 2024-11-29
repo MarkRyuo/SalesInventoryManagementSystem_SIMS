@@ -11,27 +11,30 @@ import { IoArrowBack } from "react-icons/io5";
 import { PiShieldWarningFill } from "react-icons/pi";
 
 const ResetPass = () => {
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [otpSent, setOtpSent] = useState(false);
     const [otpVerified, setOtpVerified] = useState(false); // State for OTP verification
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    
 
-    const validatePhoneNumber = (number) => /^[+]?[0-9]{10,12}$/.test(number);
+    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
 
     const handleSendOtp = async () => {
-        if (!validatePhoneNumber(phoneNumber)) {
-            setError('Invalid phone number');
+        if (!validateEmail(email)) {  // Use email validation instead of phone number validation
+            setError('Invalid email address');
             return;
         }
         try {
             const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/sendOtp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phoneNumber }),
+                body: JSON.stringify({ email }), // Use email here
             });
+
             const result = await response.json();
             if (response.ok) {
                 setOtpSent(true);
@@ -50,8 +53,9 @@ const ResetPass = () => {
             const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/sendOtp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ otp, phoneNumber }),
+                body: JSON.stringify({ otp, email }), // Use email here
             });
+
             const result = await response.json();
             if (response.ok) {
                 setSuccess('OTP verified successfully!');
@@ -77,7 +81,7 @@ const ResetPass = () => {
 
             // Query Firestore for the admin with the matching phone number
             const adminsCollection = collection(db, 'admins');
-            const q = query(adminsCollection, where('phoneNumber', '==', phoneNumber));
+            const q = query(adminsCollection, where('email', '==', email)); // Search by email
             const querySnapshot = await getDocs(q);
 
             if (querySnapshot.empty) {
@@ -109,13 +113,13 @@ const ResetPass = () => {
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">{success}</Alert>}
                     <Form>
-                        <Form.Group controlId="phoneNumber" className="mb-3">
-                            <Form.Label>Phone Number</Form.Label>
+                        <Form.Group controlId="email" className="mb-3">
+                            <Form.Label>Email</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="Enter your phone number"
-                                value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                type="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 disabled={otpSent || otpVerified}
                             />
                         </Form.Group>
