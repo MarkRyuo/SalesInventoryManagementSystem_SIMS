@@ -8,18 +8,19 @@ function AddQrcode({ onClose, show }) {
     const [isSaving, setIsSaving] = useState(false); // Track saving state
     const [error, setError] = useState(null); // Track error state
     const canvasRef = useRef(null);
+    const [isGenerated, setIsGenerated] = useState(false); // Track if QR code is generated
+
 
     const generateQRCode = () => {
-        // Generate a fixed value QR code (for example, use a product ID or a unique identifier)
-        const qrcodeValue = `product-${Date.now()}`;  // Use timestamp or any unique value for QR code
-
-        setError(null); // Clear any previous error
+        setIsGenerated(false); // Reset before generating
         new QRCode({
             element: canvasRef.current,
-            value: qrcodeValue,  // Set the fixed value for the QR code
-            size: 200,  // Adjust the size as needed
+            value: `product-${Date.now()}`,  // Unique QR code value
+            size: 200,
         });
+        setIsGenerated(true); // Set as generated
     };
+
 
     const saveQRCode = async () => {
         setIsSaving(true); // Show saving modal
@@ -66,7 +67,12 @@ function AddQrcode({ onClose, show }) {
                         <Button variant="primary" onClick={generateQRCode} className="mt-3 mx-3">
                             Generate
                         </Button>
-                        <Button variant="success" onClick={saveQRCode} className="mt-3 mx-2" disabled={isSaving}>
+                        <Button
+                            variant="success"
+                            onClick={saveQRCode}
+                            className="mt-3 mx-2"
+                            disabled={!isGenerated || isSaving}  // Disable Save if not generated or saving
+                        >
                             {isSaving ? (
                                 <>
                                     <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
