@@ -9,12 +9,6 @@ function AccordionsCard() {
         "Ut enim ad minim veniam, laboris nisi ut aliquip."
     ];
 
-    const carouselItems = [
-        { src: '/Img1.jpg', label: 'First slide label', text: 'Some Text' },
-        { src: '/img3.jpg', label: 'Second slide label', text: 'Some Text' },
-        { src: '/img4.jpg', label: 'Third slide label', text: 'Some Text' }
-    ];
-
     return (
         <div className={Accordionstyles.MainContent}>
             <Accordion className={Accordionstyles.containerAc} defaultActiveKey={['0']} alwaysOpen>
@@ -27,19 +21,6 @@ function AccordionsCard() {
             </Accordion>
             
 
-            <div className={Accordionstyles.containerCaro}>
-                <Carousel fade className={Accordionstyles.CarouselContainer}>
-                    {carouselItems.map((item, idx) => (
-                        <Carousel.Item key={idx}>
-                            <img src={item.src} alt='' />
-                            <Carousel.Caption>
-                                <h3>{item.label}</h3>
-                                <p>{item.text}</p>
-                            </Carousel.Caption>
-                        </Carousel.Item>
-                    ))}
-                </Carousel>
-            </div>
         </div>
     );
 }
