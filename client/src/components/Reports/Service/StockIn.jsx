@@ -1,31 +1,6 @@
 // stockHelpers.js
 import { getDatabase, ref, get } from "firebase/database";
 
-// Fetch total stock overview
-export const fetchStockInOverview = async () => {
-    const db = getDatabase();
-    const productsRef = ref(db, "products");
-
-    try {
-        const snapshot = await get(productsRef);
-        if (snapshot.exists()) {
-            const products = snapshot.val();
-            let totalStock = 0;
-            Object.keys(products).forEach((productId) => {
-                const product = products[productId];
-                totalStock += product.quantity;
-            });
-            return totalStock;
-        } else {
-            console.log("No products found.");
-            return 0;
-        }
-    } catch (error) {
-        console.error("Error fetching stock in overview:", error);
-        throw new Error("Error fetching stock in overview.");
-    }
-};
-
 // Fetch stock in by date range
 export const fetchStockInByDate = async (startDate, endDate) => {
     const db = getDatabase();
@@ -43,8 +18,14 @@ export const fetchStockInByDate = async (startDate, endDate) => {
 
                 Object.keys(addedQuantityHistory).forEach((key) => {
                     const entry = addedQuantityHistory[key];
-                    const entryDate = new Date(entry.date);
-                    if (entryDate >= new Date(startDate) && entryDate <= new Date(endDate)) {
+                    const entryDate = new Date(entry.date); // Assuming entry.date is a valid timestamp
+
+                    // Parse the start and end dates to Date objects
+                    const startDateObj = new Date(startDate);
+                    const endDateObj = new Date(endDate);
+
+                    // Check if the entry date falls within the range (inclusive)
+                    if (entryDate >= startDateObj && entryDate <= endDateObj) {
                         filteredData.push({
                             productId,
                             productName: product.productName,

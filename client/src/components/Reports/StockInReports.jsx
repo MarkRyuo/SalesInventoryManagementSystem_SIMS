@@ -43,7 +43,6 @@ function StockInReports() {
             console.error("Error fetching stock data:", error);
         }
     };
-
     // Calculate current page data
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
