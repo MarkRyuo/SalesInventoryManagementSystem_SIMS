@@ -24,10 +24,7 @@ function AddQrcode({ onClose, show }) {
 
     const saveQRCode = async () => {
         setIsSaving(true); // Show saving modal
-        // Get the QR code as a Base64 string from the canvas
         const qrcodeBase64 = canvasRef.current.toDataURL(); // Converts the canvas content to Base64
-
-        // Generate a unique identifier for the QR code
         const qrcodeId = `qr-${Date.now()}`;  // Use the timestamp as a unique ID for this QR code
 
         try {
