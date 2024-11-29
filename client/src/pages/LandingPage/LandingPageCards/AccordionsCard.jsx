@@ -11,6 +11,13 @@ function AccordionsCard() {
 
     return (
         <div className={Accordionstyles.MainContent}>
+
+            <div>
+                <h1>FAQ</h1>
+                <p></p>
+            </div>
+
+
             <Accordion className={Accordionstyles.containerAc} defaultActiveKey={['0']} alwaysOpen>
                 {accordionItems.map((body, idx) => (
                     <Accordion.Item key={idx} eventKey={idx.toString()} className={Accordionstyles.ItemAc}>
