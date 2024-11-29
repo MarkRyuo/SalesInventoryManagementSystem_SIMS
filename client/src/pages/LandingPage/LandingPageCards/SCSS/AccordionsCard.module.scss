@@ -3,5 +3,21 @@
 .MainContent {
     display: flex;
 
-    .FAQcontainer 
+    .FAQcontainer {
+        
+        h1 {
+
+        }
+
+        p {
+            
+        }
+
+        .Imgs {
+            width: 300px;
+            img {
+                width: 100%;
+            }
+        }
+    } 
 }

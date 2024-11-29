@@ -14,8 +14,8 @@ function AccordionsCard() {
 
             <div className={Accordionstyles.FAQcontainer}>
                 <h1>FAQ</h1>
-                <p>Ut enim ad minim veniam, laboris nisi ut aliquip.</p>
-                <div>
+                <p>Ut enim ad minim veniam, laboris nisi ut aliquip. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>
+                <div className={Accordionstyles.Imgs}>
                     <img src='/Img1.jpg' />
                 </div>
             </div>
