@@ -42,6 +42,9 @@ function AddQrcode({ onClose, show }) {
             // Save the Base64 string to the database
             await addQrcodeToDatabase(qrcodeId, qrcodeBase64);
             console.log('QR Code saved to database successfully!');
+
+            // Close the modal after successful save
+            onClose();
         } catch (error) {
             console.error('Error saving QR Code to database:', error);
             setError('Failed to save QR code.');
@@ -49,6 +52,7 @@ function AddQrcode({ onClose, show }) {
             setIsSaving(false); // Hide saving modal after operation is complete
         }
     };
+
 
     return (
         <>
