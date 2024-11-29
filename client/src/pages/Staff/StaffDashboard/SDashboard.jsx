@@ -102,21 +102,19 @@ function SDashboard() {
             </div>
 
             {!loading && (
-                <div className={StaffDashboardScss.chartContainer}>
-                    <div className={StaffDashboardScss.smallContainer}>
-                        <div>
-                            <StaffChart1 />
-                            <StaffChart2 />
-                            <StaffChart3 />
-                            <StaffChart4 />
+                <div className={StaffDashboardScss.smallContainer}>
+                    <div>
+                        <StaffChart1 />
+                        <StaffChart2 />
+                        <StaffChart3 />
+                        <StaffChart4 />
+                    </div>
+                    <div className={StaffDashboardScss.largeContainer}>
+                        <div className={StaffDashboardScss.buttonsHeroCard}>
+                            <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
+                            <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
                         </div>
-                        <div className={StaffDashboardScss.largeContainer}>
-                            <div className={StaffDashboardScss.buttonsHeroCard}>
-                                <StaffButtons buttons={buttons.filter(button => button.id === 1)} />
-                                <StaffButtons buttons={buttons.filter(button => button.id === 2)} />
-                            </div>
-                            <StaffChartLg1 />
-                        </div>
+                        <StaffChartLg1 />
                     </div>
                 </div>
             )}
