@@ -12,11 +12,11 @@ function AccordionsCard() {
     return (
         <div className={Accordionstyles.MainContent}>
 
-            <div>
+            <div className={Accordionstyles.FAQcontainer}>
                 <h1>FAQ</h1>
                 <p>Ut enim ad minim veniam, laboris nisi ut aliquip.</p>
                 <div>
-                    <img src='/client/public/Img1.jpg' />
+                    <img src='/Img1.jpg' />
                 </div>
             </div>
 
