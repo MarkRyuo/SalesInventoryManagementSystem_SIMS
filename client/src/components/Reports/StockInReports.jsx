@@ -5,6 +5,8 @@ import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { MainLayout } from "../../layout/MainLayout";
 import StockInReportsScss from './Scss/StockInReports.module.scss';
+import { Spinner } from "react-bootstrap";
+
 
 function StockInReports() {
     const [startDate, setStartDate] = useState("");
@@ -12,6 +14,8 @@ function StockInReports() {
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(10); // Set 15 records per page
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         // Fetch all stock data initially
@@ -36,13 +40,17 @@ function StockInReports() {
     }, [startDate, endDate]);
 
     const fetchFilteredData = async () => {
+        setLoading(true); // Start loading
         try {
             const data = await fetchStockInByDate(startDate, endDate);
             setFilteredData(data);
         } catch (error) {
             console.error("Error fetching stock data:", error);
+        } finally {
+            setLoading(false); // Stop loading once done
         }
-    };
+    };;
+
 
     // Calculate current page data
     const indexOfLastRecord = currentPage * recordsPerPage;
@@ -158,17 +166,24 @@ function StockInReports() {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentRecords.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.productId}</td>
-                                    <td>{item.productName}</td>
-                                    <td>{item.sku}</td>
-                                    <td>{item.barcode}</td>
-                                    <td>{item.addedQuantityHistory.quantity}</td>
-                                    <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
-                                </tr>
-                            ))}
+                            {loading ? (
+                                <div className="d-flex justify-content-center mt-5">
+                                    <Spinner animation="grow" variant="primary" />
+                                </div>
+                            ) : (
+                                currentRecords.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.productId}</td>
+                                        <td>{item.productName}</td>
+                                        <td>{item.sku}</td>
+                                        <td>{item.barcode}</td>
+                                        <td>{item.addedQuantityHistory.quantity}</td>
+                                        <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
+                                    </tr>
+                                ))
+                            )}
                         </tbody>
+
                         <tfoot>
                             <tr>
                                 <td colSpan="6" style={{ textAlign: "center" }}>
