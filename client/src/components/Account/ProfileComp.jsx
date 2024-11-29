@@ -14,16 +14,17 @@ const ProfileComp = () => {
         gender: "",
         username: "",
         password: "",
-        phoneNumber: "", // Added phone number
+        email: "", // Replace phoneNumber with email
         recoveryQuestions: [],
         answers: {}
     });
+    const [otp, setOtp] = useState("");
+    const [otpSent, setOtpSent] = useState(false);
+
     const [isEditing, setIsEditing] = useState(false);
     const [showRecovery, setShowRecovery] = useState(false);
     const [answerVisibility, setAnswerVisibility] = useState({});
     const adminId = localStorage.getItem('adminId');
-    const [otp, setOtp] = useState(""); // New state for OTP input
-    const [otpSent, setOtpSent] = useState(false); // Track if OTP is sent
 
     const validatePhoneNumber = (number) => {
         const regex = /^[+]?[0-9]{10,12}$/;  // Adjust as needed for country-specific formats
