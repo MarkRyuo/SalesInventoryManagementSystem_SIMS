@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { MainLayout } from "../../../layout/MainLayout";
-import { Container } from "react-bootstrap";
 import AccountPagescss from './AccountPage.module.scss';
 import StaffComp from '../../../components/Account/StaffComp';
 import ProfileMode from '../../../components/Account/ProfileMode';
@@ -41,7 +40,7 @@ export const ProductPage = () => {
 
     return (
         <MainLayout>
-            <Container className={AccountPagescss.MyAccount}>
+            <div className={AccountPagescss.MyAccount}>
                 <ProductNavbarTabs setActiveTab={setActiveTab} />
                 <div className="ProductContent">
                     {activeTab === '/MyAccount' && (
@@ -64,7 +63,7 @@ export const ProductPage = () => {
                         </div>
                     )}
                 </div>
-            </Container>
+            </div>
         </MainLayout>
     );
 };
