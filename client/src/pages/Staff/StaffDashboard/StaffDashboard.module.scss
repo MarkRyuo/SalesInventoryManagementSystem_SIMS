@@ -149,7 +149,12 @@
                 display: flex;
                 align-items: center;
                 flex-direction: column;
-                gap: 10px;
+                border: 1px solid;
+                height: 350px;
+                justify-content: center;
+                gap: 20px;
+                width: 100%;
+                max-width: 500px;
             }
         }
 }
