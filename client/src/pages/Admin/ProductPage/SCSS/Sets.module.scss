@@ -150,36 +150,33 @@
 
         .SetQrcodeContent {
 
-        div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            // border: 1px solid;
-
-            h4{
-                font-size: 0.8rem;
-            }
-            
-            p {
-                font-size: 0.7rem;
-                button {
-                    font-size: 0.7rem;
-                    text-decoration: none;
+                img {
+                    width: 70px;
+                    height: auto;
                 }
-            }
 
-            img {
-                width: 50px;
-                height: auto;
-            }
-
-            div {
-                button {
-                    font-size: 0.7rem;
+                h4{
+                    width: 110px;
+                    font-size: 0.9rem;
                 }
+
+                p {
+                    overflow-x: hidden;
+                    width: 150px;
+                    font-size: 0.8rem;
+                    button {
+                        color: red;
+                        font-size: 0.8rem;
+                        text-decoration: none;
+                    }
             }
+
+        .SetQrbtn {
+            width: 125px;
+            font-size: 0.9rem;
         }
-    }
+        }
+    
     }
     
     @media (max-width: 400px) {
