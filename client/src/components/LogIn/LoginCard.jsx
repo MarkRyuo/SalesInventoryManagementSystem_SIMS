@@ -145,7 +145,7 @@ export const LoginCard = () => {
 
             {/* Forgot Password Link */}
             <Link
-                to="/ForgotPasswordMode"
+                to="/ResetPass"
                 style={{
                     display: 'block',
                     textAlign: 'center',
