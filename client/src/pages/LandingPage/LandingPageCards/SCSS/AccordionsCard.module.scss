@@ -19,13 +19,19 @@
 
     }
 
-    .CarouselContainer {
-        width: 600px;
-        height: auto;
+    .containerCaro {
         border: 1px solid;
+        border-radius: 15px;
+        box-shadow: 1px 3px 1px #d3d3d3;
+        padding: 10px;
+            .CarouselContainer {
+                width: 600px;
+                height: auto;
+                border: 1px solid;
 
-        img {
-            width: 100%;
+                    img {
+                        width: 100%;
+                    }
+            }
         }
-    }
 }

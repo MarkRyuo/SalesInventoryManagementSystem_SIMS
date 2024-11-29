@@ -26,7 +26,19 @@ function AccordionsCard() {
                 ))}
             </Accordion>
 
-            <div></div>
+            <div className={Accordionstyles.containerCaro}>
+                <Carousel fade className={Accordionstyles.CarouselContainer}>
+                    {carouselItems.map((item, idx) => (
+                        <Carousel.Item key={idx}>
+                            <img src={item.src} alt='' />
+                            <Carousel.Caption>
+                                <h3>{item.label}</h3>
+                                <p>{item.text}</p>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                    ))}
+                </Carousel>
+            </div>
         </div>
     );
 }
