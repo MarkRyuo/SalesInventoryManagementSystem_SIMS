@@ -1,71 +1,45 @@
-import Accordion from 'react-bootstrap/Accordion';
-import Carousel from 'react-bootstrap/Carousel';
-import AccordionsCardScss from './SCSS/AccordionsCard.module.scss';
-
+import { Accordion, Carousel } from 'react-bootstrap';
+import styles from './SCSS/AccordionsCard.module.scss';
 
 function AccordionsCard() {
+    const accordionItems = [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Ut enim ad minim veniam.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "Ut enim ad minim veniam, laboris nisi ut aliquip."
+    ];
+
+    const carouselItems = [
+        { src: '/Img1.jpg', label: 'First slide label', text: 'Some Text' },
+        { src: '/img3.jpg', label: 'Second slide label', text: 'Some Text' },
+        { src: '/img4.jpg', label: 'Third slide label', text: 'Some Text' }
+    ];
+
     return (
-        <div className={AccordionsCardScss.MainAccordion}>
-            <Accordion className={AccordionsCardScss.AccordionsContainer} defaultActiveKey={['0']} alwaysOpen>
-                <Accordion.Item eventKey="0" className={AccordionsCardScss.ContainerAc}>
-                    <Accordion.Header>Accordion Item #1</Accordion.Header>
-                    <Accordion.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>Accordion Item #2</Accordion.Header>
-                    <Accordion.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam.
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="2">
-                    <Accordion.Header>Accordion Item #3</Accordion.Header>
-                    <Accordion.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam.
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="3">
-                    <Accordion.Header>Accordion Item #4</Accordion.Header>
-                    <Accordion.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam.
-                    </Accordion.Body>
-                </Accordion.Item>
+        <div className={styles.MainAccordion}>
+        
+            <Accordion className={styles.AccordionsContainer} defaultActiveKey={['0']} alwaysOpen>
+                {accordionItems.map((body, idx) => (
+                    <Accordion.Item key={idx} eventKey={idx.toString()} className={styles.ContainerAc}>
+                        <Accordion.Header>Accordion Item #{idx + 1}</Accordion.Header>
+                        <Accordion.Body>{body}</Accordion.Body>
+                    </Accordion.Item>
+                ))}
             </Accordion>
 
-
-            <Carousel fade className={AccordionsCardScss.CarouselContainer}>
-                <Carousel.Item>
-                    <img src='/Img1.jpg' alt='' />
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Some Text</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img src='/img3.jpg' alt='' />
-                    <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Some Text</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img src='/img4.jpg' alt='' />
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Some Text</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
+            <Carousel fade className={styles.CarouselContainer}>
+                {carouselItems.map((item, idx) => (
+                    <Carousel.Item key={idx}>
+                        <img src={item.src} alt='' />
+                        <Carousel.Caption>
+                            <h3>{item.label}</h3>
+                            <p>{item.text}</p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                ))}
             </Carousel>
         </div>
-    )
+    );
 }
 
 export default AccordionsCard;
