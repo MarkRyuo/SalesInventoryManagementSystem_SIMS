@@ -203,7 +203,7 @@ function ViewQrCode() {
 
             {/* Selected QR Codes for Printing Modal */}
             <Modal show={showPrintModal} onHide={closePrintModal} size="lg" centered>
-                <Modal.Header closeButton className="">
+                <Modal.Header closeButton>
                     <Modal.Title><MdOutlineQrCode2 size={20} className="me-1" />Selected QR Codes</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -237,11 +237,12 @@ function ViewQrCode() {
                     <Button variant="outline-secondary" onClick={closePrintModal}>
                         Close
                     </Button>
-                    <Button variant="success" onClick={generatePDF}>
+                    <Button variant="success" onClick={generatePDF} disabled={selectedQrcodes.length === 0}>
                         Print PDF
                     </Button>
                 </Modal.Footer>
             </Modal>
+
 
             {/* Edit Product Name Modal */}
             <Modal show={showEditModal} onHide={closeEditModal} centered>
