@@ -16,7 +16,7 @@ function AccordionsCard() {
                 <h1>FAQ</h1>
                 <p>Ut enim ad minim veniam, laboris nisi ut aliquip.</p>
                 <div>
-                    <img>
+                    <img src='/client/public/Img1.jpg' />
                 </div>
             </div>
 
