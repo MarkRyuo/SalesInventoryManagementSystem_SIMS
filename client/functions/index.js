@@ -136,7 +136,7 @@ app.post('/send-otp', async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: 'your-email@gmail.com', // Use your email address
+      from: 'salesinventorymanagementsystem@gmail.com', // Use your email address
       to: email,
       subject: 'Your OTP',
       text: `Your OTP is ${otp}`,
