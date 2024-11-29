@@ -3,7 +3,7 @@ import NavBars from "./NavBars"
 import LandingPageScss from './LandingPage.module.scss';
 import HeroCard from './LandingPageCards/HeroCard';
 import AboutCard from './LandingPageCards/AboutCard' ;
-import LoginCardPage from './LandingPageCards/LogInCardPage' ;
+// import LoginCardPage from './LandingPageCards/LogInCardPage' ;
 import Footer from './LandingPageCards/Footer';
 
 function LandingPage() {
@@ -20,8 +20,12 @@ function LandingPage() {
                     <AboutCard />
                 </div>
 
-                <div className={LandingPageScss.loginCard}>
+                {/* <div className={LandingPageScss.loginCard}>
                     <LoginCardPage />
+                </div> */}
+
+                <div className={LandingPageScss.AccordionCard}>
+
                 </div>
 
                 <div className={LandingPageScss.footerCard} id="footer">
