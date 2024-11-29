@@ -19,9 +19,11 @@ function TotalSalesReports() {
         const getData = async () => {
             const data = await fetchTransactions();
             setTransactionData(data);
+            setFilteredData(data); // Set all data as default
         };
         getData();
     }, []);
+
 
     // Format date as timestamp for comparison
     const convertToTimestamp = (dateString) => {
@@ -32,16 +34,21 @@ function TotalSalesReports() {
     // Filter the data based on start and end dates
     const filterData = () => {
         if (startDate && endDate) {
+            const endOfDayTimestamp = new Date(endDate).setHours(23, 59, 59, 999);
             const filtered = transactionData.filter(transaction => {
                 const transactionDate = convertToTimestamp(transaction.date);
                 return (
                     transactionDate >= convertToTimestamp(startDate) &&
-                    transactionDate <= convertToTimestamp(endDate)
+                    transactionDate <= endOfDayTimestamp
                 );
             });
             setFilteredData(filtered);
+        } else {
+            setFilteredData(transactionData); // Reset to all data if no filter
         }
     };
+
+
 
     // Handle XLSX file download
     const downloadXlsx = () => {
