@@ -121,10 +121,10 @@ const otps = {}; // Store OTPs temporarily
 
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // Use your email service provider
+  service: 'gmail',
   auth: {
-    user: 'your-email@gmail.com', // Your email address
-    pass: 'your-email-password', // Your email password (consider using environment variables)
+    user: functions.config().email.user,
+    pass: functions.config().email.pass,
   },
 });
 
