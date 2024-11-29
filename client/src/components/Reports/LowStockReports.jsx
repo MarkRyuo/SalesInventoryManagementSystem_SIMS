@@ -136,6 +136,7 @@ function LowStockReports() {
                         <Dropdown.Item onClick={() => handleDownload("XLSX")}>XLSX</Dropdown.Item>
                     </DropdownButton>
                 </div>
+
                 <div className={LowStockReportScss.formContent}>
                     <Form>
                         <Form.Group controlId="startDate">
@@ -161,6 +162,24 @@ function LowStockReports() {
                             Filter
                         </Button>
                     </div>
+                </div>
+
+                <div className="d-flex justify-content-start align-items-center my-2">
+                    <Button
+                        variant="link"
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                    >
+                        &#8592; {/* Left arrow */}
+                    </Button>
+                    <span style={{fontSize: '0.9rem'}}>Page {currentPage} of {totalPages}</span>
+                    <Button
+                        variant="link"
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                    >
+                        &#8594; {/* Right arrow */}
+                    </Button>
                 </div>
 
                 <div className={LowStockReportScss.tables}>
@@ -189,27 +208,6 @@ function LowStockReports() {
                                 </tr>
                             ))}
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colSpan={7} style={{ textAlign: "center" }}>
-                                        <Button
-                                            variant="link"
-                                            disabled={currentPage === 1}
-                                            onClick={() => setCurrentPage(currentPage - 1)} // Use setCurrentPage directly
-                                        >
-                                            &#8592; {/* Left arrow */}
-                                        </Button>
-                                        <span>Page {currentPage} of {totalPages}</span>
-                                        <Button
-                                            variant="link"
-                                            disabled={currentPage === totalPages}
-                                            onClick={() => setCurrentPage(currentPage + 1)} // Use setCurrentPage directly
-                                        >
-                                            &#8594; {/* Right arrow */}
-                                        </Button>
-                                </td>
-                            </tr>
-                        </tfoot>
                     </Table>
                 </div>
             </div>
