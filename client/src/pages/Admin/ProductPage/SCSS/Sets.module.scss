@@ -122,11 +122,20 @@
 
         img {
             width: 100px;
-                height: auto;
-            }
+            height: auto;
+        }
 
         h4{
             font-size: 1rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+            button {
+                color: red;
+                font-size: 0.9rem;
+                text-decoration: none;
+            }
         }
 
         div {
@@ -135,14 +144,6 @@
             align-items: center;
             // border: 1px solid;
             
-            p {
-                font-size: 0.9rem;
-                button {
-                    color: red;
-                    font-size: 0.9rem;
-                    text-decoration: none;
-                }
-            }
 
 
             div {
