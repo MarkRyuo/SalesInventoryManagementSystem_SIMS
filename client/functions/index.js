@@ -110,6 +110,8 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
 });
 
 
+require('dotenv').config();
+
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
@@ -123,8 +125,8 @@ const otps = {}; // Store OTPs temporarily
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: functions.config().email.user,
-    pass: functions.config().email.pass,
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
