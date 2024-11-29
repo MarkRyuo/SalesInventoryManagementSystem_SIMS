@@ -66,3 +66,40 @@ export const fetchStockInByDate = async (startDate, endDate) => {
         throw new Error("Error fetching stock data by date.");
     }
 };
+
+export const fetchAllStockIn = async () => {
+    const db = getDatabase();
+    const productsRef = ref(db, "products");
+
+    try {
+        const snapshot = await get(productsRef);
+        if (snapshot.exists()) {
+            const products = snapshot.val();
+            let allData = [];
+
+            Object.keys(products).forEach((productId) => {
+                const product = products[productId];
+                const addedQuantityHistory = product.addedQuantityHistory;
+
+                Object.keys(addedQuantityHistory).forEach((key) => {
+                    const entry = addedQuantityHistory[key];
+                    allData.push({
+                        productId,
+                        productName: product.productName,
+                        barcode: product.barcode,
+                        sku: product.sku,
+                        addedQuantityHistory: entry,
+                        price: product.price,
+                    });
+                });
+            });
+
+            return allData;
+        } else {
+            return [];
+        }
+    } catch (error) {
+        console.error("Error fetching all stock data:", error);
+        throw new Error("Error fetching all stock data.");
+    }
+};

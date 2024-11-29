@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fetchLowStockData } from "./Service/LowStock";
 import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import * as XLSX from "xlsx";
@@ -12,10 +12,26 @@ function LowStockReports() {
     const [endDate, setEndDate] = useState("");
     const [lowStockData, setLowStockData] = useState([]);
 
+    // Fetch all data on component mount
+    useEffect(() => {
+        const loadData = async () => {
+            const data = await fetchLowStockData();  // Fetch all data initially
+            setLowStockData(data);
+        };
+        loadData();
+    }, []);
+
     // Handle date filter
     const handleFilter = async () => {
-        const data = await fetchLowStockData(startDate, endDate);
-        setLowStockData(data);
+        if (!startDate && !endDate) {
+            // If no dates are provided, fetch all data
+            const data = await fetchLowStockData();
+            setLowStockData(data);
+        } else {
+            // If dates are provided, filter the data by date
+            const data = await fetchLowStockData(startDate, endDate);
+            setLowStockData(data);
+        }
     };
 
     // Download PDF function
@@ -108,8 +124,6 @@ function LowStockReports() {
         const fileName = `LowStockReport_${startDate || "start"}_${endDate || "end"}.xlsx`;
         XLSX.writeFile(wb, fileName);
     };
-
-
 
     const handleDownload = (format) => {
         if (format === "PDF") downloadPDF();

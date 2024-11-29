@@ -1,33 +1,41 @@
 import { useState, useEffect } from "react";
-import { fetchStockInByDate } from "./Service/StockIn"; // Import the helper function for fetching stock
+import { fetchAllStockIn } from "./Service/StockIn"; // Import the helper function for fetching stock
 import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { MainLayout } from "../../layout/MainLayout";
-import StockInReportsScss from './Scss/StockInReports.module.scss'
+import StockInReportsScss from './Scss/StockInReports.module.scss';
 
 function StockInReports() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [filteredData, setFilteredData] = useState([]);
-    const [isDataFetched, setIsDataFetched] = useState(false); // To track if data has been fetched
+    const [allData, setAllData] = useState([]);
 
     useEffect(() => {
-        // Initial fetch if dates are set
-        if (startDate && endDate) {
-            fetchFilteredData();
-        }
-    }, [startDate, endDate]);
+        // Fetch all data when the component is mounted
+        const fetchAllData = async () => {
+            try {
+                const data = await fetchAllStockIn();
+                setAllData(data);
+                setFilteredData(data); // Initially display all data
+            } catch (error) {
+                console.error("Error fetching all stock data:", error);
+            }
+        };
 
-    const fetchFilteredData = async () => {
-        try {
-            const data = await fetchStockInByDate(startDate, endDate);
-            console.log(data); // Log data to inspect the response
-            setFilteredData(data);
-            setIsDataFetched(true); // Data has been fetched and set
-        } catch (error) {
-            console.error("Error fetching stock data:", error);
-            setIsDataFetched(false); // If error occurs, no data is fetched
+        fetchAllData();
+    }, []);
+
+    const fetchFilteredData = () => {
+        if (startDate && endDate) {
+            const filtered = allData.filter(item => {
+                const entryDate = new Date(item.addedQuantityHistory.date);
+                return entryDate >= new Date(startDate) && entryDate <= new Date(endDate);
+            });
+            setFilteredData(filtered);
+        } else {
+            setFilteredData(allData); // If no date filter, show all data
         }
     };
 
@@ -86,7 +94,7 @@ function StockInReports() {
     return (
         <MainLayout>
             <div className={StockInReportsScss.Maincomponent}>
-                <h1>Stocks Report</h1>
+                <h1>Stock In Report</h1>
                 {/* Dropdown for Download Options */}
                 <div className={StockInReportsScss.DropDown}>
                     <DropdownButton variant="success" title="Download" id="download-dropdown">
@@ -114,7 +122,6 @@ function StockInReports() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
-
                     </Form>
                     <div style={{ paddingLeft: 10 }}>
                         <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
@@ -122,34 +129,32 @@ function StockInReports() {
                 </div>
 
                 {/* Table Display */}
-                {isDataFetched && (
-                    <div className={StockInReportsScss.tables}>
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Product ID</th>
-                                    <th>Product Name</th>
-                                    <th>SKU</th>
-                                    <th>Barcode</th>
-                                    <th>Quantity</th>
-                                    <th>Date Added</th>
+                <div className={StockInReportsScss.tables}>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Product Name</th>
+                                <th>SKU</th>
+                                <th>Barcode</th>
+                                <th>Quantity</th>
+                                <th>Date Added</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredData.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{item.productId}</td>
+                                    <td>{item.productName}</td>
+                                    <td>{item.sku}</td>
+                                    <td>{item.barcode}</td>
+                                    <td>{item.addedQuantityHistory.quantity}</td>
+                                    <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {filteredData.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{item.productId}</td>
-                                        <td>{item.productName}</td>
-                                        <td>{item.sku}</td>
-                                        <td>{item.barcode}</td>
-                                        <td>{item.addedQuantityHistory.quantity}</td>
-                                        <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-                    </div>
-                )}
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
             </div>
         </MainLayout>
     );
