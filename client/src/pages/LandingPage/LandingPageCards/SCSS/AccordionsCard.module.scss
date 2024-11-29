@@ -1,7 +1,6 @@
 
 
 .MainContent {
-    border: 1px solid;
     height: 700px;
     display: flex;
     width: 100%;
@@ -27,7 +26,7 @@
         }
 
         .Imgs {
-            width: 400px;
+            width: 100%;
             align-self: flex-start;
             img {
                 border-radius: 10px;
@@ -52,4 +51,115 @@
 
 
     }
+}
+
+
+@media (max-width: 998px) {
+    .MainContent {
+    height: 700px;
+    display: flex;
+    justify-content: space-evenly;
+    .FAQcontainer {
+        width: 500px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        h1 {
+            padding: 10px;
+            font-size: 2.7rem;
+            font-weight: 300;
+            align-self: flex-start;
+        }
+
+        p {
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .Imgs {
+            width: 100%;
+            align-self: flex-start;
+            img {
+                border-radius: 10px;
+                width: 90%;
+            }
+        }
+    } 
+
+    .AccoMain {
+        // border: 1px solid;
+        display: flex;
+        align-items: center;
+        width: 700px;
+
+        .containerAc {
+            width: 100%;
+        }
+
+        button {
+            font-size: 1.1rem;
+        }
+
+
+    }
+}
+}
+
+
+@media (max-width: 722px) {
+    .MainContent {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content:baseline;
+    .FAQcontainer {
+        width: 400px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        h1 {
+            padding: 10px;
+            font-size: 2.4rem;
+            font-weight: 300;
+            align-self: flex-start;
+        }
+
+        p {
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .Imgs {
+            width: 100%;
+            align-self: flex-start;
+            img {
+                border-radius: 10px;
+                width: 90%;
+            }
+        }
+    } 
+
+    .AccoMain {
+        // border: 1px solid;
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .containerAc {
+            width: 100%;
+        }
+
+        button {
+            font-size: 1rem;
+        }
+
+
+    }
+}
 }
