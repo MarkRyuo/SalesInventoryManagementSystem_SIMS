@@ -183,9 +183,9 @@ function ViewQrCode() {
                                         )}
                                     </p>
                                     <Button
-                                        variant={isSelected ? "danger" : "info"}
+                                        variant={isSelected ? "danger" : "primary"}
                                         onClick={() => handleToggleSelection(qr)}
-                                        style={{ marginTop: '8px' }}
+                                        style={{width: 125}}
                                     >
                                         {isSelected ? 'Remove Print' : 'Add Print'}
                                     </Button>

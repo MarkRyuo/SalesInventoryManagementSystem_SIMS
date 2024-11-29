@@ -106,7 +106,7 @@
 .SetQrcodemain {
     border: 1px solid red;
     padding: 10px;
-    height: 550px;
+    height: 600px;
     overflow: auto;
 
     .SetQrcodeContent {
@@ -121,15 +121,20 @@
         align-items: center;
 
         img {
-            width: 100px;
+            width: 70px;
             height: auto;
         }
 
         h4{
-            font-size: 1rem;
+            border: 1px solid;
+            width: 110px;
+            font-size: 0.9rem;
         }
 
         p {
+            border: 1px solid;
+            overflow-x: hidden;
+            width: 150px;
             font-size: 0.9rem;
             button {
                 color: red;
@@ -217,6 +222,8 @@
     }
     }
 }//!End 
+
+
 
 .SetQrcodeBtn {
     margin-top: 10px;
