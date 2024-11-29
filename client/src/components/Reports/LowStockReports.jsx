@@ -156,7 +156,11 @@ function LowStockReports() {
                             />
                         </Form.Group>
                     </Form>
-                    <Button variant="primary" onClick={handleFilter}>Filter</Button>
+                    <div style={{ paddingLeft: 10 }}>
+                        <Button onClick={handleFilter} className="mt-3">
+                            Filter
+                        </Button>
+                    </div>
                 </div>
 
                 <div className={LowStockReportScss.tables}>
