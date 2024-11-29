@@ -4,7 +4,7 @@ import LandingPagecss from './LandingPage.module.scss'
 function NavBars() {
     return (
         <Navbar expand="lg" className={LandingPagecss.Navbar}>
-                <Container>
+                <Container fluid='xxl'>
                 <div>
                     <span className={LandingPagecss.logoNav}>
                         <img src="/Reyes_Electronics_LogoBg.png" />
