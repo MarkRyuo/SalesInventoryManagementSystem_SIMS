@@ -130,7 +130,7 @@ function ReOrdering() {
     };
 
     return (
-        <Container className="m-0 p-0">
+        <div className="m-0 p-0">
             <main className={ReOrderingscss.mainReOrdering}>
                 <h4 className="my-2"><FaTruckLoading size={25} className="me-2" />Reordering</h4>
                 <div className={ReOrderingscss.TopButtons}>
@@ -165,7 +165,7 @@ function ReOrdering() {
                                             <div key={product.barcode}>
                                                 <div className={ReOrderingscss.CardBody}>
                                                     <div>
-                                                        <h4>{product.productName}</h4>
+                                                        <h5>{product.productName}</h5>
                                                         <p className="m-0">SKU: {product.sku}</p>
                                                         <p className="m-0">Quantity: {product.quantity}</p>
                                                         <p className="m-0">Status: {statusBadge}</p>
@@ -285,7 +285,7 @@ function ReOrdering() {
 
 
             </main>
-        </Container>
+        </div>
     );
 }
 
