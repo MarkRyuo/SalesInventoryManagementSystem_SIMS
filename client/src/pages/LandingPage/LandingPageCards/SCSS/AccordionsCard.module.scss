@@ -109,3 +109,57 @@
     }
 }
 
+@media (max-width: 600px) {
+    .MainContent {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    .FAQcontainer {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        h1 {
+            padding: 10px;
+            font-size: 2.7rem;
+            font-weight: 300;
+            align-self: flex-start;
+        }
+
+        p {
+            padding: 10px;
+            font-size: 0.8rem;
+        }
+
+        .Imgs {
+            width: 100%;
+            align-self: flex-start;
+            img {
+                border-radius: 10px;
+                width: 60%;
+            }
+        }
+    } 
+
+    .AccoMain {
+        border: 1px solid;
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .containerAc {
+            width: 100%;
+        }
+
+        button {
+            font-size: 0.8rem;
+        }
+
+
+    }
+    }
+}
+
