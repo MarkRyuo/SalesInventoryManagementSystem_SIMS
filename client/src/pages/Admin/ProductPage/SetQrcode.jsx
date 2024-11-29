@@ -185,7 +185,7 @@ function ViewQrCode() {
                                     <Button
                                         variant={isSelected ? "danger" : "primary"}
                                         onClick={() => handleToggleSelection(qr)}
-                                        style={{width: 125}}
+                                        className={SetQrcodescss.SetQrbtn}
                                     >
                                         {isSelected ? 'Remove Print' : 'Add Print'}
                                     </Button>
