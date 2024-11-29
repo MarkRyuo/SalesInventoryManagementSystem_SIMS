@@ -105,7 +105,11 @@ function TotalSalesReports() {
         doc.setFontSize(16);
         doc.text('Total Sales Report', 14, 20);
         doc.setFontSize(10);
-        doc.text(`From: ${startDate} To: ${endDate}`, 14, 30);
+        
+        // If no startDate or endDate, display "All"
+        const displayStartDate = startDate ? startDate : 'All';
+        const displayEndDate = endDate ? endDate : 'All';
+        doc.text(`From: ${displayStartDate} To: ${displayEndDate}`, 14, 30);
 
         // Table with custom styles
         doc.autoTable({
