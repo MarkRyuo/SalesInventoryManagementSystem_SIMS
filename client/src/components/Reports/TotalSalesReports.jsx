@@ -131,10 +131,10 @@ function TotalSalesReports() {
 
         // Footer with totals
         doc.text(`Total Quantity Sold: ${totalQuantitySold}`, 14, doc.lastAutoTable.finalY + 10);
-        doc.text(`Total Revenue: ₱${totalRevenue.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 15);
-        doc.text(`Total Discounts: ₱${totalDiscount.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 20);
-        doc.text(`Total Tax: ₱${totalTax.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 25);
-        doc.text(`Net Revenue: ₱${netRevenue.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 30);
+        doc.text(`Total Revenue: ${totalRevenue.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 15);
+        doc.text(`Total Discounts: ${totalDiscount.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 20);
+        doc.text(`Total Tax: ${totalTax.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 25);
+        doc.text(`Net Revenue: ${netRevenue.toFixed(2)}`, 14, doc.lastAutoTable.finalY + 30);
 
         // Save the PDF
         doc.save('sales_report.pdf');
