@@ -6,7 +6,7 @@ import AccordionsCardScss from './SCSS/AccordionsCard.module.scss' ;
 function AccordionsCard() {
     return (
         <div className={AccordionsCardScss.MainAccordion}>
-            <div>
+            <div className=''>
                 <Accordion>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Accordion Item #1</Accordion.Header>
@@ -36,14 +36,14 @@ function AccordionsCard() {
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img src='' alt='' />
+                        <img src='/img3.jpg' alt='' />
                         <Carousel.Caption>
                             <h3>Second slide label</h3>
                             <p>Some Text</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img src='' alt='' />
+                        <img src='/img4.jpg' alt='' />
                         <Carousel.Caption>
                             <h3>Third slide label</h3>
                             <p>Some Text</p>
