@@ -11,6 +11,8 @@
     @media (max-width: 800px) {
         font-size: 0.8rem;
         padding: 10px 15px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
     
     @media (max-width: 350px) {
@@ -41,6 +43,8 @@
     border-top-right-radius: 25px;
 
     @media (max-width: 800px) {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
         font-size: 0.8rem;
         padding: 11px 12px;
     }
@@ -78,6 +82,8 @@
     border-top-right-radius: 25px;
 
     @media (max-width: 800px) {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
         font-size: 0.8rem;
         padding: 11px 12px;
     }
