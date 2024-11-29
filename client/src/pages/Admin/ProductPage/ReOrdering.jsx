@@ -132,7 +132,7 @@ function ReOrdering() {
     return (
         <Container className="m-0 p-0">
             <main className={ReOrderingscss.mainReOrdering}>
-                <h4 className="my-2"><FaTruckLoading size={25} className="me-2" />Reordering Dashboard</h4>
+                <h4 className="my-2"><FaTruckLoading size={25} className="me-2" />Reordering</h4>
                 <div className={ReOrderingscss.TopButtons}>
                     <Button variant="primary" onClick={handleOpenReorderModal} className="mt-3">
                         <MdOutlineViewInAr size={17} className="me-1"/>View Reordered Product
