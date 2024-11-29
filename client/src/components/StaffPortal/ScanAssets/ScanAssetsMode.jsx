@@ -1,8 +1,8 @@
 import { Container, Row, Col, Button, Table, Alert, Form } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updateProductQuantity, fetchAllDiscounts, fetchAllTaxes, saveTransactionHistory } from '../../../services/ProductService';
+import { updateProductQuantity, fetchAllDiscounts, saveTransactionHistory } from '../../../services/ProductService';
 import { useState, useEffect } from 'react';
-import ScanProductModeScss from './PosScanner.module.scss' ;
+import ScanProductModeScss from './PosScanner.module.scss';
 import { IoBagCheckOutline } from "react-icons/io5";
 
 function Checkout() {
@@ -17,31 +17,25 @@ function Checkout() {
 
     const [availableDiscounts, setAvailableDiscounts] = useState([]);
     const [selectedDiscount, setSelectedDiscount] = useState(0);
-    const [availableTaxes, setAvailableTaxes] = useState([]);
-    const [selectedTaxRate, setSelectedTaxRate] = useState(0);
+
+    // Set the VAT rate directly to 12%
+    const selectedTaxRate = 12;
 
     useEffect(() => {
-        const loadDiscountsAndTaxes = async () => {
+        const loadDiscounts = async () => {
             try {
                 const discounts = await fetchAllDiscounts();
                 setAvailableDiscounts(discounts);
-
-                const taxes = await fetchAllTaxes();
-                setAvailableTaxes(taxes);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         };
 
-        loadDiscountsAndTaxes();
+        loadDiscounts();
     }, []);
 
     const handleDiscountChange = (value) => {
         setSelectedDiscount(parseFloat(value));
-    };
-
-    const handleGlobalTaxChange = (value) => {
-        setSelectedTaxRate(parseFloat(value));
     };
 
     const subtotal = scannedItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -127,12 +121,11 @@ function Checkout() {
         }
     };
 
-
     return (
-        <Container fluid  className={ScanProductModeScss.MainComponent}>
+        <Container fluid className={ScanProductModeScss.MainComponent}>
             <div className={ScanProductModeScss.navBar}>
                 <Container>
-                    <h1> <IoBagCheckOutline size={25}/>Checkout</h1>
+                    <h1> <IoBagCheckOutline size={25} />Checkout</h1>
                 </Container>
             </div>
 
@@ -178,40 +171,19 @@ function Checkout() {
                             </Form.Select>
                         </Form.Group>
 
-                        {/* Global Tax Dropdown */}
+                        {/* Payment Amount */}
                         <Form.Group className="mt-2">
-                            <Form.Label>Tax Rate:</Form.Label>
-                            <Form.Select
-                                size="sm"
-                                value={selectedTaxRate}
-                                onChange={(e) => handleGlobalTaxChange(e.target.value)}
+                            <Form.Label>Amount Paid:</Form.Label>
+                            <Form.Control
+                                type="number"
+                                placeholder="Enter payment amount"
+                                value={paymentAmount}
+                                onChange={handlePaymentChange}
                                 style={{
                                     width: '100%',
                                     maxWidth: '200px'
                                 }}
-                            >
-                                <option value={0}>No Tax</option>
-                                {availableTaxes.map(tax => (
-                                    <option key={tax.id} value={tax.value}>
-                                        {tax.name} - {tax.value}%
-                                    </option>
-                                ))}
-                            </Form.Select>
-
-                            {/* Payment Amount */}
-                            <Form.Group className="mt-2">
-                                <Form.Label>Amount Paid:</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    placeholder="Enter payment amount"
-                                    value={paymentAmount}
-                                    onChange={handlePaymentChange}
-                                    style={{
-                                        width: '100%',
-                                        maxWidth: '200px'
-                                    }}
-                                />
-                            </Form.Group>
+                            />
                         </Form.Group>
 
                         <Table striped bordered hover className="mt-3">
@@ -241,7 +213,7 @@ function Checkout() {
                                     <td>-₱{discountAmount.toFixed(2)}</td>
                                 </tr>
                                 <tr>
-                                    <td colSpan="3" className="text-end"><strong>Total Tax:</strong></td>
+                                    <td colSpan="3" className="text-end"><strong>Total Tax (12%):</strong></td>
                                     <td>₱{taxAmount.toFixed(2)}</td>
                                 </tr>
                                 <tr>
@@ -259,7 +231,6 @@ function Checkout() {
                                     <strong className="fs-6 fw-medium">Change: </strong>₱{change.toFixed(2)}
                                 </div>
                             )}
-
                         </Table>
                     </Col>
                     <div className={ScanProductModeScss.btns}>
