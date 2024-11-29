@@ -154,24 +154,24 @@ function StockInReports() {
                 </div>
 
                 <div className={StockInReportsScss.tables}>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Product ID</th>
-                                <th>Product Name</th>
-                                <th>SKU</th>
-                                <th>Barcode</th>
-                                <th>Quantity</th>
-                                <th>Date Added</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {loading ? (
-                                <div className="d-flex justify-content-center mt-5">
-                                    <Spinner animation="grow" variant="primary" />
-                                </div>
-                            ) : (
-                                currentRecords.map((item, index) => (
+                    {loading ? (
+                        <div className="d-flex justify-content-center align-items-center mt-5">
+                            <Spinner animation="grow" variant="primary" />
+                        </div>
+                    ) : (
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>SKU</th>
+                                    <th>Barcode</th>
+                                    <th>Quantity</th>
+                                    <th>Date Added</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {currentRecords.map((item, index) => (
                                     <tr key={index}>
                                         <td>{item.productId}</td>
                                         <td>{item.productName}</td>
@@ -180,34 +180,34 @@ function StockInReports() {
                                         <td>{item.addedQuantityHistory.quantity}</td>
                                         <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
                                     </tr>
-                                ))
-                            )}
-                        </tbody>
-
-                        <tfoot>
-                            <tr>
-                                <td colSpan="6" style={{ textAlign: "center" }}>
-                                    {/* Pagination arrows inside the table footer row */}
-                                    <Button
-                                        variant="link"
-                                        disabled={currentPage === 1}
-                                        onClick={handlePreviousPage}
-                                    >
-                                        &#8592; {/* Left arrow for "Previous" */}
-                                    </Button>
-                                    <span> Page {currentPage} of {totalPages} </span>
-                                    <Button
-                                        variant="link"
-                                        disabled={currentPage === totalPages}
-                                        onClick={handleNextPage}
-                                    >
-                                        &#8594; {/* Right arrow for "Next" */}
-                                    </Button>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </Table>
+                                ))}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colSpan="6" style={{ textAlign: "center" }}>
+                                        {/* Pagination arrows inside the table footer row */}
+                                        <Button
+                                            variant="link"
+                                            disabled={currentPage === 1}
+                                            onClick={handlePreviousPage}
+                                        >
+                                            &#8592; {/* Left arrow for "Previous" */}
+                                        </Button>
+                                        <span> Page {currentPage} of {totalPages} </span>
+                                        <Button
+                                            variant="link"
+                                            disabled={currentPage === totalPages}
+                                            onClick={handleNextPage}
+                                        >
+                                            &#8594; {/* Right arrow for "Next" */}
+                                        </Button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </Table>
+                    )}
                 </div>
+
             </div>
         </MainLayout>
     );
