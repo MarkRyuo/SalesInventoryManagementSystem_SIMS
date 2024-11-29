@@ -147,7 +147,7 @@ function ViewQrCode() {
                     <MdOutlineQrCode2 size={20} className="me-1" /> Generate QR Code
                 </Button>
                 <Button variant="success" onClick={handleShowPrintModal} className="ml-2">
-                    <FaEye size={20} className="me-1" />Selected QrCodes
+                    <FaEye size={20} className="me-1" />Selected Qr Code
                 </Button>
                 <AddQrcode show={isModalOpen} onClose={closeModal} />
             </div>
