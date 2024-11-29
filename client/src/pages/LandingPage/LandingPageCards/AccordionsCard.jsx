@@ -7,7 +7,7 @@ function AccordionsCard() {
     return (
         <div className={AccordionsCardScss.MainAccordion}>
             <Accordion className={AccordionsCardScss.AccordionsContainer} defaultActiveKey={['0']} alwaysOpen>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="0" className={AccordionsCardScss.ContainerAc}>
                     <Accordion.Header>Accordion Item #1</Accordion.Header>
                     <Accordion.Body>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
