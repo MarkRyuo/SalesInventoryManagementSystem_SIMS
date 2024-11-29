@@ -24,10 +24,11 @@
         box-shadow: 1px 3px 1px #d3d3d3;
         padding: 20px;
         width: 700px;
+        height: auto;
         display: flex;
         justify-content: center;
             .CarouselContainer {
-                width: 600px;
+                width: 100%;
                 height: auto;
                     img {
                         width: 100%;
