@@ -68,8 +68,8 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       order.items.forEach((item) => {
         doc.text(item.productName, 10, yPosition);
         doc.text(item.quantity.toString(), 100, yPosition, {align: "center"});
-        doc.text(`₱${parseFloat(item.price).toFixed(2)}`, 140, yPosition, {align: "right"});
-        doc.text(`₱${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, {align: "right"});
+        doc.text(`${parseFloat(item.price).toFixed(2)}`, 140, yPosition, {align: "right"});
+        doc.text(`${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, {align: "right"});
         yPosition += 10;
       });
 
@@ -78,15 +78,15 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
 
       // Totals
       yPosition += 10;
-      doc.text(`Subtotal: ₱${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
-      doc.text(`Tax: ₱${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
-      doc.text(`Discount: -₱${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
-      doc.text(`Payment Amount: ₱${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
-      doc.text(`Change: ₱${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
+      doc.text(`Subtotal: ${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
+      doc.text(`Tax: ${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
+      doc.text(`Discount: -${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
+      doc.text(`Payment Amount: ${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
+      doc.text(`Change: ${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
 
       doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
-      doc.text(`Total Amount: ₱${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
+      doc.text(`Total Amount: ${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
 
       // Footer (Thank You Message)
       doc.setFontSize(10);
