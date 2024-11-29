@@ -148,7 +148,7 @@ app.post('/generate-otp', async (req, res) => {
 });
 
 // Validate OTP endpoint
-app.post('/velidate-otp', (req, res) => {
+app.post('/validate-otp', (req, res) => {
   const { email, otp } = req.body;
   if (otps[email] === otp) {
     delete otps[email];
