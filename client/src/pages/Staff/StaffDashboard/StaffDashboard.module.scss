@@ -159,34 +159,6 @@
         }
 }
 
-@media (max-width: 1080px) {
-    .smallContainer {
-        padding: 0px;
-        display: flex;
-        gap: 10px;
-        flex-direction: column;
-
-        div:first-child {
-            display: flex;
-        }
-        
-        .largeContainer {
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
-            width: auto;
-            gap: 10px;
-
-            .divLG {
-                width: auto;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-evenly;
-                gap: 20px;
-            }
-        }
-    }
-}
 
 @media (max-width: 998px) {
     .smallContainer {

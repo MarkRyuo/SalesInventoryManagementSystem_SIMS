@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 function StaffButtons({ buttons }) {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {
         const handleResize = () => {
@@ -30,14 +29,6 @@ function StaffButtons({ buttons }) {
             borderLeft: '1px solid #92E3B8',
             boxSizing: 'border-box',
         };
-
-        // Apply responsive styles
-        if (windowWidth < 700) {
-            style = {
-                ...style,
-                display: 'none'
-            };
-        } 
 
         return style;
     };
