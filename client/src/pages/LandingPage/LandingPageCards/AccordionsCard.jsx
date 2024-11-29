@@ -14,7 +14,10 @@ function AccordionsCard() {
 
             <div>
                 <h1>FAQ</h1>
-                <p></p>
+                <p>Ut enim ad minim veniam, laboris nisi ut aliquip.</p>
+                <div>
+                    <img>
+                </div>
             </div>
 
 
