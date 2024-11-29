@@ -7,7 +7,7 @@ function AccordionsCard() {
     return (
         <div className={AccordionsCardScss.MainAccordion}>
             <Accordion className={AccordionsCardScss.AccordionsContainer}>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="0" style={{border: '1px solid', width: '800px' }}>
                     <Accordion.Header>Accordion Item #1</Accordion.Header>
                     <Accordion.Body>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -25,29 +25,29 @@ function AccordionsCard() {
             </Accordion>
 
 
-                <Carousel fade>
-                    <Carousel.Item>
-                        <img src='/Img1.jpg' alt='' />
-                        <Carousel.Caption>
-                            <h3>First slide label</h3>
-                            <p>Some Text</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img src='/img3.jpg' alt='' />
-                        <Carousel.Caption>
-                            <h3>Second slide label</h3>
-                            <p>Some Text</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img src='/img4.jpg' alt='' />
-                        <Carousel.Caption>
-                            <h3>Third slide label</h3>
-                            <p>Some Text</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
+            <Carousel fade className={AccordionsCardScss.CarouselContainer}>
+                <Carousel.Item>
+                    <img src='/Img1.jpg' alt='' />
+                    <Carousel.Caption>
+                        <h3>First slide label</h3>
+                        <p>Some Text</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img src='/img3.jpg' alt='' />
+                    <Carousel.Caption>
+                        <h3>Second slide label</h3>
+                        <p>Some Text</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img src='/img4.jpg' alt='' />
+                    <Carousel.Caption>
+                        <h3>Third slide label</h3>
+                        <p>Some Text</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
         </div>
     )
 }
