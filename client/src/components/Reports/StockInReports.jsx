@@ -1,43 +1,34 @@
 import { useState, useEffect } from "react";
-import { fetchAllStockIn } from "./Service/StockIn"; // Import the helper function for fetching stock
+import { fetchStockInByDate } from "./Service/StockIn"; // Import the helper function for fetching stock
 import { Button, Table, Form, Dropdown, DropdownButton } from "react-bootstrap";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { MainLayout } from "../../layout/MainLayout";
-import StockInReportsScss from './Scss/StockInReports.module.scss';
+import StockInReportsScss from './Scss/StockInReports.module.scss'
 
 function StockInReports() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [filteredData, setFilteredData] = useState([]);
-    const [allData, setAllData] = useState([]);
 
     useEffect(() => {
-        // Fetch all data when the component is mounted
-        const fetchAllData = async () => {
-            try {
-                const data = await fetchAllStockIn();
-                setAllData(data);
-                setFilteredData(data); // Initially display all data
-            } catch (error) {
-                console.error("Error fetching all stock data:", error);
-            }
-        };
-
-        fetchAllData();
-    }, []);
-
-    const fetchFilteredData = () => {
+        // Initial fetch if dates are set
         if (startDate && endDate) {
-            const filtered = allData.filter(item => {
-                const entryDate = new Date(item.addedQuantityHistory.date);
-                return entryDate >= new Date(startDate) && entryDate <= new Date(endDate);
-            });
-            setFilteredData(filtered);
-        } else {
-            setFilteredData(allData); // If no date filter, show all data
+            fetchFilteredData();
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [startDate, endDate]);
+
+    const fetchFilteredData = async () => {
+        try {
+            const data = await fetchStockInByDate(startDate, endDate);
+            console.log(data); // Log data to inspect the response
+            setFilteredData(data);
+        } catch (error) {
+            console.error("Error fetching stock data:", error);
         }
     };
+
 
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
@@ -122,8 +113,9 @@ function StockInReports() {
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                         </Form.Group>
+
                     </Form>
-                    <div style={{ paddingLeft: 10 }}>
+                    <div style={{paddingleft: 10}}>
                         <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
                     </div>
                 </div>
