@@ -10,13 +10,13 @@ function StockInReports() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [filteredData, setFilteredData] = useState([]);
+    const [isDataFetched, setIsDataFetched] = useState(false); // To track if data has been fetched
 
     useEffect(() => {
         // Initial fetch if dates are set
         if (startDate && endDate) {
             fetchFilteredData();
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [startDate, endDate]);
 
     const fetchFilteredData = async () => {
@@ -24,11 +24,12 @@ function StockInReports() {
             const data = await fetchStockInByDate(startDate, endDate);
             console.log(data); // Log data to inspect the response
             setFilteredData(data);
+            setIsDataFetched(true); // Data has been fetched and set
         } catch (error) {
             console.error("Error fetching stock data:", error);
+            setIsDataFetched(false); // If error occurs, no data is fetched
         }
     };
-
 
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
@@ -85,7 +86,7 @@ function StockInReports() {
     return (
         <MainLayout>
             <div className={StockInReportsScss.Maincomponent}>
-                <h1>Stock In Report</h1>
+                <h1>Stocks Report</h1>
                 {/* Dropdown for Download Options */}
                 <div className={StockInReportsScss.DropDown}>
                     <DropdownButton variant="success" title="Download" id="download-dropdown">
@@ -115,38 +116,40 @@ function StockInReports() {
                         </Form.Group>
 
                     </Form>
-                    <div style={{paddingleft: 10}}>
+                    <div style={{ paddingLeft: 10 }}>
                         <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
                     </div>
                 </div>
 
                 {/* Table Display */}
-                <div className={StockInReportsScss.tables}>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Product ID</th>
-                                <th>Product Name</th>
-                                <th>SKU</th>
-                                <th>Barcode</th>
-                                <th>Quantity</th>
-                                <th>Date Added</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredData.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.productId}</td>
-                                    <td>{item.productName}</td>
-                                    <td>{item.sku}</td>
-                                    <td>{item.barcode}</td>
-                                    <td>{item.addedQuantityHistory.quantity}</td>
-                                    <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
+                {isDataFetched && (
+                    <div className={StockInReportsScss.tables}>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>SKU</th>
+                                    <th>Barcode</th>
+                                    <th>Quantity</th>
+                                    <th>Date Added</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                </div>
+                            </thead>
+                            <tbody>
+                                {filteredData.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.productId}</td>
+                                        <td>{item.productName}</td>
+                                        <td>{item.sku}</td>
+                                        <td>{item.barcode}</td>
+                                        <td>{item.addedQuantityHistory.quantity}</td>
+                                        <td>{new Date(item.addedQuantityHistory.date).toLocaleDateString()}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    </div>
+                )}
             </div>
         </MainLayout>
     );
