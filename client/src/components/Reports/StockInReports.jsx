@@ -39,6 +39,12 @@ function StockInReports() {
     }, [startDate, endDate]);
 
     const fetchFilteredData = async () => {
+        if (!startDate || !endDate) {
+            // If either date is missing, return without fetching data
+            alert("Please select both start and end dates to filter.");
+            return;
+        }
+
         setLoading(true); // Start loading
         try {
             const data = await fetchStockInByDate(startDate, endDate);
@@ -48,7 +54,7 @@ function StockInReports() {
         } finally {
             setLoading(false); // Stop loading once done
         }
-    };;
+    };
 
 
     // Calculate current page data
@@ -148,7 +154,14 @@ function StockInReports() {
                         </Form.Group>
                     </Form>
                     <div style={{ paddingLeft: 10 }}>
-                        <Button variant="primary" onClick={fetchFilteredData}>Filter</Button>
+                        <Button
+                            variant="primary"
+                            onClick={fetchFilteredData}
+                            disabled={!startDate || !endDate} // Disable if either date is missing
+                        >
+                            Filter
+                        </Button>
+
                     </div>
                 </div>
 
