@@ -138,6 +138,10 @@
             }
         }
 
+        button {
+                font-size: 0.9rem;
+        }
+
         div {
             display: flex;
             justify-content: space-between;
@@ -147,9 +151,7 @@
 
 
             div {
-                button {
-                    font-size: 0.9rem;
-                }
+        
             }
         }
     }

@@ -144,10 +144,10 @@ function ViewQrCode() {
         <>
             <div className={SetQrcodescss.SetQrcodeBtn}>
                 <Button variant="success" onClick={openModal}>
-                    <MdOutlineQrCode2 size={20} className="me-1"/> Generate QR Code
+                    <MdOutlineQrCode2 size={20} className="me-1" /> Generate QR Code
                 </Button>
                 <Button variant="success" onClick={handleShowPrintModal} className="ml-2">
-                    <FaEye size={20} className="me-1"/>Selected QrCodes
+                    <FaEye size={20} className="me-1" />Selected QrCodes
                 </Button>
                 <AddQrcode show={isModalOpen} onClose={closeModal} />
             </div>
@@ -167,31 +167,29 @@ function ViewQrCode() {
 
                             return (
                                 <div key={qr.id} className={SetQrcodescss.SetQrcodeContent}>
-                                        <h4 className='m-0 p-0'>QR Code #{index + 1}</h4>
-                                        <Card.Img
-                                            variant="top"
-                                            src={qr.qrcodeBase64}
-                                            alt="QR Code"
-                                        />
-                                        <p className='p-0 m-0'>
-                                            {isSaved ? (
-                                                <span>{productName}</span>
-                                            ) : (
-                                                <Button variant="link" onClick={() => handleOpenEditModal(qr.id)} className='m-0 p-0'>
-                                                    Product Name
-                                                </Button>
-                                            )}
-                                        </p>
-                                        <div>
-                                            <Button
-                                                variant={isSelected ? "danger" : "info"}
-                                                onClick={() => handleToggleSelection(qr)}
-                                                style={{ marginTop: '8px' }}
-                                            >
-                                                {isSelected ? 'Remove Print' : 'Add Print'}
+                                    <h4 className='m-0 p-0'>QR Code #{index + 1}</h4>
+                                    <Card.Img
+                                        variant="top"
+                                        src={qr.qrcodeBase64}
+                                        alt="QR Code"
+                                    />
+                                    <p className='p-0 m-0'>
+                                        {isSaved ? (
+                                            <span>{productName}</span>
+                                        ) : (
+                                            <Button variant="link" onClick={() => handleOpenEditModal(qr.id)} className='m-0 p-0'>
+                                                Product Name
                                             </Button>
-                                        </div>
-                                    </div>
+                                        )}
+                                    </p>
+                                    <Button
+                                        variant={isSelected ? "danger" : "info"}
+                                        onClick={() => handleToggleSelection(qr)}
+                                        style={{ marginTop: '8px' }}
+                                    >
+                                        {isSelected ? 'Remove Print' : 'Add Print'}
+                                    </Button>
+                                </div>
                             );
                         })}
                     </div>
