@@ -104,28 +104,36 @@
 //! Set Qr-Code 
 
 .SetQrcodemain {
-    // border: 1px solid red;
+    border: 1px solid red;
     padding: 10px;
-    height: 500px;
+    height: 550px;
     overflow: auto;
 
     .SetQrcodeContent {
-        // border: 1px solid green;
+        border: 1px solid green;
         border-radius: 10px;
         box-shadow: 1px 1px 3px rgb(180, 179, 179);
         padding: 10px;
         margin: 5px;
         background-color: #ffffff;
+        display: flex;
+        justify-content: space-between ;
+        align-items: center;
+
+        img {
+            width: 100px;
+                height: auto;
+            }
+
+        h4{
+            font-size: 1rem;
+        }
 
         div {
             display: flex;
             justify-content: space-between;
             align-items: center;
             // border: 1px solid;
-
-            h4{
-                font-size: 1rem;
-            }
             
             p {
                 font-size: 0.9rem;
@@ -136,10 +144,6 @@
                 }
             }
 
-            img {
-                width: 100px;
-                height: auto;
-            }
 
             div {
                 button {
