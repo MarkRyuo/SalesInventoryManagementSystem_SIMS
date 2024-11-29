@@ -21,14 +21,16 @@ function AccordionsCard() {
             </div>
 
 
-            <Accordion className={Accordionstyles.containerAc} defaultActiveKey={['0']} alwaysOpen>
-                {accordionItems.map((body, idx) => (
-                    <Accordion.Item key={idx} eventKey={idx.toString()} className={Accordionstyles.ItemAc}>
-                        <Accordion.Header>Accordion Item #{idx + 1}</Accordion.Header>
-                        <Accordion.Body>{body}</Accordion.Body>
-                    </Accordion.Item>
-                ))}
-            </Accordion>
+            <div className={Accordionstyles.AccoMain}>
+                <Accordion className={Accordionstyles.containerAc} defaultActiveKey={['0']} alwaysOpen>
+                    {accordionItems.map((body, idx) => (
+                        <Accordion.Item key={idx} eventKey={idx.toString()} className={Accordionstyles.ItemAc}>
+                            <Accordion.Header>Accordion Item #{idx + 1}</Accordion.Header>
+                            <Accordion.Body>{body}</Accordion.Body>
+                        </Accordion.Item>
+                    ))}
+                </Accordion>
+            </div>
             
 
         </div>

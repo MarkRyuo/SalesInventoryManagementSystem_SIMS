@@ -8,8 +8,14 @@
     justify-content: space-evenly;
     .FAQcontainer {
         width: 500px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid;
         h1 {
-
+            font-size: 3rem;
+            font-weight: 300;
         }
 
         p {
@@ -17,10 +23,16 @@
         }
 
         .Imgs {
-            width: 500px;
+            width: 400px;
             img {
                 width: 100%;
             }
         }
     } 
+
+    .AccoMain {
+        border: 1px solid;
+        display: flex;
+        align-items: center;
+    }
 }
