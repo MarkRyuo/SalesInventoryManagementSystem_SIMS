@@ -150,25 +150,25 @@
 
         .SetQrcodeContent {
 
-                img {
-                    width: 70px;
-                    height: auto;
-                }
+            img {
+                width: 70px;
+                height: auto;
+            }
 
-                h4{
-                    width: 110px;
-                    font-size: 0.9rem;
-                }
+            h4{
+                width: 110px;
+                font-size: 0.9rem;
+            }
 
-                p {
-                    overflow-x: hidden;
-                    width: 150px;
+            p {
+                overflow-x: hidden;
+                width: 150px;
+                font-size: 0.8rem;
+                button {
+                    color: red;
                     font-size: 0.8rem;
-                    button {
-                        color: red;
-                        font-size: 0.8rem;
-                        text-decoration: none;
-                    }
+                    text-decoration: none;
+                }
             }
 
         .SetQrbtn {
@@ -179,42 +179,10 @@
     
     }
     
-    @media (max-width: 400px) {
-        padding: 0px;
 
-        .SetQrcodeContent {
-            height: auto;
 
-        div {
-            align-items:center ;
-            flex-direction: column;
-            // border: 1px solid;
-            h4{
-                font-size: 0.8rem;
-            }
-            
-            p {
-                font-size: 0.7rem;
-                button {
-                    font-size: 0.7rem;
-                    text-decoration: none;
-                }
-            }
 
-            img {
-                width: 50px;
-                height: auto;
-            }
 
-            div {
-                // border: 1px solid;
-                button {
-                    font-size: 0.7rem;
-                }
-            }
-        }
-    }
-    }
 }//!End 
 
 
