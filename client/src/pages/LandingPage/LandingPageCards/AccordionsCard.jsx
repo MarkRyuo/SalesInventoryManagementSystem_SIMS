@@ -1,5 +1,6 @@
 import Accordion from 'react-bootstrap/Accordion';
 import Carousel from 'react-bootstrap/Carousel';
+import AccordionsCardScss from './SCSS/AccordionsCard.module.scss'
 
 
 function AccordionsCard() {
