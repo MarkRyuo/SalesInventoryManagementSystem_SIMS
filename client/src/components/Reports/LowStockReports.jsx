@@ -185,27 +185,29 @@ function LowStockReports() {
                                 </tr>
                             ))}
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colSpan={7} style={{ textAlign: "center" }}>
+                                        <Button
+                                            variant="link"
+                                            disabled={currentPage === 1}
+                                            onClick={() => setCurrentPage(currentPage - 1)} // Use setCurrentPage directly
+                                        >
+                                            &#8592; {/* Left arrow */}
+                                        </Button>
+                                        <span>Page {currentPage} of {totalPages}</span>
+                                        <Button
+                                            variant="link"
+                                            disabled={currentPage === totalPages}
+                                            onClick={() => setCurrentPage(currentPage + 1)} // Use setCurrentPage directly
+                                        >
+                                            &#8594; {/* Right arrow */}
+                                        </Button>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </Table>
                 </div>
-
-                <div className="pagination" style={{ textAlign: "center" }}>
-                    <Button
-                        variant="link"
-                        disabled={currentPage === 1}
-                        onClick={() => setCurrentPage(currentPage - 1)} // Use setCurrentPage directly
-                    >
-                        &#8592; {/* Left arrow */}
-                    </Button>
-                    <span>Page {currentPage} of {totalPages}</span>
-                    <Button
-                        variant="link"
-                        disabled={currentPage === totalPages}
-                        onClick={() => setCurrentPage(currentPage + 1)} // Use setCurrentPage directly
-                    >
-                        &#8594; {/* Right arrow */}
-                    </Button>
-                </div>
-
             </div>
         </MainLayout>
     );
