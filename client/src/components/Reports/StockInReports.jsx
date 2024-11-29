@@ -68,14 +68,26 @@ function StockInReports() {
     const handleDownloadPDF = () => {
         const doc = new jsPDF();
 
-        doc.setFontSize(16);
-        doc.text("Stock In Report", 14, 20);
-        doc.setFontSize(12);
-        doc.text(`Date Range: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`, 14, 30);
+        // H1 Style for "REYES ELECTRONICS"
+        doc.setFontSize(16); // Larger font for H1
+        doc.text("REYES ELECTRONICS", 14, 15);
 
+        // Subheading for "Stock In Report"
+        doc.setFontSize(12);
+        doc.text("Stock In Report", 14, 25);
+
+        // Date Range
+        doc.setFontSize(9);
+        doc.text(
+            `Date Range: ${new Date(startDate).toLocaleDateString()} - ${new Date(endDate).toLocaleDateString()}`,
+            14,
+            35
+        );
+
+        // Table
         doc.autoTable({
-            startY: 40,
-            head: [['Product ID', 'Product Name', 'SKU', 'Barcode', 'Quantity', 'Date Added']],
+            startY: 45,
+            head: [['Product ID', 'Product Name', 'SKU', 'Barcode', 'Qty', 'Date Added']],
             body: filteredData.map(item => [
                 item.productId,
                 item.productName,
@@ -84,10 +96,23 @@ function StockInReports() {
                 item.addedQuantityHistory.quantity,
                 new Date(item.addedQuantityHistory.date).toLocaleDateString(),
             ]),
+            styles: { fontSize: 9 }, // Smaller font for table
+            columnStyles: {
+                0: { cellWidth: 30 },
+                1: { cellWidth: 40 },
+                2: { cellWidth: 25 },
+                3: { cellWidth: 30 },
+                4: { cellWidth: 15 },
+                5: { cellWidth: 30 },
+            },
         });
 
         doc.save('stock-in-report.pdf');
     };
+
+
+
+
 
     const handleDownloadXLSX = () => {
         const reportData = filteredData.map(item => ({
@@ -95,7 +120,7 @@ function StockInReports() {
             ProductName: item.productName,
             SKU: item.sku,
             Barcode: item.barcode,
-            Quantity: item.addedQuantityHistory.quantity,
+            Qty: item.addedQuantityHistory.quantity,
             DateAdded: new Date(item.addedQuantityHistory.date).toLocaleDateString(),
         }));
 
