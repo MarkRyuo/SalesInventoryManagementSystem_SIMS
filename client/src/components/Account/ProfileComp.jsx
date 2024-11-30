@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { useNavigate } from 'react-router-dom';
-import bcrypt from 'bcryptjs';
 import ProfileCompScss from './AccountComp.module.scss';
 
 const ProfileComp = () => {
@@ -14,13 +13,12 @@ const ProfileComp = () => {
         lastname: "",
         gender: "",
         username: "",
-        password: "",
         email: "",
     });
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
-
     const [isEditing, setIsEditing] = useState(false);
+    const [isEmailChanging, setIsEmailChanging] = useState(false); // To manage email change process
     const adminId = localStorage.getItem('adminId');
 
     const handleGenderSelect = (eventKey) => {
@@ -65,15 +63,8 @@ const ProfileComp = () => {
 
     const handleSave = async () => {
         try {
-            let updatedPassword = userData.password;
-
-            if (updatedPassword && updatedPassword !== '') {
-                updatedPassword = await bcrypt.hash(updatedPassword, 10);
-            }
-
             const updatedData = {
                 ...userData,
-                password: updatedPassword || userData.password
             };
 
             const adminDocRef = doc(db, 'admins', adminId);
@@ -125,8 +116,9 @@ const ProfileComp = () => {
                 setOtpSent(false);  // Reset OTP sent status
                 alert('OTP verified successfully!');
 
-                // After OTP verification, automatically save the updated email to Firebase
+                // After OTP verification, update the email and save the profile
                 await handleSave();
+                setIsEmailChanging(false); // Stop email change process
             } else {
                 alert(result.error);
             }
@@ -135,6 +127,10 @@ const ProfileComp = () => {
         }
     };
 
+    const handleChangeEmailClick = () => {
+        setIsEmailChanging(true);
+        setIsEditing(true);
+    };
 
     return (
         <Form className={ProfileCompScss.contentAccount}>
@@ -198,60 +194,7 @@ const ProfileComp = () => {
                     <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
                 </DropdownButton>
             </InputGroup>
-
-            <div className={ProfileCompScss.OTPcontainer}>
-                <Form.Group className="email" controlId="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type="email"
-                        name="email"
-                        value={userData.email}
-                        onChange={handleInputChange}
-                        disabled={!isEditing}
-                        className={ProfileCompScss.Email}
-                    />
-                </Form.Group>
-
-                <Button
-                    variant="primary"
-                    onClick={handleSendOtp}
-                    disabled={otpSent || !isEditing}>
-                    Send OTP
-                </Button>
-
-                {otpSent && (
-                    <>
-                        <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
-                            <Form.Label>Enter OTP</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="otp"
-                                value={otp}
-                                onChange={(e) => setOtp(e.target.value)}
-                            />
-                        </Form.Group>
-                        <Button
-                            variant="primary"
-                            onClick={handleVerifyOtp}
-                            disabled={!otp}>
-                            Verify OTP
-                        </Button>
-                    </>
-                )}
-            </div>
-
-            <Form.Group className="password" controlId="password">
-                <Form.Label className='ms-2'>Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    name="password"
-                    value={userData.password}
-                    onChange={handleInputChange}
-                    disabled={!isEditing}
-                    className={ProfileCompScss.Password}
-                />
-            </Form.Group>
-
+            
             <div className={ProfileCompScss.buttonss}>
                 <Button
                     variant='info'
@@ -267,6 +210,69 @@ const ProfileComp = () => {
                     disabled={!isEditing}>
                     Save
                 </Button>
+            </div>
+
+            <div className={ProfileCompScss.OTPcontainer}>
+                <Form.Group className="email" controlId="email">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        type="email"
+                        name="email"
+                        value={userData.email}
+                        onChange={handleInputChange}
+                        disabled={!isEditing || isEmailChanging}  // Disable when changing email
+                        className={ProfileCompScss.Email}
+                    />
+                </Form.Group>
+
+                {!userData.email && !isEmailChanging && (
+                    <Button
+                        variant="warning"
+                        onClick={handleSendOtp}
+                        disabled={otpSent || !isEditing}>
+                        Send OTP to Set Email
+                    </Button>
+                )}
+
+                {userData.email && !isEmailChanging && (
+                    <Button
+                        variant="warning"
+                        onClick={handleChangeEmailClick}
+                        disabled={isEmailChanging || !isEditing}>
+                        Change Email
+                    </Button>
+                )}
+
+                {isEmailChanging && (
+                    <>
+                        <Button
+                            variant="primary"
+                            onClick={handleSendOtp}
+                            disabled={otpSent || !isEditing}>
+                            Send OTP
+                        </Button>
+
+                        {otpSent && (
+                            <>
+                                <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
+                                    <Form.Label>Enter OTP</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="otp"
+                                        value={otp}
+                                        onChange={(e) => setOtp(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Button
+                                    variant="primary"
+                                    onClick={handleVerifyOtp}
+                                    disabled={!otp}>
+                                    Verify OTP
+                                </Button>
+                            </>
+                        )}
+                    </>
+                )}
             </div>
         </Form>
     );
