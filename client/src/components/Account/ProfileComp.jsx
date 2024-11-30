@@ -214,7 +214,7 @@ const ProfileComp = () => {
                         value={userData.email}
                         onChange={handleInputChange}
                         disabled={!isEditing} // Disable if not in editing mode
-                        className={ProfileCompScss.Email}
+                        className={ProfileCompScss.Emails}
                     />
                 </Form.Group>
 
@@ -232,7 +232,7 @@ const ProfileComp = () => {
 
                         {otpSent && (
                             <>
-                                <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
+                                <Form.Group className="my-3" controlId="otp" style={{ width: "100%", maxWidth: "500px"}}>
                                     <Form.Label>Enter OTP</Form.Label>
                                     <Form.Control
                                         type="text"
