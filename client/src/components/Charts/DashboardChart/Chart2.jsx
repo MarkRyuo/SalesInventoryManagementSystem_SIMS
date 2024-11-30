@@ -20,7 +20,11 @@ function Chart2() {
             }
         };
 
-        fetchData(); // Call the function when the component mounts or when the selected range changes
+        // Call the function initially and on real-time updates
+        fetchData(); // Fetch initial data
+        const interval = setInterval(fetchData, 5000); // Polling every 5 seconds for updates (optional for your use case)
+
+        return () => clearInterval(interval); // Cleanup interval on component unmount
     }, [selectedRange]);  // Add selectedRange as a dependency so it refetches on change
 
     // Handle the range selection
@@ -33,7 +37,6 @@ function Chart2() {
             <h5>Total Revenue</h5>
             <div className={Chartcss.contentChart2}>
                 <p>{totalSales.toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}</p> {/* Display total sales formatted */}
-                {/* <p>From the {selectedRange}</p> */}
             </div>
             <div className={Chartcss.rangeSelector}>
                 <select onChange={(e) => handleRangeChange(e.target.value)} defaultValue="today" className='form-select'>
@@ -43,7 +46,6 @@ function Chart2() {
                     <option value="year">Year</option>
                 </select>
             </div>
-
         </div>
     );
 }
