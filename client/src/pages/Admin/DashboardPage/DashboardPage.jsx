@@ -41,7 +41,7 @@ export const DashboardPage = () => {
                 // Add this part to handle missing admin document
                 if (!adminDoc.exists()) {
                     console.error('Admin document not found.');
-                    navigate('/login'); // Redirect to login if document doesn't exist
+                    navigate('/'); // Redirect to login if document doesn't exist
                     return;
                 }
 
@@ -50,7 +50,7 @@ export const DashboardPage = () => {
                 setAdminGender(gender || '');
             } catch (error) {
                 console.error('Error fetching admin data:', error);
-                navigate('/login'); // Redirect on error
+                navigate('/'); // Redirect on error
             } finally {
                 setIsLoading(false);
             }
