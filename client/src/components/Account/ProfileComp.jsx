@@ -15,11 +15,10 @@ const ProfileComp = () => {
         gender: "",
         username: "",
         password: "",
-        email: "", // Replace phoneNumber with email
+        email: "",
     });
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
-    const [otpVerified, setOtpVerified] = useState(false); // Track OTP verification status
 
     const [isEditing, setIsEditing] = useState(false);
     const adminId = localStorage.getItem('adminId');
@@ -88,7 +87,6 @@ const ProfileComp = () => {
         }
     };
 
-    // Send OTP request to backend
     const handleSendOtp = async () => {
         if (!userData.email) {
             alert('Please enter a valid email address');
@@ -125,7 +123,6 @@ const ProfileComp = () => {
             const result = await response.json();
             if (response.ok) {
                 alert('OTP verified successfully!');
-                setOtpVerified(true); // Set OTP as verified
             } else {
                 alert(result.error);
             }
@@ -225,12 +222,12 @@ const ProfileComp = () => {
                     name="password"
                     value={userData.password}
                     onChange={handleInputChange}
-                    disabled={!isEditing || !otpVerified}
+                    disabled={!isEditing}
                     className={ProfileCompScss.Password}
                 />
             </Form.Group>
 
-            {otpSent && !otpVerified && (
+            {otpSent && (
                 <>
                     <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
                         <Form.Label>Enter OTP</Form.Label>
@@ -255,14 +252,14 @@ const ProfileComp = () => {
                     variant='info'
                     className='ms-2'
                     onClick={() => setIsEditing(true)}
-                    disabled={isEditing || !otpVerified}>
+                    disabled={isEditing}>
                     Edit
                 </Button>
                 <Button
                     variant='primary'
                     className='ms-2'
                     onClick={handleSave}
-                    disabled={!isEditing || !otpVerified}>
+                    disabled={!isEditing}>
                     Save
                 </Button>
             </div>
