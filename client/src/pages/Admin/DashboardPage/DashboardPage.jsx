@@ -60,7 +60,7 @@ export const DashboardPage = () => {
         // Set the real-time date
         const updateDate = () => {
             const now = new Date();
-            const formattedDate = now.toLocaleDateString('en-US', {
+            const formattedDate = now.toLocaleDateString('en-PH', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
