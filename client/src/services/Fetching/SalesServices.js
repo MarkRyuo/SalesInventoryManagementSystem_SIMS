@@ -6,15 +6,14 @@ const isTransactionInRange = (transactionDate, range) => {
     const now = new Date();
     const transactionTime = new Date(transactionDate);
 
+    // Strip the time from the dates for comparison
+    const transactionDay = transactionTime.toISOString().split('T')[0]; // Format as 'YYYY-MM-DD'
+    const currentDay = now.toISOString().split('T')[0]; // Format as 'YYYY-MM-DD'
+
     switch (range) {
         case 'today':
-            // For today, check if the transaction's date is today and the time is between 8 AM and 9 PM
-            const startOfDay = new Date(now);
-            startOfDay.setHours(8, 0, 0, 0); // Set to 8:00 AM
-            const endOfDay = new Date(now);
-            endOfDay.setHours(21, 0, 0, 0); // Set to 9:00 PM
-
-            return transactionTime >= startOfDay && transactionTime <= endOfDay;
+            // For today, check if the transaction's date is today
+            return transactionDay === currentDay;
 
         case 'week':
             // Calculate the start of the current week (Sunday)
@@ -42,8 +41,6 @@ const isTransactionInRange = (transactionDate, range) => {
             return false;
     }
 };
-
-
 
 export const fetchSalesData = async (range) => {
     const db = getDatabase();
