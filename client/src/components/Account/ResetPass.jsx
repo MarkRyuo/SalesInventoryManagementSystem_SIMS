@@ -221,13 +221,16 @@ const ResetPass = () => {
             </Row>
 
             <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)} centered>
-                <Modal.Header>
+                <Modal.Header className='bg-danger'>
                     <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{error}</Modal.Body>
             </Modal>
 
             <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
+                <Modal.Header className='bg-success'>
+                    <Modal.Title>Success</Modal.Title>
+                </Modal.Header>
                 <Modal.Body>{success}</Modal.Body>
             </Modal>
         </Container>
