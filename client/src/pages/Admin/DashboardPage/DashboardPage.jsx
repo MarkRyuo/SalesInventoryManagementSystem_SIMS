@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Image } from 'react-bootstrap';
 import { MainLayout } from '../../../layout/MainLayout';
 import DashboardCss from './Dashboard.module.scss';
