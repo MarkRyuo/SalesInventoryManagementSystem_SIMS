@@ -184,7 +184,7 @@ const ResetPass = () => {
                                     <Form.Label>Enter OTP</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        placeholder="Enter the OTP sent to your email"
+                                        placeholder="0000000"
                                         value={otp}
                                         onChange={(e) => setOtp(e.target.value)}
                                     />
@@ -212,7 +212,7 @@ const ResetPass = () => {
                             </>
                         )}
                     </Form>
-                    <Link to={"/"} className="btn btn-link w-100 mt-3" style={{ color: "#444444", fontSize: "13px" }}>
+                    <Link to={"/"} className=" btn btn-link w-100 mt-3" style={{ color: "#444444", fontSize: "0.9rem" }}>
                         <IoArrowBack /> Back to Login
                     </Link>
                 </Col>
