@@ -69,7 +69,7 @@ function AdminTransactionHistory() {
         const doc = new jsPDF();
 
         // Using default fonts like Helvetica (most fonts support ₱)
-        doc.setFont('helvetica', 'normal');  // Use Helvetica which supports the peso sign
+        doc.setFont('courier', 'normal');  // Use Helvetica which supports the peso sign
 
         // Title and Store Info (aligned to the left)
         doc.setFontSize(12);
