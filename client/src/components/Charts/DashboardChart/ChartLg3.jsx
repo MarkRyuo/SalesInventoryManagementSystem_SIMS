@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { useState, useEffect } from 'react';
 import Chartcss from './Charts.module.scss';
 import { fetchSalesData } from '../../../services/Fetching/SalesServices';  // Import fetchSalesData function
@@ -7,15 +8,9 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 // Register the components with Chart.js
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-// Function to format the date (e.g., "Oct 01")
-const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString([], { day: '2-digit', month: 'short' });  // 'Oct 01' format
-};
-
 function ChartLg3() {
     const [salesData, setSalesData] = useState({ totalSales: [], dates: [] });
-    const [selectedRange, setSelectedRange] = useState('today');  // Default to 'today'
+    const [selectedRange, setSelectedRange] = useState('today');  // Default to 'month'
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,15 +31,57 @@ function ChartLg3() {
         setSelectedRange(range);  // Update the range
     };
 
+    // Generate date labels for the x-axis
+    const generateDateLabels = (range) => {
+        const now = new Date();
+        let labels = [];
+        switch (range) {
+            case 'today':
+                // For today, generate labels for each hour of the day
+                for (let i = 0; i < 24; i++) {
+                    const hour = new Date(now.setHours(i, 0, 0, 0)); // Set hours and reset minutes, seconds, and ms
+                    labels.push(hour.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+                }
+                break;
+            case 'week':
+                const startOfWeek = new Date(now);
+                startOfWeek.setDate(now.getDate() - now.getDay()); // Set to Sunday
+                for (let i = 0; i < 7; i++) {
+                    const day = new Date(startOfWeek);
+                    day.setDate(startOfWeek.getDate() + i);
+                    labels.push(day.toLocaleDateString());
+                }
+                break;
+            case 'month':
+                const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+                const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+                for (let i = 0; i < daysInMonth; i++) {
+                    const day = new Date(startOfMonth);
+                    day.setDate(startOfMonth.getDate() + i);
+                    labels.push(day.toLocaleDateString());
+                }
+                break;
+            case 'year':
+                for (let i = 0; i < 12; i++) {
+                    const month = new Date(now.getFullYear(), i, 1);
+                    labels.push(month.toLocaleString('default', { month: 'short' }));
+                }
+                break;
+            default:
+                break;
+        }
+        return labels;
+    };
+
     // Chart data setup
     const chartData = {
-        labels: salesData.dates.map(date => formatDate(date)),  // Format the dates
+        labels: generateDateLabels(selectedRange), // Use generated date labels
         datasets: [
             {
                 label: 'Total Sales (₱)',
                 data: salesData.totalSales, // Sales data
                 borderColor: 'rgba(170, 201, 255, 1)',
-                backgroundColor: 'rgba(170, 201, 255, 0.2)',
+                backgroundColor: 'rgba(170, 201, 255,0.2)',
                 fill: true,
                 tension: 0.4, // Smooth lines
             }
@@ -53,22 +90,21 @@ function ChartLg3() {
 
     // Chart options
     const chartOptions = {
-        responsive: true,  // Ensures the chart is responsive
-        maintainAspectRatio: false,  // Allow the chart to adjust to container size
+        responsive: true,
         scales: {
             x: {
                 ticks: {
-                    autoSkip: true,  // Skip some labels if necessary
-                    maxRotation: 45,  // Rotate labels to 45 degrees for better readability
-                    minRotation: 45,  // Maintain the 45 degrees rotation
-                    padding: 10,  // Space between labels
+                    autoSkip: true, // Skip some labels if needed
+                    maxRotation: 0, // Keep labels horizontal
+                    minRotation: 0, // No rotation
+                    padding: 10, // Add space between labels
                 },
             },
             y: {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'Amount (₱)',  // Y-axis label
+                    text: 'Amount (₱)', // Change Y-axis label to reflect only sales
                 },
             },
         },
@@ -81,7 +117,7 @@ function ChartLg3() {
                     label: (context) => {
                         const label = context.dataset.label || '';
                         const value = context.raw;
-                        return `${label}: ₱${value.toLocaleString()}`;  // Format the value with a currency symbol
+                        return `${label}: ₱${value.toLocaleString()}`;
                     },
                 },
             },
