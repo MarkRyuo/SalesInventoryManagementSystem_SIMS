@@ -36,6 +36,7 @@ const ResetPass = () => {
         if (!validateEmail(email)) {
             setError('Invalid email address');
             setShowErrorModal(true);
+            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
             return;
         }
 
@@ -43,6 +44,7 @@ const ResetPass = () => {
         if (!emailExists) {
             setError('Email not found');
             setShowErrorModal(true);
+            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
             return;
         }
 
@@ -60,19 +62,19 @@ const ResetPass = () => {
                 setOtpSent(true);
                 setSuccess('OTP sent successfully!');
                 setShowSuccessModal(true);
+                setTimeout(() => setShowSuccessModal(false), 3000); // Close modal after 3 seconds
                 setLoading(false);
-                setTimeout(() => setShowSuccessModal(false), 2000);
             } else {
                 setError(result.error);
                 setShowErrorModal(true);
+                setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
                 setLoading(false);
-                setTimeout(() => setShowErrorModal(false), 2000);
             }
         } catch (error) {
             setError('Error sending OTP.');
             setShowErrorModal(true);
+            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
             setLoading(false);
-            setTimeout(() => setShowErrorModal(false), 2000);
         }
     };
 
@@ -88,17 +90,17 @@ const ResetPass = () => {
             if (response.ok) {
                 setSuccess('OTP verified successfully!');
                 setShowSuccessModal(true);
+                setTimeout(() => setShowSuccessModal(false), 3000); // Close modal after 3 seconds
                 setOtpVerified(true);
-                setTimeout(() => setShowSuccessModal(false), 2000);
             } else {
                 setError(result.error);
                 setShowErrorModal(true);
-                setTimeout(() => setShowErrorModal(false), 2000);
+                setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
             }
         } catch (error) {
             setError('Error verifying OTP.');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 2000);
+            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
         }
     };
 
@@ -106,7 +108,7 @@ const ResetPass = () => {
         if (!newPassword) {
             setError('Password is required');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 2000);
+            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
             return;
         }
 
@@ -120,7 +122,7 @@ const ResetPass = () => {
             if (querySnapshot.empty) {
                 setError('Email not found');
                 setShowErrorModal(true);
-                setTimeout(() => setShowErrorModal(false), 2000);
+                setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
                 return;
             }
 
@@ -131,7 +133,7 @@ const ResetPass = () => {
 
             setSuccess('Password reset successfully!');
             setShowSuccessModal(true);
-            setTimeout(() => setShowSuccessModal(false), 2000);
+            setTimeout(() => setShowSuccessModal(false), 3000); // Close modal after 3 seconds
 
             setTimeout(() => {
                 navigate('/LoginPage');
@@ -140,9 +142,10 @@ const ResetPass = () => {
             console.error('Error resetting password:', error);
             setError('Error resetting password.');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 2000);
+            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
         }
     };
+
 
     return (
         <Container fluid style={{ background: "radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
