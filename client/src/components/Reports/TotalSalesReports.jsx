@@ -8,6 +8,7 @@ import { fetchTransactions } from './Service/TotalSales'; // Import the fetch fu
 import { MainLayout } from '../../layout/MainLayout'
 import TotalSalesReportScss from './Scss/TotalSalesReports.module.scss';
 import { Spinner } from 'react-bootstrap';
+import { Pagination } from 'react-bootstrap'; // Import Pagination
 
 
 function TotalSalesReports() {
@@ -16,6 +17,18 @@ function TotalSalesReports() {
     const [endDate, setEndDate] = useState('');
     const [filteredData, setFilteredData] = useState([]);
     const [isLoading, setIsLoading] = useState(true); // Loading state
+
+    // State for pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 8; // Number of rows per page
+
+    // Get current items
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Handle page change
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 
     // Fetch data from Firebase on component mount
@@ -183,7 +196,6 @@ function TotalSalesReports() {
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                         Download
                     </Dropdown.Toggle>
-
                     <Dropdown.Menu>
                         <Dropdown.Item onClick={downloadXlsx}>XLSX</Dropdown.Item>
                         <Dropdown.Item onClick={downloadPdf}>PDF</Dropdown.Item>
@@ -218,48 +230,75 @@ function TotalSalesReports() {
                             <Spinner animation="grow" variant="primary" />
                         </div>
                     ) : (
-                        <Table striped bordered hover responsive>
-                            <thead>
-                                <tr>
-                                    <th>Transaction ID</th>
-                                    <th>Date/Time</th>
-                                    <th>Qty.</th>
-                                    <th>Disc</th>
-                                    <th>Tax</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filteredData.map(transaction => (
-                                    <tr key={transaction.transactionId}>
-                                        <td>{transaction.transactionId}</td>
-                                        <td>{format(new Date(transaction.date), 'MMM dd, yyyy, h:mm a')}</td>
-                                        <td>{transaction.totalQuantity}</td>
-                                        <td>{`₱${transaction.discount}`}</td>
-                                        <td>{`₱${transaction.tax}`}</td>
-                                        <td>{`₱${transaction.total}`}</td>
+                        <>
+                            <Table striped bordered hover responsive>
+                                <thead>
+                                    <tr>
+                                        <th>Transaction ID</th>
+                                        <th>Date/Time</th>
+                                        <th>Qty.</th>
+                                        <th>Disc</th>
+                                        <th>Tax</th>
+                                        <th>Total</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colSpan="2">Totals:</td>
-                                    <td>{totalQuantitySold}</td>
-                                    <td>{`₱${totalDiscount.toFixed(2)}`}</td>
-                                    <td>{`₱${totalTax.toFixed(2)}`}</td>
-                                    <td>{`₱${totalRevenue.toFixed(2)}`}</td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="5">Net Revenue</td>
-                                    <td>{`₱${netRevenue.toFixed(2)}`}</td>
-                                </tr>
-                            </tfoot>
-                        </Table>
+                                </thead>
+                                <tbody>
+                                    {currentItems.map(transaction => (
+                                        <tr key={transaction.transactionId}>
+                                            <td>{transaction.transactionId}</td>
+                                            <td>{format(new Date(transaction.date), 'MMM dd, yyyy, h:mm a')}</td>
+                                            <td>{transaction.totalQuantity}</td>
+                                            <td>{`₱${transaction.discount}`}</td>
+                                            <td>{`₱${transaction.tax}`}</td>
+                                            <td>{`₱${transaction.total}`}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colSpan="2">Totals:</td>
+                                        <td>{totalQuantitySold}</td>
+                                        <td>{`₱${totalDiscount.toFixed(2)}`}</td>
+                                        <td>{`₱${totalTax.toFixed(2)}`}</td>
+                                        <td>{`₱${totalRevenue.toFixed(2)}`}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="5">Net Revenue</td>
+                                        <td>{`₱${netRevenue.toFixed(2)}`}</td>
+                                    </tr>
+                                </tfoot>
+                            </Table>
+                            {/* Pagination */}
+                            <div className="d-flex justify-content-center mt-3">
+                                <Pagination>
+                                    <Pagination.First onClick={() => paginate(1)} disabled={currentPage === 1}/>
+                                    <Pagination.Prev onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} />
+                                    {[...Array(Math.ceil(filteredData.length / itemsPerPage)).keys()].map(num => (
+                                        <Pagination.Item
+                                            key={num + 1}
+                                            active={num + 1 === currentPage}
+                                            onClick={() => paginate(num + 1)}
+                                        >
+                                            {num + 1}
+                                        </Pagination.Item>
+                                    ))}
+                                    <Pagination.Next
+                                        onClick={() => paginate(currentPage + 1)}
+                                        disabled={currentPage === Math.ceil(filteredData.length / itemsPerPage)}
+                                    />
+                                    <Pagination.Last
+                                        onClick={() => paginate(Math.ceil(filteredData.length / itemsPerPage))}
+                                        disabled={currentPage === Math.ceil(filteredData.length / itemsPerPage)}
+                                    />
+                                </Pagination>
+                            </div>
+                        </>
                     )}
-
                 </div>
             </div>
         </MainLayout>
+
+
 
     );
 }
