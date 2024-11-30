@@ -1,6 +1,6 @@
 import { getDatabase, ref, get } from 'firebase/database';
 
-// Function to fetch all product added quantity histories from Firebase
+// Function to fetch all product quantity histories from Firebase
 export const getProductQuantityHistory = async () => {
     const db = getDatabase();
     const productsRef = ref(db, 'products');  // Referring to the 'products' node
@@ -9,28 +9,30 @@ export const getProductQuantityHistory = async () => {
         const snapshot = await get(productsRef);
         if (snapshot.exists()) {
             const productsData = snapshot.val();
-            const addedQuantityHistories = [];
+            console.log("All products data found:", productsData); // Log products data for debugging
+            const quantityHistories = [];
 
-            // Loop through each product and get its added quantity history
+            // Loop through each product and get its quantity history
             for (let productId in productsData) {
                 const productData = productsData[productId];
-                const addedQuantityHistory = productData.addedQuantityHistory || [];
-                addedQuantityHistories.push({ productId, addedQuantityHistory });
+                const quantityHistory = productData.quantityHistory || [];
+                quantityHistories.push({ productId, quantityHistory });
             }
 
-            return addedQuantityHistories;
+            return quantityHistories;
         } else {
             console.error("No product data found.");
             return [];
         }
     } catch (error) {
-        console.error('Error fetching product added quantity histories:', error);
-        throw new Error('Failed to fetch product added quantity histories');
+        console.error('Error fetching product quantity histories:', error);
+        throw new Error('Failed to fetch product quantity histories');
     }
 };
 
 // Utility function to filter quantities by selected time range
-export const filterQuantityByRange = (addedQuantityHistories, range) => {
+export const filterQuantityByRange = (quantityHistories, range) => {
+    // Get the current date and adjust it to Philippine Time (UTC +8)
     const philippineOffset = 8 * 60; // Philippine Time Zone Offset (UTC +8)
     const today = new Date();
     const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
@@ -55,13 +57,17 @@ export const filterQuantityByRange = (addedQuantityHistories, range) => {
             return 0;
     }
 
+    // Initialize total quantity
     let totalQuantity = 0;
 
-    addedQuantityHistories.forEach(product => {
-        product.addedQuantityHistory.forEach(entry => {
+    // Loop through quantityHistories to filter by time range
+    quantityHistories.forEach(product => {
+        product.quantityHistory.forEach(entry => {
             const entryDate = new Date(entry.date);
+            // Adjust entry date to Philippine Time
             const entryDateInPhilippineTime = new Date(entryDate.getTime() + (philippineOffset - entryDate.getTimezoneOffset()) * 60000);
 
+            // Check if the entry's date is within the selected range
             if (entryDateInPhilippineTime >= startDate) {
                 totalQuantity += entry.quantity; // Add quantity if within the range
             }

@@ -11,8 +11,8 @@ function Chart1() {
         const fetchQuantity = async () => {
             setLoading(true); // Show loading indicator
             try {
-                const addedQuantityHistories = await getProductQuantityHistory();
-                const totalQuantity = filterQuantityByRange(addedQuantityHistories, 'Today');
+                const quantityHistories = await getProductQuantityHistory();
+                const totalQuantity = filterQuantityByRange(quantityHistories, 'Today');
                 setQuantity(totalQuantity);
             } catch (error) {
                 console.error('Error fetching quantity:', error);
@@ -30,7 +30,7 @@ function Chart1() {
 
     return (
         <div className={Chartcss.containerChart1}>
-            <h5>Today Stock</h5>
+            <h5>Stock Movement</h5>
             <div className={Chartcss.contentChart1}>
                 {loading ? (
                     <Spinner animation="grow" variant="success" /> // Show spinner
