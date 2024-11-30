@@ -4,6 +4,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { useNavigate } from 'react-router-dom';
 import ProfileCompScss from './AccountComp.module.scss';
+import { Link } from 'react-router-dom';
 
 const ProfileComp = () => {
     const navigate = useNavigate();
@@ -257,6 +258,9 @@ const ProfileComp = () => {
                         )}
                     </>
                 )}
+                <Link to={'/ResetPassAccount'}>
+                    Reset Password?
+                </Link>
             </div>
         </Form>
     );
