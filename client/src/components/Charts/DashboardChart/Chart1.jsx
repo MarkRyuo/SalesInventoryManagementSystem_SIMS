@@ -30,7 +30,7 @@ function Chart1() {
 
     return (
         <div className={Chartcss.containerChart1}>
-            <h5>Total Stock</h5>
+            <h5>Today Stock</h5>
             <div className={Chartcss.contentChart1}>
                 {loading ? (
                     <Spinner animation="grow" variant="success" /> // Show spinner
