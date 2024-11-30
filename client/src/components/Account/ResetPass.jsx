@@ -229,7 +229,7 @@ const ResetPass = () => {
 
             <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
                 <Modal.Header className='bg-success'>
-                    <Modal.Title>Success</Modal.Title>
+                    <Modal.Title className='text-light'>Success</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{success}</Modal.Body>
             </Modal>
