@@ -82,7 +82,7 @@ const ResetPass = () => {
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/validate-otp', {
+            const response = await fetch('https://api-hqnwrfpmoa-uc.a.run.app/validate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ otp, email }),
