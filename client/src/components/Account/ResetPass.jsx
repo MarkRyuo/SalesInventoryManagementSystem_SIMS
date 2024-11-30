@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { collection, query, where, getDocs, updateDoc } from "firebase/firestore";
@@ -18,21 +16,36 @@ const ResetPass = () => {
     const [otpVerified, setOtpVerified] = useState(false); // State for OTP verification
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    
 
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+    // Function to check if email exists in the database
+    const checkEmailExists = async () => {
+        const adminsCollection = collection(db, 'admins');
+        const q = query(adminsCollection, where('email', '==', email)); // Search by email
+        const querySnapshot = await getDocs(q);
+        return !querySnapshot.empty; // Return true if email exists, false otherwise
+    };
 
     const handleSendOtp = async () => {
-        if (!validateEmail(email)) {  // Use email validation instead of phone number validation
+        if (!validateEmail(email)) {
             setError('Invalid email address');
             return;
         }
+
+        // Check if email exists in the database
+        const emailExists = await checkEmailExists();
+        if (!emailExists) {
+            setError('Email not found');
+            return;
+        }
+
+        // If email exists, proceed with sending OTP
         try {
             const response = await fetch('http://localhost:5001/salesinventorymanagement-1bb27/us-central1/api/generate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email }), // Use email here
+                body: JSON.stringify({ email }),
             });
 
             const result = await response.json();
@@ -53,7 +66,7 @@ const ResetPass = () => {
             const response = await fetch('http://localhost:5001/salesinventorymanagement-1bb27/us-central1/api/validate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ otp, email }), // Use email here
+                body: JSON.stringify({ otp, email }),
             });
 
             const result = await response.json();
@@ -103,7 +116,6 @@ const ResetPass = () => {
         }
     };
 
-
     return (
         <Container fluid style={{ background: "radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
             <Row className={ResetPassScss.rowContainer}>
@@ -141,7 +153,6 @@ const ResetPass = () => {
                                         value={otp}
                                         onChange={(e) => setOtp(e.target.value)}
                                     />
-
                                 </Form.Group>
                                 <Button variant="primary" onClick={handleVerifyOtp} className="w-100 mb-3">
                                     Verify OTP
