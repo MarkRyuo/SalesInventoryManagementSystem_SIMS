@@ -54,7 +54,7 @@ function Chart1() {
     return (
         <div className={StaffChartcss.containerChart1}>
             <h5>Stock Movement</h5>
-            <div className={Chartcss.contentChart1}>
+            <div className={StaffChartcss.contentChart1}>
                 {loading ? (
                     <Spinner animation="grow" variant="success" /> // Show spinner while loading
                 ) : (
