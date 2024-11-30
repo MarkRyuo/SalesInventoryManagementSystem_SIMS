@@ -222,7 +222,7 @@ const ResetPass = () => {
 
             <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)} centered>
                 <Modal.Header className='bg-danger'>
-                    <Modal.Title>Error</Modal.Title>
+                    <Modal.Title className='text-light'>Error</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{error}</Modal.Body>
             </Modal>
