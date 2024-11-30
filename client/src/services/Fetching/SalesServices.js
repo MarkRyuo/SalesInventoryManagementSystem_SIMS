@@ -8,53 +8,43 @@ const isTransactionInRange = (transactionDate, range) => {
 
     switch (range) {
         case 'today':
-            // For today, check if the transaction's date matches today's date (ignoring time)
             return transactionTime.toDateString() === now.toDateString();
         case 'week':
-            // Calculate the start of the current week (Sunday)
             const startOfWeek = new Date(now);
-            startOfWeek.setDate(now.getDate() - now.getDay()); // Set to Sunday
-            startOfWeek.setHours(0, 0, 0, 0); // Reset time to 00:00
+            startOfWeek.setDate(now.getDate() - now.getDay());
+            startOfWeek.setHours(0, 0, 0, 0);
 
-            // Calculate the end of the week (Saturday)
             const endOfWeek = new Date(startOfWeek);
-            endOfWeek.setDate(startOfWeek.getDate() + 6); // Saturday
-            endOfWeek.setHours(23, 59, 59, 999); // Set to the last millisecond of Saturday
+            endOfWeek.setDate(startOfWeek.getDate() + 6);
+            endOfWeek.setHours(23, 59, 59, 999);
 
-            // Check if the transaction date is within the range of this week
             return transactionTime >= startOfWeek && transactionTime <= endOfWeek;
         case 'month':
-            // Check if the transaction is in the current month and year
             return transactionTime.getMonth() === now.getMonth() && transactionTime.getFullYear() === now.getFullYear();
         case 'year':
-            // Check if the transaction is in the current year
             return transactionTime.getFullYear() === now.getFullYear();
         default:
             return false;
     }
 };
 
-
 export const fetchSalesData = async (range) => {
     const db = getDatabase();
     const transactionHistoryRef = ref(db, 'TransactionHistory');
-    const salesData = { totalQuantity: [], totalSales: [] };
+    const salesData = { totalSales: [] };  // Removed totalQuantity
 
     try {
         const snapshot = await get(transactionHistoryRef);
         if (snapshot.exists()) {
             const transactions = snapshot.val();
 
-            // Loop through each transaction to filter and aggregate the sales data
             Object.keys(transactions).forEach(transactionId => {
                 const transaction = transactions[transactionId];
                 const transactionDate = transaction.date;
-                const totalAmount = parseFloat(transaction.total); // Get total amount (sales)
-                const quantity = transaction.totalQuantity; // Get total quantity sold
+                const totalAmount = parseFloat(transaction.total);
 
                 if (isTransactionInRange(transactionDate, range)) {
-                    salesData.totalQuantity.push(quantity);  // Add to total quantity
-                    salesData.totalSales.push(totalAmount);  // Add to total sales amount
+                    salesData.totalSales.push(totalAmount);  // Only adding total sales amount
                 }
             });
 
@@ -62,7 +52,7 @@ export const fetchSalesData = async (range) => {
             return salesData;
         } else {
             console.log("No transactions found.");
-            return salesData;  // Return empty data if no transactions
+            return salesData;
         }
     } catch (error) {
         console.error("Error fetching transactions:", error);
