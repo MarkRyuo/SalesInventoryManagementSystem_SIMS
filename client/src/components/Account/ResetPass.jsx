@@ -134,7 +134,7 @@ const ResetPass = () => {
                 <Col xs={12} md={8} lg={4} className={ResetPassScss.colContainer}>
                     <div><PiShieldWarningFill size={70} /></div>
                     <h2 className="mb-2 text-center">Forgot Password</h2>
-                    <p className='fs-6 m-0 text-center'>Enter your Email and we'll send you an OTP to reset your password.</p>
+                    <p className='fs-6 m-0 text-center w-65'>Enter your Email and we'll send you an OTP to reset your password.</p>
 
                     <Form>
                         {!otpSent && !otpVerified && (
@@ -157,7 +157,7 @@ const ResetPass = () => {
 
                         {otpSent && !otpVerified && (
                             <>
-                                <Form.Group controlId="otp" className="mb-3 mt-4">
+                                <Form.Group controlId="otp" className="mb-3 mt-2">
                                     <Form.Label>Enter OTP</Form.Label>
                                     <Form.Control
                                         type="text"
