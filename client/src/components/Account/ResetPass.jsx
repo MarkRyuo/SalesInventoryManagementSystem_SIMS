@@ -1,11 +1,10 @@
-/* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
-import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Modal, Spinner } from 'react-bootstrap';
 import { collection, query, where, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../services/firebase"; // Ensure this points to your Firebase config
 import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
 import ResetPassScss from './ResetPass.module.scss';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { IoArrowBack } from "react-icons/io5";
 import { PiShieldWarningFill } from "react-icons/pi";
 
@@ -19,6 +18,8 @@ const ResetPass = () => {
     const [success, setSuccess] = useState('');
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [loading, setLoading] = useState(false); // State for loading spinner
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -45,6 +46,9 @@ const ResetPass = () => {
             return;
         }
 
+        // Show loading spinner while sending OTP
+        setLoading(true);
+
         // If email exists, proceed with sending OTP
         try {
             const response = await fetch('http://localhost:5001/salesinventorymanagement-1bb27/us-central1/api/generate-otp', {
@@ -58,13 +62,19 @@ const ResetPass = () => {
                 setOtpSent(true);
                 setSuccess('OTP sent successfully!');
                 setShowSuccessModal(true);
+                setLoading(false); // Stop the loading spinner
+                setTimeout(() => setShowSuccessModal(false), 2000); // Hide success modal after 2 seconds
             } else {
                 setError(result.error);
                 setShowErrorModal(true);
+                setLoading(false); // Stop the loading spinner
+                setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
             }
         } catch (error) {
             setError('Error sending OTP.');
             setShowErrorModal(true);
+            setLoading(false); // Stop the loading spinner
+            setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
         }
     };
 
@@ -81,13 +91,16 @@ const ResetPass = () => {
                 setSuccess('OTP verified successfully!');
                 setShowSuccessModal(true);
                 setOtpVerified(true); // OTP verified, now show the new password input
+                setTimeout(() => setShowSuccessModal(false), 2000); // Hide success modal after 2 seconds
             } else {
                 setError(result.error);
                 setShowErrorModal(true);
+                setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
             }
         } catch (error) {
             setError('Error verifying OTP.');
             setShowErrorModal(true);
+            setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
         }
     };
 
@@ -95,6 +108,7 @@ const ResetPass = () => {
         if (!newPassword) {
             setError('Password is required');
             setShowErrorModal(true);
+            setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
             return;
         }
 
@@ -110,6 +124,7 @@ const ResetPass = () => {
             if (querySnapshot.empty) {
                 setError('Email not found');
                 setShowErrorModal(true);
+                setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
                 return;
             }
 
@@ -121,10 +136,17 @@ const ResetPass = () => {
 
             setSuccess('Password reset successfully!');
             setShowSuccessModal(true);
+            setTimeout(() => setShowSuccessModal(false), 2000); // Hide success modal after 2 seconds
+
+            // Redirect to login page after successful reset
+            setTimeout(() => {
+                navigate('/LoginPage');
+            }, 2000); // Wait for 2 seconds before redirecting
         } catch (error) {
             console.error('Error resetting password:', error);
             setError('Error resetting password.');
             setShowErrorModal(true);
+            setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
         }
     };
 
@@ -151,7 +173,7 @@ const ResetPass = () => {
 
                         {!otpSent && (
                             <Button variant="primary" onClick={handleSendOtp} className="w-100">
-                                Send OTP
+                                {loading ? <Spinner animation="grow" variant="light" size="sm" /> : 'Send OTP'}
                             </Button>
                         )}
 
@@ -189,34 +211,24 @@ const ResetPass = () => {
                             </>
                         )}
                     </Form>
-                    <Link to={"/"} style={{ textDecoration: 'none', color: '#130e01' }}><IoArrowBack />Back to Login</Link>
+                    <Link to={"/"} className="btn btn-link w-100 mt-3" style={{ color: "#444444", fontSize: "13px" }}>
+                        <IoArrowBack /> Back to Login
+                    </Link>
                 </Col>
             </Row>
 
-            {/* Error Modal */}
-            <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)}>
+            <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{error}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowErrorModal(false)}>
-                        Close
-                    </Button>
-                </Modal.Footer>
             </Modal>
 
-            {/* Success Modal */}
-            <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+            <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Success</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{success}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowSuccessModal(false)}>
-                        Close
-                    </Button>
-                </Modal.Footer>
             </Modal>
         </Container>
     );
