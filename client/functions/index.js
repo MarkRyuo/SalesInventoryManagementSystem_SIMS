@@ -10,7 +10,7 @@ const logger = require("firebase-functions/logger");
 
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const cors = require("cors")({origin: true});
+const cors = require("cors");
 const {jsPDF} = require("jspdf");
 const qr = require("qrcode"); // For QR code generation
 
