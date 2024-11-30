@@ -122,7 +122,11 @@ const ProfileComp = () => {
 
             const result = await response.json();
             if (response.ok) {
+                setOtpSent(false);  // Reset OTP sent status
                 alert('OTP verified successfully!');
+
+                // After OTP verification, automatically save the updated email to Firebase
+                await handleSave();
             } else {
                 alert(result.error);
             }
@@ -130,6 +134,7 @@ const ProfileComp = () => {
             console.error('Error verifying OTP:', error);
         }
     };
+
 
     return (
         <Form className={ProfileCompScss.contentAccount}>
@@ -208,7 +213,7 @@ const ProfileComp = () => {
                 </Form.Group>
 
                 <Button
-                    variant=""
+                    variant="primary"
                     onClick={handleSendOtp}
                     disabled={otpSent || !isEditing}>
                     Send OTP
