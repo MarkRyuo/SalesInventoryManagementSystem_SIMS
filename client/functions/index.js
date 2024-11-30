@@ -111,84 +111,79 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
 
 
 require('dotenv').config();
-const express = require('express');
 const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
 
-const app = express();
+// CORS handler to allow all origins for testing or specify domains
+const corsHandler = cors({ origin: true }); // Allow all origins or specify your frontend domain
 
-// Configure CORS to allow requests from your frontend domain
-app.use(cors({
-  origin: [
-    "https://salesinventorymanagement-1bb27.web.app", // Another local dev URL
-  ],
-  methods: ['GET', 'POST'], // Allow only POST and GET requests
-  allowedHeaders: ['Content-Type'], // Allow only Content-Type header
-}));
+// Temporary store for OTPs
+const otps = {};
 
-// Body parser middleware
-app.use(bodyParser.json());
-
-const otps = {}; // Store OTPs temporarily
-
-// Nodemailer transporter
+// Nodemailer transporter setup for Gmail
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   host: 'smtp.gmail.com',
   port: 465, // Use port 465 for secure connection
   secure: true, // Set to true for SSL
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: process.env.EMAIL_USER, // Your email address from environment variables
+    pass: process.env.EMAIL_PASS, // Your email password from environment variables
   },
 });
 
-// Generate OTP endpoint
-app.post('/generate-otp', async (req, res) => {
-  const { email } = req.body;
-  const otp = Math.floor(100000 + Math.random() * 900000).toString();
-  otps[email] = otp;
+// Cloud Function to generate OTP and send via email
+exports.generateOtp = functions.https.onRequest((req, res) => {
+  corsHandler(req, res, async () => {
+    const { email } = req.body; // Get the email from the request body
+    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a random 6-digit OTP
 
-  try {
-    // Attempt to send the email
-    await transporter.sendMail({
-      from: 'salesinventorymanagementsystem@gmail.com', // Your email address
-      to: email,
-      subject: 'Your OTP',
-      text: `Hello,
+    // Store OTP temporarily
+    otps[email] = otp;
 
-      Your One-Time Password (OTP) for verifying is: ${otp}
-      
-      Please use this code to complete your verification process. The OTP is valid for a short time only.
+    try {
+      // Attempt to send the OTP email
+      await transporter.sendMail({
+        from: 'salesinventorymanagementsystem@gmail.com', // Your email address
+        to: email, // Recipient email
+        subject: 'Your OTP for Verification',
+        text: `Hello,
 
-      Best regards,  
-      Sales Inventory Management System Team`,
-    });
-    res.status(200).send({ message: 'OTP sent' });
-  } catch (err) {
-    // Log the error for debugging
-    console.error('Error sending email:', err);
+        Your One-Time Password (OTP) for verifying is: ${otp}
+        
+        Please use this code to complete your verification process. The OTP is valid for a short time only.
 
-    // Send a detailed error message to the client
-    res.status(500).send({
-      error: 'Failed to send OTP',
-      details: err.message || 'Unknown error',
-    });
-  }
+        Best regards,
+        Sales Inventory Management System Team`,
+      });
+
+      // Respond with a success message
+      res.status(200).send({ message: 'OTP sent successfully' });
+    } catch (err) {
+      // Log and return error details if sending email fails
+      console.error('Error sending OTP email:', err);
+      res.status(500).send({
+        error: 'Failed to send OTP',
+        details: err.message || 'Unknown error',
+      });
+    }
+  });
 });
 
+// Cloud Function to validate OTP
+exports.validateOtp = functions.https.onRequest((req, res) => {
+  corsHandler(req, res, async () => {
+    const { email, otp } = req.body;
 
-// Validate OTP endpoint
-app.post('/validate-otp', (req, res) => {
-  const { email, otp } = req.body;
-  if (otps[email] === otp) {
-    delete otps[email];
-    res.status(200).send({ message: 'OTP verified' });
-  } else {
-    res.status(400).send({ error: 'Invalid OTP' });
-  }
+    // Check if OTP matches
+    if (otps[email] === otp) {
+      // OTP is valid, delete it to prevent reuse
+      delete otps[email];
+      res.status(200).send({ message: 'OTP verified successfully' });
+    } else {
+      // OTP is invalid
+      res.status(400).send({ error: 'Invalid OTP' });
+    }
+  });
 });
 
-// Firebase function to handle the Express app
-exports.api = functions.https.onRequest(app);
 
