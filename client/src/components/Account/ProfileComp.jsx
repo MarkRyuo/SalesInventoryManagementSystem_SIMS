@@ -259,7 +259,7 @@ const ProfileComp = () => {
                     </>
                 )}
             </div>
-            <Link to={'/ResetPassAccount'} className='ps-2' style={{textDecoration: 'none'}}>
+            <Link to={'/ResetPassAccount'} className='ps-2' style={{textDecoration: 'none', fontSize: '1rem'}}>
                 Reset Password?
             </Link>
         </Form>
