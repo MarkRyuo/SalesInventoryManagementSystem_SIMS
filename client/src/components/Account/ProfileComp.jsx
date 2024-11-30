@@ -85,7 +85,7 @@ const ProfileComp = () => {
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:5001/salesinventorymanagement-1bb27/us-central1/api/generate-otp', {
+            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/generateOtp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: userData.email }),
@@ -105,7 +105,7 @@ const ProfileComp = () => {
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/generate-otp', {
+            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/validateOtp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: userData.email, otp }),
