@@ -121,7 +121,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173", // Frontend local dev URL
-    "http://127.0.0.1:5001", // Another local dev URL
+    "https://salesinventorymanagement-1bb27.web.app", // Another local dev URL
   ],
   methods: ['GET', 'POST'], // Allow only POST and GET requests
   allowedHeaders: ['Content-Type'], // Allow only Content-Type header

@@ -53,7 +53,7 @@ const ResetPass = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:5001/salesinventorymanagement-1bb27/us-central1/api/generate-otp', {
+            const response = await fetch('https://salesinventorymanagement-1bb27.web.app/generate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
@@ -82,7 +82,7 @@ const ResetPass = () => {
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('http://localhost:5001/salesinventorymanagement-1bb27/us-central1/api/validate-otp', {
+            const response = await fetch('https://salesinventorymanagement-1bb27.web.app/validate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ otp, email }),
