@@ -7,6 +7,12 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 // Register the components with Chart.js
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
+// Function to format the date (e.g., "Oct 01")
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString([], { day: '2-digit', month: 'short' });  // 'Oct 01' format
+};
+
 function ChartLg3() {
     const [salesData, setSalesData] = useState({ totalSales: [], dates: [] });
     const [selectedRange, setSelectedRange] = useState('today');  // Default to 'today'
@@ -32,7 +38,7 @@ function ChartLg3() {
 
     // Chart data setup
     const chartData = {
-        labels: salesData.dates, // Use fetched dates as labels
+        labels: salesData.dates.map(date => formatDate(date)),  // Format the dates
         datasets: [
             {
                 label: 'Total Sales (₱)',
@@ -47,21 +53,22 @@ function ChartLg3() {
 
     // Chart options
     const chartOptions = {
-        responsive: true,
+        responsive: true,  // Ensures the chart is responsive
+        maintainAspectRatio: false,  // Allow the chart to adjust to container size
         scales: {
             x: {
                 ticks: {
-                    autoSkip: true, // Skip some labels if needed
-                    maxRotation: 0, // Keep labels horizontal
-                    minRotation: 0, // No rotation
-                    padding: 10, // Add space between labels
+                    autoSkip: true,  // Skip some labels if necessary
+                    maxRotation: 45,  // Rotate labels to 45 degrees for better readability
+                    minRotation: 45,  // Maintain the 45 degrees rotation
+                    padding: 10,  // Space between labels
                 },
             },
             y: {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'Amount (₱)', // Change Y-axis label to reflect only sales
+                    text: 'Amount (₱)',  // Y-axis label
                 },
             },
         },
@@ -74,7 +81,7 @@ function ChartLg3() {
                     label: (context) => {
                         const label = context.dataset.label || '';
                         const value = context.raw;
-                        return `${label}: ₱${value.toLocaleString()}`;
+                        return `${label}: ₱${value.toLocaleString()}`;  // Format the value with a currency symbol
                     },
                 },
             },
@@ -96,6 +103,5 @@ function ChartLg3() {
         </div>
     );
 }
-
 
 export default ChartLg3;
