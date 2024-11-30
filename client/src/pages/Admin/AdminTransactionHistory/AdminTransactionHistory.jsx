@@ -83,7 +83,7 @@ function AdminTransactionHistory() {
         doc.text(`Order Date: ${order.date}`, 10, 40);
 
         // Customer info (aligned to the left)
-        doc.text(`Sold To: ${order.customerName}`, 10, 45);
+        doc.text(`Sold To: ${order.customerName}`, 10, 55);
 
         // Separator Line
         doc.line(10, 65, 200, 65); // Draw line to separate items and total
@@ -112,14 +112,14 @@ function AdminTransactionHistory() {
         // Totals (aligned to the left)
         yPosition += 10;
         doc.text(`Subtotal: ${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
-        doc.text(`Tax: ${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
-        doc.text(`Discount: -${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
-        doc.text(`Payment Amount: ${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
-        doc.text(`Change: ${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
+        doc.text(`Tax: ${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 7);
+        doc.text(`Discount: -${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 14);
+        doc.text(`Payment Amount: ${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 21);
+        doc.text(`Change: ${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 28);
 
         doc.setFontSize(12);
         doc.setFont('courier', 'bold');
-        doc.text(`Total Amount: ${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
+        doc.text(`Total Amount: ${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 36);
 
         // QR Code (aligned to the left)
         const qrCanvas = qrRef.current;
@@ -130,7 +130,7 @@ function AdminTransactionHistory() {
 
         // Footer (centered)
         doc.setFontSize(10);
-        doc.setFont('helvetica', 'italic');
+        doc.setFont('courier', 'italic');
         doc.text('This is not official Receipt!', 105, yPosition + 80, { align: 'center' });  // Centered footer text
 
         // Save as PDF
