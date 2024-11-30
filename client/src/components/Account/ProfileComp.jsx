@@ -18,7 +18,6 @@ const ProfileComp = () => {
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
-    const [isEmailChanging, setIsEmailChanging] = useState(false); // To manage email change process
     const adminId = localStorage.getItem('adminId');
 
     const handleGenderSelect = (eventKey) => {
@@ -118,18 +117,12 @@ const ProfileComp = () => {
 
                 // After OTP verification, update the email and save the profile
                 await handleSave();
-                setIsEmailChanging(false); // Stop email change process
             } else {
                 alert(result.error);
             }
         } catch (error) {
             console.error('Error verifying OTP:', error);
         }
-    };
-
-    const handleChangeEmailClick = () => {
-        setIsEmailChanging(true);
-        setIsEditing(true);
     };
 
     return (
@@ -194,7 +187,7 @@ const ProfileComp = () => {
                     <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
                 </DropdownButton>
             </InputGroup>
-            
+
             <div className={ProfileCompScss.buttonss}>
                 <Button
                     variant='info'
@@ -220,37 +213,22 @@ const ProfileComp = () => {
                         name="email"
                         value={userData.email}
                         onChange={handleInputChange}
-                        disabled={!isEditing || isEmailChanging}  // Disable when changing email
+                        disabled={!isEditing || !!userData.email} // Disable if editing is false or if email already exists
                         className={ProfileCompScss.Email}
                     />
                 </Form.Group>
 
-                {!userData.email && !isEmailChanging && (
-                    <Button
-                        variant="warning"
-                        onClick={handleSendOtp}
-                        disabled={otpSent || !isEditing}>
-                        Send OTP to Set Email
-                    </Button>
-                )}
 
-                {userData.email && !isEmailChanging && (
-                    <Button
-                        variant="warning"
-                        onClick={handleChangeEmailClick}
-                        disabled={isEmailChanging || !isEditing}>
-                        Change Email
-                    </Button>
-                )}
-
-                {isEmailChanging && (
+                {userData.email && (
                     <>
-                        <Button
-                            variant="primary"
-                            onClick={handleSendOtp}
-                            disabled={otpSent || !isEditing}>
-                            Send OTP
-                        </Button>
+                        {!otpSent && (
+                            <Button
+                                variant="primary"
+                                onClick={handleSendOtp}
+                                disabled={otpSent || !isEditing}>
+                                Send OTP
+                            </Button>
+                        )}
 
                         {otpSent && (
                             <>
