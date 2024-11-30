@@ -101,8 +101,8 @@ function AdminTransactionHistory() {
         order.items.forEach(item => {
             doc.text(item.productName, 10, yPosition);
             doc.text(item.quantity.toString(), 100, yPosition, { align: "center" });
-            doc.text(`₱${parseFloat(item.price).toFixed(2)}`, 140, yPosition, { align: "right" });
-            doc.text(`₱${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, { align: "right" });
+            doc.text(`${parseFloat(item.price).toFixed(2)}`, 140, yPosition, { align: "right" });
+            doc.text(`${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, { align: "right" });
             yPosition += 10;
         });
 
@@ -111,15 +111,15 @@ function AdminTransactionHistory() {
 
         // Totals (aligned to the left)
         yPosition += 10;
-        doc.text(`Subtotal: ₱${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
-        doc.text(`Tax: ₱${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
-        doc.text(`Discount: -₱${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
-        doc.text(`Payment Amount: ₱${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
-        doc.text(`Change: ₱${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
+        doc.text(`Subtotal: ${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
+        doc.text(`Tax: ${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
+        doc.text(`Discount: -${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
+        doc.text(`Payment Amount: ${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
+        doc.text(`Change: ${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
 
-        doc.setFontSize(14);
+        doc.setFontSize(12);
         doc.setFont('courier', 'bold');
-        doc.text(`Total Amount: ₱${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
+        doc.text(`Total Amount: ${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
 
         // QR Code (aligned to the left)
         const qrCanvas = qrRef.current;
