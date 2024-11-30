@@ -138,7 +138,7 @@ const ResetPass = () => {
             setTimeout(() => setShowSuccessModal(false), 2000); // Close modal after 3 seconds
 
             setTimeout(() => {
-                navigate('/LoginPage');
+                navigate('/AccountPage');
             }, 2000);
         } catch (error) {
             console.error('Error resetting password:', error);
@@ -155,7 +155,7 @@ const ResetPass = () => {
                 <Col xs={12} md={8} lg={4} className={ResetPassScss.colContainer}>
                     <div><IoShieldCheckmarkSharp size={70}/></div>
                     <h2 className="mb-2 text-center">Reset Password</h2>
-                    <p className='fs-6 m-0 text-center w-65'>Enter your Email and we'll send you an OTP to reset your password.</p>
+                    <p className='fs-6 m-0 text-center w-65'>Enter the Email and we'll send you an OTP to reset your password.</p>
 
                     <Form>
                         {!otpSent && !otpVerified && (
