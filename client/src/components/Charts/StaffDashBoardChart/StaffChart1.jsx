@@ -1,42 +1,64 @@
 import { useState, useEffect } from 'react';
-import StaffChartcss from './StaffCharts.module.scss'
-import { getProductQuantityHistory, filterQuantityByRange } from '../../../services/Fetching/StockInServices'; // Import the functions
+import StaffChartcss from './StaffCharts.module.scss';
+import { filterQuantityByRange } from '../../../services/Fetching/StockInServices';
 import Spinner from 'react-bootstrap/Spinner'; // Import Spinner from React-Bootstrap
+import { getDatabase, ref, onValue } from 'firebase/database'; // Firebase Realtime Database imports
 
-// Chart1 Small component to display quantity data for the selected time range
 function Chart1() {
     const [quantity, setQuantity] = useState(0);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const fetchQuantity = async () => {
+        const db = getDatabase(); // Initialize Firebase Realtime Database
+
+        // Firebase reference to the products node
+        const productsRef = ref(db, 'products');
+
+        // Real-time listener to fetch and update quantity when the data changes
+        const quantityListener = onValue(productsRef, (snapshot) => {
             setLoading(true); // Show loading indicator
             try {
-                const quantityHistories = await getProductQuantityHistory();
-                const totalQuantity = filterQuantityByRange(quantityHistories, 'Today');
-                setQuantity(totalQuantity);
+                if (snapshot.exists()) {
+                    const productsData = snapshot.val();
+                    console.log("All products data found:", productsData); // Log products data for debugging
+                    const quantityHistories = [];
+
+                    // Loop through each product and get its quantity history
+                    for (let productId in productsData) {
+                        const productData = productsData[productId];
+                        const quantityHistory = productData.quantityHistory || [];
+                        quantityHistories.push({ productId, quantityHistory });
+                    }
+
+                    // Filter the quantity based on 'Today'
+                    const totalQuantity = filterQuantityByRange(quantityHistories, 'Today');
+                    setQuantity(totalQuantity); // Update the state with filtered quantity
+                } else {
+                    console.error("No product data found.");
+                    setQuantity(0);
+                }
             } catch (error) {
                 console.error('Error fetching quantity:', error);
             } finally {
                 setLoading(false); // Hide loading indicator
             }
+        });
+
+        // Cleanup the listener on component unmount
+        return () => {
+            // Remove the real-time listener when the component unmounts
+            quantityListener();
         };
-
-        // Fetch initial quantity and set up polling for live updates
-        fetchQuantity();
-        const interval = setInterval(fetchQuantity, 5000); // Update every 5 seconds
-
-        return () => clearInterval(interval); // Cleanup on component unmount
     }, []);
 
     return (
         <div className={StaffChartcss.containerChart1}>
-            <h5>Total Stock</h5>
-            <div className={StaffChartcss.contentChart1}>
+            <h5>Stock Movement</h5>
+            <div className={Chartcss.contentChart1}>
                 {loading ? (
-                    <Spinner animation="grow" variant="success" /> // Show spinner
+                    <Spinner animation="grow" variant="success" /> // Show spinner while loading
                 ) : (
-                    <p>{quantity}</p> // Show quantity when not loading
+                    <p>{quantity}</p> // Display total quantity after loading
                 )}
             </div>
         </div>
