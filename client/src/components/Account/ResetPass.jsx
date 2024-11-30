@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
 import { Form, Button, Container, Row, Col, Modal, Spinner } from 'react-bootstrap';
 import { collection, query, where, getDocs, updateDoc } from "firebase/firestore";
@@ -8,11 +7,13 @@ import ResetPassScss from './ResetPass.module.scss';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { IoArrowBack } from "react-icons/io5";
 import { PiShieldWarningFill } from "react-icons/pi";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; // Import eye icons
 
 const ResetPass = () => {
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false); // State for toggling password visibility
     const [otpSent, setOtpSent] = useState(false);
     const [otpVerified, setOtpVerified] = useState(false); // State for OTP verification
     const [error, setError] = useState('');
@@ -24,12 +25,11 @@ const ResetPass = () => {
 
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    // Function to check if email exists in the database
     const checkEmailExists = async () => {
         const adminsCollection = collection(db, 'admins');
-        const q = query(adminsCollection, where('email', '==', email)); // Search by email
+        const q = query(adminsCollection, where('email', '==', email));
         const querySnapshot = await getDocs(q);
-        return !querySnapshot.empty; // Return true if email exists, false otherwise
+        return !querySnapshot.empty;
     };
 
     const handleSendOtp = async () => {
@@ -39,7 +39,6 @@ const ResetPass = () => {
             return;
         }
 
-        // Check if email exists in the database
         const emailExists = await checkEmailExists();
         if (!emailExists) {
             setError('Email not found');
@@ -47,10 +46,8 @@ const ResetPass = () => {
             return;
         }
 
-        // Show loading spinner while sending OTP
         setLoading(true);
 
-        // If email exists, proceed with sending OTP
         try {
             const response = await fetch('http://localhost:5001/salesinventorymanagement-1bb27/us-central1/api/generate-otp', {
                 method: 'POST',
@@ -63,19 +60,19 @@ const ResetPass = () => {
                 setOtpSent(true);
                 setSuccess('OTP sent successfully!');
                 setShowSuccessModal(true);
-                setLoading(false); // Stop the loading spinner
-                setTimeout(() => setShowSuccessModal(false), 2000); // Hide success modal after 2 seconds
+                setLoading(false);
+                setTimeout(() => setShowSuccessModal(false), 2000);
             } else {
                 setError(result.error);
                 setShowErrorModal(true);
-                setLoading(false); // Stop the loading spinner
-                setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
+                setLoading(false);
+                setTimeout(() => setShowErrorModal(false), 2000);
             }
         } catch (error) {
             setError('Error sending OTP.');
             setShowErrorModal(true);
-            setLoading(false); // Stop the loading spinner
-            setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
+            setLoading(false);
+            setTimeout(() => setShowErrorModal(false), 2000);
         }
     };
 
@@ -91,17 +88,17 @@ const ResetPass = () => {
             if (response.ok) {
                 setSuccess('OTP verified successfully!');
                 setShowSuccessModal(true);
-                setOtpVerified(true); // OTP verified, now show the new password input
-                setTimeout(() => setShowSuccessModal(false), 2000); // Hide success modal after 2 seconds
+                setOtpVerified(true);
+                setTimeout(() => setShowSuccessModal(false), 2000);
             } else {
                 setError(result.error);
                 setShowErrorModal(true);
-                setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
+                setTimeout(() => setShowErrorModal(false), 2000);
             }
         } catch (error) {
             setError('Error verifying OTP.');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
+            setTimeout(() => setShowErrorModal(false), 2000);
         }
     };
 
@@ -109,27 +106,24 @@ const ResetPass = () => {
         if (!newPassword) {
             setError('Password is required');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
+            setTimeout(() => setShowErrorModal(false), 2000);
             return;
         }
 
         try {
-            // Hash the new password using bcrypt before saving it
             const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-            // Query Firestore for the admin with the matching email
             const adminsCollection = collection(db, 'admins');
-            const q = query(adminsCollection, where('email', '==', email)); // Search by email
+            const q = query(adminsCollection, where('email', '==', email));
             const querySnapshot = await getDocs(q);
 
             if (querySnapshot.empty) {
                 setError('Email not found');
                 setShowErrorModal(true);
-                setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
+                setTimeout(() => setShowErrorModal(false), 2000);
                 return;
             }
 
-            // Update the password for the matched document
             for (const doc of querySnapshot.docs) {
                 const adminRef = doc.ref;
                 await updateDoc(adminRef, { password: hashedPassword });
@@ -137,17 +131,16 @@ const ResetPass = () => {
 
             setSuccess('Password reset successfully!');
             setShowSuccessModal(true);
-            setTimeout(() => setShowSuccessModal(false), 2000); // Hide success modal after 2 seconds
+            setTimeout(() => setShowSuccessModal(false), 2000);
 
-            // Redirect to login page after successful reset
             setTimeout(() => {
                 navigate('/LoginPage');
-            }, 2000); // Wait for 2 seconds before redirecting
+            }, 2000);
         } catch (error) {
             console.error('Error resetting password:', error);
             setError('Error resetting password.');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 2000); // Hide error modal after 2 seconds
+            setTimeout(() => setShowErrorModal(false), 2000);
         }
     };
 
@@ -199,12 +192,21 @@ const ResetPass = () => {
                             <>
                                 <Form.Group controlId="newPassword" className="mb-3">
                                     <Form.Label>New Password</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        placeholder="Enter new password"
-                                        value={newPassword}
-                                        onChange={(e) => setNewPassword(e.target.value)}
-                                    />
+                                    <div className="d-flex align-items-center">
+                                        <Form.Control
+                                            type={passwordVisible ? 'text' : 'password'}
+                                            placeholder="Enter new password"
+                                            value={newPassword}
+                                            onChange={(e) => setNewPassword(e.target.value)}
+                                        />
+                                        <span
+                                            className="ms-2"
+                                            style={{ cursor: 'pointer' }}
+                                            onClick={() => setPasswordVisible(!passwordVisible)}
+                                        >
+                                            {passwordVisible ? <AiFillEyeInvisible size={20} /> : <AiFillEye size={20} />}
+                                        </span>
+                                    </div>
                                 </Form.Group>
                                 <Button variant="success" onClick={handleResetPassword} className="w-100">
                                     Reset Password
@@ -226,9 +228,6 @@ const ResetPass = () => {
             </Modal>
 
             <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
-                <Modal.Header>
-                    <Modal.Title>Success</Modal.Title>
-                </Modal.Header>
                 <Modal.Body>{success}</Modal.Body>
             </Modal>
         </Container>
