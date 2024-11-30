@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import { useState, useEffect } from 'react';
 import Chartcss from './Charts.module.scss';
 import { fetchSalesData } from '../../../services/Fetching/SalesServices';  // Import fetchSalesData function
@@ -10,7 +9,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 function ChartLg3() {
     const [salesData, setSalesData] = useState({ totalSales: [], dates: [] });
-    const [selectedRange, setSelectedRange] = useState('today');  // Default to 'month'
+    const [selectedRange, setSelectedRange] = useState('today');  // Default to 'today'
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,57 +30,15 @@ function ChartLg3() {
         setSelectedRange(range);  // Update the range
     };
 
-    // Generate date labels for the x-axis
-    const generateDateLabels = (range) => {
-        const now = new Date();
-        let labels = [];
-        switch (range) {
-            case 'today':
-                // For today, generate labels for each hour of the day
-                for (let i = 0; i < 24; i++) {
-                    const hour = new Date(now.setHours(i, 0, 0, 0)); // Set hours and reset minutes, seconds, and ms
-                    labels.push(hour.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-                }
-                break;
-            case 'week':
-                const startOfWeek = new Date(now);
-                startOfWeek.setDate(now.getDate() - now.getDay()); // Set to Sunday
-                for (let i = 0; i < 7; i++) {
-                    const day = new Date(startOfWeek);
-                    day.setDate(startOfWeek.getDate() + i);
-                    labels.push(day.toLocaleDateString());
-                }
-                break;
-            case 'month':
-                const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-                const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-                for (let i = 0; i < daysInMonth; i++) {
-                    const day = new Date(startOfMonth);
-                    day.setDate(startOfMonth.getDate() + i);
-                    labels.push(day.toLocaleDateString());
-                }
-                break;
-            case 'year':
-                for (let i = 0; i < 12; i++) {
-                    const month = new Date(now.getFullYear(), i, 1);
-                    labels.push(month.toLocaleString('default', { month: 'short' }));
-                }
-                break;
-            default:
-                break;
-        }
-        return labels;
-    };
-
     // Chart data setup
     const chartData = {
-        labels: generateDateLabels(selectedRange), // Use generated date labels
+        labels: salesData.dates, // Use fetched dates as labels
         datasets: [
             {
                 label: 'Total Sales (₱)',
                 data: salesData.totalSales, // Sales data
                 borderColor: 'rgba(170, 201, 255, 1)',
-                backgroundColor: 'rgba(170, 201, 255,0.2)',
+                backgroundColor: 'rgba(170, 201, 255, 0.2)',
                 fill: true,
                 tension: 0.4, // Smooth lines
             }
@@ -139,5 +96,6 @@ function ChartLg3() {
         </div>
     );
 }
+
 
 export default ChartLg3;
