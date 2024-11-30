@@ -4,6 +4,8 @@ import DashboardCss from './Dashboard.module.scss';
 import { useEffect, useState } from 'react';
 import { db } from '../../../services/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+
 
 //? Charts
 import Chart1 from '../../../components/Charts/DashboardChart/Chart1';
@@ -20,6 +22,8 @@ export const DashboardPage = () => {
     const [adminGender, setAdminGender] = useState('');
     const [currentDate, setCurrentDate] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         const fetchAdminData = async () => {
@@ -27,6 +31,7 @@ export const DashboardPage = () => {
                 const adminId = localStorage.getItem('adminId');
                 if (!adminId) {
                     console.error('Admin ID not found');
+                    navigate('/');
                     return;
                 }
 
@@ -64,7 +69,7 @@ export const DashboardPage = () => {
         const dateInterval = setInterval(updateDate, 1000); // Update date every second
 
         return () => clearInterval(dateInterval); // Clean up the interval on component unmount
-    }, []);
+    }, [navigate]);
 
     const getSalutation = (gender) => {
         if (gender.toLowerCase() === 'male') return 'Mr.';
