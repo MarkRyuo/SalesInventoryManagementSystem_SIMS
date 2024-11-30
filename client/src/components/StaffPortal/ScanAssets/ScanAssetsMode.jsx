@@ -58,11 +58,7 @@ function Checkout() {
     };
 
     const handleCheckout = async () => {
-        if (!customerName.trim()) {
-            setErrorMessage("Customer name is required.");
-            return;
-        }
-
+        // Remove the required check for customerName
         const zeroQuantityItem = scannedItems.find(item => item.quantity <= 0);
         if (zeroQuantityItem) {
             setErrorMessage(`Cannot proceed to checkout. ${zeroQuantityItem.productName} has a quantity of zero.`);
@@ -83,7 +79,7 @@ function Checkout() {
 
         const orderDetails = {
             date: currentDate,
-            customerName,
+            customerName: customerName || "Walk-in Customer", // Default to "Walk-in Customer" if empty
             items: scannedItems.map(item => ({
                 productId: item.productId,
                 productName: item.productName,
@@ -97,12 +93,12 @@ function Checkout() {
             discountPercentage,
             total: total.toFixed(2),
             totalQuantity,
-            paymentAmount: paymentAmount.toFixed(2),  // Add payment amount
-            change: change.toFixed(2),  // Add change
+            paymentAmount: paymentAmount.toFixed(2),
+            change: change.toFixed(2),
         };
 
         try {
-            await saveTransactionHistory(orderDetails);  // Save transaction with new fields
+            await saveTransactionHistory(orderDetails); // Save transaction
             console.log("Transaction saved successfully");
         } catch (error) {
             setErrorMessage(`Failed to save transaction. ${error.message}`);
@@ -115,11 +111,12 @@ function Checkout() {
                     await updateProductQuantity(item.barcode, -item.quantity); // Update stock
                 })
             );
-            navigate('/PosSuccess');  // Redirect to success page
+            navigate('/PosSuccess'); // Redirect to success page
         } catch (error) {
             setErrorMessage(`Failed to finalize checkout. ${error.message}`);
         }
     };
+
 
     return (
         <Container fluid className={ScanProductModeScss.MainComponent}>
