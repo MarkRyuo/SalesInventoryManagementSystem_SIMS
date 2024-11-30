@@ -201,6 +201,10 @@ const router = createBrowserRouter([
     path: "ResetPass",
     element: <ResetPass /> ,
   },
+  {
+    path: "ResetPassAccount",
+    element: <ResetPassAccount /> ,
+  },
 
 ]);
 
