@@ -53,7 +53,7 @@ const ResetPass = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/generate-otp', {
+            const response = await fetch('https://api-hqnwrfpmoa-uc.a.run.app/generate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
