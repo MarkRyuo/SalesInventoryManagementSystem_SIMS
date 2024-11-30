@@ -183,21 +183,27 @@ exports.validateOtp = functions.https.onRequest((req, res) => {
     // Trim spaces from OTP input
     const enteredOtp = otp.trim();
 
-    // Check if OTP exists and is valid
+    // Check if OTP exists for the email
     if (otps[email]) {
       const otpData = otps[email];
 
       // Check if OTP has expired
       if (Date.now() > otpData.expiresAt) {
         delete otps[email]; // Remove expired OTP
+        console.log(`OTP for ${email} has expired`);
         return res.status(400).send({ error: 'OTP has expired' });
       }
 
       // Check if OTP matches
       if (otpData.otp === enteredOtp) {
         delete otps[email]; // OTP is valid, delete to prevent reuse
+        console.log(`OTP for ${email} verified successfully`);
         return res.status(200).send({ message: 'OTP verified successfully' });
+      } else {
+        console.log(`Invalid OTP for ${email}`);
       }
+    } else {
+      console.log(`No OTP found for ${email}`);
     }
 
     // OTP is invalid
