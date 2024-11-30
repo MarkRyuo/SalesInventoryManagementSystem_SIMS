@@ -19,7 +19,6 @@ const ProfileComp = () => {
     });
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
-    const [otpVerified, setOtpVerified] = useState(false); // Track OTP verification status
 
     const [isEditing, setIsEditing] = useState(false);
     const adminId = localStorage.getItem('adminId');
@@ -123,7 +122,6 @@ const ProfileComp = () => {
 
             const result = await response.json();
             if (response.ok) {
-                setOtpVerified(true);  // Mark OTP as verified
                 alert('OTP verified successfully!');
             } else {
                 alert(result.error);
@@ -212,9 +210,29 @@ const ProfileComp = () => {
                 <Button
                     variant=""
                     onClick={handleSendOtp}
-                    disabled={otpSent || !isEditing || otpVerified}>
+                    disabled={otpSent || !isEditing}>
                     Send OTP
                 </Button>
+
+                {otpSent && (
+                    <>
+                        <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
+                            <Form.Label>Enter OTP</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="otp"
+                                value={otp}
+                                onChange={(e) => setOtp(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Button
+                            variant="primary"
+                            onClick={handleVerifyOtp}
+                            disabled={!otp}>
+                            Verify OTP
+                        </Button>
+                    </>
+                )}
             </div>
 
             <Form.Group className="password" controlId="password">
@@ -228,26 +246,6 @@ const ProfileComp = () => {
                     className={ProfileCompScss.Password}
                 />
             </Form.Group>
-
-            {otpSent && !otpVerified && (
-                <>
-                    <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
-                        <Form.Label>Enter OTP</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="otp"
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Button
-                        variant="primary"
-                        onClick={handleVerifyOtp}
-                        disabled={!otp}>
-                        Verify OTP
-                    </Button>
-                </>
-            )}
 
             <div className={ProfileCompScss.buttonss}>
                 <Button
