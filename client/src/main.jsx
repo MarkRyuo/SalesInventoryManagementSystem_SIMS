@@ -41,6 +41,7 @@ import LowStockReports from './components/Reports/LowStockReports.jsx';
 import StockInReports from './components/Reports/StockInReports.jsx';
 import TotalSalesReports from './components/Reports/TotalSalesReports.jsx'
 import ResetPass from './components/Account/ResetPass.jsx'
+import ResetPassAccount from './components/Account/ResetPassAccount.jsx';
 
 
 const router = createBrowserRouter([
@@ -200,6 +201,10 @@ const router = createBrowserRouter([
   {
     path: "ResetPass",
     element: <ResetPass /> ,
+  },
+  {
+    path: "ResetPassAccount",
+    element: <ResetPassAccount /> ,
   },
 
 ]);

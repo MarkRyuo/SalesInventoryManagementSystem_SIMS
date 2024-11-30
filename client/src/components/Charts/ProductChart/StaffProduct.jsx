@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { getAllProducts, getCategories } from "../../../services/ProductService";
 import SetCategory from "../../../pages/Admin/ProductPage/SetCategory";
 import SetDiscounts from "../../../pages/Admin/ProductPage/SetDiscounts";
-import SetTax from "../../../pages/Admin/ProductPage/SetTax";
 import { editProductInDatabase, deleteProduct } from '../../../services/ProductService';
 import { FaProductHunt } from "react-icons/fa";
 
@@ -175,9 +174,6 @@ function ProductChart() {
         <>
             <Row className="my-4">
                 <div className={Productcss.containerTop}>
-                    <div>
-                        <SetTax />
-                    </div>
                     <div>
                         <SetCategory />
                     </div>

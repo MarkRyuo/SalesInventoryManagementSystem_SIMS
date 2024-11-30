@@ -40,7 +40,7 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       const doc = new jsPDF();
 
       // Title and Store Info
-      doc.setFont("helvetica", "normal");
+      doc.setFont("courier", "normal");
       doc.setFontSize(12);
       doc.text("REYES ELECTRONIC SHOP", 10, 20);
       doc.setFontSize(10);
@@ -59,17 +59,17 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       let yPosition = 75;
       doc.setFontSize(10);
       doc.text("Product Name", 10, yPosition);
-      doc.text("Qty", 100, yPosition, {align: "center"});
-      doc.text("Price", 140, yPosition, {align: "right"});
-      doc.text("Amount", 180, yPosition, {align: "right"});
+      doc.text("Qty", 100, yPosition, { align: "center" });
+      doc.text("Price", 140, yPosition, { align: "right" });
+      doc.text("Amount", 180, yPosition, { align: "right" });
 
       // Product Items Loop
       yPosition += 10;
       order.items.forEach((item) => {
         doc.text(item.productName, 10, yPosition);
-        doc.text(item.quantity.toString(), 100, yPosition, {align: "center"});
-        doc.text(`${parseFloat(item.price).toFixed(2)}`, 140, yPosition, {align: "right"});
-        doc.text(`${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, {align: "right"});
+        doc.text(item.quantity.toString(), 100, yPosition, { align: "center" });
+        doc.text(`${parseFloat(item.price).toFixed(2)}`, 140, yPosition, { align: "right" });
+        doc.text(`${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, { align: "right" });
         yPosition += 10;
       });
 
@@ -85,13 +85,13 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       doc.text(`Change: ${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
 
       doc.setFontSize(14);
-      doc.setFont("helvetica", "bold");
+      doc.setFont("courier", "bold");
       doc.text(`Total Amount: ${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
 
       // Footer (Thank You Message)
       doc.setFontSize(10);
-      doc.setFont("helvetica", "italic");
-      doc.text("This is not official receipt!", 105, yPosition + 80, {align: "center"});
+      doc.setFont("courier", "italic");
+      doc.text("This is not official receipt!", 105, yPosition + 80, { align: "center" });
 
       // Generate QR code (you can customize it as per your needs)
       const qrCodeData = await qr.toDataURL(`https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/downloadOrder?id=${orderId}`);
@@ -119,7 +119,10 @@ const app = express();
 
 // Configure CORS to allow requests from your frontend domain
 app.use(cors({
-  origin: "https://salesinventorymanagement-1bb27.web.app", // Allow only this frontend domain
+  origin: [
+    "http://localhost:5173", // Frontend local dev URL
+    "http://127.0.0.1:5001", // Another local dev URL
+  ],
   methods: ['GET', 'POST'], // Allow only POST and GET requests
   allowedHeaders: ['Content-Type'], // Allow only Content-Type header
 }));
@@ -132,6 +135,9 @@ const otps = {}; // Store OTPs temporarily
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465, // Use port 465 for secure connection
+  secure: true, // Set to true for SSL
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -145,17 +151,33 @@ app.post('/generate-otp', async (req, res) => {
   otps[email] = otp;
 
   try {
+    // Attempt to send the email
     await transporter.sendMail({
-      from: 'salesinventorymanagementsystem@gmail.com', // Use your email address
+      from: 'salesinventorymanagementsystem@gmail.com', // Your email address
       to: email,
       subject: 'Your OTP',
-      text: `Your OTP is ${otp}`,
+      text: `Hello,
+
+      Your One-Time Password (OTP) for verifying is: ${otp}
+      
+      Please use this code to complete your verification process. The OTP is valid for a short time only.
+
+      Best regards,  
+      Sales Inventory Management System Team`,
     });
     res.status(200).send({ message: 'OTP sent' });
   } catch (err) {
-    res.status(500).send({ error: 'Failed to send OTP' });
+    // Log the error for debugging
+    console.error('Error sending email:', err);
+
+    // Send a detailed error message to the client
+    res.status(500).send({
+      error: 'Failed to send OTP',
+      details: err.message || 'Unknown error',
+    });
   }
 });
+
 
 // Validate OTP endpoint
 app.post('/validate-otp', (req, res) => {

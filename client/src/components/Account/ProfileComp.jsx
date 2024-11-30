@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { useNavigate } from 'react-router-dom';
-import bcrypt from 'bcryptjs';
 import ProfileCompScss from './AccountComp.module.scss';
+import { Link } from 'react-router-dom';
 
 const ProfileComp = () => {
     const navigate = useNavigate();
@@ -14,26 +14,12 @@ const ProfileComp = () => {
         lastname: "",
         gender: "",
         username: "",
-        password: "",
-        email: "", // Replace phoneNumber with email
-        recoveryQuestions: [],
-        answers: {}
+        email: "",
     });
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
-
     const [isEditing, setIsEditing] = useState(false);
-    const [showRecovery, setShowRecovery] = useState(false);
-    const [answerVisibility, setAnswerVisibility] = useState({});
     const adminId = localStorage.getItem('adminId');
-
-    const availableQuestions = [
-        "In which city was your first business located?",
-        "What year did you start your business?",
-        "What is the name of your first school?",
-        "What is your favorite color?",
-        "What city were you born in?"
-    ];
 
     const handleGenderSelect = (eventKey) => {
         setUserData({ ...userData, gender: eventKey });
@@ -42,27 +28,6 @@ const ProfileComp = () => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUserData({ ...userData, [name]: value });
-    };
-
-    const handleAnswerChange = (question, answer) => {
-        setUserData((prevData) => ({
-            ...prevData,
-            answers: {
-                ...prevData.answers,
-                [question]: answer,
-            },
-        }));
-        setAnswerVisibility((prevVisibility) => ({
-            ...prevVisibility,
-            [question]: false
-        }));
-    };
-
-    const toggleAnswerVisibility = (question) => {
-        setAnswerVisibility((prevVisibility) => ({
-            ...prevVisibility,
-            [question]: !prevVisibility[question]
-        }));
     };
 
     useEffect(() => {
@@ -81,8 +46,6 @@ const ProfileComp = () => {
                     const data = adminDoc.data();
                     setUserData({
                         ...data,
-                        recoveryQuestions: data.recoveryQuestions || [],
-                        answers: data.answers || {}
                     });
                     console.log("Fetched user data:", data);
                 } else {
@@ -100,15 +63,8 @@ const ProfileComp = () => {
 
     const handleSave = async () => {
         try {
-            let updatedPassword = userData.password;
-
-            if (updatedPassword && updatedPassword !== '') {
-                updatedPassword = await bcrypt.hash(updatedPassword, 10);
-            }
-
             const updatedData = {
                 ...userData,
-                password: updatedPassword || userData.password
             };
 
             const adminDocRef = doc(db, 'admins', adminId);
@@ -116,28 +72,12 @@ const ProfileComp = () => {
 
             alert("Profile updated successfully.");
             setIsEditing(false);
-            setShowRecovery(false);
-            setAnswerVisibility({});
         } catch (error) {
             console.error("Error updating profile:", error);
             alert(`Failed to update profile: ${error.message}`);
         }
     };
 
-    const handleAddQuestion = (question) => {
-        if (!userData.recoveryQuestions.includes(question) && userData.recoveryQuestions.length < 3) {
-            setUserData((prevData) => ({
-                ...prevData,
-                recoveryQuestions: [...prevData.recoveryQuestions, question],
-            }));
-            setAnswerVisibility((prevVisibility) => ({
-                ...prevVisibility,
-                [question]: false
-            }));
-        }
-    };
-
-    // Send OTP request to backend
     const handleSendOtp = async () => {
         if (!userData.email) {
             alert('Please enter a valid email address');
@@ -145,7 +85,7 @@ const ProfileComp = () => {
         }
 
         try {
-            const response = await fetch('https://api-hqnwrfpmoa-uc.a.run.app/generate-otp', {
+            const response = await fetch('http://127.0.0.1:5001/salesinventorymanagement-1bb27/us-central1/api/generate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: userData.email }),
@@ -163,10 +103,9 @@ const ProfileComp = () => {
         }
     };
 
-
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('https://api-hqnwrfpmoa-uc.a.run.app/validate-otp', {
+            const response = await fetch('http://localhost:5001/salesinventorymanagement-1bb27/us-central1/api/validate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: userData.email, otp }),
@@ -174,7 +113,11 @@ const ProfileComp = () => {
 
             const result = await response.json();
             if (response.ok) {
+                setOtpSent(false);  // Reset OTP sent status
                 alert('OTP verified successfully!');
+
+                // After OTP verification, update the email and save the profile
+                await handleSave();
             } else {
                 alert(result.error);
             }
@@ -182,7 +125,6 @@ const ProfileComp = () => {
             console.error('Error verifying OTP:', error);
         }
     };
-
 
     return (
         <Form className={ProfileCompScss.contentAccount}>
@@ -213,7 +155,6 @@ const ProfileComp = () => {
                     />
                 </Form.Group>
             </div>
-
 
             <Form.Group controlId="username">
                 <Form.Label>Username</Form.Label>
@@ -248,110 +189,6 @@ const ProfileComp = () => {
                 </DropdownButton>
             </InputGroup>
 
-            <div className={ProfileCompScss.OTPcontainer}>
-                <Form.Group className="email" controlId="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type="email"
-                        name="email"
-                        value={userData.email}
-                        onChange={handleInputChange}
-                        disabled={!isEditing}
-                        className={ProfileCompScss.Email}
-                    />
-                </Form.Group>
-
-
-                <Button
-                    variant=""
-                    onClick={handleSendOtp}
-                    disabled={otpSent || !isEditing}>
-                    Send OTP
-                </Button>
-            </div>
-
-            <Form.Group className="password" controlId="password">
-                <Form.Label className='ms-2'>Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    name="password"
-                    value={userData.password}
-                    onChange={handleInputChange}
-                    disabled={!isEditing}
-                    className={ProfileCompScss.Password}
-                />
-            </Form.Group>
-
-            {otpSent && (
-                <>
-                    <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
-                        <Form.Label>Enter OTP</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="otp"
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Button
-                        variant="primary"
-                        onClick={handleVerifyOtp}
-                        disabled={!otp}>
-                        Verify OTP
-                    </Button>
-                </>
-            )}
-
-            {isEditing && (
-                <>
-                    <Button
-                        variant="link"
-                        onClick={() => setShowRecovery(!showRecovery)}
-                        style={{ padding: 0 }}
-                    >
-                        {showRecovery ? "Hide Recovery Questions" : "Show Recovery Questions"}
-                    </Button>
-
-                    {showRecovery && (
-                        <>
-                            <h4>Select Recovery Questions</h4>
-                            <DropdownButton
-                                variant="outline-secondary"
-                                title="Choose a Recovery Question"
-                                id="recovery-question-dropdown"
-                                onSelect={handleAddQuestion}
-                                disabled={userData.recoveryQuestions.length >= 3}
-                            >
-                                {availableQuestions.map((question) => (
-                                    <Dropdown.Item key={question} eventKey={question}>
-                                        {question}
-                                    </Dropdown.Item>
-                                ))}
-                            </DropdownButton>
-
-                            {userData.recoveryQuestions.map((question) => (
-                                <Form.Group key={question} className="mb-3" style={{ position: "relative" }}>
-                                    <Form.Label>Your Answer for: {question}</Form.Label>
-                                    <Form.Control
-                                        type={answerVisibility[question] ? "text" : "password"}
-                                        value={userData.answers[question] || ''}
-                                        onChange={(e) => handleAnswerChange(question, e.target.value)}
-                                        readOnly={!isEditing}
-                                    />
-                                    <Button
-                                        variant="link"
-                                        onClick={() => toggleAnswerVisibility(question)}
-                                        style={{ padding: 0 }}
-                                    >
-                                        {answerVisibility[question] ? "Hide Answer" : "Show Answer"}
-                                    </Button>
-                                </Form.Group>
-                            ))}
-                        </>
-                    )}
-                </>
-            )}
-
             <div className={ProfileCompScss.buttonss}>
                 <Button
                     variant='info'
@@ -368,6 +205,63 @@ const ProfileComp = () => {
                     Save
                 </Button>
             </div>
+
+            <div className={ProfileCompScss.OTPcontainer}>
+                <Form.Group className="email" controlId="email">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        type="email"
+                        name="email"
+                        value={userData.email}
+                        onChange={handleInputChange}
+                        disabled={!!userData.email} // Disable if email already has a value
+                        className={ProfileCompScss.Emails}
+                        isInvalid={!userData.email} // Add invalid state if email is empty
+                    />
+                    {!userData.email && (
+                        <Form.Control.Feedback type="invalid">
+                            Please enter your email address.
+                        </Form.Control.Feedback>
+                    )}
+                </Form.Group>
+
+                {userData.email && (
+                    <>
+                        {!otpSent && (
+                            <Button
+                                variant="primary"
+                                onClick={handleSendOtp}
+                                disabled={otpSent || !isEditing || !userData.email} // Disable if no email is entered
+                            >
+                                Send OTP
+                            </Button>
+                        )}
+
+                        {otpSent && (
+                            <>
+                                <Form.Group className="my-3" controlId="otp" style={{ width: "100%", maxWidth: "500px"}}>
+                                    <Form.Label>Enter OTP</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="otp"
+                                        value={otp}
+                                        onChange={(e) => setOtp(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Button
+                                    variant="primary"
+                                    onClick={handleVerifyOtp}
+                                    disabled={!otp}>
+                                    Verify OTP
+                                </Button>
+                            </>
+                        )}
+                    </>
+                )}
+            </div>
+            <Link to={'/ResetPassAccount'} className='ps-2' style={{textDecoration: 'none', fontSize: '1rem'}}>
+                Reset Password?
+            </Link>
         </Form>
     );
 };

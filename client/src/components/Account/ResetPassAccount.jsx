@@ -8,7 +8,7 @@ import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
 import ResetPassScss from './ResetPass.module.scss';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { IoArrowBack } from "react-icons/io5";
-import { PiShieldWarningFill } from "react-icons/pi";
+import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"; // Import eye icons
 
 const ResetPass = () => {
@@ -138,7 +138,7 @@ const ResetPass = () => {
             setTimeout(() => setShowSuccessModal(false), 2000); // Close modal after 3 seconds
 
             setTimeout(() => {
-                navigate('/LoginPage');
+                navigate('/AccountPage');
             }, 2000);
         } catch (error) {
             console.error('Error resetting password:', error);
@@ -153,9 +153,9 @@ const ResetPass = () => {
         <Container fluid style={{ background: "radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>
             <Row className={ResetPassScss.rowContainer}>
                 <Col xs={12} md={8} lg={4} className={ResetPassScss.colContainer}>
-                    <div><PiShieldWarningFill size={70} /></div>
-                    <h2 className="mb-2 text-center">Forgot Password</h2>
-                    <p className='fs-6 m-0 text-center w-65'>Enter your Email and we'll send you an OTP to reset your password.</p>
+                    <div><IoShieldCheckmarkSharp size={70}/></div>
+                    <h2 className="mb-2 text-center">Reset Password</h2>
+                    <p className='fs-6 m-0 text-center w-65'>Enter the Email and we'll send you an OTP to reset your password.</p>
 
                     <Form>
                         {!otpSent && !otpVerified && (
@@ -219,8 +219,8 @@ const ResetPass = () => {
                             </>
                         )}
                     </Form>
-                    <Link to={"/LoginPage"} className="mt-2 me-3" style={{ color: "#444444", fontSize: "1rem", textDecoration: 'none' }}>
-                        <IoArrowBack /> Back to Login
+                    <Link to={"/AccountPage"} className="mt-2 me-3" style={{ color: "#444444", fontSize: "1rem", textDecoration: 'none' }}>
+                        <IoArrowBack /> Back to Account
                     </Link>
                 </Col>
             </Row>
