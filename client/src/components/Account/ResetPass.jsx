@@ -1,5 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
-import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import { collection, query, where, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../services/firebase"; // Ensure this points to your Firebase config
 import bcrypt from 'bcryptjs'; // Import bcrypt for hashing
@@ -16,6 +17,8 @@ const ResetPass = () => {
     const [otpVerified, setOtpVerified] = useState(false); // State for OTP verification
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -30,6 +33,7 @@ const ResetPass = () => {
     const handleSendOtp = async () => {
         if (!validateEmail(email)) {
             setError('Invalid email address');
+            setShowErrorModal(true);
             return;
         }
 
@@ -37,6 +41,7 @@ const ResetPass = () => {
         const emailExists = await checkEmailExists();
         if (!emailExists) {
             setError('Email not found');
+            setShowErrorModal(true);
             return;
         }
 
@@ -52,12 +57,14 @@ const ResetPass = () => {
             if (response.ok) {
                 setOtpSent(true);
                 setSuccess('OTP sent successfully!');
-                setError('');
+                setShowSuccessModal(true);
             } else {
                 setError(result.error);
+                setShowErrorModal(true);
             }
         } catch (error) {
             setError('Error sending OTP.');
+            setShowErrorModal(true);
         }
     };
 
@@ -72,19 +79,22 @@ const ResetPass = () => {
             const result = await response.json();
             if (response.ok) {
                 setSuccess('OTP verified successfully!');
-                setError('');
+                setShowSuccessModal(true);
                 setOtpVerified(true); // OTP verified, now show the new password input
             } else {
                 setError(result.error);
+                setShowErrorModal(true);
             }
         } catch (error) {
             setError('Error verifying OTP.');
+            setShowErrorModal(true);
         }
     };
 
     const handleResetPassword = async () => {
         if (!newPassword) {
             setError('Password is required');
+            setShowErrorModal(true);
             return;
         }
 
@@ -99,6 +109,7 @@ const ResetPass = () => {
 
             if (querySnapshot.empty) {
                 setError('Email not found');
+                setShowErrorModal(true);
                 return;
             }
 
@@ -109,10 +120,11 @@ const ResetPass = () => {
             }
 
             setSuccess('Password reset successfully!');
-            setError('');
+            setShowSuccessModal(true);
         } catch (error) {
             console.error('Error resetting password:', error);
             setError('Error resetting password.');
+            setShowErrorModal(true);
         }
     };
 
@@ -123,8 +135,7 @@ const ResetPass = () => {
                     <div><PiShieldWarningFill size={70} /></div>
                     <h2 className="mb-2 text-center">Forgot Password</h2>
                     <p className='fs-6 m-0 text-center'>Enter your Email and we'll send you an OTP to reset your password.</p>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    {success && <Alert variant="success">{success}</Alert>}
+
                     <Form>
                         {!otpSent && !otpVerified && (
                             <Form.Group controlId="email" className="mb-3">
@@ -181,6 +192,32 @@ const ResetPass = () => {
                     <Link to={"/"} style={{ textDecoration: 'none', color: '#130e01' }}><IoArrowBack />Back to Login</Link>
                 </Col>
             </Row>
+
+            {/* Error Modal */}
+            <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{error}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowErrorModal(false)}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            {/* Success Modal */}
+            <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Success</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{success}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowSuccessModal(false)}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     );
 };
