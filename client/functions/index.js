@@ -10,7 +10,7 @@ const logger = require("firebase-functions/logger");
 
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const cors = require("cors")({origin: true});
+const cors = require("cors");
 const {jsPDF} = require("jspdf");
 const qr = require("qrcode"); // For QR code generation
 
@@ -117,8 +117,12 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-// Configure CORS to allow requests from all origins (or specify specific origins)
-app.use(cors({ origin: true }));
+// Configure CORS to allow requests from your frontend domain
+app.use(cors({
+  origin: "https://salesinventorymanagement-1bb27.web.app", // Allow only this frontend domain
+  methods: ['GET', 'POST'], // Allow only POST and GET requests
+  allowedHeaders: ['Content-Type'], // Allow only Content-Type header
+}));
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -166,5 +170,4 @@ app.post('/validate-otp', (req, res) => {
 
 // Firebase function to handle the Express app
 exports.api = functions.https.onRequest(app);
-
 
