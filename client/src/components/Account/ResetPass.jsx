@@ -122,20 +122,21 @@ const ResetPass = () => {
                 <Col xs={12} md={8} lg={4} className={ResetPassScss.colContainer}>
                     <div><PiShieldWarningFill size={70} /></div>
                     <h2 className="mb-2 text-center">Forgot Password</h2>
-                    <p className='fs-6 m-0 text-center'>Enter your Email and we'll send you a OTP to reset your password.</p>
+                    <p className='fs-6 m-0 text-center'>Enter your Email and we'll send you an OTP to reset your password.</p>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {success && <Alert variant="success">{success}</Alert>}
                     <Form>
-                        <Form.Group controlId="email" className="mb-3">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Enter your email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                disabled={otpSent || otpVerified}
-                            />
-                        </Form.Group>
+                        {!otpSent && !otpVerified && (
+                            <Form.Group controlId="email" className="mb-3">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </Form.Group>
+                        )}
 
                         {!otpSent && (
                             <Button variant="primary" onClick={handleSendOtp} className="w-100">
