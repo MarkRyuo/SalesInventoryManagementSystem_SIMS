@@ -40,7 +40,7 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       const doc = new jsPDF();
 
       // Title and Store Info
-      doc.setFont("helvetica", "normal");
+      doc.setFont("courier", "normal");
       doc.setFontSize(12);
       doc.text("REYES ELECTRONIC SHOP", 10, 20);
       doc.setFontSize(10);
@@ -59,17 +59,17 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       let yPosition = 75;
       doc.setFontSize(10);
       doc.text("Product Name", 10, yPosition);
-      doc.text("Qty", 100, yPosition, {align: "center"});
-      doc.text("Price", 140, yPosition, {align: "right"});
-      doc.text("Amount", 180, yPosition, {align: "right"});
+      doc.text("Qty", 100, yPosition, { align: "center" });
+      doc.text("Price", 140, yPosition, { align: "right" });
+      doc.text("Amount", 180, yPosition, { align: "right" });
 
       // Product Items Loop
       yPosition += 10;
       order.items.forEach((item) => {
         doc.text(item.productName, 10, yPosition);
-        doc.text(item.quantity.toString(), 100, yPosition, {align: "center"});
-        doc.text(`${parseFloat(item.price).toFixed(2)}`, 140, yPosition, {align: "right"});
-        doc.text(`${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, {align: "right"});
+        doc.text(item.quantity.toString(), 100, yPosition, { align: "center" });
+        doc.text(`${parseFloat(item.price).toFixed(2)}`, 140, yPosition, { align: "right" });
+        doc.text(`${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, { align: "right" });
         yPosition += 10;
       });
 
@@ -85,13 +85,13 @@ exports.downloadOrder = functions.https.onRequest((req, res) => {
       doc.text(`Change: ${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
 
       doc.setFontSize(14);
-      doc.setFont("helvetica", "bold");
+      doc.setFont("courier", "bold");
       doc.text(`Total Amount: ${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
 
       // Footer (Thank You Message)
       doc.setFontSize(10);
-      doc.setFont("helvetica", "italic");
-      doc.text("This is not official receipt!", 105, yPosition + 80, {align: "center"});
+      doc.setFont("courier", "italic");
+      doc.text("This is not official receipt!", 105, yPosition + 80, { align: "center" });
 
       // Generate QR code (you can customize it as per your needs)
       const qrCodeData = await qr.toDataURL(`https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/downloadOrder?id=${orderId}`);
