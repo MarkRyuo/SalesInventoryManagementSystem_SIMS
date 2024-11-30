@@ -176,9 +176,6 @@ function ProductChart() {
             <Row className="my-4">
                 <div className={Productcss.containerTop}>
                     <div>
-                        <SetTax />
-                    </div>
-                    <div>
                         <SetCategory />
                     </div>
                     <div>
