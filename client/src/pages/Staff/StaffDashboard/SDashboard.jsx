@@ -7,6 +7,7 @@ import StaffDashboardScss from './StaffDashboard.module.scss';
 import StaffButtons from "../../../components/StaffPortal/StaffButtons/StaffButtons";
 import { TiDocumentAdd } from "react-icons/ti";
 import { BiScan } from "react-icons/bi";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 
 //? Charts
 import StaffChart1 from '../../../components/Charts/StaffDashBoardChart/StaffChart1'
@@ -19,11 +20,24 @@ function SDashboard() {
     const [staffName, setStaffName] = useState({ firstname: "", lastname: "", gender: "" });
     const [currentDate, setCurrentDate] = useState("");
     const [loading, setLoading] = useState(true);
+    const [sessionTimer, setSessionTimer] = useState(null); // Track session timeout
+    const navigate = useNavigate(); // Navigate for auto logout
 
     const [buttons] = useState([
         { btnName: "Add New Product", btnIcon: <TiDocumentAdd size={60} />, path: "/AddNewAssets", id: 1 },
         { btnName: "Point of Sale", btnIcon: <BiScan size={60} />, path: "/ScanAsset", id: 2 },
     ]);
+
+    // Function to handle session timeout
+    const startSessionTimer = () => {
+        // Logout after 30 minutes
+        const timer = setTimeout(() => {
+            alert("Session expired due to inactivity.");
+            localStorage.removeItem('staffId');
+            navigate("/login"); // Redirect to login page
+        }, 30 * 60 * 1000); // 30 minutes in milliseconds
+        setSessionTimer(timer);
+    };
 
     useEffect(() => {
         // Fetch staff details from Firestore
@@ -31,8 +45,9 @@ function SDashboard() {
             try {
                 const staffId = localStorage.getItem('staffId');
                 if (!staffId) {
-                    console.error("Staff ID not found in localStorage.");
-                    setLoading(false);
+                    alert("Staff ID not found. Logging out.");
+                    localStorage.removeItem('staffId');
+                    navigate("/login"); // Redirect to login page if no staff ID found
                     return;
                 }
 
@@ -44,11 +59,15 @@ function SDashboard() {
                     setStaffName({ firstname, lastname, gender });
                 } else {
                     console.error("No such document!");
+                    alert("Staff data not found. Logging out.");
+                    localStorage.removeItem('staffId');
+                    navigate("/login"); // Redirect to login page if staff data not found
                 }
             } catch (error) {
                 console.error("Error fetching staff data:", error);
             } finally {
                 setLoading(false); // Stop loading when data fetch is complete
+                startSessionTimer(); // Start session timer once data is fetched
             }
         };
 
@@ -62,7 +81,14 @@ function SDashboard() {
             day: 'numeric',
         });
         setCurrentDate(dateString);
-    }, []);
+
+        // Cleanup on component unmount
+        return () => {
+            if (sessionTimer) {
+                clearTimeout(sessionTimer); // Clear session timer on unmount
+            }
+        };
+    }, [navigate]); // Empty dependency array to run only once
 
     // Determine the title based on the gender
     const getTitle = (gender) => {
