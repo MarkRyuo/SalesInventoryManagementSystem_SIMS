@@ -116,8 +116,11 @@ const nodemailer = require('nodemailer');
 // CORS handler to allow all origins for testing or specify domains
 const corsHandler = cors({ origin: true }); // Allow all origins or specify your frontend domain
 
-// Temporary store for OTPs
+// Temporary store for OTPs with expiration time
 const otps = {};
+
+// OTP expiry time (e.g., 5 minutes)
+const OTP_EXPIRY_TIME = 5 * 60 * 1000; // 5 minutes
 
 // Nodemailer transporter setup for Gmail
 const transporter = nodemailer.createTransport({
@@ -137,8 +140,11 @@ exports.generateOtp = functions.https.onRequest((req, res) => {
     const { email } = req.body; // Get the email from the request body
     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a random 6-digit OTP
 
-    // Store OTP temporarily
-    otps[email] = otp;
+    // Store OTP temporarily with expiration time
+    otps[email] = {
+      otp,
+      expiresAt: Date.now() + OTP_EXPIRY_TIME,
+    };
 
     try {
       // Attempt to send the OTP email
@@ -174,15 +180,28 @@ exports.validateOtp = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
     const { email, otp } = req.body;
 
-    // Check if OTP matches
-    if (otps[email] === otp) {
-      // OTP is valid, delete it to prevent reuse
-      delete otps[email];
-      res.status(200).send({ message: 'OTP verified successfully' });
-    } else {
-      // OTP is invalid
-      res.status(400).send({ error: 'Invalid OTP' });
+    // Trim spaces from OTP input
+    const enteredOtp = otp.trim();
+
+    // Check if OTP exists and is valid
+    if (otps[email]) {
+      const otpData = otps[email];
+
+      // Check if OTP has expired
+      if (Date.now() > otpData.expiresAt) {
+        delete otps[email]; // Remove expired OTP
+        return res.status(400).send({ error: 'OTP has expired' });
+      }
+
+      // Check if OTP matches
+      if (otpData.otp === enteredOtp) {
+        delete otps[email]; // OTP is valid, delete to prevent reuse
+        return res.status(200).send({ message: 'OTP verified successfully' });
+      }
     }
+
+    // OTP is invalid
+    res.status(400).send({ error: 'Invalid OTP' });
   });
 });
 
