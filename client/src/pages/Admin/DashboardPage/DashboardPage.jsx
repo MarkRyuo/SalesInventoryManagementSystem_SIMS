@@ -23,6 +23,40 @@ export const DashboardPage = () => {
     const [currentDate, setCurrentDate] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+    const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+
+    const resetSessionTimer = () => {
+        localStorage.setItem('lastActivity', Date.now());
+    };
+
+    const checkSessionTimeout = () => {
+        const lastActivity = localStorage.getItem('lastActivity');
+        if (lastActivity && Date.now() - lastActivity > SESSION_TIMEOUT) {
+            localStorage.removeItem('adminId');
+            navigate('/');
+        }
+    };
+
+    useEffect(() => {
+        resetSessionTimer(); // Initialize lastActivity
+        const activityEvents = ['click', 'keydown', 'mousemove', 'scroll'];
+
+        // Update lastActivity on user interaction
+        const updateActivity = () => resetSessionTimer();
+        activityEvents.forEach((event) =>
+            window.addEventListener(event, updateActivity)
+        );
+
+        // Check session timeout periodically
+        const sessionInterval = setInterval(checkSessionTimeout, 1000);
+
+        return () => {
+            activityEvents.forEach((event) =>
+                window.removeEventListener(event, updateActivity)
+            );
+            clearInterval(sessionInterval);
+        };
+    }, [navigate]);
 
 
     useEffect(() => {
