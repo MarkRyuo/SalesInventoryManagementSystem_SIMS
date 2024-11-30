@@ -115,10 +115,8 @@ const nodemailer = require('nodemailer');
 
 // CORS handler to allow all origins for testing or specify domains
 const corsHandler = cors({ origin: true }); // Allow all origins or specify your frontend domain
-
 // Temporary store for OTPs with expiration time
 const otps = {};
-
 // OTP expiry time (e.g., 5 minutes)
 const OTP_EXPIRY_TIME = 5 * 60 * 1000; // 5 minutes
 
@@ -145,6 +143,8 @@ exports.generateOtp = functions.https.onRequest((req, res) => {
       otp,
       expiresAt: Date.now() + OTP_EXPIRY_TIME,
     };
+
+    console.log(`Generated OTP for ${email}: ${otp}`); // Log the generated OTP
 
     try {
       // Attempt to send the OTP email
@@ -182,6 +182,8 @@ exports.validateOtp = functions.https.onRequest((req, res) => {
 
     // Trim spaces from OTP input
     const enteredOtp = otp.trim();
+
+    console.log(`Validating OTP for ${email}: Entered OTP = ${enteredOtp}, Stored OTP = ${otps[email] ? otps[email].otp : 'undefined'}`);
 
     // Check if OTP exists for the email
     if (otps[email]) {
