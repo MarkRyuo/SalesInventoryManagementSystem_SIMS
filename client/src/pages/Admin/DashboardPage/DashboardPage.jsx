@@ -3,9 +3,8 @@ import { MainLayout } from '../../../layout/MainLayout';
 import DashboardCss from './Dashboard.module.scss';
 import { useEffect, useState } from 'react';
 import { db } from '../../../services/firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-
 
 //? Charts
 import Chart1 from '../../../components/Charts/DashboardChart/Chart1';
@@ -15,7 +14,6 @@ import ChartLg1 from '../../../components/Charts/DashboardChart/ChartLg1';
 import ChartLg2 from '../../../components/Charts/DashboardChart/ChartLg2';
 import ChartLg3 from '../../../components/Charts/DashboardChart/ChartLg3';
 import Chart4 from '../../../components/Charts/DashboardChart/Chart4';
-
 
 export const DashboardPage = () => {
     const [adminName, setAdminName] = useState('');
@@ -33,7 +31,8 @@ export const DashboardPage = () => {
         const lastActivity = localStorage.getItem('lastActivity');
         if (lastActivity && Date.now() - lastActivity > SESSION_TIMEOUT) {
             localStorage.removeItem('adminId');
-            navigate('/');
+            localStorage.removeItem('sessionId');
+            navigate('/'); // Redirect to login
         }
     };
 
@@ -58,7 +57,6 @@ export const DashboardPage = () => {
         };
     }, [navigate]);
 
-
     useEffect(() => {
         const fetchAdminData = async () => {
             try {
@@ -79,7 +77,17 @@ export const DashboardPage = () => {
                     return;
                 }
 
-                const { firstname, lastname, gender } = adminDoc.data();
+                const { firstname, lastname, gender, sessionId } = adminDoc.data();
+                const currentSessionId = localStorage.getItem('sessionId');
+
+                // If session IDs don't match, log out
+                if (sessionId !== currentSessionId) {
+                    localStorage.removeItem('adminId');
+                    localStorage.removeItem('sessionId');
+                    navigate('/'); // Redirect to login
+                    return;
+                }
+
                 setAdminName(`${firstname} ${lastname}`);
                 setAdminGender(gender || '');
             } catch (error) {
@@ -143,23 +151,21 @@ export const DashboardPage = () => {
             </div>
 
             {!isLoading && (
-
-                    <div className={DashboardCss.smallContainer}>
-                        <div>
-                            <Chart1 />
-                            <Chart2 />
-                            <Chart3 />
-                            <Chart4 />
-                        </div>
-                        <div className={DashboardCss.largeContainer}>
-                            <div className={DashboardCss.divLG}>
-                                <ChartLg3 />
-                                <ChartLg2 />
-                            </div>
-                                <ChartLg1 />
-                        </div>
+                <div className={DashboardCss.smallContainer}>
+                    <div>
+                        <Chart1 />
+                        <Chart2 />
+                        <Chart3 />
+                        <Chart4 />
                     </div>
-
+                    <div className={DashboardCss.largeContainer}>
+                        <div className={DashboardCss.divLG}>
+                            <ChartLg3 />
+                            <ChartLg2 />
+                        </div>
+                        <ChartLg1 />
+                    </div>
+                </div>
             )}
         </MainLayout>
     );
