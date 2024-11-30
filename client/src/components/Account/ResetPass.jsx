@@ -212,7 +212,7 @@ const ResetPass = () => {
                             </>
                         )}
                     </Form>
-                    <Link to={"/"} className="mt-3" style={{ color: "#444444", fontSize: "1rem", textDecoration: 'none' }}>
+                    <Link to={"/"} className="mt-3 me-3" style={{ color: "#444444", fontSize: "1rem", textDecoration: 'none' }}>
                         <IoArrowBack /> Back to Login
                     </Link>
                 </Col>
