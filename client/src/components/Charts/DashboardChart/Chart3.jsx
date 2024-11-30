@@ -17,7 +17,6 @@ function Chart3() {
 
             onValue(ordersRef, snapshot => {
                 if (!snapshot.exists()) {
-                    console.log('No sales data found.');
                     setQuantitySold(0); // Return 0 if no data
                     setLoading(false); // Set loading to false when data is fetched
                     return;
