@@ -213,11 +213,10 @@ const ProfileComp = () => {
                         name="email"
                         value={userData.email}
                         onChange={handleInputChange}
-                        disabled={!isEditing || !!userData.email} // Disable if editing is false or if email already exists
+                        disabled={!isEditing} // Disable if not in editing mode
                         className={ProfileCompScss.Email}
                     />
                 </Form.Group>
-
 
                 {userData.email && (
                     <>
@@ -225,7 +224,8 @@ const ProfileComp = () => {
                             <Button
                                 variant="primary"
                                 onClick={handleSendOtp}
-                                disabled={otpSent || !isEditing}>
+                                disabled={otpSent || !isEditing || !userData.email} // Disable if no email is entered
+                            >
                                 Send OTP
                             </Button>
                         )}
