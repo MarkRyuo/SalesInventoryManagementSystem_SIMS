@@ -90,17 +90,17 @@ const ResetPass = () => {
             if (response.ok) {
                 setSuccess('OTP verified successfully!');
                 setShowSuccessModal(true);
-                setTimeout(() => setShowSuccessModal(false), 3000); // Close modal after 3 seconds
+                setTimeout(() => setShowSuccessModal(false), 2000); // Close modal after 3 seconds
                 setOtpVerified(true);
             } else {
                 setError(result.error);
                 setShowErrorModal(true);
-                setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
+                setTimeout(() => setShowErrorModal(false), 2000); // Close modal after 3 seconds
             }
         } catch (error) {
             setError('Error verifying OTP.');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
+            setTimeout(() => setShowErrorModal(false), 2000); // Close modal after 3 seconds
         }
     };
 
@@ -108,7 +108,7 @@ const ResetPass = () => {
         if (!newPassword) {
             setError('Password is required');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
+            setTimeout(() => setShowErrorModal(false), 2000); // Close modal after 3 seconds
             return;
         }
 
@@ -122,7 +122,7 @@ const ResetPass = () => {
             if (querySnapshot.empty) {
                 setError('Email not found');
                 setShowErrorModal(true);
-                setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
+                setTimeout(() => setShowErrorModal(false), 2000); // Close modal after 3 seconds
                 return;
             }
 
@@ -133,7 +133,7 @@ const ResetPass = () => {
 
             setSuccess('Password reset successfully!');
             setShowSuccessModal(true);
-            setTimeout(() => setShowSuccessModal(false), 3000); // Close modal after 3 seconds
+            setTimeout(() => setShowSuccessModal(false), 2000); // Close modal after 3 seconds
 
             setTimeout(() => {
                 navigate('/LoginPage');
@@ -142,7 +142,7 @@ const ResetPass = () => {
             console.error('Error resetting password:', error);
             setError('Error resetting password.');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
+            setTimeout(() => setShowErrorModal(false), 2000); // Close modal after 3 seconds
         }
     };
 
