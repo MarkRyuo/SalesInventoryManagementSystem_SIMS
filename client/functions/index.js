@@ -156,7 +156,14 @@ app.post('/generate-otp', async (req, res) => {
       from: 'salesinventorymanagementsystem@gmail.com', // Your email address
       to: email,
       subject: 'Your OTP',
-      text: `Your OTP is ${otp}`,
+      text: `Hello,
+
+      Your One-Time Password (OTP) for verifying is: ${otp}
+      
+      Please use this code to complete your verification process. The OTP is valid for a short time only.
+
+      Best regards,  
+      Sales Inventory Management System Team`,
     });
     res.status(200).send({ message: 'OTP sent' });
   } catch (err) {
