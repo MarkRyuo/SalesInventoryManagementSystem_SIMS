@@ -31,24 +31,28 @@ export const DashboardPage = () => {
                 const adminId = localStorage.getItem('adminId');
                 if (!adminId) {
                     console.error('Admin ID not found');
-                    navigate('/');
+                    navigate('/'); // Redirect to login if adminId is missing
                     return;
                 }
 
                 const adminDocRef = doc(db, 'admins', adminId);
                 const adminDoc = await getDoc(adminDocRef);
 
-                if (adminDoc.exists()) {
-                    const { firstname, lastname, gender } = adminDoc.data();
-                    setAdminName(`${firstname} ${lastname}`);
-                    setAdminGender(gender || ''); // Store gender if it exists
-                } else {
+                // Add this part to handle missing admin document
+                if (!adminDoc.exists()) {
                     console.error('Admin document not found.');
+                    navigate('/login'); // Redirect to login if document doesn't exist
+                    return;
                 }
+
+                const { firstname, lastname, gender } = adminDoc.data();
+                setAdminName(`${firstname} ${lastname}`);
+                setAdminGender(gender || '');
             } catch (error) {
                 console.error('Error fetching admin data:', error);
+                navigate('/login'); // Redirect on error
             } finally {
-                setIsLoading(false); // Stop loading when data fetch is complete
+                setIsLoading(false);
             }
         };
 
