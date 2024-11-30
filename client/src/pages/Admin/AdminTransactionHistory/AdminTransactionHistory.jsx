@@ -76,14 +76,14 @@ function AdminTransactionHistory() {
         doc.text('REYES ELECTRONIC SHOP', 10, 20);  // Aligned to left
         doc.setFontSize(10);
         doc.text('JP Rizal St. Población Barangay 4, 4217 Lipa City Batangas Philippines', 10, 30);
-        doc.text('RAMIL P. REYES - PROP.', 10, 40);
+        doc.text('RAMIL P. REYES - PROP.', 10, 35);
 
         // Order Date (aligned to the left)
-        doc.setFontSize(12);
-        doc.text(`Order Date: ${order.date}`, 10, 50);
+        doc.setFontSize(11);
+        doc.text(`Order Date: ${order.date}`, 10, 40);
 
         // Customer info (aligned to the left)
-        doc.text(`Sold To: ${order.customerName}`, 10, 60);
+        doc.text(`Sold To: ${order.customerName}`, 10, 45);
 
         // Separator Line
         doc.line(10, 65, 200, 65); // Draw line to separate items and total
