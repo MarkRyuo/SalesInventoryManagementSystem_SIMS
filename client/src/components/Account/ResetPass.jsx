@@ -79,21 +79,21 @@ const ResetPass = () => {
             // Hash the new password using bcrypt before saving it
             const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-            // Query Firestore for the admin with the matching phone number
+            // Query Firestore for the admin with the matching email
             const adminsCollection = collection(db, 'admins');
             const q = query(adminsCollection, where('email', '==', email)); // Search by email
             const querySnapshot = await getDocs(q);
 
             if (querySnapshot.empty) {
-                setError('Phone number not found');
+                setError('Email not found');
                 return;
             }
 
             // Update the password for the matched document
-            querySnapshot.forEach(async (doc) => {
+            for (const doc of querySnapshot.docs) {
                 const adminRef = doc.ref;
                 await updateDoc(adminRef, { password: hashedPassword });
-            });
+            }
 
             setSuccess('Password reset successfully!');
             setError('');
@@ -102,6 +102,7 @@ const ResetPass = () => {
             setError('Error resetting password.');
         }
     };
+
 
     return (
         <Container fluid style={{ background: "radial-gradient(500px at 0.7% 3.4%, rgb(164, 231, 192) 0%, rgb(245, 255, 244) 80%)" }}>

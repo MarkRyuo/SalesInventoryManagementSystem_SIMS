@@ -119,7 +119,10 @@ const app = express();
 
 // Configure CORS to allow requests from your frontend domain
 app.use(cors({
-  origin: "http://localhost:5173", // Allow frontend localhost URL
+  origin: [
+    "http://localhost:5173", // Frontend local dev URL
+    "http://127.0.0.1:5001", // Another local dev URL
+  ],
   methods: ['GET', 'POST'], // Allow only POST and GET requests
   allowedHeaders: ['Content-Type'], // Allow only Content-Type header
 }));
@@ -132,6 +135,9 @@ const otps = {}; // Store OTPs temporarily
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465, // Use port 465 for secure connection
+  secure: true, // Set to true for SSL
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
@@ -145,17 +151,26 @@ app.post('/generate-otp', async (req, res) => {
   otps[email] = otp;
 
   try {
+    // Attempt to send the email
     await transporter.sendMail({
-      from: 'salesinventorymanagementsystem@gmail.com', // Use your email address
+      from: 'salesinventorymanagementsystem@gmail.com', // Your email address
       to: email,
       subject: 'Your OTP',
       text: `Your OTP is ${otp}`,
     });
     res.status(200).send({ message: 'OTP sent' });
   } catch (err) {
-    res.status(500).send({ error: 'Failed to send OTP' });
+    // Log the error for debugging
+    console.error('Error sending email:', err);
+
+    // Send a detailed error message to the client
+    res.status(500).send({
+      error: 'Failed to send OTP',
+      details: err.message || 'Unknown error',
+    });
   }
 });
+
 
 // Validate OTP endpoint
 app.post('/validate-otp', (req, res) => {
