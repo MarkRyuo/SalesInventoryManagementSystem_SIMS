@@ -118,7 +118,7 @@ function AdminTransactionHistory() {
         doc.text(`Change: ₱${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
 
         doc.setFontSize(14);
-        doc.setFont('helvetica', 'bold');
+        doc.setFont('courier', 'bold');
         doc.text(`Total Amount: ₱${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
 
         // QR Code (aligned to the left)
