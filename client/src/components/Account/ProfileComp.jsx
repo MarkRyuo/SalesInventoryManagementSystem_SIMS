@@ -19,6 +19,7 @@ const ProfileComp = () => {
     });
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
+    const [otpVerified, setOtpVerified] = useState(false); // Track OTP verification status
 
     const [isEditing, setIsEditing] = useState(false);
     const adminId = localStorage.getItem('adminId');
@@ -124,6 +125,7 @@ const ProfileComp = () => {
             const result = await response.json();
             if (response.ok) {
                 alert('OTP verified successfully!');
+                setOtpVerified(true); // Set OTP as verified
             } else {
                 alert(result.error);
             }
@@ -223,12 +225,12 @@ const ProfileComp = () => {
                     name="password"
                     value={userData.password}
                     onChange={handleInputChange}
-                    disabled={!isEditing}
+                    disabled={!isEditing || !otpVerified}
                     className={ProfileCompScss.Password}
                 />
             </Form.Group>
 
-            {otpSent && (
+            {otpSent && !otpVerified && (
                 <>
                     <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
                         <Form.Label>Enter OTP</Form.Label>
@@ -253,14 +255,14 @@ const ProfileComp = () => {
                     variant='info'
                     className='ms-2'
                     onClick={() => setIsEditing(true)}
-                    disabled={isEditing}>
+                    disabled={isEditing || !otpVerified}>
                     Edit
                 </Button>
                 <Button
                     variant='primary'
                     className='ms-2'
                     onClick={handleSave}
-                    disabled={!isEditing}>
+                    disabled={!isEditing || !otpVerified}>
                     Save
                 </Button>
             </div>
