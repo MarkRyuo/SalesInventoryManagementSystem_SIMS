@@ -37,7 +37,7 @@ const unifiedLogin = async (username, password, navigate) => {
             });
 
             // Alert for successful login
-            alert("Login successful! Welcome Admin.");
+            // alert("Login successful! Welcome Admin.");
 
             // Redirect Admin to Dashboard
             localStorage.setItem('adminId', adminDoc.id);
@@ -79,7 +79,7 @@ const unifiedLogin = async (username, password, navigate) => {
             }
 
             // Alert for successful login
-            alert("Login successful! Welcome Staff.");
+            // alert("Login successful! Welcome Staff.");
 
             // Redirect Staff to Dashboard
             localStorage.setItem('staffId', staffDoc.id);
