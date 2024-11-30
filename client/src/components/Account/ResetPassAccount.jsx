@@ -154,7 +154,7 @@ const ResetPass = () => {
             <Row className={ResetPassScss.rowContainer}>
                 <Col xs={12} md={8} lg={4} className={ResetPassScss.colContainer}>
                     <div><PiShieldWarningFill size={70} /></div>
-                    <h2 className="mb-2 text-center">Forgot Password</h2>
+                    <h2 className="mb-2 text-center">Reset Password</h2>
                     <p className='fs-6 m-0 text-center w-65'>Enter your Email and we'll send you an OTP to reset your password.</p>
 
                     <Form>
