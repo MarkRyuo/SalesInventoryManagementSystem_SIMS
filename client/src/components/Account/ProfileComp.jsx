@@ -19,6 +19,7 @@ const ProfileComp = () => {
     });
     const [otp, setOtp] = useState("");
     const [otpSent, setOtpSent] = useState(false);
+    const [otpVerified, setOtpVerified] = useState(false); // Track OTP verification status
 
     const [isEditing, setIsEditing] = useState(false);
     const adminId = localStorage.getItem('adminId');
@@ -122,6 +123,7 @@ const ProfileComp = () => {
 
             const result = await response.json();
             if (response.ok) {
+                setOtpVerified(true);  // Mark OTP as verified
                 alert('OTP verified successfully!');
             } else {
                 alert(result.error);
@@ -210,7 +212,7 @@ const ProfileComp = () => {
                 <Button
                     variant=""
                     onClick={handleSendOtp}
-                    disabled={otpSent || !isEditing}>
+                    disabled={otpSent || !isEditing || otpVerified}>
                     Send OTP
                 </Button>
             </div>
@@ -227,7 +229,7 @@ const ProfileComp = () => {
                 />
             </Form.Group>
 
-            {otpSent && (
+            {otpSent && !otpVerified && (
                 <>
                     <Form.Group className="mb-3" controlId="otp" style={{ width: "100%", maxWidth: "500px", paddingLeft: 12 }}>
                         <Form.Label>Enter OTP</Form.Label>
