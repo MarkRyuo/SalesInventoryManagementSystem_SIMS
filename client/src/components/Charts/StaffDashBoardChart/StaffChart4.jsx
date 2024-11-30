@@ -59,9 +59,9 @@ function Chart4() {
     }, []);
 
     return (
-        <div className={Chartcss.containerChart4}>
+        <div className={StaffChartcss.containerChart4}>
             <h5>Low Stock</h5>
-            <div className={Chartcss.contentChart4}>
+            <div className={StaffChartcss.contentChart4}>
                 {loading ? (
                     <Spinner animation="grow" variant="success" className='my-2' /> // Show spinner during data fetch
                 ) : (
