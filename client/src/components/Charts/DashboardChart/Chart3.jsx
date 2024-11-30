@@ -1,6 +1,7 @@
 import Chartcss from './Charts.module.scss';
 import { useState, useEffect } from "react";
 import { fetchQuantitySoldByRange } from '../../../services/ProductService'; // Import the new service
+import { Spinner } from 'react-bootstrap'; // Import the Spinner from React-Bootstrap
 
 function Chart3() {
     const [quantitySold, setQuantitySold] = useState(0);
@@ -28,7 +29,11 @@ function Chart3() {
         <div className={Chartcss.containerChart3}>
             <h5>Quantity Sold</h5>
             <div className={Chartcss.contentChart3}>
-                <p>{loading ? "Loading..." : quantitySold}</p>
+                {loading ? (
+                    <Spinner animation="grow" variant="success" className='my-2'/>
+                ) : (
+                    <p>{quantitySold}</p>
+                )}
                 <div>
                     <select
                         className="form-select"
@@ -42,7 +47,6 @@ function Chart3() {
                     </select>
                 </div>
             </div>
-
         </div>
     );
 }
