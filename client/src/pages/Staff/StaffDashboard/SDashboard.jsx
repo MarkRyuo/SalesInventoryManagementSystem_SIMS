@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import MainStaffLayout from "../../../layout/MainStaffLayout";
 import { Image } from "react-bootstrap";
 import { useState, useEffect } from "react";
@@ -88,7 +89,7 @@ function SDashboard() {
                 clearTimeout(sessionTimer); // Clear session timer on unmount
             }
         };
-    }, [navigate]); // Empty dependency array to run only once
+    }, []); // Empty dependency array to run only once
 
     // Determine the title based on the gender
     const getTitle = (gender) => {
