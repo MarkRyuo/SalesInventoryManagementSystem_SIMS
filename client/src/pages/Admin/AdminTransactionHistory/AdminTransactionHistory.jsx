@@ -131,7 +131,7 @@ function AdminTransactionHistory() {
         // Footer (centered)
         doc.setFontSize(10);
         doc.setFont('helvetica', 'italic');
-        doc.text('Thank you for your purchase!', 105, yPosition + 80, { align: 'center' });  // Centered footer text
+        doc.text('This is not official Receipt!', 105, yPosition + 80, { align: 'center' });  // Centered footer text
 
         // Save as PDF
         doc.save(`Order_${order.id}.pdf`);
