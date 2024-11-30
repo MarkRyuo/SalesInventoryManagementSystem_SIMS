@@ -119,7 +119,7 @@ const app = express();
 
 // Configure CORS to allow requests from your frontend domain
 app.use(cors({
-  origin: "https://salesinventorymanagement-1bb27.web.app", // Allow only this frontend domain
+  origin: "http://localhost:5173", // Allow frontend localhost URL
   methods: ['GET', 'POST'], // Allow only POST and GET requests
   allowedHeaders: ['Content-Type'], // Allow only Content-Type header
 }));

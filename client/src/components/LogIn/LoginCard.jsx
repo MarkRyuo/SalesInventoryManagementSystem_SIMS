@@ -1,19 +1,16 @@
 import { useState } from 'react';
-import { Alert, FloatingLabel, Button, Form, Spinner } from 'react-bootstrap';
+import { FloatingLabel, Button, Form, Spinner, Modal } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import unifiedLogin from '../../services/UnifiedLogIn'; // Import the unifiedLogin function
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // You need to install react-icons
-
 
 export const LoginCard = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const [showError, setShowError] = useState(false);
-    const [loading, setLoading] = useState(false); // State for loading indicator
-    const [success, setSuccess] = useState(false); // State for success message
-
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -21,141 +18,111 @@ export const LoginCard = () => {
     };
 
     const handleLogin = async () => {
-        setLoading(true); // Start loading
-        setSuccess(false); // Reset success message
-        setError(null); // Reset error message
+        setLoading(true);
+        setSuccess(false);
+        setError(null);
         try {
-            // Attempt to log in using the provided username and password
             await unifiedLogin(username, password, navigate);
-            setSuccess(true); // Set success state
-            setUsername(''); // Clear the username input field
-            setPassword(''); // Clear the password input field
-            setTimeout(() => {
-                // The navigation will be handled by unifiedLogin
-            }, 2000); // Delay for success message display
-        } catch (error) {
-            // Handle login errors (e.g., incorrect username or password)
-            setError(error.message);
-            setShowError(true);
-
-            // Clear username and password input fields when login fails
+            setSuccess(true);
             setUsername('');
             setPassword('');
-
-            // Automatically clear the error after 3 seconds with a smooth fade-out
-            setTimeout(() => {
-                setShowError(false);
-            }, 3000);
-
-            // Clear the error message from state after the transition ends
-            setTimeout(() => {
-                setError(null);
-            }, 3500); // Slightly longer to ensure the fade-out completes
+        } catch (error) {
+            setError(error.message);
         } finally {
-            setLoading(false); // Stop loading
+            setLoading(false);
         }
     };
 
     return (
-        <Form>
-            {/* Display success message if login is successful */}
-            {success && (
-                <Alert
-                    variant="success"
-                    style={{
-                        opacity: 1,
-                        transition: 'opacity 0.5s ease-in-out',
-                        marginBottom: '20px'
-                    }}
-                >
-                    <Alert.Heading>Login Successful!</Alert.Heading>
+        <>
+            {/* Success Modal */}
+            <Modal show={success} onHide={() => setSuccess(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Login Successful</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                     <p>Redirecting to your Dashboard...</p>
-                </Alert>
-            )}
+                </Modal.Body>
+            </Modal>
 
-            {/* Display error message if login fails */}
-            {error && (
-                <Alert
-                    variant="danger"
-                    show={showError}
-                    onClose={() => setShowError(false)}
-                    dismissible
+            {/* Error Modal */}
+            <Modal show={!!error} onHide={() => setError(null)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Login Failed</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>{error} Please check your credentials and try again.</p>
+                </Modal.Body>
+            </Modal>
+
+            <Form>
+                {/* Username */}
+                <FloatingLabel controlId="floatingInput" label="Username" className="mb-4">
+                    <Form.Control
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        disabled={loading}
+                    />
+                </FloatingLabel>
+
+                {/* Password */}
+                <FloatingLabel controlId="floatingPassword" label="Password" className="position-relative">
+                    <Form.Control
+                        type={isPasswordVisible ? 'text' : 'password'}
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        disabled={loading}
+                    />
+                    <span
+                        onClick={togglePasswordVisibility}
+                        style={{
+                            position: 'absolute',
+                            right: '43px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        {isPasswordVisible ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
+                    </span>
+                </FloatingLabel>
+
+                {/* Login Button */}
+                <Button
+                    variant="primary"
+                    style={{ width: '70%', marginTop: '20px' }}
+                    onClick={handleLogin}
+                    size="lg"
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <>
+                            <Spinner animation="grow" variant="primary" size="sm" role="status" aria-hidden="true" />{' '}
+                            Logging in...
+                        </>
+                    ) : (
+                        'Login'
+                    )}
+                </Button>
+
+                {/* Forgot Password Link */}
+                <Link
+                    to="/ResetPass"
                     style={{
-                        opacity: showError ? 1 : 0,
-                        transition: 'opacity 0.5s ease-in-out'
+                        display: 'block',
+                        textAlign: 'center',
+                        marginTop: '10px',
+                        textDecoration: 'none',
+                        color: '#007bff',
                     }}
                 >
-                    <Alert.Heading>Login Failed</Alert.Heading>
-                    <p>
-                        {error} Please check your credentials and try again.
-                    </p>
-                </Alert>
-            )}
-
-            {/* Username */}
-            <FloatingLabel controlId="floatingInput" label="Username" className="mb-4" >
-                <Form.Control
-                    type="text"
-                    placeholder='Username'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    disabled={loading} // Disable input while loading
-                />
-            </FloatingLabel>
-
-            {/* Password */}
-            <FloatingLabel controlId="floatingPassword" label="Password" className="position-relative">
-                <Form.Control
-                    type={isPasswordVisible ? 'text' : 'password'}
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    disabled={loading} // Disable input while loading
-                />
-                <span
-                    onClick={togglePasswordVisibility}
-                    style={{
-                        position: 'absolute',
-                        right: '43px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        cursor: 'pointer',
-                    }}
-                >
-                    {isPasswordVisible ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
-                </span>
-            </FloatingLabel>
-
-            {/* Login Button */}
-            <Button
-                variant="primary"
-                style={{ width: "70%", marginTop: "20px" }}
-                onClick={handleLogin}
-                size='lg'
-                disabled={loading} // Disable button while loading
-            >
-                {loading ? (
-                    <>
-                        <Spinner animation="grow" variant="primary" size="sm" role="status" aria-hidden="true" /> Logging in...
-                    </>
-                ) : (
-                    'Login'
-                )}
-            </Button>
-
-            {/* Forgot Password Link */}
-            <Link
-                to="/ResetPass"
-                style={{
-                    display: 'block',
-                    textAlign: 'center',
-                    marginTop: '10px',
-                    textDecoration: 'none',
-                    color: '#007bff'
-                }}>
-                Forgot Password?
-            </Link>
-        </Form>
+                    Forgot Password?
+                </Link>
+            </Form>
+        </>
     );
 };
 
