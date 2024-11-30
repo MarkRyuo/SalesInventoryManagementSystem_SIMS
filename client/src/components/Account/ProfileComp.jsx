@@ -213,9 +213,15 @@ const ProfileComp = () => {
                         name="email"
                         value={userData.email}
                         onChange={handleInputChange}
-                        disabled={!isEditing} // Disable if not in editing mode
+                        disabled={!!userData.email} // Disable if email already has a value
                         className={ProfileCompScss.Emails}
+                        isInvalid={!userData.email} // Add invalid state if email is empty
                     />
+                    {!userData.email && (
+                        <Form.Control.Feedback type="invalid">
+                            Please enter your email address.
+                        </Form.Control.Feedback>
+                    )}
                 </Form.Group>
 
                 {userData.email && (
