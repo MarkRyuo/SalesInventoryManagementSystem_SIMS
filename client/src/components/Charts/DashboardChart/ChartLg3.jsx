@@ -37,8 +37,8 @@ function ChartLg3() {
         let labels = [];
         switch (range) {
             case 'today':
-                // For today, generate labels for each time slot (7 AM - 9 AM, 9 AM - 11 AM, etc.)
-                const timeSlots = ['7:00 AM - 9:00 AM', '9:00 AM - 11:00 AM', '11:00 AM - 1:00 PM', '1:00 PM - 3:00 PM', '3:00 PM - 6:00 PM'];
+                // Time slots from 7:00 AM to 6:00 PM
+                const timeSlots = ['7AM-9AM', '9AM-11AM', '11AM-1PM', '1PM-3PM', '3PM-6PM'];
                 labels = timeSlots;
                 break;
             case 'week':
@@ -47,7 +47,7 @@ function ChartLg3() {
                 for (let i = 0; i < 7; i++) {
                     const day = new Date(startOfWeek);
                     day.setDate(startOfWeek.getDate() + i);
-                    labels.push(day.toLocaleDateString());
+                    labels.push(day.toLocaleString('default', { weekday: 'long' }));  // Full day name (e.g., Sunday)
                 }
                 break;
             case 'month':
@@ -70,6 +70,7 @@ function ChartLg3() {
         }
         return labels;
     };
+
 
     // Chart data setup
     const chartData = {
