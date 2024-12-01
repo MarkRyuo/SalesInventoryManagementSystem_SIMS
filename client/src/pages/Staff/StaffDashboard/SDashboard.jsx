@@ -35,7 +35,7 @@ function SDashboard() {
         const timer = setTimeout(() => {
             alert("Session expired due to inactivity.");
             localStorage.removeItem('staffId');
-            navigate("/login"); // Redirect to login page
+            navigate("/"); // Redirect to login page
         }, 30 * 60 * 1000); // 30 minutes in milliseconds
         setSessionTimer(timer);
     };
