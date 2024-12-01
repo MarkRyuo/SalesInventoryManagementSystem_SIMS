@@ -45,7 +45,16 @@ const isTransactionInRange = (transactionDate, range) => {
 export const fetchSalesData = async (range) => {
     const db = getDatabase();
     const transactionHistoryRef = ref(db, 'TransactionHistory');
-    const salesData = { totalQuantity: [], totalSales: [] };
+    const salesData = { totalSales: [], totalQuantity: [], dates: [] };
+
+    // Define the time slots
+    const timeSlots = [
+        { label: '7AM-9AM', start: 7, end: 9 },
+        { label: '9AM-11AM', start: 9, end: 11 },
+        { label: '11AM-1PM', start: 11, end: 13 },
+        { label: '1PM-3PM', start: 13, end: 15 },
+        { label: '3PM-6PM', start: 15, end: 18 },
+    ];
 
     try {
         const snapshot = await get(transactionHistoryRef);
@@ -59,9 +68,50 @@ export const fetchSalesData = async (range) => {
                 const totalAmount = parseFloat(transaction.total); // Get total amount (sales)
                 const quantity = transaction.totalQuantity; // Get total quantity sold
 
+                // Get the date and time of transaction for further processing
+                const transactionTime = new Date(transactionDate);
+                const transactionHour = transactionTime.getHours(); // Hour of the transaction
+
+                // Check if the transaction is within the selected range
                 if (isTransactionInRange(transactionDate, range)) {
-                    salesData.totalQuantity.push(quantity);  // Add to total quantity
-                    salesData.totalSales.push(totalAmount);  // Add to total sales amount
+                    // For Today range, aggregate by custom time slots
+                    if (range === 'today') {
+                        // Find the correct time slot for the transaction
+                        const timeSlotIndex = timeSlots.findIndex(slot =>
+                            transactionHour >= slot.start && transactionHour < slot.end
+                        );
+
+                        if (timeSlotIndex !== -1) {
+                            // Initialize arrays for time slots if not already initialized
+                            if (!salesData.totalSales[timeSlotIndex]) {
+                                salesData.totalSales[timeSlotIndex] = 0;
+                                salesData.totalQuantity[timeSlotIndex] = 0;
+                            }
+
+                            // Aggregate the total sales and quantity in the respective time slot
+                            salesData.totalSales[timeSlotIndex] += totalAmount;
+                            salesData.totalQuantity[timeSlotIndex] += quantity;
+
+                            // Add the label for the time slot if it's not already added
+                            if (!salesData.dates[timeSlotIndex]) {
+                                salesData.dates[timeSlotIndex] = timeSlots[timeSlotIndex].label;
+                            }
+                        }
+                    }
+
+                    // For Week range, aggregate by days of the week
+                    if (range === 'week') {
+                        const dayOfWeek = transactionTime.toLocaleString('default', { weekday: 'long' });
+                        const dayIndex = salesData.dates.indexOf(dayOfWeek);
+                        if (dayIndex === -1) {
+                            salesData.dates.push(dayOfWeek);
+                            salesData.totalSales.push(totalAmount);
+                            salesData.totalQuantity.push(quantity);
+                        } else {
+                            salesData.totalSales[dayIndex] += totalAmount;
+                            salesData.totalQuantity[dayIndex] += quantity;
+                        }
+                    }
                 }
             });
 
@@ -76,3 +126,6 @@ export const fetchSalesData = async (range) => {
         throw new Error(`Error fetching transactions: ${error.message}`);
     }
 };
+
+
+
