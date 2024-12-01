@@ -110,13 +110,12 @@ exports.downloadOrder = functions
   });
 
 
-require('dotenv').config();
+admin.initializeApp();
 const nodemailer = require('nodemailer');
 
 // CORS handler to allow all origins for testing or specify domains
 const corsHandler = cors({ origin: true }); // Allow all origins or specify your frontend domain
-// Temporary store for OTPs with expiration time
-const otps = {};
+
 // OTP expiry time (e.g., 5 minutes)
 const OTP_EXPIRY_TIME = 5 * 60 * 1000; // 5 minutes
 
@@ -138,15 +137,16 @@ exports.generateOtp = functions.https.onRequest((req, res) => {
     const { email } = req.body; // Get the email from the request body
     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a random 6-digit OTP
 
-    // Store OTP temporarily with expiration time
-    otps[email] = {
-      otp,
-      expiresAt: Date.now() + OTP_EXPIRY_TIME,
-    };
-
-    console.log(`Generated OTP for ${email}: ${otp}`); // Log the generated OTP
+    // Firestore reference to store OTP
+    const otpRef = admin.firestore().collection('otps').doc(email);
 
     try {
+      // Store OTP in Firestore with expiration time
+      await otpRef.set({
+        otp,
+        expiresAt: Date.now() + OTP_EXPIRY_TIME, // Expiry time of 5 minutes
+      });
+
       // Attempt to send the OTP email
       await transporter.sendMail({
         from: 'salesinventorymanagementsystem@gmail.com', // Your email address
@@ -155,7 +155,7 @@ exports.generateOtp = functions.https.onRequest((req, res) => {
         text: `Hello,
 
         Your One-Time Password (OTP) for verifying is: ${otp}
-        
+
         Please use this code to complete your verification process. The OTP is valid for a short time only.
 
         Best regards,
@@ -174,44 +174,4 @@ exports.generateOtp = functions.https.onRequest((req, res) => {
     }
   });
 });
-
-
-exports.validateOtp = functions.https.onRequest((req, res) => {
-  corsHandler(req, res, async () => {
-    const { email, otp } = req.body;
-
-    // Trim spaces from OTP input
-    const enteredOtp = otp.trim();
-
-    console.log(`Validating OTP for ${email}: Entered OTP = ${enteredOtp}, Stored OTP = ${otps[email] ? otps[email].otp : 'undefined'}`);
-
-    // Check if OTP exists for the email
-    if (otps[email]) {
-      const otpData = otps[email];
-
-      // Check if OTP has expired
-      if (Date.now() > otpData.expiresAt) {
-        delete otps[email]; // Remove expired OTP
-        console.log(`OTP for ${email} has expired`);
-        return res.status(400).send({ error: 'OTP has expired' });
-      }
-
-      // Check if OTP matches
-      if (otpData.otp === enteredOtp) {
-        delete otps[email]; // OTP is valid, delete to prevent reuse
-        console.log(`OTP for ${email} verified successfully`);
-        return res.status(200).send({ message: 'OTP verified successfully' });
-      } else {
-        console.log(`Invalid OTP for ${email}`);
-        return res.status(400).send({ error: 'Invalid OTP' });
-      }
-    } else {
-      console.log(`No OTP found for ${email}`);
-    }
-
-    // OTP is invalid
-    res.status(400).send({ error: 'Invalid OTP' });
-  });
-});
-
 
