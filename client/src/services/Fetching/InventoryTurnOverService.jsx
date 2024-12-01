@@ -4,22 +4,19 @@ import { getDatabase, ref, get } from "firebase/database";
 
 const isInRange = (transactionDate, range, now) => {
     switch (range) {
-        case "today":
-            return transactionDate.toDateString() === now.toDateString();
-        case "week":
-            const startOfWeek = new Date(now);
-            startOfWeek.setDate(now.getDate() - now.getDay());
-            const endOfWeek = new Date(startOfWeek);
-            endOfWeek.setDate(startOfWeek.getDate() + 6);
-            return transactionDate >= startOfWeek && transactionDate <= endOfWeek;
         case "month":
             return transactionDate.getMonth() === now.getMonth() && transactionDate.getFullYear() === now.getFullYear();
+        case "quarter":
+            const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
+            const transactionQuarter = Math.floor((transactionDate.getMonth() + 3) / 3);
+            return transactionDate.getFullYear() === now.getFullYear() && transactionQuarter === currentQuarter;
         case "year":
             return transactionDate.getFullYear() === now.getFullYear();
         default:
             return false;
     }
 };
+
 
 export const fetchInventoryTurnover = async (range) => {
     const db = getDatabase();
@@ -32,9 +29,6 @@ export const fetchInventoryTurnover = async (range) => {
             get(productsRef),
         ]);
 
-        console.log("Transaction Snapshot:", transactionSnapshot.val());
-        console.log("Products Snapshot:", productsSnapshot.val());
-
         if (transactionSnapshot.exists() && productsSnapshot.exists()) {
             const transactions = transactionSnapshot.val();
             const products = productsSnapshot.val();
@@ -46,13 +40,13 @@ export const fetchInventoryTurnover = async (range) => {
             let beginningInventoryValue = 0;
             let endingInventoryValue = 0;
 
-            // Calculate total sales (COGS) and gather inventory values for average calculation
+            // Calculate total sales (COGS)
             Object.keys(transactions).forEach((transactionId) => {
                 const transaction = transactions[transactionId];
                 const transactionDate = new Date(Date.parse(transaction.date));
 
                 if (isInRange(transactionDate, range, now)) {
-                    totalSales += parseFloat(transaction.total);
+                    totalSales += parseFloat(transaction.total); // Sum of all transactions in range
                 }
             });
 
@@ -91,4 +85,5 @@ export const fetchInventoryTurnover = async (range) => {
         throw error;
     }
 };
+
 

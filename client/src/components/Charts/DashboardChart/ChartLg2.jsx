@@ -10,7 +10,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 function ChartLg2() {
     const [turnoverData, setTurnoverData] = useState([]);
     const [labels, setLabels] = useState([]);
-    const [selectedRange, setSelectedRange] = useState("month");
+    const [selectedRange, setSelectedRange] = useState("month"); // Default range set to "month"
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -19,7 +19,7 @@ function ChartLg2() {
             setLoading(true);
             setError(null);
             try {
-                const turnover = await fetchInventoryTurnover(selectedRange);
+                const turnover = await fetchInventoryTurnover(selectedRange); // Fetch data based on selected range
                 const now = new Date();
 
                 setTurnoverData((prev) => [...prev, turnover]);
@@ -33,9 +33,12 @@ function ChartLg2() {
         };
 
         fetchData();
-    }, [selectedRange]);
+    }, [selectedRange]); // Effect runs again whenever the selectedRange changes
 
-    const handleRangeChange = (range) => setSelectedRange(range);
+    // This function updates the selected range when the user selects a new range
+    const handleRangeChange = (range) => {
+        setSelectedRange(range);
+    };
 
     const chartData = {
         labels,
@@ -73,9 +76,8 @@ function ChartLg2() {
         <div className={Chartcss.containerChartLg2}>
             <div className={Chartcss.rangeButtons}>
                 <select onChange={(e) => handleRangeChange(e.target.value)} className="form-select">
-                    <option value="today">Today</option>
-                    <option value="week">Week</option>
                     <option value="month">Month</option>
+                    <option value="quarter">Quarter</option>
                     <option value="year">Year</option>
                 </select>
             </div>
