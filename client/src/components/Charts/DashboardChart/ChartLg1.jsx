@@ -8,10 +8,15 @@ function ChartLg1() {
 
     // Helper function to format today's date
     const getFormattedToday = useCallback(() => {
-        const today = new Date();
-        const philippineOffset = 8 * 60; // UTC +8
-        const localTime = new Date(today.getTime() + (philippineOffset - today.getTimezoneOffset()) * 60000);
-        return localTime.toISOString().split('T')[0];
+        const formatter = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Asia/Manila',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+        });
+        const formatted = formatter.format(new Date()); // Format to Philippine Time
+        const [month, day, year] = formatted.split('/');
+        return `${year}-${month}-${day}`; // Return YYYY-MM-DD
     }, []);
 
     useEffect(() => {
@@ -68,14 +73,21 @@ function ChartLg1() {
     // Midnight Reset
     useEffect(() => {
         const interval = setInterval(() => {
-            const now = new Date();
-            if (now.getHours() === 0 && now.getMinutes() === 0) {
-                setActivityToday([]); // Reset at midnight
+            const formatter = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Manila',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: false,
+            });
+            const currentTime = formatter.format(new Date());
+            if (currentTime === "00:00") {
+                setActivityToday([]); // Reset at midnight Philippine Time
             }
         }, 60000); // Check every minute
 
         return () => clearInterval(interval); // Cleanup interval
     }, []);
+
 
     return (
         <div className={Chartcss.containerChartLg1}>
