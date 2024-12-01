@@ -20,7 +20,6 @@ function Chart1() {
             try {
                 if (snapshot.exists()) {
                     const productsData = snapshot.val();
-                    console.log("All products data found:", productsData); // Log products data for debugging
                     const quantityHistories = [];
 
                     // Loop through each product and get its quantity history
