@@ -35,9 +35,9 @@ function ChartLg3() {
     const generateDateLabels = (range) => {
         const now = new Date();
         let labels = [];
+
         switch (range) {
             case 'today':
-                // Time slots from 7:00 AM to 6:00 PM
                 const timeSlots = ['7AM-9AM', '9AM-11AM', '11AM-1PM', '1PM-3PM', '3PM-6PM'];
                 labels = timeSlots;
                 break;
@@ -47,16 +47,28 @@ function ChartLg3() {
                 for (let i = 0; i < 7; i++) {
                     const day = new Date(startOfWeek);
                     day.setDate(startOfWeek.getDate() + i);
-                    labels.push(day.toLocaleString('default', { weekday: 'long' }));  // Full day name (e.g., Sunday)
+                    labels.push(day.toLocaleString('default', { weekday: 'long' }));  // Full day name
                 }
                 break;
             case 'month':
                 const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
                 const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+                let weekStartDate = new Date(startOfMonth);
+                let weekEndDate = new Date(startOfMonth);
+
                 for (let i = 0; i < daysInMonth; i++) {
                     const day = new Date(startOfMonth);
                     day.setDate(startOfMonth.getDate() + i);
-                    labels.push(day.toLocaleDateString());
+
+                    // Move to the next week when it's Sunday (Day 6) or the last day of the month
+                    if (day.getDay() === 0 || i === daysInMonth - 1) {
+                        weekEndDate.setDate(weekEndDate.getDate() + 6);
+                        labels.push(`${Math.floor(i / 7) + 1}: ${weekStartDate.toLocaleDateString()} - ${weekEndDate.toLocaleDateString()}`);
+                        weekStartDate = new Date(day);
+                        weekEndDate = new Date(day);
+                    } else {
+                        weekEndDate.setDate(weekEndDate.getDate() + 1);
+                    }
                 }
                 break;
             case 'year':
@@ -68,8 +80,12 @@ function ChartLg3() {
             default:
                 break;
         }
+
         return labels;
     };
+
+
+
 
 
     // Chart data setup
