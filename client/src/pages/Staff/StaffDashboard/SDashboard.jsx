@@ -48,7 +48,7 @@ function SDashboard() {
                 if (!staffId) {
                     alert("Staff ID not found. Logging out.");
                     localStorage.removeItem('staffId');
-                    navigate("/login"); // Redirect to login page if no staff ID found
+                    navigate("/"); // Redirect to login page if no staff ID found
                     return;
                 }
 
