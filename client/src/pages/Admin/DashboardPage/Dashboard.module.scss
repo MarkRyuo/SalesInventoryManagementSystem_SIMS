@@ -202,9 +202,11 @@
             display: flex;
             width: auto;
             gap: 10px;
+            justify-content: center;
+            align-items: center;
 
             .divLG {
-                width: auto;
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
