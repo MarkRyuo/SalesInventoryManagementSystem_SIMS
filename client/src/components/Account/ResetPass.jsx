@@ -106,7 +106,6 @@ const ResetPass = () => {
         }
     };
 
-
     const handleResetPassword = async () => {
         if (!newPassword) {
             setError('Password is required');
