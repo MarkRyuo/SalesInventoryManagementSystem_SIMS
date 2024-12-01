@@ -10,7 +10,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 function ChartLg3() {
     const [salesData, setSalesData] = useState({ totalSales: [], dates: [] });
-    const [selectedRange, setSelectedRange] = useState('today');  // Default to 'month'
+    const [selectedRange, setSelectedRange] = useState('today');  // Default to 'today'
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,20 +31,15 @@ function ChartLg3() {
         setSelectedRange(range);  // Update the range
     };
 
-    // Generate date labels for the x-axis
+    // Generate date/time labels for the x-axis based on the range
     const generateDateLabels = (range) => {
         const now = new Date();
         let labels = [];
         switch (range) {
             case 'today':
-                // For today, generate labels for each hour from 7 AM to 6 PM
-                const startOfDay = new Date(now);
-                startOfDay.setHours(7, 0, 0, 0); // Set to 7:00 AM
-                for (let i = 0; i < 12; i++) {  // 12 hours from 7 AM to 6 PM
-                    const hour = new Date(startOfDay);
-                    hour.setHours(startOfDay.getHours() + i);  // Increment the hours
-                    labels.push(hour.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-                }
+                // For today, generate labels for each time slot (7 AM - 9 AM, 9 AM - 11 AM, etc.)
+                const timeSlots = ['7:00 AM - 9:00 AM', '9:00 AM - 11:00 AM', '11:00 AM - 1:00 PM', '1:00 PM - 3:00 PM', '3:00 PM - 6:00 PM'];
+                labels = timeSlots;
                 break;
             case 'week':
                 const startOfWeek = new Date(now);
@@ -75,8 +70,6 @@ function ChartLg3() {
         }
         return labels;
     };
-
-
 
     // Chart data setup
     const chartData = {
