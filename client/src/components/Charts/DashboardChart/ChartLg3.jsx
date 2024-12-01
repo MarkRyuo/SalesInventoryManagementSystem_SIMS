@@ -37,10 +37,10 @@ function ChartLg3() {
         let labels = [];
         switch (range) {
             case 'today':
-                // For today, generate labels for each hour from 8 AM to 9 PM
+                // For today, generate labels for each hour from 7 AM to 6 PM
                 const startOfDay = new Date(now);
-                startOfDay.setHours(8, 0, 0, 0); // Set to 8:00 AM
-                for (let i = 0; i < 14; i++) {  // 14 hours from 8 AM to 9 PM
+                startOfDay.setHours(7, 0, 0, 0); // Set to 7:00 AM
+                for (let i = 0; i < 12; i++) {  // 12 hours from 7 AM to 6 PM
                     const hour = new Date(startOfDay);
                     hour.setHours(startOfDay.getHours() + i);  // Increment the hours
                     labels.push(hour.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
@@ -75,6 +75,7 @@ function ChartLg3() {
         }
         return labels;
     };
+
 
 
     // Chart data setup
