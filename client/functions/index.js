@@ -113,13 +113,13 @@ exports.downloadOrder = functions
 admin.initializeApp();
 const nodemailer = require('nodemailer');
 
-// CORS handler to allow all origins for testing or specify domains
-const corsHandler = cors({ origin: true }); // Allow all origins or specify your frontend domain
+// CORS handler
+const corsHandler = cors({ origin: true });
 
-// OTP expiry time (e.g., 5 minutes)
-const OTP_EXPIRY_TIME = 5 * 60 * 1000; // 5 minutes
+// Constants
+const OTP_EXPIRY_TIME = 5 * 60 * 1000; // OTP expiry time (5 minutes)
 
-// Nodemailer transporter setup for Gmail
+// Create a transporter for sending OTP email
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   host: 'smtp.gmail.com',
@@ -132,46 +132,52 @@ const transporter = nodemailer.createTransport({
 });
 
 // Cloud Function to generate OTP and send via email
-exports.generateOtp = functions.https.onRequest((req, res) => {
-  corsHandler(req, res, async () => {
-    const { email } = req.body; // Get the email from the request body
-    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a random 6-digit OTP
+exports.generateOtp = functions.runWith({ memory: '256MB', timeoutSeconds: 60 })
+  .https.onRequest((req, res) => {
+    corsHandler(req, res, async () => {
+      const { email } = req.body; // Get the email from the request body
 
-    // Firestore reference to store OTP
-    const otpRef = admin.firestore().collection('otps').doc(email);
+      if (!email) {
+        return res.status(400).send({ error: 'Email is required' });
+      }
 
-    try {
-      // Store OTP in Firestore with expiration time
-      await otpRef.set({
-        otp,
-        expiresAt: Date.now() + OTP_EXPIRY_TIME, // Expiry time of 5 minutes
-      });
+      const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a random 6-digit OTP
 
-      // Attempt to send the OTP email
-      await transporter.sendMail({
-        from: 'salesinventorymanagementsystem@gmail.com', // Your email address
-        to: email, // Recipient email
-        subject: 'Your OTP for Verification',
-        text: `Hello,
+      // Firestore reference to store OTP
+      const otpRef = admin.firestore().collection('otps').doc(email);
 
-        Your One-Time Password (OTP) for verifying is: ${otp}
+      try {
+        // Store OTP in Firestore with expiration time
+        await otpRef.set({
+          otp,
+          expiresAt: Date.now() + OTP_EXPIRY_TIME, // Expiry time of 5 minutes
+        });
 
-        Please use this code to complete your verification process. The OTP is valid for a short time only.
+        // Send OTP email to the user
+        await transporter.sendMail({
+          from: 'salesinventorymanagementsystem@gmail.com', // Your email address
+          to: email, // Recipient email
+          subject: 'Your OTP for Verification',
+          text: `Hello,
 
-        Best regards,
-        Sales Inventory Management System Team`,
-      });
+          Your One-Time Password (OTP) for verifying is: ${otp}
 
-      // Respond with a success message
-      res.status(200).send({ message: 'OTP sent successfully' });
-    } catch (err) {
-      // Log and return error details if sending email fails
-      console.error('Error sending OTP email:', err);
-      res.status(500).send({
-        error: 'Failed to send OTP',
-        details: err.message || 'Unknown error',
-      });
-    }
+          Please use this code to complete your verification process. The OTP is valid for a short time only.
+
+          Best regards,
+          Sales Inventory Management System Team`,
+        });
+
+        // Respond with a success message
+        res.status(200).send({ message: 'OTP sent successfully' });
+      } catch (err) {
+        // Log and return error details if sending email fails
+        console.error('Error sending OTP email:', err);
+        res.status(500).send({
+          error: 'Failed to send OTP',
+          details: err.message || 'Unknown error',
+        });
+      }
+    });
   });
-});
 
