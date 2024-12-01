@@ -53,7 +53,7 @@ const ResetPass = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/generateOtp', {
+            const response = await fetch('https://api-326509861898.us-central1.run.app/generate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
@@ -82,7 +82,7 @@ const ResetPass = () => {
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/validateOtp', {
+            const response = await fetch('https://api-326509861898.us-central1.run.app/validateOtp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ otp, email }),
