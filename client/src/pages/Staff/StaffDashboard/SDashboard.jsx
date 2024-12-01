@@ -62,7 +62,7 @@ function SDashboard() {
                     console.error("No such document!");
                     alert("Staff data not found. Logging out.");
                     localStorage.removeItem('staffId');
-                    navigate("/login"); // Redirect to login page if staff data not found
+                    navigate("/"); // Redirect to login page if staff data not found
                 }
             } catch (error) {
                 console.error("Error fetching staff data:", error);
