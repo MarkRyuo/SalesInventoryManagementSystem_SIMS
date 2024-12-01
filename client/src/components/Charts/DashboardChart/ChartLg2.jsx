@@ -11,9 +11,13 @@ function ChartLg2() {
     const [turnoverData, setTurnoverData] = useState([]);
     const [labels, setLabels] = useState([]);
     const [selectedRange, setSelectedRange] = useState("month");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
+            setError(null);
             try {
                 const turnover = await fetchInventoryTurnover(selectedRange);
                 const now = new Date();
@@ -21,7 +25,10 @@ function ChartLg2() {
                 setTurnoverData((prev) => [...prev, turnover]);
                 setLabels((prev) => [...prev, now.toLocaleDateString()]);
             } catch (error) {
+                setError("Failed to load inventory turnover data.");
                 console.error("Error fetching turnover data:", error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -72,6 +79,10 @@ function ChartLg2() {
                     <option value="year">Year</option>
                 </select>
             </div>
+
+            {loading && <div>Loading...</div>} {/* Display loading state */}
+            {error && <div>{error}</div>} {/* Display error message */}
+
             <Line data={chartData} options={chartOptions} />
         </div>
     );
