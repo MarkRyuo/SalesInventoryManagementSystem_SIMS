@@ -26,7 +26,22 @@ function Chart3() {
                 const now = new Date();
                 let startDate, endDate;
 
-                // Calculate the start and end date for the given range
+                // Helper function to calculate totalQuantity for different ranges
+                const calculateTotalQuantity = (orders, startDate, endDate) => {
+                    let totalQuantity = 0;
+                    Object.keys(orders).forEach(key => {
+                        const order = orders[key];
+                        const orderDate = new Date(order.date);
+
+                        if (orderDate >= startDate && orderDate <= endDate) {
+                            // Sum up the quantity of items sold in the order
+                            const quantitySold = order.items.reduce((sum, item) => sum + item.quantity, 0);
+                            totalQuantity += quantitySold;
+                        }
+                    });
+                    return totalQuantity;
+                };
+
                 switch (timeRange) {
                     case "Today":
                         startDate = new Date(now.setHours(0, 0, 0, 0)); // Start of today
@@ -37,8 +52,8 @@ function Chart3() {
                         endDate = new Date(); // Current time
                         break;
                     case "Month":
-                        startDate = new Date(now.setDate(1)); // Start of this month
-                        endDate = new Date(now.setMonth(now.getMonth() + 1, 0)); // End of this month
+                        startDate = new Date(now.getFullYear(), now.getMonth(), 1); // Start of this month
+                        endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0); // End of this month
                         break;
                     case "Year":
                         startDate = new Date(now.setMonth(0, 1)); // Start of the year
@@ -50,18 +65,7 @@ function Chart3() {
                         return;
                 }
 
-                // Calculate the total quantity sold within the date range
-                let totalQuantity = 0;
-                Object.keys(orders).forEach(key => {
-                    const order = orders[key];
-                    const orderDate = new Date(order.date);
-
-                    if (orderDate >= startDate && orderDate <= endDate) {
-                        // Sum up the quantity of items sold in the order
-                        const quantitySold = order.items.reduce((sum, item) => sum + item.quantity, 0);
-                        totalQuantity += quantitySold;
-                    }
-                });
+                let totalQuantity = calculateTotalQuantity(orders, startDate, endDate);
 
                 setQuantitySold(totalQuantity); // Update state with the fetched quantity sold
                 setLoading(false); // Set loading to false when data is fetched
@@ -87,7 +91,7 @@ function Chart3() {
                         onChange={(e) => setTimeRange(e.target.value)} // Handle change to set the selected value
                     >
                         <option value="Today">Today</option>
-                        <option value="7 Days">7 Days</option>
+                        <option value="7 Days">Week</option>
                         <option value="Month">Month</option>
                         <option value="Year">Year</option>
                     </select>
