@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 import { getDatabase, ref, get } from "firebase/database";
 
-
+// Modify 'isInRange' to accept 'now' as a parameter
 const isInRange = (transactionDate, range, now) => {
     switch (range) {
         case "month":
@@ -17,8 +17,7 @@ const isInRange = (transactionDate, range, now) => {
     }
 };
 
-
-export const fetchInventoryTurnover = async (range) => {
+export const fetchInventoryTurnover = async (range, now) => {
     const db = getDatabase();
     const transactionHistoryRef = ref(db, "TransactionHistory");
     const productsRef = ref(db, "products");
@@ -33,8 +32,6 @@ export const fetchInventoryTurnover = async (range) => {
             const transactions = transactionSnapshot.val();
             const products = productsSnapshot.val();
 
-            const now = new Date();
-
             // Variables to store total sales and inventory values
             let totalSales = 0;
             let beginningInventoryValue = 0;
@@ -45,13 +42,12 @@ export const fetchInventoryTurnover = async (range) => {
                 const transaction = transactions[transactionId];
                 const transactionDate = new Date(Date.parse(transaction.date));
 
-                if (isInRange(transactionDate, range, now)) {
+                if (isInRange(transactionDate, range, now)) { // now is passed to 'isInRange'
                     totalSales += parseFloat(transaction.total); // Sum of all transactions in range
                 }
             });
 
             // Calculate Beginning Inventory (for the first day of the selected range)
-            // Assuming the beginning inventory is fetched from the `products` data at the start of the range
             Object.keys(products).forEach((productId) => {
                 const product = products[productId];
                 beginningInventoryValue += parseFloat(product.price) * parseInt(product.quantity); // Initial stock value
@@ -85,5 +81,3 @@ export const fetchInventoryTurnover = async (range) => {
         throw error;
     }
 };
-
-

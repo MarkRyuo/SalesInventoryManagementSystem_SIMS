@@ -14,16 +14,38 @@ function ChartLg2() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    // Helper function to format labels based on the selected range
+    const generateLabels = (range) => {
+        const now = new Date();
+        const labels = [];
+
+        if (range === "month") {
+            // Only show the current month
+            labels.push(now.toLocaleString("default", { month: "long" }));
+        } else if (range === "quarter") {
+            labels.push("Q1", "Q2", "Q3", "Q4");
+        } else if (range === "year") {
+            for (let i = 0; i < 12; i++) {
+                const month = new Date(now.getFullYear(), i, 1);
+                labels.push(month.toLocaleString("default", { month: "long" }));
+            }
+        }
+        return labels;
+    };
+
+
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             setError(null);
             try {
-                const turnover = await fetchInventoryTurnover(selectedRange); // Fetch data based on selected range
                 const now = new Date();
+                const turnover = await fetchInventoryTurnover(selectedRange, now); // Pass 'now' as a parameter
+                // Set labels based on the selected range
+                setLabels(generateLabels(selectedRange));
 
+                // Set turnover data
                 setTurnoverData((prev) => [...prev, turnover]);
-                setLabels((prev) => [...prev, now.toLocaleDateString()]);
             } catch (error) {
                 setError("Failed to load inventory turnover data.");
                 console.error("Error fetching turnover data:", error);
