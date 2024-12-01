@@ -13,10 +13,14 @@ const isTransactionInRange = (transactionDate, range) => {
         case 'today':
             return transactionTime.toDateString() === currentDate.toDateString();
         case 'week':
+            // Get the current week start (Sunday) and end (Saturday)
             const startOfWeek = new Date(currentDate);
             startOfWeek.setDate(currentDate.getDate() - currentDate.getDay()); // Sunday
+            startOfWeek.setHours(0, 0, 0, 0); // Set to midnight for accurate comparison
             const endOfWeek = new Date(startOfWeek);
             endOfWeek.setDate(startOfWeek.getDate() + 6); // Saturday
+            endOfWeek.setHours(23, 59, 59, 999); // Set to last moment of Saturday
+
             return transactionTime >= startOfWeek && transactionTime <= endOfWeek;
         case 'month':
             return transactionTime.getMonth() === currentDate.getMonth() && transactionTime.getFullYear() === currentDate.getFullYear();
@@ -26,6 +30,7 @@ const isTransactionInRange = (transactionDate, range) => {
             return false;
     }
 };
+
 
 
 export const fetchTotalSales = async (range) => {
