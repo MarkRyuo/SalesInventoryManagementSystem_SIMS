@@ -76,23 +76,19 @@ export const fetchSalesData = async (range) => {
                 if (isTransactionInRange(transactionDate, range)) {
                     // For Today range, aggregate by custom time slots
                     if (range === 'today') {
-                        // Find the correct time slot for the transaction
                         const timeSlotIndex = timeSlots.findIndex(slot =>
                             transactionHour >= slot.start && transactionHour < slot.end
                         );
 
                         if (timeSlotIndex !== -1) {
-                            // Initialize arrays for time slots if not already initialized
                             if (!salesData.totalSales[timeSlotIndex]) {
                                 salesData.totalSales[timeSlotIndex] = 0;
                                 salesData.totalQuantity[timeSlotIndex] = 0;
                             }
 
-                            // Aggregate the total sales and quantity in the respective time slot
                             salesData.totalSales[timeSlotIndex] += totalAmount;
                             salesData.totalQuantity[timeSlotIndex] += quantity;
 
-                            // Add the label for the time slot if it's not already added
                             if (!salesData.dates[timeSlotIndex]) {
                                 salesData.dates[timeSlotIndex] = timeSlots[timeSlotIndex].label;
                             }
@@ -112,8 +108,30 @@ export const fetchSalesData = async (range) => {
                             salesData.totalQuantity[dayIndex] += quantity;
                         }
                     }
+
+                    // For Month range, merge the sales data from the weeks
+                    if (range === 'month') {
+                        const weekIndex = Math.floor(transactionTime.getDate() / 7); // Determine which week the transaction belongs to
+                        if (!salesData.dates[weekIndex]) {
+                            salesData.dates[weekIndex] = `Week ${weekIndex + 1}`;
+                            salesData.totalSales[weekIndex] = totalAmount;
+                            salesData.totalQuantity[weekIndex] = quantity;
+                        } else {
+                            salesData.totalSales[weekIndex] += totalAmount;
+                            salesData.totalQuantity[weekIndex] += quantity;
+                        }
+                    }
                 }
             });
+
+            // For the month range, sum up all weekly sales to get the total sales for the month
+            if (range === 'month') {
+                const totalMonthSales = salesData.totalSales.reduce((acc, curr) => acc + curr, 0);
+                const totalMonthQuantity = salesData.totalQuantity.reduce((acc, curr) => acc + curr, 0);
+                salesData.totalSales = [totalMonthSales];  // Merged total sales for the whole month
+                salesData.totalQuantity = [totalMonthQuantity];  // Merged total quantity for the whole month
+                salesData.dates = ['Month Total'];  // Single entry for the total month
+            }
 
             console.log(`Sales Data for ${range}:`, salesData);
             return salesData;
@@ -126,6 +144,7 @@ export const fetchSalesData = async (range) => {
         throw new Error(`Error fetching transactions: ${error.message}`);
     }
 };
+
 
 
 
