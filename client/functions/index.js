@@ -8,7 +8,7 @@ const {onRequest} = require("firebase-functions/v2/https");
 // eslint-disable-next-line no-unused-vars
 const logger = require("firebase-functions/logger");
 
-const functions = require("firebase-functions");
+const functions = require("firebase-functions/v2");
 const admin = require("firebase-admin");
 const cors = require("cors");
 const {jsPDF} = require("jspdf");
