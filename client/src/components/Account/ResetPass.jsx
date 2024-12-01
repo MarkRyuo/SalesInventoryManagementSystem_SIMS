@@ -38,7 +38,7 @@ const ResetPass = () => {
         if (!validateEmail(email)) {
             setError('Invalid email address');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
+            setTimeout(() => setShowErrorModal(false), 3000);
             return;
         }
 
@@ -46,7 +46,7 @@ const ResetPass = () => {
         if (!emailExists) {
             setError('Email not found');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
+            setTimeout(() => setShowErrorModal(false), 3000);
             return;
         }
 
@@ -64,25 +64,25 @@ const ResetPass = () => {
                 setOtpSent(true);
                 setSuccess('OTP sent successfully!');
                 setShowSuccessModal(true);
-                setTimeout(() => setShowSuccessModal(false), 3000); // Close modal after 3 seconds
+                setTimeout(() => setShowSuccessModal(false), 3000);
                 setLoading(false);
             } else {
                 setError(result.error);
                 setShowErrorModal(true);
-                setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
+                setTimeout(() => setShowErrorModal(false), 3000);
                 setLoading(false);
             }
         } catch (error) {
             setError('Error sending OTP.');
             setShowErrorModal(true);
-            setTimeout(() => setShowErrorModal(false), 3000); // Close modal after 3 seconds
+            setTimeout(() => setShowErrorModal(false), 3000);
             setLoading(false);
         }
     };
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/validateOtp', {
+            const response = await fetch('https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/verifyOtp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ otp, email }),
@@ -105,6 +105,7 @@ const ResetPass = () => {
             setTimeout(() => setShowErrorModal(false), 2000); // Close modal after 3 seconds
         }
     };
+
 
     const handleResetPassword = async () => {
         if (!newPassword) {
