@@ -175,7 +175,7 @@ exports.generateOtp = functions.https.onRequest((req, res) => {
   });
 });
 
-// Cloud Function to validate OTP
+
 exports.validateOtp = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
     const { email, otp } = req.body;
@@ -203,6 +203,7 @@ exports.validateOtp = functions.https.onRequest((req, res) => {
         return res.status(200).send({ message: 'OTP verified successfully' });
       } else {
         console.log(`Invalid OTP for ${email}`);
+        return res.status(400).send({ error: 'Invalid OTP' });
       }
     } else {
       console.log(`No OTP found for ${email}`);
