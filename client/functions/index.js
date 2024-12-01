@@ -110,8 +110,10 @@ exports.downloadOrder = functions
   });
 
 
-admin.initializeApp();
 const nodemailer = require('nodemailer');
+
+// Initialize Firebase Admin SDK
+admin.initializeApp();
 
 // CORS handler
 const corsHandler = cors({ origin: true });
@@ -180,4 +182,55 @@ exports.generateOtp = functions.runWith({ memory: '256MB', timeoutSeconds: 60 })
       }
     });
   });
+
+// Cloud Function to verify OTP
+exports.verifyOtp = functions.runWith({ memory: '256MB', timeoutSeconds: 60 })
+  .https.onRequest((req, res) => {
+    corsHandler(req, res, async () => {
+      const { email, otp } = req.body; // Get email and OTP from the request body
+
+      if (!email || !otp) {
+        return res.status(400).send({ error: 'Email and OTP are required' });
+      }
+
+      // Firestore reference to retrieve OTP stored for the email
+      const otpRef = admin.firestore().collection('otps').doc(email);
+
+      try {
+        // Fetch OTP from Firestore
+        const otpDoc = await otpRef.get();
+
+        if (!otpDoc.exists) {
+          return res.status(400).send({ error: 'OTP not found for this email' });
+        }
+
+        const storedOtp = otpDoc.data().otp;
+        const expiresAt = otpDoc.data().expiresAt;
+
+        // Check if OTP has expired
+        if (Date.now() > expiresAt) {
+          return res.status(400).send({ error: 'OTP has expired' });
+        }
+
+        // Check if OTP is valid
+        if (storedOtp !== otp) {
+          return res.status(400).send({ error: 'Invalid OTP' });
+        }
+
+        // OTP is valid, you can now mark this as verified or proceed with your logic
+        res.status(200).send({ message: 'OTP verified successfully' });
+
+        // Optionally, you can delete the OTP from Firestore after successful verification
+        await otpRef.delete();
+      } catch (err) {
+        // Log and return error details if verification fails
+        console.error('Error verifying OTP:', err);
+        res.status(500).send({
+          error: 'Failed to verify OTP',
+          details: err.message || 'Unknown error',
+        });
+      }
+    });
+  });
+
 
