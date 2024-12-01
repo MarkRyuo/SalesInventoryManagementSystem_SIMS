@@ -35,12 +35,18 @@ const isTransactionInRange = (transactionDate, range) => {
 
         case 'year':
             // Check if the transaction is in the current year
-            return transactionTime.getFullYear() === now.getFullYear();
+            // This ensures the transaction is in November and December
+            const transactionYear = transactionTime.getFullYear();
+            const currentYear = now.getFullYear();
+
+            // If the transaction year matches the current year, return true
+            return transactionYear === currentYear;
 
         default:
             return false;
     }
 };
+
 
 export const fetchSalesData = async (range) => {
     const db = getDatabase();
@@ -121,6 +127,19 @@ export const fetchSalesData = async (range) => {
                             salesData.totalQuantity[weekIndex] += quantity;
                         }
                     }
+
+                    // For Year range, merge the sales data from the months
+                    if (range === 'year') {
+                        const monthIndex = transactionTime.getMonth(); // Get the month of the transaction
+                        if (!salesData.dates[monthIndex]) {
+                            salesData.dates[monthIndex] = new Date(transactionTime).toLocaleString('default', { month: 'short' });
+                            salesData.totalSales[monthIndex] = totalAmount;
+                            salesData.totalQuantity[monthIndex] = quantity;
+                        } else {
+                            salesData.totalSales[monthIndex] += totalAmount;
+                            salesData.totalQuantity[monthIndex] += quantity;
+                        }
+                    }
                 }
             });
 
@@ -131,6 +150,15 @@ export const fetchSalesData = async (range) => {
                 salesData.totalSales = [totalMonthSales];  // Merged total sales for the whole month
                 salesData.totalQuantity = [totalMonthQuantity];  // Merged total quantity for the whole month
                 salesData.dates = ['Month Total'];  // Single entry for the total month
+            }
+
+            // For the year range, sum up all monthly sales to get the total sales for the year
+            if (range === 'year') {
+                const totalYearSales = salesData.totalSales.reduce((acc, curr) => acc + curr, 0);
+                const totalYearQuantity = salesData.totalQuantity.reduce((acc, curr) => acc + curr, 0);
+                salesData.totalSales = [totalYearSales];  // Merged total sales for the whole year
+                salesData.totalQuantity = [totalYearQuantity];  // Merged total quantity for the whole year
+                salesData.dates = ['Year Total'];  // Single entry for the total year
             }
 
             console.log(`Sales Data for ${range}:`, salesData);
@@ -144,6 +172,7 @@ export const fetchSalesData = async (range) => {
         throw new Error(`Error fetching transactions: ${error.message}`);
     }
 };
+
 
 
 
