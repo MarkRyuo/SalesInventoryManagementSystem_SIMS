@@ -31,7 +31,6 @@ function ProductChart() {
                 setProducts(Object.values(allProducts));
                 setFilteredProducts(Object.values(allProducts));
                 const allCategories = await getCategories();
-                console.log("Categories fetched:", allCategories); // Log the categories
                 setCategories(allCategories);
             } catch (error) {
                 console.error("Error fetching products or categories:", error);

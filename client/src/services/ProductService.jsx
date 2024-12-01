@@ -157,7 +157,6 @@ export const getAllProducts = async () => {
     try {
         const snapshot = await get(productsRef);
         if (!snapshot.exists()) {
-            console.log("No products found.");
             return []; // Return an empty array if no products are found
         }
 
@@ -180,7 +179,6 @@ export const getAllProducts = async () => {
             return product;
         }).filter(product => product !== null); // Filter out any null values
 
-        console.log("Retrieved products:", formattedProducts);
         return formattedProducts;
     } catch (error) {
         console.error("Error retrieving products:", error);
