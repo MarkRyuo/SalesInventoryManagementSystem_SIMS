@@ -46,7 +46,6 @@ export const fetchTotalSales = async (range) => {
                     totalSales += totalAmount;
                 }
             });
-            console.log(`Total Sales for ${range}:`, totalSales);
 
             // Return the formatted total sales as PHP currency
             return totalSales.toLocaleString('en-PH', {
@@ -54,7 +53,6 @@ export const fetchTotalSales = async (range) => {
                 currency: 'PHP'
             });
         } else {
-            console.log("No transactions found.");
             return '₱0.00';  // Return a default formatted value if no data found
         }
     } catch (error) {
