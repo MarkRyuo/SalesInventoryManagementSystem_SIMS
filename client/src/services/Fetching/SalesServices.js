@@ -4,37 +4,38 @@ import { getDatabase, ref, get } from "firebase/database";
 // Helper function to calculate if a transaction is within a specific date range
 const isTransactionInRange = (transactionDate, range) => {
     const now = new Date();
-    const transactionTime = new Date(transactionDate);
+    const transactionTime = new Date(transactionDate); // Ensure correct parsing
 
-    // Strip the time from the dates for comparison
-    const transactionDay = transactionTime.toISOString().split('T')[0]; // Format as 'YYYY-MM-DD'
-    const currentDay = now.toISOString().split('T')[0]; // Format as 'YYYY-MM-DD'
+    // Handle invalid date parsing
+    if (isNaN(transactionTime)) {
+        console.error(`Invalid transaction date format: ${transactionDate}`);
+        return false;
+    }
 
     switch (range) {
         case 'today':
-            // For today, check if the transaction's date is today
-            return transactionDay === currentDay;
+            return (
+                transactionTime.toDateString() === now.toDateString()
+            );
 
         case 'week':
-            // Calculate the start of the current week (Sunday)
             const startOfWeek = new Date(now);
-            startOfWeek.setDate(now.getDate() - now.getDay()); // Set to Sunday
-            startOfWeek.setHours(0, 0, 0, 0); // Reset time to 00:00
+            startOfWeek.setDate(now.getDate() - now.getDay());
+            startOfWeek.setHours(0, 0, 0, 0);
 
-            // Calculate the end of the week (Saturday)
             const endOfWeek = new Date(startOfWeek);
-            endOfWeek.setDate(startOfWeek.getDate() + 6); // Saturday
-            endOfWeek.setHours(23, 59, 59, 999); // Set to the last millisecond of Saturday
+            endOfWeek.setDate(startOfWeek.getDate() + 6);
+            endOfWeek.setHours(23, 59, 59, 999);
 
-            // Check if the transaction date is within the range of this week
             return transactionTime >= startOfWeek && transactionTime <= endOfWeek;
 
         case 'month':
-            // Check if the transaction is in the current month and year
-            return transactionTime.getMonth() === now.getMonth() && transactionTime.getFullYear() === now.getFullYear();
+            return (
+                transactionTime.getMonth() === now.getMonth() &&
+                transactionTime.getFullYear() === now.getFullYear()
+            );
 
         case 'year':
-            // Check if the transaction is in the current year
             return transactionTime.getFullYear() === now.getFullYear();
 
         default:
