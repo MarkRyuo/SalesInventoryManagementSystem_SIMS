@@ -16,98 +16,98 @@ const qr = require("qrcode"); // For QR code generation
 
 admin.initializeApp();
 
-// Function to handle the download
-exports.downloadOrder = functions.https.onRequest((req, res) => {
-  cors(req, res, async () => {
-    const orderId = req.query.id;
+exports.downloadOrder = functions
+  .runWith({ timeoutSeconds: 540 }) // Increase the timeout to 9 minutes
+  .https.onRequest((req, res) => {
+    cors(req, res, async () => {
+      const orderId = req.query.id;
 
-    if (!orderId) {
-      return res.status(400).send("Order ID is required");
-    }
-
-    try {
-      // Fetch the order from Firebase
-      // eslint-disable-next-line max-len
-      const orderSnapshot = await admin.database().ref(`TransactionHistory/${orderId}`).once("value");
-      const order = orderSnapshot.val();
-
-      if (!order) {
-        return res.status(404).send("Order not found");
+      if (!orderId) {
+        return res.status(400).send("Order ID is required");
       }
 
-      // Generate PDF (you can adjust the content here)
-      // eslint-disable-next-line new-cap
-      const doc = new jsPDF();
+      try {
+        // Fetch the order from Firebase
+        const orderSnapshot = await admin.database().ref(`TransactionHistory/${orderId}`).once("value");
+        const order = orderSnapshot.val();
 
-      // Title and Store Info
-      doc.setFont("courier", "normal");
-      doc.setFontSize(12);
-      doc.text("REYES ELECTRONIC SHOP", 10, 20);
-      doc.setFontSize(10);
-      doc.text("JP Rizal St. Población Barangay 4, 4217 Lipa City Batangas Philippines", 10, 30);
-      doc.text("RAMIL P. REYES - PROP.", 10, 40);
+        if (!order) {
+          return res.status(404).send("Order not found");
+        }
 
-      // Order Date and Customer Info
-      doc.setFontSize(12);
-      doc.text(`Order Date: ${order.date}`, 10, 50);
-      doc.text(`Sold To: ${order.customerName}`, 10, 60);
+        // Generate PDF (you can adjust the content here)
+        // eslint-disable-next-line new-cap
+        const doc = new jsPDF();
 
-      // Separator Line
-      doc.line(10, 65, 200, 65);
+        // Title and Store Info
+        doc.setFont("courier", "normal");
+        doc.setFontSize(12);
+        doc.text("REYES ELECTRONIC SHOP", 10, 20);
+        doc.setFontSize(10);
+        doc.text("JP Rizal St. Población Barangay 4, 4217 Lipa City Batangas Philippines", 10, 30);
+        doc.text("RAMIL P. REYES - PROP.", 10, 40);
 
-      // Product Table Header
-      let yPosition = 75;
-      doc.setFontSize(10);
-      doc.text("Product Name", 10, yPosition);
-      doc.text("Qty", 100, yPosition, { align: "center" });
-      doc.text("Price", 140, yPosition, { align: "right" });
-      doc.text("Amount", 180, yPosition, { align: "right" });
+        // Order Date and Customer Info
+        doc.setFontSize(12);
+        doc.text(`Order Date: ${order.date}`, 10, 50);
+        doc.text(`Sold To: ${order.customerName}`, 10, 60);
 
-      // Product Items Loop
-      yPosition += 10;
-      order.items.forEach((item) => {
-        doc.text(item.productName, 10, yPosition);
-        doc.text(item.quantity.toString(), 100, yPosition, { align: "center" });
-        doc.text(`${parseFloat(item.price).toFixed(2)}`, 140, yPosition, { align: "right" });
-        doc.text(`${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, { align: "right" });
+        // Separator Line
+        doc.line(10, 65, 200, 65);
+
+        // Product Table Header
+        let yPosition = 75;
+        doc.setFontSize(10);
+        doc.text("Product Name", 10, yPosition);
+        doc.text("Qty", 100, yPosition, { align: "center" });
+        doc.text("Price", 140, yPosition, { align: "right" });
+        doc.text("Amount", 180, yPosition, { align: "right" });
+
+        // Product Items Loop
         yPosition += 10;
-      });
+        order.items.forEach((item) => {
+          doc.text(item.productName, 10, yPosition);
+          doc.text(item.quantity.toString(), 100, yPosition, { align: "center" });
+          doc.text(`${parseFloat(item.price).toFixed(2)}`, 140, yPosition, { align: "right" });
+          doc.text(`${parseFloat(item.totalAmount).toFixed(2)}`, 180, yPosition, { align: "right" });
+          yPosition += 10;
+        });
 
-      // Separator Line for Totals
-      doc.line(10, yPosition, 200, yPosition);
+        // Separator Line for Totals
+        doc.line(10, yPosition, 200, yPosition);
 
-      // Totals
-      yPosition += 10;
-      doc.text(`Subtotal: ${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
-      doc.text(`Tax: ${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
-      doc.text(`Discount: -${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
-      doc.text(`Payment Amount: ${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
-      doc.text(`Change: ${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
+        // Totals
+        yPosition += 10;
+        doc.text(`Subtotal: ${parseFloat(order.subtotal).toFixed(2)}`, 10, yPosition);
+        doc.text(`Tax: ${parseFloat(order.tax).toFixed(2)}`, 10, yPosition + 10);
+        doc.text(`Discount: -${parseFloat(order.discount).toFixed(2)}`, 10, yPosition + 20);
+        doc.text(`Payment Amount: ${parseFloat(order.paymentAmount).toFixed(2)}`, 10, yPosition + 30);
+        doc.text(`Change: ${parseFloat(order.change).toFixed(2)}`, 10, yPosition + 40);
 
-      doc.setFontSize(14);
-      doc.setFont("courier", "bold");
-      doc.text(`Total Amount: ${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
+        doc.setFontSize(14);
+        doc.setFont("courier", "bold");
+        doc.text(`Total Amount: ${parseFloat(order.total).toFixed(2)}`, 10, yPosition + 50);
 
-      // Footer (Thank You Message)
-      doc.setFontSize(10);
-      doc.setFont("courier", "italic");
-      doc.text("This is not official receipt!", 105, yPosition + 80, { align: "center" });
+        // Footer (Thank You Message)
+        doc.setFontSize(10);
+        doc.setFont("courier", "italic");
+        doc.text("This is not official receipt!", 105, yPosition + 80, { align: "center" });
 
-      // Generate QR code (you can customize it as per your needs)
-      const qrCodeData = await qr.toDataURL(`https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/downloadOrder?id=${orderId}`);
-      doc.addImage(qrCodeData, "PNG", 150, 10, 50, 50);
+        // Generate QR code
+        const qrCodeData = await qr.toDataURL(`https://us-central1-salesinventorymanagement-1bb27.cloudfunctions.net/downloadOrder?id=${orderId}`);
+        doc.addImage(qrCodeData, "PNG", 150, 10, 50, 50);
 
-      // Send PDF to the client
-      const pdfOutput = doc.output("arraybuffer");
-      res.set("Content-Type", "application/pdf");
-      res.set("Content-Disposition", "attachment; filename=order_receipt.pdf");
-      res.send(Buffer.from(pdfOutput));
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-      res.status(500).send("Error generating PDF");
-    }
+        // Send PDF to the client
+        const pdfOutput = doc.output("arraybuffer");
+        res.set("Content-Type", "application/pdf");
+        res.set("Content-Disposition", "attachment; filename=order_receipt.pdf");
+        res.send(Buffer.from(pdfOutput));
+      } catch (error) {
+        console.error("Error generating PDF:", error);
+        res.status(500).send("Error generating PDF");
+      }
+    });
   });
-});
 
 
 require('dotenv').config();
