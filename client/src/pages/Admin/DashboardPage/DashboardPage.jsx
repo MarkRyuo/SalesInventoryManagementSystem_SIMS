@@ -122,8 +122,8 @@ export const DashboardPage = () => {
                 <div className={DashboardCss.componentHeroCard}>
                     <h1 className='d-flex'>Dashboard</h1>
                     {isLoading ? (
-                        <div className={DashboardCss.loadingContainer}>
-                            <p>Loading admin Dashboard</p>
+                        <div className="fs-4 text-center pt-5 mt-5">
+                            <p>Loading Admin Dashboard...</p>
                         </div>
                     ) : (
                         <div className={DashboardCss.credentialDashboard}>

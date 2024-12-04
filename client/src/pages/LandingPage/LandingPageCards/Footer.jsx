@@ -60,7 +60,7 @@ function Footer() {
                         <h6 className="text-uppercase fw-bold mb-2">About</h6>
                         <Nav className="flex-column">
                             <Nav.Link onClick={handleShow} className="text-reset p-0">Terms and Condition</Nav.Link>
-                            <Nav.Link href="#!" className="text-reset p-0 pt-1">Developers</Nav.Link>
+                            {/* <Nav.Link href="#!" className="text-reset p-0 pt-1">Developers</Nav.Link> */}
                         </Nav>
                     </Col>
 

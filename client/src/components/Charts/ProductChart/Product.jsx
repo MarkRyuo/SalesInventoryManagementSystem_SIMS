@@ -31,7 +31,6 @@ function ProductChart() {
                 setProducts(Object.values(allProducts));
                 setFilteredProducts(Object.values(allProducts));
                 const allCategories = await getCategories();
-                console.log("Categories fetched:", allCategories); // Log the categories
                 setCategories(allCategories);
             } catch (error) {
                 console.error("Error fetching products or categories:", error);
@@ -209,19 +208,25 @@ function ProductChart() {
                 </Col>
                 <div style={{ display: "inline-flex", gap: 70, marginTop: 10 }}>
                     <div className={Productcss.allDropdownyBtn}>
-                        <DropdownButton
-                            variant=""
-                            id="dropdown-basic-button"
-                            title=<span>{selectedCategory}</span>
-                            onSelect={(eventKey) => setSelectedCategory(eventKey)}
-                        >
-                            <Dropdown.Item eventKey="All Category"><span>All Category</span></Dropdown.Item>
-                            {categories.map((category) => (
-                                <Dropdown.Item eventKey={category.id} key={category.id}>
-                                    <span>{category.name}</span>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="" id="dropdown-basic-button">
+                                <span>{selectedCategory}</span>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu style={{ maxHeight: '200px', overflowY: 'auto' }}>
+                                <Dropdown.Item eventKey="All Category" onClick={() => setSelectedCategory("All Category")}>
+                                    <span>All Category</span>
                                 </Dropdown.Item>
-                            ))}
-                        </DropdownButton>
+                                {categories.map((category) => (
+                                    <Dropdown.Item
+                                        eventKey={category.id}
+                                        key={category.id}
+                                        onClick={() => setSelectedCategory(category.name)}
+                                    >
+                                        <span>{category.name}</span>
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
 
                     </div>
                     <div className={Productcss.allDropdownyBtn}>

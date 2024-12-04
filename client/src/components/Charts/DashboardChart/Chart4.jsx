@@ -16,7 +16,6 @@ function Chart4() {
                 const snapshot = await get(productsRef);
 
                 if (!snapshot.exists()) {
-                    console.log("No products found.");
                     setLowStockCount(0);
                     setLoading(false);
                     return;

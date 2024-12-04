@@ -35,7 +35,7 @@ function SDashboard() {
         const timer = setTimeout(() => {
             alert("Session expired due to inactivity.");
             localStorage.removeItem('staffId');
-            navigate("/login"); // Redirect to login page
+            navigate("/"); // Redirect to login page
         }, 30 * 60 * 1000); // 30 minutes in milliseconds
         setSessionTimer(timer);
     };
@@ -48,7 +48,7 @@ function SDashboard() {
                 if (!staffId) {
                     alert("Staff ID not found. Logging out.");
                     localStorage.removeItem('staffId');
-                    navigate("/login"); // Redirect to login page if no staff ID found
+                    navigate("/"); // Redirect to login page if no staff ID found
                     return;
                 }
 
@@ -62,7 +62,7 @@ function SDashboard() {
                     console.error("No such document!");
                     alert("Staff data not found. Logging out.");
                     localStorage.removeItem('staffId');
-                    navigate("/login"); // Redirect to login page if staff data not found
+                    navigate("/"); // Redirect to login page if staff data not found
                 }
             } catch (error) {
                 console.error("Error fetching staff data:", error);
