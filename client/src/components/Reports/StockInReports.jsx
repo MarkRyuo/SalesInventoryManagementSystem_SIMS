@@ -66,7 +66,7 @@ function StockInReports() {
     const totalPages = Math.ceil(filteredData.length / recordsPerPage);
 
     const handleDownloadPDF = () => {
-        const doc = new jsPDF();
+        const doc = new jsPDF('landscape'); // Set landscape orientation
 
         // H1 Style for "REYES ELECTRONICS"
         doc.setFontSize(16); // Larger font for H1
@@ -99,9 +99,9 @@ function StockInReports() {
             styles: { fontSize: 9 }, // Smaller font for table
             columnStyles: {
                 0: { cellWidth: 30 },
-                1: { cellWidth: 40 },
-                2: { cellWidth: 25 },
-                3: { cellWidth: 30 },
+                1: { cellWidth: 60 },
+                2: { cellWidth: 70 },
+                3: { cellWidth: 40 },
                 4: { cellWidth: 15 },
                 5: { cellWidth: 30 },
             },
@@ -109,6 +109,7 @@ function StockInReports() {
 
         doc.save('stock-in-report.pdf');
     };
+
 
 
 
