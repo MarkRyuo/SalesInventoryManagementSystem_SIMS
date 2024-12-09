@@ -86,8 +86,8 @@ function StockInReports() {
 
         // Table
         doc.autoTable({
-            startY: 45,
-            head: [['Product ID', 'Product Name', 'SKU', 'Barcode', 'Qty', 'Date Added']],
+            startY: 40,
+            head: [['Product ID', 'Product Name', 'SKU', 'Barcode/Qr', 'Qty', 'Date Added']],
             body: filteredData.map(item => [
                 item.productId,
                 item.productName,
@@ -98,12 +98,12 @@ function StockInReports() {
             ]),
             styles: { fontSize: 9 }, // Smaller font for table
             columnStyles: {
-                0: { cellWidth: 30 },
-                1: { cellWidth: 60 },
+                0: { cellWidth: 35 },
+                1: { cellWidth: 65 },
                 2: { cellWidth: 70 },
                 3: { cellWidth: 40 },
-                4: { cellWidth: 15 },
-                5: { cellWidth: 30 },
+                4: { cellWidth: 20 },
+                5: { cellWidth: 35 },
             },
         });
 
