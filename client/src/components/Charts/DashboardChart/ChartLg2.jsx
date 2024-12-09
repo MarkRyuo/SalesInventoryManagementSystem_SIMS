@@ -23,7 +23,7 @@ function ChartLg2() {
             // Only show the current month
             labels.push(now.toLocaleString("default", { month: "long" }));
         } else if (range === "quarter") {
-            labels.push("Q1", "Q2", "Q3", "Q4");
+            labels.push("Q1", "Q2", "Q3", "Q4"); 
         } else if (range === "year") {
             for (let i = 0; i < 12; i++) {
                 const month = new Date(now.getFullYear(), i, 1);
@@ -69,7 +69,7 @@ function ChartLg2() {
                 data: turnoverData,
                 borderColor: "rgba(75, 192, 192, 1)",
                 backgroundColor: "rgba(75, 192, 192, 0.2)",
-                fill: true, // Fill under the line
+                fill: true,
                 tension: 0.4,
             },
         ],
@@ -80,7 +80,7 @@ function ChartLg2() {
         scales: {
             y: {
                 beginAtZero: true,
-                reverse: true, // Inverts the Y-axis grid-lines
+                reverse: true, // Inverts the Y-axis gridlines
                 title: {
                     display: true,
                     text: "Turnover Rate", // Title for Y-axis
@@ -91,6 +91,9 @@ function ChartLg2() {
             title: {
                 display: true,
                 text: "Inventory Turnover Chart", // Title of the Graph
+                font: {
+                    size: 17,
+                }
             },
             legend: {
                 position: "top", // Position of the legend

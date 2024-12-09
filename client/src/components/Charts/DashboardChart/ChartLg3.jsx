@@ -120,7 +120,7 @@ function ChartLg3() {
             display: true,
             text: 'Sales Report Overview', // Add a title to your chart
             font: {
-                size: 20,
+                size: 17,
             },
         },
         tooltip: {
