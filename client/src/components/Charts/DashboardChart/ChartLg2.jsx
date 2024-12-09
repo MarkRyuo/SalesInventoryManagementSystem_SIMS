@@ -113,5 +113,3 @@ function ChartLg2() {
 }
 
 export default ChartLg2;
-
-
