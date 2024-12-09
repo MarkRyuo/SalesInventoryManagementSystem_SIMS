@@ -99,7 +99,6 @@ function ChartLg2() {
         },
     };
 
-
     return (
         <div className={Chartcss.containerChartLg2}>
             <div className={Chartcss.rangeButtons}>
