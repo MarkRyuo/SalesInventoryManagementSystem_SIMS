@@ -41,7 +41,7 @@ function LowStockReports() {
 
     // Download PDF function
     const downloadPDF = () => {
-        const doc = new jsPDF();
+        const doc = new jsPDF('landscape'); // Landscape orientation
 
         // Title and Date Range Text
         doc.setFontSize(16); // Larger font for the title
@@ -80,18 +80,17 @@ function LowStockReports() {
             styles: {
                 fontSize: 8, // Smaller font for the table to fit the content
                 cellPadding: 3, // Padding for better readability
-                halign: 'center', // Horizontal center alignment
                 valign: 'middle', // Vertical middle alignment
                 overflow: 'linebreak', // Break long words into multiple lines if needed
             },
             columnStyles: {
                 0: { cellWidth: 12 },  // No. column width
-                1: { cellWidth: 40 },  // Product Name column width
-                2: { cellWidth: 25 },  // SKU column width
-                3: { cellWidth: 25 },  // Barcode column width
+                1: { cellWidth: 60 },  // Product Name column width
+                2: { cellWidth: 70 },  // SKU column width
+                3: { cellWidth: 40 },  // Barcode column width
                 4: { cellWidth: 15 },  // Quantity column width
-                5: { cellWidth: 15 },  // Threshold column width
-                6: { cellWidth: 18 },  // Status column width
+                5: { cellWidth: 20 },  // Threshold column width
+                6: { cellWidth: 25 },  // Status column width
                 7: { cellWidth: 28 },  // Date column width
             },
             tableWidth: 'auto', // Auto-adjust table width to fit content
@@ -100,6 +99,7 @@ function LowStockReports() {
         const fileName = `LowStockReport_${startDate || "start"}_${endDate || "end"}.pdf`;
         doc.save(fileName);
     };
+
 
 
 
