@@ -81,18 +81,24 @@ function ChartLg2() {
         scales: {
             y: {
                 beginAtZero: true,
+                reverse: true, // Inverts the Y-axis gridlines
                 title: {
                     display: true,
-                    text: "Turnover Rate",
+                    text: "Turnover Rate", // Title for Y-axis
                 },
             },
         },
         plugins: {
+            title: {
+                display: true,
+                text: "Inventory Turnover Chart", // Title of the Graph
+            },
             legend: {
-                position: "top",
+                position: "top", // Position of the legend
             },
         },
     };
+
 
     return (
         <div className={Chartcss.containerChartLg2}>
