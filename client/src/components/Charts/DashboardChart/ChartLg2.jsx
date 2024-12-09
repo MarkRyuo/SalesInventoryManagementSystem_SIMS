@@ -80,7 +80,7 @@ function ChartLg2() {
         scales: {
             y: {
                 beginAtZero: true,
-                reverse: true, // Inverts the Y-axis gridlines
+                reverse: true, // Inverts the Y-axis grid-lines
                 title: {
                     display: true,
                     text: "Turnover Rate", // Title for Y-axis
