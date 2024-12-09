@@ -124,8 +124,6 @@ function TotalSalesReports() {
         link.click();
     };
 
-
-    // Handle PDF file download
     // Handle PDF file download in landscape orientation
     const downloadPdf = () => {
         const doc = new jsPDF({
