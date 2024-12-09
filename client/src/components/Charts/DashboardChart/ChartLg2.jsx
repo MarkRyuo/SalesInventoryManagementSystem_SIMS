@@ -33,7 +33,6 @@ function ChartLg2() {
         return labels;
     };
 
-
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
