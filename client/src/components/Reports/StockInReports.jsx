@@ -110,11 +110,6 @@ function StockInReports() {
         doc.save('stock-in-report.pdf');
     };
 
-
-
-
-
-
     const handleDownloadXLSX = () => {
         const reportData = filteredData.map(item => ({
             ProductID: item.productId,
