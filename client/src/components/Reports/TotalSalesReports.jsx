@@ -128,8 +128,11 @@ function TotalSalesReports() {
 
 
     // Handle PDF file download
+    // Handle PDF file download in landscape orientation
     const downloadPdf = () => {
-        const doc = new jsPDF();
+        const doc = new jsPDF({
+            orientation: 'landscape', // Set orientation to landscape
+        });
 
         // Title and Date Range
         doc.setFontSize(16);
@@ -177,6 +180,7 @@ function TotalSalesReports() {
         // Save the PDF
         doc.save(`SalesReport_${startDate || 'All'}_to_${endDate || 'All'}.pdf`);
     };
+
 
 
     // Calculate totals
