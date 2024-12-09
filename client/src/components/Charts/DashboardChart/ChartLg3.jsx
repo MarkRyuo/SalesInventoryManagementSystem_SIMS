@@ -94,39 +94,47 @@ function ChartLg3() {
 
     // Chart options
     const chartOptions = {
-        responsive: true,
-        scales: {
-            x: {
-                ticks: {
-                    autoSkip: true, // Skip some labels if needed
-                    maxRotation: 0, // Keep labels horizontal
-                    minRotation: 0, // No rotation
-                    padding: 10, // Add space between labels
-                },
+    responsive: true,
+    scales: {
+        x: {
+            ticks: {
+                autoSkip: true,
+                maxRotation: 0,
+                minRotation: 0,
+                padding: 10,
             },
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'Amount (₱)', // Change Y-axis label to reflect only sales
+        },
+        y: {
+            beginAtZero: true,
+            title: {
+                display: true,
+                text: 'Amount (₱)',
+            },
+        },
+    },
+    plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Sales Report Overview', // Add a title to your chart
+            font: {
+                size: 20,
+            },
+        },
+        tooltip: {
+            callbacks: {
+                label: (context) => {
+                    const label = context.dataset.label || '';
+                    const value = context.raw;
+                    return `${label}: ₱${value.toLocaleString()}`;
                 },
             },
         },
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            tooltip: {
-                callbacks: {
-                    label: (context) => {
-                        const label = context.dataset.label || '';
-                        const value = context.raw;
-                        return `${label}: ₱${value.toLocaleString()}`;
-                    },
-                },
-            },
-        },
-    };
+    },
+};
+
 
     return (
         <div className={Chartcss.containerChartLg3}>
