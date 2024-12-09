@@ -48,8 +48,12 @@ function SavedOrderDetails() {
     };
 
     // Generate PDF for the order
+    // Generate PDF for the order
     const downloadPDF = (order) => {
-        const doc = new jsPDF();
+        // Create a new jsPDF instance with landscape orientation
+        const doc = new jsPDF({
+            orientation: 'landscape',
+        });
 
         // Title
         doc.setFont("helvetica", "bold");
@@ -73,26 +77,26 @@ function SavedOrderDetails() {
         doc.setFont("helvetica", "normal");
         doc.text("No.", 10, y);
         doc.text("Name", 30, y);
-        doc.text("SKU", 100, y);
-        doc.text("Quantity", 150, y);
+        doc.text("SKU", 120, y);
+        doc.text("Quantity", 230, y);
         y += 10;
 
         // Draw a line separating the headers from the product list
-        doc.line(10, y, 200, y);
+        doc.line(10, y, 290, y); // Adjusted for landscape width
         y += 10;
 
         // Product List
         order.products.forEach((product, index) => {
             doc.text((index + 1).toString(), 10, y);
             doc.text(product.productName || "No Name", 30, y);
-            doc.text(product.sku || "N/A", 100, y);
-            doc.text((product.quantity || 0).toString(), 150, y);
+            doc.text(product.sku || "N/A", 120, y);
+            doc.text((product.quantity || 0).toString(), 235, y);
             y += 10;
 
             // Add extra space after each product
-            if (y > 270) {
+            if (y > 200) { // Adjust for landscape height
                 doc.addPage(); // Create a new page if it's close to the bottom of the current one
-                y = 20; // Reset Y to the top of the new p  age
+                y = 20; // Reset Y to the top of the new page
             }
         });
 
@@ -103,6 +107,7 @@ function SavedOrderDetails() {
         // Trigger the download of the PDF
         doc.save(`${order.id}_order.pdf`);
     };
+
 
 
     // Delete an order
