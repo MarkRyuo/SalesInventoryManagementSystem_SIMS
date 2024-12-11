@@ -26,7 +26,7 @@ function NewAssetsScanner() {
     //! Modal State
     const [showModal, setShowModal] = useState(false);
     const [customQuantity, setCustomQuantity] = useState(1);
-
+    
     const codeReader = new BrowserMultiFormatReader();
 
     useEffect(() => {
