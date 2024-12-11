@@ -171,8 +171,8 @@ function NewAssetsScanner() {
                         <div className={NewProductscss.NewProductCamera}>
                             <div>
                                 {error && (
-                                    <Alert variant="" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
-                                        {/* Error: {error} */}
+                                    <Alert variant="danger" style={{ opacity: fadeOut ? 0 : 1, transition: 'opacity 1s ease-in-out' }}>
+                                        Error: {error}
                                     </Alert>
                                 )}
                                 {message && (
