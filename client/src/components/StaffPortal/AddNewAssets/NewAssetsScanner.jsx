@@ -26,7 +26,7 @@ function NewAssetsScanner() {
     //! Modal State
     const [showModal, setShowModal] = useState(false);
     const [customQuantity, setCustomQuantity] = useState(1);
-    
+
     const codeReader = new BrowserMultiFormatReader();
 
     useEffect(() => {
@@ -34,6 +34,10 @@ function NewAssetsScanner() {
             try {
                 const devices = await codeReader.listVideoInputDevices();
                 setVideoDevices(devices);
+
+                if (devices.length === 0) {
+                    throw new Error("No video devices found.");
+                }
 
                 const backCamera = devices.find(device =>
                     device.label.toLowerCase().includes('back') || device.label.toLowerCase().includes('rear')
@@ -102,6 +106,7 @@ function NewAssetsScanner() {
         };
     }, [navigate, scanning, lastScannedBarcode, selectedDeviceId]);
 
+
     const resetScanner = () => {
         setScanning(true);
         setLastScannedBarcode('');
@@ -113,15 +118,28 @@ function NewAssetsScanner() {
     const handleCameraSwitch = () => {
         if (videoDevices.length > 1) {
             const currentIndex = videoDevices.findIndex(device => device.deviceId === selectedDeviceId);
+            if (currentIndex === -1) {
+                setError("Current camera device not found.");
+                return;
+            }
+
             const nextIndex = (currentIndex + 1) % videoDevices.length;
-            const nextDeviceId = videoDevices[nextIndex].deviceId;
-            setSelectedDeviceId(nextDeviceId);
-            setScanning(false);
-            setTimeout(() => {
-                setScanning(true);
-            }, 300);
+            const nextDeviceId = videoDevices[nextIndex]?.deviceId || videoDevices[0]?.deviceId;
+
+            if (nextDeviceId) {
+                setSelectedDeviceId(nextDeviceId);
+                setScanning(false);
+                setTimeout(() => {
+                    setScanning(true);
+                }, 300);
+            } else {
+                setError("Failed to switch camera. No valid device found.");
+            }
+        } else {
+            setError("Only one video device available. Camera switching not possible.");
         }
     };
+
 
     //! Handle Bulk Update
     const handleBulkUpdate = async () => {
@@ -134,6 +152,14 @@ function NewAssetsScanner() {
                 const updatedQuantity = await updateProductQuantity(lastScannedBarcode, customQuantity);
                 const productName = product.productName || "Unknown Product";
                 setMessage(`Bulk Updated: ${productName}: ${updatedQuantity}.`);
+
+                setTimeout(() => {
+                    setFadeOut(true);
+                    setTimeout(() => {
+                        setFadeOut(false);
+                        setMessage('');
+                    }, 2000);
+                }, 2000);
             } else {
                 setError("Product not found.");
             }
@@ -174,7 +200,7 @@ function NewAssetsScanner() {
                             <video ref={videoRef} style={{ display: isProcessing ? 'none' : 'block', opacity: videoFade ? 1 : 0, transition: 'opacity 1s ease-in-out' }} />
                         </div>
                         <Button onClick={() => setShowModal(true)} variant='primary' className="my-2" disabled={!lastScannedBarcode || isProcessing}>
-                    Bulk Update
+                            Bulk Update
                         </Button>
                     </div>
                 </div>
