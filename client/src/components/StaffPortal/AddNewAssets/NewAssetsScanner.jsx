@@ -30,82 +30,81 @@ function NewAssetsScanner() {
     const codeReader = new BrowserMultiFormatReader();
 
     useEffect(() => {
-        const startScanner = async (deviceId = null) => {
-            try {
-                const devices = await codeReader.listVideoInputDevices();
-                setVideoDevices(devices);
+    const startScanner = async (deviceId = null) => {
+        try {
+            const devices = await codeReader.listVideoInputDevices();
+            setVideoDevices(devices);
 
-                if (devices.length === 0) {
-                    throw new Error("No video devices found.");
-                }
+            if (devices.length === 0) {
+                throw new Error("No video devices found.");
+            }
 
-                const backCamera = devices.find(device =>
-                    device.label.toLowerCase().includes('back') || device.label.toLowerCase().includes('rear')
-                );
-                const selectedDevice = deviceId || (backCamera ? backCamera.deviceId : devices[0]?.deviceId);
-                setSelectedDeviceId(selectedDevice);
+            const backCamera = devices.find(device =>
+                device.label.toLowerCase().includes('back') || device.label.toLowerCase().includes('rear')
+            );
+            const selectedDevice = deviceId || (backCamera ? backCamera.deviceId : devices[0]?.deviceId);
+            setSelectedDeviceId(selectedDevice);
 
-                codeReader.decodeFromVideoDevice(selectedDevice, videoRef.current, async (result, err) => {
-                    if (result && scanning) {
-                        const barcode = result.text;
+            codeReader.decodeFromVideoDevice(selectedDevice, videoRef.current, async (result, err) => {
+                if (result && scanning) {
+                    const barcode = result.text;
 
-                        if (barcode !== lastScannedBarcode) {
-                            setLastScannedBarcode(barcode);
-                            setScanning(false);
-                            setIsProcessing(true);
-                            setVideoFade(false);
-                            setGuideFade(false);
+                    if (barcode !== lastScannedBarcode) {
+                        setLastScannedBarcode(barcode);
+                        setScanning(false);
+                        setIsProcessing(true);
+                        setVideoFade(false);
+                        setGuideFade(false);
 
-                            codeReader.reset();
+                        codeReader.reset();
 
-                            try {
-                                const product = await fetchProductByBarcode(barcode);
-                                if (product) {
-                                    const additionalQuantity = 1;
-                                    const updatedQuantity = await updateProductQuantity(barcode, additionalQuantity);
+                        try {
+                            const product = await fetchProductByBarcode(barcode);
+                            if (product) {
+                                const additionalQuantity = 1;
+                                const updatedQuantity = await updateProductQuantity(barcode, additionalQuantity);
 
-                                    const productName = product.productName || "Unknown Product";
-                                    setMessage(`Updated: ${productName}: ${updatedQuantity}.`);
-                                } else {
-                                    navigate('/NewAssets', { state: { barcode: barcode } });
-                                }
-
-                                setTimeout(() => {
-                                    setIsProcessing(false);
-                                    setFadeOut(true);
-                                    setTimeout(() => {
-                                        setFadeOut(false);
-                                        setMessage('');
-                                        setVideoFade(true);
-                                        setGuideFade(true);
-                                        setScanning(true);
-                                        startScanner(selectedDeviceId);
-                                    }, 1000);
-                                }, 2000);
-
-                            } catch (error) {
-                                setError(error.message || "An unexpected error occurred.");
-                                resetScanner();
+                                const productName = product.productName || "Unknown Product";
+                                setMessage(`Updated: ${productName}: ${updatedQuantity}.`);
+                            } else {
+                                navigate('/NewAssets', { state: { barcode: barcode } });
                             }
+
+                            setTimeout(() => {
+                                setIsProcessing(false);
+                                setFadeOut(true);
+                                setTimeout(() => {
+                                    setFadeOut(false);
+                                    setMessage('');
+                                    setVideoFade(true);
+                                    setGuideFade(true);
+                                    setScanning(true);
+                                    startScanner(selectedDeviceId);
+                                }, 1000);
+                            }, 2000);
+
+                        } catch (error) {
+                            setError(error.message || "An unexpected error occurred.");
+                            resetScanner();
                         }
                     }
+                }
 
-                    if (err && !(err instanceof NotFoundException)) {
-                        setError(err.message || "An unexpected error occurred.");
-                    }
-                });
-            } catch (err) {
-                setError("Failed to initialize scanner: " + err.message);
-            }
-        };
+                if (err && !(err instanceof NotFoundException)) {
+                    setError(err.message || "An unexpected error occurred.");
+                }
+            });
+        } catch (err) {
+            setError("Failed to initialize scanner: " + err.message);
+        }
+    };
 
-        startScanner(selectedDeviceId);
+    startScanner(selectedDeviceId);
 
-        return () => {
-            codeReader.reset();
-        };
-    }, [navigate, scanning, lastScannedBarcode, selectedDeviceId]);
-
+    return () => {
+        codeReader.reset();
+    };
+}, [navigate, scanning, lastScannedBarcode, selectedDeviceId]);
 
     const resetScanner = () => {
         setScanning(true);
@@ -118,28 +117,15 @@ function NewAssetsScanner() {
     const handleCameraSwitch = () => {
         if (videoDevices.length > 1) {
             const currentIndex = videoDevices.findIndex(device => device.deviceId === selectedDeviceId);
-            if (currentIndex === -1) {
-                setError("Current camera device not found.");
-                return;
-            }
-
             const nextIndex = (currentIndex + 1) % videoDevices.length;
-            const nextDeviceId = videoDevices[nextIndex]?.deviceId || videoDevices[0]?.deviceId;
-
-            if (nextDeviceId) {
-                setSelectedDeviceId(nextDeviceId);
-                setScanning(false);
-                setTimeout(() => {
-                    setScanning(true);
-                }, 300);
-            } else {
-                setError("Failed to switch camera. No valid device found.");
-            }
-        } else {
-            setError("Only one video device available. Camera switching not possible.");
+            const nextDeviceId = videoDevices[nextIndex]?.deviceId || videoDevices[0].deviceId;
+            setSelectedDeviceId(nextDeviceId);
+            setScanning(false);
+            setTimeout(() => {
+                setScanning(true);
+            }, 300);
         }
     };
-
 
     //! Handle Bulk Update
     const handleBulkUpdate = async () => {
